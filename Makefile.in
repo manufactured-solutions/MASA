@@ -38,10 +38,9 @@ host_triplet = @host@
 target_triplet = @target@
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/doxygen.am \
-	$(srcdir)/masa.pc.in $(top_srcdir)/apps/Makefile.in \
-	$(top_srcdir)/configure COPYING build-aux/config.guess \
-	build-aux/config.sub build-aux/depcomp build-aux/install-sh \
-	build-aux/ltmain.sh build-aux/missing
+	$(srcdir)/masa.pc.in $(top_srcdir)/configure COPYING \
+	build-aux/config.guess build-aux/config.sub build-aux/depcomp \
+	build-aux/install-sh build-aux/ltmain.sh build-aux/missing
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/acx_mpi.m4 \
@@ -65,7 +64,7 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/masa/config.h
-CONFIG_CLEAN_FILES = apps/Makefile masa.pc
+CONFIG_CLEAN_FILES = masa.pc
 SOURCES =
 DIST_SOURCES =
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
@@ -253,10 +252,10 @@ ACLOCAL_AMFLAGS = -I m4
 AUTOMAKE_OPTIONS = foreign
 
 # Build in these directories:
-SUBDIRS = lib masa tests apps doc
+SUBDIRS = lib masa tests doc
 
 # Distribute these items:
-DIST_SUBDIRS = lib masa tests apps doc
+DIST_SUBDIRS = lib masa tests doc
 EXTRA_DIST = bootstrap $(DX_CONFIG)
 
 # Tools in the auxillary directory
@@ -345,8 +344,6 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 	cd $(srcdir) && $(AUTOCONF)
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
-apps/Makefile: $(top_builddir)/config.status $(top_srcdir)/apps/Makefile.in
-	cd $(top_builddir) && $(SHELL) ./config.status $@
 masa.pc: $(top_builddir)/config.status $(srcdir)/masa.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 
