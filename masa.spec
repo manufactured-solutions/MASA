@@ -1,16 +1,16 @@
 #
 # Spec file for GRVY Toolkit
 #
-Summary:      A software interface that provides access to various manufactured solutions.
-Name:         MASA
+Summary:      GRVY is a toolkit library for HPC Application Development
+Name:         grvy
 Version:      0.10.0
 Release:      1
-License:      LGPL
+License:      GPL
 Group:        applications
-Source:       masa-%{version}.tar.gz
-Distribution: Linux
-Vendor:       PECOS
-Packager:     nick@ices.utexas.edu
+Source:       grvy-%{version}.tar.gz
+Distribution: Koomie Linux
+Vendor:       Koomie
+Packager:     karl@ices.utexas.edu
 
 BuildRoot: /var/tmp/%{name}-%{version}-buildroot
 
@@ -33,7 +33,8 @@ BuildRoot: /var/tmp/%{name}-%{version}-buildroot
 
 %description
 
-A software interface that provides access to various manufactured solutions.
+The HPCT Toolkit is a library to support common functionality desired
+across HPC application development done in house.
 
 
 %prep
@@ -90,7 +91,7 @@ EOF
 cat > $RPM_BUILD_ROOT/%{MODULE_DIR}/.version.%{version} << 'EOF'
 #%Module1.0#################################################
 ##
-## version file for MASA
+## version file for GRVY
 ##
  
 set     ModulesVersion      "%{version}"

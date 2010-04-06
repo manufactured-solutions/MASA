@@ -88,7 +88,7 @@ DX_PS_FEATURE(OFF)
 
 DX_INIT_DOXYGEN(MASA, doxygen/masa.dox, docs)
 
-AC_OUTPUT( Makefile lib/Makefile masa/Makefile masa.pc masa.spec doxygen/Makefile)
+AC_OUTPUT( Makefile lib/Makefile masa/Makefile masa.pc masa.spec doc/Makefile)
 
 # Final summary
 

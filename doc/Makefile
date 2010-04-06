@@ -34,88 +34,78 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-unknown-linux-gnu
 host_triplet = x86_64-unknown-linux-gnu
-target_triplet = x86_64-unknown-linux-gnu
 subdir = doc
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/acx_mpi.m4 \
-	$(top_srcdir)/m4/ax_add_am_ctagsflags.m4 \
-	$(top_srcdir)/m4/ax_add_am_macro.m4 \
-	$(top_srcdir)/m4/ax_am_macros.m4 \
-	$(top_srcdir)/m4/ax_append_to_file.m4 \
-	$(top_srcdir)/m4/ax_cflags_warn_all_ansi.m4 \
-	$(top_srcdir)/m4/ax_check_enable_debug.m4 \
-	$(top_srcdir)/m4/ax_file_escapes.m4 \
-	$(top_srcdir)/m4/ax_print_to_file.m4 \
-	$(top_srcdir)/m4/ax_prog_cc_c99_cflags.m4 \
-	$(top_srcdir)/m4/ax_prog_doxygen.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4/ax_prog_doxygen.m4 \
 	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
 	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
-	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/m4/trim.m4 \
-	$(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
-CONFIG_HEADER = $(top_builddir)/masa/config.h
+CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 SOURCES =
 DIST_SOURCES =
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /h2/nick/Desktop/tester/build-aux/missing --run aclocal-1.10
-AMINCLUDE = aminclude.am
-AMTAR = ${SHELL} /h2/nick/Desktop/tester/build-aux/missing --run tar
+ACLOCAL = ${SHELL} /h2/nick/Desktop/pecos/mms/MASA/trunk/build-aux/missing --run aclocal-1.10
+AMTAR = ${SHELL} /h2/nick/Desktop/pecos/mms/MASA/trunk/build-aux/missing --run tar
 AR = ar
-AUTOCONF = ${SHELL} /h2/nick/Desktop/tester/build-aux/missing --run autoconf
-AUTOHEADER = ${SHELL} /h2/nick/Desktop/tester/build-aux/missing --run autoheader
-AUTOMAKE = ${SHELL} /h2/nick/Desktop/tester/build-aux/missing --run automake-1.10
+AUTOCONF = ${SHELL} /h2/nick/Desktop/pecos/mms/MASA/trunk/build-aux/missing --run autoconf
+AUTOHEADER = ${SHELL} /h2/nick/Desktop/pecos/mms/MASA/trunk/build-aux/missing --run autoheader
+AUTOMAKE = ${SHELL} /h2/nick/Desktop/pecos/mms/MASA/trunk/build-aux/missing --run automake-1.10
 AWK = gawk
 CC = icc
 CCDEPMODE = depmode=gcc3
-CFLAGS =   -c99 -Wall -ansi -pedantic
+CFLAGS = -g -O2
 CPP = icc -E
 CPPFLAGS = -D_GCC_NEXT_LIMITS_H
+CXX = icpc
+CXXCPP = icpc -E
+CXXDEPMODE = depmode=gcc3
+CXXFLAGS = -DMPICH_IGNORE_CXX_SEEK
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
 DOXYGEN_PAPER_SIZE = 
 DSYMUTIL = 
 DUMPBIN = 
-DX_CONFIG = doxygen.cfg
-DX_DOCDIR = doxygen-doc
+DX_CONFIG = doxygen/masa.dox
+DX_DOCDIR = docs
 DX_DOT = /usr/bin/dot
 DX_DOXYGEN = /usr/bin/doxygen
 DX_DVIPS = 
-DX_EGREP = 
-DX_ENV =  SRCDIR='.' PROJECT='masa' DOCDIR='doxygen-doc' VERSION='0.0.1' PERL_PATH='/usr/bin/perl' HAVE_DOT='YES' DOT_PATH='/usr/bin' GENERATE_MAN='NO' GENERATE_RTF='NO' GENERATE_XML='NO' GENERATE_HTMLHELP='NO' GENERATE_CHI='NO' GENERATE_HTML='YES' GENERATE_LATEX='NO'
+DX_EGREP = /bin/egrep
+DX_ENV =  SRCDIR='.' PROJECT='MASA' DOCDIR='docs' VERSION='0.10.0' PERL_PATH='/usr/bin/perl' HAVE_DOT='YES' DOT_PATH='/usr/bin' GENERATE_MAN='NO' GENERATE_RTF='NO' GENERATE_XML='NO' GENERATE_HTMLHELP='NO' GENERATE_CHI='NO' GENERATE_HTML='YES' GENERATE_LATEX='YES'
 DX_FLAG_chi = 0
 DX_FLAG_chm = 0
 DX_FLAG_doc = 1
 DX_FLAG_dot = 1
 DX_FLAG_html = 1
 DX_FLAG_man = 0
-DX_FLAG_pdf = 0
+DX_FLAG_pdf = 1
 DX_FLAG_ps = 0
 DX_FLAG_rtf = 0
 DX_FLAG_xml = 0
 DX_HHC = 
 DX_LATEX = 
-DX_MAKEINDEX = 
-DX_PDFLATEX = 
+DX_MAKEINDEX = /usr/bin/makeindex
+DX_PDFLATEX = /usr/bin/pdflatex
 DX_PERL = /usr/bin/perl
-DX_PROJECT = masa
+DX_PROJECT = MASA
 ECHO_C = 
 ECHO_N = -n
 ECHO_T = 
 EGREP = /bin/grep -E
 EXEEXT = 
+F77 = ifort
 FC = ifort
-FCFLAGS = 
-FCLIBS =  -L/org/centers/pecos/intel/fce/10.1.021/lib -L/usr/lib/gcc/x86_64-linux-gnu/4.2.4/ -L/usr/lib/gcc/x86_64-linux-gnu/4.2.4/../../../../lib64 -lifport -lifcore -limf -lsvml -lm -lipgo -lirc -lirc_s -ldl
+FCFLAGS = -g
+FFLAGS = -g
 FGREP = /bin/grep -F
+GENERIC_RELEASE = 0.27
 GREP = /bin/grep
-HPCT_CFLAGS = -I/org/centers/pecos/LIBRARIES/hpct/0.26.0/include
-HPCT_LIBS = -L/org/centers/pecos/LIBRARIES/hpct/0.26.0/lib -lhpct
-INC_AMINCLUDE = include $(top_builddir)/aminclude.am
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
@@ -124,17 +114,13 @@ INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /usr/bin/ld -m elf_x86_64
 LDFLAGS = 
 LIBOBJS = 
-LIBS = -lhdf5 
+LIBS = 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
-LIBTOOL_DEPS = build-aux/ltmain.sh
 LIPO = 
 LN_S = ln -s
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /h2/nick/Desktop/tester/build-aux/missing --run makeinfo
+MAKEINFO = ${SHELL} /h2/nick/Desktop/pecos/mms/MASA/trunk/build-aux/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
-MPICC = mpicc
-MPIFC = mpif90
-MPILIBS =  
 NM = /usr/bin/nm -B
 NMEDIT = 
 OBJDUMP = objdump
@@ -143,30 +129,31 @@ OTOOL =
 OTOOL64 = 
 PACKAGE = masa
 PACKAGE_BUGREPORT = nick@ices.utexas.edu
-PACKAGE_NAME = masa
-PACKAGE_STRING = masa 0.0.1
+PACKAGE_NAME = MASA
+PACKAGE_STRING = MASA 0.10.0
 PACKAGE_TARNAME = masa
-PACKAGE_VERSION = 0.0.1
+PACKAGE_VERSION = 0.10.0
 PATH_SEPARATOR = :
-PKG_CONFIG = /usr/bin/pkg-config
 RANLIB = ranlib
 SED = /bin/sed
 SET_MAKE = 
 SHELL = /bin/bash
 STRIP = strip
-VERSION = 0.0.1
-abs_builddir = /h2/nick/Desktop/tester/doc
-abs_srcdir = /h2/nick/Desktop/tester/doc
-abs_top_builddir = /h2/nick/Desktop/tester
-abs_top_srcdir = /h2/nick/Desktop/tester
+VERSION = 0.10.0
+abs_builddir = /h2/nick/Desktop/pecos/mms/MASA/trunk/doc
+abs_srcdir = /h2/nick/Desktop/pecos/mms/MASA/trunk/doc
+abs_top_builddir = /h2/nick/Desktop/pecos/mms/MASA/trunk
+abs_top_srcdir = /h2/nick/Desktop/pecos/mms/MASA/trunk
 ac_ct_CC = icc
+ac_ct_CXX = 
 ac_ct_DUMPBIN = 
+ac_ct_F77 = 
 ac_ct_FC = 
 am__include = include
 am__leading_dot = .
 am__quote = 
-am__tar = tar --format=ustar -chf - "$$tardir"
-am__untar = tar -xf -
+am__tar = ${AMTAR} chof - "$$tardir"
+am__untar = ${AMTAR} xf -
 bindir = ${exec_prefix}/bin
 build = x86_64-unknown-linux-gnu
 build_alias = 
@@ -187,7 +174,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = $(SHELL) /h2/nick/Desktop/tester/build-aux/install-sh
+install_sh = $(SHELL) /h2/nick/Desktop/pecos/mms/MASA/trunk/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -204,11 +191,7 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
 sysconfdir = ${prefix}/etc
-target = x86_64-unknown-linux-gnu
 target_alias = 
-target_cpu = x86_64
-target_os = linux-gnu
-target_vendor = unknown
 top_builddir = ..
 top_srcdir = ..
 all: all-am
@@ -223,9 +206,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  doc/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  doc/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign  doc/Makefile
+	  $(AUTOMAKE) --gnu  doc/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -379,7 +362,7 @@ uninstall-am:
 
 
 # Required for AX_AM_MACROS
-include $(top_builddir)/aminclude.am
+@INC_AMINCLUDE@
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
