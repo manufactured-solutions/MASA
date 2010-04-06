@@ -1,0 +1,11 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: MASA
+Description: A software interface that provides access to various manufactured solutions to be used for verification by various models.
+Requires:
+Version: 0.0.1
+Libs: -L${libdir} -lmasa
+Cflags: -I${includedir}
