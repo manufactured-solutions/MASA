@@ -10,8 +10,8 @@
 #
 # LAST MODIFICATION
 #
-#   2009-07-16
-#
+#   2010-04-06
+#  By Nick, who does not necessarily know what he is doing here.
 
 AC_DEFUN([AX_SUMMARIZE_CONFIG],
 [

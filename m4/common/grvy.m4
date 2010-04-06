@@ -1,6 +1,6 @@
 # SYNOPSIS
 #
-#   Test for libGRVY
+#   Test for libMASA
 #
 #   AM_PATH_grvy([, ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND]]])
 #
@@ -19,6 +19,7 @@
 #
 # COPYLEFT
 #
+#   Copyright (c) 2010 Nick Malaya  <nick@ices.utexas.edu>
 #   Copyright (c) 2010 Karl W. Schulz <karl@ices.utexas.edu>
 #   Copyright (c) 2009 Rhys Ulerich <rhys.ulerich@gmail.com>
 #   Copyright (c) 2008 Thomas Porschberg <thomas@randspringer.de>
@@ -84,10 +85,10 @@ if test "${with_grvy}" != no ; then
     fi
 
     if test "$succeeded" = no; then
-        ifelse([$2],,AC_MSG_ERROR([libGRVY not found.  Try either --with-grvy or setting GRVY_DIR.]),
+        ifelse([$2],,AC_MSG_ERROR([libMASA not found.  Try either --with-grvy or setting GRVY_DIR.]),
             [$2])
     else
-        AC_DEFINE(HAVE_GRVY,1,[Define if GRVY is available])
+        AC_DEFINE(HAVE_GRVY,1,[Define if MASA is available])
         AC_SUBST(GRVY_CFLAGS)
         AC_SUBST(GRVY_LIBS)
 	AC_SUBST(GRVY_PREFIX)

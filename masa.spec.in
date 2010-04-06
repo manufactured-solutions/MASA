@@ -1,16 +1,16 @@
 #
 # Spec file for GRVY Toolkit
 #
-Summary:      GRVY is a toolkit library for HPC Application Development
-Name:         grvy
+Summary:      MASA is a toolkit library for HPC Application Development
+Name:         MASA
 Version:      @VERSION@
 Release:      1
 License:      GPL
 Group:        applications
-Source:       grvy-%{version}.tar.gz
-Distribution: Koomie Linux
-Vendor:       Koomie
-Packager:     karl@ices.utexas.edu
+Source:       masa-%{version}.tar.gz
+Distribution: Linux
+Vendor:       PECOS
+Packager:     nick@ices.utexas.edu
 
 BuildRoot: /var/tmp/%{name}-%{version}-buildroot
 
