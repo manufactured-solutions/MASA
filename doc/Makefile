@@ -37,10 +37,11 @@ host_triplet = x86_64-unknown-linux-gnu
 subdir = doc
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/ax_prog_doxygen.m4 \
-	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
-	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
-	$(top_srcdir)/m4/lt~obsolete.m4 $(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/m4/common/ax_prog_doxygen.m4 \
+	$(top_srcdir)/m4/common/ax_tls.m4 \
+	$(top_srcdir)/m4/common/boost.m4 \
+	$(top_srcdir)/m4/common/config_environment.m4 \
+	$(top_srcdir)/m4/config_summary.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
@@ -56,6 +57,8 @@ AUTOCONF = ${SHELL} /h2/nick/Desktop/pecos/mms/MASA/trunk/build-aux/missing --ru
 AUTOHEADER = ${SHELL} /h2/nick/Desktop/pecos/mms/MASA/trunk/build-aux/missing --run autoheader
 AUTOMAKE = ${SHELL} /h2/nick/Desktop/pecos/mms/MASA/trunk/build-aux/missing --run automake-1.10
 AWK = gawk
+BOOST_CPPFLAGS = -I/org/centers/pecos/LIBRARIES/BOOST/boost-1.40.0-intel-10.1.021/include/boost-1_40
+BOOST_ROOT = /org/centers/pecos/LIBRARIES/BOOST/boost-1.40.0-intel-10.1.021
 CC = icc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
@@ -68,16 +71,16 @@ CXXFLAGS = -DMPICH_IGNORE_CXX_SEEK
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
+DISTCHECK_CONFIGURE_FLAGS =  '--with-boost=/org/centers/pecos/LIBRARIES/BOOST/boost-1.40.0-intel-10.1.021'
 DOXYGEN_PAPER_SIZE = 
 DSYMUTIL = 
-DUMPBIN = 
 DX_CONFIG = doxygen/masa.dox
 DX_DOCDIR = docs
 DX_DOT = /usr/bin/dot
 DX_DOXYGEN = /usr/bin/doxygen
 DX_DVIPS = 
 DX_EGREP = /bin/egrep
-DX_ENV =  SRCDIR='.' PROJECT='MASA' DOCDIR='docs' VERSION='0.10.0' PERL_PATH='/usr/bin/perl' HAVE_DOT='YES' DOT_PATH='/usr/bin' GENERATE_MAN='NO' GENERATE_RTF='NO' GENERATE_XML='NO' GENERATE_HTMLHELP='NO' GENERATE_CHI='NO' GENERATE_HTML='YES' GENERATE_LATEX='YES'
+DX_ENV =  SRCDIR='.' PROJECT='MASA' DOCDIR='docs' VERSION='0.10.0' BUILDDATE='2010-04-06 15:14' BUILDHOST='tensor.ices.utexas.edu' BUILDUSER='nick' PERL_PATH='/usr/bin/perl' HAVE_DOT='YES' DOT_PATH='/usr/bin' GENERATE_MAN='NO' GENERATE_RTF='NO' GENERATE_XML='NO' GENERATE_HTMLHELP='NO' GENERATE_CHI='NO' GENERATE_HTML='YES' GENERATE_LATEX='YES'
 DX_FLAG_chi = 0
 DX_FLAG_chm = 0
 DX_FLAG_doc = 1
@@ -94,6 +97,7 @@ DX_MAKEINDEX = /usr/bin/makeindex
 DX_PDFLATEX = /usr/bin/pdflatex
 DX_PERL = /usr/bin/perl
 DX_PROJECT = MASA
+ECHO = echo
 ECHO_C = 
 ECHO_N = -n
 ECHO_T = 
@@ -103,7 +107,6 @@ F77 = ifort
 FC = ifort
 FCFLAGS = -g
 FFLAGS = -g
-FGREP = /bin/grep -F
 GENERIC_RELEASE = 0.27
 GREP = /bin/grep
 INSTALL = /usr/bin/install -c
@@ -111,22 +114,16 @@ INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-LD = /usr/bin/ld -m elf_x86_64
 LDFLAGS = 
 LIBOBJS = 
 LIBS = 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
-LIPO = 
 LN_S = ln -s
 LTLIBOBJS = 
 MAKEINFO = ${SHELL} /h2/nick/Desktop/pecos/mms/MASA/trunk/build-aux/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
-NM = /usr/bin/nm -B
 NMEDIT = 
-OBJDUMP = objdump
 OBJEXT = o
-OTOOL = 
-OTOOL64 = 
 PACKAGE = masa
 PACKAGE_BUGREPORT = nick@ices.utexas.edu
 PACKAGE_NAME = MASA
@@ -146,7 +143,6 @@ abs_top_builddir = /h2/nick/Desktop/pecos/mms/MASA/trunk
 abs_top_srcdir = /h2/nick/Desktop/pecos/mms/MASA/trunk
 ac_ct_CC = icc
 ac_ct_CXX = 
-ac_ct_DUMPBIN = 
 ac_ct_F77 = 
 ac_ct_FC = 
 am__include = include
@@ -179,7 +175,6 @@ libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
 localstatedir = ${prefix}/var
-lt_ECHO = echo
 mandir = ${datarootdir}/man
 mkdir_p = /bin/mkdir -p
 oldincludedir = /usr/include
