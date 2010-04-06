@@ -92,7 +92,6 @@ dnl Generate Makefiles
 dnl ------------------------------------------------
 AC_CONFIG_FILES([
     Makefile
-    apps/Makefile
     doc/Makefile
     lib/Makefile
     masa/Makefile

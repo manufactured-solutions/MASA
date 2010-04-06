@@ -19466,7 +19466,7 @@ esac
 #echo DX_ENV=$DX_ENV
 
 
-ac_config_files="$ac_config_files Makefile apps/Makefile doc/Makefile lib/Makefile masa/Makefile tests/Makefile masa.pc"
+ac_config_files="$ac_config_files Makefile doc/Makefile lib/Makefile masa/Makefile tests/Makefile masa.pc"
 
 
 cat >confcache <<\_ACEOF
@@ -20555,7 +20555,6 @@ do
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
-    "apps/Makefile") CONFIG_FILES="$CONFIG_FILES apps/Makefile" ;;
     "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
     "lib/Makefile") CONFIG_FILES="$CONFIG_FILES lib/Makefile" ;;
     "masa/Makefile") CONFIG_FILES="$CONFIG_FILES masa/Makefile" ;;

@@ -4,10 +4,10 @@ ACLOCAL_AMFLAGS = -I m4
 AUTOMAKE_OPTIONS = foreign
 
 # Build in these directories:
-SUBDIRS = lib masa tests apps doc
+SUBDIRS = lib masa tests doc
 
 # Distribute these items:
-DIST_SUBDIRS = lib masa tests apps doc
+DIST_SUBDIRS = lib masa tests doc
 EXTRA_DIST= bootstrap $(DX_CONFIG)
 
 # Eliminate .svn directories in dist tarball
