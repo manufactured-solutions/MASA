@@ -37,7 +37,7 @@
 // need many more sanity/error checks
 // how am I going to automate this all?
 
-#include "masa.h"
+#include <masa.h>
 
 // -------------------------------------------------------
 // these are just a few utility functions

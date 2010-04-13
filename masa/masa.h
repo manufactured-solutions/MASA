@@ -43,14 +43,14 @@ using namespace std;
 
 namespace MASA 
 {
-
-  class manufactured_solution
-  {
+  
+  /*class manufactured_solution  {
+    
   private: 
     string mms_name; // the name of the manufactured solution  
     double Tan;      // analytical solution 
     double Q;        // source term
-    gradT;           // gradient 
+    double gradT;           // gradient 
     
   public: 
     manufactured_solution ();  // constructor
@@ -59,17 +59,17 @@ namespace MASA
     void set_name   (string);  // method: sets name
     
   }; // done with MMS class
-
+  */
   // masa map functions here
   // probably want to hide this from the user eventually
 
-  int masa_map_solution (string, string);
-  int masa_map_temporal (string, string);
-  int masa_map_coeff    (string, string); 
-  int masa_map          (string, string);
-  int masa_map_dimension(string, string);
-
+  int masa_map_solution  (string, string);
+  int masa_map_temporal  (string, string);
+  int masa_map_coeff     (string, string); 
+  int masa_map           (string, string);
+  int masa_map_dimension (string, string);
+ 
   // masa_shell
   //void masa_shell_choose_solution();
-
+  
 } //end MASA namespace
