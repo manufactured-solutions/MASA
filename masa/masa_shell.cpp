@@ -42,6 +42,8 @@ void masa_shell_choose_solution()
   void* ptr; // initialize null
   double dbl=12.3;
   double dbl2;
+  double field;
+  double blah;
   string str;
 
   printf("\n\n Now type solution to initialize.");
@@ -62,6 +64,13 @@ void masa_shell_choose_solution()
   masa_set_param(ptr,"axp",dbl);
   masa_get_param(ptr,"axp",&dbl2);
   cout << "double is:" << dbl2 << endl;
+ 
+  cin >> blah;
+  masa_set_param(ptr,"k0",1);
+  masa_set_param(ptr,"ax",1); 
+  
+  masa_eval_1d_source(ptr,.5,&field);
+  cout << "source term is:" << field;
 
 }// end masa_shell_choose_solution
 
