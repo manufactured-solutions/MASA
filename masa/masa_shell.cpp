@@ -32,30 +32,44 @@
 
 // this is the MASA shell, for users to grow familiar with the masa namespace, as well as debugging
 
-#include <masa.h>
+#include "masa.h"
 
-using namespace std;
 using namespace MASA;
 
 void masa_shell_choose_solution()
 {
   char userstring[100],masterstring[100];
+  void* ptr; // initialize null
+  double dbl=12.3;
+  double dbl2;
+  string str;
 
   printf("\n\n Now type solution to initialize.");
   printf("\n Remember to place underscores between parameters (e.g. steady_heatequation)");
   printf("\n\n");
   scanf("%s",userstring);
-  masa_map_dimension(userstring,masterstring);
+
+  //masa_map_dimension(userstring,masterstring);
+  masa_getid(&ptr,userstring);
+  masa_get_name(ptr,&str);
+  cout << endl << "User has selected: " << str << endl;
+
+  cout << "input double" << endl;
+  cin >> dbl;
+  cout << "double is:" << dbl << endl;
+  masa_get_param(ptr,"axp",&dbl2);
+  cout << "initially set to:" << dbl2 << endl;
+  masa_set_param(ptr,"axp",dbl);
+  masa_get_param(ptr,"axp",&dbl2);
+  cout << "double is:" << dbl2 << endl;
+
 }// end masa_shell_choose_solution
 
 void masa_shell_print_avail()
 {
   // this function prints the available manufactured solutions -- 
   // obviously needs to get a handle on the manufactured solutions class here
-  printf("\n");
-  printf("\n 2d heat equation");
-  printf("\n 3d heat equation");
-  printf("\n");
+  masa_printid();
 }
 
 int main()

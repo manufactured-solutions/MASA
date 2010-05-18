@@ -41,35 +41,29 @@
 
 using namespace std;
 
-namespace MASA 
+namespace MASA
 {
-  
-  /*class manufactured_solution  {
-    
-  private: 
-    string mms_name; // the name of the manufactured solution  
-    double Tan;      // analytical solution 
-    double Q;        // source term
-    double gradT;           // gradient 
-    
-  public: 
-    manufactured_solution ();  // constructor
-    ~manufactured_solution();  // destructor
-    void return_name      ();  // method: returns name
-    void set_name   (string);  // method: sets name
-    
-  }; // done with MMS class
-  */
-  // masa map functions here
-  // probably want to hide this from the user eventually
 
-  int masa_map_solution  (string, string);
-  int masa_map_temporal  (string, string);
-  int masa_map_coeff     (string, string); 
-  int masa_map           (string, string);
-  int masa_map_dimension (string, string);
- 
-  // masa_shell
-  //void masa_shell_choose_solution();
+  // masa core functions (to be called by user)
+  int masa_getid(void**,string);
+  int masa_printid();
+  int masa_set_param(void*,string,double);
+  int masa_get_param(void*,string,double*);
+  int masa_get_name(void*,string*);
+  
+  // source term
+  int masa_eval_1d_source(void*,double,double*);
+  int masa_eval_2d_source(void*,double,double,double);
+  int masa_eval_3d_source(void*,double,double,double,double);
+
+  // analytical solution
+  int masa_eval_1d_an(void*,double,double);
+  int masa_eval_2d_an(void*,double,double,double);
+  int masa_eval_3d_an(void*,double,double,double,double);
+
+  // gradient of analytical solution
+  int masa_eval_1d_grad(void*,int,double,double);
+  int masa_eval_2d_grad(void*,int,double,double,double);
+  int masa_eval_3d_grad(void*,int,double,double,double,double);
   
 } //end MASA namespace

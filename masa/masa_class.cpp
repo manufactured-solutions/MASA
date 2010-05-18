@@ -30,36 +30,203 @@
   *--------------------------------------------------------------------------
   */  
 
-using <masa.h>
+#include "masa_internal.h"
 
-namespace MASA {
-  
-  manufactured_solution::manufactured_solution()
-  {
-    
-    mms_name="uninit"; // create bad name
-    
-  }
-  
-  manufactured_solution::~manufactured_solution()
-  {
-    
-    //need to free everything here
-    
-  }
-  
-  manufactured_solution::return_name()
-  {
-    
-    cout << endl << mms_name << endl;
-    
-  }
-  
-  manufactured_solution::set_name(string input_string)
-  {
-    
-    mms_name=input_string;
+using namespace MASA;
 
-  }
+void MASA::manufactured_solution::get_var(string var, double* sol)
+{
+  int selector;
+  selector = varmap[var];    // find location in pointer array
 
-};
+    if(selector==0)
+    {
+      cout << "\nMASA ERROR: No such variable exists\n";
+      // exit(1); this isnt really a fatal error
+    }
+  else 
+    {
+      *sol = *vararr[selector];   // set to value 
+    } 
+
+}// done with get_var function
+
+void MASA::manufactured_solution::set_var(string var, double val)
+{
+  int selector;
+  selector = varmap[var];    // find location in pointer array
+
+  if(selector==0)
+    {
+      cout << "\nMASA ERROR: No such variable to be set\n";
+      // exit(1);not really a fatal error
+    }
+  else 
+    {
+      *vararr[selector] = val;   // set variable to new value    
+    } 
+}// done with set_var function
+
+//test problem -- not a real class!
+MASA::heat_eq::heat_eq()
+{
+  // here, we load up the map so we can key to specific variables
+  // using input
+  //mmsname = "heat equation";
+  mmsname = "heat_eq";
+  
+  //first variable "axp" -- load map and array
+  varmap["axp"]=1;
+  axp=-1;
+  vararr.push_back(&axp);
+  vararr.push_back(&axp);
+  
+}//done with constructor
+
+/* ------------------------------------------------
+ *
+ *         HEAT EQUATION
+ *
+ *
+ *
+ * -----------------------------------------------
+ */ 
+
+MASA::heateq_1d_steady_const::heateq_1d_steady_const()
+{
+    mmsname = "heateq_1d_steady_const";
+
+  //first variable "axp" -- load map and array
+  varmap["axp"]=1;
+  axp=-1;
+  vararr.push_back(&axp);
+  vararr.push_back(&axp);
+
+  // initalize other variables
+  varmap["ax"]=2;
+  ax=-1;
+  vararr.push_back(&ax);
+
+  // 2nd var
+  varmap["k0"]=3;
+  k0=-1;
+  vararr.push_back(&k0);   
+
+}//done with constructor
+
+double MASA::heateq_1d_steady_const::eval_q_u(double x)
+{
+  double qt = ax * ax * k0 * cos(ax * x);
+  return qt;
+
+}//done with constructor
+
+
+MASA::heateq_2d_steady_const::heateq_2d_steady_const()
+{
+    mmsname = "heateq_2d_steady_const";
+
+
+}//done with constructor
+
+
+MASA::heateq_3d_steady_const::heateq_3d_steady_const()
+{
+    mmsname = "heateq_3d_steady_const";
+
+
+}//done with constructor
+
+MASA::heateq_1d_unsteady_const::heateq_1d_unsteady_const()
+{
+    mmsname = "heateq_1d_unsteady_const";
+
+
+}//done with constructor
+
+
+MASA::heateq_2d_unsteady_const::heateq_2d_unsteady_const()
+{
+    mmsname = "heateq_2d_unsteady_const";
+
+
+}//done with constructor
+
+
+MASA::heateq_3d_unsteady_const::heateq_3d_unsteady_const()
+{
+    mmsname = "heateq_3d_unsteady_const";
+
+
+}//done with constructor
+
+
+MASA::heateq_1d_unsteady_var::heateq_1d_unsteady_var()
+{
+    mmsname = "heateq_1d_unsteady_var";
+
+
+}//done with constructor
+
+
+MASA::heateq_2d_unsteady_var::heateq_2d_unsteady_var()
+{
+    mmsname = "heateq_2d_unsteady_var";
+
+
+}//done with constructor
+
+
+MASA::heateq_3d_unsteady_var::heateq_3d_unsteady_var()
+{
+    mmsname = "heateq_3d_unsteady_var";
+
+
+}//done with constructor
+
+
+MASA::heateq_1d_steady_var::heateq_1d_steady_var()
+{
+    mmsname = "heateq_1d_steady_var";
+
+
+}//done with constructor
+
+
+MASA::heateq_2d_steady_var::heateq_2d_steady_var()
+{
+    mmsname = "heateq_2d_steady_var";
+
+
+}//done with constructor
+
+
+MASA::heateq_3d_steady_var::heateq_3d_steady_var()
+{
+    mmsname = "heateq_3d_steady_var";
+
+
+}//done with constructor
+
+/* ------------------------------------------------
+ *
+ *         EULER EQUATIONS
+ *
+ *
+ *
+ * -----------------------------------------------
+ */ 
+
+MASA::euler_2d::euler_2d()
+{
+    mmsname = "euler_2d";
+
+
+}//done with constructor
+
+MASA::euler_3d::euler_3d()
+{
+    mmsname = "euler_3d";
+
+
+}//done with constructor

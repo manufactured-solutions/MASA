@@ -37,13 +37,13 @@
 // need many more sanity/error checks
 // how am I going to automate this all?
 
-#include <masa.h>
+#include "masa_internal.h"
+
+using namespace MASA;
 
 // -------------------------------------------------------
 // these are just a few utility functions
 // -------------------------------------------------------
-
-using namespace std; 
 
 // all this does is convert a string to entirely lower case
 // should simplify our user stuff
@@ -83,7 +83,7 @@ string remove_whitespace(string string1)
 // -------------------------------------------------------
 
 // user chooses 1d,2d, or 3d 
-int masa_map_dimension(string input_string, string return_string)
+int MASA::masa_map_dimension(string input_string, string return_string)
 {
   multimap<string, string> names;
   string temp_string;
@@ -139,7 +139,7 @@ int masa_map_dimension(string input_string, string return_string)
 
 
 // user chooses type of solution
-int masa_map_solution(string input_string, string return_string)
+int MASA::masa_map_solution(string input_string, string return_string)
 {
   multimap<string, string> names;
   string temp_string;
@@ -190,7 +190,7 @@ int masa_map_solution(string input_string, string return_string)
 
 
 // user chooses if solution has constant or variable coefficients
-int masa_map_coeff(string input_string, string return_string)
+int MASA::masa_map_coeff(string input_string, string return_string)
 {
   multimap<string, string> names;
   string temp_string;
@@ -241,7 +241,7 @@ int masa_map_coeff(string input_string, string return_string)
 }// end masa_map_coeff
 
 // user chooses steady or transient solution
-int masa_map_temporal(string input_string, string return_string)
+int MASA::masa_map_temporal(string input_string, string return_string)
 {
   multimap<string, string> names;
   string temp_string;
@@ -284,7 +284,7 @@ int masa_map_temporal(string input_string, string return_string)
 }// end masa_map_temporal
 
 // get string, parse it, and return the string name of the solution we want
-int masa_map(string input_string, string return_string)
+int MASA::masa_map(string input_string, string return_string)
 {
   int error; // simple error handler
   int n=0;
