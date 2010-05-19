@@ -137,6 +137,16 @@ MASA::heateq_3d_steady_const::heateq_3d_steady_const()
 
 }//done with constructor
 
+
+/* ------------------------------------------------
+ *
+ *         HEAT EQUATION
+ *
+ *   Unsteady         
+ *
+ * -----------------------------------------------
+ */ 
+
 MASA::heateq_1d_unsteady_const::heateq_1d_unsteady_const()
 {
     mmsname = "heateq_1d_unsteady_const";
@@ -185,6 +195,18 @@ MASA::heateq_3d_unsteady_var::heateq_3d_unsteady_var()
 }//done with constructor
 
 
+/* ------------------------------------------------
+ *
+ *         HEAT EQUATION
+ *
+ *        steady
+ *
+ *        variable coefficients
+ *
+ * -----------------------------------------------
+ */ 
+
+
 MASA::heateq_1d_steady_var::heateq_1d_steady_var()
 {
     mmsname = "heateq_1d_steady_var";
@@ -210,7 +232,7 @@ MASA::heateq_3d_steady_var::heateq_3d_steady_var()
 
 /* ------------------------------------------------
  *
- *         EULER EQUATIONS
+ *         EULER EQUATION
  *
  *
  *
@@ -227,6 +249,29 @@ MASA::euler_2d::euler_2d()
 MASA::euler_3d::euler_3d()
 {
     mmsname = "euler_3d";
+
+
+}//done with constructor
+
+/* ------------------------------------------------
+ *
+ *         Compressible Navier-Stokes EQUATIONs
+ *
+ *
+ *
+ * -----------------------------------------------
+ */ 
+
+MASA::ns_compress_2d::ns_compress_2d()
+{
+  mmsname = "navierstokes_compressible_2d";
+
+
+}//done with constructor
+
+MASA::ns_compress_3d::ns_compress_3d()
+{
+  mmsname = "navierstokes_compressible_3d";
 
 
 }//done with constructor

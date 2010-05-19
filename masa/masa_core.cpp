@@ -74,6 +74,9 @@ int MASA::masa_getid(void** objid,string str)
 
   anim.push_back(new euler_2d());
   anim.push_back(new euler_3d());
+
+  anim.push_back(new ns_compress_2d());
+  anim.push_back(new ns_compress_3d());
   
   int flag=0;
   string name;
@@ -132,6 +135,9 @@ int MASA::masa_printid()
 
   anim.push_back(new euler_2d());
   anim.push_back(new euler_3d());
+
+  anim.push_back(new ns_compress_2d());
+  anim.push_back(new ns_compress_3d());
 
   string name;
   cout << endl;

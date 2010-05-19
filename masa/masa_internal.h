@@ -206,4 +206,24 @@ namespace MASA
     
   };
 
+  // ------------------------------------------------------
+  // ---------- compressible navier stokes  ------------
+  // ------------------------------------------------------
+
+  class ns_compress_2d : public manufactured_solution
+  {
+    
+  public:
+    ns_compress_2d(); // constructor
+    
+  };
+
+  class ns_compress_3d : public manufactured_solution
+  {
+    
+  public:
+    ns_compress_3d(); // constructor
+    
+  };
+
 } // end MASA namespace
