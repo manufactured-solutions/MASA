@@ -30,6 +30,10 @@
   *--------------------------------------------------------------------------
   */  
 
+//
+//   These are the MASA class member functions and constructors
+// 
+
 #include <masa_internal.h>
 
 using namespace MASA;

@@ -32,7 +32,7 @@
 
 // these routines take a string, parse it
 // and returns what we 'really' wanted the user to input
-
+//
 // ideas:
 // need many more sanity/error checks
 // how am I going to automate this all?

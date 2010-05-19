@@ -30,7 +30,9 @@
   *--------------------------------------------------------------------------
   */  
 
-// includes
+//
+// This header file contains the public functions designed to be exposed in MASA
+//
 
 #include <iostream>
 #include <vector>
