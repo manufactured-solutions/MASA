@@ -37,7 +37,7 @@
 // need many more sanity/error checks
 // how am I going to automate this all?
 
-#include "masa_internal.h"
+#include <masa_internal.h>
 
 using namespace MASA;
 

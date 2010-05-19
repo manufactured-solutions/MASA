@@ -1,5 +1,5 @@
-#include "masa.h"
-#include "math.h"
+#include <masa.h>
+#include <math.h>
 
 namespace MASA 
 {

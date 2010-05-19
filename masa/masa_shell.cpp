@@ -32,7 +32,7 @@
 
 // this is the MASA shell, for users to grow familiar with the masa namespace, as well as debugging
 
-#include "masa.h"
+#include <masa.h>
 
 using namespace MASA;
 

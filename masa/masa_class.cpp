@@ -30,7 +30,7 @@
   *--------------------------------------------------------------------------
   */  
 
-#include "masa_internal.h"
+#include <masa_internal.h>
 
 using namespace MASA;
 

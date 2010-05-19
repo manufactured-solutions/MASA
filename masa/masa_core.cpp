@@ -33,7 +33,7 @@
 // this is the core set of routines -- the only functions that should be called by users
 // all other files are internal
 
-#include "masa_internal.h"
+#include <masa_internal.h>
 
 using namespace MASA;
 
