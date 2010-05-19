@@ -68,12 +68,11 @@ void MASA::manufactured_solution::set_var(string var, double val)
 }// done with set_var function
 
 //test problem -- not a real class!
-MASA::heat_eq::heat_eq()
+MASA::MASA_Test::MASA_Test()
 {
   // here, we load up the map so we can key to specific variables
   // using input
-  //mmsname = "heat equation";
-  mmsname = "heat_eq";
+  mmsname = "MASA example function";
   
   //first variable "axp" -- load map and array
   varmap["axp"]=1;

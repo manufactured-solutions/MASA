@@ -48,40 +48,57 @@ int masa_v2o(void* obid, manufactured_solution** manfac)
 
 }
 
+// get list mms
+//
+// this function returns a vector of pointers to 
+// manufactured solutions available
+//
+// adding function because it is called in several places
+
+int get_list_mms(vector<manufactured_solution*>* anim)
+{
+  anim->push_back(new MASA_Test()); // test function
+  
+  // register solutions here
+  anim->push_back(new heateq_1d_steady_const());
+  anim->push_back(new heateq_2d_steady_const());
+  anim->push_back(new heateq_3d_steady_const());
+
+  anim->push_back(new heateq_1d_unsteady_const());
+  anim->push_back(new heateq_2d_unsteady_const());
+  anim->push_back(new heateq_3d_unsteady_const());
+
+  anim->push_back(new heateq_1d_unsteady_var());
+  anim->push_back(new heateq_2d_unsteady_var());
+  anim->push_back(new heateq_3d_unsteady_var());
+
+  anim->push_back(new heateq_1d_steady_var());
+  anim->push_back(new heateq_2d_steady_var());
+  anim->push_back(new heateq_3d_steady_var());
+
+  anim->push_back(new euler_2d());
+  anim->push_back(new euler_3d());
+
+  anim->push_back(new ns_compress_2d());
+  anim->push_back(new ns_compress_3d());
+
+  return 0;
+
+}
+
+//
+// function that searches all registered masa solutions
+// for a selected manufactured solution
+//
 int MASA::masa_getid(void** objid,string str)
 {
-  vector<manufactured_solution*> anim;
-  anim.push_back(new heat_eq()); // secret test function
-  //anim.push_back(new euler());
-  //anim.push_back(new ns());
-
-  // register solutions here
-  anim.push_back(new heateq_1d_steady_const());
-  anim.push_back(new heateq_2d_steady_const());
-  anim.push_back(new heateq_3d_steady_const());
-
-  anim.push_back(new heateq_1d_unsteady_const());
-  anim.push_back(new heateq_2d_unsteady_const());
-  anim.push_back(new heateq_3d_unsteady_const());
-
-  anim.push_back(new heateq_1d_unsteady_var());
-  anim.push_back(new heateq_2d_unsteady_var());
-  anim.push_back(new heateq_3d_unsteady_var());
-
-  anim.push_back(new heateq_1d_steady_var());
-  anim.push_back(new heateq_2d_steady_var());
-  anim.push_back(new heateq_3d_steady_var());
-
-  anim.push_back(new euler_2d());
-  anim.push_back(new euler_3d());
-
-  anim.push_back(new ns_compress_2d());
-  anim.push_back(new ns_compress_3d());
-  
   int flag=0;
   string name;
-  
-  // masa_map();
+  vector<manufactured_solution*> anim;
+
+  get_list_mms(&anim); //construct list 
+ 
+  // masa_map();  
 
   for (vector<manufactured_solution*>::const_iterator it = anim.begin(); it != anim.end(); ++it) {
     (*it)->return_name(&name); // get name
@@ -109,37 +126,16 @@ int MASA::masa_getid(void** objid,string str)
 }// done with masa getid
 
 
+//
+// function that prints all registered masa solutions
+//
 int MASA::masa_printid()
 {
   vector<manufactured_solution*> anim;
-  //anim.push_back(new heat_eq());
-  //anim.push_back(new euler());
-  //anim.push_back(new ns())
-
-  // register solutions here
-  anim.push_back(new heateq_1d_steady_const());
-  anim.push_back(new heateq_2d_steady_const());
-  anim.push_back(new heateq_3d_steady_const());
-
-  anim.push_back(new heateq_1d_unsteady_const());
-  anim.push_back(new heateq_2d_unsteady_const());
-  anim.push_back(new heateq_3d_unsteady_const());
-
-  anim.push_back(new heateq_1d_unsteady_var());
-  anim.push_back(new heateq_2d_unsteady_var());
-  anim.push_back(new heateq_3d_unsteady_var());
-
-  anim.push_back(new heateq_1d_steady_var());
-  anim.push_back(new heateq_2d_steady_var());
-  anim.push_back(new heateq_3d_steady_var());
-
-  anim.push_back(new euler_2d());
-  anim.push_back(new euler_3d());
-
-  anim.push_back(new ns_compress_2d());
-  anim.push_back(new ns_compress_3d());
-
   string name;
+
+  get_list_mms(&anim); //construct list 
+
   cout << endl;
   // masa_map();
   for (vector<manufactured_solution*>::const_iterator it = anim.begin(); it != anim.end(); ++it) {

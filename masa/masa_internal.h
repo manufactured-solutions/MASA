@@ -52,12 +52,12 @@ namespace MASA
   // ---------- all other mms classes ------------
   // ------------------------------------------------------
   // just a demo class
-  class heat_eq : public manufactured_solution 
+  class MASA_Test : public manufactured_solution 
   {
   private:
     double axp;
   public:
-    heat_eq(); // constructor
+    MASA_Test(); // constructor
     
   }; // done with heat_eq_1d
 
