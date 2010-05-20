@@ -89,7 +89,7 @@ void masa_shell_choose_solution()
 	  printf("\n Input variable name:\n");
 	  scanf("%s",userstring);	  
 	  masa_get_param(ptr,userstring,&dbl2);
-	  cout << "initially set to:" << dbl2 << endl;
+	  cout << "currently set to:" << dbl2 << endl;
 	  cout << "\nInput new value (double)" << endl;
 	  cin >> dbl;
 	  masa_set_param(ptr,userstring,dbl);

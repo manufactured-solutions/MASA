@@ -39,15 +39,16 @@
 
 using namespace MASA;
 
-double MASA_VAR_DEFAULT = -12345.67; // default --initialize each var to 'crazy' value
-
 /* ------------------------------------------------
  *
  *         Manufactured Solution Class 
  *
  * -----------------------------------------------
  */ 
-
+MASA::manufactured_solution::manufactured_solution()
+{
+  MASA_VAR_DEFAULT = -12345.67; // default --initialize each var to 'crazy' value
+}
 void MASA::manufactured_solution::get_var(string var, double* sol)
 {
   int selector;
@@ -56,7 +57,6 @@ void MASA::manufactured_solution::get_var(string var, double* sol)
     if(selector==0)
     {
       cout << "\nMASA ERROR: No such variable exists\n";
-      // exit(1); this isnt really a fatal error
     }
     else 
       {
@@ -189,7 +189,7 @@ MASA::MASA_Test::MASA_Test()
 {
   // here, we load up the map so we can key to specific variables
   // using input
-  mmsname = "MASA example function";
+  mmsname = "MASA_test_function";
   dimension = 1;
   
   //first variable "axp" -- load map and array
@@ -197,157 +197,21 @@ MASA::MASA_Test::MASA_Test()
   axp=MASA_VAR_DEFAULT;
   vararr.push_back(&axp);
   vararr.push_back(&axp);
+
+  varmap["demo_var_2"]=2;
+  demo_var_2=MASA_VAR_DEFAULT;
+  vararr.push_back(&demo_var_2);
+
+  varmap["demo_var_3"]=3;
+  demo_var_3=MASA_VAR_DEFAULT;
+  vararr.push_back(&demo_var_3);
   
 }//done with constructor
 
-/* ------------------------------------------------
- *
- *         HEAT EQUATION
- *
- *
- *
- * -----------------------------------------------
- */ 
-
-MASA::heateq_1d_steady_const::heateq_1d_steady_const()
+double MASA::MASA_Test::eval_q_u(double x)
 {
-    mmsname = "heateq_1d_steady_const";
-    dimension=1;
-
-  // this bears some explaination -- to make the index match between the 
-  // map and the pointer array, the index must both be starting at _1_,
-  // not zero, as is typical for c. Thus, we have to add a dummy variable here
-
-  //first variable (dummy) "axp" -- load map and array
-  // varmap["axp"]=0;
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
-
-  // initalize other variables
-  varmap["ax"]=1;
-  ax=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&ax);
-
-  // 2nd var
-  varmap["k0"]=2;
-  k0=MASA_VAR_DEFAULT;
-  vararr.push_back(&k0);   
-
-}//done with constructor
-
-double MASA::heateq_1d_steady_const::eval_q_u(double x)
-{
-  double qt = ax * ax * k0 * cos(ax * x);
+  double qt = demo_var_2 + demo_var_3 + axp;
   return qt;
-
-}//done with constructor
-
-
-MASA::heateq_2d_steady_const::heateq_2d_steady_const()
-{
-    mmsname = "heateq_2d_steady_const";
-    dimension=2;
-
-}//done with constructor
-
-
-MASA::heateq_3d_steady_const::heateq_3d_steady_const()
-{
-    mmsname = "heateq_3d_steady_const";
-    dimension=3;
-
-}//done with constructor
-
-
-/* ------------------------------------------------
- *
- *         HEAT EQUATION
- *
- *   Unsteady         
- *
- * -----------------------------------------------
- */ 
-
-MASA::heateq_1d_unsteady_const::heateq_1d_unsteady_const()
-{
-    mmsname = "heateq_1d_unsteady_const";
-    dimension=1;
-
-}//done with constructor
-
-
-MASA::heateq_2d_unsteady_const::heateq_2d_unsteady_const()
-{
-    mmsname = "heateq_2d_unsteady_const";
-    dimension=2;
-
-}//done with constructor
-
-
-MASA::heateq_3d_unsteady_const::heateq_3d_unsteady_const()
-{
-    mmsname = "heateq_3d_unsteady_const";
-    dimension=3;
-
-}//done with constructor
-
-
-MASA::heateq_1d_unsteady_var::heateq_1d_unsteady_var()
-{
-    mmsname = "heateq_1d_unsteady_var";
-    dimension=1;
-
-}//done with constructor
-
-
-MASA::heateq_2d_unsteady_var::heateq_2d_unsteady_var()
-{
-    mmsname = "heateq_2d_unsteady_var";
-    dimension=2;
-
-}//done with constructor
-
-
-MASA::heateq_3d_unsteady_var::heateq_3d_unsteady_var()
-{
-    mmsname = "heateq_3d_unsteady_var";
-    dimension=3;
-
-}//done with constructor
-
-
-/* ------------------------------------------------
- *
- *         HEAT EQUATION
- *
- *        steady
- *
- *        variable coefficients
- *
- * -----------------------------------------------
- */ 
-
-
-MASA::heateq_1d_steady_var::heateq_1d_steady_var()
-{
-    mmsname = "heateq_1d_steady_var";
-    dimension=1;
-
-}//done with constructor
-
-
-MASA::heateq_2d_steady_var::heateq_2d_steady_var()
-{
-    mmsname = "heateq_2d_steady_var";
-    dimension=2;
-
-}//done with constructor
-
-
-MASA::heateq_3d_steady_var::heateq_3d_steady_var()
-{
-    mmsname = "heateq_3d_steady_var";
-    dimension=3;
 
 }//done with constructor
 

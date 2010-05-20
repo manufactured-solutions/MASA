@@ -72,6 +72,7 @@ namespace MASA
     double gradT;                           // gradient 
     
   protected:
+    double MASA_VAR_DEFAULT;
     map<string,int> varmap;               // map to each variable
     vector<double*>  vararr;              // arr of pointers to each variable
     string mmsname;                       // the name of the manufactured solution  
@@ -88,6 +89,7 @@ namespace MASA
     virtual double eval_g(double){cout << "MASA ERROR";   return -1.33;}; // returns value of gradient
 
     // functions to inherit
+    manufactured_solution();                // constructor
     void get_var(string,double*);     // returns variable value
     void set_var(string,double);     // sets variable value    
     void display_var();     // print all variable names and values
@@ -140,9 +142,11 @@ namespace MASA
   {
   private:
     double axp;
+    double demo_var_2;
+    double demo_var_3;
   public:
     MASA_Test(); // constructor
-    
+    double eval_q_u(double);
   }; // done with heat_eq_1d
 
   // ------------------------------------------------------
@@ -153,6 +157,7 @@ namespace MASA
   {
   private:
     double axp;
+
     double ax;
     double k0;    
   public:
@@ -163,16 +168,27 @@ namespace MASA
   class heateq_2d_steady_const : public manufactured_solution 
   {
   private:
-    int axp;
+    double axp;
+
+    double ax;
+    double k0;
+    double by;
+
   public:
     heateq_2d_steady_const(); // constructor
-    
+    double eval_q_u(double)      ; // source term evaluator
   };
   
   class heateq_3d_steady_const : public manufactured_solution 
   {
   private:
-    int axp;
+    double axp;
+
+    double ax;
+    double k0;
+    double by;
+    double cz;
+
   public:
     heateq_3d_steady_const(); // constructor
     
@@ -184,7 +200,15 @@ namespace MASA
   class heateq_1d_unsteady_const : public manufactured_solution 
   {
   private:
-    int axp;
+    double axp;
+
+    double ax;
+    double k0;
+    double dt;
+    double cp0;
+    double at;
+    double rho;
+    
   public:
     heateq_1d_unsteady_const(); // constructor
     
@@ -193,7 +217,17 @@ namespace MASA
   class heateq_2d_unsteady_const : public manufactured_solution 
   {
   private:
-    int axp;
+    double axp;
+
+    double ax;
+    double k0;
+    double dt;
+    double cp0;
+    double at;
+    double rho;
+    double by;
+    double bt;
+
   public:
     heateq_2d_unsteady_const(); // constructor
     
@@ -202,7 +236,19 @@ namespace MASA
   class heateq_3d_unsteady_const : public manufactured_solution 
   {
   private:
-    int axp;
+    double axp;
+
+    double ax;
+    double k0;
+    double dt;
+    double cp0;
+    double at;
+    double rho;
+    double by;
+    double bt;
+    double cz;
+    double ct;
+    
   public:
     heateq_3d_unsteady_const(); // constructor
     
@@ -215,7 +261,19 @@ namespace MASA
   class heateq_1d_unsteady_var : public manufactured_solution 
   {
   private:
-    int axp;
+    double axp;
+
+    double ax;
+    double k0;
+    double dt;
+    double cp0;
+    double at;
+    double rho;
+    double cp1;
+    double cp2;
+    double k1;
+    double k2;
+    
   public:
     heateq_1d_unsteady_var(); // constructor
     
@@ -224,7 +282,21 @@ namespace MASA
   class heateq_2d_unsteady_var : public manufactured_solution 
   {
   private:
-    int axp;
+    double axp;
+
+    double ax;
+    double k0;
+    double dt;
+    double cp0;
+    double at;
+    double rho;
+    double cp1;
+    double cp2;
+    double k1;
+    double k2;
+    double by;
+    double bt;
+
   public:
     heateq_2d_unsteady_var(); // constructor
     
@@ -233,7 +305,23 @@ namespace MASA
   class heateq_3d_unsteady_var : public manufactured_solution 
   {
   private:
-    int axp;
+    double axp;
+
+    double ax;
+    double k0;
+    double dt;
+    double cp0;
+    double at;
+    double rho;
+    double cp1;
+    double cp2;
+    double k1;
+    double k2;
+    double by;
+    double bt;
+    double cz;
+    double ct;
+
   public:
     heateq_3d_unsteady_var(); // constructor
     
@@ -246,7 +334,13 @@ namespace MASA
   class heateq_1d_steady_var : public manufactured_solution 
   {
   private:
-    int axp;
+    double axp;
+
+    double ax;
+    double k0;
+    double k1;
+    double k2;
+
   public:
     heateq_1d_steady_var(); // constructor
     
@@ -255,7 +349,14 @@ namespace MASA
   class heateq_2d_steady_var : public manufactured_solution 
   {
   private:
-    int axp;
+    double axp;
+    
+    double ax;
+    double k0;
+    double k1;
+    double k2;
+    double by;
+
   public:
     heateq_2d_steady_var(); // constructor
     
@@ -264,7 +365,15 @@ namespace MASA
   class heateq_3d_steady_var : public manufactured_solution 
   {
   private:
-    int axp;
+    double axp;
+
+    double ax;
+    double k0;
+    double k1;
+    double k2;
+    double by;
+    double cz;
+
   public:
     heateq_3d_steady_var(); // constructor
     
@@ -277,9 +386,11 @@ namespace MASA
   class euler_2d : public manufactured_solution
   {
     
-  public:
-    euler_2d(); // constructor
     
+
+  public:
+    euler_2d(); // constructor    
+
   };
 
   class euler_3d : public manufactured_solution
