@@ -189,31 +189,46 @@ int MASA::masa_eval_1d_source(void* objid,double x,double* field)
   return 0;
 }
 
-int MASA::masa_eval_2d_source(void* objid,double x,double y,double field)
+int MASA::masa_eval_2d_source(void* objid,double x,double y,double* field)
 {
   manufactured_solution* acobj;
   masa_v2o(objid,&acobj);
 
-  field=acobj->eval_q_v(x);
+  *field=acobj->eval_q_v(x);
 
   return 0;
 }
 
-int MASA::masa_eval_3d_source(void* objid,double x,double y,double z,double field)
+int MASA::masa_eval_3d_source(void* objid,double x,double y,double z,double* field)
 {
   manufactured_solution* acobj;
   masa_v2o(objid,&acobj);
 
-  field=acobj->eval_q_v(x);
+  *field=acobj->eval_q_v(x);
 
   return 0;
 }
 
-int MASA::masa_get_name(void* objid,string*name)
+int MASA::masa_get_name(void* objid,string* name)
 {
   manufactured_solution* acobj;
-  string str;
   masa_v2o(objid,&acobj);
   acobj->return_name(name); // set string to name
+  return 0;
+}
+
+int MASA::masa_get_dimension(void* objid,int* dim)
+{
+  manufactured_solution* acobj;
+  masa_v2o(objid,&acobj);
+  acobj->return_dim(dim); // set string to name
+  return 0;
+}
+
+int MASA::masa_sanity_check(void* objid)
+{
+  manufactured_solution* acobj;
+  masa_v2o(objid,&acobj);
+  acobj->sanity_check(); // set string to name
   return 0;
 }

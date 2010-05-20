@@ -40,13 +40,18 @@ void masa_shell_choose_solution()
 {
   char userstring[100],masterstring[100];
   void* ptr; // initialize null
-  double dbl=12.3;
-  double dbl2;
+
   int q = 1;
+  int dimension;
+
+  double x,y,z;
+  double dbl;
+  double dbl2;
   double field;
   double blah;
-  string str;
 
+  string str;
+  
   printf("\n\n Now type solution to initialize.");
   printf("\n Remember to place underscores between parameters (e.g. steady_heatequation)");
   printf("\n\n");
@@ -61,11 +66,10 @@ void masa_shell_choose_solution()
 
   while(q>0)
     {
-      printf("\n 0) Exit and drop currently selected manufactured solution");
+      printf("\n\n 0) Exit and drop currently selected manufactured solution");
       printf("\n 1) Show all variables and registered values");
       printf("\n 2) Register variable values");
-      printf("\n 3) Evaluate Source Term");
-      printf("\n 4) Evaluate Analytical Term\n");
+      printf("\n 3) Evaluate\n\n");
       scanf("%i",&q);
 
       // switch statement based on user input
@@ -82,7 +86,7 @@ void masa_shell_choose_solution()
 	  
 	case 2:
 	  printf("\n User Selected 2: Register Variable");
-	  printf("\n Input Variable name:\n");
+	  printf("\n Input variable name:\n");
 	  scanf("%s",userstring);	  
 	  masa_get_param(ptr,userstring,&dbl2);
 	  cout << "initially set to:" << dbl2 << endl;
@@ -94,14 +98,50 @@ void masa_shell_choose_solution()
 	  break;
 	  
 	case 3:
-	  printf("\n User Selected 3: Evaluate Source term");
-	  masa_eval_1d_source(ptr,.5,&field);
-	  cout << "source term is:" << field;
-	  break;
-	  
-	case 4:
-	  printf("\n User Selected 4: Evaluate Analytical Term");
-	  break;
+	  printf("\n User Selected 3: Evaluate");
+	  masa_sanity_check(ptr);
+	  masa_get_dimension(ptr,&dimension);	 
+	  switch(dimension)
+	    {
+	    case 1:
+	      cout << "\nplease input x location: \n";
+	      cin >> x;
+
+	      masa_eval_1d_source(ptr,x,&field);
+	      cout << "source term is:" << field;
+	      break;
+
+	    case 2:
+	      cout << "\nplease input x location: \n";
+	      cin >> x;
+
+	      cout << "\nplease input y location: \n";
+	      cin >> y;
+
+	      masa_eval_2d_source(ptr,x,y,&field);
+	      cout << "source term is:" << field;
+	      break;
+
+	    case 3:
+	      cout << "\nplease input x location: \n";
+	      cin >> x;
+
+	      cout << "\nplease input y location: \n";
+	      cin >> y;
+
+	      cout << "\nplease input z location: \n";
+	      cin >> z;
+
+	      masa_eval_3d_source(ptr,x,y,z,&field);
+	      cout << "source term is:" << field << endl << endl;
+	      break;
+	      
+	    default: 
+	      printf("\n Error: Undefined dimension for class, please try again.\n");
+	      break;
+
+	    }//done with switch
+	  break; // done with case 3
 	  
 	default:
 	  printf("\n Error: Undefined input, please try again.\n");

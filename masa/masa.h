@@ -53,20 +53,22 @@ namespace MASA
   int masa_get_param(void*,string,double*);
   int masa_display_param(void*);
   int masa_get_name(void*,string*);
-  
+  int masa_get_dimension(void*,int*);
+  int masa_sanity_check(void*);
+
   // source term
   int masa_eval_1d_source(void*,double,double*);
-  int masa_eval_2d_source(void*,double,double,double);
-  int masa_eval_3d_source(void*,double,double,double,double);
+  int masa_eval_2d_source(void*,double,double,double*);
+  int masa_eval_3d_source(void*,double,double,double,double*);
 
   // analytical solution
-  int masa_eval_1d_an(void*,double,double);
-  int masa_eval_2d_an(void*,double,double,double);
-  int masa_eval_3d_an(void*,double,double,double,double);
+  int masa_eval_1d_an(void*,double,double*);
+  int masa_eval_2d_an(void*,double,double,double*);
+  int masa_eval_3d_an(void*,double,double,double,double*);
 
   // gradient of analytical solution
-  int masa_eval_1d_grad(void*,int,double,double);
-  int masa_eval_2d_grad(void*,int,double,double,double);
-  int masa_eval_3d_grad(void*,int,double,double,double,double);
+  int masa_eval_1d_grad(void*,int,double,double*);
+  int masa_eval_2d_grad(void*,int,double,double,double*);
+  int masa_eval_3d_grad(void*,int,double,double,double,double*);
   
 } //end MASA namespace

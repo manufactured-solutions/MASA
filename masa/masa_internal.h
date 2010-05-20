@@ -52,7 +52,6 @@ namespace MASA
  
   // masa_shell
   //void masa_shell_choose_solution();
-  
 
   /* -------------------------------------------------------------------------------------------   
    * manufactured_solution Base Class
@@ -73,9 +72,10 @@ namespace MASA
     double gradT;                           // gradient 
     
   protected:
-    map<string,int> varmap;              // map to each variable
+    map<string,int> varmap;               // map to each variable
     vector<double*>  vararr;              // arr of pointers to each variable
     string mmsname;                       // the name of the manufactured solution  
+    int dimension;                        // dimension of the solution
 
   public: 
 
@@ -91,8 +91,9 @@ namespace MASA
     void get_var(string,double*);     // returns variable value
     void set_var(string,double);     // sets variable value    
     void display_var();     // print all variable names and values
+    void sanity_check();     // checks that all variables to the class have been initalized
     void return_name(string* inname){inname->assign(mmsname);};  // method: returns name
-
+    void return_dim (int* indim){*indim=dimension;};  // method: returns name
     
   }; // done with MMS base class
 
