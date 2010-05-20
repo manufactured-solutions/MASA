@@ -215,28 +215,6 @@ double MASA::MASA_Test::eval_q_u(double x)
 
 }//done with constructor
 
-/* ------------------------------------------------
- *
- *         EULER EQUATION
- *
- *
- *
- * -----------------------------------------------
- */ 
-
-MASA::euler_2d::euler_2d()
-{
-    mmsname = "euler_2d";
-    dimension=2;
-
-}//done with constructor
-
-MASA::euler_3d::euler_3d()
-{
-    mmsname = "euler_3d";
-    dimension=3;
-
-}//done with constructor
 
 /* ------------------------------------------------
  *

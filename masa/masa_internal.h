@@ -385,9 +385,32 @@ namespace MASA
 
   class euler_2d : public manufactured_solution
   {
-    
-    
+    double axp;
 
+    double u0;
+    double ux;
+    double uy;
+    double v0;
+    double vx;
+    double vy;
+    double rho0;
+    double rhox;
+    double rhoy;
+    double p0;
+    double px;
+    double py;
+    double apx;
+    double apy;
+    double arhox;
+    double arhoy;
+    double aux;
+    double auy;
+    double avx;
+    double avy;
+    double gamma;
+    double mu;
+    double l;
+    
   public:
     euler_2d(); // constructor    
 
@@ -395,6 +418,46 @@ namespace MASA
 
   class euler_3d : public manufactured_solution
   {
+    double axp;
+    
+    double u0;
+    double ux;
+    double uy;
+    double uz;
+    double v0;
+    double vx;
+    double vy;
+    double vz;
+    double w0;
+    double wx;
+    double wy;
+    double wz;
+    double rho0;
+    double rhox;
+    double rhoy;
+    double rhoz;
+    double p0;
+    double px;
+    double py;
+    double pz;
+    double apx;
+    double apy;
+    double apz;
+    double arhox;
+    double arhoy;
+    double arhoz;
+    double aux;
+    double auy;
+    double auz;
+    double avx;
+    double avy;
+    double avz;
+    double awx;
+    double awy;
+    double awz;
+    double mu;
+    double gamma;
+    double l;
     
   public:
     euler_3d(); // constructor
