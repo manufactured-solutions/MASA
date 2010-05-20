@@ -2,4 +2,4 @@
 SUBDIRS = masa
 
 # Distribute these directories:
-DIST_SUBDIRS = masa include
+DIST_SUBDIRS = masa
