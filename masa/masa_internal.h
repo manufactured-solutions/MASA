@@ -90,6 +90,7 @@ namespace MASA
     // functions to inherit
     void get_var(string,double*);     // returns variable value
     void set_var(string,double);     // sets variable value    
+    void display_var();     // print all variable names and values
     void return_name(string* inname){inname->assign(mmsname);};  // method: returns name
 
     

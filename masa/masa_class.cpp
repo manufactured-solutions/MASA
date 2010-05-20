@@ -64,6 +64,17 @@ void MASA::manufactured_solution::get_var(string var, double* sol)
 
 }// done with get_var function
 
+void MASA::manufactured_solution::display_var()
+{
+  int selector;
+  cout << "\n Solution has " << varmap.size() << " variables.\n\n";
+  for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
+    {      
+      cout << it->first <<" is set to: " << *vararr[it->second] << '\n';
+    }    
+  
+} // done with display all variable names
+
 void MASA::manufactured_solution::set_var(string var, double val)
 {
   int selector;

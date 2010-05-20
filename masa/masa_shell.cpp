@@ -42,6 +42,7 @@ void masa_shell_choose_solution()
   void* ptr; // initialize null
   double dbl=12.3;
   double dbl2;
+  int q = 1;
   double field;
   double blah;
   string str;
@@ -56,21 +57,58 @@ void masa_shell_choose_solution()
   masa_get_name(ptr,&str);
   cout << endl << "User has selected: " << str << endl;
 
-  cout << "input double" << endl;
-  cin >> dbl;
-  cout << "double is:" << dbl << endl;
-  masa_get_param(ptr,"axp",&dbl2);
-  cout << "initially set to:" << dbl2 << endl;
-  masa_set_param(ptr,"axp",dbl);
-  masa_get_param(ptr,"axp",&dbl2);
-  cout << "double is:" << dbl2 << endl;
- 
-  cin >> blah;
-  masa_set_param(ptr,"k0",1);
-  masa_set_param(ptr,"ax",1); 
-  
-  masa_eval_1d_source(ptr,.5,&field);
-  cout << "source term is:" << field;
+  // now let user register variables, etc.
+
+  while(q>0)
+    {
+      printf("\n 0) Exit and drop currently selected manufactured solution");
+      printf("\n 1) Show all variables and registered values");
+      printf("\n 2) Register variable values");
+      printf("\n 3) Evaluate Source Term");
+      printf("\n 4) Evaluate Analytical Term\n");
+      scanf("%i",&q);
+
+      // switch statement based on user input
+      switch(q)
+	{
+	case 0:
+	  printf("\n Exiting.");
+	  break;
+
+	case 1:
+	  printf("\n User Selected 1: Display all variables\n");
+	  masa_display_param(ptr);
+	  break;
+	  
+	case 2:
+	  printf("\n User Selected 2: Register Variable");
+	  printf("\n Input Variable name:\n");
+	  scanf("%s",userstring);	  
+	  masa_get_param(ptr,userstring,&dbl2);
+	  cout << "initially set to:" << dbl2 << endl;
+	  cout << "\nInput new value (double)" << endl;
+	  cin >> dbl;
+	  masa_set_param(ptr,userstring,dbl);
+	  masa_get_param(ptr,userstring,&dbl2);
+	  cout << endl << userstring << " is now set to:" << dbl2 << endl;
+	  break;
+	  
+	case 3:
+	  printf("\n User Selected 3: Evaluate Source term");
+	  masa_eval_1d_source(ptr,.5,&field);
+	  cout << "source term is:" << field;
+	  break;
+	  
+	case 4:
+	  printf("\n User Selected 4: Evaluate Analytical Term");
+	  break;
+	  
+	default:
+	  printf("\n Error: Undefined input, please try again.\n");
+	  break;
+	} // end switch
+     
+    }
 
 }// end masa_shell_choose_solution
 

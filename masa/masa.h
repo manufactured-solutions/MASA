@@ -51,6 +51,7 @@ namespace MASA
   int masa_printid();
   int masa_set_param(void*,string,double);
   int masa_get_param(void*,string,double*);
+  int masa_display_param(void*);
   int masa_get_name(void*,string*);
   
   // source term

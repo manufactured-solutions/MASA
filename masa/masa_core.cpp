@@ -169,6 +169,16 @@ int MASA::masa_get_param(void* objid,string param,double *paramval)
   return 0;
 }
 
+int MASA::masa_display_param(void* objid)
+{
+  manufactured_solution* acobj;
+  masa_v2o(objid,&acobj);
+
+  acobj->display_var();
+
+  return 0;
+}
+
 int MASA::masa_eval_1d_source(void* objid,double x,double* field)
 {
   manufactured_solution* acobj;
