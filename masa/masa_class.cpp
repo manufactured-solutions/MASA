@@ -35,8 +35,17 @@
 // 
 
 #include <masa_internal.h>
+#include <assert.h>
 
 using namespace MASA;
+
+
+/* ------------------------------------------------
+ *
+ *         Manufactured Solution Class 
+ *
+ * -----------------------------------------------
+ */ 
 
 void MASA::manufactured_solution::get_var(string var, double* sol)
 {
@@ -71,7 +80,87 @@ void MASA::manufactured_solution::set_var(string var, double val)
     } 
 }// done with set_var function
 
-//test problem -- not a real class!
+void Polynomial::set_coeffs( const std::vector<double> &coeffs_in )
+{
+  int num_coeffs = coeffs_in.size();
+
+  coeffs.resize( num_coeffs );
+
+  coeffs = coeffs_in;
+
+  return;
+}
+
+/* ------------------------------------------------
+ *
+ *         Polynomial Class
+ *
+ * -----------------------------------------------
+ */ 
+
+double Polynomial::operator()( const double &x ) const
+{
+  int num_coeffs = coeffs.size();
+
+  int n = num_coeffs-1;
+
+  double y;
+
+  // We use Horner's method here. 
+  y = coeffs[n];
+
+  for( int i = n-1; i >= 0; --i )
+    {
+      y = coeffs[i] + y*x;
+    }
+
+  return y;
+
+}
+
+void Polynomial::eval_derivs( const double &x, const int & k, std::vector<double> & derivs ) const
+{
+
+  // Zero out the vector first.
+  for( int i = 0; i <= k; ++i) derivs[i] = 0.0;
+
+  int num_coeffs = coeffs.size();
+
+  int n = num_coeffs-1;
+
+  // We use Horner's method here.
+  // Can use proof by induction to prove recursion formula for derivatives.
+  derivs[0] = coeffs[n];
+
+  for( int i = n-1; i >= 0; --i )
+    {
+
+      for( int j = k; j > 0; --j)
+	{
+	  derivs[j] = j*derivs[j-1] + x*derivs[j]; 
+	}
+
+      derivs[0] = coeffs[i] + x*derivs[0];
+      
+    }
+  
+  return;
+}
+
+double Polynomial::get_coeffs( const int &coeff_index ) const
+{
+  assert( coeff_index >= 0 );
+  assert( coeff_index <= (coeffs.size()-1) );
+  return coeffs[coeff_index];
+}
+
+/* ------------------------------------------------
+ *
+ *         Test Problem
+ *
+ * -----------------------------------------------
+ */ 
+
 MASA::MASA_Test::MASA_Test()
 {
   // here, we load up the map so we can key to specific variables

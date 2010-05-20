@@ -53,8 +53,17 @@ namespace MASA
   // masa_shell
   //void masa_shell_choose_solution();
   
-  // this is an abstract class
-  // DO NOT EDIT THIS CLASS
+
+  /* -------------------------------------------------------------------------------------------   
+   * manufactured_solution Base Class
+   *
+   * this is an abstract class
+   * DO NOT EDIT THIS CLASS
+   *
+   * All manufactured solutions will inherit this class and it's methods 
+   *
+   * -------------------------------------------------------------------------------------------   
+   */ 
   class manufactured_solution 
   {
     
@@ -64,9 +73,9 @@ namespace MASA
     double gradT;                           // gradient 
     
   protected:
-    string mmsname;                       // the name of the manufactured solution  
     map<string,int> varmap;              // map to each variable
     vector<double*>  vararr;              // arr of pointers to each variable
+    string mmsname;                       // the name of the manufactured solution  
 
   public: 
 
@@ -82,8 +91,44 @@ namespace MASA
     void get_var(string,double*);     // returns variable value
     void set_var(string,double);     // sets variable value    
     void return_name(string* inname){inname->assign(mmsname);};  // method: returns name
+
     
   }; // done with MMS base class
+
+  /* -------------------------------------------------------------------------------------------   
+   * Polynomial Base Class
+   *
+   * Blatantly stealing paul bauman's polynomial class definitions in the name of science
+   * 
+   * In addition to inheriting manufactured class, must inherit polynomial 
+   *
+   * -------------------------------------------------------------------------------------------   
+   */ 
+  class Polynomial
+  {
+  public:
+    
+    void set_coeffs( const vector<double> & );
+    
+    // Evaluates polynomial.
+    double operator()( const double & ) const;
+    
+    // Evaluates polynomial and deriviatives up to order specified by user.
+    void eval_derivs( const double &, const int &, vector<double> & ) const;
+    
+    double get_coeffs( const int & ) const;    
+    
+  protected:
+    
+    // We assume that the coefficents are ordered as follows:
+    // y(x) = a0 + a1*x + a2*x^2 + ... + an*x^n
+    // so that there should be n+1 coeff so that
+    // coeffs[0] = a0
+    // coeffs[1] = a1
+    // and so on.
+    vector<double> coeffs;
+    
+  };  
 
   // ------------------------------------------------------
   // ---------- all other mms classes ------------
