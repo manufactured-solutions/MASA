@@ -1,5 +1,5 @@
 dnl Initialize autoconf
-AC_INIT([MASAshell], [0.01], [nick@ices.utexas.edu])
+AC_INIT([MASAshell], [0.10], [nick@ices.utexas.edu])
 
 dnl Initialize automake
 AM_INIT_AUTOMAKE

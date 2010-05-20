@@ -1,4 +1,0 @@
-1) ./bootstrap
-2) ./configure --prefix= top-level dir
-3) make
-4) make install
