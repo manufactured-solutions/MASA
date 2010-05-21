@@ -478,7 +478,7 @@ namespace MASA
   // ---------- compressible navier stokes  ------------
   // ------------------------------------------------------
 
-  class compressible_navierstokes_2d : public manufactured_solution
+  class navierstokes_compressible_2d : public manufactured_solution
   {    
     double axp;
 
@@ -507,11 +507,11 @@ namespace MASA
     double L;
     
   public:
-    compressible_navierstokes_2d(); // constructor
+    navierstokes_compressible_2d(); // constructor
     
   };
   
-  class compressible_navierstokes_3d : public manufactured_solution
+  class navierstokes_compressible_3d : public manufactured_solution
   {
     double axp;
 
@@ -555,7 +555,7 @@ namespace MASA
     double L;    
     
   public:
-    compressible_navierstokes_3d(); //constructor
+    navierstokes_compressible_3d(); //constructor
     
   }; // done with navier stokes 3d class
   

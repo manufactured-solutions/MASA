@@ -47,9 +47,9 @@ using namespace MASA;
  * -----------------------------------------------
  */ 
 
-MASA::compressible_navierstokes_2d::compressible_navierstokes_2d()
+MASA::navierstokes_compressible_2d::navierstokes_compressible_2d()
 {
-  mmsname = "compressible_navierstokes_2d";
+  mmsname = "navierstokes_compressible_2d";
   dimension=2;
 
   //first variable (dummy) "axp" -- load map and array
@@ -57,114 +57,114 @@ MASA::compressible_navierstokes_2d::compressible_navierstokes_2d()
   vararr.push_back(&axp);
 
   // initalize other variables
-  varmap["u0"]=1;
-  u0=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&u0);
+  varmap["u_0"]=1;
+  u_0=MASA_VAR_DEFAULT;              // need to initialize all variables!
+  vararr.push_back(&u_0);
 
   // 2nd var
-  varmap["ux"]=2;
-  ux=MASA_VAR_DEFAULT;
-  vararr.push_back(&ux);
+  varmap["u_x"]=2;
+  u_x=MASA_VAR_DEFAULT;
+  vararr.push_back(&u_x);
 
   // 3rd var
-  varmap["uy"]=3;
-  uy=MASA_VAR_DEFAULT;
-  vararr.push_back(&uy);
+  varmap["u_y"]=3;
+  u_y=MASA_VAR_DEFAULT;
+  vararr.push_back(&u_y);
 
   // 4th var
-  varmap["v0"]=4;
-  v0=MASA_VAR_DEFAULT;
-  vararr.push_back(&v0);
+  varmap["v_0"]=4;
+  v_0=MASA_VAR_DEFAULT;
+  vararr.push_back(&v_0);
 
   // 5th var
-  varmap["vx"]=5;
-  vx=MASA_VAR_DEFAULT;
-  vararr.push_back(&vx);
+  varmap["v_x"]=5;
+  v_x=MASA_VAR_DEFAULT;
+  vararr.push_back(&v_x);
 
   //6th var
-  varmap["vy"]=6;
-  vy=MASA_VAR_DEFAULT;
-  vararr.push_back(&vy);
+  varmap["v_y"]=6;
+  v_y=MASA_VAR_DEFAULT;
+  vararr.push_back(&v_y);
 
   //7th var
-  varmap["rho0"]=7;
-  rho0=MASA_VAR_DEFAULT;
-  vararr.push_back(&rho0);
+  varmap["rho_0"]=7;
+  rho_0=MASA_VAR_DEFAULT;
+  vararr.push_back(&rho_0);
 
   //8th var
-  varmap["rhox"]=8;
-  rhox=MASA_VAR_DEFAULT;
-  vararr.push_back(&rhox);
+  varmap["rho_x"]=8;
+  rho_x=MASA_VAR_DEFAULT;
+  vararr.push_back(&rho_x);
 
   //9th var
-  varmap["rhoy"]=9;
-  rhoy=MASA_VAR_DEFAULT;
-  vararr.push_back(&rhoy);
+  varmap["rho_y"]=9;
+  rho_y=MASA_VAR_DEFAULT;
+  vararr.push_back(&rho_y);
 
   //10th var
-  varmap["p0"]=10;
-  p0=MASA_VAR_DEFAULT;
-  vararr.push_back(&p0);
+  varmap["p_0"]=10;
+  p_0=MASA_VAR_DEFAULT;
+  vararr.push_back(&p_0);
 
   //11th var
-  varmap["px"]=11;
-  px=MASA_VAR_DEFAULT;
-  vararr.push_back(&px);
+  varmap["p_x"]=11;
+  p_x=MASA_VAR_DEFAULT;
+  vararr.push_back(&p_x);
 
   //12th var
-  varmap["py"]=12;
-  py=MASA_VAR_DEFAULT;
-  vararr.push_back(&py);
+  varmap["p_y"]=12;
+  p_y=MASA_VAR_DEFAULT;
+  vararr.push_back(&p_y);
 
   //13th var
-  varmap["apx"]=13;
-  apx=MASA_VAR_DEFAULT;
-  vararr.push_back(&apx);
+  varmap["a_px"]=13;
+  a_px=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_px);
 
   //14th var
-  varmap["apy"]=14;
-  apy=MASA_VAR_DEFAULT;
-  vararr.push_back(&apy);
+  varmap["a_py"]=14;
+  a_py=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_py);
 
   //15th var
-  varmap["arhox"]=15;
-  arhox=MASA_VAR_DEFAULT;
-  vararr.push_back(&arhox);
+  varmap["a_rhox"]=15;
+  a_rhox=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_rhox);
 
   //16th var
-  varmap["arhoy"]=16;
-  arhoy=MASA_VAR_DEFAULT;
-  vararr.push_back(&arhoy);
+  varmap["a_rhoy"]=16;
+  a_rhoy=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_rhoy);
 
   //17th var
-  varmap["aux"]=17;
-  aux=MASA_VAR_DEFAULT;
-  vararr.push_back(&aux);
+  varmap["a_ux"]=17;
+  a_ux=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_ux);
 
   //18th var
-  varmap["auy"]=18;
-  auy=MASA_VAR_DEFAULT;
-  vararr.push_back(&auy);
+  varmap["a_uy"]=18;
+  a_uy=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_uy);
 
   //19th var
-  varmap["avx"]=19;
-  avx=MASA_VAR_DEFAULT;
-  vararr.push_back(&avx);
+  varmap["a_vx"]=19;
+  a_vx=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_vx);
 
   //20th var
-  varmap["avy"]=20;
-  avy=MASA_VAR_DEFAULT;
-  vararr.push_back(&avy);
+  varmap["a_vy"]=20;
+  a_vy=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_vy);
 
-  //21st var
-  varmap["l"]=21;
-  l=MASA_VAR_DEFAULT;
-  vararr.push_back(&l);
+  //21th var
+  varmap["L"]=21;
+  L=MASA_VAR_DEFAULT;
+  vararr.push_back(&L);
 
   //22nd var
-  varmap["gamma"]=22;
-  gamma=MASA_VAR_DEFAULT;
-  vararr.push_back(&gamma);
+  varmap["Gamma"]=22;
+  Gamma=MASA_VAR_DEFAULT;
+  vararr.push_back(&Gamma);
 
   //23rd var
   varmap["mu"]=23;
@@ -183,9 +183,9 @@ MASA::compressible_navierstokes_2d::compressible_navierstokes_2d()
  * -----------------------------------------------
  */ 
 
-MASA::compressible_navierstokes_3d::compressible_navierstokes_3d()
+MASA::navierstokes_compressible_3d::navierstokes_compressible_3d()
 {
-  mmsname = "compressible_navierstokes_3d";
+  mmsname = "navierstokes_compressible_3d";
   dimension=3;
 
   //first variable (dummy) "axp" -- load map and array
@@ -193,169 +193,189 @@ MASA::compressible_navierstokes_3d::compressible_navierstokes_3d()
   vararr.push_back(&axp);
 
   // initalize other variables
-  varmap["u0"]=1;
-  u0=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&u0);
+  varmap["u_0"]=1;
+  u_0=MASA_VAR_DEFAULT;              // need to initialize all variables!
+  vararr.push_back(&u_0);
 
   // 2nd var
-  varmap["ux"]=2;
-  ux=MASA_VAR_DEFAULT;
-  vararr.push_back(&ux);
+  varmap["u_x"]=2;
+  u_x=MASA_VAR_DEFAULT;
+  vararr.push_back(&u_x);
 
   // 3rd var
-  varmap["uy"]=3;
-  uy=MASA_VAR_DEFAULT;
-  vararr.push_back(&uy);
+  varmap["u_y"]=3;
+  u_y=MASA_VAR_DEFAULT;
+  vararr.push_back(&u_y);
 
   // 4th var
-  varmap["v0"]=4;
-  v0=MASA_VAR_DEFAULT;
-  vararr.push_back(&v0);
+  varmap["v_0"]=4;
+  v_0=MASA_VAR_DEFAULT;
+  vararr.push_back(&v_0);
 
   // 5th var
-  varmap["vx"]=5;
-  vx=MASA_VAR_DEFAULT;
-  vararr.push_back(&vx);
+  varmap["v_x"]=5;
+  v_x=MASA_VAR_DEFAULT;
+  vararr.push_back(&v_x);
 
   //6th var
-  varmap["vy"]=6;
-  vy=MASA_VAR_DEFAULT;
-  vararr.push_back(&vy);
+  varmap["v_y"]=6;
+  v_y=MASA_VAR_DEFAULT;
+  vararr.push_back(&v_y);
 
   //7th var
-  varmap["rho0"]=7;
-  rho0=MASA_VAR_DEFAULT;
-  vararr.push_back(&rho0);
+  varmap["rho_0"]=7;
+  rho_0=MASA_VAR_DEFAULT;
+  vararr.push_back(&rho_0);
 
   //8th var
-  varmap["rhox"]=8;
-  rhox=MASA_VAR_DEFAULT;
-  vararr.push_back(&rhox);
+  varmap["rho_x"]=8;
+  rho_x=MASA_VAR_DEFAULT;
+  vararr.push_back(&rho_x);
 
   //9th var
-  varmap["rhoy"]=9;
-  rhoy=MASA_VAR_DEFAULT;
-  vararr.push_back(&rhoy);
+  varmap["rho_y"]=9;
+  rho_y=MASA_VAR_DEFAULT;
+  vararr.push_back(&rho_y);
 
   //10th var
-  varmap["p0"]=10;
-  p0=MASA_VAR_DEFAULT;
-  vararr.push_back(&p0);
+  varmap["p_0"]=10;
+  p_0=MASA_VAR_DEFAULT;
+  vararr.push_back(&p_0);
 
   //11th var
-  varmap["px"]=11;
-  px=MASA_VAR_DEFAULT;
-  vararr.push_back(&px);
+  varmap["p_x"]=11;
+  p_x=MASA_VAR_DEFAULT;
+  vararr.push_back(&p_x);
 
   //12th var
-  varmap["py"]=12;
-  py=MASA_VAR_DEFAULT;
-  vararr.push_back(&py);
+  varmap["p_y"]=12;
+  p_y=MASA_VAR_DEFAULT;
+  vararr.push_back(&p_y);
 
   //13th var
-  varmap["apx"]=13;
-  apx=MASA_VAR_DEFAULT;
-  vararr.push_back(&apx);
+  varmap["a_px"]=13;
+  a_px=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_px);
 
   //14th var
-  varmap["apy"]=14;
-  apy=MASA_VAR_DEFAULT;
-  vararr.push_back(&apy);
+  varmap["a_py"]=14;
+  a_py=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_py);
 
   //15th var
-  varmap["arhox"]=15;
-  arhox=MASA_VAR_DEFAULT;
-  vararr.push_back(&arhox);
+  varmap["a_rhox"]=15;
+  a_rhox=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_rhox);
 
   //16th var
-  varmap["arhoy"]=16;
-  arhoy=MASA_VAR_DEFAULT;
-  vararr.push_back(&arhoy);
+  varmap["a_rhoy"]=16;
+  a_rhoy=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_rhoy);
 
   //17th var
-  varmap["aux"]=17;
-  aux=MASA_VAR_DEFAULT;
-  vararr.push_back(&aux);
+  varmap["a_ux"]=17;
+  a_ux=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_ux);
 
   //18th var
-  varmap["auy"]=18;
-  auy=MASA_VAR_DEFAULT;
-  vararr.push_back(&auy);
+  varmap["a_uy"]=18;
+  a_uy=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_uy);
 
   //19th var
-  varmap["avx"]=19;
-  avx=MASA_VAR_DEFAULT;
-  vararr.push_back(&avx);
+  varmap["a_vx"]=19;
+  a_vx=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_vx);
 
   //20th var
-  varmap["avy"]=20;
-  avy=MASA_VAR_DEFAULT;
-  vararr.push_back(&avy);
+  varmap["a_vy"]=20;
+  a_vy=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_vy);
 
   //21th var
-  varmap["l"]=21;
-  l=MASA_VAR_DEFAULT;
-  vararr.push_back(&l);
+  varmap["L"]=21;
+  L=MASA_VAR_DEFAULT;
+  vararr.push_back(&L);
 
   //22th var
-  varmap["uz"]=22;
-  uz=MASA_VAR_DEFAULT;
-  vararr.push_back(&uz);
+  varmap["u_z"]=22;
+  u_z=MASA_VAR_DEFAULT;
+  vararr.push_back(&u_z);
 
   //23th var
-  varmap["vz"]=23;
-  vz=MASA_VAR_DEFAULT;
-  vararr.push_back(&vz);
+  varmap["v_z"]=23;
+  v_z=MASA_VAR_DEFAULT;
+  vararr.push_back(&v_z);
 
   //24th var
-  varmap["wz"]=24;
-  wz=MASA_VAR_DEFAULT;
-  vararr.push_back(&wz);
+  varmap["w_z"]=24;
+  w_z=MASA_VAR_DEFAULT;
+  vararr.push_back(&w_z);
 
   //25th var
-  varmap["rhoz"]=25;
-  rhoz=MASA_VAR_DEFAULT;
-  vararr.push_back(&rhoz);
+  varmap["rho_z"]=25;
+  rho_z=MASA_VAR_DEFAULT;
+  vararr.push_back(&rho_z);
 
   //26th var
-  varmap["pz"]=26;
-  pz=MASA_VAR_DEFAULT;
-  vararr.push_back(&pz);
+  varmap["p_z"]=26;
+  p_z=MASA_VAR_DEFAULT;
+  vararr.push_back(&p_z);
 
   //27th var
-  varmap["apz"]=27;
-  apz=MASA_VAR_DEFAULT;
-  vararr.push_back(&apz);
+  varmap["a_pz"]=27;
+  a_pz=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_pz);
 
   //28th var
-  varmap["arhoz"]=28;
-  arhoz=MASA_VAR_DEFAULT;
-  vararr.push_back(&arhoz);
+  varmap["a_rhoz"]=28;
+  a_rhoz=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_rhoz);
 
   //29th var
-  varmap["auz"]=29;
-  auz=MASA_VAR_DEFAULT;
-  vararr.push_back(&auz);
+  varmap["a_uz"]=29;
+  a_uz=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_uz);
 
   //30th var
-  varmap["avz"]=30;
-  avz=MASA_VAR_DEFAULT;
-  vararr.push_back(&avz);
+  varmap["a_vz"]=30;
+  a_vz=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_vz);
 
   //31th var
-  varmap["awz"]=31;
-  awz=MASA_VAR_DEFAULT;
-  vararr.push_back(&awz);
+  varmap["a_wz"]=31;
+  a_wz=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_wz);
 
   //32nd var
-  varmap["gamma"]=32;
-  gamma=MASA_VAR_DEFAULT;
-  vararr.push_back(&gamma);
+  varmap["Gamma"]=32;
+  Gamma=MASA_VAR_DEFAULT;
+  vararr.push_back(&Gamma);
 
   //33rd var
   varmap["mu"]=33;
   mu=MASA_VAR_DEFAULT;
   vararr.push_back(&mu);
+
+  //34th var
+  varmap["a_wy"]=34;
+  a_wy=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_wy);
+
+  //35th var
+  varmap["a_wx"]=35;
+  a_wx=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_wx);
+
+  //36th var
+  varmap["a_py"]=36;
+  a_py=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_py);
+
+  //37th var
+  varmap["a_px"]=37;
+  a_px=MASA_VAR_DEFAULT;
+  vararr.push_back(&a_px);
 
 }//done with constructor
 

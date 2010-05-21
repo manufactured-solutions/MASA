@@ -214,27 +214,3 @@ double MASA::MASA_Test::eval_q_u(double x)
   return qt;
 
 }//done with constructor
-
-
-/* ------------------------------------------------
- *
- *         Compressible Navier-Stokes EQUATIONs
- *
- *
- *
- * -----------------------------------------------
- */ 
-
-MASA::ns_compress_2d::ns_compress_2d()
-{
-  mmsname = "navierstokes_compressible_2d";
-    dimension=2;
-
-}//done with constructor
-
-MASA::ns_compress_3d::ns_compress_3d()
-{
-  mmsname = "navierstokes_compressible_3d";
-    dimension=3;
-
-}//done with constructor
