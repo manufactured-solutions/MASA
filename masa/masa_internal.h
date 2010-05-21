@@ -72,7 +72,9 @@ namespace MASA
     double gradT;                           // gradient 
     
   protected:
+    int num_vars;
     double MASA_VAR_DEFAULT;
+
     map<string,int> varmap;               // map to each variable
     vector<double*>  vararr;              // arr of pointers to each variable
     string mmsname;                       // the name of the manufactured solution  
@@ -100,6 +102,7 @@ namespace MASA
 
     // member functions solution classes will inherit
     manufactured_solution();                                     // constructor
+    void register_var(string, double*);                          // this registers a variable
     void get_var(string,double*);                                // returns variable value
     void set_var(string,double);                                 // sets variable value    
     void display_var();                                          // print all variable names and values

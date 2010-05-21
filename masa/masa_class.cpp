@@ -47,7 +47,9 @@ using namespace MASA;
  */ 
 MASA::manufactured_solution::manufactured_solution()
 {
-  MASA_VAR_DEFAULT = -12345.67; // default --initialize each var to 'crazy' value
+  MASA_VAR_DEFAULT = -12345.67; // default -- initialize each var to 'crazy' value
+  num_vars=0;                   // default -- will ++ for each registered variable
+  vararr.push_back(&MASA_VAR_DEFAULT);   // dummy used to start index at correct location
 }
 void MASA::manufactured_solution::get_var(string var, double* sol)
 {
@@ -68,7 +70,9 @@ void MASA::manufactured_solution::get_var(string var, double* sol)
 void MASA::manufactured_solution::display_var()
 {
   int selector;
+
   cout << "\n Solution has " << varmap.size() << " variables.\n\n";
+
   for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
     {      
       cout << it->first <<" is set to: " << *vararr[it->second] << '\n';
@@ -101,7 +105,22 @@ void MASA::manufactured_solution::sanity_check()
 	  cout << "\nMASA WARNING: " << it->first << " is not initialized!\n";
 	}
     }    
+  
+  if(varmap.size() != num_vars)
+    {
+      cout << "\n MASA has enountered a fatal error with regards to variable registration.\n"; 
+      cout << "Are you calling the method manufactured_solution.register_var? This could be causing the error.\n"; 
+      cout << "varmap.size() = " << varmap.size() << "; num_vars = " << num_vars << endl << endl;
+      exit(1);
+    }
+}// done with set_var function
 
+void MASA::manufactured_solution::register_var(string in,double* var)
+{
+  num_vars++;           // this is not a bug-- we want to step num_vars up by one ONLY when adding a new variable.
+  varmap[in]=num_vars;
+  *var=MASA_VAR_DEFAULT;
+  vararr.push_back(var);
 }// done with set_var function
 
 /* ------------------------------------------------
@@ -191,21 +210,11 @@ MASA::MASA_Test::MASA_Test()
   // using input
   mmsname = "MASA_test_function";
   dimension = 1;
-  
-  //first variable "axp" -- load map and array
-  varmap["dummy"]=1;
-  dummy=MASA_VAR_DEFAULT;
-  vararr.push_back(&dummy);
-  vararr.push_back(&dummy);
 
-  varmap["demo_var_2"]=2;
-  demo_var_2=MASA_VAR_DEFAULT;
-  vararr.push_back(&demo_var_2);
-
-  varmap["demo_var_3"]=3;
-  demo_var_3=MASA_VAR_DEFAULT;
-  vararr.push_back(&demo_var_3);
-  
+  register_var("dummy",&dummy);
+  register_var("demo_var_2",&demo_var_2);
+  register_var("demo_var_3",&demo_var_3);
+ 
 }//done with constructor
 
 double MASA::MASA_Test::eval_q_u(double x)
