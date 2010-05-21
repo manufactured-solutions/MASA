@@ -82,20 +82,30 @@ namespace MASA
 
     // functions to override
     virtual ~manufactured_solution(){};       // destructor
-    virtual double eval_an(){cout << "MASA ERROR";  return -1.33;}; // returns value of solution
-    virtual double eval_q_u(double){cout << "MASA ERROR"; return -1.33;}; // returns value of source term (u)
-    virtual double eval_q_v(double){cout << "MASA ERROR"; return -1.33;}; // returns value of source term (v)
-    virtual double eval_q_w(double){cout << "MASA ERROR"; return -1.33;}; // returns value of source term (w)
-    virtual double eval_g(double){cout << "MASA ERROR";   return -1.33;}; // returns value of gradient
 
-    // functions to inherit
-    manufactured_solution();                // constructor
-    void get_var(string,double*);     // returns variable value
-    void set_var(string,double);     // sets variable value    
-    void display_var();     // print all variable names and values
-    void sanity_check();     // checks that all variables to the class have been initalized
+    // analytical solution
+    virtual double eval_an()         {cout << "MASA ERROR: Analytical Solution is unavailable or not properly loaded.";  return -1.33;}; // returns value of analytical solution
+
+    // source terms
+    virtual double eval_q_u(double)  {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                      // returns value of source term (u)
+    virtual double eval_q_v(double)  {cout << "MASA ERROR: Source term (v) is unavailable or not properly loaded."; return -1.33;};      // returns value of source term (v)
+    virtual double eval_q_w(double)  {cout << "MASA ERROR: Source Term (w) is unavailable or not properly loaded."; return -1.33;};      // returns value of source term (w)
+    virtual double eval_q_e(double)  {cout << "MASA ERROR: Source Term (e) is unavailable or not properly loaded."; return -1.33;};      // returns value of source term (energy)
+    virtual double eval_q_rho(double){cout << "MASA ERROR: Source Term (rho) is unavailable or not properly loaded."; return -1.33;};    // returns value of source term (density)
+
+    // gradient 
+    virtual double eval_1d_g(double) {cout << "MASA ERROR: gradient is unavailable or not properly loaded.";   return -1.33;};           // returns value of gradient
+    virtual double eval_2d_g(double) {cout << "MASA ERROR: gradient is unavailable or not properly loaded.";   return -1.33;};           // returns value of gradient
+    virtual double eval_3d_g(double) {cout << "MASA ERROR: gradient is unavailable or not properly loaded.";   return -1.33;};           // returns value of gradient
+
+    // member functions solution classes will inherit
+    manufactured_solution();                                     // constructor
+    void get_var(string,double*);                                // returns variable value
+    void set_var(string,double);                                 // sets variable value    
+    void display_var();                                          // print all variable names and values
+    void sanity_check();                                         // checks that all variables to the class have been initalized
     void return_name(string* inname){inname->assign(mmsname);};  // method: returns name
-    void return_dim (int* indim){*indim=dimension;};  // method: returns name
+    void return_dim (int* indim)    {*indim=dimension;};         // method: returns dimension of solution
     
   }; // done with MMS base class
 
@@ -468,20 +478,85 @@ namespace MASA
   // ---------- compressible navier stokes  ------------
   // ------------------------------------------------------
 
-  class ns_compress_2d : public manufactured_solution
-  {
+  class compressible_navierstokes_2d : public manufactured_solution
+  {    
+    double axp;
+
+    double u_0;
+    double u_x;
+    double u_y;
+    double v_0;
+    double v_x;
+    double v_y;
+    double rho_0;
+    double rho_x;
+    double rho_y;
+    double p_0;
+    double p_x;
+    double p_y;
+    double a_px;
+    double a_py;
+    double a_rhox;
+    double a_rhoy;
+    double a_ux;
+    double a_uy;
+    double a_vx;
+    double a_vy;
+    double Gamma;
+    double mu;
+    double L;
     
   public:
-    ns_compress_2d(); // constructor
+    compressible_navierstokes_2d(); // constructor
     
   };
-
-  class ns_compress_3d : public manufactured_solution
+  
+  class compressible_navierstokes_3d : public manufactured_solution
   {
+    double axp;
+
+    double u_0;
+    double u_x;
+    double u_y;
+    double u_z;
+    double v_0;
+    double v_x;
+    double v_y;
+    double v_z;
+    double w_0;
+    double w_x;
+    double w_y;
+    double w_z;
+    double rho_0;
+    double rho_x;
+    double rho_y;
+    double rho_z;
+    double p_0;
+    double p_x;
+    double p_y;
+    double p_z;
+    double a_px;
+    double a_py;
+    double a_pz;
+    double a_rhox;
+    double a_rhoy;
+    double a_rhoz;
+    double a_ux;
+    double a_uy;
+    double a_uz;
+    double a_vx;
+    double a_vy;
+    double a_vz;
+    double a_wx;
+    double a_wy;
+    double a_wz;
+    double mu;
+    double Gamma;
+    double L;    
     
   public:
-    ns_compress_3d(); // constructor
+    compressible_navierstokes_3d(); //constructor
     
-  };
-
+  }; // done with navier stokes 3d class
+  
 } // end MASA namespace

@@ -32,7 +32,7 @@
 
 //
 //   These are the MASA class member functions and constructors
-//   For the Euler Equations
+//   For the Compressible Navier-Stokes
 
 #include <masa_internal.h> 
 
@@ -40,16 +40,16 @@ using namespace MASA;
 
 /* ------------------------------------------------
  *
- *         EULER EQUATION
+ *         Compressible Navier Stokes Equations
  *
- *
+ *         2D
  *
  * -----------------------------------------------
  */ 
 
-MASA::euler_2d::euler_2d()
+MASA::compressible_navierstokes_2d::compressible_navierstokes_2d()
 {
-  mmsname = "euler_2d";
+  mmsname = "compressible_navierstokes_2d";
   dimension=2;
 
   //first variable (dummy) "axp" -- load map and array
@@ -173,11 +173,20 @@ MASA::euler_2d::euler_2d()
 
 }//done with constructor
 
-MASA::euler_3d::euler_3d()
-{
-  mmsname = "euler_3d";
-  dimension=3;
 
+/* ------------------------------------------------
+ *
+ *         Compressible Navier Stokes Equations
+ *
+ *         3D
+ *
+ * -----------------------------------------------
+ */ 
+
+MASA::compressible_navierstokes_3d::compressible_navierstokes_3d()
+{
+  mmsname = "compressible_navierstokes_3d";
+  dimension=3;
 
   //first variable (dummy) "axp" -- load map and array
   axp=MASA_VAR_DEFAULT;
