@@ -47,14 +47,14 @@ using namespace MASA;
  * -----------------------------------------------
  */ 
 
-MASA::navierstokes_compressible_2d::navierstokes_compressible_2d()
+MASA::navierstokes_2d_compressible::navierstokes_2d_compressible()
 {
-  mmsname = "navierstokes_compressible_2d";
+  mmsname = "navierstokes_2d_compressible";
   dimension=2;
 
-  //first variable (dummy) "axp" -- load map and array
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
+  //first variable (dummy) "dummy" -- load map and array
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
 
   // initalize other variables
   varmap["u_0"]=1;
@@ -183,14 +183,14 @@ MASA::navierstokes_compressible_2d::navierstokes_compressible_2d()
  * -----------------------------------------------
  */ 
 
-MASA::navierstokes_compressible_3d::navierstokes_compressible_3d()
+MASA::navierstokes_3d_compressible::navierstokes_3d_compressible()
 {
-  mmsname = "navierstokes_compressible_3d";
+  mmsname = "navierstokes_3d_compressible";
   dimension=3;
 
-  //first variable (dummy) "axp" -- load map and array
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
+  //first variable (dummy) "dummy" -- load map and array
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
 
   // initalize other variables
   varmap["u_0"]=1;

@@ -193,10 +193,10 @@ MASA::MASA_Test::MASA_Test()
   dimension = 1;
   
   //first variable "axp" -- load map and array
-  varmap["axp"]=1;
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
-  vararr.push_back(&axp);
+  varmap["dummy"]=1;
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
+  vararr.push_back(&dummy);
 
   varmap["demo_var_2"]=2;
   demo_var_2=MASA_VAR_DEFAULT;
@@ -210,7 +210,7 @@ MASA::MASA_Test::MASA_Test()
 
 double MASA::MASA_Test::eval_q_u(double x)
 {
-  double qt = demo_var_2 + demo_var_3 + axp;
+  double qt = demo_var_2 + demo_var_3 + dummy;
   return qt;
 
 }//done with constructor

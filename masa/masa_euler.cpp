@@ -52,9 +52,9 @@ MASA::euler_2d::euler_2d()
   mmsname = "euler_2d";
   dimension=2;
 
-  //first variable (dummy) "axp" -- load map and array
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
+  //first variable (dummy) "dummy" -- load map and array
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
 
   // initalize other variables
   varmap["u0"]=1;
@@ -178,10 +178,9 @@ MASA::euler_3d::euler_3d()
   mmsname = "euler_3d";
   dimension=3;
 
-
-  //first variable (dummy) "axp" -- load map and array
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
+  //first variable (dummy) "dummy" -- load map and array
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
 
   // initalize other variables
   varmap["u0"]=1;

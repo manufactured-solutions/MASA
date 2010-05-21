@@ -322,6 +322,9 @@ int MASA::masa_map(string input_string, string return_string)
 	  cout << "\n Please email nick@ices.utexas.edu about this.\n";
 	  exit(1);
 	}
+
+      // now, rebuild into 'correct' string
+
       
     }// end for loop
   

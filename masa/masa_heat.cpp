@@ -56,9 +56,9 @@ MASA::heateq_1d_steady_const::heateq_1d_steady_const()
   // map and the pointer array, the index must both be starting at _1_,
   // not zero, as is typical for c. Thus, we have to add a dummy variable here
 
-  //first variable (dummy) "axp" -- load map and array
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
+  //first variable (dummy) "dummy" -- load map and array
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
 
   // initalize other variables
   varmap["ax"]=1;
@@ -84,9 +84,9 @@ MASA::heateq_2d_steady_const::heateq_2d_steady_const()
     mmsname = "heateq_2d_steady_const";
     dimension=2;
 
-    //first variable (dummy) "axp" -- load map and array
-    axp=MASA_VAR_DEFAULT;
-    vararr.push_back(&axp);
+    //first variable (dummy) "dummy" -- load map and array
+    dummy=MASA_VAR_DEFAULT;
+    vararr.push_back(&dummy);
     
     // initalize other variables
     varmap["ax"]=1;                   // incriment map location
@@ -124,9 +124,9 @@ MASA::heateq_3d_steady_const::heateq_3d_steady_const()
     mmsname = "heateq_3d_steady_const";
     dimension=3;
 
-    //first variable (dummy) "axp" -- load map and array
-    axp=MASA_VAR_DEFAULT;
-    vararr.push_back(&axp);
+    //first variable (dummy) "dummy" -- load map and array
+    dummy=MASA_VAR_DEFAULT;
+    vararr.push_back(&dummy);
     
     // initalize other variables
     varmap["ax"]=1;                   // incriment map location
@@ -165,9 +165,9 @@ MASA::heateq_1d_unsteady_const::heateq_1d_unsteady_const()
   mmsname = "heateq_1d_unsteady_const";
   dimension=1;
 
-  //first variable (dummy) "axp" -- load map and array
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
+  //first variable (dummy) "dummy" -- load map and array
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
   
   // initalize other variables
   varmap["ax"]=1;                   // incriment map location
@@ -207,9 +207,9 @@ MASA::heateq_2d_unsteady_const::heateq_2d_unsteady_const()
   mmsname = "heateq_2d_unsteady_const";
   dimension=2;
     
-  //first variable (dummy) "axp" -- load map and array
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
+  //first variable (dummy) "dummy" -- load map and array
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
 
   // initalize other variables
   varmap["ax"]=1;                   // incriment map location
@@ -259,9 +259,9 @@ MASA::heateq_3d_unsteady_const::heateq_3d_unsteady_const()
     mmsname = "heateq_3d_unsteady_const";
     dimension=3;
     
-  //first variable (dummy) "axp" -- load map and array
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
+  //first variable (dummy) "dummy" -- load map and array
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
 
   // initalize other variables
   varmap["ax"]=1;                   // incriment map location
@@ -321,9 +321,9 @@ MASA::heateq_1d_unsteady_var::heateq_1d_unsteady_var()
   mmsname = "heateq_1d_unsteady_var";
   dimension=1;
 
-  //first variable (dummy) "axp" -- load map and array
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
+  //first variable (dummy) "dummy" -- load map and array
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
 
   // initalize other variables
   varmap["ax"]=1;                   // incriment map location
@@ -384,9 +384,9 @@ MASA::heateq_2d_unsteady_var::heateq_2d_unsteady_var()
   dimension=2;
 
 
-  //first variable (dummy) "axp" -- load map and array
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
+  //first variable (dummy) "dummy" -- load map and array
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
 
   // initalize other variables
   varmap["ax"]=1;                   // incriment map location
@@ -456,9 +456,9 @@ MASA::heateq_3d_unsteady_var::heateq_3d_unsteady_var()
   mmsname = "heateq_3d_unsteady_var";
   dimension=3;
 
-  //first variable (dummy) "axp" -- load map and array
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
+  //first variable (dummy) "dummy" -- load map and array
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
 
   // initalize other variables
   varmap["ax"]=1;                   // incriment map location
@@ -550,9 +550,9 @@ MASA::heateq_1d_steady_var::heateq_1d_steady_var()
   mmsname = "heateq_1d_steady_var";
   dimension=1;
   
-  //first variable (dummy) "axp" -- load map and array
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
+  //first variable (dummy) "dummy" -- load map and array
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
   
   // initalize other variables
   varmap["ax"]=1;
@@ -582,9 +582,9 @@ MASA::heateq_2d_steady_var::heateq_2d_steady_var()
   mmsname = "heateq_2d_steady_var";
   dimension=2;
 
-  //first variable (dummy) "axp" -- load map and array
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
+  //first variable (dummy) "dummy" -- load map and array
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
   
   // initalize other variables
   varmap["ax"]=1;
@@ -618,9 +618,9 @@ MASA::heateq_3d_steady_var::heateq_3d_steady_var()
   mmsname = "heateq_3d_steady_var";
   dimension=3;
 
-  //first variable (dummy) "axp" -- load map and array
-  axp=MASA_VAR_DEFAULT;
-  vararr.push_back(&axp);
+  //first variable "dummy" -- load map and array
+  dummy=MASA_VAR_DEFAULT;
+  vararr.push_back(&dummy);
   
   // initalize other variables
   varmap["ax"]=1;

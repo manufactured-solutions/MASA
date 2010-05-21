@@ -81,8 +81,8 @@ int get_list_mms(vector<manufactured_solution*>* anim)
   anim->push_back(new euler_2d());
   anim->push_back(new euler_3d());
 
-  anim->push_back(new navierstokes_compressible_2d());
-  anim->push_back(new navierstokes_compressible_3d());
+  anim->push_back(new navierstokes_2d_compressible());
+  anim->push_back(new navierstokes_3d_compressible());
 
   return 0;
 

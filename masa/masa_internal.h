@@ -151,7 +151,7 @@ namespace MASA
   class MASA_Test : public manufactured_solution 
   {
   private:
-    double axp;
+    double dummy;
     double demo_var_2;
     double demo_var_3;
   public:
@@ -166,7 +166,7 @@ namespace MASA
   class heateq_1d_steady_const : public manufactured_solution 
   {
   private:
-    double axp;
+    double dummy;
 
     double ax;
     double k0;    
@@ -178,7 +178,7 @@ namespace MASA
   class heateq_2d_steady_const : public manufactured_solution 
   {
   private:
-    double axp;
+    double dummy;
 
     double ax;
     double k0;
@@ -192,7 +192,7 @@ namespace MASA
   class heateq_3d_steady_const : public manufactured_solution 
   {
   private:
-    double axp;
+    double dummy;
 
     double ax;
     double k0;
@@ -210,7 +210,7 @@ namespace MASA
   class heateq_1d_unsteady_const : public manufactured_solution 
   {
   private:
-    double axp;
+    double dummy;
 
     double ax;
     double k0;
@@ -227,7 +227,7 @@ namespace MASA
   class heateq_2d_unsteady_const : public manufactured_solution 
   {
   private:
-    double axp;
+    double dummy;
 
     double ax;
     double k0;
@@ -246,7 +246,7 @@ namespace MASA
   class heateq_3d_unsteady_const : public manufactured_solution 
   {
   private:
-    double axp;
+    double dummy;
 
     double ax;
     double k0;
@@ -271,7 +271,7 @@ namespace MASA
   class heateq_1d_unsteady_var : public manufactured_solution 
   {
   private:
-    double axp;
+    double dummy;
 
     double ax;
     double k0;
@@ -292,7 +292,7 @@ namespace MASA
   class heateq_2d_unsteady_var : public manufactured_solution 
   {
   private:
-    double axp;
+    double dummy;
 
     double ax;
     double k0;
@@ -315,7 +315,7 @@ namespace MASA
   class heateq_3d_unsteady_var : public manufactured_solution 
   {
   private:
-    double axp;
+    double dummy;
 
     double ax;
     double k0;
@@ -344,7 +344,7 @@ namespace MASA
   class heateq_1d_steady_var : public manufactured_solution 
   {
   private:
-    double axp;
+    double dummy;
 
     double ax;
     double k0;
@@ -359,7 +359,7 @@ namespace MASA
   class heateq_2d_steady_var : public manufactured_solution 
   {
   private:
-    double axp;
+    double dummy;
     
     double ax;
     double k0;
@@ -375,7 +375,7 @@ namespace MASA
   class heateq_3d_steady_var : public manufactured_solution 
   {
   private:
-    double axp;
+    double dummy;
 
     double ax;
     double k0;
@@ -395,7 +395,7 @@ namespace MASA
 
   class euler_2d : public manufactured_solution
   {
-    double axp;
+    double dummy;
 
     double u0;
     double ux;
@@ -428,7 +428,7 @@ namespace MASA
 
   class euler_3d : public manufactured_solution
   {
-    double axp;
+    double dummy;
     
     double u0;
     double ux;
@@ -478,9 +478,9 @@ namespace MASA
   // ---------- compressible navier stokes  ------------
   // ------------------------------------------------------
 
-  class navierstokes_compressible_2d : public manufactured_solution
+  class navierstokes_2d_compressible : public manufactured_solution
   {    
-    double axp;
+    double dummy;
 
     double u_0;
     double u_x;
@@ -507,13 +507,13 @@ namespace MASA
     double L;
     
   public:
-    navierstokes_compressible_2d(); // constructor
+    navierstokes_2d_compressible(); // constructor
     
   };
   
-  class navierstokes_compressible_3d : public manufactured_solution
+  class navierstokes_3d_compressible : public manufactured_solution
   {
-    double axp;
+    double dummy;
 
     double u_0;
     double u_x;
@@ -555,7 +555,7 @@ namespace MASA
     double L;    
     
   public:
-    navierstokes_compressible_3d(); //constructor
+    navierstokes_3d_compressible(); //constructor
     
   }; // done with navier stokes 3d class
   
