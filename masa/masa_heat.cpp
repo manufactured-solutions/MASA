@@ -71,7 +71,7 @@ MASA::heateq_2d_steady_const::heateq_2d_steady_const()
     register_var("ax",&ax);   
     register_var("k0",&k0);
     register_var("by",&by);
-
+    
 }//done with constructor
 
 double MASA::heateq_2d_steady_const::eval_q_u(double x)

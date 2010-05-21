@@ -53,17 +53,31 @@ MASA::manufactured_solution::manufactured_solution()
 }
 void MASA::manufactured_solution::get_var(string var, double* sol)
 {
-  int selector;
-  selector = varmap[var];    // find location in pointer array
-
-    if(selector==0)
-    {
-      cout << "\nMASA ERROR: No such variable exists\n";
-    }
-    else 
+  int selector=1;
+  int error=1;
+  
+  // lets run though the list to check the variable does exist
+  for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
+    {          
+      error=var.compare(it->first); // one value must be 0, as in equal, to exit with success
+      if(error==0);
       {
-	*sol = *vararr[selector];   // set to value 
-      } 
+	cout << "found it";
+	selector=0; // set flag for variable existance 
+      }
+    }    
+  
+  if(selector==0) // no error - the variable exists
+    {
+      selector = varmap[var];    // find location in pointer array
+      *sol = *vararr[selector];   // set to value 
+      
+    }
+  else 
+    {
+      cout << "\nMASA ERROR: No such variable  (" << var << ") exists\n";
+      return;
+    } 
     
 }// done with get_var function
 
@@ -82,18 +96,31 @@ void MASA::manufactured_solution::display_var()
 
 void MASA::manufactured_solution::set_var(string var, double val)
 {
-  int selector;
-  selector = varmap[var];    // find location in pointer array
-
+  int selector=1;
+  int error=1;
+  
+  // lets run though the list to check the variable does exist
+  for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
+    {          
+      error=var.compare(it->first); // one value must be 0, as in equal, to exit with success
+      if(error==0);
+      {
+	cout << "found it";
+	selector=0; // set flag for variable existance 
+      }
+    }    
+  
   if(selector==0)
-    {
-      cout << "\nMASA ERROR: No such variable to be set\n";
-      // exit(1);not really a fatal error
+    {      
+      selector = varmap[var];    // find location in pointer array      
+      *vararr[selector] = val;   // set variable to new value    
     }
   else 
-    {
-      *vararr[selector] = val;   // set variable to new value    
+    {      
+      cout << "\nMASA ERROR: No such variable (" << var << ") exists to be set\n";
+      return;
     } 
+
 }// done with set_var function
 
 void MASA::manufactured_solution::sanity_check()

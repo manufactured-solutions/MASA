@@ -86,19 +86,35 @@ namespace MASA
     virtual ~manufactured_solution(){};       // destructor
 
     // analytical solution
-    virtual double eval_an()         {cout << "MASA ERROR: Analytical Solution is unavailable or not properly loaded.";  return -1.33;}; // returns value of analytical solution
-
+    virtual double eval_an(double)                {cout << "MASA ERROR: Analytical Solution is unavailable or not properly loaded."; return -1.33;}; // returns value of analytical solution
+    virtual double eval_an(double,double)         {cout << "MASA ERROR: Analytical Solution is unavailable or not properly loaded."; return -1.33;}; // overloaded for 2d problems
+    virtual double eval_an(double,double,double)  {cout << "MASA ERROR: Analytical Solution is unavailable or not properly loaded."; return -1.33;}; // overloaded for 3d problems
+    
     // source terms
-    virtual double eval_q_u(double)  {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                      // returns value of source term (u)
-    virtual double eval_q_v(double)  {cout << "MASA ERROR: Source term (v) is unavailable or not properly loaded."; return -1.33;};      // returns value of source term (v)
-    virtual double eval_q_w(double)  {cout << "MASA ERROR: Source Term (w) is unavailable or not properly loaded."; return -1.33;};      // returns value of source term (w)
-    virtual double eval_q_e(double)  {cout << "MASA ERROR: Source Term (e) is unavailable or not properly loaded."; return -1.33;};      // returns value of source term (energy)
-    virtual double eval_q_rho(double){cout << "MASA ERROR: Source Term (rho) is unavailable or not properly loaded."; return -1.33;};    // returns value of source term (density)
+    virtual double eval_q_u(double)                {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // returns value of source term (u)
+    virtual double eval_q_u(double,double)         {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // overloaded for 2d problems
+    virtual double eval_q_u(double,double,double)  {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // overloaded for 3d problems
+
+    virtual double eval_q_v(double)                {cout << "MASA ERROR: Source term (v) is unavailable for 1d problems -- eval_q_v has too few arguments."; return -1.33;}; // returns value of source term (v)
+    virtual double eval_q_v(double,double)         {cout << "MASA ERROR: Source term (v) is unavailable or not properly loaded."; return -1.33;};                            // overloaded for 2d problems
+    virtual double eval_q_v(double,double,double)  {cout << "MASA ERROR: Source term (v) is unavailable or not properly loaded."; return -1.33;};                            // overloaded for 3d problems 
+
+    virtual double eval_q_w(double)                {cout << "MASA ERROR: Source term (w) is unavailable for 1d problems -- eval_q_w has too few arguments."; return -1.33;};  // returns value of source term (w)
+    virtual double eval_q_w(double,double)         {cout << "MASA ERROR: Source term (w) is unavailable for 2d problems -- eval_q_w has too few arguments."; return -1.33;};  // overloaded for 2d problems
+    virtual double eval_q_w(double,double,double)  {cout << "MASA ERROR: Source Term (w) is unavailable or not properly loaded."; return -1.33;};                             // overloaded for 3d problems
+
+    virtual double eval_q_e(double)                {cout << "MASA ERROR: Source Term (e) is unavailable or not properly loaded."; return -1.33;};    // returns value of source term (energy)
+    virtual double eval_q_e(double,double)         {cout << "MASA ERROR: Source Term (e) is unavailable or not properly loaded."; return -1.33;};    // returns value of source term (energy)
+    virtual double eval_q_e(double,double,double)  {cout << "MASA ERROR: Source Term (e) is unavailable or not properly loaded."; return -1.33;};    // returns value of source term (energy)
+
+    virtual double eval_q_rho(double)              {cout << "MASA ERROR: Source Term (rho) is unavailable or not properly loaded."; return -1.33;};  // returns value of source term (density)
+    virtual double eval_q_rho(double,double)       {cout << "MASA ERROR: Source Term (rho) is unavailable or not properly loaded."; return -1.33;};  // returns value of source term (density)
+    virtual double eval_q_rho(double,double,double){cout << "MASA ERROR: Source Term (rho) is unavailable or not properly loaded."; return -1.33;};  // returns value of source term (density)
 
     // gradient 
-    virtual double eval_1d_g(double) {cout << "MASA ERROR: gradient is unavailable or not properly loaded.";   return -1.33;};           // returns value of gradient
-    virtual double eval_2d_g(double) {cout << "MASA ERROR: gradient is unavailable or not properly loaded.";   return -1.33;};           // returns value of gradient
-    virtual double eval_3d_g(double) {cout << "MASA ERROR: gradient is unavailable or not properly loaded.";   return -1.33;};           // returns value of gradient
+    virtual double eval_1d_g(double)               {cout << "MASA ERROR: gradient is unavailable or not properly loaded.";   return -1.33;};         // returns value of 1d gradient
+    virtual double eval_2d_g(double,double)        {cout << "MASA ERROR: gradient is unavailable or not properly loaded.";   return -1.33;};         // returns value of 2d gradient
+    virtual double eval_3d_g(double,double,double) {cout << "MASA ERROR: gradient is unavailable or not properly loaded.";   return -1.33;};         // returns value of 3d gradient
 
     // member functions solution classes will inherit
     manufactured_solution();                                     // constructor
