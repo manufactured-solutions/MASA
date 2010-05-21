@@ -52,23 +52,8 @@ MASA::heateq_1d_steady_const::heateq_1d_steady_const()
     mmsname = "heateq_1d_steady_const";
     dimension=1;
 
-  // this bears some explaination -- to make the index match between the 
-  // map and the pointer array, the index must both be starting at _1_,
-  // not zero, as is typical for c. Thus, we have to add a dummy variable here
-
-  //first variable (dummy) "dummy" -- load map and array
-  dummy=MASA_VAR_DEFAULT;
-  vararr.push_back(&dummy);
-
-  // initalize other variables
-  varmap["ax"]=1;
-  ax=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&ax);
-
-  // 2nd var
-  varmap["k0"]=2;
-  k0=MASA_VAR_DEFAULT;
-  vararr.push_back(&k0);   
+    register_var("ax",&ax);   
+    register_var("k0",&k0);
 
 }//done with constructor
 
@@ -76,7 +61,6 @@ double MASA::heateq_1d_steady_const::eval_q_u(double x)
 {
   double qt = ax * ax * k0 * cos(ax * x);
   return qt;
-
 }
 
 MASA::heateq_2d_steady_const::heateq_2d_steady_const()
@@ -84,24 +68,9 @@ MASA::heateq_2d_steady_const::heateq_2d_steady_const()
     mmsname = "heateq_2d_steady_const";
     dimension=2;
 
-    //first variable (dummy) "dummy" -- load map and array
-    dummy=MASA_VAR_DEFAULT;
-    vararr.push_back(&dummy);
-    
-    // initalize other variables
-    varmap["ax"]=1;                   // incriment map location
-    ax=MASA_VAR_DEFAULT;              // need to initialize all variables!
-    vararr.push_back(&ax);            // add variable to pointer array
-    
-    // 2nd var
-    varmap["k0"]=2;
-    k0=MASA_VAR_DEFAULT;
-    vararr.push_back(&k0);   
-    
-    // 3rd var
-    varmap["by"]=3;
-    by=MASA_VAR_DEFAULT;
-    vararr.push_back(&by);   
+    register_var("ax",&ax);   
+    register_var("k0",&k0);
+    register_var("by",&by);
 
 }//done with constructor
 
@@ -124,29 +93,10 @@ MASA::heateq_3d_steady_const::heateq_3d_steady_const()
     mmsname = "heateq_3d_steady_const";
     dimension=3;
 
-    //first variable (dummy) "dummy" -- load map and array
-    dummy=MASA_VAR_DEFAULT;
-    vararr.push_back(&dummy);
-    
-    // initalize other variables
-    varmap["ax"]=1;                   // incriment map location
-    ax=MASA_VAR_DEFAULT;              // need to initialize all variables!
-    vararr.push_back(&ax);            // add variable to pointer array
-    
-    // 2nd var
-    varmap["k0"]=2;
-    k0=MASA_VAR_DEFAULT;
-    vararr.push_back(&k0);   
-    
-    // 3rd var
-    varmap["by"]=3;
-    by=MASA_VAR_DEFAULT;
-    vararr.push_back(&by);   
-
-    // 4th var
-    varmap["cz"]=4;
-    cz=MASA_VAR_DEFAULT;
-    vararr.push_back(&cz);   
+    register_var("ax",&ax);   
+    register_var("k0",&k0);
+    register_var("by",&by);
+    register_var("cz",&cz);
 
 }//done with constructor
 
@@ -165,39 +115,12 @@ MASA::heateq_1d_unsteady_const::heateq_1d_unsteady_const()
   mmsname = "heateq_1d_unsteady_const";
   dimension=1;
 
-  //first variable (dummy) "dummy" -- load map and array
-  dummy=MASA_VAR_DEFAULT;
-  vararr.push_back(&dummy);
-  
-  // initalize other variables
-  varmap["ax"]=1;                   // incriment map location
-  ax=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&ax);            // add variable to pointer array
-  
-  // 2nd var
-  varmap["k0"]=2;
-  k0=MASA_VAR_DEFAULT;
-  vararr.push_back(&k0);   
-  
-  // 3rd var
-  varmap["dt"]=3;
-  dt=MASA_VAR_DEFAULT;
-  vararr.push_back(&dt);   
-  
-  // 4th var
-  varmap["cp0"]=4;
-  cp0=MASA_VAR_DEFAULT;
-  vararr.push_back(&cp0);   
-
-  // 5th var
-  varmap["at"]=5;
-  at=MASA_VAR_DEFAULT;
-  vararr.push_back(&at);
-
-  // 6th var
-  varmap["rho"]=6;
-  rho=MASA_VAR_DEFAULT;
-  vararr.push_back(&rho);
+  register_var("ax",&ax);   
+  register_var("k0",&k0);
+  register_var("dt",&dt);
+  register_var("cp0",&cp0);
+  register_var("at",&at);
+  register_var("rho",&rho);
 
 }//done with constructor
 
@@ -207,111 +130,33 @@ MASA::heateq_2d_unsteady_const::heateq_2d_unsteady_const()
   mmsname = "heateq_2d_unsteady_const";
   dimension=2;
     
-  //first variable (dummy) "dummy" -- load map and array
-  dummy=MASA_VAR_DEFAULT;
-  vararr.push_back(&dummy);
-
-  // initalize other variables
-  varmap["ax"]=1;                   // incriment map location
-  ax=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&ax);            // add variable to pointer array
-  
-  // 2nd var
-  varmap["k0"]=2;
-  k0=MASA_VAR_DEFAULT;
-  vararr.push_back(&k0);   
-  
-  // 3rd var
-  varmap["dt"]=3;
-  dt=MASA_VAR_DEFAULT;
-  vararr.push_back(&dt);   
-  
-  // 4th var
-  varmap["cp0"]=4;
-  cp0=MASA_VAR_DEFAULT;
-  vararr.push_back(&cp0);   
-
-  // 5th var
-  varmap["at"]=5;
-  at=MASA_VAR_DEFAULT;
-  vararr.push_back(&at);
-
-  // 6th var
-  varmap["rho"]=6;
-  rho=MASA_VAR_DEFAULT;
-  vararr.push_back(&rho);
-
-  // 7th var
-  varmap["by"]=7;
-  by=MASA_VAR_DEFAULT;
-  vararr.push_back(&by);
-
-  // 8th var
-  varmap["bt"]=7;
-  bt=MASA_VAR_DEFAULT;
-  vararr.push_back(&bt);
+  register_var("ax",&ax);   
+  register_var("k0",&k0);
+  register_var("dt",&dt);
+  register_var("cp0",&cp0);
+  register_var("at",&at);
+  register_var("rho",&rho);
+  register_var("by",&by);
+  register_var("bt",&bt);
 
 }//done with constructor
 
 
 MASA::heateq_3d_unsteady_const::heateq_3d_unsteady_const()
 {
-    mmsname = "heateq_3d_unsteady_const";
-    dimension=3;
-    
-  //first variable (dummy) "dummy" -- load map and array
-  dummy=MASA_VAR_DEFAULT;
-  vararr.push_back(&dummy);
-
-  // initalize other variables
-  varmap["ax"]=1;                   // incriment map location
-  ax=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&ax);            // add variable to pointer array
+  mmsname = "heateq_3d_unsteady_const";
+  dimension=3;
   
-  // 2nd var
-  varmap["k0"]=2;
-  k0=MASA_VAR_DEFAULT;
-  vararr.push_back(&k0);   
-  
-  // 3rd var
-  varmap["dt"]=3;
-  dt=MASA_VAR_DEFAULT;
-  vararr.push_back(&dt);   
-  
-  // 4th var
-  varmap["cp0"]=4;
-  cp0=MASA_VAR_DEFAULT;
-  vararr.push_back(&cp0);   
-
-  // 5th var
-  varmap["at"]=5;
-  at=MASA_VAR_DEFAULT;
-  vararr.push_back(&at);
-
-  // 6th var
-  varmap["rho"]=6;
-  rho=MASA_VAR_DEFAULT;
-  vararr.push_back(&rho);
-
-  // 7th var
-  varmap["by"]=7;
-  by=MASA_VAR_DEFAULT;
-  vararr.push_back(&by);
-
-  // 8th var
-  varmap["bt"]=7;
-  bt=MASA_VAR_DEFAULT;
-  vararr.push_back(&bt);
-
-  // 7th var
-  varmap["cz"]=8;
-  cz=MASA_VAR_DEFAULT;
-  vararr.push_back(&cz);
-
-  // 8th var
-  varmap["ct"]=9;
-  ct=MASA_VAR_DEFAULT;
-  vararr.push_back(&ct);
+  register_var("ax",&ax);   
+  register_var("k0",&k0);
+  register_var("dt",&dt);
+  register_var("cp0",&cp0);
+  register_var("at",&at);
+  register_var("rho",&rho);
+  register_var("by",&by);
+  register_var("bt",&bt);
+  register_var("cz",&cz);
+  register_var("ct",&ct);
 
 }//done with constructor
 
@@ -321,59 +166,16 @@ MASA::heateq_1d_unsteady_var::heateq_1d_unsteady_var()
   mmsname = "heateq_1d_unsteady_var";
   dimension=1;
 
-  //first variable (dummy) "dummy" -- load map and array
-  dummy=MASA_VAR_DEFAULT;
-  vararr.push_back(&dummy);
-
-  // initalize other variables
-  varmap["ax"]=1;                   // incriment map location
-  ax=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&ax);            // add variable to pointer array
-  
-  // 2nd var
-  varmap["k0"]=2;
-  k0=MASA_VAR_DEFAULT;
-  vararr.push_back(&k0);   
-  
-  // 3rd var
-  varmap["dt"]=3;
-  dt=MASA_VAR_DEFAULT;
-  vararr.push_back(&dt);   
-  
-  // 4th var
-  varmap["cp0"]=4;
-  cp0=MASA_VAR_DEFAULT;
-  vararr.push_back(&cp0);   
-
-  // 5th var
-  varmap["at"]=5;
-  at=MASA_VAR_DEFAULT;
-  vararr.push_back(&at);
-
-  // 6th var
-  varmap["rho"]=6;
-  rho=MASA_VAR_DEFAULT;
-  vararr.push_back(&rho);
-
-  // 7th var
-  varmap["cp1"]=7;
-  cp1=MASA_VAR_DEFAULT;
-  vararr.push_back(&cp1);
-
-  // 8th var
-  varmap["cp2"]=8;
-  cp2=MASA_VAR_DEFAULT;
-  vararr.push_back(&cp2);
-
-  // 9th var
-  varmap["k1"]=9;
-  k1=MASA_VAR_DEFAULT;
-  vararr.push_back(&k1);   
-
-  // 10th var
-  varmap["k2"]=10;
-  k2=MASA_VAR_DEFAULT;
-  vararr.push_back(&k2);   
+  register_var("ax",&ax);   
+  register_var("k0",&k0);
+  register_var("dt",&dt);
+  register_var("cp0",&cp0);
+  register_var("at",&at);
+  register_var("rho",&rho);
+  register_var("cp1",&cp1);
+  register_var("cp2",&cp2);
+  register_var("k1",&k1);
+  register_var("k2",&k2);
 
 }//done with constructor
 
@@ -383,70 +185,18 @@ MASA::heateq_2d_unsteady_var::heateq_2d_unsteady_var()
   mmsname = "heateq_2d_unsteady_var";
   dimension=2;
 
-
-  //first variable (dummy) "dummy" -- load map and array
-  dummy=MASA_VAR_DEFAULT;
-  vararr.push_back(&dummy);
-
-  // initalize other variables
-  varmap["ax"]=1;                   // incriment map location
-  ax=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&ax);            // add variable to pointer array
-  
-  // 2nd var
-  varmap["k0"]=2;
-  k0=MASA_VAR_DEFAULT;
-  vararr.push_back(&k0);   
-  
-  // 3rd var
-  varmap["dt"]=3;
-  dt=MASA_VAR_DEFAULT;
-  vararr.push_back(&dt);   
-  
-  // 4th var
-  varmap["cp0"]=4;
-  cp0=MASA_VAR_DEFAULT;
-  vararr.push_back(&cp0);   
-
-  // 5th var
-  varmap["at"]=5;
-  at=MASA_VAR_DEFAULT;
-  vararr.push_back(&at);
-
-  // 6th var
-  varmap["rho"]=6;
-  rho=MASA_VAR_DEFAULT;
-  vararr.push_back(&rho);
-
-  // 7th var
-  varmap["cp1"]=7;
-  cp1=MASA_VAR_DEFAULT;
-  vararr.push_back(&cp1);
-
-  // 8th var
-  varmap["cp2"]=8;
-  cp2=MASA_VAR_DEFAULT;
-  vararr.push_back(&cp2);
-
-  // 9th var
-  varmap["k1"]=9;
-  k1=MASA_VAR_DEFAULT;
-  vararr.push_back(&k1);   
-
-  // 10th var
-  varmap["k2"]=10;
-  k2=MASA_VAR_DEFAULT;
-  vararr.push_back(&k2);   
-
-  // 11th var
-  varmap["by"]=11;
-  by=MASA_VAR_DEFAULT;
-  vararr.push_back(&by);   
-
-  // 12th var
-  varmap["bt"]=12;
-  bt=MASA_VAR_DEFAULT;
-  vararr.push_back(&bt);
+  register_var("ax",&ax);   
+  register_var("k0",&k0);
+  register_var("dt",&dt);
+  register_var("cp0",&cp0);
+  register_var("at",&at);
+  register_var("rho",&rho);
+  register_var("cp1",&cp1);
+  register_var("cp2",&cp2);
+  register_var("k1",&k1);
+  register_var("k2",&k2);
+  register_var("by",&by);
+  register_var("bt",&bt);
 
 }//done with constructor
 
@@ -456,79 +206,20 @@ MASA::heateq_3d_unsteady_var::heateq_3d_unsteady_var()
   mmsname = "heateq_3d_unsteady_var";
   dimension=3;
 
-  //first variable (dummy) "dummy" -- load map and array
-  dummy=MASA_VAR_DEFAULT;
-  vararr.push_back(&dummy);
-
-  // initalize other variables
-  varmap["ax"]=1;                   // incriment map location
-  ax=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&ax);            // add variable to pointer array
-  
-  // 2nd var
-  varmap["k0"]=2;
-  k0=MASA_VAR_DEFAULT;
-  vararr.push_back(&k0);   
-  
-  // 3rd var
-  varmap["dt"]=3;
-  dt=MASA_VAR_DEFAULT;
-  vararr.push_back(&dt);   
-  
-  // 4th var
-  varmap["cp0"]=4;
-  cp0=MASA_VAR_DEFAULT;
-  vararr.push_back(&cp0);   
-
-  // 5th var
-  varmap["at"]=5;
-  at=MASA_VAR_DEFAULT;
-  vararr.push_back(&at);
-
-  // 6th var
-  varmap["rho"]=6;
-  rho=MASA_VAR_DEFAULT;
-  vararr.push_back(&rho);
-
-  // 7th var
-  varmap["cp1"]=7;
-  cp1=MASA_VAR_DEFAULT;
-  vararr.push_back(&cp1);
-
-  // 8th var
-  varmap["cp2"]=8;
-  cp2=MASA_VAR_DEFAULT;
-  vararr.push_back(&cp2);
-
-  // 9th var
-  varmap["k1"]=9;
-  k1=MASA_VAR_DEFAULT;
-  vararr.push_back(&k1);   
-
-  // 10th var
-  varmap["k2"]=10;
-  k2=MASA_VAR_DEFAULT;
-  vararr.push_back(&k2);   
-
-  // 11th var
-  varmap["by"]=11;
-  by=MASA_VAR_DEFAULT;
-  vararr.push_back(&by);   
-
-  // 12th var
-  varmap["bt"]=12;
-  bt=MASA_VAR_DEFAULT;
-  vararr.push_back(&bt);
-
-  // 13th var
-  varmap["cz"]=13;
-  cz=MASA_VAR_DEFAULT;
-  vararr.push_back(&cz);   
-
-  // 14th var
-  varmap["ct"]=14;
-  ct=MASA_VAR_DEFAULT;
-  vararr.push_back(&ct);
+  register_var("ax",&ax);   
+  register_var("k0",&k0);
+  register_var("dt",&dt);
+  register_var("cp0",&cp0);
+  register_var("at",&at);
+  register_var("rho",&rho);
+  register_var("cp1",&cp1);
+  register_var("cp2",&cp2);
+  register_var("k1",&k1);
+  register_var("k2",&k2);
+  register_var("by",&by);
+  register_var("bt",&bt);
+  register_var("cz",&cz);
+  register_var("ct",&ct);
 
 }//done with constructor
 
@@ -549,30 +240,11 @@ MASA::heateq_1d_steady_var::heateq_1d_steady_var()
 {
   mmsname = "heateq_1d_steady_var";
   dimension=1;
-  
-  //first variable (dummy) "dummy" -- load map and array
-  dummy=MASA_VAR_DEFAULT;
-  vararr.push_back(&dummy);
-  
-  // initalize other variables
-  varmap["ax"]=1;
-  ax=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&ax);
 
-  // 2nd var
-  varmap["k0"]=2;
-  k0=MASA_VAR_DEFAULT;
-  vararr.push_back(&k0);   
-
-  // 3rd var
-  varmap["k1"]=3;
-  k1=MASA_VAR_DEFAULT;
-  vararr.push_back(&k1);
-
-  // 4th var
-  varmap["k2"]=4;
-  k2=MASA_VAR_DEFAULT;
-  vararr.push_back(&k2);
+  register_var("ax",&ax);   
+  register_var("k0",&k0);
+  register_var("k1",&k1);
+  register_var("k2",&k2);
 
 }//done with constructor
 
@@ -582,34 +254,11 @@ MASA::heateq_2d_steady_var::heateq_2d_steady_var()
   mmsname = "heateq_2d_steady_var";
   dimension=2;
 
-  //first variable (dummy) "dummy" -- load map and array
-  dummy=MASA_VAR_DEFAULT;
-  vararr.push_back(&dummy);
-  
-  // initalize other variables
-  varmap["ax"]=1;
-  ax=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&ax);
-
-  // 2nd var
-  varmap["k0"]=2;
-  k0=MASA_VAR_DEFAULT;
-  vararr.push_back(&k0);   
-
-  // 3rd var
-  varmap["k1"]=3;
-  k1=MASA_VAR_DEFAULT;
-  vararr.push_back(&k1);
-
-  // 4th var
-  varmap["k2"]=4;
-  k2=MASA_VAR_DEFAULT;
-  vararr.push_back(&k2);
-
-  // 5th var
-  varmap["by"]=5;
-  by=MASA_VAR_DEFAULT;
-  vararr.push_back(&by);
+  register_var("ax",&ax);   
+  register_var("k0",&k0);
+  register_var("k1",&k1);
+  register_var("k2",&k2);
+  register_var("by",&by);
 
 }//done with constructor
 
@@ -618,38 +267,11 @@ MASA::heateq_3d_steady_var::heateq_3d_steady_var()
   mmsname = "heateq_3d_steady_var";
   dimension=3;
 
-  //first variable "dummy" -- load map and array
-  dummy=MASA_VAR_DEFAULT;
-  vararr.push_back(&dummy);
-  
-  // initalize other variables
-  varmap["ax"]=1;
-  ax=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&ax);
-
-  // 2nd var
-  varmap["k0"]=2;
-  k0=MASA_VAR_DEFAULT;
-  vararr.push_back(&k0);   
-
-  // 3rd var
-  varmap["k1"]=3;
-  k1=MASA_VAR_DEFAULT;
-  vararr.push_back(&k1);
-
-  // 4th var
-  varmap["k2"]=4;
-  k2=MASA_VAR_DEFAULT;
-  vararr.push_back(&k2);
-
-  // 5th var
-  varmap["by"]=5;
-  by=MASA_VAR_DEFAULT;
-  vararr.push_back(&by);
-
-  // 6th var
-  varmap["cz"]=6;
-  cz=MASA_VAR_DEFAULT;
-  vararr.push_back(&cz);
+  register_var("ax",&ax);   
+  register_var("k0",&k0);
+  register_var("k1",&k1);
+  register_var("k2",&k2);
+  register_var("by",&by);
+  register_var("cz",&cz);
 
 }//done with constructor

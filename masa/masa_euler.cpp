@@ -52,124 +52,29 @@ MASA::euler_2d::euler_2d()
   mmsname = "euler_2d";
   dimension=2;
 
-  //first variable (dummy) "dummy" -- load map and array
-  dummy=MASA_VAR_DEFAULT;
-  vararr.push_back(&dummy);
-
-  // initalize other variables
-  varmap["u0"]=1;
-  u0=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&u0);
-
-  // 2nd var
-  varmap["ux"]=2;
-  ux=MASA_VAR_DEFAULT;
-  vararr.push_back(&ux);
-
-  // 3rd var
-  varmap["uy"]=3;
-  uy=MASA_VAR_DEFAULT;
-  vararr.push_back(&uy);
-
-  // 4th var
-  varmap["v0"]=4;
-  v0=MASA_VAR_DEFAULT;
-  vararr.push_back(&v0);
-
-  // 5th var
-  varmap["vx"]=5;
-  vx=MASA_VAR_DEFAULT;
-  vararr.push_back(&vx);
-
-  //6th var
-  varmap["vy"]=6;
-  vy=MASA_VAR_DEFAULT;
-  vararr.push_back(&vy);
-
-  //7th var
-  varmap["rho0"]=7;
-  rho0=MASA_VAR_DEFAULT;
-  vararr.push_back(&rho0);
-
-  //8th var
-  varmap["rhox"]=8;
-  rhox=MASA_VAR_DEFAULT;
-  vararr.push_back(&rhox);
-
-  //9th var
-  varmap["rhoy"]=9;
-  rhoy=MASA_VAR_DEFAULT;
-  vararr.push_back(&rhoy);
-
-  //10th var
-  varmap["p0"]=10;
-  p0=MASA_VAR_DEFAULT;
-  vararr.push_back(&p0);
-
-  //11th var
-  varmap["px"]=11;
-  px=MASA_VAR_DEFAULT;
-  vararr.push_back(&px);
-
-  //12th var
-  varmap["py"]=12;
-  py=MASA_VAR_DEFAULT;
-  vararr.push_back(&py);
-
-  //13th var
-  varmap["apx"]=13;
-  apx=MASA_VAR_DEFAULT;
-  vararr.push_back(&apx);
-
-  //14th var
-  varmap["apy"]=14;
-  apy=MASA_VAR_DEFAULT;
-  vararr.push_back(&apy);
-
-  //15th var
-  varmap["arhox"]=15;
-  arhox=MASA_VAR_DEFAULT;
-  vararr.push_back(&arhox);
-
-  //16th var
-  varmap["arhoy"]=16;
-  arhoy=MASA_VAR_DEFAULT;
-  vararr.push_back(&arhoy);
-
-  //17th var
-  varmap["aux"]=17;
-  aux=MASA_VAR_DEFAULT;
-  vararr.push_back(&aux);
-
-  //18th var
-  varmap["auy"]=18;
-  auy=MASA_VAR_DEFAULT;
-  vararr.push_back(&auy);
-
-  //19th var
-  varmap["avx"]=19;
-  avx=MASA_VAR_DEFAULT;
-  vararr.push_back(&avx);
-
-  //20th var
-  varmap["avy"]=20;
-  avy=MASA_VAR_DEFAULT;
-  vararr.push_back(&avy);
-
-  //21st var
-  varmap["l"]=21;
-  l=MASA_VAR_DEFAULT;
-  vararr.push_back(&l);
-
-  //22nd var
-  varmap["gamma"]=22;
-  gamma=MASA_VAR_DEFAULT;
-  vararr.push_back(&gamma);
-
-  //23rd var
-  varmap["mu"]=23;
-  mu=MASA_VAR_DEFAULT;
-  vararr.push_back(&mu);
+  register_var("u_0",&u_0);
+  register_var("u_x",&u_x);
+  register_var("u_y",&u_y);
+  register_var("v_0",&v_0);
+  register_var("v_x",&v_x);
+  register_var("v_y",&v_y);
+  register_var("rho_0",&rho_0);
+  register_var("rho_x",&rho_x);
+  register_var("rho_y",&rho_y);
+  register_var("p_0",&p_0);
+  register_var("p_x",&p_x);
+  register_var("p_y",&p_y);
+  register_var("a_px",&a_px);
+  register_var("a_py",&a_py);
+  register_var("a_rhox",&a_rhox);
+  register_var("a_rhoy",&a_rhoy);
+  register_var("a_ux",&a_ux);
+  register_var("a_uy",&a_uy);
+  register_var("a_vx",&a_vx);
+  register_var("a_vy",&a_vy);
+  register_var("L",&L);
+  register_var("Gamma",&Gamma);
+  register_var("mu",&mu);
 
 }//done with constructor
 
@@ -178,174 +83,43 @@ MASA::euler_3d::euler_3d()
   mmsname = "euler_3d";
   dimension=3;
 
-  //first variable (dummy) "dummy" -- load map and array
-  dummy=MASA_VAR_DEFAULT;
-  vararr.push_back(&dummy);
-
-  // initalize other variables
-  varmap["u0"]=1;
-  u0=MASA_VAR_DEFAULT;              // need to initialize all variables!
-  vararr.push_back(&u0);
-
-  // 2nd var
-  varmap["ux"]=2;
-  ux=MASA_VAR_DEFAULT;
-  vararr.push_back(&ux);
-
-  // 3rd var
-  varmap["uy"]=3;
-  uy=MASA_VAR_DEFAULT;
-  vararr.push_back(&uy);
-
-  // 4th var
-  varmap["v0"]=4;
-  v0=MASA_VAR_DEFAULT;
-  vararr.push_back(&v0);
-
-  // 5th var
-  varmap["vx"]=5;
-  vx=MASA_VAR_DEFAULT;
-  vararr.push_back(&vx);
-
-  //6th var
-  varmap["vy"]=6;
-  vy=MASA_VAR_DEFAULT;
-  vararr.push_back(&vy);
-
-  //7th var
-  varmap["rho0"]=7;
-  rho0=MASA_VAR_DEFAULT;
-  vararr.push_back(&rho0);
-
-  //8th var
-  varmap["rhox"]=8;
-  rhox=MASA_VAR_DEFAULT;
-  vararr.push_back(&rhox);
-
-  //9th var
-  varmap["rhoy"]=9;
-  rhoy=MASA_VAR_DEFAULT;
-  vararr.push_back(&rhoy);
-
-  //10th var
-  varmap["p0"]=10;
-  p0=MASA_VAR_DEFAULT;
-  vararr.push_back(&p0);
-
-  //11th var
-  varmap["px"]=11;
-  px=MASA_VAR_DEFAULT;
-  vararr.push_back(&px);
-
-  //12th var
-  varmap["py"]=12;
-  py=MASA_VAR_DEFAULT;
-  vararr.push_back(&py);
-
-  //13th var
-  varmap["apx"]=13;
-  apx=MASA_VAR_DEFAULT;
-  vararr.push_back(&apx);
-
-  //14th var
-  varmap["apy"]=14;
-  apy=MASA_VAR_DEFAULT;
-  vararr.push_back(&apy);
-
-  //15th var
-  varmap["arhox"]=15;
-  arhox=MASA_VAR_DEFAULT;
-  vararr.push_back(&arhox);
-
-  //16th var
-  varmap["arhoy"]=16;
-  arhoy=MASA_VAR_DEFAULT;
-  vararr.push_back(&arhoy);
-
-  //17th var
-  varmap["aux"]=17;
-  aux=MASA_VAR_DEFAULT;
-  vararr.push_back(&aux);
-
-  //18th var
-  varmap["auy"]=18;
-  auy=MASA_VAR_DEFAULT;
-  vararr.push_back(&auy);
-
-  //19th var
-  varmap["avx"]=19;
-  avx=MASA_VAR_DEFAULT;
-  vararr.push_back(&avx);
-
-  //20th var
-  varmap["avy"]=20;
-  avy=MASA_VAR_DEFAULT;
-  vararr.push_back(&avy);
-
-  //21th var
-  varmap["l"]=21;
-  l=MASA_VAR_DEFAULT;
-  vararr.push_back(&l);
-
-  //22th var
-  varmap["uz"]=22;
-  uz=MASA_VAR_DEFAULT;
-  vararr.push_back(&uz);
-
-  //23th var
-  varmap["vz"]=23;
-  vz=MASA_VAR_DEFAULT;
-  vararr.push_back(&vz);
-
-  //24th var
-  varmap["wz"]=24;
-  wz=MASA_VAR_DEFAULT;
-  vararr.push_back(&wz);
-
-  //25th var
-  varmap["rhoz"]=25;
-  rhoz=MASA_VAR_DEFAULT;
-  vararr.push_back(&rhoz);
-
-  //26th var
-  varmap["pz"]=26;
-  pz=MASA_VAR_DEFAULT;
-  vararr.push_back(&pz);
-
-  //27th var
-  varmap["apz"]=27;
-  apz=MASA_VAR_DEFAULT;
-  vararr.push_back(&apz);
-
-  //28th var
-  varmap["arhoz"]=28;
-  arhoz=MASA_VAR_DEFAULT;
-  vararr.push_back(&arhoz);
-
-  //29th var
-  varmap["auz"]=29;
-  auz=MASA_VAR_DEFAULT;
-  vararr.push_back(&auz);
-
-  //30th var
-  varmap["avz"]=30;
-  avz=MASA_VAR_DEFAULT;
-  vararr.push_back(&avz);
-
-  //31th var
-  varmap["awz"]=31;
-  awz=MASA_VAR_DEFAULT;
-  vararr.push_back(&awz);
-
-  //32nd var
-  varmap["gamma"]=32;
-  gamma=MASA_VAR_DEFAULT;
-  vararr.push_back(&gamma);
-
-  //33rd var
-  varmap["mu"]=33;
-  mu=MASA_VAR_DEFAULT;
-  vararr.push_back(&mu);
+  register_var("u_0",&u_0);
+  register_var("u_x",&u_x);
+  register_var("u_y",&u_y);
+  register_var("u_z",&u_z);
+  register_var("v_0",&v_0);
+  register_var("v_x",&v_x);
+  register_var("v_y",&v_y);
+  register_var("v_z",&v_z);
+  register_var("rho_0",&rho_0);
+  register_var("rho_x",&rho_x);
+  register_var("rho_y",&rho_y);
+  register_var("rho_z",&rho_z);
+  register_var("p_0",&p_0);
+  register_var("p_x",&p_x);
+  register_var("p_y",&p_y);
+  register_var("p_z",&p_z);
+  register_var("a_px",&a_px);
+  register_var("a_py",&a_py);
+  register_var("a_rhox",&a_rhox);
+  register_var("a_rhoy",&a_rhoy);
+  register_var("a_ux",&a_ux);
+  register_var("a_uy",&a_uy);
+  register_var("a_uz",&a_uz);
+  register_var("a_vx",&a_vx);
+  register_var("a_vy",&a_vy);
+  register_var("L",&L);
+  register_var("Gamma",&Gamma);
+  register_var("mu",&mu);
+  register_var("a_pz",&a_pz);
+  register_var("a_rhoz",&a_rhoz);
+  register_var("a_vz",&a_vz);
+  register_var("a_wz",&a_wz);
+  register_var("a_wx",&a_wx);
+  register_var("a_wy",&a_wy);
+  register_var("w_x",&w_x);
+  register_var("w_y",&w_y);
+  register_var("w_z",&w_z);
 
 }//done with constructor
 

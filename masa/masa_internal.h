@@ -400,29 +400,30 @@ namespace MASA
   {
     double dummy;
 
-    double u0;
-    double ux;
-    double uy;
-    double v0;
-    double vx;
-    double vy;
-    double rho0;
-    double rhox;
-    double rhoy;
-    double p0;
-    double px;
-    double py;
-    double apx;
-    double apy;
-    double arhox;
-    double arhoy;
-    double aux;
-    double auy;
-    double avx;
-    double avy;
-    double gamma;
+
+    double u_0;
+    double u_x;
+    double u_y;
+    double v_0;
+    double v_x;
+    double v_y;
+    double rho_0;
+    double rho_x;
+    double rho_y;
+    double p_0;
+    double p_x;
+    double p_y;
+    double a_px;
+    double a_py;
+    double a_rhox;
+    double a_rhoy;
+    double a_ux;
+    double a_uy;
+    double a_vx;
+    double a_vy;
+    double Gamma;
     double mu;
-    double l;
+    double L;
     
   public:
     euler_2d(); // constructor    
@@ -432,45 +433,45 @@ namespace MASA
   class euler_3d : public manufactured_solution
   {
     double dummy;
-    
-    double u0;
-    double ux;
-    double uy;
-    double uz;
-    double v0;
-    double vx;
-    double vy;
-    double vz;
-    double w0;
-    double wx;
-    double wy;
-    double wz;
-    double rho0;
-    double rhox;
-    double rhoy;
-    double rhoz;
-    double p0;
-    double px;
-    double py;
-    double pz;
-    double apx;
-    double apy;
-    double apz;
-    double arhox;
-    double arhoy;
-    double arhoz;
-    double aux;
-    double auy;
-    double auz;
-    double avx;
-    double avy;
-    double avz;
-    double awx;
-    double awy;
-    double awz;
+
+    double u_0;
+    double u_x;
+    double u_y;
+    double u_z;
+    double v_0;
+    double v_x;
+    double v_y;
+    double v_z;
+    double w_0;
+    double w_x;
+    double w_y;
+    double w_z;
+    double rho_0;
+    double rho_x;
+    double rho_y;
+    double rho_z;
+    double p_0;
+    double p_x;
+    double p_y;
+    double p_z;
+    double a_px;
+    double a_py;
+    double a_pz;
+    double a_rhox;
+    double a_rhoy;
+    double a_rhoz;
+    double a_ux;
+    double a_uy;
+    double a_uz;
+    double a_vx;
+    double a_vy;
+    double a_vz;
+    double a_wx;
+    double a_wy;
+    double a_wz;
     double mu;
-    double gamma;
-    double l;
+    double Gamma;
+    double L;    
     
   public:
     euler_3d(); // constructor

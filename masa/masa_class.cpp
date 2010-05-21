@@ -102,13 +102,13 @@ void MASA::manufactured_solution::sanity_check()
     {      
       if(*vararr[it->second] == MASA_VAR_DEFAULT)
 	{
-	  cout << "\nMASA WARNING: " << it->first << " is not initialized!\n";
+	  cout << "\nMASA WARNING: " << it->first << " has not been initialized!\n";
 	}
     }    
   
   if(varmap.size() != num_vars)
     {
-      cout << "\n MASA has enountered a fatal error with regards to variable registration.\n"; 
+      cout << "\n MASA FATAL ERROR: mismatch in number of variables registered.\n"; 
       cout << "Are you calling the method manufactured_solution.register_var? This could be causing the error.\n"; 
       cout << "varmap.size() = " << varmap.size() << "; num_vars = " << num_vars << endl << endl;
       exit(1);
@@ -117,10 +117,25 @@ void MASA::manufactured_solution::sanity_check()
 
 void MASA::manufactured_solution::register_var(string in,double* var)
 {
-  num_vars++;           // this is not a bug-- we want to step num_vars up by one ONLY when adding a new variable.
-  varmap[in]=num_vars;
-  *var=MASA_VAR_DEFAULT;
-  vararr.push_back(var);
+  // first, check to ensure that no such variable has already been mapped
+  if(varmap[in] <= 0) // 0 implies variable has not been registered
+    {  
+      // if variable has not been registered, register the variable
+      num_vars++;           // this is not a bug-- we want to step num_vars up by one ONLY when adding a new variable.
+      varmap[in]=num_vars;
+      *var=MASA_VAR_DEFAULT;
+      vararr.push_back(var);
+    }
+  else  // variable already registered! no unique identifier can exist!
+    {
+      cout << "\n MASA FATAL ERROR: \n"; 
+      cout << "\n User has attempted to register two variables of the same name.\n"; 
+      string error;
+      return_name(&error);
+      cout << " Info: error occured while constructing " << error << endl << endl;
+      exit(1);      
+    }
+  
 }// done with set_var function
 
 /* ------------------------------------------------
