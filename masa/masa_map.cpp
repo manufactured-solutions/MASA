@@ -38,6 +38,7 @@
 // how am I going to automate this all?
 
 #include <masa_internal.h>
+#include <string.h>
 
 using namespace MASA;
 

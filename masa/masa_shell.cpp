@@ -55,7 +55,7 @@ void masa_shell_choose_solution()
   printf("\n\n Now type solution to initialize.");
   printf("\n Remember to place underscores between parameters (e.g. steady_heatequation)");
   printf("\n\n");
-  scanf("%s",userstring);
+  cin >> userstring;
 
   //masa_map_dimension(userstring,masterstring);
   masa_getid(&ptr,userstring);
@@ -70,7 +70,7 @@ void masa_shell_choose_solution()
       printf("\n 1) Show all variables and registered values");
       printf("\n 2) Register variable values");
       printf("\n 3) Evaluate\n\n");
-      scanf("%i",&q);
+      cin >> q;
 
       // switch statement based on user input
       switch(q)
@@ -87,7 +87,7 @@ void masa_shell_choose_solution()
 	case 2:
 	  printf("\n User Selected 2: Register Variable");
 	  printf("\n Input variable name:\n");
-	  scanf("%s",userstring);	  
+	  cin >> userstring;
 	  masa_get_param(ptr,userstring,&dbl2);
 	  cout << "currently set to:" << dbl2 << endl;
 	  cout << "\nInput new value (double)" << endl;
