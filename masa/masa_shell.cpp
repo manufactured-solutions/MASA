@@ -182,7 +182,7 @@ int main()
       printf("\n 2) Choose and Initialize Solution");
       printf("\n Select option (0 to exit)");
       printf("\n input: ");
-      scanf("%i",&q);
+      cin >> q;
       
       // switch statement based on user input
       switch(q)
