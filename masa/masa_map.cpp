@@ -292,7 +292,7 @@ int MASA::masa_map(string input_string, string return_string)
   int pos_old=0;
   string line;
   vector<string> str2;
-  char* special_char="_";  
+  string special_char="_";  
   
   // return array of strings
   // we break up the string between each underscore, and save that into a vector
