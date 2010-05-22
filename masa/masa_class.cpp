@@ -59,10 +59,10 @@ void MASA::manufactured_solution::get_var(string var, double* sol)
   // lets run though the list to check the variable does exist
   for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
     {          
-      error=var.compare(it->first); // one value must be 0, as in equal, to exit with success
-      if(error==0);
+      cout << var << " + " << it->first << endl;
+      error=var.rfind(it->first); // one value must be 0, as in equal, to exit with success
+      if (error!=string::npos) // found a value
       {
-	cout << "found it";
 	selector=0; // set flag for variable existance 
       }
     }    
@@ -98,14 +98,14 @@ void MASA::manufactured_solution::set_var(string var, double val)
 {
   int selector=1;
   int error=1;
-  
+
   // lets run though the list to check the variable does exist
   for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
     {          
-      error=var.compare(it->first); // one value must be 0, as in equal, to exit with success
-      if(error==0);
+      cout << var << " + " << it->first << endl;
+      error=var.rfind(it->first); // one value must be 0, as in equal, to exit with success
+      if (error!=string::npos) // found a value
       {
-	cout << "found it";
 	selector=0; // set flag for variable existance 
       }
     }    
