@@ -107,7 +107,7 @@ void masa_shell_choose_solution()
 	      cout << "\nplease input x location: \n";
 	      cin >> x;
 
-	      masa_eval_1d_source(ptr,x,&field);
+	      masa_eval_u_source(ptr,x,&field);
 	      cout << "source term is:" << field;
 	      break;
 
@@ -118,7 +118,7 @@ void masa_shell_choose_solution()
 	      cout << "\nplease input y location: \n";
 	      cin >> y;
 
-	      masa_eval_2d_source(ptr,x,y,&field);
+	      masa_eval_u_source(ptr,x,y,&field);
 	      cout << "source term is:" << field;
 	      break;
 
@@ -132,7 +132,7 @@ void masa_shell_choose_solution()
 	      cout << "\nplease input z location: \n";
 	      cin >> z;
 
-	      masa_eval_3d_source(ptr,x,y,z,&field);
+	      masa_eval_u_source(ptr,x,y,z,&field);
 	      cout << "source term is:" << field << endl << endl;
 	      break;
 	      

@@ -45,7 +45,6 @@ using namespace std;
 
 namespace MASA
 {
-
   // masa core functions (to be called by user)
   int masa_getid(void**,string);
   int masa_printid();
@@ -56,10 +55,27 @@ namespace MASA
   int masa_get_dimension(void*,int*);
   int masa_sanity_check(void*);
 
-  // source term
-  int masa_eval_1d_source(void*,double,double*);
-  int masa_eval_2d_source(void*,double,double,double*);
-  int masa_eval_3d_source(void*,double,double,double,double*);
+  // source term(s) -- 1D
+  int masa_eval_t_source  (void*,double,double*);
+  int masa_eval_u_source  (void*,double,double*);
+  int masa_eval_e_source  (void*,double,double*);
+  int masa_eval_rho_source(void*,double,double*);
+
+  // source term(s) -- 2D
+  int masa_eval_t_source  (void*,double,double,double*);
+  int masa_eval_u_source  (void*,double,double,double*);
+  int masa_eval_v_source  (void*,double,double,double*);
+  int masa_eval_w_source  (void*,double,double,double*);
+  int masa_eval_e_source  (void*,double,double,double*);
+  int masa_eval_rho_source(void*,double,double,double*);
+
+  // source term(s) -- 3D
+  int masa_eval_t_source  (void*,double,double,double,double*);
+  int masa_eval_u_source  (void*,double,double,double,double*);
+  int masa_eval_v_source  (void*,double,double,double,double*);
+  int masa_eval_w_source  (void*,double,double,double,double*);
+  int masa_eval_e_source  (void*,double,double,double,double*);
+  int masa_eval_rho_source(void*,double,double,double,double*);
 
   // analytical solution
   int masa_eval_1d_an(void*,double,double*);

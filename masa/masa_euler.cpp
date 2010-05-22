@@ -158,7 +158,6 @@ MASA::euler_3d::euler_3d()
 
 }//done with constructor
 
-
 double MASA::euler_3d::eval_q_u(double x,double y,double z)
 {
   double Q_u;
