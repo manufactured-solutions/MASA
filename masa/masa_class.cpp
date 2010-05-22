@@ -48,6 +48,9 @@ using namespace MASA;
 MASA::manufactured_solution::manufactured_solution()
 {
   MASA_VAR_DEFAULT = -12345.67; // default -- initialize each var to 'crazy' value
+  PI               = acos(-1);
+  R                = 1;
+  k                = 1;
   num_vars=0;                   // default -- will ++ for each registered variable
   vararr.push_back(&MASA_VAR_DEFAULT);   // dummy used to start index at correct location
 }
@@ -59,7 +62,6 @@ void MASA::manufactured_solution::get_var(string var, double* sol)
   // lets run though the list to check the variable does exist
   for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
     {          
-      cout << var << " + " << it->first << endl;
       error=var.rfind(it->first); // one value must be 0, as in equal, to exit with success
       if (error!=string::npos) // found a value
       {
@@ -102,7 +104,6 @@ void MASA::manufactured_solution::set_var(string var, double val)
   // lets run though the list to check the variable does exist
   for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
     {          
-      cout << var << " + " << it->first << endl;
       error=var.rfind(it->first); // one value must be 0, as in equal, to exit with success
       if (error!=string::npos) // found a value
       {

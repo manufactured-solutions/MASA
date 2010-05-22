@@ -72,6 +72,10 @@ namespace MASA
     double gradT;                           // gradient 
     
   protected:
+    double PI;                            // 3.1415... defined in constructor
+    double R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+    double k;                             // Boltzmanns constant
+
     int num_vars;
     double MASA_VAR_DEFAULT;
 
@@ -91,6 +95,10 @@ namespace MASA
     virtual double eval_an(double,double,double)  {cout << "MASA ERROR: Analytical Solution is unavailable or not properly loaded."; return -1.33;}; // overloaded for 3d problems
     
     // source terms
+    virtual double eval_q_t(double)                {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // returns value of source term (temp)
+    virtual double eval_q_t(double, double)        {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // returns value of source term (temp)
+    virtual double eval_q_t(double,double,double)  {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // returns value of source term (temp)
+
     virtual double eval_q_u(double)                {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // returns value of source term (u)
     virtual double eval_q_u(double,double)         {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // overloaded for 2d problems
     virtual double eval_q_u(double,double,double)  {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // overloaded for 3d problems
@@ -187,11 +195,12 @@ namespace MASA
   private:
     double dummy;
 
-    double ax;
-    double k0;    
+    double A_x;
+    double k_0;    
   public:
     heateq_1d_steady_const(); // constructor
-    double eval_q_u(double)      ; // source term evaluator
+    double eval_q_t(double); // source term evaluator
+    double eval_an(double);  //analytical solution
   };
 
   class heateq_2d_steady_const : public manufactured_solution 
@@ -204,8 +213,8 @@ namespace MASA
     double by;
 
   public:
-    heateq_2d_steady_const(); // constructor
-    double eval_q_u(double)      ; // source term evaluator
+    heateq_2d_steady_const();       // constructor
+    double eval_q_t(double,double); // source term evaluator
   };
   
   class heateq_3d_steady_const : public manufactured_solution 
@@ -443,7 +452,11 @@ namespace MASA
     
   public:
     euler_2d(); // constructor    
-
+    double eval_q_u  (double,double);
+    double eval_q_v  (double,double);
+    double eval_q_e  (double,double);
+    double eval_q_rho(double,double);
+    double eval_an(double,double);
   };
 
   class euler_3d : public manufactured_solution
@@ -491,7 +504,12 @@ namespace MASA
     
   public:
     euler_3d(); // constructor
-    
+    double eval_q_u  (double,double,double);
+    double eval_q_v  (double,double,double);
+    double eval_q_w  (double,double,double);
+    double eval_q_e  (double,double,double);
+    double eval_q_rho(double,double,double);
+    double eval_an   (double,double,double);
   };
 
   // ------------------------------------------------------
@@ -528,7 +546,11 @@ namespace MASA
     
   public:
     navierstokes_2d_compressible(); // constructor
-    
+    double eval_q_u  (double,double);
+    double eval_q_v  (double,double);
+    double eval_q_e  (double,double);
+    double eval_q_rho(double,double);
+    //double eval_an   (double,double);    
   };
   
   class navierstokes_3d_compressible : public manufactured_solution
@@ -576,7 +598,12 @@ namespace MASA
     
   public:
     navierstokes_3d_compressible(); //constructor
-    
+    double eval_q_u  (double,double,double);
+    double eval_q_v  (double,double,double);
+    double eval_q_w  (double,double,double);
+    double eval_q_e  (double,double,double);
+    double eval_q_rho(double,double,double);
+    //double eval_an   (double,double,double);    
   }; // done with navier stokes 3d class
   
 } // end MASA namespace

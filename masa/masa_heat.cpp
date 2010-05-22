@@ -52,15 +52,23 @@ MASA::heateq_1d_steady_const::heateq_1d_steady_const()
     mmsname = "heateq_1d_steady_const";
     dimension=1;
 
-    register_var("ax",&ax);   
-    register_var("k0",&k0);
+    register_var("A_x",&A_x);   
+    register_var("k_0",&k_0);
 
 }//done with constructor
 
-double MASA::heateq_1d_steady_const::eval_q_u(double x)
+double MASA::heateq_1d_steady_const::eval_q_t(double x)
 {
-  double qt = ax * ax * k0 * cos(ax * x);
-  return qt;
+  double Q_T;
+  Q_T = A_x * A_x * k_0 * cos(A_x * x);
+  return Q_T;
+}
+
+double MASA::heateq_1d_steady_const::eval_an(double x)
+{
+  double T_an;
+  T_an = cos(A_x * x);
+  return T_an;
 }
 
 MASA::heateq_2d_steady_const::heateq_2d_steady_const()
@@ -74,7 +82,7 @@ MASA::heateq_2d_steady_const::heateq_2d_steady_const()
     
 }//done with constructor
 
-double MASA::heateq_2d_steady_const::eval_q_u(double x)
+double MASA::heateq_2d_steady_const::eval_q_t(double x,double y)
 {
  
   //Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * (A_x * A_x + B_y * B_y);
