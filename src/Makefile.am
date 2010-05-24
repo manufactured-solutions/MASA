@@ -16,9 +16,3 @@ libmasa_la_SOURCES      = $(cc_sources) $(h_sources)
 # Standalone Binaries
 #----------------------------
 
-bin_PROGRAMS            = MASAshell
-
-MASAshell_SOURCES       = masa_shell.cpp
-MASAshell_LDADD         = -L$(top_srcdir) -lmasa
-
-#MASAshell_CFLAGS = -I $(top_srcdir) -I $(top_builddir)/src

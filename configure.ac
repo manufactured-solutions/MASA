@@ -29,4 +29,4 @@ AM_SANITY_CHECK
 
 # Generate Output Files
 
-AC_OUTPUT( Makefile src/Makefile )
+AC_OUTPUT( Makefile src/Makefile examples/Makefile )
