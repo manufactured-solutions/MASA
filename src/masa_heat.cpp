@@ -76,9 +76,9 @@ MASA::heateq_2d_steady_const::heateq_2d_steady_const()
     mmsname = "heateq_2d_steady_const";
     dimension=2;
 
-    register_var("ax",&ax);   
-    register_var("k0",&k0);
-    register_var("by",&by);
+    register_var("A_x",&A_x);   
+    register_var("k_0",&k_0);
+    register_var("B_y",&B_y);
     
 }//done with constructor
 

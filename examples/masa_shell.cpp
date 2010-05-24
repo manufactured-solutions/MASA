@@ -58,8 +58,8 @@ void masa_shell_choose_solution()
   cin >> userstring;
 
   //masa_map_dimension(userstring,masterstring);
-  masa_getid(&ptr,userstring);
-  masa_get_name(ptr,&str);
+  masa_init("dummy",userstring);
+  masa_get_name(&str);
   cout << endl << "User has selected: " << str << endl;
 
   // now let user register variables, etc.
@@ -81,33 +81,33 @@ void masa_shell_choose_solution()
 
 	case 1:
 	  printf("\n User Selected 1: Display all variables\n");
-	  masa_display_param(ptr);
+	  masa_display_param();
 	  break;
 	  
 	case 2:
 	  printf("\n User Selected 2: Register Variable");
 	  printf("\n Input variable name:\n");
 	  cin >> userstring;
-	  masa_get_param(ptr,userstring,&dbl2);
+	  masa_get_param(userstring,&dbl2);
 	  cout << "currently set to:" << dbl2 << endl;
 	  cout << "\nInput new value (double)" << endl;
 	  cin >> dbl;
-	  masa_set_param(ptr,userstring,dbl);
-	  masa_get_param(ptr,userstring,&dbl2);
+	  masa_set_param(userstring,dbl);
+	  masa_get_param(userstring,&dbl2);
 	  cout << endl << userstring << " is now set to:" << dbl2 << endl;
 	  break;
 	  
 	case 3:
 	  printf("\n User Selected 3: Evaluate");
-	  masa_sanity_check(ptr);
-	  masa_get_dimension(ptr,&dimension);	 
+	  masa_sanity_check();
+	  masa_get_dimension(&dimension);	 
 	  switch(dimension)
 	    {
 	    case 1:
 	      cout << "\nplease input x location: \n";
 	      cin >> x;
 
-	      masa_eval_u_source(ptr,x,&field);
+	      masa_eval_q_source(x,&field);
 	      cout << "source term is:" << field;
 	      break;
 
@@ -118,7 +118,7 @@ void masa_shell_choose_solution()
 	      cout << "\nplease input y location: \n";
 	      cin >> y;
 
-	      masa_eval_u_source(ptr,x,y,&field);
+	      masa_eval_u_source(x,y,&field);
 	      cout << "source term is:" << field;
 	      break;
 
@@ -132,7 +132,7 @@ void masa_shell_choose_solution()
 	      cout << "\nplease input z location: \n";
 	      cin >> z;
 
-	      masa_eval_u_source(ptr,x,y,z,&field);
+	      masa_eval_u_source(x,y,z,&field);
 	      cout << "source term is:" << field << endl << endl;
 	      break;
 	      

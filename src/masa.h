@@ -63,27 +63,27 @@ namespace MASA
   int masa_eval_t_source  (double,double,double*);
   int masa_eval_u_source  (double,double,double*);
   int masa_eval_v_source  (double,double,double*);
-  int masa_eval_w_source  (void*,double,double,double*);
-  int masa_eval_e_source  (void*,double,double,double*);
-  int masa_eval_rho_source(void*,double,double,double*);
+  int masa_eval_w_source  (double,double,double*);
+  int masa_eval_e_source  (double,double,double*);
+  int masa_eval_rho_source(double,double,double*);
 
   // source term(s) -- 3D
-  int masa_eval_t_source  (void*,double,double,double,double*);
-  int masa_eval_u_source  (void*,double,double,double,double*);
-  int masa_eval_v_source  (void*,double,double,double,double*);
-  int masa_eval_w_source  (void*,double,double,double,double*);
-  int masa_eval_e_source  (void*,double,double,double,double*);
-  int masa_eval_rho_source(void*,double,double,double,double*);
+  int masa_eval_t_source  (double,double,double,double*);
+  int masa_eval_u_source  (double,double,double,double*);
+  int masa_eval_v_source  (double,double,double,double*);
+  int masa_eval_w_source  (double,double,double,double*);
+  int masa_eval_e_source  (double,double,double,double*);
+  int masa_eval_rho_source(double,double,double,double*);
 
   // analytical solution
-  int masa_eval_1d_an(void*,double,double*);
-  int masa_eval_2d_an(void*,double,double,double*);
-  int masa_eval_3d_an(void*,double,double,double,double*);
+  int masa_eval_1d_an(double,double*);
+  int masa_eval_2d_an(double,double,double*);
+  int masa_eval_3d_an(double,double,double,double*);
 
   // gradient of analytical solution
-  int masa_eval_1d_grad(void*,int,double,double*);
-  int masa_eval_2d_grad(void*,int,double,double,double*);
-  int masa_eval_3d_grad(void*,int,double,double,double,double*);
+  int masa_eval_1d_grad(int,double,double*);
+  int masa_eval_2d_grad(int,double,double,double*);
+  int masa_eval_3d_grad(int,double,double,double,double*);
 
   // old masa core functions (to be called by user)
   int masa_getid(void**,string);

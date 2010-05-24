@@ -67,7 +67,7 @@ int MASA::masa_select_mms(string name)
   
 }// done with masa_select
 
-// helper functions
+// helper function (deprecated!)
 int masa_v2o(void* obid, manufactured_solution** manfac)
 { 
   string name;
@@ -336,23 +336,15 @@ int MASA::masa_eval_v_source(double x,double y,double* field)
   return 0;
 }
 
-int MASA::masa_eval_rho_source(void* objid,double x,double y,double* field)
+int MASA::masa_eval_rho_source(double x,double y,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-
-  *field=acobj->eval_q_rho(x,y);
-
+  *field=masa_master_pointer->eval_q_rho(x,y);
   return 0;
 }
 
-int MASA::masa_eval_e_source(void* objid,double x,double y,double* field)
+int MASA::masa_eval_e_source(double x,double y,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-
-  *field=acobj->eval_q_e(x,y);
-
+  *field=masa_master_pointer->eval_q_e(x,y);
   return 0;
 }
 
@@ -363,63 +355,39 @@ int MASA::masa_eval_e_source(void* objid,double x,double y,double* field)
  * -----------------------------------------------
  */ 
 
-int MASA::masa_eval_t_source(void* objid,double x,double y,double z,double* field)
+int MASA::masa_eval_t_source(double x,double y,double z,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-
-  *field=acobj->eval_q_t(x,y,z);
-
+  *field=masa_master_pointer->eval_q_t(x,y,z);
   return 0;
 }
 
-int MASA::masa_eval_u_source(void* objid,double x,double y,double z,double* field)
+int MASA::masa_eval_u_source(double x,double y,double z,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-
-  *field=acobj->eval_q_u(x,y,z);
-
+  *field=masa_master_pointer->eval_q_u(x,y,z);
   return 0;
 }
 
-int MASA::masa_eval_v_source(void* objid,double x,double y,double z,double* field)
+int MASA::masa_eval_v_source(double x,double y,double z,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-
-  *field=acobj->eval_q_v(x,y,z);
-
+  *field=masa_master_pointer->eval_q_v(x,y,z);
   return 0;
 }
 
-int MASA::masa_eval_w_source(void* objid,double x,double y,double z,double* field)
+int MASA::masa_eval_w_source(double x,double y,double z,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-
-  *field=acobj->eval_q_v(x,y,z);
-
+  *field=masa_master_pointer->eval_q_v(x,y,z);
   return 0;
 }
 
-int MASA::masa_eval_rho_source(void* objid,double x,double y,double z,double* field)
+int MASA::masa_eval_rho_source(double x,double y,double z,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-
-  *field=acobj->eval_q_rho(x,y,z);
-
+  *field=masa_master_pointer->eval_q_rho(x,y,z);
   return 0;
 }
 
-int MASA::masa_eval_e_source(void* objid,double x,double y,double z,double* field)
+int MASA::masa_eval_e_source(double x,double y,double z,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-
-  *field=acobj->eval_q_e(x,y,z);
-
+  *field=masa_master_pointer->eval_q_e(x,y,z);
   return 0;
 }
 

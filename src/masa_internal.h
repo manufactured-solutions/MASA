@@ -208,9 +208,9 @@ namespace MASA
   private:
     double dummy;
 
-    double ax;
-    double k0;
-    double by;
+    double A_x;
+    double k_0;
+    double B_y;
 
   public:
     heateq_2d_steady_const();       // constructor
