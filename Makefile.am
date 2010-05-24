@@ -1,5 +1,5 @@
 # Build in these directories:
-SUBDIRS = masa
+SUBDIRS = src
 
 # Distribute these directories:
-DIST_SUBDIRS = masa
+DIST_SUBDIRS = src
