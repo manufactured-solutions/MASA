@@ -1,50 +1,14 @@
-                        MASA Build Procedure
-                    =============================
+TO BUILD:
 
-0. Introduction
----------------
+1) ./bootstrap
+2) ./configure --prefix= top-level dir
+3) make
+4) make install
 
-This document describes how to build MASA from source code on
-Unix-like systems.
+TO ADD A NEW SOLUTION:
 
+1) Type the new class in masa_internal.h
+2) Add the constructor which sets all default variable names
+3) Add the source term evaluation functions 
+4) 'Register' the new solution in masa_core.cpp, get_list_mms
 
-1. Dependencies
----------------
-
-The code depends upon the following libraries:
-
-    1) A working MPI stack present in your path
-
-
-2. Configuration
-----------------
-
-If you have no `configure' script in the top level directory, run
-`bootstrap' to create one using GNU autoconf and automake.
-
-Before compiling MASA, you need to run the provided `configure'
-script.  Generally, just `./configure' will work, but you may wish to
-provide more parameters.  Run `./configure --help' for details.
-
-
-3. Compilation
---------------
-
-To compile MASA after it has been configured, simply type 'make'.
-
-After the compilation one or more ready-to-use executables should reside
-in the apps directory.  The library is built within the MASA directory.
-Related documentation will be built in the doc
-subdirectory.
-
-
-4. Testing
---------------
-
-Unit tests can be compiled and run using 'make check'.
-
-
-5. API documentation
---------------
-
-API documentation can be produced in doxygen-doc by running 'make doxygen-doc'.
