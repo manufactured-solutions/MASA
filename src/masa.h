@@ -47,15 +47,11 @@ using namespace std;
 
 namespace MASA
 {
-  // masa core functions (to be called by user)
-  int masa_getid(void**,string);
-  int masa_printid();
-  int masa_set_param(void*,string,double);
-  int masa_get_param(void*,string,double*);
-  int masa_display_param(void*);
-  int masa_get_name(void*,string*);
-  int masa_get_dimension(void*,int*);
-  int masa_sanity_check(void*);
+  // new masa api function
+  int masa_init(string, string);
+  int masa_select(string);
+  int masa_curr_mms(string*);
+  int masa_list_mms();
 
   // source term(s) -- 1D
   int masa_eval_t_source  (void*,double,double*);
@@ -88,5 +84,15 @@ namespace MASA
   int masa_eval_1d_grad(void*,int,double,double*);
   int masa_eval_2d_grad(void*,int,double,double,double*);
   int masa_eval_3d_grad(void*,int,double,double,double,double*);
+
+  // old masa core functions (to be called by user)
+  int masa_getid(void**,string);
+  int masa_printid();
+  int masa_set_param(void*,string,double);
+  int masa_get_param(void*,string,double*);
+  int masa_display_param(void*);
+  int masa_get_name(void*,string*);
+  int masa_get_dimension(void*,int*);
+  int masa_sanity_check(void*);
   
 } //end MASA namespace

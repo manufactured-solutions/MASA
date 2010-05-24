@@ -46,9 +46,15 @@ void masa_shell_print_avail()
 
 int main()
 {
+  string blah;
 
   masa_shell_print_avail();
   cout << endl << endl;
   masa_init("heateq_1d_steady_const", "nick");
+  masa_curr_mms(&blah);
+  masa_init("heateq_1d_steady_const", "bob");
+  masa_curr_mms(&blah);
+
+  masa_list_mms();
 
 }

@@ -45,7 +45,7 @@ manufactured_solution* masa_master_pointer;           // pointer to currently se
 //
 //  this function selects an already initialized manufactured class
 //
-int masa_select(string name)
+int MASA::masa_select(string name)
 {
   string nametemp;
   int selector;
@@ -119,7 +119,7 @@ int get_list_mms(vector<manufactured_solution*>* anim)
 //
 //  this function will initiate a masa manufactured class
 //
-int masa_init(string str, string unique_name)
+int MASA::masa_init(string str, string unique_name)
 {
   int flag=0;
   string name;
@@ -159,6 +159,36 @@ int masa_init(string str, string unique_name)
   
   return 0; // steady as she goes
 
+}
+
+//
+//  this function will initiate a masa manufactured class
+//
+int MASA::masa_curr_mms(string* str)
+{
+
+  // lets run though the list to check the variable does exist
+  masa_master_pointer->return_name(str);
+  cout << endl << *str << endl;
+  // cout << masa_master_list[masa_master_pointer] << endl;    
+  return 0;
+}
+
+//
+//  this function will initiate a masa manufactured class
+//
+int MASA::masa_list_mms()
+{
+  string str;
+
+  // output the size of the map
+  cout << "Number of initialized solutions: " << masa_master_list.size() << endl;
+  for(map<string,manufactured_solution*>::iterator iter = masa_master_list.begin(); iter != masa_master_list.end(); iter++)
+    {
+      (iter->second)->return_name(&str);
+      cout << iter->first << " : " << str << endl;
+    }
+  return 0;
 }
 
 //
