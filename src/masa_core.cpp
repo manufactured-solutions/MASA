@@ -45,7 +45,7 @@ manufactured_solution* masa_master_pointer;           // pointer to currently se
 //
 //  this function selects an already initialized manufactured class
 //
-int MASA::masa_select(string name)
+int MASA::masa_select_mms(string name)
 {
   string nametemp;
   int selector;
@@ -54,7 +54,7 @@ int MASA::masa_select(string name)
   it=masa_master_list.find(name);
   if(it != masa_master_list.end()) // found a name
     { 
-      cout << "selected " << name << endl;
+      // cout << "selected " << name << endl;
       masa_master_list[name]=masa_master_pointer; // set pointer to currently selected solution      
     }      
   else 
@@ -119,7 +119,7 @@ int get_list_mms(vector<manufactured_solution*>* anim)
 //
 //  this function will initiate a masa manufactured class
 //
-int MASA::masa_init(string str, string unique_name)
+int MASA::masa_init(string unique_name, string str)
 {
   int flag=0;
   string name;
@@ -169,8 +169,8 @@ int MASA::masa_curr_mms(string* str)
 
   // lets run though the list to check the variable does exist
   masa_master_pointer->return_name(str);
-  cout << endl << *str << endl;
   // cout << masa_master_list[masa_master_pointer] << endl;    
+
   return 0;
 }
 
@@ -194,7 +194,7 @@ int MASA::masa_list_mms()
 //
 // function that searches all registered masa solutions
 // for a selected manufactured solution
-//
+// (deprecated)
 int MASA::masa_getid(void** objid,string str)
 {
   int flag=0;
@@ -230,7 +230,6 @@ int MASA::masa_getid(void** objid,string str)
   return 0; // steady as she goes
 }// done with masa getid
 
-
 //
 // function that prints all registered masa solutions
 //
@@ -252,32 +251,28 @@ int MASA::masa_printid()
   return 0; // steady as she goes
 }// done with masa print id
 
-int MASA::masa_set_param(void* objid,string param,double paramval)
+int MASA::masa_set_param(string param,double paramval)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-  
-  acobj->set_var(param,paramval);
+  masa_master_pointer->set_var(param,paramval);
+  return 0;
+}
+
+//
+// Function that returns value of parameter selected by string
+// 
+
+int MASA::masa_get_param(string param,double *paramval)
+{
+
+  masa_master_pointer->get_var(param,paramval);
 
   return 0;
 }
 
-int MASA::masa_get_param(void* objid,string param,double *paramval)
+int MASA::masa_display_param()
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
 
-  acobj->get_var(param,paramval);
-
-  return 0;
-}
-
-int MASA::masa_display_param(void* objid)
-{
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-
-  acobj->display_var();
+  masa_master_pointer->display_var();
 
   return 0;
 }
@@ -289,43 +284,29 @@ int MASA::masa_display_param(void* objid)
  * -----------------------------------------------
  */ 
 
-int MASA::masa_eval_t_source(void* objid,double x,double* field)
+int MASA::masa_eval_t_source(double x,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
 
-  *field=acobj->eval_q_t(x);
+  *field=masa_master_pointer->eval_q_t(x);
 
   return 0;
 }
 
-int MASA::masa_eval_u_source(void* objid,double x,double* field)
+int MASA::masa_eval_u_source(double x,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-
-  *field=acobj->eval_q_u(x);
-
+  *field=masa_master_pointer->eval_q_u(x);
   return 0;
 }
 
-int MASA::masa_eval_rho_source(void* objid,double x,double* field)
+int MASA::masa_eval_rho_source(double x,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-
-  *field=acobj->eval_q_rho(x);
-
+  *field=masa_master_pointer->eval_q_rho(x);
   return 0;
 }
 
-int MASA::masa_eval_e_source(void* objid,double x,double* field)
+int MASA::masa_eval_e_source(double x,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-
-  *field=acobj->eval_q_e(x);
-
+  *field=masa_master_pointer->eval_q_e(x);
   return 0;
 }
 
@@ -336,33 +317,22 @@ int MASA::masa_eval_e_source(void* objid,double x,double* field)
  * -----------------------------------------------
  */ 
 
-int MASA::masa_eval_t_source(void* objid,double x,double y,double* field)
+int MASA::masa_eval_t_source(double x,double y,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-
-  *field=acobj->eval_q_t(x,y);
-
+  *field=masa_master_pointer->eval_q_t(x,y);
   return 0;
 }
 
-int MASA::masa_eval_u_source(void* objid,double x,double y,double* field)
+int MASA::masa_eval_u_source(double x,double y,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
 
-  *field=acobj->eval_q_u(x,y);
-
+  *field=masa_master_pointer->eval_q_u(x,y);
   return 0;
 }
 
-int MASA::masa_eval_v_source(void* objid,double x,double y,double* field)
+int MASA::masa_eval_v_source(double x,double y,double* field)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-
-  *field=acobj->eval_q_v(x,y);
-
+  *field=masa_master_pointer->eval_q_v(x,y);
   return 0;
 }
 
@@ -460,26 +430,20 @@ int MASA::masa_eval_e_source(void* objid,double x,double y,double z,double* fiel
  * -----------------------------------------------
  */ 
 
-int MASA::masa_get_name(void* objid,string* name)
+int MASA::masa_get_name(string* name)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-  acobj->return_name(name); // set string to name
+  masa_master_pointer->return_name(name); // set string to name
   return 0;
 }
 
-int MASA::masa_get_dimension(void* objid,int* dim)
+int MASA::masa_get_dimension(int* dim)
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-  acobj->return_dim(dim); // set string to name
+  masa_master_pointer->return_dim(dim); // set string to name
   return 0;
 }
 
-int MASA::masa_sanity_check(void* objid)
+int MASA::masa_sanity_check()
 {
-  manufactured_solution* acobj;
-  masa_v2o(objid,&acobj);
-  acobj->sanity_check(); // set string to name
+  masa_master_pointer->sanity_check(); // set string to name
   return 0;
 }

@@ -48,21 +48,21 @@ using namespace std;
 namespace MASA
 {
   // new masa api function
-  int masa_init(string, string);
-  int masa_select(string);
-  int masa_curr_mms(string*);
-  int masa_list_mms();
+  int masa_init      (string, string);
+  int masa_select_mms(string);
+  int masa_curr_mms  (string*);
+  int masa_list_mms  ();
 
   // source term(s) -- 1D
-  int masa_eval_t_source  (void*,double,double*);
-  int masa_eval_u_source  (void*,double,double*);
-  int masa_eval_e_source  (void*,double,double*);
-  int masa_eval_rho_source(void*,double,double*);
+  int masa_eval_t_source  (double,double*);
+  int masa_eval_u_source  (double,double*);
+  int masa_eval_e_source  (double,double*);
+  int masa_eval_rho_source(double,double*);
 
   // source term(s) -- 2D
-  int masa_eval_t_source  (void*,double,double,double*);
-  int masa_eval_u_source  (void*,double,double,double*);
-  int masa_eval_v_source  (void*,double,double,double*);
+  int masa_eval_t_source  (double,double,double*);
+  int masa_eval_u_source  (double,double,double*);
+  int masa_eval_v_source  (double,double,double*);
   int masa_eval_w_source  (void*,double,double,double*);
   int masa_eval_e_source  (void*,double,double,double*);
   int masa_eval_rho_source(void*,double,double,double*);
@@ -88,11 +88,11 @@ namespace MASA
   // old masa core functions (to be called by user)
   int masa_getid(void**,string);
   int masa_printid();
-  int masa_set_param(void*,string,double);
-  int masa_get_param(void*,string,double*);
-  int masa_display_param(void*);
-  int masa_get_name(void*,string*);
-  int masa_get_dimension(void*,int*);
-  int masa_sanity_check(void*);
+  int masa_set_param(string,double);
+  int masa_get_param(string,double*);
+  int masa_display_param();
+  int masa_get_name(string*);
+  int masa_get_dimension(int*);
+  int masa_sanity_check();
   
 } //end MASA namespace

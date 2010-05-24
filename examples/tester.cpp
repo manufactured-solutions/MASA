@@ -43,18 +43,25 @@ void masa_shell_print_avail()
 
 }
 
-
 int main()
 {
   string blah;
+  double sol;
 
   masa_shell_print_avail();
   cout << endl << endl;
-  masa_init("heateq_1d_steady_const", "nick");
-  masa_curr_mms(&blah);
-  masa_init("heateq_1d_steady_const", "bob");
-  masa_curr_mms(&blah);
-
+  masa_init("nick","heateq_1d_steady_const");
+  masa_init( "bob","heateq_2d_steady_const");
   masa_list_mms();
+
+  masa_select_mms("nick");
+  masa_display_param();
+  masa_eval_t_source(1.2,&sol);
+  cout << sol << endl;
+
+  masa_select_mms("bob");
+  masa_display_param();
+  masa_eval_t_source(1,1,&sol);
+  cout << sol << endl;
 
 }
