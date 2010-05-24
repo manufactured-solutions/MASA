@@ -39,6 +39,34 @@
 
 using namespace MASA;
 
+map<string, manufactured_solution*> masa_master_list; // global map between unique name and manufactured class
+manufactured_solution* masa_master_pointer;           // pointer to currently selected manufactured solution
+
+//
+//  this function selects an already initialized manufactured class
+//
+int masa_select(string name)
+{
+  string nametemp;
+  int selector;
+  // lets run though the list to check the variable does exist
+  map<string,manufactured_solution*>::iterator it;
+  it=masa_master_list.find(name);
+  if(it != masa_master_list.end()) // found a name
+    { 
+      cout << "selected " << name << endl;
+      masa_master_list[name]=masa_master_pointer; // set pointer to currently selected solution      
+    }      
+  else 
+    {
+      cout << "\nMASA ERROR: No such manufactured solution (" << name << ") has been initialized.\n";
+      exit(1);
+    } 
+
+  return 0;
+  
+}// done with masa_select
+
 // helper functions
 int masa_v2o(void* obid, manufactured_solution** manfac)
 { 
@@ -85,6 +113,51 @@ int get_list_mms(vector<manufactured_solution*>* anim)
   anim->push_back(new navierstokes_3d_compressible());
 
   return 0;
+
+}
+
+//
+//  this function will initiate a masa manufactured class
+//
+int masa_init(string str, string unique_name)
+{
+  int flag=0;
+  string name;
+  int error=1;
+  vector<manufactured_solution*> anim;
+
+  get_list_mms(&anim); //construct list 
+ 
+  // masa_map();  
+
+  for (vector<manufactured_solution*>::const_iterator it = anim.begin(); it != anim.end(); ++it) 
+    {
+      (*it)->return_name(&name); // get name
+      error=str.rfind(name);   // look for name -- must be identical to full name
+      if (error!=string::npos) // found a value
+	{
+	  masa_master_list[unique_name]=*it; // write down name 
+	  masa_master_pointer=*it; // set as currently active manufactured solution
+	  flag=1;                 // set exit flag
+	}
+      else // strings not identical
+	{
+	  delete *it; // this calls the deconstructor
+	}
+    }// done with for loop 
+  
+  
+  if(flag==1)
+    {      
+      //cout << "\nMASA got it\n";
+    }
+  else
+    {
+      cout << "\nMASA FATAL ERROR: No Manufactured Solutions of that Type\n";
+      exit(1); // error code, terminate
+    }
+  
+  return 0; // steady as she goes
 
 }
 
