@@ -1,6 +1,8 @@
 #include <math.h>
 
-#define PI acos(-1)
+double PI = acos(-1);
+double R  = 1;
+double k  = 1;
 
 double SourceQ_u (
   double x,

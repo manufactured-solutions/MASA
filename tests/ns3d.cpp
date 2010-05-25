@@ -4,10 +4,8 @@
 
 #include <masa.h>
 
-using namespace MASA;
 using namespace std;
-
-#define PI = acos(-1)
+using namespace MASA;
 
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
 
@@ -55,7 +53,8 @@ double SourceQ_e ( // 40
   double);
 
 
-double SourceQ_u ( // should be 38
+double SourceQ_u ( // should be 39
+  double,
   double,
   double,
   double,
@@ -97,7 +96,50 @@ double SourceQ_u ( // should be 38
   double);
 
 
-double SourceQ_v ( // 38
+double SourceQ_v ( // 39
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double,
+  double);
+
+double SourceQ_w ( // 39
+  double,
   double,
   double,
   double,
@@ -191,11 +233,12 @@ int main()
   // solutions
   double ufield,ufield2;
   double vfield,vfield2;
+  double wfield,wfield2;
   double efield,efield2;
   double rho,rho2;
 
   // initalize
-  masa_init("navier-stokes-test","navier-stokes_3d_compressible");
+  masa_init("navier-stokes-test","navierstokes_3d_compressible");
 
   // set params
   masa_set_param("u_0",param);
@@ -288,19 +331,22 @@ int main()
   // evaluate source terms (2D)
   masa_eval_u_source  (x,y,z,&ufield);
   masa_eval_v_source  (x,y,z,&vfield);
+  masa_eval_w_source  (x,y,z,&wfield);
   masa_eval_e_source  (x,y,z,&efield);
   masa_eval_rho_source(x,y,z,&rho);
 
-  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,L);
-  vfield2   = SourceQ_v  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,L);
+  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L);
+  vfield2   = SourceQ_v  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L);
+  wfield2   = SourceQ_w  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L);
   rho2      = SourceQ_rho(x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L);
   efield2   = SourceQ_e  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,Gamma,mu,L);
   
   // test the result is roughly zero
-  ufield=ufield-ufield2;
-  vfield=vfield-vfield2;
-  efield=efield-efield2;
-  rho   =rho-rho2;
+  ufield = ufield-ufield2;
+  vfield = vfield-vfield2;
+  wfield = wfield-wfield2;
+  efield = efield-efield2;
+  rho    = rho-rho2;
   
   //cout << endl << ufield << endl << vfield << endl << efield << rho << endl;
 
@@ -315,6 +361,13 @@ int main()
     {
       cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
       cout << "V Field Source Term\n";
+      exit(1);
+    }
+
+  if(wfield > threshold)
+    {
+      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+      cout << "W Field Source Term\n";
       exit(1);
     }
 
