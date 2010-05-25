@@ -15,4 +15,4 @@ navierstokes3d_SOURCES = ns3d.cpp Navier-Stokes_3d_compressible_source.C
 navierstokes3d_LDADD   = -L$(top_srcdir)/src -lmasa
 
 TESTS_ENVIRONMENT      = 
-TESTS                  = euler2d euler3d navierstokes3d navierstokes2d
+TESTS                  = euler2d euler3d navierstokes2d navierstokes3d
