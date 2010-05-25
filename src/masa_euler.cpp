@@ -152,6 +152,7 @@ MASA::euler_3d::euler_3d()
   register_var("a_wz",&a_wz);
   register_var("a_wx",&a_wx);
   register_var("a_wy",&a_wy);
+  register_var("w_0",&w_0);
   register_var("w_x",&w_x);
   register_var("w_y",&w_y);
   register_var("w_z",&w_z);
