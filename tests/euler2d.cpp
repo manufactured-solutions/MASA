@@ -9,6 +9,8 @@ using namespace std;
 
 #define PI = acos(-1)
 
+const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
+
 double SourceQ_e ( // 24
   double,
   double,
@@ -197,13 +199,42 @@ int main()
   vfield2   = SourceQ_v  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
   rho2      = SourceQ_rho(x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);  
   efield2   = SourceQ_e  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L);
+
   
+  // test the result is roughly zero
   ufield=ufield-ufield2;
   vfield=vfield-vfield2;
   efield=efield-efield2;
   rho   =rho-rho2;
+  
+  if(ufield > threshold)
+    {
+      cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+      cout << "U Field Source Term\n";
+      exit(1);
+    }
 
-  cout << endl << ufield << endl << vfield << endl << efield << endl << rho;
+  if(vfield > threshold)
+    {
+      cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+      cout << "V Field Source Term\n";
+      exit(1);
+    }
 
+  if(efield > threshold)
+    {
+      cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+      cout << "Energy Source Term\n";
+      exit(1);
+    }
+
+  if(rho > threshold)
+    {
+      cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+      cout << "RHO Source Term\n";
+      exit(1);
+    }
+
+  cout << "EULER-2D: PASSED\n";
 
 }
