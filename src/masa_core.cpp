@@ -375,7 +375,7 @@ int MASA::masa_eval_v_source(double x,double y,double z,double* field)
 
 int MASA::masa_eval_w_source(double x,double y,double z,double* field)
 {
-  *field=masa_master_pointer->eval_q_v(x,y,z);
+  *field=masa_master_pointer->eval_q_w(x,y,z);
   return 0;
 }
 
