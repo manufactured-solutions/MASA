@@ -235,6 +235,6 @@ int main()
       exit(1);
     }
 
-  cout << "EULER-2D: PASSED\n";
+  // tests passed
 
 }
