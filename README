@@ -1,3 +1,8 @@
+Welcome to MASA, the Manufactured Analytical Solutions Abstraction Library. 
+
+Check the EXAMPLES directory for examples of the MASA C++, C and Fortran API.
+The source code is contained in MASA, and the regression tests are in tests.
+
 TO BUILD:
 
 1) ./bootstrap
