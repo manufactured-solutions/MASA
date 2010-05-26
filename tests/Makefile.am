@@ -3,9 +3,9 @@ INCLUDES                  = -I$(top_srcdir)/src -I$(top_builddir)/src
 bin_PROGRAMS              = heat_const_steady \
 			    heat_var_steady \
 	                    heat_const_unsteady \
-                            heat_var_unsteady \	
+                            heat_var_unsteady \
 	                    euler2d \
-                            euler3d \	
+                            euler3d \
 	                    navierstokes3d \
 	                    navierstokes2d
 
@@ -38,7 +38,7 @@ TESTS_ENVIRONMENT         =
 TESTS                     = heat_const_steady \
 			    heat_var_steady \
 	                    heat_const_unsteady \
-                            heat_var_unsteady \	
+                            heat_var_unsteady \
 	                    euler2d \
 	                    euler3d \
                             navierstokes3d \
