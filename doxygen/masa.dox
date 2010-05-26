@@ -568,8 +568,8 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = src/grvy.h examples/pecos-input.txt \
-		         doxygen/grvy.page \
+INPUT                  = src/masa.h examples/pecos-input.txt \
+		         doxygen/masa.page \
 			 doxygen/txt_common
 
 # This tag can be used to specify the character encoding of the source files 
