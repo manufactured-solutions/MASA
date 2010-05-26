@@ -284,10 +284,18 @@ int MASA::masa_display_param()
  * -----------------------------------------------
  */ 
 
-int MASA::masa_eval_t_source(double x,double* field)
+int MASA::masa_eval_t_source(double x,double* field) //x 
 {
 
   *field=masa_master_pointer->eval_q_t(x);
+
+  return 0;
+}
+
+int MASA::masa_eval_t_source(double x,double t,double* field) //x,t
+{
+
+  *field=masa_master_pointer->eval_q_t(x,t);
 
   return 0;
 }
@@ -317,9 +325,9 @@ int MASA::masa_eval_e_source(double x,double* field)
  * -----------------------------------------------
  */ 
 
-int MASA::masa_eval_t_source(double x,double y,double* field)
+int MASA::masa_eval_t_source(double x,double y,double t,double* field)
 {
-  *field=masa_master_pointer->eval_q_t(x,y);
+  *field=masa_master_pointer->eval_q_t(x,y,t);
   return 0;
 }
 
@@ -355,9 +363,9 @@ int MASA::masa_eval_e_source(double x,double y,double* field)
  * -----------------------------------------------
  */ 
 
-int MASA::masa_eval_t_source(double x,double y,double z,double* field)
+int MASA::masa_eval_t_source(double x,double y,double z,double t,double* field)
 {
-  *field=masa_master_pointer->eval_q_t(x,y,z);
+  *field=masa_master_pointer->eval_q_t(x,y,z,t);
   return 0;
 }
 

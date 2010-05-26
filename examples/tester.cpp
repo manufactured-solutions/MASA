@@ -56,7 +56,7 @@ int main()
 
   masa_select_mms("nick");
   masa_display_param();
-  masa_eval_t_source(1.2,&sol);
+  masa_eval_t_source(1.2,1.2,&sol);
   cout << sol << endl;
 
   masa_select_mms("bob");

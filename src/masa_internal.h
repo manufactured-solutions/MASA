@@ -98,6 +98,7 @@ namespace MASA
     virtual double eval_q_t(double)                {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // returns value of source term (temp)
     virtual double eval_q_t(double, double)        {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // returns value of source term (temp)
     virtual double eval_q_t(double,double,double)  {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // returns value of source term (temp)
+    virtual double eval_q_t(double,double,double,double)  {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};             // returns value of source term (x,y,z,t)
 
     virtual double eval_q_u(double)                {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // returns value of source term (u)
     virtual double eval_q_u(double,double)         {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // overloaded for 2d problems
@@ -239,17 +240,16 @@ namespace MASA
   {
   private:
     double dummy;
-
-    double ax;
-    double k0;
-    double dt;
-    double cp0;
-    double at;
+    double A_x;
+    double A_t;
+    double D_t;
+    double k_0;
+    double cp_0;
     double rho;
     
   public:
     heateq_1d_unsteady_const(); // constructor
-    
+    double eval_q_t(double,double); // needs x,t
   };
 
   class heateq_2d_unsteady_const : public manufactured_solution 
@@ -257,18 +257,18 @@ namespace MASA
   private:
     double dummy;
 
-    double ax;
-    double k0;
-    double dt;
-    double cp0;
-    double at;
+    double A_x;
+    double A_t;
+    double B_y;
+    double B_t;
+    double D_t;
     double rho;
-    double by;
-    double bt;
+    double k_0;
+    double cp_0;
 
   public:
     heateq_2d_unsteady_const(); // constructor
-    
+    double eval_q_t(double,double,double); // needs x,y,t
   };
   
   class heateq_3d_unsteady_const : public manufactured_solution 
@@ -276,20 +276,20 @@ namespace MASA
   private:
     double dummy;
 
-    double ax;
-    double k0;
-    double dt;
-    double cp0;
-    double at;
+    double A_x;
+    double A_t;
+    double B_y;
+    double B_t;
+    double C_z;
+    double C_t;
+    double D_t;
+    double k_0;
+    double cp_0;
     double rho;
-    double by;
-    double bt;
-    double cz;
-    double ct;
     
   public:
     heateq_3d_unsteady_const(); // constructor
-    
+    double eval_q_t(double,double,double,double); // needs x,y,z,t    
   };
 
   // ------------------------------------------------------
@@ -301,16 +301,16 @@ namespace MASA
   private:
     double dummy;
 
-    double ax;
-    double k0;
-    double dt;
-    double cp0;
-    double at;
+    double A_x;
+    double A_t;
+    double D_t;
     double rho;
-    double cp1;
-    double cp2;
-    double k1;
-    double k2;
+    double k_0;
+    double k_1;
+    double k_2;
+    double cp_0;
+    double cp_1;
+    double cp_2;
     
   public:
     heateq_1d_unsteady_var(); // constructor
@@ -322,18 +322,18 @@ namespace MASA
   private:
     double dummy;
 
-    double ax;
-    double k0;
-    double dt;
-    double cp0;
-    double at;
+    double A_x;
+    double A_t;
+    double B_y;
+    double B_t;
+    double D_t;
     double rho;
-    double cp1;
-    double cp2;
-    double k1;
-    double k2;
-    double by;
-    double bt;
+    double k_0;
+    double k_1;
+    double k_2;
+    double cp_0;
+    double cp_1;
+    double cp_2;
 
   public:
     heateq_2d_unsteady_var(); // constructor
@@ -345,20 +345,20 @@ namespace MASA
   private:
     double dummy;
 
-    double ax;
-    double k0;
-    double dt;
-    double cp0;
-    double at;
+    double A_x;
+    double A_t;
+    double B_y;
+    double B_t;
+    double C_z;
+    double C_t;
+    double D_t;
     double rho;
-    double cp1;
-    double cp2;
-    double k1;
-    double k2;
-    double by;
-    double bt;
-    double cz;
-    double ct;
+    double k_0;
+    double k_1;
+    double k_2;
+    double cp_0;
+    double cp_1;
+    double cp_2;
 
   public:
     heateq_3d_unsteady_var(); // constructor
@@ -374,10 +374,10 @@ namespace MASA
   private:
     double dummy;
 
-    double ax;
-    double k0;
-    double k1;
-    double k2;
+    double A_x;
+    double k_0;
+    double k_1;
+    double k_2;
 
   public:
     heateq_1d_steady_var(); // constructor
@@ -389,11 +389,11 @@ namespace MASA
   private:
     double dummy;
     
-    double ax;
-    double k0;
-    double k1;
-    double k2;
-    double by;
+    double A_x;
+    double k_0;
+    double k_1;
+    double k_2;
+    double B_y;
 
   public:
     heateq_2d_steady_var(); // constructor
@@ -405,12 +405,12 @@ namespace MASA
   private:
     double dummy;
 
-    double ax;
-    double k0;
-    double k1;
-    double k2;
-    double by;
-    double cz;
+    double A_x;
+    double k_0;
+    double k_1;
+    double k_2;
+    double B_y;
+    double C_z;
 
   public:
     heateq_3d_steady_var(); // constructor
@@ -424,7 +424,6 @@ namespace MASA
   class euler_2d : public manufactured_solution
   {
     double dummy;
-
 
     double u_0;
     double u_x;

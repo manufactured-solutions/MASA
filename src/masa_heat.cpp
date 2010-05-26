@@ -123,14 +123,21 @@ MASA::heateq_1d_unsteady_const::heateq_1d_unsteady_const()
   mmsname = "heateq_1d_unsteady_const";
   dimension=1;
 
-  register_var("ax",&ax);   
-  register_var("k0",&k0);
-  register_var("dt",&dt);
-  register_var("cp0",&cp0);
-  register_var("at",&at);
+  register_var("A_x",&A_x);   
+  register_var("k_0",&k_0);
+  register_var("D_t",&D_t);
+  register_var("cp_0",&cp_0);
+  register_var("A_t",&A_t);
   register_var("rho",&rho);
 
 }//done with constructor
+
+double MASA::heateq_1d_unsteady_const::eval_q_t(double x,double t)
+{
+  double Q_T = cos(A_x * x + A_t * t) * cos(D_t * t) * k_0 * A_x * A_x - (sin(A_x * x + A_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(D_t * t) * D_t) * rho * cp_0;
+  return Q_T;
+}
+
 
 
 MASA::heateq_2d_unsteady_const::heateq_2d_unsteady_const()
@@ -138,16 +145,22 @@ MASA::heateq_2d_unsteady_const::heateq_2d_unsteady_const()
   mmsname = "heateq_2d_unsteady_const";
   dimension=2;
     
-  register_var("ax",&ax);   
-  register_var("k0",&k0);
-  register_var("dt",&dt);
-  register_var("cp0",&cp0);
-  register_var("at",&at);
+  register_var("A_x",&A_x);   
+  register_var("k_0",&k_0);
+  register_var("D_t",&D_t);
+  register_var("cp_0",&cp_0);
+  register_var("A_t",&A_t);
   register_var("rho",&rho);
-  register_var("by",&by);
-  register_var("bt",&bt);
+  register_var("B_y",&B_y);
+  register_var("B_t",&B_t);
 
 }//done with constructor
+
+double MASA::heateq_2d_unsteady_const::eval_q_t(double x,double y, double t)
+{
+  double Q_T = -(sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * k_0;
+  return Q_T;
+}
 
 
 MASA::heateq_3d_unsteady_const::heateq_3d_unsteady_const()
@@ -155,18 +168,24 @@ MASA::heateq_3d_unsteady_const::heateq_3d_unsteady_const()
   mmsname = "heateq_3d_unsteady_const";
   dimension=3;
   
-  register_var("ax",&ax);   
-  register_var("k0",&k0);
-  register_var("dt",&dt);
-  register_var("cp0",&cp0);
-  register_var("at",&at);
+  register_var("A_x",&A_x);   
+  register_var("k_0",&k_0);
+  register_var("D_t",&D_t);
+  register_var("cp_0",&cp_0);
+  register_var("A_t",&A_t);
   register_var("rho",&rho);
-  register_var("by",&by);
-  register_var("bt",&bt);
-  register_var("cz",&cz);
-  register_var("ct",&ct);
+  register_var("B_y",&B_y);
+  register_var("B_t",&B_t);
+  register_var("C_z",&C_z);
+  register_var("C_t",&C_t);
 
 }//done with constructor
+
+double MASA::heateq_3d_unsteady_const::eval_q_t(double x,double y, double z,double t)
+{
+  double Q_T = -(sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * B_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * C_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y + C_z * C_z) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * k_0;
+  return Q_T;
+}
 
 
 MASA::heateq_1d_unsteady_var::heateq_1d_unsteady_var()
@@ -174,16 +193,16 @@ MASA::heateq_1d_unsteady_var::heateq_1d_unsteady_var()
   mmsname = "heateq_1d_unsteady_var";
   dimension=1;
 
-  register_var("ax",&ax);   
-  register_var("k0",&k0);
-  register_var("dt",&dt);
-  register_var("cp0",&cp0);
-  register_var("at",&at);
+  register_var("A_x",&A_x);   
+  register_var("k_0",&k_0);
+  register_var("D_t",&D_t);
+  register_var("cp_0",&cp_0);
+  register_var("A_t",&A_t);
   register_var("rho",&rho);
-  register_var("cp1",&cp1);
-  register_var("cp2",&cp2);
-  register_var("k1",&k1);
-  register_var("k2",&k2);
+  register_var("cp_1",&cp_1);
+  register_var("cp_2",&cp_2);
+  register_var("k_1",&k_1);
+  register_var("k_2",&k_2);
 
 }//done with constructor
 
@@ -193,18 +212,18 @@ MASA::heateq_2d_unsteady_var::heateq_2d_unsteady_var()
   mmsname = "heateq_2d_unsteady_var";
   dimension=2;
 
-  register_var("ax",&ax);   
-  register_var("k0",&k0);
-  register_var("dt",&dt);
-  register_var("cp0",&cp0);
-  register_var("at",&at);
+  register_var("A_x",&A_x);   
+  register_var("k_0",&k_0);
+  register_var("D_t",&D_t);
+  register_var("cp_0",&cp_0);
+  register_var("A_t",&A_t);
   register_var("rho",&rho);
-  register_var("cp1",&cp1);
-  register_var("cp2",&cp2);
-  register_var("k1",&k1);
-  register_var("k2",&k2);
-  register_var("by",&by);
-  register_var("bt",&bt);
+  register_var("cp_1",&cp_1);
+  register_var("cp_2",&cp_2);
+  register_var("k_1",&k_1);
+  register_var("k_2",&k_2);
+  register_var("B_y",&B_y);
+  register_var("B_t",&B_t);
 
 }//done with constructor
 
@@ -214,20 +233,20 @@ MASA::heateq_3d_unsteady_var::heateq_3d_unsteady_var()
   mmsname = "heateq_3d_unsteady_var";
   dimension=3;
 
-  register_var("ax",&ax);   
-  register_var("k0",&k0);
-  register_var("dt",&dt);
-  register_var("cp0",&cp0);
-  register_var("at",&at);
+  register_var("A_x",&A_x);   
+  register_var("k_0",&k_0);
+  register_var("D_t",&D_t);
+  register_var("cp_0",&cp_0);
+  register_var("A_t",&A_t);
   register_var("rho",&rho);
-  register_var("cp1",&cp1);
-  register_var("cp2",&cp2);
-  register_var("k1",&k1);
-  register_var("k2",&k2);
-  register_var("by",&by);
-  register_var("bt",&bt);
-  register_var("cz",&cz);
-  register_var("ct",&ct);
+  register_var("cp_1",&cp_1);
+  register_var("cp_2",&cp_2);
+  register_var("k_1",&k_1);
+  register_var("k_2",&k_2);
+  register_var("B_y",&B_y);
+  register_var("B_t",&B_t);
+  register_var("C_z",&C_z);
+  register_var("C_t",&C_t);
 
 }//done with constructor
 
@@ -243,43 +262,42 @@ MASA::heateq_3d_unsteady_var::heateq_3d_unsteady_var()
  * -----------------------------------------------
  */ 
 
-
 MASA::heateq_1d_steady_var::heateq_1d_steady_var()
 {
   mmsname = "heateq_1d_steady_var";
   dimension=1;
 
-  register_var("ax",&ax);   
-  register_var("k0",&k0);
-  register_var("k1",&k1);
-  register_var("k2",&k2);
+  register_var("A_x",&A_x);   
+  register_var("k_0",&k_0);
+  register_var("k_1",&k_1);
+  register_var("k_2",&k_2);
 
 }//done with constructor
 
 
 MASA::heateq_2d_steady_var::heateq_2d_steady_var()
 {
-  mmsname = "heateq_2d_steady_var";
+  mmsname = "heat_eq_2d_steady_var";
   dimension=2;
 
-  register_var("ax",&ax);   
-  register_var("k0",&k0);
-  register_var("k1",&k1);
-  register_var("k2",&k2);
-  register_var("by",&by);
+  register_var("A_x",&A_x);   
+  register_var("k_0",&k_0);
+  register_var("k_1",&k_1);
+  register_var("k_2",&k_2);
+  register_var("B_y",&B_y);
 
 }//done with constructor
 
 MASA::heateq_3d_steady_var::heateq_3d_steady_var()
 {
-  mmsname = "heateq_3d_steady_var";
+  mmsname = "heat_eq_3d_steady_var";
   dimension=3;
 
-  register_var("ax",&ax);   
-  register_var("k0",&k0);
-  register_var("k1",&k1);
-  register_var("k2",&k2);
-  register_var("by",&by);
-  register_var("cz",&cz);
+  register_var("A_x",&A_x);   
+  register_var("k_0",&k_0);
+  register_var("k1",&k_1);
+  register_var("k2",&k_2);
+  register_var("B_y",&B_y);
+  register_var("C_z",&C_z);
 
 }//done with constructor

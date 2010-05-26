@@ -44,7 +44,9 @@ int main()
   double y=.4;
   double z=.3;
 
+  /// -----------------------------------------------------------------------
   // initalize 1D
+  /// -----------------------------------------------------------------------
   masa_init("temp-test-1d","heateq_1d_steady_const");
 
   masa_set_param("A_x",param);
@@ -70,7 +72,9 @@ int main()
   cout << "1D Steady Constant Heat Equation: PASSED\n";
 
 
+  /// -----------------------------------------------------------------------
   // initalize 2D
+  /// -----------------------------------------------------------------------
   masa_init("temp-test-2d","heateq_2d_steady_const");
 
   masa_set_param("A_x",param);
@@ -98,8 +102,10 @@ int main()
 
   cout << "2D Steady Constant Heat Equation: PASSED\n";
 
-
+  /// -----------------------------------------------------------------------
   // initalize 3D
+  /// -----------------------------------------------------------------------
+
   masa_init("temp-test-3d","heateq_3d_steady_const");
 
   masa_set_param("A_x",param);

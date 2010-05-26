@@ -54,13 +54,14 @@ namespace MASA
   int masa_list_mms  ();
 
   // source term(s) -- 1D
-  int masa_eval_t_source  (double,double*);
+  int masa_eval_t_source  (double,double*);        // x
+  int masa_eval_t_source  (double,double,double*); // x,t
   int masa_eval_u_source  (double,double*);
   int masa_eval_e_source  (double,double*);
   int masa_eval_rho_source(double,double*);
 
   // source term(s) -- 2D
-  int masa_eval_t_source  (double,double,double*);
+  int masa_eval_t_source  (double,double,double,double*); //x,y,t
   int masa_eval_u_source  (double,double,double*);
   int masa_eval_v_source  (double,double,double*);
   int masa_eval_w_source  (double,double,double*);
@@ -68,7 +69,7 @@ namespace MASA
   int masa_eval_rho_source(double,double,double*);
 
   // source term(s) -- 3D
-  int masa_eval_t_source  (double,double,double,double*);
+  int masa_eval_t_source  (double,double,double,double,double*); // x,y,z,t
   int masa_eval_u_source  (double,double,double,double*);
   int masa_eval_v_source  (double,double,double,double*);
   int masa_eval_w_source  (double,double,double,double*);
