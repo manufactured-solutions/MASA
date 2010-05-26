@@ -84,15 +84,8 @@ MASA::heateq_2d_steady_const::heateq_2d_steady_const()
 
 double MASA::heateq_2d_steady_const::eval_q_t(double x,double y)
 {
- 
-  //Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * (A_x * A_x + B_y * B_y);
-  //T_an = cos(A_x * x) * cos(B_y * y);
-  //gradT_an[0] = -A_x * cos(B_y * y) * sin(A_x * x);
-  //gradT_an[1] = -B_y * cos(A_x * x) * sin(B_y * y);
-
-  //double qt = ax * ax * k0 * cos(ax * x);
-  return 1;
-
+  double Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * (A_x * A_x + B_y * B_y);
+  return Q_T;
 }
 
 
@@ -101,12 +94,19 @@ MASA::heateq_3d_steady_const::heateq_3d_steady_const()
     mmsname = "heateq_3d_steady_const";
     dimension=3;
 
-    register_var("ax",&ax);   
-    register_var("k0",&k0);
-    register_var("by",&by);
-    register_var("cz",&cz);
+    register_var("A_x",&A_x);   
+    register_var("k_0",&k_0);
+    register_var("B_y",&B_y);
+    register_var("C_z",&C_z);
 
 }//done with constructor
+
+double MASA::heateq_3d_steady_const::eval_q_t(double x,double y,double z)
+{
+  double Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * cos(C_z * z) * (A_x * A_x + B_y * B_y + C_z * C_z);
+  return Q_T;
+}
+
 
 
 /* ------------------------------------------------

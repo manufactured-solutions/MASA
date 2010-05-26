@@ -222,14 +222,14 @@ namespace MASA
   private:
     double dummy;
 
-    double ax;
-    double k0;
-    double by;
-    double cz;
+    double A_x;
+    double k_0;
+    double B_y;
+    double C_z;
 
   public:
     heateq_3d_steady_const(); // constructor
-    
+    double eval_q_t(double,double,double); //evaluate source term
   };
   // ------------------------------------------------------
   // ---------- heat equation / unsteady / constant -------
