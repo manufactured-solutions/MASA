@@ -3,7 +3,7 @@
 # dependencies here.
 #-----------------------------------
 
-PECOS_extra_dependencies = doxygen/grvy.page \
+PECOS_extra_dependencies = doxygen/masa.page \
 			   doxygen/txt_common/about.page \
 			   doxygen/txt_common/gpl.page \
 			   doxygen/txt_common/acknowledgment.page
