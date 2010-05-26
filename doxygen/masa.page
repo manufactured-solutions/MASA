@@ -1,0 +1,234 @@
+/*! \mainpage The GRVY Library
+
+<b>Version \version</b>, Build Date: \builddate
+
+Built by: \builduser on \buildhost
+<hr>
+
+\section overview Overview
+
+The Groovy Toolkit (GRVY) is a library used to house various support
+functions often required for application development of
+high-performance, scientific applications.  The library is written in
+C++, but provides an API for development in C and Fortran.  The
+primary functionality provided by the library is categorized as
+follows:
+
+<ul>
+<li>a flexible method for
+parsing ascii-files input files (with backwards-compatibility support)
+<li>a performance timing mechanism to provide a simple
+summary of individual code section performance along with basic
+statistics
+<li> a simple priority-based logging mechanism to control application messages
+<li> miscellaneous file handling and math utilities
+</ul>
+
+Thanks for your interest in libGRVY. To aid in usage, this manual is
+further divided into the following subsections:
+
+<ul>
+<li> \subpage model "Library Overview"
+<li> \subpage installation
+<li> \subpage apiC "C/C++ Interface"
+<li> \subpage apiF "Fortran Interface"
+</ul>
+
+<!-- \subpage inputFile  Example Input File -->
+
+
+<!-- \subpage apiF Fortran API -->
+<!-- \subpage examples Examples -->
+
+\section bugs Reporting Bugs
+
+Bugs in the code and errors or omissions in the documentation can be
+reported to karl@ices.utexas.edu.  Requests and contributions are
+welcome at the same e-mail address.  All bug reports should include:
+<ul>
+<li>the version number of the GRVY library,
+<li>the hardware and operating system,
+<li>the compiler used, including version number and compilation options,
+<li>a description of the bug behavior, and ideally, 
+<li>a short program which reproduces the bug.
+</ul>
+
+\section licence License
+\copydoc License
+
+\section acknowledgements Acknowledgments
+\copydoc Acknowledgments
+
+\section pecos-center More Information About PECOS
+\copydoc About
+
+ */
+
+/*! \page inputFile Example libGRVY Input File
+
+This is an example input file for use with the libGRVY parsing mechanism.
+Note that hehind the scenes, the library is using
+the <a href="http://getpot.sourceforge.net/">GetPot</a> parsing tool
+to provide a flexible parsing mechanism for C/C++ and Fortran.  Note
+that the default comment delimiter is defined as the \# sign and
+comments can begin at the beginning of a line or after a variable
+declaration to aid in documenting the input file.  The parsing
+mechansism is keyword driven and can be organized into multiple
+sections.  Consequently, you are allowed to have variables of the same
+name so long as they are within unique section definitions.  Note also
+that because the parsing mechanism is keyword driven, the input
+directives can be specified in \e arbitrary order.  There is no
+requirement to maintain a specific variable declaration pattern.
+
+<b>Important Note for Fortran Programmers</b> The input parser can
+handle double precision input using standard C style notation;
+however, it will not support Fortran's "d" delimiter. So, please specify
+double precision values as \e 1.2345e6 as opposed to \e 1.2345d6.
+
+<hr>
+
+\include pecos-input.txt
+
+*/
+
+/*! \page installation Installation/Linkage
+
+libGRVY uses the GNU autotools suite (autoconf, automake, and libtool)
+for its development build system.  This system is popular among the
+Linux development community and provides a familiar build environment
+for end users.  
+
+To build libGRVY starting from a release distribution, untar the distribution and
+enter the top-level directory.
+
+<div class="fragment"><pre class="fragment">
+ > tar xvfz grvy-$(VERSION).tar.gz
+ > cd grvy-$(VERSION)/            
+</pre></div>
+
+<h2>Configuration Requirements</h2>
+
+libGRVY requires that the <a href="http://www.boost.org/">Boost C++
+library</a> be available locally. If Boost is installed and available
+within your default login environment, then libGRVY should automatically configure
+against the available installation.  If, however, your Boost
+installation is in a non-standard location, use
+the <tt>--with-boost</tt> option to specify the location.
+
+Since libGRVY provides a Fortran interface, a valid Fortran90 compiler is
+also required.  To date, libGRVY has been successfully tested with \e
+gfortran and the Intel \e ifort compilers.  The configuration step
+will look for available compilers in the user environment but as with
+any \e autoconf based configuration, these can be overridden with
+command line arguments (by setting \c CXX, \c FC, and \c F77
+appropriately).
+
+<b>Installation Directory</b>: Use the <tt>--prefix</tt> option to
+specify your desired top-level installation directory for GRVY.  The
+examples below all configure libGRVY to be installed in the user's ~/bin/grvy
+directory.
+
+<em>Configure with Boost from default login environment:</em> <br>
+
+\code > ./configure --prefix=$HOME/bin/grvy \endcode
+
+<em>Or, configure with Boost from a specific directory:</em>        <br>
+
+\code > ./configure --prefix=$HOME/bin/grvy --with-boost=$MY_BOOST_DIR/boost-1.37.0 \endcode
+
+<em>Or, configure with specific compilers:</em>        <br>
+
+\code > ./configure CXX=g++ FC=ifort --prefix=$HOME/bin/grvy \endcode
+
+<h2> Library Build </h2>
+
+Once configured, issue a <tt>make</tt> to build the software. If successful, this
+will build the libGRVY library (static and dynamic versions) and several
+examples.
+
+\code > make \endcode
+
+<b> Verifying the build:</b> To verify that the software is working
+properly, a test option is provided to run a short suite of
+functionality tests against the local build.  To run, issue a <tt>make
+check</tt> to run the tests.  If successfull, output similar to the
+following will be generated.
+
+\code
+ > make check
+------------------------------------------------------- 
+ Initializing GRVY Tests			        
+------------------------------------------------------- 
+PASS: init.sh					        
+PASS: C_input_read_variables			        
+PASS: C_input_nofile_available			        
+PASS: C_input_read_missing_variable		        
+PASS: C_input_register_variables		        
+PASS: C_input_register_read_missing_variable	        
+PASS: C_timer_sum				        
+------------------------------------------------------- 
+ Finalizing GRVY Tests, have a groovy day 	        
+------------------------------------------------------- 
+
+PASS: finalize.sh  
+================== 
+All 8 tests passed 
+================== 
+\endcode
+
+<h2> Installation </h2>
+
+After the build is complete, issue a <tt>make install</tt> to install
+the library.  The installation will consist of three top-level
+directories housing the library, include files, and
+example files.  An example of the top-level directories after
+installation is shown below:
+
+\code > make install \endcode
+
+Top-level libGRVY installation directory:
+
+\code
+ > ls $HOME/bin/grvy/
+ examples/  include/  lib/
+\endcode
+
+<h2>Library Linkage</h2>
+
+To link an external C/C++ or Fortran application with the library, the
+\c include directory must be added to the compilers include search
+path in order to access the grvy.h header file (or for Fortran, the \c
+lib directory should be added to access the pre-compiled
+grvy F90 module).  The \c lib directory should also be added
+to the linker search path along with a request to link against the
+libGRVY library.  Several example link steps are provided below.  These
+examples assume that the libGRVY library has been successfully built and
+installed previously in the users's ~/bin/grvy directory:
+
+<h3>C/C++ Example</h3>
+
+\code > $(CC) -I$HOME/bin/grvy/include app.c -L$HOME/bin/grvy/lib -lgrvy \endcode
+
+<h3>Fortran Example</h3>
+
+\code > $(FC) -I$HOME/bin/grvy/lib app.f90 -L$HOME/bin/grvy/lib -lgrvy \endcode
+
+To embed the dynamic library search path for the libGRVY library
+directly into the application executable, use an additional linker
+option as follows:
+
+<h3>C/C++ Example</h3>
+
+\code > $(CC) -I$HOME/bin/grvy/include app.c -L$HOME/bin/grvy/lib \
+         -Wl,-rpath,$HOME/bin/grvy/lib -lgrvy \endcode
+
+
+<b>Important Note:</b> F90 module file formats are not consistent
+across multiple compilers. Therefore, a Fortran application and the libGRVY
+F90 interface \em must be built with the same Fortran compiler family to ensure
+compatibility.
+
+
+*/
+
+
