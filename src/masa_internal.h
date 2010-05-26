@@ -314,7 +314,7 @@ namespace MASA
     
   public:
     heateq_1d_unsteady_var(); // constructor
-    
+    double eval_q_t(double,double); // needs x,t
   };
 
   class heateq_2d_unsteady_var : public manufactured_solution 
@@ -337,7 +337,7 @@ namespace MASA
 
   public:
     heateq_2d_unsteady_var(); // constructor
-    
+    double eval_q_t(double,double,double); // needs x,y,t    
   };
   
   class heateq_3d_unsteady_var : public manufactured_solution 
@@ -362,7 +362,7 @@ namespace MASA
 
   public:
     heateq_3d_unsteady_var(); // constructor
-    
+    double eval_q_t(double,double,double,double); // needs x,y,z,t    
   };
 
   // ------------------------------------------------------
