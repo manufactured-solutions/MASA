@@ -206,7 +206,6 @@ MASA::heateq_1d_unsteady_var::heateq_1d_unsteady_var()
 
 }//done with constructor
 
-
 MASA::heateq_2d_unsteady_var::heateq_2d_unsteady_var()
 {
   mmsname = "heateq_2d_unsteady_var";
@@ -226,7 +225,6 @@ MASA::heateq_2d_unsteady_var::heateq_2d_unsteady_var()
   register_var("B_t",&B_t);
 
 }//done with constructor
-
 
 MASA::heateq_3d_unsteady_var::heateq_3d_unsteady_var()
 {
@@ -274,10 +272,15 @@ MASA::heateq_1d_steady_var::heateq_1d_steady_var()
 
 }//done with constructor
 
+double MASA::heateq_1d_steady_var::eval_q_t(double x)
+{
+  double Q_T = 0.3e1 * A_x * A_x * k_2 * pow(cos(A_x * x), 0.3e1) + 0.2e1 * A_x * A_x * k_1 * pow(cos(A_x * x), 0.2e1) - A_x * A_x * k_1 + (k_0 - 0.2e1 * k_2) * A_x * A_x * cos(A_x * x);
+  return Q_T;
+}
 
 MASA::heateq_2d_steady_var::heateq_2d_steady_var()
 {
-  mmsname = "heat_eq_2d_steady_var";
+  mmsname = "heateq_2d_steady_var";
   dimension=2;
 
   register_var("A_x",&A_x);   
@@ -288,16 +291,29 @@ MASA::heateq_2d_steady_var::heateq_2d_steady_var()
 
 }//done with constructor
 
+double MASA::heateq_2d_steady_var::eval_q_t(double x,double y)
+{
+  double Q_T = (0.3e1 * A_x * A_x + 0.3e1 * B_y * B_y) * k_2 * pow(cos(A_x * x), 0.3e1) * pow(cos(B_y * y), 0.3e1) + (0.2e1 * A_x * A_x + 0.2e1 * B_y * B_y) * k_1 * pow(cos(A_x * x), 0.2e1) * pow(cos(B_y * y), 0.2e1) - (pow(cos(B_y * y), 0.2e1) * A_x * A_x + pow(cos(A_x * x), 0.2e1) * B_y * B_y) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y - 0.2e1 * pow(cos(B_y * y), 0.2e1) * k_2 * A_x * A_x - 0.2e1 * pow(cos(A_x * x), 0.2e1) * k_2 * B_y * B_y) * cos(A_x * x) * cos(B_y * y);
+  return Q_T;
+}
+
+
 MASA::heateq_3d_steady_var::heateq_3d_steady_var()
 {
-  mmsname = "heat_eq_3d_steady_var";
+  mmsname = "heateq_3d_steady_var";
   dimension=3;
 
   register_var("A_x",&A_x);   
   register_var("k_0",&k_0);
-  register_var("k1",&k_1);
-  register_var("k2",&k_2);
+  register_var("k_1",&k_1);
+  register_var("k_2",&k_2);
   register_var("B_y",&B_y);
   register_var("C_z",&C_z);
 
 }//done with constructor
+
+double MASA::heateq_3d_steady_var::eval_q_t(double x,double y,double z)
+{
+  double Q_T = (0.3e1 * A_x * A_x + 0.3e1 * B_y * B_y + 0.3e1 * C_z * C_z) * k_2 * pow(cos(A_x * x), 0.3e1) * pow(cos(B_y * y), 0.3e1) * pow(cos(C_z * z), 0.3e1) + (0.2e1 * A_x * A_x + 0.2e1 * B_y * B_y + 0.2e1 * C_z * C_z) * k_1 * pow(cos(A_x * x), 0.2e1) * pow(cos(B_y * y), 0.2e1) * pow(cos(C_z * z), 0.2e1) - (pow(cos(B_y * y), 0.2e1) * pow(cos(C_z * z), 0.2e1) * A_x * A_x + pow(cos(A_x * x), 0.2e1) * pow(cos(C_z * z), 0.2e1) * B_y * B_y + pow(cos(A_x * x), 0.2e1) * pow(cos(B_y * y), 0.2e1) * C_z * C_z) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y + k_0 * C_z * C_z - 0.2e1 * pow(cos(B_y * y), 0.2e1) * pow(cos(C_z * z), 0.2e1) * k_2 * A_x * A_x - 0.2e1 * pow(cos(A_x * x), 0.2e1) * pow(cos(C_z * z), 0.2e1) * k_2 * B_y * B_y - 0.2e1 * pow(cos(A_x * x), 0.2e1) * pow(cos(B_y * y), 0.2e1) * k_2 * C_z * C_z) * cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
+  return Q_T;
+}

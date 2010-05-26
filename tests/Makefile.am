@@ -1,15 +1,19 @@
 INCLUDES                  = -I$(top_srcdir)/src -I$(top_builddir)/src
 
 bin_PROGRAMS              = heat_const_steady \
+			    heat_var_steady \
 	                    heat_const_unsteady \
 	                    euler2d \
                             euler3d \	
 	                    navierstokes3d \
 	                    navierstokes2d
 
-# Programs:
+# Test Programs:
 heat_const_steady_SOURCES = heatsc.cpp
 heat_const_steady_LDADD   = -L$(top_srcdir)/src -lmasa
+
+heat_var_steady_SOURCES = heatsv.cpp
+heat_var_steady_LDADD   = -L$(top_srcdir)/src -lmasa
 
 heat_const_unsteady_SOURCES = heatuc.cpp
 heat_const_unsteady_LDADD   = -L$(top_srcdir)/src -lmasa
@@ -28,6 +32,7 @@ navierstokes3d_LDADD      = -L$(top_srcdir)/src -lmasa
 
 TESTS_ENVIRONMENT         = 
 TESTS                     = heat_const_steady \
+			    heat_var_steady \
 	                    heat_const_unsteady \
 	                    euler2d \
 	                    euler3d \
