@@ -168,6 +168,4 @@ DX_CLEANFILES = \
 
 # Additional PECOS dependencies
 
-# doxygen/hpct.page: doxygen-doc
-
 endif DX_COND_doc

@@ -38,13 +38,13 @@ DX_CHI_FEATURE(OFF)
 DX_MAN_FEATURE(OFF)
 DX_RTF_FEATURE(OFF)
 DX_XML_FEATURE(OFF)
-DX_PDF_FEATURE(ON) 
+DX_PDF_FEATURE(ON)
 DX_PS_FEATURE(OFF)
 
 DX_INIT_DOXYGEN(MASA, doxygen/masa.dox, docs) 
 
 # Generate Output Files
-AC_OUTPUT( Makefile src/Makefile examples/Makefile tests/Makefile)
+AC_OUTPUT( Makefile src/Makefile examples/Makefile tests/Makefile doxygen/Makefile)
 
 # FINAL SUMMARY
 # AX_SUMMARIZE_CONFIG 
