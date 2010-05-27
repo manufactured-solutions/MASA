@@ -33,6 +33,8 @@
 // this is an example of the MASA API used for calling the 2D euler equation
 
 #include <masa.h>
+#include <iostream>
+#include <fstream>
 
 using namespace MASA;
 
@@ -45,9 +47,21 @@ int main()
   double vfield;
   double efield;
   double rho;
+  double tempx,tempy;
 
-  x=.5;
-  y=.4;
+  //problem size
+  double lx,ly;
+  double dx,dy;
+  int nx,ny;
+
+  // initialize
+  nx = 10;  // number of points
+  ny = 10;  
+  lx=1;     // length
+  ly=1; 
+
+  dx=double(lx/nx);
+  dy=double(ly/ny);
 
   // initialize the problem
   masa_init("euler-example","euler_2d");
@@ -91,22 +105,16 @@ int main()
   masa_sanity_check();
 
   // evaluate source terms over the domain (0<x<1, 0<y<1) 
-  masa_eval_u_source  (x,y,&ufield);
-  masa_eval_v_source  (x,y,&vfield);
-  masa_eval_e_source  (x,y,&efield);
-  masa_eval_rho_source(x,y,&rho);
+  for(int i=0;i<nx;i++)
+    for(int j=0;j<nx;j++)
+      {  
+	tempx=i*dx;
+	tempy=j*dy;
+	masa_eval_u_source  (tempx,tempy,&ufield);
+	masa_eval_v_source  (tempx,tempy,&vfield);
+	masa_eval_e_source  (tempx,tempy,&efield);
+	masa_eval_rho_source(tempx,tempy,&rho);
+      }
+
 
 }// end program
-
-
-
-
-
-
-
-
-
-
-
-
-}
