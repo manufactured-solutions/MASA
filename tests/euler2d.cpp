@@ -189,7 +189,7 @@ int main()
   masa_set_param("L",param);
   double L=param;
 
-  // evaluate source terms (3D)
+  // evaluate source terms (2D)
   masa_sanity_check();
   masa_eval_u_source  (x,y,&ufield);
   masa_eval_v_source  (x,y,&vfield);

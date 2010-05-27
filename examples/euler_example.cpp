@@ -30,38 +30,72 @@
   *--------------------------------------------------------------------------
   */  
 
-// this is just a program I have to play around with
+// this is an example of the MASA API used for calling the 2D euler equation
 
 #include <masa.h>
 
 using namespace MASA;
 
-void masa_shell_print_avail()
-{
-
-  masa_printid();
-
-}
-
 int main()
 {
-  string blah;
-  double sol;
+  // initialize the problem
+  masa_init("euler-example","euler_2d");
 
-  masa_shell_print_avail();
-  cout << endl << endl;
-  masa_init("nick","heateq_1d_steady_const");
-  masa_init( "bob","heateq_2d_steady_const");
-  masa_list_mms();
+  // intialize the various parameters required for Euler 2D
+  masa_set_param("u_0",param);
+  masa_set_param("u_x",param);
+  masa_set_param("u_y",param);
 
-  masa_select_mms("nick");
-  masa_display_param();
-  masa_eval_t_source(1.2,1.2,&sol);
-  cout << sol << endl;
+  masa_set_param("v_0",param);
+  masa_set_param("v_x",param);
+  masa_set_param("v_y",param);
 
-  masa_select_mms("bob");
-  masa_display_param();
-  masa_eval_t_source(1,1,&sol);
-  cout << sol << endl;
+  masa_set_param("rho_0",param);
+  masa_set_param("rho_x",param);
+  masa_set_param("rho_y",param);
+
+  masa_set_param("p_0",param);
+  masa_set_param("p_x",param);
+  masa_set_param("p_y",param);
+
+  masa_set_param("a_px",param);
+  masa_set_param("a_py",param);
+
+  masa_set_param("a_rhox",param);
+  masa_set_param("a_rhoy",param);
+
+  masa_set_param("a_ux",param);
+  masa_set_param("a_uy",param);
+
+  masa_set_param("a_vx",param);
+  masa_set_param("a_vy",param);
+
+  masa_set_param("Gamma",param);
+  masa_set_param("mu",param);
+  masa_set_param("L",param);
+
+
+  // call the sanity check routine 
+  // (tests that all variables have been initialized)
+  masa_sanity_check();
+
+  // evaluate source terms over the domain (0<x<1, 0<y<1) 
+  masa_eval_u_source  (x,y,&ufield);
+  masa_eval_v_source  (x,y,&vfield);
+  masa_eval_e_source  (x,y,&efield);
+  masa_eval_rho_source(x,y,&rho);
+
+}// end program
+
+
+
+
+
+
+
+
+
+
+
 
 }
