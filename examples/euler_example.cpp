@@ -38,6 +38,17 @@ using namespace MASA;
 
 int main()
 {
+  // declarations
+  double param =.8;
+  double x,y;
+  double ufield;
+  double vfield;
+  double efield;
+  double rho;
+
+  x=.5;
+  y=.4;
+
   // initialize the problem
   masa_init("euler-example","euler_2d");
 
