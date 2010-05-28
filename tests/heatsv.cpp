@@ -82,6 +82,7 @@ int main()
     {
       cout << "\nMASA REGRESSION TEST FAILED: Heat Equation 1d Steady Variable\n";
       cout << "ERROR in: T Source Term\n";
+      cout << "Exceeded Threshold by: " << tfield << endl;
       exit(1);
     }
 
@@ -118,6 +119,7 @@ int main()
     {
       cout << "\nMASA REGRESSION TEST FAILED: Heat Equation 2d Steady Variable\n";
       cout << "ERROR in: T Source Term\n";
+      cout << "Exceeded Threshold by: " << tfield << endl;
       exit(1);
     }
 
@@ -158,6 +160,7 @@ int main()
     {
       cout << "\nMASA REGRESSION TEST FAILED: Heat Equation 3d Steady Variable\n";
       cout << "ERROR in: T Source Term\n";
+      cout << "Exceeded Threshold by: " << tfield << endl;
       exit(1);
     }
 
