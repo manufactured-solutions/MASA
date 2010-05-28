@@ -106,8 +106,8 @@ void masa_shell_choose_solution()
 	    case 1:
 	      cout << "\nplease input x location: \n";
 	      cin >> x;
-
-	      masa_eval_u_source(x,&field);
+	      
+	      masa_eval_t_source(x,&field);
 	      cout << "source term is:" << field;
 	      break;
 

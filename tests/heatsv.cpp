@@ -87,6 +87,7 @@ int main()
     }
 
   cout << "1D Steady Variable Coefficient Heat Equation: PASSED\n";
+  //cout << "Residual: "<< tfield << endl;
 
   /// -----------------------------------------------------------------------
   // initalize 2D
@@ -124,7 +125,7 @@ int main()
     }
 
   cout << "2D Steady Variable Coefficient Heat Equation: PASSED\n";
-
+  //cout << "Residual: "<< tfield << endl;
 
   /// -----------------------------------------------------------------------
   // initalize 3D
@@ -165,5 +166,5 @@ int main()
     }
 
   cout << "3D Steady Variable Coefficient Heat Equation: PASSED\n";
-
+  //cout << "Residual: "<< tfield << endl;
 }
