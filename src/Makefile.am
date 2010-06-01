@@ -4,7 +4,11 @@ cc_sources              = masa_core.cpp masa_class.cpp masa_map.cpp masa_heat.cp
 INCLUDES                = 
 AM_FCFLAGS              = $(INCLUDES)
 AM_CFLAGS               = $(INCLUDES)
-AM_CPPFLAGS             = $(INCLUDES) -fp-model precise
+AM_CPPFLAGS             = $(INCLUDES) 
+
+if USE_INTEL
+  AM_CPPFLAGS          += -fp-model precise
+endif
 
 lib_LTLIBRARIES         = libmasa.la
 library_includedir      = $(includedir)

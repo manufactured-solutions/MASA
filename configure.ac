@@ -25,6 +25,8 @@ AC_PROG_CXX
 AC_PROG_FC
 AC_PROG_F77
 AC_PROG_LIBTOOL
+
+AM_CONDITIONAL([USE_INTEL],[test "$CXX" = "icpc"])
 AM_SANITY_CHECK
 
 # ----------------

@@ -1,5 +1,9 @@
 INCLUDES                  = -I$(top_srcdir)/src -I$(top_builddir)/src
-AM_CPPFLAGS             = $(INCLUDES) -fp-model precise
+AM_CPPFLAGS             = $(INCLUDES)
+
+if USE_INTEL
+  AM_CPPFLAGS          += -fp-model precise
+endif
 
 bin_PROGRAMS              = heat_const_steady \
 			    heat_var_steady \
