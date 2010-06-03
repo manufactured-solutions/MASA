@@ -4,7 +4,7 @@
 using namespace std;
 using namespace MASA;
 
-const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
+const double threshold = 2.0e-15; // should be small enough to catch any obvious problems
 
 double SourceQ_t_1d(
   double x,

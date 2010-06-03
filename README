@@ -17,3 +17,5 @@ TO ADD A NEW SOLUTION:
 3) Add the source term evaluation functions 
 4) 'Register' the new solution in masa_core.cpp, get_list_mms
 
+Nice API example:
+http://vis.lbl.gov/Research/H5Part/UsingC.html
