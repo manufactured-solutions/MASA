@@ -78,6 +78,11 @@ MASA::navierstokes_2d_compressible::navierstokes_2d_compressible()
 
 }//done with constructor
 
+void MASA::navierstokes_2d_compressible::init_var()
+{
+
+} // done with variable initializer
+
 double MASA::navierstokes_2d_compressible::eval_q_u(double x,double y)
 {
   double Q_u;
@@ -160,6 +165,11 @@ MASA::navierstokes_3d_compressible::navierstokes_3d_compressible()
   register_var("w_z",&w_z);
 
 }//done with constructor
+
+void MASA::navierstokes_3d_compressible::init_var()
+{
+
+} // done with variable initializer
 
 double MASA::navierstokes_3d_compressible::eval_q_u(double x,double y,double z)
 {

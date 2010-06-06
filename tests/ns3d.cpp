@@ -355,6 +355,7 @@ int main()
     {
       cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
       cout << "U Field Source Term\n";
+      cout << "Exceeded Threshold by: " << ufield << endl;
       exit(1);
     }
 
@@ -362,6 +363,7 @@ int main()
     {
       cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
       cout << "V Field Source Term\n";
+      cout << "Exceeded Threshold by: " << vfield << endl;
       exit(1);
     }
 
@@ -369,6 +371,7 @@ int main()
     {
       cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
       cout << "W Field Source Term\n";
+      cout << "Exceeded Threshold by: " << wfield << endl;
       exit(1);
     }
 
@@ -376,6 +379,7 @@ int main()
     {
       cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
       cout << "Energy Source Term\n";
+      cout << "Exceeded Threshold by: " << efield << endl;
       exit(1);
     }
 
@@ -383,6 +387,7 @@ int main()
     {
       cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
       cout << "RHO Source Term\n";
+      cout << "Exceeded Threshold by: " << rho << endl;
       exit(1);
     }
 

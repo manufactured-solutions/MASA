@@ -106,6 +106,7 @@ int get_list_mms(vector<manufactured_solution*>* anim)
   anim->push_back(new heateq_2d_steady_var());
   anim->push_back(new heateq_3d_steady_var());
 
+  anim->push_back(new euler_1d());
   anim->push_back(new euler_2d());
   anim->push_back(new euler_3d());
 

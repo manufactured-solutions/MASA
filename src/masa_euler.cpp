@@ -40,7 +40,69 @@ using namespace MASA;
 
 /* ------------------------------------------------
  *
- *         EULER EQUATION
+ *         EULER EQUATION 1D
+ *
+ *
+ *
+ * -----------------------------------------------
+ */ 
+
+MASA::euler_1d::euler_1d()
+{
+  mmsname = "euler_1d";
+  dimension=1;
+
+  register_var("u_0",&u_0);
+  register_var("u_x",&u_x);
+  register_var("rho_0",&rho_0);
+  register_var("rho_x",&rho_x);
+  register_var("p_0",&p_0);
+  register_var("p_x",&p_x);
+  register_var("a_px",&a_px);
+  register_var("a_rhox",&a_rhox);
+  register_var("a_ux",&a_ux);
+  register_var("L",&L);
+  register_var("Gamma",&Gamma);
+  register_var("mu",&mu);
+
+}//done with constructor
+
+void MASA::euler_1d::init_var()
+{
+
+} // done with variable initializer
+
+double MASA::euler_1d::eval_q_u(double x)
+{
+  double Q_u;
+  Q_u = -sin(a_px * PI * x / L) * a_px * PI * p_x / L + rho_x * cos(a_rhox * PI * x / L) * pow(u_0 + u_x * sin(a_ux * PI * x / L), 0.2e1) * a_rhox * PI / L + 0.2e1 * u_x * cos(a_ux * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L)) * (u_0 + u_x * sin(a_ux * PI * x / L)) * a_ux * PI / L;
+  return Q_u;
+}
+
+double MASA::euler_1d::eval_q_e(double x)
+{
+  double Q_e;
+  Q_e = cos(a_rhox * PI * x / L) * rho_x * pow(u_0 + u_x * sin(a_ux * PI * x / L), 0.3e1) * a_rhox * PI / L / 0.2e1 + cos(a_ux * PI * x / L) * (p_0 + p_x * cos(a_px * PI * x / L)) * a_ux * PI * u_x * Gamma / L / (Gamma - 0.1e1) - Gamma * p_x * sin(a_px * PI * x / L) * (u_0 + u_x * sin(a_ux * PI * x / L)) * a_px * PI / L / (Gamma - 0.1e1) + 0.3e1 / 0.2e1 * cos(a_ux * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L)) * pow(u_0 + u_x * sin(a_ux * PI * x / L), 0.2e1) * a_ux * PI * u_x / L;
+  return(Q_e);
+}
+
+double MASA::euler_1d::eval_q_rho(double x)
+{
+  double Q_rho;
+  Q_rho = rho_x * cos(a_rhox * PI * x / L) * (u_0 + u_x * sin(a_ux * PI * x / L)) * a_rhox * PI / L + u_x * cos(a_ux * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L)) * a_ux * PI / L;
+  return(Q_rho);
+}
+
+double MASA::euler_1d::eval_an(double x)
+{
+  double qt=1;
+  cout << "MASA: Warning -- no analytical solution input currently!\n";
+  return qt;
+}
+
+/* ------------------------------------------------
+ *
+ *         EULER EQUATION 2D
  *
  *
  *
@@ -78,6 +140,11 @@ MASA::euler_2d::euler_2d()
 
 }//done with constructor
 
+void MASA::euler_2d::init_var()
+{
+
+} // done with variable initializer
+
 double MASA::euler_2d::eval_q_u(double x,double y)
 {
   double Q_u;
@@ -112,6 +179,16 @@ double MASA::euler_2d::eval_an(double x,double y)
   cout << "MASA: Warning -- no analytical solution input currently!\n";
   return qt;
 }
+
+/* ------------------------------------------------
+ *
+ *         EULER EQUATION 3d
+ *
+ *
+ *
+ * -----------------------------------------------
+ */ 
+
 
 MASA::euler_3d::euler_3d()
 {
@@ -158,6 +235,11 @@ MASA::euler_3d::euler_3d()
   register_var("w_z",&w_z);
 
 }//done with constructor
+
+void MASA::euler_3d::init_var()
+{
+
+} // done with variable initializer
 
 double MASA::euler_3d::eval_q_u(double x,double y,double z)
 {

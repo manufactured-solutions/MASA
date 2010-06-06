@@ -88,6 +88,7 @@ namespace MASA
 
     // functions to override
     virtual ~manufactured_solution(){};       // destructor
+    void init_var(){cout << "MASA ERROR: NO DEFAULT VALUES AVAILABLE";};                                                                             // inits all variables to selected values
 
     // analytical solution
     virtual double eval_an(double)                {cout << "MASA ERROR: Analytical Solution is unavailable or not properly loaded."; return -1.33;}; // returns value of analytical solution
@@ -200,8 +201,9 @@ namespace MASA
     double k_0;    
   public:
     heateq_1d_steady_const(); // constructor
-    double eval_q_t(double); // source term evaluator
-    double eval_an(double);  //analytical solution
+    void   init_var();        // default problem values
+    double eval_q_t(double);  // source term evaluator
+    double eval_an(double);   //analytical solution
   };
 
   class heateq_2d_steady_const : public manufactured_solution 
@@ -215,6 +217,7 @@ namespace MASA
 
   public:
     heateq_2d_steady_const();       // constructor
+    void   init_var();        // default problem values
     double eval_q_t(double,double); // source term evaluator
   };
   
@@ -230,6 +233,7 @@ namespace MASA
 
   public:
     heateq_3d_steady_const(); // constructor
+    void   init_var();        // default problem values
     double eval_q_t(double,double,double); //evaluate source term
   };
   // ------------------------------------------------------
@@ -249,6 +253,7 @@ namespace MASA
     
   public:
     heateq_1d_unsteady_const(); // constructor
+    void   init_var();        // default problem values
     double eval_q_t(double,double); // needs x,t
   };
 
@@ -268,6 +273,7 @@ namespace MASA
 
   public:
     heateq_2d_unsteady_const(); // constructor
+    void   init_var();        // default problem values
     double eval_q_t(double,double,double); // needs x,y,t
   };
   
@@ -289,6 +295,7 @@ namespace MASA
     
   public:
     heateq_3d_unsteady_const(); // constructor
+    void   init_var();        // default problem values
     double eval_q_t(double,double,double,double); // needs x,y,z,t    
   };
 
@@ -314,6 +321,7 @@ namespace MASA
     
   public:
     heateq_1d_unsteady_var(); // constructor
+    void   init_var();        // default problem values
     double eval_q_t(double,double); // needs x,t
   };
 
@@ -337,6 +345,7 @@ namespace MASA
 
   public:
     heateq_2d_unsteady_var(); // constructor
+    void   init_var();        // default problem values
     double eval_q_t(double,double,double); // needs x,y,t    
   };
   
@@ -362,6 +371,7 @@ namespace MASA
 
   public:
     heateq_3d_unsteady_var(); // constructor
+    void   init_var();        // default problem values
     double eval_q_t(double,double,double,double); // needs x,y,z,t    
   };
 
@@ -381,6 +391,7 @@ namespace MASA
 
   public:
     heateq_1d_steady_var(); // constructor
+    void   init_var();        // default problem values
     double eval_q_t(double); // needs x
   };
 
@@ -397,6 +408,7 @@ namespace MASA
 
   public:
     heateq_2d_steady_var(); // constructor
+    void   init_var();        // default problem values
     double eval_q_t(double,double); // needs x,y
   };
   
@@ -414,6 +426,7 @@ namespace MASA
 
   public:
     heateq_3d_steady_var(); // constructor
+    void   init_var();        // default problem values
     double eval_q_t(double,double,double); // needs x,y,z
     
   };
@@ -421,6 +434,29 @@ namespace MASA
   // ------------------------------------------------------
   // ---------- euler ------------
   // ------------------------------------------------------
+  class euler_1d : public manufactured_solution
+  {
+    double u_0;
+    double u_x;
+    double rho_0;
+    double rho_x;
+    double p_0;
+    double p_x;
+    double a_px;
+    double a_rhox;
+    double a_ux;
+    double Gamma;
+    double mu;
+    double L;
+    
+  public:
+    euler_1d(); // constructor    
+    void   init_var();          // default problem values
+    double eval_q_u  (double);
+    double eval_q_e  (double);
+    double eval_q_rho(double);
+    double eval_an   (double);
+  };
 
   class euler_2d : public manufactured_solution
   {
@@ -452,6 +488,7 @@ namespace MASA
     
   public:
     euler_2d(); // constructor    
+    void   init_var();        // default problem values
     double eval_q_u  (double,double);
     double eval_q_v  (double,double);
     double eval_q_e  (double,double);
@@ -504,6 +541,7 @@ namespace MASA
     
   public:
     euler_3d(); // constructor
+    void   init_var();        // default problem values
     double eval_q_u  (double,double,double);
     double eval_q_v  (double,double,double);
     double eval_q_w  (double,double,double);
@@ -546,6 +584,7 @@ namespace MASA
     
   public:
     navierstokes_2d_compressible(); // constructor
+    void   init_var();        // default problem values
     double eval_q_u  (double,double);
     double eval_q_v  (double,double);
     double eval_q_e  (double,double);
@@ -598,6 +637,7 @@ namespace MASA
     
   public:
     navierstokes_3d_compressible(); //constructor
+    void   init_var();        // default problem values
     double eval_q_u  (double,double,double);
     double eval_q_v  (double,double,double);
     double eval_q_w  (double,double,double);

@@ -209,29 +209,33 @@ int main()
 
   if(ufield > threshold)
     {
-      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
       cout << "U Field Source Term\n";
+      cout << "Exceeded Threshold by: " << ufield << endl;
       exit(1);
     }
 
   if(vfield > threshold)
     {
-      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
       cout << "V Field Source Term\n";
+      cout << "Exceeded Threshold by: " << vfield << endl;
       exit(1);
     }
 
   if(efield > threshold)
     {
-      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
       cout << "Energy Source Term\n";
+      cout << "Exceeded Threshold by: " << efield << endl;
       exit(1);
     }
 
   if(rho > threshold)
     {
-      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
       cout << "RHO Source Term\n";
+      cout << "Exceeded Threshold by: " << rho << endl;
       exit(1);
     }
 

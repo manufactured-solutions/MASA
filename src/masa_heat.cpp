@@ -57,6 +57,11 @@ MASA::heateq_1d_steady_const::heateq_1d_steady_const()
 
 }//done with constructor
 
+void MASA::heateq_1d_steady_const::init_var()
+{
+
+}
+
 double MASA::heateq_1d_steady_const::eval_q_t(double x)
 {
   double Q_T;
@@ -82,6 +87,11 @@ MASA::heateq_2d_steady_const::heateq_2d_steady_const()
     
 }//done with constructor
 
+void MASA::heateq_2d_steady_const::init_var()
+{
+
+} // done with variable initializer
+
 double MASA::heateq_2d_steady_const::eval_q_t(double x,double y)
 {
   double Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * (A_x * A_x + B_y * B_y);
@@ -100,6 +110,11 @@ MASA::heateq_3d_steady_const::heateq_3d_steady_const()
     register_var("C_z",&C_z);
 
 }//done with constructor
+
+void MASA::heateq_3d_steady_const::init_var()
+{
+
+} // done with variable initializer
 
 double MASA::heateq_3d_steady_const::eval_q_t(double x,double y,double z)
 {
@@ -131,6 +146,11 @@ MASA::heateq_1d_unsteady_const::heateq_1d_unsteady_const()
 
 }//done with constructor
 
+void MASA::heateq_1d_unsteady_const::init_var()
+{
+
+} // done with variable initializer
+
 double MASA::heateq_1d_unsteady_const::eval_q_t(double x,double t)
 {
   double Q_T = cos(A_x * x + A_t * t) * cos(D_t * t) * k_0 * A_x * A_x - (sin(A_x * x + A_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(D_t * t) * D_t) * rho * cp_0;
@@ -160,7 +180,6 @@ double MASA::heateq_2d_unsteady_const::eval_q_t(double x,double y, double t)
   return Q_T;
 }
 
-
 MASA::heateq_3d_unsteady_const::heateq_3d_unsteady_const()
 {
   mmsname = "heateq_3d_unsteady_const";
@@ -178,6 +197,11 @@ MASA::heateq_3d_unsteady_const::heateq_3d_unsteady_const()
   register_var("C_t",&C_t);
 
 }//done with constructor
+
+void MASA::heateq_3d_unsteady_const::init_var()
+{
+
+} // done with variable initializer
 
 double MASA::heateq_3d_unsteady_const::eval_q_t(double x,double y, double z,double t)
 {
@@ -212,6 +236,11 @@ MASA::heateq_1d_unsteady_var::heateq_1d_unsteady_var()
 
 }//done with constructor
 
+void MASA::heateq_1d_unsteady_var::init_var()
+{
+
+} // done with variable initializer
+
 double MASA::heateq_1d_unsteady_var::eval_q_t(double x, double t)
 {
   double Q_T = -pow(cos(D_t * t), 0.2e1) * A_x * A_x * k_1 + 0.3e1 * pow(cos(A_x * x + A_t * t), 0.3e1) * pow(cos(D_t * t), 0.3e1) * A_x * A_x * k_2 - sin(A_x * x + A_t * t) * cos(D_t * t) * A_t * rho * cp_0 - cos(A_x * x + A_t * t) * sin(D_t * t) * D_t * rho * cp_0 + (A_x * A_x * k_0 - 0.2e1 * pow(cos(D_t * t), 0.2e1) * A_x * A_x * k_2 - sin(A_x * x + A_t * t) * cos(D_t * t) * A_t * rho * cp_1 - cos(A_x * x + A_t * t) * sin(D_t * t) * D_t * rho * cp_1) * cos(A_x * x + A_t * t) * cos(D_t * t) + (0.2e1 * A_x * A_x * k_1 - sin(A_x * x + A_t * t) * cos(D_t * t) * A_t * rho * cp_2 - cos(A_x * x + A_t * t) * sin(D_t * t) * D_t * rho * cp_2) * pow(cos(A_x * x + A_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1);
@@ -237,6 +266,11 @@ MASA::heateq_2d_unsteady_var::heateq_2d_unsteady_var()
   register_var("B_t",&B_t);
 
 }//done with constructor
+
+void MASA::heateq_2d_unsteady_var::init_var()
+{
+
+} // done with variable initializer
 
 double MASA::heateq_2d_unsteady_var::eval_q_t(double x,double y,double t)
 {
@@ -265,6 +299,11 @@ MASA::heateq_3d_unsteady_var::heateq_3d_unsteady_var()
   register_var("C_t",&C_t);
 
 }//done with constructor
+
+void MASA::heateq_3d_unsteady_var::init_var()
+{
+
+} // done with variable initializer
 
 double MASA::heateq_3d_unsteady_var::eval_q_t(double x,double y,double z,double t)
 {
@@ -297,6 +336,11 @@ MASA::heateq_1d_steady_var::heateq_1d_steady_var()
 
 }//done with constructor
 
+void MASA::heateq_1d_steady_var::init_var()
+{
+
+} // done with variable initializer
+
 double MASA::heateq_1d_steady_var::eval_q_t(double x)
 {
   double Q_T = 0.3e1 * A_x * A_x * k_2 * pow(cos(A_x * x), 0.3e1) + 0.2e1 * A_x * A_x * k_1 * pow(cos(A_x * x), 0.2e1) - A_x * A_x * k_1 + (k_0 - 0.2e1 * k_2) * A_x * A_x * cos(A_x * x);
@@ -315,6 +359,12 @@ MASA::heateq_2d_steady_var::heateq_2d_steady_var()
   register_var("B_y",&B_y);
 
 }//done with constructor
+
+void MASA::heateq_2d_steady_var::init_var()
+{
+
+} // done with variable initializer
+
 
 double MASA::heateq_2d_steady_var::eval_q_t(double x,double y)
 {
@@ -336,6 +386,11 @@ MASA::heateq_3d_steady_var::heateq_3d_steady_var()
   register_var("C_z",&C_z);
 
 }//done with constructor
+
+void MASA::heateq_3d_steady_var::init_var()
+{
+
+} // done with variable initializer
 
 double MASA::heateq_3d_steady_var::eval_q_t(double x,double y,double z)
 {
