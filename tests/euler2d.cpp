@@ -119,8 +119,32 @@ double SourceQ_rho ( // 22
 
 int main()
 {
+  //variables
+  double u_0;
+  double u_x;
+  double u_y;
+  double v_0;
+  double v_x;
+  double v_y;
+  double rho_0;
+  double rho_x;
+  double rho_y;
+  double p_0;
+  double p_x;
+  double p_y;
+  double a_px;
+  double a_py;
+  double a_rhox;
+  double a_rhoy;
+  double a_ux;
+  double a_uy;
+  double a_vx;
+  double a_vy;
+  double Gamma;
+  double mu;
+  double L;
+
   // parameters
-  double param = 1.2;
   double x=.5;
   double y=.4;
 
@@ -134,60 +158,39 @@ int main()
   masa_init("euler-test","euler_2d");
 
   // set params
-  masa_set_param("u_0",param);
-  double u_0=param;
-  masa_set_param("u_x",param);
-  double u_x=param;
-  masa_set_param("u_y",param);
-  double u_y=param;
+  masa_init_param();
+  
+  // get vars
+  masa_get_param("u_0",&u_0);
+  masa_get_param("u_x",&u_x);
+  masa_get_param("u_y",&u_y);
+  masa_get_param("v_0",&v_0);
+  masa_get_param("v_x",&v_x);
+  masa_get_param("v_y",&v_y);
 
-  masa_set_param("v_0",param);
-  double v_0=param;
-  masa_set_param("v_x",param);
-  double v_x=param;
-  masa_set_param("v_y",param);
-  double v_y=param;
+  masa_get_param("rho_0",&rho_0);
+  masa_get_param("rho_x",&rho_x);
+  masa_get_param("rho_y",&rho_y);
 
-  masa_set_param("rho_0",param);
-  double rho_0=param;
-  masa_set_param("rho_x",param);
-  double rho_x=param;
-  masa_set_param("rho_y",param);
-  double rho_y=param;
+  masa_get_param("p_0",&p_0);
+  masa_get_param("p_x",&p_x);
+  masa_get_param("p_y",&p_y);
 
-  masa_set_param("p_0",param);
-  double p_0=param;
-  masa_set_param("p_x",param);
-  double p_x=param;
-  masa_set_param("p_y",param);
-  double p_y=param;
+  masa_get_param("a_px",&a_px);
+  masa_get_param("a_py",&a_py);
 
-  masa_set_param("a_px",param);
-  double a_px=param;
-  masa_set_param("a_py",param);
-  double a_py=param;
+  masa_get_param("a_rhox",&a_rhox);
+  masa_get_param("a_rhoy",&a_rhoy);
 
-  masa_set_param("a_rhox",param);
-  double a_rhox=param;
-  masa_set_param("a_rhoy",param);
-  double a_rhoy=param;
+  masa_get_param("a_ux",&a_ux);
+  masa_get_param("a_uy",&a_uy);
 
-  masa_set_param("a_ux",param);
-  double a_ux=param;
-  masa_set_param("a_uy",param);
-  double a_uy=param;
+  masa_get_param("a_vx",&a_vx);
+  masa_get_param("a_vy",&a_vy);
 
-  masa_set_param("a_vx",param);
-  double a_vx=param;
-  masa_set_param("a_vy",param);
-  double a_vy=param;
-
-  masa_set_param("Gamma",param);
-  double Gamma=param;
-  masa_set_param("mu",param);
-  double mu=param;
-  masa_set_param("L",param);
-  double L=param;
+  masa_get_param("Gamma",&Gamma);
+  masa_get_param("mu",&mu);
+  masa_get_param("L",&L);
 
   // evaluate source terms (2D)
   masa_sanity_check();
