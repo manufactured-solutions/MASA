@@ -72,14 +72,9 @@ int main()
   double tempx;
 
   //problem size
-  double lx,ly;
-  double dx,dy;
-  int nx,ny;
-
-  // initialize
-  nx = 2000;  // number of points
-  lx=10;     // length
-  dx=double(lx/nx);
+  int nx = 2000;  // number of points
+  int lx=10;     // length
+  double dx=double(lx)/double(nx);
 
   // solutions
   double ufield,ufield2;

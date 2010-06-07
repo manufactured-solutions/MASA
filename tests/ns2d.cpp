@@ -168,8 +168,8 @@ int main()
   int lx=2;     // length
   int ly=1; 
   
-  double dx=double(lx/nx);
-  double dy=double(ly/ny);
+  double dx=double(lx)/double(nx);
+  double dy=double(ly)/double(ny);
 
   masa_init("navier-stokes-test","navierstokes_2d_compressible");
 

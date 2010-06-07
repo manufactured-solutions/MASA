@@ -160,8 +160,8 @@ int main()
   int lx=3;     // length
   int ly=1; 
   
-  double dx=double(lx/nx);
-  double dy=double(ly/ny);
+  double dx=double(lx)/double(nx);
+  double dy=double(ly)/double(ny);
 
   masa_init("euler-test","euler_2d");
 
