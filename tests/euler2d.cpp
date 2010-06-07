@@ -145,8 +145,8 @@ int main()
   double L;
 
   // parameters
-  double x=.5;
-  double y=.4;
+  double x;
+  double y;
 
   // solutions
   double ufield,ufield2;
@@ -155,6 +155,14 @@ int main()
   double rho,rho2;
 
   // initalize
+  int nx = 10;  // number of points
+  int ny = 10;  
+  int lx=1;     // length
+  int ly=1; 
+  
+  double dx=double(lx/nx);
+  double dy=double(ly/ny);
+
   masa_init("euler-test","euler_2d");
 
   // set params
@@ -192,57 +200,66 @@ int main()
   masa_get_param("mu",&mu);
   masa_get_param("L",&L);
 
-  // evaluate source terms (2D)
+
+  // check that all terms have been initialized
   masa_sanity_check();
-  masa_eval_u_source  (x,y,&ufield);
-  masa_eval_v_source  (x,y,&vfield);
-  masa_eval_e_source  (x,y,&efield);
-  masa_eval_rho_source(x,y,&rho);
 
-  ufield2   = SourceQ_u  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
-  vfield2   = SourceQ_v  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
-  rho2      = SourceQ_rho(x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);  
-  efield2   = SourceQ_e  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L);
+  // evaluate source terms (2D)
+  for(int i=0;i<nx;i++)
+    for(int j=0;j<ny;j++)    
+      {
+	x=i*dx;
+	y=j*dy;
+
+	masa_eval_u_source  (x,y,&ufield);
+	masa_eval_v_source  (x,y,&vfield);
+	masa_eval_e_source  (x,y,&efield);
+	masa_eval_rho_source(x,y,&rho);
+
+	ufield2   = SourceQ_u  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
+	vfield2   = SourceQ_v  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
+	rho2      = SourceQ_rho(x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);  
+	efield2   = SourceQ_e  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L);
 
   
-  // test the result is roughly zero
-  ufield=ufield-ufield2;
-  vfield=vfield-vfield2;
-  efield=efield-efield2;
-  rho   =rho-rho2;
+	// test the result is roughly zero
+	ufield=ufield-ufield2;
+	vfield=vfield-vfield2;
+	efield=efield-efield2;
+	rho   =rho-rho2;
   
-  if(ufield > threshold)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
-      cout << "U Field Source Term\n";
-      cout << "Exceeded Threshold by: " << ufield << endl;
-      exit(1);
-    }
+	if(ufield > threshold)
+	  {
+	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+	    cout << "U Field Source Term\n";
+	    cout << "Exceeded Threshold by: " << ufield << endl;
+	    exit(1);
+	  }
 
-  if(vfield > threshold)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
-      cout << "V Field Source Term\n";
-      cout << "Exceeded Threshold by: " << vfield << endl;
-      exit(1);
-    }
+	if(vfield > threshold)
+	  {
+	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+	    cout << "V Field Source Term\n";
+	    cout << "Exceeded Threshold by: " << vfield << endl;
+	    exit(1);
+	  }
 
-  if(efield > threshold)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
-      cout << "Energy Source Term\n";
-      cout << "Exceeded Threshold by: " << efield << endl;
-      exit(1);
-    }
+	if(efield > threshold)
+	  {
+	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+	    cout << "Energy Source Term\n";
+	    cout << "Exceeded Threshold by: " << efield << endl;
+	    exit(1);
+	  }
 
-  if(rho > threshold)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
-      cout << "RHO Source Term\n";
-      cout << "Exceeded Threshold by: " << rho << endl;
-      exit(1);
-    }
-
+	if(rho > threshold)
+	  {
+	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+	    cout << "RHO Source Term\n";
+	    cout << "Exceeded Threshold by: " << rho << endl;
+	    exit(1);
+	  }
+      } // done iterating
   // tests passed
 
 }

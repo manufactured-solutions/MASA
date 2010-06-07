@@ -78,12 +78,8 @@ int main()
 
   // initialize
   nx = 10;  // number of points
-  ny = 10;  
   lx=1;     // length
-  ly=1; 
-
   dx=double(lx/nx);
-  dy=double(ly/ny);
 
   // solutions
   double ufield,ufield2;
