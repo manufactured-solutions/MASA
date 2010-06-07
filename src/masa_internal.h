@@ -88,11 +88,31 @@ namespace MASA
     virtual ~manufactured_solution(){};       // destructor
     virtual void init_var(){cout << "MASA ERROR: NO DEFAULT VALUES AVAILABLE";};                                                                             // inits all variables to selected values
 
-    // analytical solution
-    virtual double eval_an(double)                {cout << "MASA ERROR: Analytical Solution is unavailable or not properly loaded."; return -1.33;}; // returns value of analytical solution
-    virtual double eval_an(double,double)         {cout << "MASA ERROR: Analytical Solution is unavailable or not properly loaded."; return -1.33;}; // overloaded for 2d problems
-    virtual double eval_an(double,double,double)  {cout << "MASA ERROR: Analytical Solution is unavailable or not properly loaded."; return -1.33;}; // overloaded for 3d problems
-    
+    // analytical solution(s)
+    virtual double eval_an_t(double)                {cout << "MASA ERROR: Analytical Solution (T) is unavailable or not properly loaded."; return -1.33;}; // returns value of analytical solution
+    virtual double eval_an_t(double,double)         {cout << "MASA ERROR: Analytical Solution (T) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 2d problems
+    virtual double eval_an_t(double,double,double)  {cout << "MASA ERROR: Analytical Solution (T) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 3d problems
+
+    virtual double eval_an_u(double)                {cout << "MASA ERROR: Analytical Solution (u) is unavailable or not properly loaded."; return -1.33;}; // returns value of analytical solution
+    virtual double eval_an_u(double,double)         {cout << "MASA ERROR: Analytical Solution (u) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 2d problems
+    virtual double eval_an_u(double,double,double)  {cout << "MASA ERROR: Analytical Solution (u) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 3d problems
+
+    virtual double eval_an_v(double)                {cout << "MASA ERROR: Analytical Solution (v) is unavailable for 1D problems."; return -1.33;};        // returns value of analytical solution
+    virtual double eval_an_v(double,double)         {cout << "MASA ERROR: Analytical Solution (v) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 2d problems
+    virtual double eval_an_v(double,double,double)  {cout << "MASA ERROR: Analytical Solution (v) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 3d problems
+
+    virtual double eval_an_w(double)                {cout << "MASA ERROR: Analytical Solution (w) is unavailable for 1d problems."; return -1.33;};        // returns value of analytical solution
+    virtual double eval_an_w(double,double)         {cout << "MASA ERROR: Analytical Solution (w) is unavailable for 2d problems."; return -1.33;};        // overloaded for 2d problems
+    virtual double eval_an_w(double,double,double)  {cout << "MASA ERROR: Analytical Solution (w) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 3d problems
+
+    virtual double eval_an_e(double)                {cout << "MASA ERROR: Analytical Solution (e) is unavailable or not properly loaded."; return -1.33;}; // returns value of analytical solution
+    virtual double eval_an_e(double,double)         {cout << "MASA ERROR: Analytical Solution (e) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 2d problems
+    virtual double eval_an_e(double,double,double)  {cout << "MASA ERROR: Analytical Solution (e) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 3d problems
+
+    virtual double eval_an_rho(double)              {cout << "MASA ERROR: Analytical Solution (rho) is unavailable or not properly loaded."; return -1.33;}; // returns value of analytical solution
+    virtual double eval_an_rho(double,double)       {cout << "MASA ERROR: Analytical Solution (rho) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 2d problems
+    virtual double eval_an_rho(double,double,double){cout << "MASA ERROR: Analytical Solution (rho) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 3d problems
+   
     // source terms
     virtual double eval_q_t(double)                {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // returns value of source term (temp)
     virtual double eval_q_t(double, double)        {cout << "MASA ERROR: Solution has not been properly loaded."; return -1.33;};                    // returns value of source term (temp)
@@ -455,10 +475,15 @@ namespace MASA
   public:
     euler_1d(); // constructor    
     void   init_var();          // default problem values
-    double eval_q_u  (double);
-    double eval_q_e  (double);
-    double eval_q_rho(double);
-    double eval_an   (double);
+
+    double eval_q_u   (double); // source terms
+    double eval_q_e   (double);
+    double eval_q_rho (double);
+    
+    double eval_an_u  (double); // analytical
+    double eval_an_p  (double);
+    double eval_an_rho(double);
+
   };
 
   class euler_2d : public manufactured_solution
@@ -494,11 +519,17 @@ namespace MASA
   public:
     euler_2d(); // constructor    
     void   init_var();        // default problem values
+
     double eval_q_u  (double,double);
     double eval_q_v  (double,double);
     double eval_q_e  (double,double);
     double eval_q_rho(double,double);
-    double eval_an(double,double);
+
+    double eval_an_u  (double,double); // analytical
+    double eval_an_v  (double,double);
+    double eval_an_p  (double,double);
+    double eval_an_rho(double,double);
+
   };
 
   class euler_3d : public manufactured_solution
@@ -548,12 +579,20 @@ namespace MASA
   public:
     euler_3d(); // constructor
     void   init_var();        // default problem values
-    double eval_q_u  (double,double,double);
+
+    double eval_q_u  (double,double,double); // source terms
     double eval_q_v  (double,double,double);
     double eval_q_w  (double,double,double);
     double eval_q_e  (double,double,double);
     double eval_q_rho(double,double,double);
-    double eval_an   (double,double,double);
+
+    double eval_an_u  (double,double,double); // analytical
+    double eval_an_v  (double,double,double);
+    double eval_an_w  (double,double,double);
+    double eval_an_q  (double,double,double);
+    double eval_an_p  (double,double,double);
+    double eval_an_rho(double,double,double);
+
   };
 
   // ------------------------------------------------------
@@ -592,11 +631,17 @@ namespace MASA
   public:
     navierstokes_2d_compressible(); // constructor
     void   init_var();        // default problem values
+
     double eval_q_u  (double,double);
     double eval_q_v  (double,double);
     double eval_q_e  (double,double);
     double eval_q_rho(double,double);
-    //double eval_an   (double,double);    
+
+    double eval_an_u  (double,double); // analytical
+    double eval_an_v  (double,double);
+    double eval_an_p  (double,double);
+    double eval_an_rho(double,double);
+
   };
   
   class navierstokes_3d_compressible : public manufactured_solution
@@ -646,12 +691,20 @@ namespace MASA
   public:
     navierstokes_3d_compressible(); //constructor
     void   init_var();        // default problem values
-    double eval_q_u  (double,double,double);
+
+    double eval_q_u  (double,double,double); // source terms
     double eval_q_v  (double,double,double);
     double eval_q_w  (double,double,double);
     double eval_q_e  (double,double,double);
     double eval_q_rho(double,double,double);
-    //double eval_an   (double,double,double);    
+
+    double eval_an_u  (double,double,double); // analytical
+    double eval_an_v  (double,double,double);
+    double eval_an_w  (double,double,double);
+    double eval_an_q  (double,double,double);
+    double eval_an_p  (double,double,double);
+    double eval_an_rho(double,double,double);
+
   }; // done with navier stokes 3d class
   
 } // end MASA namespace
