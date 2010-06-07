@@ -69,20 +69,19 @@ MASA::euler_1d::euler_1d()
 
 void MASA::euler_1d::init_var()
 {
-  double param =.8;
-
-  set_var("u_0",param);
-  set_var("u_x",param);
-  set_var("rho_0",param);
-  set_var("rho_x",param);
-  set_var("p_0",param);
-  set_var("p_x",param);
-  set_var("a_px",param);
-  set_var("a_rhox",param);
-  set_var("a_ux",param);
-  set_var("L",param);
-  set_var("Gamma",param);
-  set_var("mu",param);
+  // randomly generated
+  set_var("u_0",.191);
+  set_var("u_x",1.63);
+  set_var("rho_0",91.5);
+  set_var("rho_x",5.13);
+  set_var("p_0",.1984);
+  set_var("p_x",3.151);
+  set_var("a_px",6.151);
+  set_var("a_rhox",1.2);
+  set_var("a_ux",.03);
+  set_var("L",3.02);
+  set_var("Gamma",16.1);
+  set_var("mu",.091);
 
 } // done with variable initializer
 
@@ -156,39 +155,31 @@ MASA::euler_2d::euler_2d()
 
 void MASA::euler_2d::init_var()
 {
-  double param =.8;
 
-  set_var("u_0",param);
-  set_var("u_x",param);
-  set_var("u_y",param);
-
-  set_var("v_0",param);
-  set_var("v_x",param);
-  set_var("v_y",param);
-
-  set_var("rho_0",param);
-  set_var("rho_x",param);
-  set_var("rho_y",param);
-
-  set_var("p_0",param);
-  set_var("p_x",param);
-  set_var("p_y",param);
-
-  set_var("a_px",param);
-  set_var("a_py",param);
-
-  set_var("a_rhox",param);
-  set_var("a_rhoy",param);
-
-  set_var("a_ux",param);
-  set_var("a_uy",param);
-
-  set_var("a_vx",param);
-  set_var("a_vy",param);
-
-  set_var("Gamma",param);
-  set_var("mu",param);
-  set_var("L",param);
+  // currently randomly generated
+  set_var("u_0",1.23);
+  set_var("u_x",1.1);
+  set_var("u_y",.08);
+  set_var("v_0",12);
+  set_var("v_x",1.6);
+  set_var("v_y",.67);
+  set_var("rho_0",1.02);
+  set_var("rho_x",7.2);
+  set_var("rho_y",9.8);
+  set_var("p_0",1.2);
+  set_var("p_x",.91);
+  set_var("p_y",.623);
+  set_var("a_px",.165);
+  set_var("a_py",.612);
+  set_var("a_rhox",.627);
+  set_var("a_rhoy",.828);
+  set_var("a_ux",.1987);
+  set_var("a_uy",1.189);
+  set_var("a_vx",1.91);
+  set_var("a_vy",2.901);
+  set_var("Gamma",1.01);
+  set_var("mu",.918);
+  set_var("L",3.02);
 
 } // done with variable initializer
 
@@ -285,47 +276,46 @@ MASA::euler_3d::euler_3d()
 
 void MASA::euler_3d::init_var()
 {
-  double param = .8914;
 
-  // set params
-  masa_set_param("u_0",param);
-  masa_set_param("u_x",param);
-  masa_set_param("u_y",param);
-  masa_set_param("u_z",param);
-  masa_set_param("v_0",param);
-  masa_set_param("v_x",param);
-  masa_set_param("v_y",param);
-  masa_set_param("v_z",param);
-  masa_set_param("w_0",param);
-  masa_set_param("w_x",param);
-  masa_set_param("w_y",param);
-  masa_set_param("w_z",param);
-  masa_set_param("rho_0",param);
-  masa_set_param("rho_x",param);
-  masa_set_param("rho_y",param);
-  masa_set_param("rho_z",param);
-  masa_set_param("p_0",param);
-  masa_set_param("p_x",param);
-  masa_set_param("p_y",param);
-  masa_set_param("p_z",param);
-  masa_set_param("a_px",param);
-  masa_set_param("a_py",param);
-  masa_set_param("a_pz",param);
-  masa_set_param("a_rhox",param);
-  masa_set_param("a_rhoy",param);
-  masa_set_param("a_rhoz",param);
-  masa_set_param("a_ux",param);
-  masa_set_param("a_uy",param);
-  masa_set_param("a_uz",param);
-  masa_set_param("a_vx",param);
-  masa_set_param("a_vy",param);
-  masa_set_param("a_vz",param);
-  masa_set_param("a_wx",param);
-  masa_set_param("a_wy",param);
-  masa_set_param("a_wz",param);
-  masa_set_param("Gamma",param);
-  masa_set_param("mu",param);
-  masa_set_param("L",param);
+  // set params (random currenly)
+  masa_set_param("u_0",2.27);
+  masa_set_param("u_x",6.00);
+  masa_set_param("u_y",5.35);
+  masa_set_param("u_z",5.34);
+  masa_set_param("v_0",3.46);
+  masa_set_param("v_x",6.13);
+  masa_set_param("v_y",.54);
+  masa_set_param("v_z",.30);
+  masa_set_param("w_0",.411);
+  masa_set_param("w_x",3.14);
+  masa_set_param("w_y",5.68);
+  masa_set_param("w_z",6.51);
+  masa_set_param("rho_0",1.63);
+  masa_set_param("rho_x",4.7);
+  masa_set_param("rho_y",20.85);
+  masa_set_param("rho_z",12.15);
+  masa_set_param("p_0",50.135);
+  masa_set_param("p_x",.73);
+  masa_set_param("p_y",49);
+  masa_set_param("p_z",60.8);
+  masa_set_param("a_px",388.8);
+  masa_set_param("a_py",40.1);
+  masa_set_param("a_pz",38.5);
+  masa_set_param("a_rhox",.82);
+  masa_set_param("a_rhoy",.41);
+  masa_set_param("a_rhoz",.44);
+  masa_set_param("a_ux",.46);
+  masa_set_param("a_uy",.425);
+  masa_set_param("a_uz",.42);
+  masa_set_param("a_vx",.52);
+  masa_set_param("a_vy",.23);
+  masa_set_param("a_vz",16.2);
+  masa_set_param("a_wx",11.05);
+  masa_set_param("a_wy",21.8);
+  masa_set_param("a_wz",13.6);
+  masa_set_param("Gamma",27.5);
+  masa_set_param("mu",12.01);
+  masa_set_param("L",3.02);
 
 } // done with variable initializer
 
