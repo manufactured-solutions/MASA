@@ -295,10 +295,10 @@ int main()
   int nz = 30;
   int lx=1;                // length
   int ly=2; 
-  int lz=3;   
-  double dx=double(lx/nx); // spacing
-  double dy=double(ly/ny);
-  double dz=double(lz/nz);
+  int lz=3;     
+  double dx=double(lx)/double(nx);
+  double dy=double(ly)/double(ny);
+  double dz=double(lz)/double(nz);
 
   masa_init("navier-stokes-test","navierstokes_3d_compressible");
 
