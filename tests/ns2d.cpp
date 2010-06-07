@@ -34,9 +34,13 @@ double SourceQ_e (
   double,
   double,
   double,
+  double,
+  double,
   double);
 
 double SourceQ_u (
+  double,
+  double,
   double,
   double,
   double,
@@ -86,9 +90,13 @@ double SourceQ_v (
   double,
   double,
   double,
+  double,
+  double,
   double);
 
 double SourceQ_rho( 
+  double,
+  double,
   double,
   double,
   double,
@@ -140,6 +148,8 @@ int main()
   double Gamma;
   double mu;
   double L;
+  double R;
+  double k;
 
   // parameters
   double x;
@@ -198,6 +208,9 @@ int main()
   masa_get_param("mu",&mu);
   masa_get_param("L",&L);
 
+  masa_get_param("R",&R);
+  masa_get_param("k",&k);
+
   // check that all terms have been initialized
   masa_sanity_check();
 
@@ -213,10 +226,10 @@ int main()
 	masa_eval_e_source  (x,y,&efield);
 	masa_eval_rho_source(x,y,&rho);
 
-	ufield2   = SourceQ_u  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L);
-	vfield2   = SourceQ_v  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L);
-	rho2      = SourceQ_rho(x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L);
-	efield2   = SourceQ_e  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L);
+	ufield2   = SourceQ_u  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);
+	vfield2   = SourceQ_v  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);
+	rho2      = SourceQ_rho(x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);
+	efield2   = SourceQ_e  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L,R,k);
 
 	// test the result is roughly zero
 	ufield = ufield-ufield2;

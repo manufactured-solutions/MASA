@@ -52,6 +52,9 @@ MASA::euler_1d::euler_1d()
   mmsname = "euler_1d";
   dimension=1;
 
+  register_var("R",&R);
+  register_var("k",&k);
+
   register_var("u_0",&u_0);
   register_var("u_x",&u_x);
   register_var("rho_0",&rho_0);
@@ -70,6 +73,9 @@ MASA::euler_1d::euler_1d()
 void MASA::euler_1d::init_var()
 {
   // randomly generated
+  set_var("R",1.01);
+  set_var("k",1.38);
+
   set_var("u_0",.191);
   set_var("u_x",1.63);
   set_var("rho_0",91.5);
@@ -127,6 +133,9 @@ MASA::euler_2d::euler_2d()
   mmsname = "euler_2d";
   dimension=2;
 
+  register_var("R",&R);
+  register_var("k",&k);
+
   register_var("u_0",&u_0);
   register_var("u_x",&u_x);
   register_var("u_y",&u_y);
@@ -157,6 +166,9 @@ void MASA::euler_2d::init_var()
 {
 
   // currently randomly generated
+  set_var("R",1.01);
+  set_var("k",1.38);
+
   set_var("u_0",1.23);
   set_var("u_x",1.1);
   set_var("u_y",.08);
@@ -233,6 +245,9 @@ MASA::euler_3d::euler_3d()
   mmsname = "euler_3d";
   dimension=3;
 
+  register_var("R",&R);
+  register_var("k",&k);
+
   register_var("u_0",&u_0);
   register_var("u_x",&u_x);
   register_var("u_y",&u_y);
@@ -278,6 +293,9 @@ void MASA::euler_3d::init_var()
 {
 
   // set params (random currenly)
+  set_var("R",1.01);
+  set_var("k",1.38);
+
   masa_set_param("u_0",2.27);
   masa_set_param("u_x",6.00);
   masa_set_param("u_y",5.35);

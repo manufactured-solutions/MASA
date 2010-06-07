@@ -52,6 +52,9 @@ MASA::navierstokes_2d_compressible::navierstokes_2d_compressible()
   mmsname = "navierstokes_2d_compressible";
   dimension=2;
 
+  register_var("R",&R);
+  register_var("k",&k);
+
   register_var("u_0",&u_0);
   register_var("u_x",&u_x);
   register_var("u_y",&u_y);
@@ -82,6 +85,9 @@ void MASA::navierstokes_2d_compressible::init_var()
 {
 
   // currently randomly generated
+  set_var("R",1.01);
+  set_var("k",1.38);
+
   set_var("u_0",1.23);
   set_var("u_x",1.1);
   set_var("u_y",.08);
@@ -150,6 +156,9 @@ MASA::navierstokes_3d_compressible::navierstokes_3d_compressible()
   mmsname = "navierstokes_3d_compressible";
   dimension=3;
 
+  register_var("R",&R);
+  register_var("k",&k);
+
   register_var("u_0",&u_0);
   register_var("u_x",&u_x);
   register_var("u_y",&u_y);
@@ -195,6 +204,9 @@ void MASA::navierstokes_3d_compressible::init_var()
 {
 
   // set params
+  set_var("R",1.01);
+  set_var("k",1.38);
+
   masa_set_param("u_0",2.27);
   masa_set_param("u_x",6.00);
   masa_set_param("u_y",5.35);

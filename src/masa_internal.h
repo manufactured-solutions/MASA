@@ -73,8 +73,6 @@ namespace MASA
     
   protected:
     double PI;                            // 3.1415... defined in constructor
-    double R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
-    double k;                             // Boltzmanns constant
 
     int num_vars;
     double MASA_VAR_DEFAULT;
@@ -436,6 +434,10 @@ namespace MASA
   // ------------------------------------------------------
   class euler_1d : public manufactured_solution
   {
+
+    double R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+    double k;                             // Boltzmanns constant
+
     double u_0;
     double u_x;
     double rho_0;
@@ -449,6 +451,7 @@ namespace MASA
     double mu;
     double L;
     
+
   public:
     euler_1d(); // constructor    
     void   init_var();          // default problem values
@@ -460,7 +463,9 @@ namespace MASA
 
   class euler_2d : public manufactured_solution
   {
-    double dummy;
+
+    double R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+    double k;     // Boltzmanns constant
 
     double u_0;
     double u_x;
@@ -498,7 +503,8 @@ namespace MASA
 
   class euler_3d : public manufactured_solution
   {
-    double dummy;
+    double R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+    double k;     // Boltzmanns constant
 
     double u_0;
     double u_x;
@@ -556,7 +562,8 @@ namespace MASA
 
   class navierstokes_2d_compressible : public manufactured_solution
   {    
-    double dummy;
+    double R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+    double k;     // Boltzmanns constant
 
     double u_0;
     double u_x;
@@ -594,7 +601,8 @@ namespace MASA
   
   class navierstokes_3d_compressible : public manufactured_solution
   {
-    double dummy;
+    double R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+    double k;     // Boltzmanns constant
 
     double u_0;
     double u_x;

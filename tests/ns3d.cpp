@@ -9,7 +9,9 @@ using namespace MASA;
 
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
 
-double SourceQ_e ( // 40
+double SourceQ_e (
+  double,
+  double,
   double,
   double,
   double,
@@ -53,7 +55,9 @@ double SourceQ_e ( // 40
   double);
 
 
-double SourceQ_u ( // should be 39
+double SourceQ_u (
+  double,
+  double,
   double,
   double,
   double,
@@ -96,7 +100,9 @@ double SourceQ_u ( // should be 39
   double);
 
 
-double SourceQ_v ( // 39
+double SourceQ_v (
+  double,
+  double,
   double,
   double,
   double,
@@ -138,7 +144,9 @@ double SourceQ_v ( // 39
   double,
   double);
 
-double SourceQ_w ( // 39
+double SourceQ_w (
+  double,
+  double,
   double,
   double,
   double,
@@ -180,7 +188,9 @@ double SourceQ_w ( // 39
   double,
   double);
 
-double SourceQ_rho( // 39
+double SourceQ_rho(
+  double,
+  double,
   double,
   double,
   double,
@@ -264,6 +274,9 @@ int main()
   double Gamma;
   double L;    
 
+  double R;
+  double K;    
+
   // parameters
   double x;
   double y;
@@ -278,7 +291,7 @@ int main()
 
   // initalize
   int nx = 20;             // number of points
-  int ny = 120;
+  int ny = 10;
   int nz = 30;
   int lx=1;                // length
   int ly=2; 
@@ -342,6 +355,9 @@ int main()
   masa_get_param("mu",&mu);
   masa_get_param("L",&L);
 
+  masa_get_param("R",&R);
+  masa_get_param("k",&K);
+
   // check all vars are initialized
   masa_sanity_check();
 
@@ -360,12 +376,12 @@ int main()
 	  masa_eval_e_source  (x,y,z,&efield);
 	  masa_eval_rho_source(x,y,z,&rho);
 
-	  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L);
-	  vfield2   = SourceQ_v  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L);
-	  wfield2   = SourceQ_w  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L);
-	  rho2      = SourceQ_rho(x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L);
-	  efield2   = SourceQ_e  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,Gamma,L);
-  
+	  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
+	  vfield2   = SourceQ_v  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
+	  wfield2   = SourceQ_w  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
+	  rho2      = SourceQ_rho(x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
+	  efield2   = SourceQ_e  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,Gamma,L,R,K);
+
 	  // test the result is roughly zero
 	  ufield = ufield-ufield2;
 	  vfield = vfield-vfield2;
@@ -404,6 +420,7 @@ int main()
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
 	      cout << "Energy Source Term\n";
 	      cout << "Exceeded Threshold by: " << efield << endl;
+	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
 
