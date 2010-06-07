@@ -285,6 +285,47 @@ MASA::euler_3d::euler_3d()
 
 void MASA::euler_3d::init_var()
 {
+  double param = .8914;
+
+  // set params
+  masa_set_param("u_0",param);
+  masa_set_param("u_x",param);
+  masa_set_param("u_y",param);
+  masa_set_param("u_z",param);
+  masa_set_param("v_0",param);
+  masa_set_param("v_x",param);
+  masa_set_param("v_y",param);
+  masa_set_param("v_z",param);
+  masa_set_param("w_0",param);
+  masa_set_param("w_x",param);
+  masa_set_param("w_y",param);
+  masa_set_param("w_z",param);
+  masa_set_param("rho_0",param);
+  masa_set_param("rho_x",param);
+  masa_set_param("rho_y",param);
+  masa_set_param("rho_z",param);
+  masa_set_param("p_0",param);
+  masa_set_param("p_x",param);
+  masa_set_param("p_y",param);
+  masa_set_param("p_z",param);
+  masa_set_param("a_px",param);
+  masa_set_param("a_py",param);
+  masa_set_param("a_pz",param);
+  masa_set_param("a_rhox",param);
+  masa_set_param("a_rhoy",param);
+  masa_set_param("a_rhoz",param);
+  masa_set_param("a_ux",param);
+  masa_set_param("a_uy",param);
+  masa_set_param("a_uz",param);
+  masa_set_param("a_vx",param);
+  masa_set_param("a_vy",param);
+  masa_set_param("a_vz",param);
+  masa_set_param("a_wx",param);
+  masa_set_param("a_wy",param);
+  masa_set_param("a_wz",param);
+  masa_set_param("Gamma",param);
+  masa_set_param("mu",param);
+  masa_set_param("L",param);
 
 } // done with variable initializer
 

@@ -81,7 +81,7 @@ MASA::navierstokes_2d_compressible::navierstokes_2d_compressible()
 void MASA::navierstokes_2d_compressible::init_var()
 {
   // set params
-  double param=1.2;
+  double param=1.23;
 
   set_var("u_0",param);
   set_var("u_x",param);
