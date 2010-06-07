@@ -69,7 +69,7 @@ int main()
   double L;
 
   // parameters
-  double x=.5;
+  double tempx;
 
   //problem size
   double lx,ly;
@@ -118,44 +118,51 @@ int main()
   masa_sanity_check();
 
   // evaluate source terms (1D)
-  
-  masa_eval_u_source  (x,&ufield);
-  masa_eval_e_source  (x,&efield);
-  masa_eval_rho_source(x,&rho);
+  for(int i=0;i<nx;i++)
+    {
+      tempx=i*dx;
+      
+      // ask for masa answer
+      masa_eval_u_source  (tempx,&ufield);
+      masa_eval_e_source  (tempx,&efield);
+      masa_eval_rho_source(tempx,&rho);
 
-  ufield2   = SourceQ_u  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
-  rho2      = SourceQ_rho(x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
-  efield2   = SourceQ_e  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,Gamma,mu,L);
+      // get fundamental source term solution
+      ufield2   = SourceQ_u  (tempx,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
+      rho2      = SourceQ_rho(tempx,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
+      efield2   = SourceQ_e  (tempx,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,Gamma,mu,L);
+
   
-  // test the result is roughly zero
-  ufield=ufield-ufield2;
-  efield=efield-efield2;
-  rho   =rho-rho2;
+      // test the result is roughly zero
+      ufield=ufield-ufield2;
+      efield=efield-efield2;
+      rho   =rho-rho2;
    
-  if(ufield > threshold)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
-      cout << "U Field Source Term\n";
-      cout << "Exceeded Threshold by: " << ufield << endl;
-      exit(1);
-    }
+      if(ufield > threshold)
+	{
+	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
+	  cout << "U Field Source Term\n";
+	  cout << "Exceeded Threshold by: " << ufield << endl;
+	  exit(1);
+	}
 
-  if(efield > threshold)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
-      cout << "Energy Source Term\n";
-      cout << "Exceeded Threshold by: " << efield << endl;
-      exit(1);
-    }
+      if(efield > threshold)
+	{
+	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
+	  cout << "Energy Source Term\n";
+	  cout << "Exceeded Threshold by: " << efield << endl;
+	  exit(1);
+	}
 
-  if(rho > threshold)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
-      cout << "RHO Source Term\n";
-      cout << "Exceeded Threshold by: " << rho << endl;
-      exit(1);
-    }
+      if(rho > threshold)
+	{
+	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
+	  cout << "RHO Source Term\n";
+	  cout << "Exceeded Threshold by: " << rho << endl;
+	  exit(1);
+	}
 
+    } // done interating 
   // tests passed
 
 }
