@@ -156,8 +156,8 @@ int main()
 
   // initalize
   int nx = 10;  // number of points
-  int ny = 10;  
-  int lx=1;     // length
+  int ny = 15;  
+  int lx=3;     // length
   int ly=1; 
   
   double dx=double(lx/nx);

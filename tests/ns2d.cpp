@@ -142,7 +142,6 @@ int main()
   double L;
 
   // parameters
-  double param = 1.2;
   double x;
   double y;
   double z;
@@ -155,8 +154,8 @@ int main()
 
   // initalize
   int nx = 10;  // number of points
-  int ny = 10;  
-  int lx=1;     // length
+  int ny = 8;  
+  int lx=2;     // length
   int ly=1; 
   
   double dx=double(lx/nx);

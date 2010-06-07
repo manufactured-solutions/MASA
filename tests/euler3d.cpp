@@ -341,6 +341,9 @@ int main()
   masa_get_param("mu",&mu);
   masa_get_param("L",&L);
 
+  // check all vars initialized
+  masa_sanity_check();
+
   // evaluate source terms (3D)
   for(int i=0;i<nx;i++)
     for(int j=0;j<ny;j++)    
@@ -350,7 +353,6 @@ int main()
 	  y=j*dy;
 	  z=k*dz;
 
-	  masa_sanity_check();
 	  masa_eval_u_source  (x,y,z,&ufield);
 	  masa_eval_v_source  (x,y,z,&vfield);
 	  masa_eval_w_source  (x,y,z,&wfield);
