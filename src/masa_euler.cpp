@@ -69,6 +69,20 @@ MASA::euler_1d::euler_1d()
 
 void MASA::euler_1d::init_var()
 {
+  double param =.8;
+
+  set_var("u_0",param);
+  set_var("u_x",param);
+  set_var("rho_0",param);
+  set_var("rho_x",param);
+  set_var("p_0",param);
+  set_var("p_x",param);
+  set_var("a_px",param);
+  set_var("a_rhox",param);
+  set_var("a_ux",param);
+  set_var("L",param);
+  set_var("Gamma",param);
+  set_var("mu",param);
 
 } // done with variable initializer
 

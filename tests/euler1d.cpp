@@ -54,9 +54,36 @@ double SourceQ_rho ( // 10
 
 int main()
 {
+  //variables 
+  double u_0;
+  double u_x;
+  double rho_0;
+  double rho_x;
+  double p_0;
+  double p_x;
+  double a_px;
+  double a_rhox;
+  double a_ux;
+  double Gamma;
+  double mu;
+  double L;
+
   // parameters
-  double param = 1.2;
   double x=.5;
+
+  //problem size
+  double lx,ly;
+  double dx,dy;
+  int nx,ny;
+
+  // initialize
+  nx = 10;  // number of points
+  ny = 10;  
+  lx=1;     // length
+  ly=1; 
+
+  dx=double(lx/nx);
+  dy=double(ly/ny);
 
   // solutions
   double ufield,ufield2;
@@ -66,40 +93,32 @@ int main()
   // initalize
   masa_init("euler-test","euler_1d");
 
-  // set params
-  masa_set_param("u_0",param);
-  double u_0=param;
-  masa_set_param("u_x",param);
-  double u_x=param;
+  // initialize the default parameters
+  masa_init_param();
 
-  masa_set_param("rho_0",param);
-  double rho_0=param;
-  masa_set_param("rho_x",param);
-  double rho_x=param;
+  // get defaults for comparison to source terms
+  masa_get_param("u_0",&u_0);
+  masa_get_param("u_x",&u_x);
 
-  masa_set_param("p_0",param);
-  double p_0=param;
-  masa_set_param("p_x",param);
-  double p_x=param;
+  masa_get_param("rho_0",&rho_0);
+  masa_get_param("rho_x",&rho_x);
 
-  masa_set_param("a_px",param);
-  double a_px=param;
+  masa_get_param("p_0",&p_0);
+  masa_get_param("p_x",&p_x);
 
-  masa_set_param("a_rhox",param);
-  double a_rhox=param;
+  masa_get_param("a_px",&a_px);
+  masa_get_param("a_rhox",&a_rhox);
+  masa_get_param("a_ux",&a_ux);
 
-  masa_set_param("a_ux",param);
-  double a_ux=param;
+  masa_get_param("Gamma",&Gamma);
+  masa_get_param("mu",&mu);
+  masa_get_param("L",&L);
 
-  masa_set_param("Gamma",param);
-  double Gamma=param;
-  masa_set_param("mu",param);
-  double mu=param;
-  masa_set_param("L",param);
-  double L=param;
+  // check that all terms have been initialized
+  masa_sanity_check();
 
   // evaluate source terms (1D)
-  masa_sanity_check();
+  
   masa_eval_u_source  (x,&ufield);
   masa_eval_e_source  (x,&efield);
   masa_eval_rho_source(x,&rho);
@@ -112,7 +131,7 @@ int main()
   ufield=ufield-ufield2;
   efield=efield-efield2;
   rho   =rho-rho2;
-  
+   
   if(ufield > threshold)
     {
       cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
