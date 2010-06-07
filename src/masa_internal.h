@@ -104,10 +104,10 @@ namespace MASA
     virtual double eval_an_w(double)                {cout << "MASA ERROR: Analytical Solution (w) is unavailable for 1d problems."; return -1.33;};        // returns value of analytical solution
     virtual double eval_an_w(double,double)         {cout << "MASA ERROR: Analytical Solution (w) is unavailable for 2d problems."; return -1.33;};        // overloaded for 2d problems
     virtual double eval_an_w(double,double,double)  {cout << "MASA ERROR: Analytical Solution (w) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 3d problems
-
-    virtual double eval_an_e(double)                {cout << "MASA ERROR: Analytical Solution (e) is unavailable or not properly loaded."; return -1.33;}; // returns value of analytical solution
-    virtual double eval_an_e(double,double)         {cout << "MASA ERROR: Analytical Solution (e) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 2d problems
-    virtual double eval_an_e(double,double,double)  {cout << "MASA ERROR: Analytical Solution (e) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 3d problems
+    
+    virtual double eval_an_p(double)                {cout << "MASA ERROR: Analytical Solution (e) is unavailable or not properly loaded."; return -1.33;}; // returns value of analytical solution
+    virtual double eval_an_p(double,double)         {cout << "MASA ERROR: Analytical Solution (e) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 2d problems
+    virtual double eval_an_p(double,double,double)  {cout << "MASA ERROR: Analytical Solution (e) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 3d problems
 
     virtual double eval_an_rho(double)              {cout << "MASA ERROR: Analytical Solution (rho) is unavailable or not properly loaded."; return -1.33;}; // returns value of analytical solution
     virtual double eval_an_rho(double,double)       {cout << "MASA ERROR: Analytical Solution (rho) is unavailable or not properly loaded."; return -1.33;}; // overloaded for 2d problems

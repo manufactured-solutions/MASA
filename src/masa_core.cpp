@@ -294,6 +294,11 @@ int MASA::masa_display_param()
  * -----------------------------------------------
  */ 
 
+
+  // --------------------------------
+  // source terms
+  // --------------------------------
+
 int MASA::masa_eval_t_source(double x,double* field) //x 
 {
 
@@ -328,12 +333,45 @@ int MASA::masa_eval_e_source(double x,double* field)
   return 0;
 }
 
+  // --------------------------------
+  // analytical terms
+  // --------------------------------
+
+int MASA::masa_eval_t_an(double x,double* field)
+{
+  *field=masa_master_pointer->eval_an_t(x);
+  return 0;
+}
+
+int MASA::masa_eval_u_an(double x,double* field)
+{
+  *field=masa_master_pointer->eval_an_u(x);
+  return 0;
+}
+
+int MASA::masa_eval_p_an(double x,double* field)
+{
+  *field=masa_master_pointer->eval_an_p(x);
+  return 0;
+}
+
+int MASA::masa_eval_rho_an(double x,double* field)
+{
+  *field=masa_master_pointer->eval_an_rho(x);
+  return 0;
+}
+
+
 /* ------------------------------------------------
  *
  *         2D functions
  *
  * -----------------------------------------------
  */ 
+
+  // --------------------------------
+  // source terms
+  // --------------------------------
 
 int MASA::masa_eval_t_source(double x,double y,double t,double* field)
 {
@@ -366,12 +404,51 @@ int MASA::masa_eval_e_source(double x,double y,double* field)
   return 0;
 }
 
+  // --------------------------------
+  // analytical terms
+  // --------------------------------
+
+int MASA::masa_eval_t_an(double x,double y,double* field)
+{
+  *field=masa_master_pointer->eval_an_t(x,y);
+  return 0;
+}
+
+int MASA::masa_eval_u_an(double x,double y,double* field)
+{
+  *field=masa_master_pointer->eval_an_u(x,y);
+  return 0;
+}
+
+int MASA::masa_eval_v_an(double x,double y,double* field)
+{
+  *field=masa_master_pointer->eval_an_v(x,y);
+  return 0;
+}
+
+int MASA::masa_eval_p_an(double x,double y,double* field)
+{
+  *field=masa_master_pointer->eval_an_p(x,y);
+  return 0;
+}
+
+int MASA::masa_eval_rho_an(double x,double y,double* field)
+{
+  *field=masa_master_pointer->eval_an_rho(x,y);
+  return 0;
+}
+
+
 /* ------------------------------------------------
  *
  *         3D functions
  *
  * -----------------------------------------------
  */ 
+
+  // --------------------------------
+  // source terms
+  // --------------------------------
 
 int MASA::masa_eval_t_source(double x,double y,double z,double t,double* field)
 {
@@ -406,6 +483,46 @@ int MASA::masa_eval_rho_source(double x,double y,double z,double* field)
 int MASA::masa_eval_e_source(double x,double y,double z,double* field)
 {
   *field=masa_master_pointer->eval_q_e(x,y,z);
+  return 0;
+}
+
+  // --------------------------------
+  // analytical terms
+  // --------------------------------
+
+int MASA::masa_eval_t_an(double x,double y,double z,double* field)
+{
+  *field=masa_master_pointer->eval_an_t(x,y,z);
+  return 0;
+}
+
+int MASA::masa_eval_u_an(double x,double y,double z,double* field)
+{
+  *field=masa_master_pointer->eval_an_u(x,y,z);
+  return 0;
+}
+
+int MASA::masa_eval_v_an(double x,double y,double z,double* field)
+{
+  *field=masa_master_pointer->eval_an_v(x,y,z);
+  return 0;
+}
+
+int MASA::masa_eval_w_an(double x,double y,double z,double* field)
+{
+  *field=masa_master_pointer->eval_an_w(x,y,z);
+  return 0;
+}
+
+int MASA::masa_eval_p_an(double x,double y,double z,double* field)
+{
+  *field=masa_master_pointer->eval_an_p(x,y,z);
+  return 0;
+}
+
+int MASA::masa_eval_rho_an(double x,double y,double z,double* field)
+{
+  *field=masa_master_pointer->eval_an_rho(x,y,z);
   return 0;
 }
 
