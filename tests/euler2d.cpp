@@ -118,8 +118,8 @@ double SourceQ_rho ( // 22
 
 
 int main()
-{
-  //variables
+
+{  //variables
   double u_0;
   double u_x;
   double u_y;
@@ -199,7 +199,6 @@ int main()
   masa_get_param("Gamma",&Gamma);
   masa_get_param("mu",&mu);
   masa_get_param("L",&L);
-
 
   // check that all terms have been initialized
   masa_sanity_check();
