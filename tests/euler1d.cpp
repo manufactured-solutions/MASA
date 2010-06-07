@@ -77,8 +77,8 @@ int main()
   int nx,ny;
 
   // initialize
-  nx = 10;  // number of points
-  lx=1;     // length
+  nx = 2000;  // number of points
+  lx=10;     // length
   dx=double(lx/nx);
 
   // solutions

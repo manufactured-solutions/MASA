@@ -155,8 +155,8 @@ int main()
   double rho,rho2;
 
   // initalize
-  int nx = 10;  // number of points
-  int ny = 15;  
+  int nx = 425;  // number of points
+  int ny = 768;  
   int lx=3;     // length
   int ly=1; 
   
