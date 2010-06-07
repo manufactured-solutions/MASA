@@ -30,7 +30,7 @@
   *--------------------------------------------------------------------------
   */  
 
-// this is an example of the MASA API used for calling the 2D euler equation
+// this is an example of the MASA API used for calling the 2D heat equation
 
 #include <masa.h>
 #include <iostream>
@@ -42,10 +42,7 @@ int main()
 {
   // declarations
   double x,y;
-  double ufield;
-  double vfield;
-  double efield;
-  double rho;
+  double tfield;
   double tempx,tempy;
 
   //problem size
@@ -63,7 +60,7 @@ int main()
   dy=double(ly/ny);
 
   // initialize the problem
-  masa_init("euler-example","euler_2d");
+  masa_init("heat equation example","heateq_2d_steady_const");
 
   // initialize the default parameters
   masa_init_param();
@@ -79,11 +76,7 @@ int main()
       {  
 	tempx=i*dx;
 	tempy=j*dy;
-	masa_eval_u_source  (tempx,tempy,&ufield);
-	masa_eval_v_source  (tempx,tempy,&vfield);
-	masa_eval_e_source  (tempx,tempy,&efield);
-	masa_eval_rho_source(tempx,tempy,&rho);
+	masa_eval_t_source  (tempx,tempy,&tfield);
       }
-
 
 }// end program

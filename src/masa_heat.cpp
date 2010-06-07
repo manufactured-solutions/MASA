@@ -89,6 +89,11 @@ MASA::heateq_2d_steady_const::heateq_2d_steady_const()
 
 void MASA::heateq_2d_steady_const::init_var()
 {
+  double param=1.2;
+
+  masa_set_param("A_x",param);
+  masa_set_param("B_y",param);
+  masa_set_param("k_0",param);
 
 } // done with variable initializer
 
@@ -173,6 +178,11 @@ MASA::heateq_2d_unsteady_const::heateq_2d_unsteady_const()
   register_var("B_t",&B_t);
 
 }//done with constructor
+
+void MASA::heateq_2d_unsteady_const::init_var()
+{
+
+} // done with variable initializer
 
 double MASA::heateq_2d_unsteady_const::eval_q_t(double x,double y, double t)
 {

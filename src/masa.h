@@ -53,6 +53,11 @@ namespace MASA
   int masa_curr_mms  (string*);
   int masa_list_mms  ();
 
+  // interact with mms variables
+  int masa_init_param();
+  int masa_set_param(string,double);
+  int masa_get_param(string,double*);
+
   // source term(s) -- 1D
   int masa_eval_t_source  (double,double*);        // x
   int masa_eval_t_source  (double,double,double*); // x,t
@@ -89,8 +94,6 @@ namespace MASA
   // old masa core functions (to be called by user)
   int masa_getid(void**,string);
   int masa_printid();
-  int masa_set_param(string,double);
-  int masa_get_param(string,double*);
   int masa_display_param();
   int masa_get_name(string*);
   int masa_get_dimension(int*);

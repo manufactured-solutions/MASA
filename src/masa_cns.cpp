@@ -80,6 +80,32 @@ MASA::navierstokes_2d_compressible::navierstokes_2d_compressible()
 
 void MASA::navierstokes_2d_compressible::init_var()
 {
+  // set params
+  double param=1.2;
+
+  set_var("u_0",param);
+  set_var("u_x",param);
+  set_var("u_y",param);
+  set_var("v_0",param);
+  set_var("v_x",param);
+  set_var("v_y",param);
+  set_var("rho_0",param);
+  set_var("rho_x",param);
+  set_var("rho_y",param);
+  set_var("p_0",param);
+  set_var("p_x",param);
+  set_var("p_y",param);
+  set_var("a_px",param);
+  set_var("a_py",param);
+  set_var("a_rhox",param);
+  set_var("a_rhoy",param);
+  set_var("a_ux",param);
+  set_var("a_uy",param);
+  set_var("a_vx",param);
+  set_var("a_vy",param);
+  set_var("Gamma",param);
+  set_var("mu",param);
+  set_var("L",param);
 
 } // done with variable initializer
 

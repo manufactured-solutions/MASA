@@ -30,7 +30,7 @@
   *--------------------------------------------------------------------------
   */  
 
-// this is an example of the MASA API used for calling the 2D euler equation
+// this is an example of the MASA API used for calling the 2D compressible navier stokes equations
 
 #include <masa.h>
 #include <iostream>
@@ -63,7 +63,7 @@ int main()
   dy=double(ly/ny);
 
   // initialize the problem
-  masa_init("euler-example","euler_2d");
+  masa_init("navier-stokes-example","navierstokes_2d_compressible");
 
   // initialize the default parameters
   masa_init_param();

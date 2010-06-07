@@ -5,6 +5,10 @@ if USE_INTEL
   AM_CPPFLAGS          += -fp-model precise
 endif
 
+if USE_GNU
+  AM_CPPFLAGS          += -fno-unsafe-math-optimizations
+endif
+
 bin_PROGRAMS              = heat_const_steady \
 			    heat_var_steady \
 	                    heat_const_unsteady \

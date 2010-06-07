@@ -88,7 +88,7 @@ namespace MASA
 
     // functions to override
     virtual ~manufactured_solution(){};       // destructor
-    void init_var(){cout << "MASA ERROR: NO DEFAULT VALUES AVAILABLE";};                                                                             // inits all variables to selected values
+    virtual void init_var(){cout << "MASA ERROR: NO DEFAULT VALUES AVAILABLE";};                                                                             // inits all variables to selected values
 
     // analytical solution
     virtual double eval_an(double)                {cout << "MASA ERROR: Analytical Solution is unavailable or not properly loaded."; return -1.33;}; // returns value of analytical solution

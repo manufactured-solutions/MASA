@@ -10,6 +10,10 @@ if USE_INTEL
   AM_CPPFLAGS          += -fp-model precise
 endif
 
+if USE_GNU
+  AM_CPPFLAGS          += -fno-unsafe-math-optimizations
+endif
+
 lib_LTLIBRARIES         = libmasa.la
 library_includedir      = $(includedir)
 library_include_HEADERS = masa.h

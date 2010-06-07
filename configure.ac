@@ -27,6 +27,7 @@ AC_PROG_F77
 AC_PROG_LIBTOOL
 
 AM_CONDITIONAL([USE_INTEL],[test "$CXX" = "icpc"])
+AM_CONDITIONAL([USE_GNU],[test "$CXX" = "g++"])
 AM_SANITY_CHECK
 
 # ----------------

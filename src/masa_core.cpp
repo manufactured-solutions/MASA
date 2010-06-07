@@ -259,6 +259,15 @@ int MASA::masa_set_param(string param,double paramval)
 }
 
 //
+// Set all parameters to default values
+//
+int MASA::masa_init_param()
+{
+  masa_master_pointer->init_var();
+  return 0;
+}
+
+//
 // Function that returns value of parameter selected by string
 // 
 
