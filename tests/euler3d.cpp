@@ -11,7 +11,7 @@ using namespace std;
 
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
 
-double SourceQ_e ( // 40
+double SourceQ_e (
   double,
   double,
   double,
@@ -224,44 +224,44 @@ double SourceQ_rho( // 39
 int main()
 {
   //variables
-    double u_0;
-    double u_x;
-    double u_y;
-    double u_z;
-    double v_0;
-    double v_x;
-    double v_y;
-    double v_z;
-    double w_0;
-    double w_x;
-    double w_y;
-    double w_z;
-    double rho_0;
-    double rho_x;
-    double rho_y;
-    double rho_z;
-    double p_0;
-    double p_x;
-    double p_y;
-    double p_z;
-    double a_px;
-    double a_py;
-    double a_pz;
-    double a_rhox;
-    double a_rhoy;
-    double a_rhoz;
-    double a_ux;
-    double a_uy;
-    double a_uz;
-    double a_vx;
-    double a_vy;
-    double a_vz;
-    double a_wx;
-    double a_wy;
-    double a_wz;
-    double mu;
-    double Gamma;
-    double L;    
+  double u_0;
+  double u_x;
+  double u_y;
+  double u_z;
+  double v_0;
+  double v_x;
+  double v_y;
+  double v_z;
+  double w_0;
+  double w_x;
+  double w_y;
+  double w_z;
+  double rho_0;
+  double rho_x;
+  double rho_y;
+  double rho_z;
+  double p_0;
+  double p_x;
+  double p_y;
+  double p_z;
+  double a_px;
+  double a_py;
+  double a_pz;
+  double a_rhox;
+  double a_rhoy;
+  double a_rhoz;
+  double a_ux;
+  double a_uy;
+  double a_uz;
+  double a_vx;
+  double a_vy;
+  double a_vz;
+  double a_wx;
+  double a_wy;
+  double a_wz;
+  double mu;
+  double Gamma;
+  double L;    
 
   // parameters
   double x;
@@ -282,9 +282,9 @@ int main()
   int lx=1;                // length
   int ly=2; 
   int lz=3;   
-  double dx=double(lx/nx); // spacing
-  double dy=double(ly/ny);
-  double dz=double(lz/nz);
+  double dx=double(lx)/double(nx); // spacing
+  double dy=double(ly)/double(ny);
+  double dz=double(lz)/double(nz);
 
   masa_init("euler-test","euler_3d");
 
@@ -363,7 +363,7 @@ int main()
 	  vfield2   = SourceQ_v  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,L);
 	  wfield2   = SourceQ_w  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,L);
 	  rho2      = SourceQ_rho(x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L);
-	  efield2   = SourceQ_e  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,Gamma,mu,L);
+	  efield2   = SourceQ_e  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,Gamma,L);
   
 	  // test the result is roughly zero
 	  ufield= ufield-ufield2;
