@@ -122,7 +122,6 @@ int main()
       ufield2   = SourceQ_u  (tempx,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
       rho2      = SourceQ_rho(tempx,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
       efield2   = SourceQ_e  (tempx,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,Gamma,mu,L);
-
   
       // test the result is roughly zero
       ufield=ufield-ufield2;

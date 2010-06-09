@@ -3,13 +3,38 @@
 //
 
 #include <masa.h>
+#include <math.h>
 
 using namespace MASA;
 using namespace std;
 
-#define PI = acos(-1)
+double pi = acos(-1);
 
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
+
+double anQ_p (double x,double y,double p_0,double p_x,double p_y,double a_px,double a_py,double L)
+{
+  double p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
+  return p_an;
+}
+  
+double anQ_u (double x,double y,double u_0,double u_x,double u_y,double a_ux,double a_uy,double L)
+{
+  double u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  return u_an;
+} 
+ 
+double anQ_v (double x,double y,double v_0,double v_x,double v_y,double a_vx,double a_vy,double L)
+{
+  double v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  return v_an;
+}
+
+double anQ_rho (double x,double y,double rho_0,double rho_x,double rho_y,double a_rhox,double a_rhoy,double L)
+{ 
+  double rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
+  return rho_an;
+}
 
 double SourceQ_e ( // 24
   double,
@@ -154,6 +179,11 @@ int main()
   double efield,efield2;
   double rho,rho2;
 
+  double u_an,u_an2;
+  double v_an,v_an2;
+  double p_an,p_an2;
+  double rho_an,rho_an2;
+
   // initalize
   int nx = 425;  // number of points
   int ny = 768;  
@@ -209,28 +239,54 @@ int main()
       {
 	x=i*dx;
 	y=j*dy;
-
+	
+	//evalulate source terms
 	masa_eval_u_source  (x,y,&ufield);
 	masa_eval_v_source  (x,y,&vfield);
 	masa_eval_e_source  (x,y,&efield);
 	masa_eval_rho_source(x,y,&rho);
 
-	ufield2   = SourceQ_u  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
-	vfield2   = SourceQ_v  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
-	rho2      = SourceQ_rho(x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);  
-	efield2   = SourceQ_e  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L);
-  
+	//evaluate analytical terms
+	masa_eval_u_an        (x,y,&u_an);
+	masa_eval_v_an        (x,y,&v_an);
+	masa_eval_p_an        (x,y,&p_an);
+	masa_eval_rho_an      (x,y,&rho_an);
+	  
+	// check against maple
+	ufield2 = SourceQ_u   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
+	vfield2 = SourceQ_v   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
+	rho2    = SourceQ_rho (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);  
+	efield2 = SourceQ_e   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L);
+	
+	u_an2   = anQ_u   (x,y,u_0,u_x,u_y,a_ux,a_uy,L);
+	v_an2   = anQ_v   (x,y,v_0,v_x,v_y,a_vx,a_vy,L);
+	rho_an2 = anQ_rho (x,y,rho_0,rho_x,rho_y,a_rhox,a_rhoy,L);
+	p_an2   = anQ_p   (x,y,p_0,p_x,p_y,a_px,a_py,L);
+	
 	// test the result is roughly zero
-	ufield=ufield-ufield2;
-	vfield=vfield-vfield2;
-	efield=efield-efield2;
-	rho   =rho-rho2;
-  
+	ufield = ufield-ufield2;
+	vfield = vfield-vfield2;
+	efield = efield-efield2;
+	rho    = rho-rho2;
+	
+	u_an   = u_an-u_an2;
+	v_an   = v_an-v_an2;
+	rho_an = rho_an-rho_an2;
+	p_an   = p_an-p_an2;
+
 	if(ufield > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "U Field Source Term\n";
 	    cout << "Exceeded Threshold by: " << ufield << endl;
+	    exit(1);
+	  }
+
+	if(u_an > threshold)
+	  {
+	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+	    cout << "U Field Analytical Term\n";
+	    cout << "Exceeded Threshold by: " << u_an << endl;
 	    exit(1);
 	  }
 
@@ -242,11 +298,27 @@ int main()
 	    exit(1);
 	  }
 
+	if(v_an > threshold)
+	  {
+	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+	    cout << "V Field Analytical Term\n";
+	    cout << "Exceeded Threshold by: " << v_an << endl;
+	    exit(1);
+	  }
+
 	if(efield > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "Energy Source Term\n";
 	    cout << "Exceeded Threshold by: " << efield << endl;
+	    exit(1);
+	  }
+
+	if(p_an > threshold)
+	  {
+	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+	    cout << "P Field Analytical Term\n";
+	    cout << "Exceeded Threshold by: " << p_an << endl;
 	    exit(1);
 	  }
 
@@ -257,6 +329,16 @@ int main()
 	    cout << "Exceeded Threshold by: " << rho << endl;
 	    exit(1);
 	  }
+
+	if(rho_an > threshold)
+	  {
+	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+	    cout << "RHO Analytical Term\n";
+	    cout << "Exceeded Threshold by: " << rho_an << endl;
+	    exit(1);
+	  }
+
+
       } // done iterating
   // tests passed
 
