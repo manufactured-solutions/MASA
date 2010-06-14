@@ -175,7 +175,7 @@ int main()
 
   // solutions
   double ufield,ufield2;
-  double vfield,vfield2;
+  double vfield,vfield2,vfield3;
   double efield,efield2;
   double rho,rho2;
 
@@ -265,7 +265,7 @@ int main()
 	
 	// test the result is roughly zero
 	ufield = ufield-ufield2;
-	vfield = vfield-vfield2;
+	vfield3= vfield-vfield2;
 	efield = efield-efield2;
 	rho    = rho-rho2;
 	
@@ -290,11 +290,11 @@ int main()
 	    exit(1);
 	  }
 
-	if(vfield > threshold)
+	if(vfield3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "V Field Source Term\n";
-	    cout << "Exceeded Threshold by: " << vfield << endl;
+	    cout << "Exceeded Threshold by: " << vfield3 << endl;
 	    exit(1);
 	  }
 
