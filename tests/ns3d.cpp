@@ -321,6 +321,12 @@ int main()
   double efield,efield2;
   double rho,rho2;
 
+  double u_an,u_an2;
+  double v_an,v_an2;
+  double w_an,w_an2;
+  double p_an,p_an2;
+  double rho_an,rho_an2;
+
   // initalize
   int nx = 20;             // number of points
   int ny = 10;
@@ -402,17 +408,31 @@ int main()
 	  y=j*dy;
 	  z=k*dz;
 
+	  // evalulate source terms
 	  masa_eval_u_source  (x,y,z,&ufield);
 	  masa_eval_v_source  (x,y,z,&vfield);
 	  masa_eval_w_source  (x,y,z,&wfield);
 	  masa_eval_e_source  (x,y,z,&efield);
 	  masa_eval_rho_source(x,y,z,&rho);
 
+	  // evaluate analytical terms
+	  masa_eval_u_an        (x,y,z,&u_an);
+	  masa_eval_v_an        (x,y,z,&v_an);
+	  masa_eval_p_an        (x,y,z,&p_an);
+	  masa_eval_rho_an      (x,y,z,&rho_an);	  
+
+	  // check against maple output
 	  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
 	  vfield2   = SourceQ_v  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
 	  wfield2   = SourceQ_w  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
 	  rho2      = SourceQ_rho(x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
 	  efield2   = SourceQ_e  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,Gamma,L,R,K);
+
+	  u_an2     = anQ_u   (x,y,z,u_0,u_x,u_y,u_z,a_ux,a_uy,a_uz,L);
+	  v_an2     = anQ_v   (x,y,z,v_0,v_x,v_y,v_z,a_vx,a_vy,a_vz,L);
+	  w_an2     = anQ_w   (x,y,z,w_0,w_x,w_y,w_z,a_wx,a_wy,a_wz,L);
+	  rho_an2   = anQ_rho (x,y,z,rho_0,rho_x,rho_y,rho_z,a_rhox,a_rhoy,a_rhoz,L);
+	  p_an2     = anQ_p   (x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L);
 
 	  // test the result is roughly zero
 	  ufield = ufield-ufield2;
@@ -420,6 +440,11 @@ int main()
 	  wfield = wfield-wfield2;
 	  efield = efield-efield2;
 	  rho    = rho-rho2;
+
+	  u_an   = u_an-u_an2;
+	  v_an   = v_an-v_an2;
+	  rho_an = rho_an-rho_an2;
+	  p_an   = p_an-p_an2;
   
 	  //cout << endl << ufield << endl << vfield << endl << efield << rho << endl;
 
@@ -431,11 +456,27 @@ int main()
 	      exit(1);
 	    }
 
+	  if(u_an > threshold)
+	    {
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "U Field Analytical Term\n";
+	      cout << "Exceeded Threshold by: " << u_an << endl;
+	      exit(1);
+	    }
+
 	  if(vfield > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
 	      cout << "V Field Source Term\n";
 	      cout << "Exceeded Threshold by: " << vfield << endl;
+	      exit(1);
+	    }
+	  
+	  if(v_an > threshold)
+	    {
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "V Field Analytical Term\n";
+	      cout << "Exceeded Threshold by: " << v_an << endl;
 	      exit(1);
 	    }
 
@@ -444,6 +485,14 @@ int main()
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
 	      cout << "W Field Source Term\n";
 	      cout << "Exceeded Threshold by: " << wfield << endl;
+	      exit(1);
+	    }
+
+	  if(w_an > threshold)
+	    {
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "W Field Analytical Term\n";
+	      cout << "Exceeded Threshold by: " << w_an << endl;
 	      exit(1);
 	    }
 
@@ -456,6 +505,14 @@ int main()
 	      exit(1);
 	    }
 
+	  if(p_an > threshold)
+	    {
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "P Field Analytical Term\n";
+	      cout << "Exceeded Threshold by: " << p_an << endl;
+	      exit(1);
+	    }
+
 	  if(rho > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
@@ -463,6 +520,15 @@ int main()
 	      cout << "Exceeded Threshold by: " << rho << endl;
 	      exit(1);
 	    }
+
+	  if(rho_an > threshold)
+	    {
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "RHO Analytical Term\n";
+	      cout << "Exceeded Threshold by: " << rho_an << endl;
+	      exit(1);
+	    }
+
 	} // done iterating
 
   // tests passed
