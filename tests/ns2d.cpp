@@ -3,11 +3,36 @@
 //
 
 #include <masa.h>
-
+#include <math.h> 
 using namespace std;
 using namespace MASA;
 
+const double pi = acos(-1);
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
+
+double anQ_p (double x,double y,double p_0,double p_x,double p_y,double a_px,double a_py,double L)
+{
+  double p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
+  return p_an;
+}
+  
+double anQ_u (double x,double y,double u_0,double u_x,double u_y,double a_ux,double a_uy,double L)
+{
+  double u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  return u_an;
+} 
+ 
+double anQ_v (double x,double y,double v_0,double v_x,double v_y,double a_vx,double a_vy,double L)
+{
+  double v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  return v_an;
+}
+
+double anQ_rho (double x,double y,double rho_0,double rho_x,double rho_y,double a_rhox,double a_rhoy,double L)
+{ 
+  double rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
+  return rho_an;
+}
 
 double SourceQ_e (
   double,

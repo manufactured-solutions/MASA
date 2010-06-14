@@ -153,32 +153,28 @@ double MASA::navierstokes_2d_compressible::eval_q_e(double x,double y)
 double MASA::navierstokes_2d_compressible::eval_an_u(double x,double y)
 {
   double u_an;
-  cout << "No analytical solution exists!";
-  u_an=-1.33;
+  u_an = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L);
   return u_an;
 }
 
 double MASA::navierstokes_2d_compressible::eval_an_v(double x,double y)
 {
   double v_an;
-  cout << "No analytical solution exists!";
-  v_an=-1.33;
+  v_an = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
   return v_an;
 }
 
 double MASA::navierstokes_2d_compressible::eval_an_p(double x,double y)
 {
   double p_an;
-  cout << "No analytical solution exists!";
-  p_an=-1.33;
+  p_an = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L);
   return p_an;
 }
 
 double MASA::navierstokes_2d_compressible::eval_an_rho(double x,double y)
 {
   double rho_an;
-  cout << "No analytical solution exists!";
-  rho_an=-1.33;
+  rho_an = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L);
   return rho_an;
 }
 
@@ -336,39 +332,34 @@ double MASA::navierstokes_3d_compressible::eval_q_e(double x,double y,double z)
 double MASA::navierstokes_3d_compressible::eval_an_u(double x,double y,double z)
 {
   double u_an;
-  cout << "No analytical solution exists!";
-  u_an=-1.33;
+  u_an = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);  
   return u_an;
 }
 
 double MASA::navierstokes_3d_compressible::eval_an_v(double x,double y,double z)
 {
   double v_an;
-  cout << "No analytical solution exists!";
-  v_an=-1.33;
+  v_an = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
   return v_an;
 }
 
 double MASA::navierstokes_3d_compressible::eval_an_w(double x,double y,double z)
 {
   double w_an;
-  cout << "No analytical solution exists!";
-  w_an=-1.33;
+  w_an = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);
   return w_an;
 }
 
 double MASA::navierstokes_3d_compressible::eval_an_p(double x,double y,double z)
 {
   double p_an;
-  cout << "No analytical solution exists!";
-  p_an=-1.33;
+  p_an = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_z * cos(a_pz * PI * z / L);
   return p_an;
 }
 
 double MASA::navierstokes_3d_compressible::eval_an_rho(double x,double y,double z)
 {
   double rho_an;
-  cout << "No analytical solution exists!";
-  rho_an=-1.33;
+  rho_an = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L);
   return rho_an;
 }

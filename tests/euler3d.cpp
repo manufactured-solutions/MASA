@@ -3,13 +3,43 @@
 //
 
 #include <masa.h>
+#include <math.h>
 
 using namespace MASA;
 using namespace std;
 
-#define PI = acos(-1)
-
+const double pi = acos(-1);
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
+
+double anQ_p (double x,double y,double z,double p_0,double p_x,double p_y,double p_z,double a_px,double a_py,double a_pz,double L)
+{
+  double p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_z * cos(a_pz * pi * z / L);
+  return p_an;
+}
+ 
+double anQ_u (double x,double y,double z,double u_0,double u_x,double u_y,double u_z,double a_ux,double a_uy,double a_uz,double L)
+{
+  double u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_z * cos(a_uz * pi * z / L);  
+  return u_an;
+} 
+ 
+double anQ_v (double x,double y,double z,double v_0,double v_x,double v_y,double v_z,double a_vx,double a_vy,double a_vz,double L)
+{
+  double v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_z * sin(a_vz * pi * z / L);
+  return v_an;
+}
+
+double anQ_w (double x,double y,double z,double w_0,double w_x,double w_y,double w_z,double a_wx,double a_wy,double a_wz,double L)
+{
+  double w_an = w_0 + w_x * sin(a_wx * pi * x / L) + w_y * sin(a_wy * pi * y / L) + w_z * cos(a_wz * pi * z / L);
+  return w_an;
+}
+
+double anQ_rho (double x,double y,double z,double rho_0,double rho_x,double rho_y,double rho_z,double a_rhox,double a_rhoy,double a_rhoz,double L)
+{ 
+  double rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_z * sin(a_rhoz * pi * z / L);
+  return rho_an;
+}
 
 double SourceQ_e (
   double,
@@ -275,6 +305,12 @@ int main()
   double efield,efield2;
   double rho,rho2;
 
+  double u_an,u_an2;
+  double v_an,v_an2;
+  double w_an,w_an2;
+  double p_an,p_an2;
+  double rho_an,rho_an2;
+
   // initalize
   int nx = 93;             // number of points
   int ny = 12;  
@@ -353,18 +389,32 @@ int main()
 	  y=j*dy;
 	  z=k*dz;
 
+	  //evalulate source terms
 	  masa_eval_u_source  (x,y,z,&ufield);
 	  masa_eval_v_source  (x,y,z,&vfield);
 	  masa_eval_w_source  (x,y,z,&wfield);
 	  masa_eval_e_source  (x,y,z,&efield);
 	  masa_eval_rho_source(x,y,z,&rho);
 
+	  //evaluate analytical terms
+	  masa_eval_u_an        (x,y,z,&u_an);
+	  masa_eval_v_an        (x,y,z,&v_an);
+	  masa_eval_p_an        (x,y,z,&p_an);
+	  masa_eval_rho_an      (x,y,z,&rho_an);	  
+
+	  // check against maple output
 	  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,L);
 	  vfield2   = SourceQ_v  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,L);
 	  wfield2   = SourceQ_w  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,L);
 	  rho2      = SourceQ_rho(x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L);
 	  efield2   = SourceQ_e  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,Gamma,L);
   
+	  u_an2     = anQ_u   (x,y,z,u_0,u_x,u_y,u_z,a_ux,a_uy,a_uz,L);
+	  v_an2     = anQ_v   (x,y,z,v_0,v_x,v_y,v_z,a_vx,a_vy,a_vz,L);
+	  w_an2     = anQ_w   (x,y,z,w_0,w_x,w_y,w_z,a_wx,a_wy,a_wz,L);
+	  rho_an2   = anQ_rho (x,y,z,rho_0,rho_x,rho_y,rho_z,a_rhox,a_rhoy,a_rhoz,L);
+	  p_an2     = anQ_p   (x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L);
+	  
 	  // test the result is roughly zero
 	  ufield= ufield-ufield2;
 	  vfield= vfield-vfield2;
@@ -372,14 +422,27 @@ int main()
 	  efield= efield-efield2;
 	  rho   = rho-rho2;
 
+	  u_an   = u_an-u_an2;
+	  v_an   = v_an-v_an2;
+	  rho_an = rho_an-rho_an2;
+	  p_an   = p_an-p_an2;
+	  
 	  //masa_display_param();  
 	  //cout << endl << ufield << endl << vfield << endl << efield << rho << endl;
 
 	  if(ufield > threshold)
 	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "U Field Source Term\n";
 	      cout << "Exceeded Threshold by: " << ufield << endl;
+	      exit(1);
+	    }
+	  
+	  if(u_an > threshold)
+	    {
+	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
+	      cout << "U Field Analytical Term\n";
+	      cout << "Exceeded Threshold by: " << u_an << endl;
 	      exit(1);
 	    }
 
@@ -391,11 +454,27 @@ int main()
 	      exit(1);
 	    }
 
+	  if(v_an > threshold)
+	    {
+	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
+	      cout << "V Field Analytical Term\n";
+	      cout << "Exceeded Threshold by: " << v_an << endl;
+	      exit(1);
+	    }
+
 	  if(wfield > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "W Field Source Term\n";
 	      cout << "Exceeded Threshold by: " << wfield << endl;
+	      exit(1);
+	    }
+
+	  if(w_an > threshold)
+	    {
+	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
+	      cout << "W Field Analytical Term\n";
+	      cout << "Exceeded Threshold by: " << w_an << endl;
 	      exit(1);
 	    }
 
@@ -407,11 +486,27 @@ int main()
 	      exit(1);
 	    }
 
+	  if(p_an > threshold)
+	    {
+	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
+	      cout << "P Field Analytical Term\n";
+	      cout << "Exceeded Threshold by: " << p_an << endl;
+	      exit(1);
+	    }
+
 	  if(rho > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "RHO Source Term\n";
 	      cout << "Exceeded Threshold by: " << rho << endl;
+	      exit(1);
+	    }
+
+	  if(rho_an > threshold)
+	    {
+	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
+	      cout << "RHO Analytical Term\n";
+	      cout << "Exceeded Threshold by: " << rho_an << endl;
 	      exit(1);
 	    }
 	  
