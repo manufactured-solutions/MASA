@@ -1,6 +1,6 @@
 #include <math.h>
 
-#define PI acos(-1)
+const double PI = acos(-1);
 
 double SourceQ_e ( // 40
   double x,
