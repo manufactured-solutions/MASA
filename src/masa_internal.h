@@ -67,15 +67,15 @@ namespace MASA
   {
     
   private: 
-    double Tan;                             // analytical solution 
-    double Q;                               // source term
-    double gradT;                           // gradient 
+    double Tan;                          // analytical solution 
+    double Q;                            // source term
+    double gradT;                        // gradient 
     
   protected:
-    double PI;                            // 3.1415... defined in constructor
-
+    static const double PI;              // 3.1415... defined in constructor
+    static const double MASA_VAR_DEFAULT;   
+    double dummy;
     int num_vars;
-    double MASA_VAR_DEFAULT;
 
     map<string,int> varmap;               // map to each variable
     vector<double*>  vararr;              // arr of pointers to each variable
@@ -198,7 +198,6 @@ namespace MASA
   class MASA_Test : public manufactured_solution 
   {
   private:
-    double dummy;
     double demo_var_2;
     double demo_var_3;
   public:
@@ -213,8 +212,6 @@ namespace MASA
   class heateq_1d_steady_const : public manufactured_solution 
   {
   private:
-    double dummy;
-
     double A_x;
     double k_0;    
   public:
@@ -227,8 +224,6 @@ namespace MASA
   class heateq_2d_steady_const : public manufactured_solution 
   {
   private:
-    double dummy;
-
     double A_x;
     double k_0;
     double B_y;
@@ -242,8 +237,6 @@ namespace MASA
   class heateq_3d_steady_const : public manufactured_solution 
   {
   private:
-    double dummy;
-
     double A_x;
     double k_0;
     double B_y;
@@ -261,7 +254,6 @@ namespace MASA
   class heateq_1d_unsteady_const : public manufactured_solution 
   {
   private:
-    double dummy;
     double A_x;
     double A_t;
     double D_t;
@@ -278,8 +270,6 @@ namespace MASA
   class heateq_2d_unsteady_const : public manufactured_solution 
   {
   private:
-    double dummy;
-
     double A_x;
     double A_t;
     double B_y;
@@ -298,8 +288,6 @@ namespace MASA
   class heateq_3d_unsteady_const : public manufactured_solution 
   {
   private:
-    double dummy;
-
     double A_x;
     double A_t;
     double B_y;
@@ -324,8 +312,6 @@ namespace MASA
   class heateq_1d_unsteady_var : public manufactured_solution 
   {
   private:
-    double dummy;
-
     double A_x;
     double A_t;
     double D_t;
@@ -346,8 +332,6 @@ namespace MASA
   class heateq_2d_unsteady_var : public manufactured_solution 
   {
   private:
-    double dummy;
-
     double A_x;
     double A_t;
     double B_y;
@@ -370,8 +354,6 @@ namespace MASA
   class heateq_3d_unsteady_var : public manufactured_solution 
   {
   private:
-    double dummy;
-
     double A_x;
     double A_t;
     double B_y;
@@ -400,8 +382,6 @@ namespace MASA
   class heateq_1d_steady_var : public manufactured_solution 
   {
   private:
-    double dummy;
-
     double A_x;
     double k_0;
     double k_1;
@@ -416,8 +396,6 @@ namespace MASA
   class heateq_2d_steady_var : public manufactured_solution 
   {
   private:
-    double dummy;
-    
     double A_x;
     double k_0;
     double k_1;
@@ -433,8 +411,6 @@ namespace MASA
   class heateq_3d_steady_var : public manufactured_solution 
   {
   private:
-    double dummy;
-
     double A_x;
     double k_0;
     double k_1;

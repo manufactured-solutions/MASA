@@ -45,13 +45,18 @@ using namespace MASA;
  *
  * -----------------------------------------------
  */ 
+
 MASA::manufactured_solution::manufactured_solution()
-{
-  MASA_VAR_DEFAULT = -12345.67; // default -- initialize each var to 'crazy' value
-  PI               = acos(-1);
+{  
   num_vars=0;                   // default -- will ++ for each registered variable
-  vararr.push_back(&MASA_VAR_DEFAULT);   // dummy used to start index at correct location
+  dummy=0;
+  vararr.push_back(&dummy);   // dummy used to start index at correct location
 }
+
+// define PI and other constants
+const double MASA::manufactured_solution::PI = acos(-1);
+const double MASA::manufactured_solution::MASA_VAR_DEFAULT = -12345.67; // default -- initialize each var to 'crazy' value
+
 void MASA::manufactured_solution::get_var(string var, double* sol)
 {
   int selector=1;
