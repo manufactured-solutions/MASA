@@ -117,6 +117,11 @@ namespace MASA
   int masa_eval_2d_grad(int,double,double,double*);
   int masa_eval_3d_grad(int,double,double,double,double*);
 
+  // --------------------------------
+  // internal masa functions user might want to call
+  // --------------------------------
+  int masa_map (string*);
+  int masa_map2(string, string);
 
   // --------------------------------
   // old masa core functions (to be called by user)

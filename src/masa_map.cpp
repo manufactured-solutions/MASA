@@ -285,7 +285,7 @@ int MASA::masa_map_temporal(string input_string, string return_string)
 }// end masa_map_temporal
 
 // get string, parse it, and return the string name of the solution we want
-int MASA::masa_map(string input_string, string return_string)
+int MASA::masa_map2(string input_string, string return_string)
 {
   int error; // simple error handler
   int n=0;
@@ -331,3 +331,16 @@ int MASA::masa_map(string input_string, string return_string)
   
   return 0;
 }
+
+int MASA::masa_map(string* input_string)
+{
+  // fix up the input given
+  string temp;
+  temp = *input_string;
+  temp = uptolow(temp);
+  temp = remove_line(temp);
+  temp = remove_whitespace(temp);
+  *input_string=temp;
+  return 0;
+
+}//done with masa_map

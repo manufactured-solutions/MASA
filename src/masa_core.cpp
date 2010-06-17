@@ -123,18 +123,19 @@ int get_list_mms(vector<manufactured_solution*>* anim)
 int MASA::masa_init(string unique_name, string str)
 {
   int flag=0;
-  string name;
+  string name,temp;
   int error=1;
   vector<manufactured_solution*> anim;
 
   get_list_mms(&anim); //construct list 
- 
-  // masa_map();  
+  
+  temp=str;
+  masa_map(&temp); // remove lowercase, etc.
 
   for (vector<manufactured_solution*>::const_iterator it = anim.begin(); it != anim.end(); ++it) 
     {
       (*it)->return_name(&name); // get name
-      error=str.rfind(name);   // look for name -- must be identical to full name
+      error=temp.rfind(name);   // look for name -- must be identical to full name, after masa_map edits
       if (error!=string::npos) // found a value
 	{
 	  masa_master_list[unique_name]=*it; // write down name 
