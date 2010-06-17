@@ -6,7 +6,7 @@ if USE_INTEL
 endif
 
 if USE_GNU
-  AM_CPPFLAGS          += -fno-unsafe-math-optimizations
+  AM_CPPFLAGS          += -fno-unsafe-math-optimizations -Wunsafe-loop-optimizations
 endif
 
 bin_PROGRAMS              = heat_const_steady \

@@ -1,6 +1,11 @@
 #include <math.h>
 
-double PI = acos(-1);
+//#ifdef linux
+#include <fpu_control.h>
+//#endif
+
+//#define PI M_PI
+const double PI = acos(-1);
 
 double SourceQ_e (
   double x,
@@ -90,6 +95,7 @@ double SourceQ_v (
   double L)
 {
   double Q_v;
+  fpu_control_t cw;
   Q_v = p_y * cos(a_py * PI * y / L) * a_py * PI / L + rho_x * cos(a_rhox * PI * x / L) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L)) * a_rhox * PI / L - sin(a_rhoy * PI * y / L) * rho_y * pow(v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L), 0.2e1) * a_rhoy * PI / L + cos(a_ux * PI * x / L) * u_x * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L)) * a_ux * PI / L - sin(a_vx * PI * x / L) * v_x * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L)) * a_vx * PI / L + 0.2e1 * cos(a_vy * PI * y / L) * v_y * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L)) * a_vy * PI / L;
   return(Q_v);
 }

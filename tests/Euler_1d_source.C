@@ -1,6 +1,7 @@
 #include <math.h>
 
-const double PI = acos(-1);
+#define PI M_PI
+//const double PI = acos(-1);
 
 double SourceQ_rho (
   double x,
