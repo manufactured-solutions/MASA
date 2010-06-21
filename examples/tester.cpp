@@ -30,38 +30,48 @@
   *--------------------------------------------------------------------------
   */  
 
-// this is just a program I have to play around with
 
-#include <masa.h>
+/* this is just a program I have to play around with
+   features that appear in this example may be:
 
-using namespace MASA;
+   - depreciated
+   - experimental
+   - dangerous
 
-void masa_shell_print_avail()
-{
+   use at your own risk
 
-  masa_printid();
+*/
 
-}
+
+#include <cmasa.h>
 
 int main()
 {
-  string blah;
   double sol;
+  
+  // init
+  cmasa_init("nick","heateq_1d_steady_const");
+  cmasa_init_param();
 
-  masa_shell_print_avail();
-  cout << endl << endl;
-  masa_init("nick","heateq_1d_steady_const");
-  masa_init( "bob","heateq_2d_steady_const");
-  masa_list_mms();
+  cmasa_init( "bob","heateq_2d_steady_const");
+  cmasa_init_param();
 
-  masa_select_mms("nick");
-  masa_display_param();
-  masa_eval_t_source(1.2,1.2,&sol);
+  // list
+  cmasa_list_mms();
+
+  // switch
+  cmasa_select_mms("nick");
+  cmasa_display_param();
+
+  //check all initialized properly
+  cmasa_sanity_check();
+  /*
+  masa_eval_t_source(1.2,&sol);
   cout << sol << endl;
 
   masa_select_mms("bob");
   masa_display_param();
   masa_eval_t_source(1,1,&sol);
   cout << sol << endl;
-
+  */
 }

@@ -43,3 +43,20 @@ int cmasa_list_mms()
   return 0;
 }
 
+int cmasa_init_param()
+{
+  masa_init_param();
+  return 0;
+}
+
+int cmasa_sanity_check()
+{
+  masa_sanity_check();
+  return 0;
+}
+
+int cmasa_display_param()
+{
+  masa_display_param();
+  return 0;
+}

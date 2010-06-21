@@ -42,14 +42,14 @@ extern int cmasa_select_mms(char*);
 extern int cmasa_curr_mms  (char*);
 extern int cmasa_list_mms  ();
 
-/*
 // --------------------------------
 // interact with mms variables
 // --------------------------------
 int cmasa_init_param();
-int cmasa_set_param(char*,double);
-int cmasa_get_param(char*,double*);
+//int cmasa_set_param(char*,double);
+//int cmasa_get_param(char*,double*);
 
+/*
 // --------------------------------
 // source term(s) -- 1D
 // --------------------------------
@@ -107,9 +107,10 @@ int cmasa_eval_3d_grad(int,double,double,double,double*);
 // --------------------------------
 // old masa core functions (to be called by user)
 // --------------------------------
-int cmasa_display_param();
+
 int cmasa_get_name(char*);
 int cmasa_get_dimension(int*);
-int cmasa_sanity_check();
-
 */
+
+int cmasa_display_param();
+int cmasa_sanity_check();
