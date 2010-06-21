@@ -76,7 +76,9 @@ int main()
       {  
 	tempx=i*dx;
 	tempy=j*dy;
+
 	masa_eval_t_source  (tempx,tempy,&tfield);
+	
       }
 
 }// end program
