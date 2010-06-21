@@ -54,8 +54,8 @@ int MASA::masa_select_mms(string name)
   it=masa_master_list.find(name);
   if(it != masa_master_list.end()) // found a name
     { 
-      // cout << "selected " << name << endl;
-      masa_master_list[name]=masa_master_pointer; // set pointer to currently selected solution      
+      cout << "selected " << name << endl;
+      masa_master_pointer=masa_master_list[name]; // set pointer to currently selected solution      
     }      
   else 
     {

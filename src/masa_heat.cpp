@@ -59,7 +59,10 @@ MASA::heateq_1d_steady_const::heateq_1d_steady_const()
 
 void MASA::heateq_1d_steady_const::init_var()
 {
-
+  
+  masa_set_param("A_x",1.4);
+  masa_set_param("k_0",.82);
+  
 }
 
 double MASA::heateq_1d_steady_const::eval_q_t(double x)
