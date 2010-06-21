@@ -1,19 +1,25 @@
-INCLUDES                = -I$(top_srcdir)/src -I$(top_builddir)/src
-bin_PROGRAMS            = tester MASAshell euler_example navierstokes_example heat_example
+INCLUDES      = -I$(top_srcdir)/src -I$(top_builddir)/src
+AM_FCFLAGS    = $(INCLUDES)
+AM_CFLAGS     = $(INCLUDES)
+AM_CPPFLAGS   = $(INCLUDES)
+LIBS          = -L$(top_builddir)/src -lmasa
 
-MASAshell_SOURCES       = masa_shell.cpp
-MASAshell_LDADD         = -L$(top_srcdir)/src -lmasa
+bin_PROGRAMS  = tester MASAshell euler_example navierstokes_example heat_example switch
+#bin_PROGRAMS += C_euler_example
 
-heat_example_SOURCES   = heat-eq.cpp
-heat_example_LDADD     = -L$(top_srcdir)/src -lmasa
+# ----------------- 
+#    CPP
+# ----------------- 
 
-euler_example_SOURCES   = euler_example.cpp
-euler_example_LDADD     = -L$(top_srcdir)/src -lmasa
+MASAshell_SOURCES            = masa_shell.cpp
+heat_example_SOURCES         = heat-eq.cpp
+euler_example_SOURCES        = euler_example.cpp
+navierstokes_example_SOURCES = compressible_navier_stokes_example.cpp
+switch_SOURCES               = switch.cpp
+tester_SOURCES               = tester.cpp
 
-navierstokes_example_SOURCES   = compressible_navier_stokes_example.cpp
-navierstokes_example_LDADD     = -L$(top_srcdir)/src -lmasa
+# ----------------- 
+#    C
+# ----------------- 
 
-tester_SOURCES       = tester.cpp
-tester_LDADD         = -L$(top_srcdir)/src -lmasa
-
-#MASAshell_CFLAGS = -I $(top_srcdir) -I $(top_builddir)/src
+#C_euler_example_SOURCES       = ceuler_example.c
