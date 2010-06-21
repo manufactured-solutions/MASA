@@ -31,15 +31,8 @@
   */  
 
 
-/* this is just a program I have to play around with
-   features that appear in this example may be:
-
-   - depreciated
-   - experimental
-   - dangerous
-
-   use at your own risk
-
+/* 
+  - this is an example of the heat equation in 1d for C-language -
 */
 
 
@@ -73,4 +66,6 @@ int main()
   cmasa_display_param();
   cmasa_eval_t_source(1,1,&sol);
   printf("\nt source: %g\n",sol);
+
+  return 0; // done
 }

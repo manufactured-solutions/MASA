@@ -49,7 +49,6 @@ int cmasa_init_param();
 //int cmasa_set_param(char*,double);
 //int cmasa_get_param(char*,double*);
 
-/*
 // --------------------------------
 // source term(s) -- 1D
 // --------------------------------
@@ -110,7 +109,6 @@ int cmasa_eval_3d_grad(int,double,double,double,double*);
 
 int cmasa_get_name(char*);
 int cmasa_get_dimension(int*);
-*/
 
 int cmasa_display_param();
 int cmasa_sanity_check();

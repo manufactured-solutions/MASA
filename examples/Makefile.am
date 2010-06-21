@@ -5,6 +5,7 @@ AM_CPPFLAGS   = $(INCLUDES)
 LIBS          = -L$(top_builddir)/src -lmasa
 
 bin_PROGRAMS  = tester MASAshell euler_example navierstokes_example heat_example switch
+bin_PROGRAMS += C_heat_example
 #bin_PROGRAMS += C_euler_example
 
 # ----------------- 
@@ -22,4 +23,5 @@ tester_SOURCES               = tester.cpp
 #    C
 # ----------------- 
 
+c_heat_example_SOURCES       = c_heat_example.cpp
 #C_euler_example_SOURCES       = ceuler_example.c
