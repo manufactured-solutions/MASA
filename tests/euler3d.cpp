@@ -1,5 +1,5 @@
 //
-// program that tests euler-2d against known source term generated from maple
+// program that tests euler-3d against known source term generated from maple
 //
 
 #include <masa.h>

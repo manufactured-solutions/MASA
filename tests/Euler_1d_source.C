@@ -1,7 +1,7 @@
 #include <math.h>
+//#include <fpu_control.h>
 
-#define PI M_PI
-//const double PI = acos(-1);
+double PI = acos(-1);
 
 double SourceQ_rho (
   double x,
