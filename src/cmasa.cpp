@@ -5,12 +5,6 @@
 using namespace std;
 using namespace MASA;
 
-char *asd(char* in, char *out)
-{
-  strcat(out, in); // <-- err arg 2 makes pointer from integer without a cast
-  return out;
-}
-
 int cmasa_init(char* specificname,char* functionname)
 {
   string sn(specificname);
