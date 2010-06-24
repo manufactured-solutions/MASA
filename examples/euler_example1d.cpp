@@ -30,24 +30,52 @@
   *--------------------------------------------------------------------------
   */  
 
-// this is an example of the MASA C API used for calling the 1D euler equation
+// this is an example of the MASA API used for calling the 1D euler equation
 
-#include <cmasa.h>
+#include <masa.h>
+#include <iostream>
+#include <fstream>
+
+using namespace MASA;
 
 int main()
 {
-  char* name = "nick solution";
-  char* specificname= "euler_1d";
-  
-  cmasa_init(name,specificname);
-  cmasa_list_mms();
+  // declarations
+  double tempx,tempy;
+  double ufield,vfield,efield,rho;	
+  double u_an,v_an,p_an,rho_an;
 
-  //cmasa_init_param();
-  //cmasa_sanity_check();
-  
-  //cmasa_eval_u_source();
-  //cmasa_eval_e_source();
-  //cmasa_eval_rho_source();
-  return 0;
-}
+  //problem size
+  double lx,dx;
+  int nx;
 
+  // initialize
+  nx = 10;  // number of points
+  lx=1;     // length
+  dx=double(lx/nx);
+
+  // initialize the problem
+  masa_init("euler-example","euler_1d");
+
+  // initialize the default parameters
+  masa_init_param();
+  masa_sanity_check();
+
+  // evaluate source terms over the domain (0<x<1)
+  for(int i=0;i<nx;i++)
+    {  
+      tempx=i*dx;
+
+      // evaluate source terms
+      masa_eval_u_source  (tempx,tempy,&ufield);
+      masa_eval_e_source  (tempx,tempy,&efield);
+      masa_eval_rho_source(tempx,tempy,&rho);
+      
+      //evaluate analytical solution
+      masa_eval_u_an        (tempx,tempy,&u_an);
+      masa_eval_p_an        (tempx,tempy,&p_an);
+      masa_eval_rho_an      (tempx,tempy,&rho_an);
+      
+    }
+  
+}// end program
