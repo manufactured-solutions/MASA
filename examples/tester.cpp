@@ -42,7 +42,6 @@
 
 */
 
-
 #include <cmasa.h>
 #include <stdio.h>
 

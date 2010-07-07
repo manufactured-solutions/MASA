@@ -42,7 +42,7 @@
 int main()
 {
   double sol;
-  
+
   // init
   cmasa_init("nick","heateq_1d_steady_const");
   cmasa_init_param();

@@ -5,7 +5,7 @@
 using namespace std;
 using namespace MASA;
 
-int cmasa_init(char* specificname,char* functionname)
+int cmasa_init(const char* specificname,const char* functionname)
 {
   string sn(specificname);
   string fn(functionname);
@@ -15,7 +15,7 @@ int cmasa_init(char* specificname,char* functionname)
   return 0;
 }
 
-int cmasa_select_mms(char* function_user_wants)
+int cmasa_select_mms(const char* function_user_wants)
 {
   string fuw(function_user_wants);
   masa_select_mms(fuw);

@@ -4,7 +4,7 @@ AM_CFLAGS     = $(INCLUDES)
 AM_CPPFLAGS   = $(INCLUDES)
 LIBS          = -L$(top_builddir)/src -lmasa
 
-bin_PROGRAMS  = verify tester MASAshell euler_example navierstokes_example heat_example switch
+bin_PROGRAMS  = verify MASAshell euler_example navierstokes_example heat_example switch #tester 
 bin_PROGRAMS += c_heat_example
 
 # ----------------- 
@@ -18,7 +18,7 @@ heat_example_SOURCES         = heat-eq.cpp
 euler_example_SOURCES        = euler_example.cpp
 navierstokes_example_SOURCES = compressible_navier_stokes_example.cpp
 switch_SOURCES               = switch.cpp
-tester_SOURCES               = tester.cpp
+#tester_SOURCES               = tester.cpp
 
 # ----------------- 
 #    C

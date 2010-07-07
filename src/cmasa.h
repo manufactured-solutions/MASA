@@ -37,9 +37,9 @@
 // --------------------------------
 // new masa api function
 // --------------------------------
-extern int cmasa_init      (char*, char*);
-extern int cmasa_select_mms(char*);
-extern int cmasa_curr_mms  (char*);
+extern int cmasa_init      (const char*, const char*);
+extern int cmasa_select_mms(const char*);
+extern int cmasa_curr_mms  (const char*);
 extern int cmasa_list_mms  ();
 
 // --------------------------------
@@ -107,7 +107,7 @@ int cmasa_eval_3d_grad(int,double,double,double,double*);
 // old masa core functions (to be called by user)
 // --------------------------------
 
-int cmasa_get_name(char*);
+int cmasa_get_name(const char*);
 int cmasa_get_dimension(int*);
 
 int cmasa_display_param();
