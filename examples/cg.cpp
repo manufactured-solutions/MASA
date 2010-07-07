@@ -20,9 +20,25 @@ double linf(double *x1,int n)
   double scal=0;
   for(int i=0;i<n;i++)
     {    
+      //cout << "hit " << x1[i] << endl;
+	  
       if(x1[i]>scal)
-	scal=x1[i];
+	{
+	  scal=x1[i];
+	}
     }
+  return scal;
+}
+
+// return L2 norm
+double l2(double *x1,int n)
+{
+  double scal=0;
+  for(int i=0;i<n;i++)
+    {    
+      scal += x1[i]*x1[i];
+    }
+  //scal=sqrt(scal);
   return scal;
 }
 
@@ -38,11 +54,12 @@ int cg(int n,double* A,double* b,double* x)
   double p[n];  // search vector
   double alpha; // step length
   double beta;  // improvement
-
+  
   double thresh = 1e-15;
-  int it =0;
+  int it = 0;
+  int count = 20;
   double temp[n];  // temp vector
-
+  
   for(int i=0;i<n;i++)
     {
       // initialize residual to RHS
@@ -58,7 +75,8 @@ int cg(int n,double* A,double* b,double* x)
     }
 
   //begin iteration
-  while(linf(&r[0],n)>thresh)
+  //while(linf(&r[0],n)>thresh)
+  while(n > it)
     {
       // calc A p_{n-1}
       for(int ii=0;ii<n;ii++)
@@ -72,6 +90,7 @@ int cg(int n,double* A,double* b,double* x)
       
       // update step length
       alpha = scalar(&ro[0],&ro[0],n)/scalar(&p[0],&temp[0],n);
+      //cout << "alpha is: " << alpha << endl;
 
       // update approx solution & residual 
       for(int ii=0;ii<n;ii++)
@@ -91,12 +110,17 @@ int cg(int n,double* A,double* b,double* x)
 	}
       
       it++;
-      
+      //cout << r[0] << endl;
+      //cout << "current thresh exceeded by " << l2(&r[0],n) << endl;
+
     }//done with iteration
 
   cout << "Performed " << it << " Iteration(s)" << endl;
   
 }
+
+// this is just a test routine to check the conjugate gradient solver
+//
 
 int main()
 {
@@ -108,10 +132,25 @@ int main()
   // init n:
   for(int i=0;i<n;i++)
     {
+      /*
       for(int j=0;j<n;j++)
 	{
 	  A[i][j]=i*n+j+1;	  
 	}
+      */
+
+      A[0][0]=1;
+      A[0][1]=2;
+      A[0][2]=3;
+
+      A[1][0]=2;
+      A[1][1]=1;
+      A[1][2]=5;
+
+      A[2][0]=3;
+      A[2][1]=5;
+      A[2][2]=1;
+
       b[0]=1;
       b[1]=2;
       b[2]=3;
