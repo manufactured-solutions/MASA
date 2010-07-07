@@ -47,9 +47,9 @@ int main()
   cmasa_init("nick","heateq_1d_steady_const");
   cmasa_init_param();
 
-  cmasa_init( "bob","heateq_2d_steady_const");
+  cmasa_init("bob","heateq_2d_steady_const");
   cmasa_init_param();
-
+  
   // list
   cmasa_list_mms();
 
