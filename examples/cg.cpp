@@ -116,5 +116,5 @@ int cg(int n,double* A,double* b,double* x)
     }//done with iteration
 
   cout << "Performed " << it << " Iteration(s)" << endl;
-  
+  return 0;
 }

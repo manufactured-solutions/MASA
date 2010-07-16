@@ -51,4 +51,4 @@ DX_INIT_DOXYGEN(MASA, doxygen/masa.dox, docs)
 AC_OUTPUT( Makefile src/Makefile examples/Makefile tests/Makefile doxygen/Makefile)
 
 # FINAL SUMMARY
-# AX_SUMMARIZE_CONFIG 
+ AX_SUMMARIZE_CONFIG 
