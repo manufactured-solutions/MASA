@@ -137,6 +137,7 @@ namespace MASA
 
     virtual double eval_q_rho(double)              {cout << "MASA ERROR: Source Term (rho) is unavailable or not properly loaded."; return -1.33;};  // returns value of source term (density)
     virtual double eval_q_rho(double,double)       {cout << "MASA ERROR: Source Term (rho) is unavailable or not properly loaded."; return -1.33;};  // returns value of source term (density)
+    virtual double eval_q_rho_u(double,double)       {cout << "MASA ERROR: Source Term (rho) is unavailable or not properly loaded."; return -1.33;};  // returns value of source term (density) -- 1d Sod
     virtual double eval_q_rho(double,double,double){cout << "MASA ERROR: Source Term (rho) is unavailable or not properly loaded."; return -1.33;};  // returns value of source term (density)
 
     // gradient 
@@ -568,6 +569,25 @@ namespace MASA
     double eval_an_q  (double,double,double);
     double eval_an_p  (double,double,double);
     double eval_an_rho(double,double,double);
+
+  };
+
+  // ------------------------------------------------------
+  // ---------- sod 1d ------------
+  // ------------------------------------------------------
+  class sod_1d : public manufactured_solution
+  {
+    double Gamma;
+    double mu;
+
+  public:
+    sod_1d(); // constructor    
+    void   init_var();          // default problem values
+
+    double eval_q_rho   (double,double);
+    double eval_q_rho_u (double,double);
+    double func         (double);  // helper function
+    double rtbis(double,double,double);
 
   };
 

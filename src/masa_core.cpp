@@ -110,6 +110,8 @@ int get_list_mms(vector<manufactured_solution*>* anim)
   anim->push_back(new euler_2d());
   anim->push_back(new euler_3d());
 
+  anim->push_back(new sod_1d());
+
   anim->push_back(new navierstokes_2d_compressible());
   anim->push_back(new navierstokes_3d_compressible());
 
@@ -325,6 +327,12 @@ int MASA::masa_eval_u_source(double x,double* field)
 int MASA::masa_eval_rho_source(double x,double* field)
 {
   *field=masa_master_pointer->eval_q_rho(x);
+  return 0;
+}
+
+int MASA::masa_eval_rho_u_source(double x,double t,double* field)
+{
+  *field=masa_master_pointer->eval_q_rho_u(x,t);
   return 0;
 }
 
