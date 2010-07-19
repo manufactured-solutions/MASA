@@ -278,6 +278,7 @@ int main()
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "U Field Source Term\n";
 	    cout << "Exceeded Threshold by: " << ufield << endl;
+	    cout << x <<  endl;
 	    exit(1);
 	  }
 
@@ -286,6 +287,7 @@ int main()
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "U Field Analytical Term\n";
 	    cout << "Exceeded Threshold by: " << u_an << endl;
+	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
 
@@ -294,6 +296,7 @@ int main()
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "V Field Source Term\n";
 	    cout << "Exceeded Threshold by: " << vfield3 << endl;
+	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
 
@@ -302,6 +305,7 @@ int main()
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "V Field Analytical Term\n";
 	    cout << "Exceeded Threshold by: " << v_an << endl;
+	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
 
@@ -310,6 +314,7 @@ int main()
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "Energy Source Term\n";
 	    cout << "Exceeded Threshold by: " << efield << endl;
+	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
 
@@ -318,6 +323,7 @@ int main()
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "P Field Analytical Term\n";
 	    cout << "Exceeded Threshold by: " << p_an << endl;
+	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
 
@@ -326,6 +332,7 @@ int main()
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "RHO Source Term\n";
 	    cout << "Exceeded Threshold by: " << rho << endl;
+	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
 
@@ -334,6 +341,7 @@ int main()
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "RHO Analytical Term\n";
 	    cout << "Exceeded Threshold by: " << rho_an << endl;
+	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
 

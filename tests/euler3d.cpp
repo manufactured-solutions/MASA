@@ -443,6 +443,7 @@ int main()
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "U Field Analytical Term\n";
 	      cout << "Exceeded Threshold by: " << u_an << endl;
+	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
 
@@ -451,6 +452,7 @@ int main()
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "V Field Source Term\n";
 	      cout << "Exceeded Threshold by: " << vfield << endl;
+	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
 
@@ -459,6 +461,7 @@ int main()
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "V Field Analytical Term\n";
 	      cout << "Exceeded Threshold by: " << v_an << endl;
+	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
 
@@ -467,6 +470,7 @@ int main()
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "W Field Source Term\n";
 	      cout << "Exceeded Threshold by: " << wfield << endl;
+	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
 
@@ -475,6 +479,7 @@ int main()
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "W Field Analytical Term\n";
 	      cout << "Exceeded Threshold by: " << w_an << endl;
+	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
 
@@ -483,6 +488,7 @@ int main()
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "Energy Source Term\n";
 	      cout << "Exceeded Threshold by: " << efield << endl;
+	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
 
@@ -491,6 +497,7 @@ int main()
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "P Field Analytical Term\n";
 	      cout << "Exceeded Threshold by: " << p_an << endl;
+	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
 
@@ -499,6 +506,7 @@ int main()
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "RHO Source Term\n";
 	      cout << "Exceeded Threshold by: " << rho << endl;
+	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
 
@@ -507,6 +515,7 @@ int main()
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "RHO Analytical Term\n";
 	      cout << "Exceeded Threshold by: " << rho_an << endl;
+	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
 	  
