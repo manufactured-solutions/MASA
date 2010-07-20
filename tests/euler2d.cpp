@@ -263,22 +263,22 @@ int main()
 	p_an2   = anQ_p   (x,y,p_0,p_x,p_y,a_px,a_py,L);
 	
 	// test the result is roughly zero
-	ufield3 = fabs(ufield-ufield2)/fabs(ufield2); // converting to relative error
-	vfield3 = fabs(vfield-vfield2)/fabs(vfield2); // converting to relative error
-	efield3 = fabs(efield-efield2)/fabs(efield2); // converting to relative error
-	rho    = rho-rho2;
+	ufield3 = fabs(ufield-ufield2);
+	vfield3 = fabs(vfield-vfield2);
+	efield3 = fabs(efield-efield2);
+	rho     = fabs(rho-rho2);
 	
-	u_an   = u_an-u_an2;
+	u_an   = fabs(u_an-u_an2);
 	v_an3  = fabs(v_an-v_an2);
-	rho_an = rho_an-rho_an2;
-	p_an   = p_an-p_an2;
+	rho_an = fabs(rho_an-rho_an2);
+	p_an   = fabs(p_an-p_an2);
 
 	if(ufield3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "U Field Source Term\n";
 	    cout.precision(16);
-	    cout << "Exceeded (relative) Threshold by: " << ufield3 << endl;
+	    cout << "Exceeded Threshold by: " << ufield3 << endl;
 	    cout << "Source term is:                   " << ufield2 << endl;
 	    cout << "MASA term is:                     " << ufield << endl;
 	    cout << x << " " << y << endl;
@@ -300,7 +300,7 @@ int main()
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "V Field Source Term\n";
 	    cout.precision(16);
-	    cout << "Exceeded (relative) Threshold by: " << vfield3 << endl;
+	    cout << "Exceeded Threshold by: " << vfield3 << endl;
 	    cout << "Source term is:                   " << vfield2 << endl;
 	    cout << "MASA term is:                     " << vfield << endl;
 	    cout << x << " " << y << endl;
