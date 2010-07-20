@@ -263,7 +263,7 @@ int main()
 	p_an2   = anQ_p   (x,y,p_0,p_x,p_y,a_px,a_py,L);
 	
 	// test the result is roughly zero
-	ufield3 = fabs(ufield-ufield2);
+	ufield3 = fabs(ufield-ufield2)/fabs(ufield2); // converting to relative error
 	vfield3 = fabs(vfield-vfield2)/fabs(vfield2); // converting to relative error
 	efield3 = fabs(efield-efield2)/fabs(efield2); // converting to relative error
 	rho    = rho-rho2;
