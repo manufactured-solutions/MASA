@@ -1,9 +1,10 @@
 //
-// program that tests euler-2d against known source term generated from maple
+// program that tests navier-stokes 3d against known source term generated from maple
 //
 
 #include <masa.h>
 #include <math.h>
+#include <stdlib.h>
 
 using namespace std;
 using namespace MASA;
@@ -434,17 +435,17 @@ int main()
 	  rho_an2   = anQ_rho (x,y,z,rho_0,rho_x,rho_y,rho_z,a_rhox,a_rhoy,a_rhoz,L);
 	  p_an2     = anQ_p   (x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L);
 
-	  // test the result is roughly zero
-	  ufield = ufield-ufield2;
-	  vfield = vfield-vfield2;
-	  wfield = wfield-wfield2;
-	  efield3 = efield-efield2;
-	  rho    = rho-rho2;
+	  // test the result is nearly within double precision round-off error
+	  ufield  = fabs(ufield-ufield2);
+	  vfield  = fabs(vfield-vfield2);
+	  wfield  = fabs(wfield-wfield2);
+	  efield3 = fabs(efield-efield2)/fabs(efield);  // converting to relative error, not absolute
+	  rho     = fabs(rho-rho2);
 
-	  u_an   = u_an-u_an2;
-	  v_an   = v_an-v_an2;
-	  rho_an = rho_an-rho_an2;
-	  p_an   = p_an-p_an2;
+	  u_an    = fabs(u_an-u_an2);
+	  v_an    = fabs(v_an-v_an2);
+	  rho_an  = fabs(rho_an-rho_an2);
+	  p_an    = fabs(p_an-p_an2);
   
 	  //cout << endl << ufield << endl << vfield << endl << efield << rho << endl;
 
@@ -507,9 +508,9 @@ int main()
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
 	      cout << "Energy Source Term\n";
 	      cout.precision(16);
-	      cout << "Exceeded Threshold by: " << efield3 << endl;
-	      cout << "Source term is:        " << efield << endl;
-	      cout << "MASA term is:          " << efield2 << endl;
+	      cout << "Exceeded (relative) Threshold by: " << efield3 << endl;
+	      cout << "Source term is:                   " << efield << endl;
+	      cout << "MASA term is:                     " << efield2 << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
