@@ -173,7 +173,7 @@ int main()
   double y;
 
   // solutions -- efield is MASA term, efield2 is maple, efield3 is abs error between them
-  double ufield,ufield2;
+  double ufield,ufield2,ufield3;
   double vfield,vfield2,vfield3;
   double efield,efield2,efield3;
   double rho,rho2;
@@ -263,9 +263,9 @@ int main()
 	p_an2   = anQ_p   (x,y,p_0,p_x,p_y,a_px,a_py,L);
 	
 	// test the result is roughly zero
-	ufield = ufield-ufield2;
-	vfield3= fabs(vfield-vfield2)/fabs(vfield2); // converting to relative error
-	efield3 =fabs(efield-efield2)/fabs(efield2); // converting to relative error
+	ufield3 = fabs(ufield-ufield2);
+	vfield3 = fabs(vfield-vfield2)/fabs(vfield2); // converting to relative error
+	efield3 = fabs(efield-efield2)/fabs(efield2); // converting to relative error
 	rho    = rho-rho2;
 	
 	u_an   = u_an-u_an2;
@@ -273,13 +273,15 @@ int main()
 	rho_an = rho_an-rho_an2;
 	p_an   = p_an-p_an2;
 
-	if(ufield > threshold)
+	if(ufield3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "U Field Source Term\n";
-	    cout << "Exceeded Threshold by: " << ufield << endl;
 	    cout.precision(16);
-	    cout << x <<  endl;
+	    cout << "Exceeded (relative) Threshold by: " << ufield3 << endl;
+	    cout << "Source term is:                   " << ufield2 << endl;
+	    cout << "MASA term is:                     " << ufield << endl;
+	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
 
