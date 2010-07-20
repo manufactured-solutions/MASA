@@ -155,20 +155,20 @@ int main()
       p_an2   = anQ_p   (x,p_0,p_x,a_px,L);
 
       // test the result is roughly zero
-      ufield=ufield-ufield2;
-      efield=efield-efield2;
-      rho   =rho-rho2;
+      ufield = fabs(ufield-ufield2);
+      efield = fabs(efield-efield2);
+      rho    = fabs(rho-rho2);
 
-      u_an   = u_an-u_an2;
-      rho_an = rho_an-rho_an2;
-      p_an   = p_an-p_an2;
+      u_an   = fabs(u_an-u_an2);
+      rho_an = fabs(rho_an-rho_an2);
+      p_an   = fabs(p_an-p_an2);
    
       if(ufield > threshold)
 	{
 	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
 	  cout << "U Field Source Term\n";
 	  cout << "Exceeded Threshold by: " << ufield << endl;
-	      cout << x << " " << endl;
+	  cout << x << " " << endl;
 	  exit(1);
 	}
 
@@ -177,7 +177,7 @@ int main()
 	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
 	  cout << "U Field Analytical Term\n";
 	  cout << "Exceeded Threshold by: " << u_an << endl;
-	      cout << x << " " << endl;
+	  cout << x << " " << endl;
 	  exit(1);
 	}
 
