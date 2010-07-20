@@ -25,10 +25,13 @@ int cg(int,double*,double*,double*);
  * at that location.
  *
  */
-double source(double x)
+double source(double yp)
 {
-  double ret_val = (20 * a * x*x*x) + (6 * b * x);
-  return ret_val;
+  //double ret_val = (20 * a * x*x*x) + (6 * b * x);
+  //double ret_val = -(a*a*cos(a*x)+b*b*sin(b*x));
+  
+  double ret_val = pow(1-yp,2) * pow(1+yp,2) * (2 + 6*yp + 12*pow(yp,2) + 20*pow(yp,3)) + 4*pow(1-yp,2) * (1+yp) * (1 + 2*yp + 3*pow(yp,2) + 4*pow(yp,3) + 5*pow(yp,4)) - 4*(1-yp)*pow(1+yp,2) * (1 + 2*yp + 3*pow(yp,2) + 4*pow(yp,3) + 5*pow(yp,4)) + 2*pow(1-yp,2) * (yp + pow(yp,2) + pow(yp,3) + pow(yp,4) + pow(yp,5)) - 8*(1-yp)*(1+yp) * (yp + pow(yp,2) + pow(yp,3) + pow(yp,4) + pow(yp,5)) + 2*pow(1+yp,2) * (yp + pow(yp,2) + pow(yp,3) + pow(yp,4) + pow(yp,5)) - (pow(1-yp,2))*(pow(1+yp,2)*(pow(yp,5) + pow(yp,4) + pow(yp,3) + yp*yp + yp));
+																																																											      return ret_val;
 }
 
 /*
@@ -38,9 +41,11 @@ double source(double x)
  * at that location.
  *
  */
-double sol(double x)
+double an(double yp)
 {
-  double ret_val = (a* x*x*x*x*x) + (b* x*x*x) + (c*x) + d;
+  //double ret_val = (a* x*x*x*x*x) + (b* x*x*x) + (c*x) + d;
+  double ret_val = (pow(1-yp,2))*pow(1+yp,2)*(pow(yp,5) + pow(yp,4) +pow(yp,3) + yp*yp+ yp);
+  //double ret_val = cos(a*x) + sin(b*x);
   return ret_val;
 }
 
@@ -62,7 +67,8 @@ int finite_diff(int n,double L)
 
   double residual=0;
    
-  double dx = double(L/n); // this is also known as 'h'
+  double dx = double(L/(n-1)); // this is also known as 'h'
+  cout << "dx is: " << dx << endl;
   int lto;
 
   // init n:
@@ -128,17 +134,17 @@ int finite_diff(int n,double L)
   cout << "\n\nanalytical solution is: \n";
   for(int i=0;i<n;i++)
     {
-      cout << i*dx << " " << sol(i*dx) << endl;
+      cout << i*dx << " " << an(i*dx) << endl;
     }
 
 
   // now lets check this is in fact the correct solution
   for(int i=0;i<n;i++)
     {
-      residual += (dx*dx*x[i])-sol(i*dx);
+      residual += (dx*dx*x[i])-an(i*dx);
     }
 
-  cout << "residual is: " << residual << endl;
+  cout << "\n\nresidual is: " << residual << endl;
   return(1);
 }// end program
 
@@ -166,6 +172,6 @@ int main()
   finite_diff(40,2);
   */
 
-  finite_diff(10,.5);
+  finite_diff(10,1);
 
 }
