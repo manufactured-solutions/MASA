@@ -299,7 +299,7 @@ int main()
   double z;
 
   // solutions
-  double ufield,ufield2;
+  double ufield,ufield2,ufield3;
   double vfield,vfield2,vfield3;
   double wfield,wfield2;
   double efield,efield2,efield3;
@@ -416,7 +416,7 @@ int main()
 	  p_an2     = anQ_p   (x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L);
 	  
 	  // test the result is roughly zero
-	  ufield  = ufield-ufield2;
+	  ufield3 = fabs(ufield-ufield2)/fabs(ufield2);  // convert to relative error
 	  vfield3 = fabs(vfield-vfield2)/fabs(vfield2);  // convert to relative error
 	  wfield  = wfield-wfield2;
 	  efield3 = fabs(efield-efield2)/fabs(efield2);  // convert to relative error
@@ -430,12 +430,14 @@ int main()
 	  //masa_display_param();  
 	  //cout << endl << ufield << endl << vfield << endl << efield << rho << endl;
 
-	  if(ufield > threshold)
+	  if(ufield3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "U Field Source Term\n";
 	      cout.precision(16);
-	      cout << "Exceeded Threshold by: " << ufield << endl;
+	      cout << "Exceeded (relative) Threshold by: " << ufield3 << endl;
+	      cout << "Source term is:                   " << ufield2 << endl;
+	      cout << "MASA term is:                     " << ufield << endl;
 	      exit(1);
 	    }
 	  
