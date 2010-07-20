@@ -257,10 +257,10 @@ int main()
 	efield2   = SourceQ_e  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L,R,k);
 
 	// test the result is roughly zero
-	ufield = ufield-ufield2;
-	vfield = vfield-vfield2;
-	efield = efield-efield2;
-	rho    = rho-rho2;
+	ufield = fabs(ufield-ufield2);
+	vfield = fabs(vfield-vfield2);
+	efield = fabs(efield-efield2);
+	rho    = fabs(rho-rho2);
   
 	//cout << endl << ufield << endl << vfield << endl << efield << rho << endl;
 
