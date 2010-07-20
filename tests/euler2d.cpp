@@ -172,10 +172,10 @@ int main()
   double x;
   double y;
 
-  // solutions
+  // solutions -- efield is MASA term, efield2 is maple, efield3 is abs error between them
   double ufield,ufield2;
   double vfield,vfield2,vfield3;
-  double efield,efield2;
+  double efield,efield2,efield3;
   double rho,rho2;
 
   double u_an,u_an2;
@@ -265,7 +265,7 @@ int main()
 	// test the result is roughly zero
 	ufield = ufield-ufield2;
 	vfield3= fabs(vfield-vfield2)/fabs(vfield2); // converting to relative error
-	efield = efield-efield2;
+	efield3 =fabs(efield-efield2)/fabs(efield2); // converting to relative error
 	rho    = rho-rho2;
 	
 	u_an   = u_an-u_an2;
@@ -317,12 +317,14 @@ int main()
 	    exit(1);
 	  }
 
-	if(efield > threshold)
+	if(efield3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "Energy Source Term\n";
 	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << efield << endl;
+	    cout << "Exceeded Threshold by: " << efield3 << endl;
+	    cout << "Source term is:        " << efield2 << endl;
+	    cout << "MASA term is:          " << efield << endl;
 	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
