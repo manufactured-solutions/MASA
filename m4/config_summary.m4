@@ -10,7 +10,7 @@
 #
 # LAST MODIFICATION
 #
-#   2009-07-16
+#   2010-7-20
 #
 
 AC_DEFUN([AX_SUMMARIZE_CONFIG],
@@ -21,6 +21,7 @@ echo '----------------------------------- SUMMARY ------------------------------
 echo
 echo Package version............... : $PACKAGE-$VERSION
 echo
+echo C++ compiler.................. : $CXX
 echo Fortran compiler.............. : $FC
 echo Debug mode.................... : $enable_debug
 echo Fortran compiler flags........ : $FCFLAGS
@@ -31,15 +32,6 @@ echo Build host.................... : $BUILD_HOST
 echo Configure date................ : $BUILD_DATE
 echo Build architecture............ : $BUILD_ARCH
 echo SVN revision number........... : $BUILD_VERSION
-
-#echo
-#echo Optional Features:
-# if test $LINK_PETSC -eq 0; then
-#   echo '   'Link with PETSc............ : no
-# else
-#   echo '   'Link with PETSc............ : yes
-#   echo '   'PETSC DIR.................. : $PETSC_DIR
-# fi
 
 echo
 echo '-------------------------------------------------------------------------------'
