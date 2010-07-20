@@ -1,7 +1,7 @@
 INCLUDES      = -I$(top_srcdir)/src -I$(top_builddir)/src
 AM_FCFLAGS    = $(INCLUDES)
 AM_CFLAGS     = $(INCLUDES)
-AM_CPPFLAGS   = $(INCLUDES)
+AM_CXXFLAGS   = $(INCLUDES)
 LIBS          = -L$(top_builddir)/src -lmasa
 
 bin_PROGRAMS  = verify MASAshell euler_example navierstokes_example heat_example switch #tester 

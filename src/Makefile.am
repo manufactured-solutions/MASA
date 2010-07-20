@@ -5,14 +5,14 @@ cc_sources              = masa_core.cpp masa_class.cpp masa_map.cpp masa_heat.cp
 INCLUDES                = 
 AM_FCFLAGS              = $(INCLUDES)
 AM_CFLAGS               = $(INCLUDES)
-AM_CPPFLAGS             = $(INCLUDES) 
+AM_CXXFLAGS             = $(INCLUDES) -O0
 
 if USE_INTEL
-  AM_CPPFLAGS          += -fp-model precise
+  AM_CXXFLAGS          += -fp-model precise
 endif
 
 if USE_GNU
-  AM_CPPFLAGS          += -fno-unsafe-math-optimizations
+  AM_CXXFLAGS          += -fno-unsafe-math-optimizations
 endif
 
 lib_LTLIBRARIES         = libmasa.la

@@ -35,6 +35,13 @@ AM_CONDITIONAL([USE_INTEL],[test "$CXX" = "icpc"])
 AM_CONDITIONAL([USE_GNU],[test "$CXX" = "g++"])
 AM_SANITY_CHECK
 
+# ------------------------------
+# Flags
+# ------------------------------
+
+AM_CPPFLAGS="-O3 -g"
+AM_FCFLAGS="$FCFLAGS -g -DDEBUG"
+
 # ----------------
 # Doxygen support 
 # ---------------- 

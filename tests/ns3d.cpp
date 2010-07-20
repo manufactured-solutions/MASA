@@ -10,7 +10,7 @@ using namespace std;
 using namespace MASA;
 
 const double pi = acos(-1);
-const double threshold = 1.0e-10; // should be small enough to catch any obvious problems
+const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
 
 double anQ_p (double x,double y,double z,double p_0,double p_x,double p_y,double p_z,double a_px,double a_py,double a_pz,double L)
 {
@@ -439,7 +439,7 @@ int main()
 	  ufield  = fabs(ufield-ufield2);
 	  vfield  = fabs(vfield-vfield2);
 	  wfield  = fabs(wfield-wfield2);
-	  efield3 = fabs(efield-efield2)/fabs(efield2);  // converting to relative error, not absolute
+	  efield3 = fabs(efield-efield2);  // converting to relative error, not absolute
 	  rho     = fabs(rho-rho2);
 
 	  u_an    = fabs(u_an-u_an2);

@@ -9,7 +9,7 @@ using namespace MASA;
 using namespace std;
 
 const double pi = acos(-1);
-const double threshold = 1.0e-14; // should be small enough to catch any obvious problems
+const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
 
 double anQ_p (double x,double y,double z,double p_0,double p_x,double p_y,double p_z,double a_px,double a_py,double a_pz,double L)
 {

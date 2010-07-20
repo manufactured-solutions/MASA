@@ -4,8 +4,6 @@ include $(top_srcdir)/doxygen/aminclude.am
 AUTOMAKE_OPTIONS = foreign
 SUBDIRS          = src examples tests doxygen
 
-BUILT_SOURCES = dist_version
-
 # Distribute these directories:
 DIST_SUBDIRS = src examples
 

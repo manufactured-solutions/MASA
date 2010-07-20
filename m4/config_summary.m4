@@ -22,10 +22,10 @@ echo
 echo Package version............... : $PACKAGE-$VERSION
 echo
 echo C++ compiler.................. : $CXX
+echo C++ compiler flags............ : $CPPFLAGS
 echo Fortran compiler.............. : $FC
-echo Debug mode.................... : $enable_debug
 echo Fortran compiler flags........ : $FCFLAGS
-#echo libGRVY DIR................... : $GRVY_PREFIX
+echo Debug mode.................... : $enable_debug
 echo Install dir................... : $prefix 
 echo Build user.................... : $USER
 echo Build host.................... : $BUILD_HOST
