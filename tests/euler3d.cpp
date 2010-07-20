@@ -300,7 +300,7 @@ int main()
 
   // solutions
   double ufield,ufield2;
-  double vfield,vfield2;
+  double vfield,vfield2,vfield3;
   double wfield,wfield2;
   double efield,efield2,efield3;
   double rho,rho2;
@@ -417,9 +417,9 @@ int main()
 	  
 	  // test the result is roughly zero
 	  ufield  = ufield-ufield2;
-	  vfield  = vfield-vfield2;
+	  vfield3 = fabs(vfield-vfield2)/fabs(vfield2);  // convert to relative error
 	  wfield  = wfield-wfield2;
-	  efield3 = fabs(efield-efield2)/fabs(efield2);
+	  efield3 = fabs(efield-efield2)/fabs(efield2);  // convert to relative error
 	  rho     = rho-rho2;
 
 	  u_an   = u_an-u_an2;
@@ -449,12 +449,14 @@ int main()
 	      exit(1);
 	    }
 
-	  if(vfield > threshold)
+	  if(vfield3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "V Field Source Term\n";
 	      cout.precision(16);
-	      cout << "Exceeded Threshold by: " << vfield << endl;
+	      cout << "Exceeded (relative) Threshold by: " << vfield3 << endl;
+	      cout << "Source term is:                   " << vfield2 << endl;
+	      cout << "MASA term is:                     " << vfield << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
