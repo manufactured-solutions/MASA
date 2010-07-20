@@ -416,11 +416,11 @@ int main()
 	  p_an2     = anQ_p   (x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L);
 	  
 	  // test the result is roughly zero
-	  ufield= ufield-ufield2;
-	  vfield= vfield-vfield2;
-	  wfield= wfield-wfield2;
-	  efield3= efield-efield2;
-	  rho   = rho-rho2;
+	  ufield  = ufield-ufield2;
+	  vfield  = vfield-vfield2;
+	  wfield  = wfield-wfield2;
+	  efield3 = fabs(efield-efield2)/fabs(efield2);
+	  rho     = rho-rho2;
 
 	  u_an   = u_an-u_an2;
 	  v_an   = v_an-v_an2;
@@ -494,9 +494,9 @@ int main()
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "Energy Source Term\n";
 	      cout.precision(16);
-	      cout << "Exceeded Threshold by: " << efield3 << endl;
-	      cout << "Source term is:        " << efield << endl;
-	      cout << "MASA term is:          " << efield2 << endl;
+	      cout << "Exceeded (relative) Threshold by: " << efield3 << endl;
+	      cout << "Source term is:                   " << efield2 << endl;
+	      cout << "MASA term is:                     " << efield << endl;
 	      cout << x << " " << y << endl;
 	      exit(1);
 	    }
