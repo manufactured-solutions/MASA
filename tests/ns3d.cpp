@@ -439,7 +439,7 @@ int main()
 	  ufield  = fabs(ufield-ufield2);
 	  vfield  = fabs(vfield-vfield2);
 	  wfield  = fabs(wfield-wfield2);
-	  efield3 = fabs(efield-efield2)/fabs(efield);  // converting to relative error, not absolute
+	  efield3 = fabs(efield-efield2)/fabs(efield2);  // converting to relative error, not absolute
 	  rho     = fabs(rho-rho2);
 
 	  u_an    = fabs(u_an-u_an2);
@@ -509,8 +509,8 @@ int main()
 	      cout << "Energy Source Term\n";
 	      cout.precision(16);
 	      cout << "Exceeded (relative) Threshold by: " << efield3 << endl;
-	      cout << "Source term is:                   " << efield << endl;
-	      cout << "MASA term is:                     " << efield2 << endl;
+	      cout << "Source term is:                   " << efield2 << endl;
+	      cout << "MASA term is:                     " << efield << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }

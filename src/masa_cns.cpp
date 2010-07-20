@@ -245,7 +245,7 @@ void MASA::navierstokes_3d_compressible::init_var()
 
   masa_set_param("u_0",2.27);
   masa_set_param("u_x",6.00);
-  masa_set_param("u_y",5.35);
+  masa_set_param("u_y",1.35);
   masa_set_param("u_z",5.34);
   masa_set_param("v_0",3.46);
   masa_set_param("v_x",6.13);
@@ -257,14 +257,14 @@ void MASA::navierstokes_3d_compressible::init_var()
   masa_set_param("w_z",6.51);
   masa_set_param("rho_0",1.63);
   masa_set_param("rho_x",4.7);
-  masa_set_param("rho_y",20.85);
+  masa_set_param("rho_y",0.85);
   masa_set_param("rho_z",12.15);
-  masa_set_param("p_0",50.135);
+  masa_set_param("p_0",1.135);
   masa_set_param("p_x",.73);
-  masa_set_param("p_y",49);
-  masa_set_param("p_z",60.8);
-  masa_set_param("a_px",388.8);
-  masa_set_param("a_py",40.1);
+  masa_set_param("p_y",4.9);
+  masa_set_param("p_z",1.8);
+  masa_set_param("a_px",8.8);
+  masa_set_param("a_py",0.1);
   masa_set_param("a_pz",38.5);
   masa_set_param("a_rhox",.82);
   masa_set_param("a_rhoy",.41);
@@ -274,12 +274,12 @@ void MASA::navierstokes_3d_compressible::init_var()
   masa_set_param("a_uz",.42);
   masa_set_param("a_vx",.52);
   masa_set_param("a_vy",.23);
-  masa_set_param("a_vz",16.2);
-  masa_set_param("a_wx",11.05);
-  masa_set_param("a_wy",21.8);
+  masa_set_param("a_vz",1.2);
+  masa_set_param("a_wx",1.05);
+  masa_set_param("a_wy",1.8);
   masa_set_param("a_wz",13.6);
-  masa_set_param("Gamma",27.5);
-  masa_set_param("mu",12.01);
+  masa_set_param("Gamma",2.5);
+  masa_set_param("mu",2.01);
   masa_set_param("L",3.02);
 
 } // done with variable initializer

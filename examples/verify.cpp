@@ -133,13 +133,13 @@ int finite_diff(int n,double L)
 
 
   // now lets check this is in fact the correct solution
-  for(int i;i<n;i++)
+  for(int i=0;i<n;i++)
     {
       residual += (dx*dx*x[i])-sol(i*dx);
     }
 
   cout << "residual is: " << residual << endl;
-
+  return(1);
 }// end program
 
 int main()

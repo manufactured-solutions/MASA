@@ -339,7 +339,9 @@ double MASA::sod_1d::rtbis(double x1,double x2,double xacc)
       if(fabs(dx) < xacc || fmid == 0.) 
 	return(myval);
     }
-    
+  
   printf("** Error: Too many bisection in rtbis\n");
+  return(-1);
+  
 
 }
