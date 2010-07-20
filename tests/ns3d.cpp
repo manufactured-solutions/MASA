@@ -318,7 +318,7 @@ int main()
   double ufield,ufield2;
   double vfield,vfield2;
   double wfield,wfield2;
-  double efield,efield2;
+  double efield,efield2,efield3;
   double rho,rho2;
 
   double u_an,u_an2;
@@ -438,7 +438,7 @@ int main()
 	  ufield = ufield-ufield2;
 	  vfield = vfield-vfield2;
 	  wfield = wfield-wfield2;
-	  efield = efield-efield2;
+	  efield3 = efield-efield2;
 	  rho    = rho-rho2;
 
 	  u_an   = u_an-u_an2;
@@ -502,11 +502,14 @@ int main()
 	      exit(1);
 	    }
 
-	  if(efield > threshold)
+	  if(efield3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
 	      cout << "Energy Source Term\n";
-	      cout << "Exceeded Threshold by: " << efield << endl;
+	      cout.precision(16);
+	      cout << "Exceeded Threshold by: " << efield3 << endl;
+	      cout << "Source term is:        " << efield << endl;
+	      cout << "MASA term is:          " << efield2 << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }

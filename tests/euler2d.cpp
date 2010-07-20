@@ -179,7 +179,7 @@ int main()
   double rho,rho2;
 
   double u_an,u_an2;
-  double v_an,v_an2;
+  double v_an,v_an2,v_an3;
   double p_an,p_an2;
   double rho_an,rho_an2;
 
@@ -269,7 +269,7 @@ int main()
 	rho    = rho-rho2;
 	
 	u_an   = u_an-u_an2;
-	v_an   = v_an-v_an2;
+	v_an3   = v_an-v_an2;
 	rho_an = rho_an-rho_an2;
 	p_an   = p_an-p_an2;
 
@@ -278,6 +278,7 @@ int main()
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "U Field Source Term\n";
 	    cout << "Exceeded Threshold by: " << ufield << endl;
+	    cout.precision(16);
 	    cout << x <<  endl;
 	    exit(1);
 	  }
@@ -287,6 +288,7 @@ int main()
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "U Field Analytical Term\n";
 	    cout << "Exceeded Threshold by: " << u_an << endl;
+	    cout.precision(16);
 	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
@@ -295,16 +297,21 @@ int main()
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "V Field Source Term\n";
+	    cout.precision(16);
 	    cout << "Exceeded Threshold by: " << vfield3 << endl;
+	    cout << "Source term is:        " << vfield2 << endl;
+	    cout << "MASA term is:          " << vfield << endl;
 	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
 
-	if(v_an > threshold)
+	if(v_an3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "V Field Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << v_an << endl;
+	    cout << "Exceeded Threshold by: " << v_an3 << endl;
+	    cout << "Source term is:        " << v_an2 << endl;
+	    cout << "MASA term is:          " << v_an << endl;
 	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
