@@ -57,15 +57,12 @@ extern "C" int cmasa_display_param()
 
 extern "C" int cmasa_set_param(char* param,double val)
 {
-
-  return 0;
+  return(masa_set_param(param,val));
 }
-
 
 extern "C" int cmasa_get_param(char* param, double* val)
 {
-
-  return 0;
+  return(masa_get_param(param,val));
 }
 
 // --------------------------------
