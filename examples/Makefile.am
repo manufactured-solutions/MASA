@@ -1,7 +1,7 @@
 INCLUDES      = -I$(top_srcdir)/src -I$(top_builddir)/src
 AM_FCFLAGS    = $(INCLUDES)
 AM_CFLAGS     = $(INCLUDES)
-AM_CXXFLAGS   = $(INCLUDES)
+AM_CPPFLAGS   = $(INCLUDES)
 LIBS          = -L$(top_builddir)/src -lmasa
 
 bin_PROGRAMS  = verify MASAshell euler_example navierstokes_example heat_example switch #tester 
@@ -24,5 +24,5 @@ switch_SOURCES               = switch.cpp
 #    C
 # ----------------- 
 
-c_heat_example_SOURCES       = c_heat_example.cpp
+c_heat_example_SOURCES       = c_heat_example.c
 #C_euler_example_SOURCES       = ceuler_example.c

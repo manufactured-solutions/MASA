@@ -64,8 +64,15 @@ int cmasa_display_param()
 // --------------------------------
 // source term(s) -- 1D
 // --------------------------------
-int cmasa_eval_t_source  (double x ,double t,double* sol){masa_eval_t_source  (x ,t,sol);return 0;}
-int cmasa_eval_t_source  (double x,double* sol){masa_eval_t_source  (x,sol); return 0;}
+//int cmasa_eval_t_source  (double x ,double t,double* sol){masa_eval_t_source  (x ,t,sol);return 0;}
+
+extern "C" int cmasa_eval_t_source(double x,double* sol)
+{
+  cout << "here\n";
+  return( masa_eval_t_source(x,sol));
+}
+
+
 int cmasa_eval_u_source  (double x,double* sol){masa_eval_u_source  (x,sol); return 0;}
 int cmasa_eval_e_source  (double x,double* sol){masa_eval_e_source  (x,sol); return 0;}
 int cmasa_eval_rho_source(double x,double* sol){masa_eval_rho_source(x,sol); return 0;}

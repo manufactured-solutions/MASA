@@ -304,17 +304,13 @@ int MASA::masa_display_param()
 
 int MASA::masa_eval_t_source(double x,double* field) //x 
 {
-
   *field=masa_master_pointer->eval_q_t(x);
-
   return 0;
 }
 
 int MASA::masa_eval_t_source(double x,double t,double* field) //x,t
 {
-
   *field=masa_master_pointer->eval_q_t(x,t);
-
   return 0;
 }
 

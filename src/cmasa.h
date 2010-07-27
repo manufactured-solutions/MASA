@@ -34,81 +34,90 @@
 // This header file contains the public C-interface functions designed to be exposed in MASA
 //
 
-// --------------------------------
-// new masa api function
-// --------------------------------
-extern int cmasa_init      (const char*, const char*);
-extern int cmasa_select_mms(const char*);
-extern int cmasa_curr_mms  (const char*);
-extern int cmasa_list_mms  ();
+#ifdef __cplusplus
+extern "C" {
+#endif
+  
+  // --------------------------------
+  // new masa api function
+  // --------------------------------
+  extern int cmasa_init      (const char*, const char*);
+  extern int cmasa_select_mms(const char*);
+  extern int cmasa_curr_mms  (const char*);
+  extern int cmasa_list_mms  ();
 
-// --------------------------------
-// interact with mms variables
-// --------------------------------
-int cmasa_init_param();
-//int cmasa_set_param(char*,double);
-//int cmasa_get_param(char*,double*);
+  // --------------------------------
+  // interact with mms variables
+  // --------------------------------
+  extern int cmasa_init_param();
+  //int cmasa_set_param(char*,double);
+  //int cmasa_get_param(char*,double*);
 
 // --------------------------------
 // source term(s) -- 1D
 // --------------------------------
-int cmasa_eval_t_source  (double,double*);        // x
-int cmasa_eval_t_source  (double,double,double*); // x,t
-int cmasa_eval_u_source  (double,double*);
-int cmasa_eval_e_source  (double,double*);
-int cmasa_eval_rho_source(double,double*);
+  extern int cmasa_eval_t_source  (double,double*);        // x
+  //int cmasa_eval_t_source  (double,double,double*); // x,t
+  extern int cmasa_eval_u_source  (double,double*);
+  extern int cmasa_eval_e_source  (double,double*);
+  extern int cmasa_eval_rho_source(double,double*);
 
-int cmasa_eval_t_an      (double,double*);        // x
-int cmasa_eval_t_an      (double,double,double*); // x,t
-int cmasa_eval_u_an      (double,double*);
-int cmasa_eval_p_an      (double,double*);
-int cmasa_eval_rho_an    (double,double*);
+  extern int cmasa_eval_t_an      (double,double*);        // x
+  //int cmasa_eval_t_an      (double,double,double*); // x,t
+  extern int cmasa_eval_u_an      (double,double*);
+  extern int cmasa_eval_p_an      (double,double*);
+  extern int cmasa_eval_rho_an    (double,double*);
+  /*  
+  // --------------------------------
+  // source term(s) -- 2D
+  // --------------------------------
+  //int cmasa_eval_t_source  (double,double,double,double*); //x,y,t
+  int cmasa_eval_u_source  (double,double,double*);
+  int cmasa_eval_v_source  (double,double,double*);
+  int cmasa_eval_e_source  (double,double,double*);
+  int cmasa_eval_rho_source(double,double,double*);
 
-// --------------------------------
-// source term(s) -- 2D
-// --------------------------------
-int cmasa_eval_t_source  (double,double,double,double*); //x,y,t
-int cmasa_eval_u_source  (double,double,double*);
-int cmasa_eval_v_source  (double,double,double*);
-int cmasa_eval_e_source  (double,double,double*);
-int cmasa_eval_rho_source(double,double,double*);
+  int cmasa_eval_t_an      (double,double,double,double*); //x,y,t
+  int cmasa_eval_u_an      (double,double,double*);
+  int cmasa_eval_v_an      (double,double,double*);
+  int cmasa_eval_p_an      (double,double,double*);
+  int cmasa_eval_rho_an    (double,double,double*);
 
-int cmasa_eval_t_an      (double,double,double,double*); //x,y,t
-int cmasa_eval_u_an      (double,double,double*);
-int cmasa_eval_v_an      (double,double,double*);
-int cmasa_eval_p_an      (double,double,double*);
-int cmasa_eval_rho_an    (double,double,double*);
+  // --------------------------------
+  // source term(s) -- 3D
+  // --------------------------------
+  //int cmasa_eval_t_source  (double,double,double,double,double*); // x,y,z,t
+  int cmasa_eval_u_source  (double,double,double,double*);
+  int cmasa_eval_v_source  (double,double,double,double*);
+  int cmasa_eval_w_source  (double,double,double,double*);
+  int cmasa_eval_e_source  (double,double,double,double*);
+  int cmasa_eval_rho_source(double,double,double,double*);
 
-// --------------------------------
-// source term(s) -- 3D
-// --------------------------------
-int cmasa_eval_t_source  (double,double,double,double,double*); // x,y,z,t
-int cmasa_eval_u_source  (double,double,double,double*);
-int cmasa_eval_v_source  (double,double,double,double*);
-int cmasa_eval_w_source  (double,double,double,double*);
-int cmasa_eval_e_source  (double,double,double,double*);
-int cmasa_eval_rho_source(double,double,double,double*);
+  //int cmasa_eval_t_an      (double,double,double,double,double*); // x,y,z,t
+  int cmasa_eval_u_an      (double,double,double,double*);
+  int cmasa_eval_v_an      (double,double,double,double*);
+  int cmasa_eval_w_an      (double,double,double,double*);
+  int cmasa_eval_p_an      (double,double,double,double*);
+  int cmasa_eval_rho_an    (double,double,double,double*);
 
-int cmasa_eval_t_an      (double,double,double,double,double*); // x,y,z,t
-int cmasa_eval_u_an      (double,double,double,double*);
-int cmasa_eval_v_an      (double,double,double,double*);
-int cmasa_eval_w_an      (double,double,double,double*);
-int cmasa_eval_p_an      (double,double,double,double*);
-int cmasa_eval_rho_an    (double,double,double,double*);
+  // --------------------------------
+  // gradient of analytical solution
+  // --------------------------------
+  int cmasa_eval_1d_grad(int,double,double*);
+  int cmasa_eval_2d_grad(int,double,double,double*);
+  int cmasa_eval_3d_grad(int,double,double,double,double*);
+  */
 
-// --------------------------------
-// gradient of analytical solution
-// --------------------------------
-int cmasa_eval_1d_grad(int,double,double*);
-int cmasa_eval_2d_grad(int,double,double,double*);
-int cmasa_eval_3d_grad(int,double,double,double,double*);
+  // --------------------------------
+  // old masa core functions (to be called by user)
+  // --------------------------------
+  
+  int cmasa_get_name(const char*);
+  int cmasa_get_dimension(int*);
 
-// --------------------------------
-// old masa core functions (to be called by user)
-// --------------------------------
+  int cmasa_display_param();
+  int cmasa_sanity_check();
 
-int cmasa_get_name(const char*);
-int cmasa_get_dimension(int*);
-
-int cmasa_display_param();
-int cmasa_sanity_check();
+#ifdef __cplusplus
+}
+#endif
