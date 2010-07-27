@@ -19,9 +19,9 @@ bin_PROGRAMS              = heat_const_steady \
 	                    navierstokes2d \
 	                    navierstokes3d \
 	                    c_euler1d \
-	                    c_euler2d 
-#                            c_euler3d \
-	                    c_navierstokes2d \
+	                    c_euler2d \
+                            c_euler3d 
+#	                    c_navierstokes2d \
 	                    c_navierstokes3d 
 
 #----------------------
@@ -63,8 +63,8 @@ c_euler1d_LDADD               = -L$(top_srcdir)/src -lmasa
 c_euler2d_SOURCES             = c_euler2d.c
 c_euler2d_LDADD               = -L$(top_srcdir)/src -lmasa
 
-#c_euler3d_SOURCES             = c_euler3d.c
-#c_euler3d_LDADD               = -L$(top_srcdir)/src -lmasa
+c_euler3d_SOURCES             = c_euler3d.c
+c_euler3d_LDADD               = -L$(top_srcdir)/src -lmasa
 
 #c_navierstokes2d_SOURCES      = c_ns2d.c
 #c_navierstokes2d_LDADD        = -L$(top_srcdir)/src -lmasa
@@ -88,7 +88,7 @@ TESTS                     = heat_const_steady \
                             navierstokes2d\
                             navierstokes3d\
 	                    c_euler1d \
-	                    c_euler2d 
-#	                    c_euler3d \
-                            c_navierstokes2d\
+	                    c_euler2d \
+	                    c_euler3d 
+#                            c_navierstokes2d\
                             c_navierstokes3d 

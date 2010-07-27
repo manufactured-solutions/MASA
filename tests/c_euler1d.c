@@ -111,7 +111,7 @@ int main()
   //problem size
   int nx = 2000;  // number of points
   int lx=10;     // length
-  double dx=(double)(lx/nx);
+  double dx=(double)(lx)/(double)(nx);
 
   // solutions
   double ufield,ufield2;

@@ -216,8 +216,8 @@ int main()
   int lx=3;     // length
   int ly=1; 
   
-  double dx=(double)(lx/nx);
-  double dy=(double)(ly/ny);
+  double dx=(double)(lx)/(double)(nx);
+  double dy=(double)(ly)/(double)(ny);
 
   cmasa_init("euler-test","euler_2d");
 
@@ -302,7 +302,7 @@ int main()
 
 	if(ufield3 > threshold)
 	  {
-	    printf("\nMASA REGRESSION TEST FAILED: Euler-2d\n");
+	    printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-2d\n");
 	    printf("U Field Source Term\n");
 	    exit(1);
 	  }
@@ -333,6 +333,7 @@ int main()
 
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-2d\n");
 	    printf("Energy Source Term\n");
+	    printf("Threshold Exceeded: %g\n",efield3);
 	    exit(1);
 	  }
 
