@@ -1,5 +1,4 @@
 #include <math.h>
-//#include <fpu_control.h>
 
 double PI = acos(-1);
 

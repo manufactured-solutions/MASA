@@ -1,4 +1,4 @@
-INCLUDES                  = -I$(top_srcdir)/src -I$(top_builddir)/src
+INCLUDES                = -I$(top_srcdir)/src -I$(top_builddir)/src
 AM_CXXFLAGS             = $(INCLUDES) -O0
 
 if USE_INTEL
@@ -17,9 +17,16 @@ bin_PROGRAMS              = heat_const_steady \
 	                    euler2d \
                             euler3d \
 	                    navierstokes2d \
-	                    navierstokes3d 
+	                    navierstokes3d \
+	                    c_euler1d 
+#	                    c_euler2d \
+                            c_euler3d \
+	                    c_navierstokes2d \
+	                    c_navierstokes3d 
 
-# Test Programs:
+#----------------------
+# Test Programs --- CPP: 
+#----------------------
 heat_const_steady_SOURCES   = heatsc.cpp
 heat_const_steady_LDADD     = -L$(top_srcdir)/src -lmasa
 
@@ -47,6 +54,29 @@ navierstokes2d_LDADD        = -L$(top_srcdir)/src -lmasa
 navierstokes3d_SOURCES      = ns3d.cpp Navier-Stokes_3d_compressible_source.C
 navierstokes3d_LDADD        = -L$(top_srcdir)/src -lmasa
 
+#----------------------
+# Test Programs --- C: 
+#----------------------
+c_euler1d_SOURCES             = c_euler1d.c
+c_euler1d_LDADD               = -L$(top_srcdir)/src -lmasa
+
+#c_euler2d_SOURCES             = c_euler2d.c
+#c_euler2d_LDADD               = -L$(top_srcdir)/src -lmasa
+
+#c_euler3d_SOURCES             = c_euler3d.c
+#c_euler3d_LDADD               = -L$(top_srcdir)/src -lmasa
+
+#c_navierstokes2d_SOURCES      = c_ns2d.c
+#c_navierstokes2d_LDADD        = -L$(top_srcdir)/src -lmasa
+
+#c_navierstokes3d_SOURCES      = c_ns3d.c
+#c_navierstokes3d_LDADD        = -L$(top_srcdir)/src -lmasa
+
+
+#----------------------
+# Test Queue 
+#----------------------
+
 TESTS_ENVIRONMENT         = 
 TESTS                     = heat_const_steady \
 			    heat_var_steady \
@@ -56,4 +86,9 @@ TESTS                     = heat_const_steady \
 	                    euler2d \
 	                    euler3d \
                             navierstokes2d\
-                            navierstokes3d 
+                            navierstokes3d\
+	                    c_euler1d 
+#	                    c_euler2d \
+	                    c_euler3d \
+                            c_navierstokes2d\
+                            c_navierstokes3d 
