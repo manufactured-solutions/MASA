@@ -56,67 +56,68 @@ extern "C" {
   // --------------------------------
   // source term(s) -- 1D
   // --------------------------------
-  extern int cmasa_eval_t_source  (double,double*);        // x
-  //int cmasa_eval_t_source  (double,double,double*); // x,t
-  extern int cmasa_eval_u_source  (double,double*);
-  extern int cmasa_eval_e_source  (double,double*);
-  extern int cmasa_eval_rho_source(double,double*);
+  extern int cmasa_eval_1d_t_source  (double,double*);        // x
+  extern int cmasa_eval_1d_u_source  (double,double*);
+  extern int cmasa_eval_1d_e_source  (double,double*);
+  extern int cmasa_eval_1d_rho_source(double,double*);
 
-  extern int cmasa_eval_t_an      (double,double*);        // x
+  extern int cmasa_eval_1d_t_an      (double,double*);        // x
+  extern int cmasa_eval_1d_u_an      (double,double*);
+  extern int cmasa_eval_1d_p_an      (double,double*);
+  extern int cmasa_eval_1d_rho_an    (double,double*);
+
+  //int cmasa_eval_t_source  (double,double,double*); // x,t
   //int cmasa_eval_t_an      (double,double,double*); // x,t
-  extern int cmasa_eval_u_an      (double,double*);
-  extern int cmasa_eval_p_an      (double,double*);
-  extern int cmasa_eval_rho_an    (double,double*);
-  /*  
+
   // --------------------------------
   // source term(s) -- 2D
   // --------------------------------
-  //int cmasa_eval_t_source  (double,double,double,double*); //x,y,t
-  int cmasa_eval_u_source  (double,double,double*);
-  int cmasa_eval_v_source  (double,double,double*);
-  int cmasa_eval_e_source  (double,double,double*);
-  int cmasa_eval_rho_source(double,double,double*);
 
-  int cmasa_eval_t_an      (double,double,double,double*); //x,y,t
-  int cmasa_eval_u_an      (double,double,double*);
-  int cmasa_eval_v_an      (double,double,double*);
-  int cmasa_eval_p_an      (double,double,double*);
-  int cmasa_eval_rho_an    (double,double,double*);
+  extern int cmasa_eval_2d_u_source  (double,double,double*);
+  extern int cmasa_eval_2d_v_source  (double,double,double*);
+  extern int cmasa_eval_2d_e_source  (double,double,double*);
+  extern int cmasa_eval_2d_rho_source(double,double,double*);
+  //int cmasa_eval__2dt_source  (double,double,double,double*); //x,y,t
+
+  extern int cmasa_eval_2d_t_an      (double,double,double,double*); //x,y,t
+  extern int cmasa_eval_2d_u_an      (double,double,double*);
+  extern int cmasa_eval_2d_v_an      (double,double,double*);
+  extern int cmasa_eval_2d_p_an      (double,double,double*);
+  extern int cmasa_eval_2d_rho_an    (double,double,double*);
 
   // --------------------------------
   // source term(s) -- 3D
   // --------------------------------
+
   //int cmasa_eval_t_source  (double,double,double,double,double*); // x,y,z,t
-  int cmasa_eval_u_source  (double,double,double,double*);
-  int cmasa_eval_v_source  (double,double,double,double*);
-  int cmasa_eval_w_source  (double,double,double,double*);
-  int cmasa_eval_e_source  (double,double,double,double*);
-  int cmasa_eval_rho_source(double,double,double,double*);
+  extern int cmasa_eval_3d_u_source  (double,double,double,double*);
+  extern int cmasa_eval_3d_v_source  (double,double,double,double*);
+  extern int cmasa_eval_3d_w_source  (double,double,double,double*);
+  extern int cmasa_eval_3d_e_source  (double,double,double,double*);
+  extern int cmasa_eval_3d_rho_source(double,double,double,double*);
 
   //int cmasa_eval_t_an      (double,double,double,double,double*); // x,y,z,t
-  int cmasa_eval_u_an      (double,double,double,double*);
-  int cmasa_eval_v_an      (double,double,double,double*);
-  int cmasa_eval_w_an      (double,double,double,double*);
-  int cmasa_eval_p_an      (double,double,double,double*);
-  int cmasa_eval_rho_an    (double,double,double,double*);
+  extern int cmasa_eval_3d_u_an      (double,double,double,double*);
+  extern int cmasa_eval_3d_v_an      (double,double,double,double*);
+  extern int cmasa_eval_3d_w_an      (double,double,double,double*);
+  extern int cmasa_eval_3d_p_an      (double,double,double,double*);
+  extern int cmasa_eval_3d_rho_an    (double,double,double,double*);
 
   // --------------------------------
   // gradient of analytical solution
   // --------------------------------
-  int cmasa_eval_1d_grad(int,double,double*);
-  int cmasa_eval_2d_grad(int,double,double,double*);
-  int cmasa_eval_3d_grad(int,double,double,double,double*);
-  */
+  extern int cmasa_eval_1d_grad(int,double,double*);
+  extern int cmasa_eval_2d_grad(int,double,double,double*);
+  extern int cmasa_eval_3d_grad(int,double,double,double,double*);
 
   // --------------------------------
   // old masa core functions (to be called by user)
   // --------------------------------
   
-  int cmasa_get_name(const char*);
-  int cmasa_get_dimension(int*);
-
-  int cmasa_display_param();
-  int cmasa_sanity_check();
+  extern int cmasa_get_name(const char*);
+  extern int cmasa_get_dimension(int*);
+  extern int cmasa_display_param();
+  extern int cmasa_sanity_check();
 
 #ifdef __cplusplus
 }
