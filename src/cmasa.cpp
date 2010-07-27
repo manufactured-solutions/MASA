@@ -5,7 +5,7 @@
 using namespace std;
 using namespace MASA;
 
-int cmasa_init(const char* specificname,const char* functionname)
+extern "C" int cmasa_init(const char* specificname,const char* functionname)
 {
   string sn(specificname);
   string fn(functionname);
@@ -15,7 +15,7 @@ int cmasa_init(const char* specificname,const char* functionname)
   return 0;
 }
 
-int cmasa_select_mms(const char* function_user_wants)
+extern "C" int cmasa_select_mms(const char* function_user_wants)
 {
   string fuw(function_user_wants);
   masa_select_mms(fuw);
@@ -31,27 +31,40 @@ int MASA::cmasa_curr_mms(char* function_name)
 }
 */
 
-int cmasa_list_mms()
+extern "C" int cmasa_list_mms()
 {
   masa_list_mms();
   return 0;
 }
 
-int cmasa_init_param()
+extern "C" int cmasa_init_param()
 {
   masa_init_param();
   return 0;
 }
 
-int cmasa_sanity_check()
+extern "C" int cmasa_sanity_check()
 {
   masa_sanity_check();
   return 0;
 }
 
-int cmasa_display_param()
+extern "C" int cmasa_display_param()
 {
   masa_display_param();
+  return 0;
+}
+
+extern "C" int cmasa_set_param(char* param,double val)
+{
+
+  return 0;
+}
+
+
+extern "C" int cmasa_get_param(char* param, double* val)
+{
+
   return 0;
 }
 
@@ -68,7 +81,6 @@ int cmasa_display_param()
 
 extern "C" int cmasa_eval_t_source(double x,double* sol)
 {
-  cout << "here\n";
   return( masa_eval_t_source(x,sol));
 }
 

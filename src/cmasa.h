@@ -50,12 +50,12 @@ extern "C" {
   // interact with mms variables
   // --------------------------------
   extern int cmasa_init_param();
-  //int cmasa_set_param(char*,double);
-  //int cmasa_get_param(char*,double*);
+  extern int cmasa_set_param(char*,double);
+  extern int cmasa_get_param(char*,double*);
 
-// --------------------------------
-// source term(s) -- 1D
-// --------------------------------
+  // --------------------------------
+  // source term(s) -- 1D
+  // --------------------------------
   extern int cmasa_eval_t_source  (double,double*);        // x
   //int cmasa_eval_t_source  (double,double,double*); // x,t
   extern int cmasa_eval_u_source  (double,double*);
