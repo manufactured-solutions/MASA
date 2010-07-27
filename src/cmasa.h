@@ -56,18 +56,15 @@ extern "C" {
   // --------------------------------
   // source term(s) -- 1D
   // --------------------------------
-  extern int cmasa_eval_1d_t_source  (double,double*);        // x
+  extern int cmasa_eval_1d_t_source  (double,double*);
   extern int cmasa_eval_1d_u_source  (double,double*);
   extern int cmasa_eval_1d_e_source  (double,double*);
   extern int cmasa_eval_1d_rho_source(double,double*);
 
-  extern int cmasa_eval_1d_t_an      (double,double*);        // x
+  extern int cmasa_eval_1d_t_an      (double,double*);
   extern int cmasa_eval_1d_u_an      (double,double*);
   extern int cmasa_eval_1d_p_an      (double,double*);
   extern int cmasa_eval_1d_rho_an    (double,double*);
-
-  //int cmasa_eval_t_source  (double,double,double*); // x,t
-  //int cmasa_eval_t_an      (double,double,double*); // x,t
 
   // --------------------------------
   // source term(s) -- 2D
@@ -77,9 +74,8 @@ extern "C" {
   extern int cmasa_eval_2d_v_source  (double,double,double*);
   extern int cmasa_eval_2d_e_source  (double,double,double*);
   extern int cmasa_eval_2d_rho_source(double,double,double*);
-  //int cmasa_eval__2dt_source  (double,double,double,double*); //x,y,t
 
-  extern int cmasa_eval_2d_t_an      (double,double,double,double*); //x,y,t
+  extern int cmasa_eval_2d_t_an      (double,double,double*);
   extern int cmasa_eval_2d_u_an      (double,double,double*);
   extern int cmasa_eval_2d_v_an      (double,double,double*);
   extern int cmasa_eval_2d_p_an      (double,double,double*);
@@ -89,14 +85,14 @@ extern "C" {
   // source term(s) -- 3D
   // --------------------------------
 
-  //int cmasa_eval_t_source  (double,double,double,double,double*); // x,y,z,t
+  extern int cmasa_eval_t_source     (double,double,double,double*);
   extern int cmasa_eval_3d_u_source  (double,double,double,double*);
   extern int cmasa_eval_3d_v_source  (double,double,double,double*);
   extern int cmasa_eval_3d_w_source  (double,double,double,double*);
   extern int cmasa_eval_3d_e_source  (double,double,double,double*);
   extern int cmasa_eval_3d_rho_source(double,double,double,double*);
 
-  //int cmasa_eval_t_an      (double,double,double,double,double*); // x,y,z,t
+  extern int cmasa_eval_t_an         (double,double,double,double*);
   extern int cmasa_eval_3d_u_an      (double,double,double,double*);
   extern int cmasa_eval_3d_v_an      (double,double,double,double*);
   extern int cmasa_eval_3d_w_an      (double,double,double,double*);
