@@ -74,14 +74,8 @@ extern "C" int cmasa_get_param(const char* param, double* val)
 // --------------------------------
 // source term(s) -- 1D
 // --------------------------------
-//int cmasa_eval_t_source  (double x ,double t,double* sol){masa_eval_t_source  (x ,t,sol);return 0;}
 
-extern "C" int cmasa_eval_1d_t_source(double x,double* sol)
-{
-  return( masa_eval_t_source(x,sol));
-}
-int cmasa_eval_t_an      (double,double*);        // x
-
+extern "C" int cmasa_eval_1d_t_source  (double x,double* sol){return(masa_eval_t_source(x,sol));};
 extern "C" int cmasa_eval_1d_u_source  (double x,double* sol){return(masa_eval_u_source(x,sol));};
 extern "C" int cmasa_eval_1d_e_source  (double x,double* sol){return(masa_eval_e_source(x,sol));};
 extern "C" int cmasa_eval_1d_rho_source(double x,double* sol){return(masa_eval_rho_source(x,sol));};
@@ -94,34 +88,33 @@ extern "C" int cmasa_eval_1d_rho_an    (double x,double* sol){return(masa_eval_r
 // --------------------------------
 // source term(s) -- 2D
 // --------------------------------
-/*
-extern "C" int cmasa_eval_t_source  (double,double,double,double*); //x,y,t
-extern "C" int cmasa_eval_u_source  (double,double,double*);
-extern "C" int cmasa_eval_v_source  (double,double,double*);
-extern "C" int cmasa_eval_e_source  (double,double,double*);
-extern "C" int cmasa_eval_rho_source(double,double,double*);
 
-extern "C" int cmasa_eval_t_an      (double,double,double,double*); //x,y,t
-extern "C" int cmasa_eval_u_an      (double,double,double*);
-extern "C" int cmasa_eval_v_an      (double,double,double*);
-extern "C" int cmasa_eval_p_an      (double,double,double*);
-extern "C" int cmasa_eval_rho_an    (double,double,double*);
+extern "C" int cmasa_eval_2d_t_source  (double x,double y,double* sol){return(masa_eval_t_source(x,y,sol));};
+extern "C" int cmasa_eval_2d_u_source  (double x,double y,double* sol){return(masa_eval_u_source(x,y,sol));};
+extern "C" int cmasa_eval_2d_v_source  (double x,double y,double* sol){return(masa_eval_v_source(x,y,sol));};
+extern "C" int cmasa_eval_2d_e_source  (double x,double y,double* sol){return(masa_eval_e_source(x,y,sol));};
+extern "C" int cmasa_eval_2d_rho_source(double x,double y,double* sol){return(masa_eval_rho_source(x,y,sol));};
+
+//extern "C" int cmasa_eval_2d_t_an      (double x,double y,double* sol){return(masa_eval_t_an(x,y,sol));};
+extern "C" int cmasa_eval_2d_u_an      (double x,double y,double* sol){return(masa_eval_u_an(x,y,sol));};
+extern "C" int cmasa_eval_2d_v_an      (double x,double y,double* sol){return(masa_eval_v_an(x,y,sol));};
+extern "C" int cmasa_eval_2d_p_an      (double x,double y,double* sol){return(masa_eval_p_an(x,y,sol));};
+extern "C" int cmasa_eval_2d_rho_an    (double x,double y,double* sol){return(masa_eval_rho_an(x,y,sol));};
 
 // --------------------------------
 // source term(s) -- 3D
 // --------------------------------
 
-extern "C" int cmasa_eval_t_source  (double,double,double,double,double*); // x,y,z,t
-extern "C" int cmasa_eval_u_source  (double,double,double,double*);
-extern "C" int cmasa_eval_v_source  (double,double,double,double*);
-extern "C" int cmasa_eval_w_source  (double,double,double,double*);
-extern "C" int cmasa_eval_e_source  (double,double,double,double*);
-extern "C" int cmasa_eval_rho_source(double,double,double,double*);
+extern "C" int cmasa_eval_3d_t_source  (double x,double y,double z,double* sol){return(masa_eval_t_source  (x,y,z,sol));};
+extern "C" int cmasa_eval_3d_u_source  (double x,double y,double z,double* sol){return(masa_eval_u_source  (x,y,z,sol));};
+extern "C" int cmasa_eval_3d_v_source  (double x,double y,double z,double* sol){return(masa_eval_v_source  (x,y,z,sol));};
+extern "C" int cmasa_eval_3d_w_source  (double x,double y,double z,double* sol){return(masa_eval_w_source  (x,y,z,sol));};
+extern "C" int cmasa_eval_3d_e_source  (double x,double y,double z,double* sol){return(masa_eval_e_source  (x,y,z,sol));};
+extern "C" int cmasa_eval_3d_rho_source(double x,double y,double z,double* sol){return(masa_eval_rho_source(x,y,z,sol));};
 
-//extern "C" int cmasa_eval_t_an      (double,double,double,double,double*); // x,y,z,t
-extern "C" int cmasa_eval_u_an      (double,double,double,double*);
-extern "C" int cmasa_eval_v_an      (double,double,double,double*);
-extern "C" int cmasa_eval_w_an      (double,double,double,double*);
-extern "C" int cmasa_eval_p_an      (double,double,double,double*);
-extern "C" int cmasa_eval_rho_an    (double,double,double,double*);
-*/
+extern "C" int cmasa_eval_3d_t_an      (double x,double y,double z,double* sol){return(masa_eval_t_an  (x,y,z,sol));};
+extern "C" int cmasa_eval_3d_u_an      (double x,double y,double z,double* sol){return(masa_eval_u_an  (x,y,z,sol));};
+extern "C" int cmasa_eval_3d_v_an      (double x,double y,double z,double* sol){return(masa_eval_v_an  (x,y,z,sol));};
+extern "C" int cmasa_eval_3d_w_an      (double x,double y,double z,double* sol){return(masa_eval_w_an  (x,y,z,sol));};
+extern "C" int cmasa_eval_3d_p_an      (double x,double y,double z,double* sol){return(masa_eval_p_an  (x,y,z,sol));};
+extern "C" int cmasa_eval_3d_rho_an    (double x,double y,double z,double* sol){return(masa_eval_rho_an(x,y,z,sol));};
