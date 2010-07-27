@@ -184,42 +184,42 @@ int main()
    
       if(ufield > threshold)
 	{
-	  printf("\nMASA REGRESSION TEST FAILED: Euler-1d\n");
+	  printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	  printf("U Field Source Term\n");
 	  exit(1);
 	}
 
       if(u_an > threshold)
 	{
-	  printf("\nMASA REGRESSION TEST FAILED: Euler-1d\n");
+	  printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	  printf("U Field Analytical Term\n");
 	  exit(1);
 	}
 
       if(efield > threshold)
 	{
-	  printf("\nMASA REGRESSION TEST FAILED: Euler-1d\n");
+	  printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	  printf("Energy Source Term\n");
 	  exit(1);
 	}
 
       if(p_an > threshold)
 	{
-	  printf("\nMASA REGRESSION TEST FAILED: Euler-1d\n");
+	  printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	  printf("P Field Analytical Term\n");
 	  exit(1);
 	}
       
       if(rho > threshold)
 	{
-	  printf("\nMASA REGRESSION TEST FAILED: Euler-1d\n");
+	  printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	  printf("RHO Source Term\n");
 	  exit(1);
 	}
       
       if(rho_an > threshold)
 	{
-	  printf("\nMASA REGRESSION TEST FAILED: Euler-1d\n");
+	  printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	  printf("RHO Analytical Term\n");
 	  exit(1);
 	}
