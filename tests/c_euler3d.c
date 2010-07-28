@@ -422,8 +422,6 @@ int main()
 	  y=j*dy;
 	  z=k*dz;
 
-	  printf("%g %g %g\n", x,y,z);
-
 	  //evalulate source terms
 	  cmasa_eval_3d_u_source  (x,y,z,&ufield);
 	  cmasa_eval_3d_v_source  (x,y,z,&vfield);

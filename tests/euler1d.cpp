@@ -181,13 +181,6 @@ int main()
 	  exit(1);
 	}
       
-      if(x==3.67) // print information at a specific location
-	{
-	  printf("Threshold Exceeded: %g\n",efield3);
-	  printf("MASA:               %5.16f\n",efield);
-	  printf("Maple:              %5.16f\n",efield2);
-	}
-
       if(efield3 > threshold)
 	{
 	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
