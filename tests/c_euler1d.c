@@ -116,7 +116,7 @@ int main()
 
   // solutions
   double ufield,ufield2;
-  double efield,efield2;
+  double efield,efield2,efield3;
   double rho,rho2;
 
   double u_an,u_an2;
@@ -175,9 +175,9 @@ int main()
       p_an2   = anQ_p   (x,p_0,p_x,a_px,L);
 
       // test the result is roughly zero
-      ufield = fabs(ufield-ufield2);
-      efield = fabs(efield-efield2);
-      rho    = fabs(rho-rho2);
+      ufield  = fabs(ufield-ufield2);
+      efield3 = fabs(efield-efield2);
+      rho     = fabs(rho-rho2);
 
       u_an   = fabs(u_an-u_an2);
       rho_an = fabs(rho_an-rho_an2);
@@ -197,11 +197,13 @@ int main()
 	  exit(1);
 	}
 
-      if(efield > threshold)
+      if(efield3 > threshold)
 	{
 	  printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	  printf("Energy Source Term\n");
-	  printf("Threshold Exceeded: %g\n",efield);
+	  printf("Threshold Exceeded: %g\n",efield3);
+	  printf("CMASA:              %5.16f\n",efield);
+	  printf("Maple:              %5.16f\n",efield2);
 	  exit(1);
 	}
 

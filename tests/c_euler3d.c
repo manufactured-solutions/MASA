@@ -511,7 +511,7 @@ int main()
 	      printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-3d\n");
 	      printf("E Field Source Term\n");
 	      printf("Threshold Exceeded: %g\n",efield3);
-	      //exit(1);
+	      exit(1);
 	    }
 
 	  if(p_an > threshold)
