@@ -329,6 +329,7 @@ int main()
   double x;
   double y;
   double z;
+  int i,j,k;
 
   // solutions
   double ufield,ufield2,ufield3;
@@ -413,9 +414,9 @@ int main()
   cmasa_sanity_check();
 
   // evaluate source terms (3D)
-  for(int i=0;i<nx;i++)
-    for(int j=0;j<ny;j++)    
-      for(int k=0;k<nz;k++)
+  for(i=0;i<nx;i++)
+    for(j=0;j<ny;j++)    
+      for(k=0;k<nz;k++)
 	{
 	  x=i*dx;
 	  y=j*dy;

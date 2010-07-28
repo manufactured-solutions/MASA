@@ -107,6 +107,7 @@ int main()
 
   // parameters
   double x;
+  int i;
 
   //problem size
   int nx = 2000;  // number of points
@@ -150,7 +151,7 @@ int main()
   cmasa_sanity_check();
 
   // evaluate source terms (1D)
-  for(int i=0;i<nx;i++)
+  for(i=0;i<nx;i++)
     {
       x=i*dx;
       

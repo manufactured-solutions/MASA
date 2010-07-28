@@ -198,6 +198,7 @@ int main()
   // parameters
   double x;
   double y;
+  int i,j,k;
 
   // solutions -- efield is MASA term, efield2 is maple, efield3 is abs error between them
   double ufield,ufield2,ufield3;
@@ -260,8 +261,8 @@ int main()
   cmasa_sanity_check();
 
   // evaluate source terms (2D)
-  for(int i=0;i<nx;i++)
-    for(int j=0;j<ny;j++)    
+  for(i=0;i<nx;i++)
+    for(j=0;j<ny;j++)    
       {
 	x=i*dx;
 	y=j*dy;
