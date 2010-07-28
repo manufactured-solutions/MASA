@@ -96,7 +96,7 @@ int main()
 
   // solutions
   double ufield,ufield2;
-  double efield,efield2;
+  double efield,efield2,efield3;
   double rho,rho2;
 
   double u_an,u_an2;
@@ -155,9 +155,9 @@ int main()
       p_an2   = anQ_p   (x,p_0,p_x,a_px,L);
 
       // test the result is roughly zero
-      ufield = fabs(ufield-ufield2);
-      efield = fabs(efield-efield2);
-      rho    = fabs(rho-rho2);
+      ufield  = fabs(ufield-ufield2);
+      efield3 = fabs(efield-efield2);
+      rho     = fabs(rho-rho2);
 
       u_an   = fabs(u_an-u_an2);
       rho_an = fabs(rho_an-rho_an2);
@@ -180,12 +180,20 @@ int main()
 	  cout << x << " " << endl;
 	  exit(1);
 	}
+      
+      if(x==3.67) // print information at a specific location
+	{
+	  printf("Threshold Exceeded: %g\n",efield3);
+	  printf("MASA:               %5.16f\n",efield);
+	  printf("Maple:              %5.16f\n",efield2);
+	}
 
-      if(efield > threshold)
+      if(efield3 > threshold)
 	{
 	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
-	  cout << "Energy Source Term\n";
-	  cout << "Exceeded Threshold by: " << efield << endl;
+	  printf("Threshold Exceeded: %g\n",efield3);
+	  printf("MASA:               %5.16f\n",efield);
+	  printf("Maple:              %5.16f\n",efield2);
 	  cout << x << endl;
 	  exit(1);
 	}

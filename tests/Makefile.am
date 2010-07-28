@@ -1,12 +1,15 @@
 INCLUDES                = -I$(top_srcdir)/src -I$(top_builddir)/src
 AM_CXXFLAGS             = $(INCLUDES) -O0
+AM_CFLAGS               = $(INCLUDES) -O0
 
 if USE_INTEL
   AM_CXXFLAGS          += -fp-model precise
+  AM_CFLAGS            += -fp-model precise
 endif
 
 if USE_GNU
   AM_CXXFLAGS          += -fno-unsafe-math-optimizations -Wunsafe-loop-optimizations
+  AM_CFLAGS            += -fno-unsafe-math-optimizations -Wunsafe-loop-optimizations
 endif
 
 bin_PROGRAMS              = heat_const_steady \
