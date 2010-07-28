@@ -509,6 +509,9 @@ int main()
 	      printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-3d\n");
 	      printf("E Field Source Term\n");
 	      printf("Threshold Exceeded: %g\n",efield3);
+	      printf("CMASA:              %5.16f\n",efield);
+	      printf("Maple:              %5.16f\n",efield2);
+	      printf("x,y:                %g %g\n",x,y);	   
 	      exit(1);
 	    }
 
