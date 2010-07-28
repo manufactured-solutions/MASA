@@ -41,13 +41,21 @@
 
 int main()
 {
-  double sol;
+  double sol=0;
+  double q=0;
+  int error;
+  double x  = 1.2;
+  double x2 = 2.2;
+  char* a= "A_x";
+  char* b= "k_0";
+  
+  sol = 0;
 
   // init
   cmasa_init("nick","heateq_1d_steady_const");
   cmasa_init_param();
 
-  cmasa_init("bob","heateq_2d_steady_const");
+  cmasa_init("bob","heateq_1d_steady_const");
   cmasa_init_param();
   
   // list
@@ -57,15 +65,23 @@ int main()
   cmasa_select_mms("nick");
   cmasa_display_param();
 
+  // lets examine a particular parameter 
+  cmasa_get_param(a,&q);
+  printf("A_x is set to: %g\n", q);
+
+  // now lets change that parameters value to something else.
+  cmasa_set_param(a,1.984);
+  cmasa_get_param(a,&q);
+  printf("A_x is set to: %g\n", q);
+
   //check all initialized properly
   cmasa_sanity_check();
-  cmasa_eval_t_source(1.2,&sol);
+  error = cmasa_eval_1d_t_source(x,&sol);
   printf("\nt source: %g\n",sol);
-
+  
   cmasa_select_mms("bob");
   cmasa_display_param();
-  cmasa_eval_t_source(1,1,&sol);
+  error = cmasa_eval_1d_t_source(x2,&sol);
   printf("\nt source: %g\n",sol);
-
   return 0; // done
 }
