@@ -484,8 +484,6 @@ int main()
 	  v_an    = fabs(v_an-v_an2);
 	  rho_an  = fabs(rho_an-rho_an2);
 	  p_an    = fabs(p_an-p_an2);
-  
-	  //cout << endl << ufield << endl << vfield << endl << efield << rho << endl;
 
 	  if(ufield > threshold)
 	    {	    
@@ -560,5 +558,5 @@ int main()
 	} // done iterating
 
   // tests passed
-
+  return 0;
 }

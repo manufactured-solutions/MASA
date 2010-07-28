@@ -167,4 +167,7 @@ int main()
 
   cout << "3D Steady Variable Coefficient Heat Equation: PASSED\n";
   //cout << "Residual: "<< tfield << endl;
+
+  // presumably, all tests passed
+  return 0;
 }

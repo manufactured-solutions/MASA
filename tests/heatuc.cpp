@@ -205,4 +205,6 @@ int main()
 
   cout << "3D Unsteady Constant Heat Equation: PASSED\n";
 
+  // presumably, all tests passed
+  return 0;
 }

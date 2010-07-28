@@ -296,6 +296,7 @@ int main()
 	    exit(1);
 	  }
       } // done iterating
+
   // tests passed
-	
+  return 0;
 }

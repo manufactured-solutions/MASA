@@ -362,6 +362,7 @@ int main()
 	  }
 
       } // done iterating
-  // tests passed
 
+  // tests passed
+  return 0;
 }

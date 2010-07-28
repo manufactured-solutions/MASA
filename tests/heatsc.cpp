@@ -139,4 +139,7 @@ int main()
 
   cout << "3D Steady Constant Heat Equation: PASSED\n";
 
+  // presumably, all tests passed
+  return 0;
+
 }

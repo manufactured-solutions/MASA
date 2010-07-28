@@ -273,4 +273,7 @@ int main()
 
   cout << "3D Unsteady Variable Coefficients Heat Equation: PASSED\n";
 
+  // presumably, all tests passed
+  return 0;
+
 }

@@ -231,6 +231,7 @@ int main()
 	}
 
     } // done interating 
-  // tests passed
 
+  // tests passed
+  return 0;
 }

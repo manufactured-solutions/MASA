@@ -376,6 +376,7 @@ int main()
 	  }
 
       } // done iterating
+
   // tests passed
-	
+  return 0;
 }
