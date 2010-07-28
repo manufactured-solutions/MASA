@@ -2,7 +2,6 @@
 // program that tests euler-2d against known source term generated from maple
 //
 
-
 #include <cmasa.h>
 #include <math.h>
 #include <stdio.h>
