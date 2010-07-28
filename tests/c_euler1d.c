@@ -200,6 +200,7 @@ int main()
 	{
 	  printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	  printf("Energy Source Term\n");
+	  printf("Threshold Exceeded: %g\n",efield);
 	  exit(1);
 	}
 
