@@ -3,11 +3,13 @@
 
 AC_PREREQ(2.61)
 AC_INIT([MASA], [0.10], [nick@ices.utexas.edu])
+
 AC_CONFIG_HEADER(config.h)
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE
 
 # Release versioning
+
 GENERIC_MAJOR_VERSION=0
 GENERIC_MINOR_VERSION=10
 GENERIC_MICRO_VERSION=0
@@ -21,12 +23,22 @@ AC_SUBST(GENERIC_LIBRARY_NAME)
 AC_SUBST(GENERIC_VERSION)
 AC_SUBST(GENERIC_RELEASE)
 
-# ------------------------------
-# Checks for required programs
-# ------------------------------
+# ------------------------------------------------------------------
+# Optimization Settings:
+# 
+# As MASA is targeted to support verification efforts, we desire to
+# maintain as much floating-point accuracy as possible (and are
+# willing to sacrifice speed). We thus request minimal compiler
+# optimization unless the user dictates otherwise via specific 
+# CFLAGS/CXXFLAGS settings.
+# ------------------------------------------------------------------
 
 AX_CC_MINOPT	# request minimum optimization level for C
 AX_CXX_MINOPT	# request minimum optimization level for CXX
+
+# ------------------------------
+# Checks for required programs
+# ------------------------------
 
 AC_PROG_CC
 AC_PROG_CXX
