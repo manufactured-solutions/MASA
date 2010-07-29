@@ -22,7 +22,7 @@ echo
 echo Package version............... : $PACKAGE-$VERSION
 echo
 echo C++ compiler.................. : $CXX
-echo C++ compiler flags............ : $CPPFLAGS
+echo C++ compiler flags............ : $CXXFLAGS
 echo Fortran compiler.............. : $FC
 echo Fortran compiler flags........ : $FCFLAGS
 echo Debug mode.................... : $enable_debug
