@@ -7,9 +7,9 @@ AM_FCFLAGS              = $(INCLUDES)
 AM_CFLAGS               = $(INCLUDES)
 AM_CXXFLAGS             = $(INCLUDES)
 
-if USE_INTEL
-  AM_CXXFLAGS          += -fp-model precise
-endif
+#if USE_INTEL
+#  AM_CXXFLAGS          += -fp-model precise
+#endif
 
 #if USE_GNU
 #  AM_CXXFLAGS          += -fno-unsafe-math-optimizations

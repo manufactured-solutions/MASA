@@ -2,10 +2,10 @@ INCLUDES                = -I$(top_srcdir)/src -I$(top_builddir)/src
 AM_CXXFLAGS             = $(INCLUDES)
 AM_CFLAGS               = $(INCLUDES)
 
-if USE_INTEL
-  AM_CXXFLAGS          += -fp-model precise
-  AM_CFLAGS            += -fp-model precise
-endif
+#if USE_INTEL
+#  AM_CXXFLAGS          += -fp-model precise
+#  AM_CFLAGS            += -fp-model precise
+#endif
 
 #if USE_GNU
 #  AM_CXXFLAGS          += -fno-unsafe-math-optimizations -Wunsafe-loop-optimizations
