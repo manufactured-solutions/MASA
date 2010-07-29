@@ -25,6 +25,8 @@ AC_SUBST(GENERIC_RELEASE)
 # Checks for required programs
 # ------------------------------
 
+AX_CXX_MINOPT	# request minimum optimization level for CXX
+
 AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_FC
@@ -39,8 +41,8 @@ AM_SANITY_CHECK
 # Flags
 # ------------------------------
 
-AM_CPPFLAGS="-O3 -g"
-AM_FCFLAGS="$FCFLAGS -g -DDEBUG"
+###AM_CPPFLAGS="-O3 -g"
+###AM_FCFLAGS="$FCFLAGS -g -DDEBUG"
 
 # ----------------
 # Doxygen support 
