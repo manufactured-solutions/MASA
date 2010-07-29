@@ -25,6 +25,7 @@ AC_SUBST(GENERIC_RELEASE)
 # Checks for required programs
 # ------------------------------
 
+AX_CC_MINOPT	# request minimum optimization level for C
 AX_CXX_MINOPT	# request minimum optimization level for CXX
 
 AC_PROG_CC
