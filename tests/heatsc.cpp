@@ -70,8 +70,7 @@ int main()
       exit(1);
     }
 
-  cout << "1D Steady Constant Heat Equation: PASSED\n";
-
+  // cout << "1D Steady Constant Heat Equation: PASSED\n";
 
   /// -----------------------------------------------------------------------
   // initalize 2D
@@ -102,7 +101,7 @@ int main()
       exit(1);
     }
 
-  cout << "2D Steady Constant Heat Equation: PASSED\n";
+  // cout << "2D Steady Constant Heat Equation: PASSED\n";
 
   /// -----------------------------------------------------------------------
   // initalize 3D
@@ -137,7 +136,7 @@ int main()
       exit(1);
     }
 
-  cout << "3D Steady Constant Heat Equation: PASSED\n";
+  //cout << "3D Steady Constant Heat Equation: PASSED\n";
 
   // presumably, all tests passed
   return 0;

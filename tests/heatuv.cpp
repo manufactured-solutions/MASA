@@ -145,7 +145,7 @@ int main()
       exit(1);
     }
 
-  cout << "1D Unsteady Variable Coefficients Heat Equation: PASSED\n";
+  //cout << "1D Unsteady Variable Coefficients Heat Equation: PASSED\n";
 
   /// -----------------------------------------------------------------------
   // initalize 2D
@@ -203,7 +203,7 @@ int main()
       exit(1);
     }
 
-  cout << "2D Unsteady Variable Coefficients Heat Equation: PASSED\n";
+  //cout << "2D Unsteady Variable Coefficients Heat Equation: PASSED\n";
 
 
   /// -----------------------------------------------------------------------
@@ -271,7 +271,7 @@ int main()
       exit(1);
     }
 
-  cout << "3D Unsteady Variable Coefficients Heat Equation: PASSED\n";
+  //cout << "3D Unsteady Variable Coefficients Heat Equation: PASSED\n";
 
   // presumably, all tests passed
   return 0;
