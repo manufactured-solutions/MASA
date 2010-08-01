@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "-------------------------------------------------------"
-echo "Finalizing MASA Tests, peace and love "
+echo "Finalizing MASA Tests, have a well verified day"
 echo "-------------------------------------------------------"
 echo " "
 
