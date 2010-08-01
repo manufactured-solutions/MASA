@@ -116,11 +116,11 @@ int main()
   double dx=(double)(lx)/(double)(nx);
 
   // solutions
-  double ufield,ufield2;
+  double ufield,ufield2,ufield3;
   double efield,efield2,efield3;
   double rho,rho2;
 
-  double u_an,u_an2;
+  double u_an,u_an2,u_an3;
   double p_an,p_an2;
   double rho_an,rho_an2;
 
@@ -176,25 +176,33 @@ int main()
       p_an2   = anQ_p   (x,p_0,p_x,a_px,L);
 
       // test the result is roughly zero
-      ufield  = fabs(ufield-ufield2);
+      ufield3 = fabs(ufield-ufield2);
       efield3 = fabs(efield-efield2);
       rho     = fabs(rho-rho2);
 
-      u_an   = fabs(u_an-u_an2);
+      u_an3   = fabs(u_an-u_an2);
       rho_an = fabs(rho_an-rho_an2);
       p_an   = fabs(p_an-p_an2);
    
-      if(ufield > threshold)
+      if(ufield3 > threshold)
 	{
 	  printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	  printf("U Field Source Term\n");
+	  printf("Threshold Exceeded: %g\n",ufield3);
+	  printf("CMASA:              %5.16f\n",ufield);
+	  printf("Maple:              %5.16f\n",ufield2);
+	  printf("x:                  %g\n",x);
 	  exit(1);
 	}
 
-      if(u_an > threshold)
+      if(u_an3 > threshold)
 	{
 	  printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	  printf("U Field Analytical Term\n");
+	  printf("Threshold Exceeded: %g\n",u_an3);
+	  printf("CMASA:              %5.16f\n",u_an);
+	  printf("Maple:              %5.16f\n",u_an2);
+	  printf("x:                  %g\n",x);
 	  exit(1);
 	}
 
