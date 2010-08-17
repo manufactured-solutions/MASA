@@ -308,10 +308,10 @@ int main()
 	p_an2   = anQ_p   (x,y,p_0,p_x,p_y,a_px,a_py,L);
 
 	// test the result is roughly zero
-	ufield = fabs(ufield-ufield2);
-	vfield = fabs(vfield-vfield2);
-	efield = fabs(efield-efield2);
-	rho    = fabs(rho-rho2);
+	ufield  = fabs(ufield-ufield2);
+	vfield  = fabs(vfield-vfield2);
+	efield3 = fabs(efield-efield2);
+	rho     = fabs(rho-rho2);
 	
 	u_an   = fabs(u_an-u_an2);
 	v_an3  = fabs(v_an-v_an2);
@@ -346,10 +346,14 @@ int main()
 	    exit(1);
 	  }
 
-	if(efield > threshold)
+	if(efield3 > threshold)
 	  {
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 2d\n");
 	    printf("E Field Source Term\n");
+	    printf("Threshold Exceeded: %g\n",efield3);
+	    printf("CMASA:              %5.16f\n",efield);
+	    printf("Maple:              %5.16f\n",efield2);
+	    printf("x,y:                %g %g\n",x,y);
 	    exit(1);
 	  }
 

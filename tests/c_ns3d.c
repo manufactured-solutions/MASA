@@ -355,13 +355,13 @@ int main()
   // solutions
   double ufield,ufield2;
   double vfield,vfield2;
-  double wfield,wfield2;
+  double wfield,wfield2,wfield3;
   double efield,efield2,efield3;
   double rho,rho2;
 
   double u_an,u_an2;
   double v_an,v_an2;
-  double w_an,w_an2;
+  double w_an,w_an2,w_an3;
   double p_an,p_an2;
   double rho_an,rho_an2;
 
@@ -457,6 +457,7 @@ int main()
 	  // evaluate analytical terms
 	  cmasa_eval_3d_u_an        (x,y,z,&u_an);
 	  cmasa_eval_3d_v_an        (x,y,z,&v_an);
+	  cmasa_eval_3d_w_an        (x,y,z,&w_an);
 	  cmasa_eval_3d_p_an        (x,y,z,&p_an);
 	  cmasa_eval_3d_rho_an      (x,y,z,&rho_an);	  
 
@@ -476,12 +477,13 @@ int main()
 	  // test the result is nearly within double precision round-off error
 	  ufield  = fabs(ufield-ufield2);
 	  vfield  = fabs(vfield-vfield2);
-	  wfield  = fabs(wfield-wfield2);
+	  wfield3 = fabs(wfield-wfield2);
 	  efield3 = fabs(efield-efield2);
 	  rho     = fabs(rho-rho2);
 
 	  u_an    = fabs(u_an-u_an2);
 	  v_an    = fabs(v_an-v_an2);
+	  w_an3   = fabs(w_an-w_an2);
 	  rho_an  = fabs(rho_an-rho_an2);
 	  p_an    = fabs(p_an-p_an2);
 
@@ -513,17 +515,25 @@ int main()
 	      exit(1);
 	    }
 
-	  if(wfield > threshold)
+	  if(wfield3 > threshold)
 	    {
 	      printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 3d\n");
 	      printf("W Field Source Term\n");
+	      printf("Threshold Exceeded: %g\n",wfield3);
+	      printf("CMASA:              %5.16f\n",wfield);
+	      printf("Maple:              %5.16f\n",wfield2);
+	      printf("x,y,z:              %g %g %g\n",x,y,z);	      
 	      exit(1);
 	    }
 
-	  if(w_an > threshold)
+	  if(w_an3 > threshold)
 	    {
 	      printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 3d\n");
 	      printf("W Field Analytical Term\n");
+	      printf("Threshold Exceeded: %g\n",w_an3);
+	      printf("CMASA:              %5.16f\n",w_an);
+	      printf("Maple:              %5.16f\n",w_an2);
+	      printf("x,y,z:              %g %g %g\n",x,y,z);	      
 	      exit(1);
 	    }
 
