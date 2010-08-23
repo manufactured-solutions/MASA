@@ -1,6 +1,6 @@
 h_sources               = masa.h cmasa.h masa_internal.h
-cc_sources              = masa_core.cpp masa_class.cpp masa_map.cpp masa_heat.cpp masa_euler.cpp \
-			  masa_cns.cpp masa_sod.cpp cmasa.cpp
+cc_sources              = masa_core.cpp masa_class.cpp masa_map.cpp heat.cpp euler.cpp \
+			  cns.cpp sod.cpp cmasa.cpp axi_euler.cpp axi_cns.cpp
 
 INCLUDES                = 
 AM_FCFLAGS              = $(INCLUDES)

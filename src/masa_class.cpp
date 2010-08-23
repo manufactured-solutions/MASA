@@ -32,6 +32,7 @@
 
 //
 //   These are the MASA class member functions and constructors
+//   Common to all MASA Manufactured Class Objects
 // 
 
 #include <masa_internal.h>

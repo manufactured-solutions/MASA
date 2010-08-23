@@ -573,6 +573,93 @@ namespace MASA
   };
 
   // ------------------------------------------------------
+  // ---------- axisymmetric euler ------------
+  // ------------------------------------------------------
+  class axi_euler : public manufactured_solution
+  {
+
+    double R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+
+    double p_0;
+    double p_1;
+    double rho_0;
+    double rho_1;
+    double u_1;
+    double w_0;
+    double w_1;
+    double a_pr;
+    double a_pz;
+    double a_rhor;
+    double a_rhoz;
+    double a_ur;
+    double a_uz;
+    double a_wr;
+    double a_wz;
+    double L;
+    double mu;
+    double Gamma;    
+
+  public:
+    axi_euler(); // constructor    
+    void   init_var();          // default problem values
+
+    double eval_q_u   (double,double); // radial velocity 
+    double eval_q_w   (double,double); // axial 
+    double eval_q_e   (double,double);
+    double eval_q_rho (double,double);
+    
+    double eval_an_u  (double,double); // analytical
+    double eval_an_w  (double,double);
+    double eval_an_p  (double,double);
+    double eval_an_rho(double,double);
+
+  };
+
+  // ------------------------------------------------------
+  // ---------- axisymmetric compressible navier stokes ---
+  // ------------------------------------------------------
+  class axi_cns : public manufactured_solution
+  {
+
+    double R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+    double k;                             // Boltzmanns constant
+
+    double p_0;
+    double p_1;
+    double rho_0;
+    double rho_1;
+    double u_1;
+    double w_0;
+    double w_1;
+    double a_pr;
+    double a_pz;
+    double a_rhor;
+    double a_rhoz;
+    double a_ur;
+    double a_uz;
+    double a_wr;
+    double a_wz;
+    double L;
+    double mu;
+    double Gamma;
+   
+  public:
+    axi_cns(); // constructor    
+    void   init_var();          // default problem values
+
+    double eval_q_u   (double,double); // radial velocity 
+    double eval_q_w   (double,double); // axial 
+    double eval_q_e   (double,double);
+    double eval_q_rho (double,double);
+    
+    double eval_an_u  (double,double); // analytical
+    double eval_an_w  (double,double);
+    double eval_an_p  (double,double);
+    double eval_an_rho(double,double);
+
+  };
+
+  // ------------------------------------------------------
   // ---------- sod 1d ------------
   // ------------------------------------------------------
   class sod_1d : public manufactured_solution

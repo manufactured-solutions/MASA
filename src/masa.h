@@ -32,7 +32,19 @@
 
 //
 // This header file contains the public functions designed to be exposed in MASA
-//
+// What follows is the masa.h doxygen documentation headers
+/*! \file masa.h
+\brief MASA header file containing all public C++ API
+
+MASA.h is a header file that contains all the public objects and member functions for the c++ interfaces.
+
+*/
+
+/*! \fn int masa_init(string unique_name, string mms)
+\brief Initialize a MASA manufactured solution class
+\param unique_name This is a string that provides a unique identity for the initialized manufactured class, e.g. "bob"
+\param mms This is the manufactured class to be initialized, e.g. "euler_1d"
+*/
 
 #include <iostream>
 #include <vector>

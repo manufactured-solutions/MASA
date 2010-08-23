@@ -115,6 +115,9 @@ int get_list_mms(vector<manufactured_solution*>* anim)
   anim->push_back(new navierstokes_2d_compressible());
   anim->push_back(new navierstokes_3d_compressible());
 
+  anim->push_back(new axi_euler());
+  anim->push_back(new axi_cns());
+
   return 0;
 
 }
