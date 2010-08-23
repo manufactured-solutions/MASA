@@ -345,9 +345,9 @@ int main()
   double rho_an,rho_an2;
 
   // initalize
-  int nx = 93;             // number of points
+  int nx = 43;             // number of points
   int ny = 12;  
-  int nz = 170;  
+  int nz = 23;  
   int lx=1;                // length
   int ly=2; 
   int lz=3;   

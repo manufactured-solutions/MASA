@@ -309,8 +309,8 @@ int main()
 
 	// test the result is roughly zero
 	ufield  = fabs(ufield-ufield2);
-	vfield  = fabs(vfield-vfield2);
-	efield3 = fabs(efield-efield2);
+	vfield3 = fabs(vfield-vfield2)/(vfield2); // converting to relative error.
+	efield3 = fabs(efield-efield2)/(efield2); // converting to relative error.
 	rho     = fabs(rho-rho2);
 	
 	u_an   = fabs(u_an-u_an2);
@@ -332,10 +332,15 @@ int main()
 	    exit(1);
 	  }
 
-	if(vfield > threshold)
+	if(vfield3 > threshold)
 	  {
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 2d\n");
 	    printf("V Field Source Term\n");
+	    printf("(Relative) Threshold Exceeded: %g\n",vfield3);
+	    printf("CMASA:              %5.16f\n",vfield);
+	    printf("Maple:              %5.16f\n",vfield2);
+	    printf("x,y:                %g %g\n",x,y);
+
 	    exit(1);
 	  }
 
@@ -350,7 +355,7 @@ int main()
 	  {
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 2d\n");
 	    printf("E Field Source Term\n");
-	    printf("Threshold Exceeded: %g\n",efield3);
+	    printf("(Relative) Threshold Exceeded: %g\n",efield3);
 	    printf("CMASA:              %5.16f\n",efield);
 	    printf("Maple:              %5.16f\n",efield2);
 	    printf("x,y:                %g %g\n",x,y);

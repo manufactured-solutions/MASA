@@ -90,7 +90,7 @@ int main()
   double x;
 
   //problem size
-  int nx = 2000;  // number of points
+  int nx = 200;  // number of points
   int lx=10;     // length
   double dx=double(lx)/double(nx);
 
