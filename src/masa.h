@@ -1,5 +1,7 @@
 
-$License:$
+// $License:$
+
+$Id:$
 
 
 //-*-c++-*-
