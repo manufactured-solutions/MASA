@@ -1,6 +1,5 @@
 // $License$
 // $Author$
-// $Copyright$
 // $Id$
 
 #include <cmasa.h>
