@@ -1,3 +1,8 @@
+// $License$
+// $Author$
+// $Copyright$
+// $Id:$
+
 #include <cmasa.h>
 #include <masa.h>
 #include <string>
