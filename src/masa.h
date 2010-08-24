@@ -1,5 +1,7 @@
 
-// $License:$
+// $License$
+
+// $Author$
 
 // $Id$
 
