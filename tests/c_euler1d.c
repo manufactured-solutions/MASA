@@ -1,3 +1,7 @@
+// $License$
+// $Author$
+// $Id$
+
 //
 // program that tests euler-1d against known source term generated from maple
 //

@@ -1,3 +1,7 @@
+// $License$
+// $Author$
+// $Id$
+
 #include <math.h>
 
 const double PI = acos(-1);

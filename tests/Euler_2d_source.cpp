@@ -1,3 +1,7 @@
+// $License$
+// $Author$
+// $Id$
+
 #include <math.h>
 
 //#ifdef linux
