@@ -1,7 +1,7 @@
 // $License$
 // $Author$
 // $Copyright$
-// $Id:$
+// $Id$
 
 #include <cmasa.h>
 #include <masa.h>
