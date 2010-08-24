@@ -3,6 +3,8 @@
 
 // $Author$
 
+// $Copyright$
+
 // $Id$
 
 
