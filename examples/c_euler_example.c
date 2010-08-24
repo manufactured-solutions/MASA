@@ -57,7 +57,7 @@ int main()
 
   //check all initialized properly
   cmasa_sanity_check();
-  cmasa_eval_t_source(1.2,&sol);
+  cmasa_eval_1d_u_source(1.2,&sol);
   printf("\nt source: %g\n",sol);
 
   return 0; // done
