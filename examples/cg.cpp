@@ -1,3 +1,6 @@
+// $License$
+// $Author$
+// $Id$ 
 
 #include <iostream>
 #include <math.h>
