@@ -29,11 +29,11 @@ heat_const_steady_SOURCES   = heatsc.cpp
 heat_var_steady_SOURCES     = heatsv.cpp
 heat_const_unsteady_SOURCES = heatuc.cpp
 heat_var_unsteady_SOURCES   = heatuv.cpp
-euler1d_SOURCES             = euler1d.cpp Euler_1d_source.C
-euler2d_SOURCES             = euler2d.cpp Euler_2d_source.C
-euler3d_SOURCES             = euler3d.cpp Euler_3d_source.C
-navierstokes2d_SOURCES      = ns2d.cpp Navier-Stokes_2d_compressible_source.C
-navierstokes3d_SOURCES      = ns3d.cpp Navier-Stokes_3d_compressible_source.C
+euler1d_SOURCES             = euler1d.cpp Euler_1d_source.cpp
+euler2d_SOURCES             = euler2d.cpp Euler_2d_source.cpp
+euler3d_SOURCES             = euler3d.cpp Euler_3d_source.cpp
+navierstokes2d_SOURCES      = ns2d.cpp Navier-Stokes_2d_compressible_source.cpp
+navierstokes3d_SOURCES      = ns3d.cpp Navier-Stokes_3d_compressible_source.cpp
 
 #----------------------
 # C Test Sources
