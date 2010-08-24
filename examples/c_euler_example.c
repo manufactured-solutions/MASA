@@ -48,7 +48,7 @@ int main()
   double sol;
   
   // init
-  cmasa_init("nick","euler_2d");
+  cmasa_init("nick","euler_1d");
   cmasa_init_param();
 
   // list
