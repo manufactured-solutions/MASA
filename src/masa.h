@@ -1,6 +1,5 @@
 
-
-$License$
+$License:$
 
 
 //-*-c++-*-
