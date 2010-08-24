@@ -1,3 +1,7 @@
+// $License$
+// $Author$
+// $Id$ 
+
 //program that takes the 2nd derivative numerically and compares to the analytical solution
 
 #include <iostream>

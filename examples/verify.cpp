@@ -1,3 +1,8 @@
+// $License$
+// $Author$
+// $Id$ 
+
+//
 // this is just a test routine to check the conjugate gradient solver
 //
 #include <iostream>
