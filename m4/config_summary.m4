@@ -41,5 +41,7 @@ echo '--------------------------------------------------------------------------
 echo
 echo Configure complete, now type \'make\' and then \'make install\'.
 echo
+echo To verify your verification library, type \'make check\' 
+echo to run a suite of regression tests.
 
 ])

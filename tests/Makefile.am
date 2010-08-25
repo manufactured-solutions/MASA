@@ -66,3 +66,6 @@ TESTS                      = init.sh              \
                              c_navierstokes2d     \
                              c_navierstokes3d     \
                              finalize.sh
+
+EXTRA_DIST                 = init.sh \
+                             finalize.sh
