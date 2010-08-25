@@ -1,34 +1,16 @@
+// -*-c++-*-
+//
 //-----------------------------------------------------------------------bl-
-//--------------------------------------------------------------------------
-//
-// MASA - Manufactured Analytical Solutions Abstraction Library
-//
-// Copyright (C) 2010 The PECOS Development Team
-//
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the Version 2.1 GNU Lesser General
-// Public License as published by the Free Software Foundation.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc. 51 Franklin Street, Fifth Floor,
-// Boston, MA  02110-1301  USA
-//
 //-----------------------------------------------------------------------el-
-// masa_internal.h: internal header definitions
+// $Author: nick $
+// $Id: masa_core.cpp 12639 2010-08-24 23:33:29Z nick $
 //
-// $Id: masa.h 12668 2010-08-25 16:03:32Z karl $
+//
+// masa_internal.h: internal MASA class definitions
+//                  users are NOT recommended to muck around!
+//
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
-
-//
-//   These are the internal MASA class definitions
-//   Users are NOT recommended to muck around with this
 //
 
 #include <masa.h>
