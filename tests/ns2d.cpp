@@ -1,10 +1,14 @@
-// $License$
+// -*-c++-*-
+//
+//-----------------------------------------------------------------------bl-
+//-----------------------------------------------------------------------el-
 // $Author$
 // $Id$
-
 //
-// program that tests navier-stokes-2d against known source term generated from maple
+// ns2d.cpp: program that tests navier-stokes-2d against known source term
 //
+//--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
 
 #include <masa.h>
 #include <math.h> 
