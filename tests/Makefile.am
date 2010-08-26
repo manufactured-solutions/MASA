@@ -21,6 +21,9 @@ check_PROGRAMS   = heat_const_steady   \
 	           c_navierstokes2d    \
 	           c_navierstokes3d 
 
+# License Information
+BUILT_SOURCES = .license.stamp
+
 #----------------------
 # C++ Test Sources
 #----------------------
@@ -69,3 +72,10 @@ TESTS                      = init.sh              \
 
 EXTRA_DIST                 = init.sh \
                              finalize.sh
+
+# License Information
+.license.stamp: $(top_srcdir)/LICENSE
+	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE $(cc_sources) $(h_sources)
+	echo 'updated source license headers' >$@
+
+CLEANFILES = .license.stamp
