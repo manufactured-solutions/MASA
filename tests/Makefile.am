@@ -6,6 +6,9 @@ AM_F77FLAGS      = $(INCLUDES)
 AM_FCFLAGS       = $(INCLUDES)
 AM_LDFLAGS       = $(LIBS)
 
+# License Information
+BUILT_SOURCES = .license.stamp
+
 check_PROGRAMS   = heat_const_steady   \
 		   heat_var_steady     \
 	           heat_const_unsteady \
@@ -20,9 +23,6 @@ check_PROGRAMS   = heat_const_steady   \
                    c_euler3d           \
 	           c_navierstokes2d    \
 	           c_navierstokes3d 
-
-# License Information
-BUILT_SOURCES = .license.stamp
 
 #----------------------
 # C++ Test Sources
@@ -75,7 +75,7 @@ EXTRA_DIST                 = init.sh \
 
 # License Information
 .license.stamp: $(top_srcdir)/LICENSE
-	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE $(cc_sources) $(h_sources)
+	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE *.c *.cpp
 	echo 'updated source license headers' >$@
 
 CLEANFILES = .license.stamp
