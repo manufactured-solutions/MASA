@@ -4,6 +4,9 @@ AM_CFLAGS     = $(INCLUDES)
 AM_CPPFLAGS   = $(INCLUDES)
 LIBS          = -L$(top_builddir)/src -lmasa
 
+# License Information
+BUILT_SOURCES = .license.stamp
+
 bin_PROGRAMS  = verify MASAshell euler_example navierstokes_example heat_example switch #tester 
 bin_PROGRAMS += c_heat_example c_euler_example
 
@@ -26,3 +29,12 @@ switch_SOURCES               = switch.cpp
 
 c_heat_example_SOURCES       = c_heat_example.c
 c_euler_example_SOURCES      = c_euler_example.c
+
+# ----------------- 
+# License
+# ----------------- 
+.license.stamp: $(top_srcdir)/LICENSE
+	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE *.c *.cpp
+	echo 'updated source license headers' >$@
+
+CLEANFILES = .license.stamp
