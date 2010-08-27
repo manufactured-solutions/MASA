@@ -143,27 +143,27 @@ double MASA::axi_euler::eval_q_e(double r,double z)
 double MASA::axi_euler::eval_an_u(double r,double z)
 {
   double u_an;
-  u_an = u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_uz * pi * z / L);
+  u_an = u_1 * (cos(a_ur * PI * r / L) - 0.1e1) * sin(a_uz * PI * z / L);
   return u_an;
 }
 
 double MASA::axi_euler::eval_an_w(double r,double z)
 {
   double w_an;
-  w_an = w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L);
+  w_an = w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L);
   return w_an;
 }
 
 double MASA::axi_euler::eval_an_p(double r,double z)
 {
   double p_an;
-  p_an = p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L);
+  p_an = p_0 + p_1 * sin(a_pr * PI * r / L) * cos(a_pz * PI * z / L);
   return p_an;
 }
 
 double MASA::axi_euler::eval_an_rho(double r,double z)
 {
   double rho_an;
- rho_an = rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L);
+  rho_an = rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L);
   return rho_an;
 }

@@ -1,42 +1,35 @@
-// $License$
+// -*-c++-*-
+//
+//-----------------------------------------------------------------------bl-
+//--------------------------------------------------------------------------
+//
+// MASA - Manufactured Analytical Solutions Abstraction Library
+//
+// Copyright (C) 2010 The PECOS Development Team
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the Version 2.1 GNU Lesser General
+// Public License as published by the Free Software Foundation.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc. 51 Franklin Street, Fifth Floor,
+// Boston, MA  02110-1301  USA
+//
+//-----------------------------------------------------------------------el-
 // $Author$
 // $Id$
-
- /*--------------------------------------------------------------------------
-  *--------------------------------------------------------------------------
-  *
-  * Copyright (C) 2010 The PECOS Development Team
-  *
-  * Please see http://pecos.ices.utexas.edu for more information.
-  *
-  * This file is part of MASA.
-  *
-  * MASA is free software: you can redistribute it and/or modify it under
-  * the terms of the GNU Lesser General Public License as published by the Free
-  * Software Foundation, either version 3 of the License, or (at your option)
-  * any later version.
-  *
-  * MASA is distributed in the hope that it will be useful, but WITHOUT ANY
-  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-  * FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
-  * details.
-  *
-  * You should have received a copy of the GNU Lesser General Public License along 
-  * with MASA.  If not, see <http://www.gnu.org/licenses/>.
-  *
-  *--------------------------------------------------------------------------
-  
-  MASA -- Manufactured Analytical Solutions Abstraction Library
-
-  A software interface that provides access to all manufactured solutions to 
-  be used by various models throughout the center.
-  
-  *--------------------------------------------------------------------------
-  */  
-
 //
-//   These are the MASA class member functions and constructors
-//   For the Axisymmetric Compressible Navier-Stokes
+// axi_cns.cpp: These are the MASA class member functions and constructors
+//              For the Axisymmetric Compressible Navier-Stokes
+//
+//--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
 //
 
 #include <masa_internal.h> 
@@ -150,27 +143,27 @@ double MASA::axi_cns::eval_q_e(double r,double z)
 double MASA::axi_cns::eval_an_u(double r,double z)
 {
   double u_an;
-  u_an = u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_uz * pi * z / L);
+  u_an = u_1 * (cos(a_ur * PI * r / L) - 0.1e1) * sin(a_uz * PI * z / L);
   return u_an;
 }
 
 double MASA::axi_cns::eval_an_w(double r,double z)
 {
   double w_an;
-  w_an = w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L);
+  w_an = w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L);
   return w_an;
 }
 
 double MASA::axi_cns::eval_an_p(double r,double z)
 {
   double p_an;
-  p_an = p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L);
+  p_an = p_0 + p_1 * sin(a_pr * PI * r / L) * cos(a_pz * PI * z / L);
   return p_an;
 }
 
 double MASA::axi_cns::eval_an_rho(double r,double z)
 {
   double rho_an;
-  rho_an = rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L);
+  rho_an = rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L);
   return rho_an;
 }

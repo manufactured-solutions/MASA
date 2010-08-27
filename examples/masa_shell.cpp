@@ -68,7 +68,8 @@ void masa_shell_choose_solution()
       printf("\n\n 0) Exit and drop currently selected manufactured solution");
       printf("\n 1) Show all variables and registered values");
       printf("\n 2) Register variable values");
-      printf("\n 3) Evaluate\n\n");
+      printf("\n 3) Set to default values");
+      printf("\n 4) Evaluate\n\n");
       cin >> q;
 
       // switch statement based on user input
@@ -95,9 +96,14 @@ void masa_shell_choose_solution()
 	  masa_get_param(userstring,&dbl2);
 	  cout << endl << userstring << " is now set to:" << dbl2 << endl;
 	  break;
-	  
+
 	case 3:
-	  printf("\n User Selected 3: Evaluate");
+	  printf("\n User Selected 3: Set to default values\n");
+	  masa_init_param();
+	  break;
+	  
+	case 4:
+	  printf("\n User Selected 4: Evaluate");
 	  masa_sanity_check();
 	  masa_get_dimension(&dimension);	 
 	  switch(dimension)
