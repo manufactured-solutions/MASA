@@ -97,12 +97,14 @@ namespace MASA
   int masa_eval_t_source    (double,double,double,double*); //x,y,t
   int masa_eval_u_source    (double,double,double*);
   int masa_eval_v_source    (double,double,double*);
+  int masa_eval_w_source    (double,double,double*); // for axisymmetric
   int masa_eval_e_source    (double,double,double*);
   int masa_eval_rho_source  (double,double,double*);
 
   int masa_eval_t_an        (double,double,double,double*); //x,y,t
   int masa_eval_u_an        (double,double,double*);
   int masa_eval_v_an        (double,double,double*);
+  int masa_eval_w_an        (double,double,double*); // for axisymmetric
   int masa_eval_p_an        (double,double,double*);
   int masa_eval_rho_an      (double,double,double*);
 

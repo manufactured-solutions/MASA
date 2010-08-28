@@ -396,6 +396,12 @@ int MASA::masa_eval_v_source(double x,double y,double* field)
   return 0;
 }
 
+int MASA::masa_eval_w_source(double x,double y,double* field)
+{
+  *field=masa_master_pointer->eval_q_w(x,y);
+  return 0;
+}
+
 int MASA::masa_eval_rho_source(double x,double y,double* field)
 {
   *field=masa_master_pointer->eval_q_rho(x,y);
@@ -427,6 +433,12 @@ int MASA::masa_eval_u_an(double x,double y,double* field)
 int MASA::masa_eval_v_an(double x,double y,double* field)
 {
   *field=masa_master_pointer->eval_an_v(x,y);
+  return 0;
+}
+
+int MASA::masa_eval_w_an(double x,double y,double* field)
+{
+  *field=masa_master_pointer->eval_an_w(x,y);
   return 0;
 }
 
