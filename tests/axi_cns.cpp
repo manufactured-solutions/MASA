@@ -224,7 +224,7 @@ int main()
   double dx=double(lx)/double(nx);
   double dy=double(ly)/double(ny);
 
-  masa_init("navier-stokes-test","navierstokes_2d_compressible");
+  masa_init("axisymmetric_navierstokes_compressible","axisymmetric_navierstokes_compressible");
 
   // set params
   masa_init_param();

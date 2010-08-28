@@ -18,11 +18,12 @@ check_PROGRAMS   = heat_const_steady   \
                    euler3d             \
 	           navierstokes2d      \
 	           navierstokes3d      \
+                   axi_euler           \
 	           c_euler1d           \
 	           c_euler2d           \
                    c_euler3d           \
 	           c_navierstokes2d    \
-	           c_navierstokes3d 
+	           c_navierstokes3d    
 
 #----------------------
 # C++ Test Sources
@@ -32,6 +33,7 @@ heat_const_steady_SOURCES   = heatsc.cpp
 heat_var_steady_SOURCES     = heatsv.cpp
 heat_const_unsteady_SOURCES = heatuc.cpp
 heat_var_unsteady_SOURCES   = heatuv.cpp
+axi_euler_SOURCES           = axi_euler.cpp
 euler1d_SOURCES             = euler1d.cpp Euler_1d_source.cpp
 euler2d_SOURCES             = euler2d.cpp Euler_2d_source.cpp
 euler3d_SOURCES             = euler3d.cpp Euler_3d_source.cpp
@@ -63,6 +65,7 @@ TESTS                      = init.sh              \
 	                     euler3d              \
                              navierstokes2d       \
                              navierstokes3d       \
+                             axi_euler            \
 	                     c_euler1d            \
 	                     c_euler2d            \
 	                     c_euler3d            \
