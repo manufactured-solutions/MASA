@@ -566,3 +566,52 @@ int MASA::masa_sanity_check()
   masa_master_pointer->sanity_check(); // set string to name
   return 0;
 }
+
+int MASA::masa_version_stdout()
+{
+  std::cout << "--------------------------------------------------------" << std::endl;
+  std::cout << "MASA Library: Version = " << MASA_LIB_VERSION;
+  std::cout << " (" << MASA::masa_get_numeric_version() << ")" << std::endl << std::endl;
+  std::cout << "Build Date   = " << MASA_BUILD_DATE     << std::endl;
+  std::cout << "Build Host   = " << MASA_BUILD_HOST     << std::endl;
+  std::cout << "Build User   = " << MASA_BUILD_USER     << std::endl;
+  std::cout << "Build Arch   = " << MASA_BUILD_ARCH     << std::endl;
+  std::cout << "Build Rev    = " << MASA_BUILD_VERSION  << std::endl << std::endl;
+  std::cout << "C++ Config   = " << MASA_CXX MASA_CXXFLAGS << std::endl;
+  //std::cout << "F90 Config   = " << MASA_FC MASA_FCFLAGS << std::endl;
+  std::cout << "--------------------------------------------------------" << std::endl;
+}
+
+int MASA::masa_get_numeric_version()
+{
+  // Note: return format follows the versioning convention xx.yy.zz where
+  //
+  // xx = major version number
+  // yy = minor version number
+  // zz = micro version number
+  //
+  // For example:
+  // v.   0.23  -> 002300 = 2300
+  // v   0.23.1 -> 002301 = 2301
+  // v. 10.23.2 -> 102302
+
+  int major_version = 0;
+  int minor_version = 0;
+  int micro_version = 0;
+
+  #ifdef MASA_MAJOR_VERSION
+  major_version = MASA_MAJOR_VERSION;
+  #endif
+
+  #ifdef MASA_MINOR_VERSION
+  minor_version = MASA_MINOR_VERSION;
+  #endif
+
+  #ifdef MASA_MICRO_VERSION
+  micro_version = MASA_MICRO_VERSION;
+  #endif
+
+  return(major_version*10000 + minor_version*100 + micro_version);
+
+}
+

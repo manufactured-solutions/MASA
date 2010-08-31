@@ -21,6 +21,9 @@ GENERIC_RELEASE=$GENERIC_MAJOR_VERSION.$GENERIC_MINOR_VERSION
 
 AC_SUBST(GENERIC_LIBRARY_NAME)   
 AC_SUBST(GENERIC_VERSION)
+AC_SUBST(GENERIC_MAJOR_VERSION)
+AC_SUBST(GENERIC_MINOR_VERSION)
+AC_SUBST(GENERIC_MICRO_VERSION)
 AC_SUBST(GENERIC_RELEASE)
 
 # ------------------------------------------------------------------
@@ -50,12 +53,9 @@ AC_PROG_LIBTOOL
 ###AM_CONDITIONAL([USE_GNU],[test "$CXX" = "g++"])
 AM_SANITY_CHECK
 
-# ------------------------------
-# Flags
-# ------------------------------
+# Query configuration environment
 
-###AM_CPPFLAGS="-O3 -g"
-###AM_FCFLAGS="$FCFLAGS -g -DDEBUG"
+AX_SUMMARIZE_ENV
 
 # ----------------
 # Doxygen support 
@@ -75,8 +75,8 @@ DX_PS_FEATURE(OFF)
 DX_INIT_DOXYGEN(MASA, doxygen/masa.dox, docs) 
 
 # Generate Output Files
-AC_OUTPUT( Makefile src/Makefile examples/Makefile tests/Makefile doxygen/Makefile)
+AC_OUTPUT( Makefile src/Makefile examples/Makefile tests/Makefile doxygen/Makefile src/masa.h )
 
 # FINAL SUMMARY
-AX_SUMMARIZE_ENV
+
 AX_SUMMARIZE_CONFIG 

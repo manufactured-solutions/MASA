@@ -27,7 +27,7 @@ echo C compiler.................... : $CC
 echo C compiler flags.............. : $CFLAGS
 echo Fortran compiler.............. : $FC
 echo Fortran compiler flags........ : $FCFLAGS
-echo Debug mode.................... : $enable_debug
+# echo Debug mode.................... : $enable_debug
 echo Install dir................... : $prefix 
 echo Build user.................... : $USER
 echo Build host.................... : $BUILD_HOST

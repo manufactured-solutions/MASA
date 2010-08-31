@@ -29,6 +29,28 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
+#ifndef MASA_H_
+#define MASA_H_
+
+/*
+ * Library version/build info
+ */
+
+#define MASA_MAJOR_VERSION  @GENERIC_MAJOR_VERSION@
+#define MASA_MINOR_VERSION  @GENERIC_MINOR_VERSION@
+#define MASA_MICRO_VERSION  @GENERIC_MICRO_VERSION@
+
+#define MASA_BUILD_USER     "@BUILD_USER@"
+#define MASA_BUILD_ARCH     "@BUILD_ARCH@"
+#define MASA_BUILD_HOST     "@BUILD_HOST@"
+#define MASA_BUILD_DATE     "@BUILD_DATE@"
+#define MASA_BUILD_VERSION  "@BUILD_VERSION@"
+
+#define MASA_LIB_VERSION    "@VERSION@"
+
+#define MASA_CXX            "@CXX@"
+#define MASA_CXXFLAGS       "@CXXFLAGS@"
+
 
 // This header file contains the public functions designed to be exposed in MASA
 // What follows is the masa.h doxygen documentation headers
@@ -55,25 +77,24 @@ MASA.h is a header file that contains all the public objects and member function
 #include <map>
 #include <stdlib.h>
 
-using namespace std;
-
 namespace MASA
 {
 
   // --------------------------------
   // new masa api function
   // --------------------------------
-  int masa_init      (string, string);
-  int masa_select_mms(string);
-  int masa_curr_mms  (string*);
+
+  int masa_init      (std::string, std::string);
+  int masa_select_mms(std::string);
+  int masa_curr_mms  (std::string*);
   int masa_list_mms  ();
 
   // --------------------------------
   // interact with mms variables
   // --------------------------------
   int masa_init_param();
-  int masa_set_param(string,double);
-  int masa_get_param(string,double*);
+  int masa_set_param(std::string,double);
+  int masa_get_param(std::string,double*);
 
   // --------------------------------
   // source term(s) -- 1D
@@ -135,17 +156,26 @@ namespace MASA
   // --------------------------------
   // internal masa functions user might want to call
   // --------------------------------
-  int masa_map (string*);
-  int masa_map2(string, string);
+  int masa_map (std::string*);
+  int masa_map2(std::string, std::string);
 
   // --------------------------------
   // old masa core functions (to be called by user)
   // --------------------------------
-  int masa_getid(void**,string);
+  int masa_getid(void**,std::string);
   int masa_printid();
   int masa_display_param();
-  int masa_get_name(string*);
+  int masa_get_name(std::string*);
   int masa_get_dimension(int*);
   int masa_sanity_check();
+
+  // --------------------
+  // Versioning routines
+  // --------------------
+
+  int masa_version_stdout();
+  int masa_get_numeric_version();
   
 } //end MASA namespace
+
+#endif

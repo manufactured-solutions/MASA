@@ -16,6 +16,11 @@ library_include_HEADERS = masa.h cmasa.h
 libmasa_la_LDFLAGS      = $(all_libraries) -release $(GENERIC_RELEASE)
 libmasa_la_SOURCES      = $(cc_sources) $(h_sources)
 
+bin_PROGRAMS            = version
+version_SOURCES         = version.cpp
+version_LDADD           = -L$(top_builddir)/src -lmasa
+#version_DEPENDENCIES    = libmasa.la
+
 .license.stamp: $(top_srcdir)/LICENSE
 	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE $(cc_sources) $(h_sources)
 	echo 'updated source license headers' >$@

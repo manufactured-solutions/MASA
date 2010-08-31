@@ -30,9 +30,9 @@
 //--------------------------------------------------------------------------
 //
 
-
 #include <masa.h>
 
+using namespace std;
 using namespace MASA;
 
 void masa_shell_choose_solution()
