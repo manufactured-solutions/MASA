@@ -6,4 +6,4 @@ SUBDIRS          = src examples tests doxygen
 
 # Distribute these directories:
 DISTDIRS = src examples
-EXTRA_DIST= AUTHORS README NEWS
+EXTRA_DIST= AUTHORS README NEWS CHANGES
