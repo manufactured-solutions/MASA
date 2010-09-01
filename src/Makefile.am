@@ -21,6 +21,8 @@ version_SOURCES         = version.cpp
 version_LDADD           = -L$(top_builddir)/src -lmasa
 #version_DEPENDENCIES    = libmasa.la
 
+EXTRA_DIST              = lic_utils/update_license.pl
+
 .license.stamp: $(top_srcdir)/LICENSE
 	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE $(cc_sources) $(h_sources)
 	echo 'updated source license headers' >$@

@@ -6,7 +6,7 @@ SUBDIRS          = src examples tests doxygen
 
 # Distribute these directories:
 DISTDIRS = src examples
-EXTRA_DIST= AUTHORS README NEWS CHANGES dist_version
+EXTRA_DIST= AUTHORS README LICENSE CHANGES dist_version
 
 # Revision control support for external distribution
 
