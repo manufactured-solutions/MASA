@@ -580,6 +580,7 @@ int MASA::masa_version_stdout()
   std::cout << "C++ Config   = " << MASA_CXX MASA_CXXFLAGS << std::endl;
   //std::cout << "F90 Config   = " << MASA_FC MASA_FCFLAGS << std::endl;
   std::cout << "--------------------------------------------------------" << std::endl;
+  return 0;
 }
 
 int MASA::masa_get_numeric_version()
