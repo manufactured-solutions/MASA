@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT([masa], [0.10], [nick@ices.utexas.edu])
+AC_INIT([masa], [0.11], [nick@ices.utexas.edu])
 
 AC_CONFIG_HEADER(config.h)
 AC_CONFIG_AUX_DIR([build-aux])
@@ -11,7 +11,7 @@ AM_INIT_AUTOMAKE
 # Release versioning
 
 GENERIC_MAJOR_VERSION=0
-GENERIC_MINOR_VERSION=10
+GENERIC_MINOR_VERSION=11
 GENERIC_MICRO_VERSION=0
 
 GENERIC_VERSION=$GENERIC_MAJOR_VERSION.$GENERIC_MINOR_VERSION.$GENERIC_MICRO_VERSION 
