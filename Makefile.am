@@ -6,4 +6,13 @@ SUBDIRS          = src examples tests doxygen
 
 # Distribute these directories:
 DISTDIRS = src examples
-EXTRA_DIST= AUTHORS README NEWS CHANGES
+EXTRA_DIST= AUTHORS README NEWS CHANGES dist_version
+
+# Revision control support for external distribution
+
+if SVN_CHECKOUT
+dist_version: FORCE
+	@SVN_REVISION@ > $(top_srcdir)/dist_version
+
+FORCE:
+endif
