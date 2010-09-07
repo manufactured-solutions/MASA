@@ -33,6 +33,10 @@
 #include <masa.h>
 #include <math.h>
 
+
+#include <iostream>
+#include <stdlib.h>
+
 using namespace MASA;
 using namespace std;
 
