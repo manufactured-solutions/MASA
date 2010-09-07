@@ -35,6 +35,10 @@
 
 #include <masa.h>
 #include <math.h>
+#include <iostream>
+#include <map>
+#include <vector>
+#include <stdlib.h>
 
 using namespace std;
 

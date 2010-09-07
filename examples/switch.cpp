@@ -34,6 +34,7 @@
 
 // header contains all subroutine information
 #include <masa.h>
+#include <iostream>
 
 // MASA was designed with a custom namespace
 using namespace MASA;

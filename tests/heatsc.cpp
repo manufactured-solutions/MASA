@@ -32,6 +32,8 @@
 
 #include <math.h>
 #include <masa.h>
+#include <iostream>
+#include <stdlib.h>
 
 using namespace std;
 using namespace MASA;
