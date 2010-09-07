@@ -72,7 +72,7 @@ DX_PS_FEATURE(OFF)
 DX_INIT_DOXYGEN(MASA, doxygen/masa.dox, docs) 
 
 # Generate Output Files
-AC_OUTPUT( Makefile src/Makefile examples/Makefile tests/Makefile doxygen/Makefile src/masa.h )
+AC_OUTPUT( Makefile src/Makefile examples/Makefile tests/Makefile doxygen/Makefile src/masa.h masa.spec )
 
 # FINAL SUMMARY
 
