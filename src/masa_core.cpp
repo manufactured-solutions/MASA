@@ -577,7 +577,7 @@ int MASA::masa_version_stdout()
   std::cout << "Build User   = " << MASA_BUILD_USER     << std::endl;
   std::cout << "Build Arch   = " << MASA_BUILD_ARCH     << std::endl;
   std::cout << "Build Rev    = " << MASA_BUILD_VERSION  << std::endl << std::endl;
-  std::cout << "C++ Config   = " << MASA_CXX MASA_CXXFLAGS << std::endl;
+  std::cout << "C++ Config   = " << MASA_CXX << " "     << MASA_CXXFLAGS << std::endl;
   //std::cout << "F90 Config   = " << MASA_FC MASA_FCFLAGS << std::endl;
   std::cout << "--------------------------------------------------------" << std::endl;
   return 0;
