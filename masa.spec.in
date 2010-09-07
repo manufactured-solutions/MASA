@@ -1,0 +1,103 @@
+#
+# Spec file for MASA
+#
+Summary:      MASA - Manufactured Analytical Solutions Abstraction Library
+Name:         masa
+Version:      @VERSION@
+Release:      0
+License:      LGPL
+Group:        applications
+Source:       masa-%{version}.tar.gz
+Distribution: Koomie Linux
+Vendor:       Koomie
+Packager:     karl@ices.utexas.edu
+
+BuildRoot: /var/tmp/%{name}-%{version}-buildroot
+
+%define _topdir /h1/karl/build/rpms/
+%define APPS /org/centers/pecos/LIBRARIES
+%define MODULES modulefiles
+
+%define INSTALL_DIR %{APPS}/%{name}/%{version}
+%define MODULE_DIR  %{APPS}/%{MODULES}/%{name}
+
+# PECOS Library settings
+
+%define APPS /org/centers/pecos/LIBRARIES
+%define MODULES /org/centers/pecos/modulefiles
+
+%define INSTALL_DIR %{APPS}/%{name}/%{version}
+%define MODULE_DIR  %{MODULES}/%{name}
+
+
+%description
+
+MASA is a Manufactured Analytical Solutions Abstraction Library.
+
+%prep
+
+rm -rf $RPM_BUILD_ROOT/%{INSTALL_DIR}
+mkdir -p $RPM_BUILD_ROOT/%{INSTALL_DIR}
+
+%setup
+
+%build
+
+./configure FC=ifort F77=ifort CC=icc CXX=icpc --prefix=%{INSTALL_DIR}
+make
+make DESTDIR=$RPM_BUILD_ROOT install
+
+rm -rf $RPM_BUILD_ROOT/%{MODULE_DIR}
+mkdir -p $RPM_BUILD_ROOT/%{MODULE_DIR}
+cat > $RPM_BUILD_ROOT/%{MODULE_DIR}/%{version} << 'EOF'
+#%Module1.0###################################################################
+#
+# This modulefile setups the environment for the MASA library.
+#
+##############################################################################
+
+
+proc ModulesHelp { } {
+puts stderr "The %{name} module file defines the following environment variables:"
+puts stderr "MASA_DIR, MASA_LIB, and MASA_INC for the location of the "
+puts stderr "MASA distribution.\n"
+
+puts stderr "To use the MASA library, compile the source code with the option:"
+puts stderr ""
+puts stderr "\t-I\$MASA_INC "
+puts stderr "\nand add the following options to the link step: "
+puts stderr ""
+puts stderr "\t-L\$MASA_LIB -lmasa"
+
+puts stderr "\nVersion %{version}"
+
+}
+
+prepend-path    LD_LIBRARY_PATH   %{INSTALL_DIR}/lib
+prepend-path    PKG_CONFIG_PATH   %{INSTALL_DIR}/lib/pkgconfig
+prepend-path    INCLUDE           %{INSTALL_DIR}/include
+
+setenv MASA_DIR %{INSTALL_DIR}
+setenv MASA_INC %{INSTALL_DIR}/include
+setenv MASA_LIB %{INSTALL_DIR}/lib
+
+EOF
+
+cat > $RPM_BUILD_ROOT/%{MODULE_DIR}/.version.%{version} << 'EOF'
+#%Module1.0#################################################
+##
+## version file for MASA
+##
+ 
+set     ModulesVersion      "%{version}"
+EOF
+
+%files
+%defattr(-,karl,pecos)
+%{INSTALL_DIR}
+%{MODULE_DIR}
+
+%post
+
+%clean
+rm -rf $RPM_BUILD_ROOT
