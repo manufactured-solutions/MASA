@@ -68,14 +68,7 @@ MASA.h is a header file that contains all the public objects and member function
 \param mms This is the manufactured class to be initialized, e.g. "euler_1d"
 */
 
-#include <iostream>
-#include <vector>
-#include <stdio.h>
-#include <stdlib.h>
 #include <string>
-#include <iostream>
-#include <map>
-#include <stdlib.h>
 
 namespace MASA
 {
