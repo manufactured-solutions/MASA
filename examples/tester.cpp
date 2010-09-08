@@ -46,7 +46,7 @@
 
 */
 
-#include <cmasa.h>
+#include <masa.h>
 #include <stdio.h>
 
 int main()

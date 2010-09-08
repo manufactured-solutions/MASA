@@ -31,7 +31,7 @@
 //--------------------------------------------------------------------------
 //
 
-#include <cmasa.h>
+#include <masa.h>
 #include <masa.h>
 #include <string>
 
