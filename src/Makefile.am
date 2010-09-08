@@ -19,7 +19,7 @@ libmasa_la_SOURCES      = $(cc_sources) $(h_sources)
 bin_PROGRAMS            = version
 version_SOURCES         = version.cpp
 version_LDADD           = -L$(top_builddir)/src -lmasa
-#version_DEPENDENCIES    = libmasa.la
+version_DEPENDENCIES    = libmasa.la
 
 EXTRA_DIST              = lic_utils/update_license.pl
 
