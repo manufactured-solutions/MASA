@@ -32,9 +32,9 @@
 #ifndef MASA_H_
 #define MASA_H_
 
-/*
- * Library version/build info
- */
+//
+// Library version/build info
+//
 
 #define MASA_MAJOR_VERSION  @GENERIC_MAJOR_VERSION@
 #define MASA_MINOR_VERSION  @GENERIC_MINOR_VERSION@
