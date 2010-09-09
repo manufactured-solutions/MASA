@@ -114,6 +114,8 @@ int get_list_mms(vector<manufactured_solution*>* anim)
   anim->push_back(new axi_euler());
   anim->push_back(new axi_cns());
 
+  anim->push_back(new rans_sa());
+
   return 0;
 
 }

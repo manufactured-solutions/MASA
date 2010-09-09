@@ -683,6 +683,20 @@ namespace MASA
   };
 
   // ------------------------------------------------------
+  // ---------- RANS: Spelart Alamaras Channel  ------------
+  // ------------------------------------------------------
+  class rans_sa : public manufactured_solution
+  {
+    double Gamma;
+    double mu;
+
+  public:
+    rans_sa(); // constructor    
+    void   init_var();          // default problem values
+
+  };
+
+  // ------------------------------------------------------
   // ---------- compressible navier stokes  ------------
   // ------------------------------------------------------
 
