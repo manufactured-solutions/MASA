@@ -7,7 +7,7 @@ LIBS          = -L$(top_builddir)/src -lmasa
 # License Information
 BUILT_SOURCES = .license.stamp
 
-bin_PROGRAMS  = verify MASAshell euler_example navierstokes_example heat_example switch #tester 
+bin_PROGRAMS  = verify MASAshell euler_example navierstokes_example heat_example switch rans_sa #tester 
 bin_PROGRAMS += c_heat_example c_euler_example
 
 # ----------------- 
@@ -20,6 +20,7 @@ MASAshell_SOURCES            = masa_shell.cpp
 heat_example_SOURCES         = heat-eq.cpp
 euler_example_SOURCES        = euler_example.cpp
 navierstokes_example_SOURCES = compressible_navier_stokes_example.cpp
+rans_sa_example_SOURCES      = rans_sa.cpp
 switch_SOURCES               = switch.cpp
 #tester_SOURCES               = tester.cpp
 
