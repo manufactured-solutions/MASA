@@ -229,36 +229,37 @@ int main()
   masa_init_param();
   
   // get vars
-  masa_get_param("u_0",&u_0);
-  masa_get_param("u_x",&u_x);
-  masa_get_param("u_y",&u_y);
-  masa_get_param("v_0",&v_0);
-  masa_get_param("v_x",&v_x);
-  masa_get_param("v_y",&v_y);
+  u_0 = masa_get_param("u_0");
+  u_x = masa_get_param("u_x");
+  u_y = masa_get_param("u_y");
 
-  masa_get_param("rho_0",&rho_0);
-  masa_get_param("rho_x",&rho_x);
-  masa_get_param("rho_y",&rho_y);
+  v_0 = masa_get_param("v_0");
+  v_x = masa_get_param("v_x");
+  v_y = masa_get_param("v_y");
 
-  masa_get_param("p_0",&p_0);
-  masa_get_param("p_x",&p_x);
-  masa_get_param("p_y",&p_y);
+  rho_0 = masa_get_param("rho_0");
+  rho_x = masa_get_param("rho_x");
+  rho_y = masa_get_param("rho_y");
 
-  masa_get_param("a_px",&a_px);
-  masa_get_param("a_py",&a_py);
+  p_0 = masa_get_param("p_0");
+  p_x = masa_get_param("p_x");
+  p_y = masa_get_param("p_y");
 
-  masa_get_param("a_rhox",&a_rhox);
-  masa_get_param("a_rhoy",&a_rhoy);
+  a_px = masa_get_param("a_px");
+  a_py = masa_get_param("a_py");
 
-  masa_get_param("a_ux",&a_ux);
-  masa_get_param("a_uy",&a_uy);
+  a_rhox = masa_get_param("a_rhox");
+  a_rhoy = masa_get_param("a_rhoy");
 
-  masa_get_param("a_vx",&a_vx);
-  masa_get_param("a_vy",&a_vy);
+  a_ux = masa_get_param("a_ux");
+  a_uy = masa_get_param("a_uy");
 
-  masa_get_param("Gamma",&Gamma);
-  masa_get_param("mu",&mu);
-  masa_get_param("L",&L);
+  a_vx = masa_get_param("a_vx");
+  a_vy = masa_get_param("a_vy");
+
+  Gamma = masa_get_param("Gamma");
+  mu    = masa_get_param("mu");
+  L     = masa_get_param("L");
 
   // check that all terms have been initialized
   masa_sanity_check();
@@ -271,17 +272,17 @@ int main()
 	y=j*dy;
 	
 	//evalulate source terms
-	masa_eval_u_source  (x,y,&ufield);
-	masa_eval_v_source  (x,y,&vfield);
-	masa_eval_e_source  (x,y,&efield);
-	masa_eval_rho_source(x,y,&rho);
-
+	ufield = masa_eval_u_source  (x,y);
+	vfield = masa_eval_v_source  (x,y);
+	efield = masa_eval_e_source  (x,y);
+	rho    = masa_eval_rho_source(x,y);
+	
 	//evaluate analytical terms
-	masa_eval_u_an        (x,y,&u_an);
-	masa_eval_v_an        (x,y,&v_an);
-	masa_eval_p_an        (x,y,&p_an);
-	masa_eval_rho_an      (x,y,&rho_an);
-	  
+	u_an = masa_eval_u_an        (x,y);
+	v_an = masa_eval_v_an        (x,y);
+	p_an = masa_eval_p_an        (x,y);
+	rho_an = masa_eval_rho_an    (x,y);
+		  
 	// check against maple
 	ufield2 = SourceQ_u   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
 	vfield2 = SourceQ_v   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);

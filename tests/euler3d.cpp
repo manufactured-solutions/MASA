@@ -379,7 +379,7 @@ int main()
   rho_y = masa_get_param("rho_y");
   rho_z = masa_get_param("rho_z");
 
-  p_0   = masa_get_param("p_0");
+  p_0 = masa_get_param("p_0");
   p_x = masa_get_param("p_x");
   p_y = masa_get_param("p_y");
   p_z = masa_get_param("p_z");

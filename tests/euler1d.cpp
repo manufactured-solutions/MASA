@@ -142,22 +142,22 @@ int main()
   masa_init_param();
 
   // get defaults for comparison to source terms
-  masa_get_param("u_0",&u_0);
-  masa_get_param("u_x",&u_x);
+  // get vars
+  u_0 = masa_get_param("u_0");
+  u_x = masa_get_param("u_x");
+  rho_0 = masa_get_param("rho_0");
+  rho_x = masa_get_param("rho_x");
 
-  masa_get_param("rho_0",&rho_0);
-  masa_get_param("rho_x",&rho_x);
+  p_0 = masa_get_param("p_0");
+  p_x = masa_get_param("p_x");
 
-  masa_get_param("p_0",&p_0);
-  masa_get_param("p_x",&p_x);
+  a_px = masa_get_param("a_px");
+  a_rhox = masa_get_param("a_rhox");
+  a_ux = masa_get_param("a_ux");
 
-  masa_get_param("a_px",&a_px);
-  masa_get_param("a_rhox",&a_rhox);
-  masa_get_param("a_ux",&a_ux);
-
-  masa_get_param("Gamma",&Gamma);
-  masa_get_param("mu",&mu);
-  masa_get_param("L",&L);
+  Gamma = masa_get_param("Gamma");
+  mu    = masa_get_param("mu");
+  L     = masa_get_param("L");
 
   // check that all terms have been initialized
   masa_sanity_check();
@@ -166,16 +166,16 @@ int main()
   for(int i=0;i<nx;i++)
     {
       x=i*dx;
+      	
+      //evalulate source terms
+      ufield = masa_eval_u_source  (x);
+      efield = masa_eval_e_source  (x);
+      rho    = masa_eval_rho_source(x);
       
-      // ask for masa answer
-      masa_eval_u_source  (x,&ufield);
-      masa_eval_e_source  (x,&efield);
-      masa_eval_rho_source(x,&rho);
-
       //evaluate analytical terms
-      masa_eval_u_an        (x,&u_an);
-      masa_eval_p_an        (x,&p_an);
-      masa_eval_rho_an      (x,&rho_an);
+      u_an = masa_eval_u_an        (x);
+      p_an = masa_eval_p_an        (x);
+      rho_an = masa_eval_rho_an    (x);
 
       // get fundamental source term solution
       ufield2   = SourceQ_u  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
