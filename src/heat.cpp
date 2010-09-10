@@ -119,6 +119,12 @@ MASA::heateq_3d_steady_const::heateq_3d_steady_const()
 
 void MASA::heateq_3d_steady_const::init_var()
 {
+  double param=1.2;
+
+  masa_set_param("A_x",param);
+  masa_set_param("B_y",param);
+  masa_set_param("k_0",param);
+  masa_set_param("C_z",param);
 
 } // done with variable initializer
 
