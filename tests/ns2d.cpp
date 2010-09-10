@@ -233,40 +233,41 @@ int main()
   // set params
   masa_init_param();
   
-  // get vars
-  masa_get_param("u_0",&u_0);
-  masa_get_param("u_x",&u_x);
-  masa_get_param("u_y",&u_y);
-  masa_get_param("v_0",&v_0);
-  masa_get_param("v_x",&v_x);
-  masa_get_param("v_y",&v_y);
+  // get vars for comparison
+  u_0 = masa_get_param("u_0");
+  u_x = masa_get_param("u_x");
+  u_y = masa_get_param("u_y");
 
-  masa_get_param("rho_0",&rho_0);
-  masa_get_param("rho_x",&rho_x);
-  masa_get_param("rho_y",&rho_y);
+  v_0 = masa_get_param("v_0");
+  v_x = masa_get_param("v_x");
+  v_y = masa_get_param("v_y");
 
-  masa_get_param("p_0",&p_0);
-  masa_get_param("p_x",&p_x);
-  masa_get_param("p_y",&p_y);
+  rho_0 = masa_get_param("rho_0");
+  rho_x = masa_get_param("rho_x");
+  rho_y = masa_get_param("rho_y");
 
-  masa_get_param("a_px",&a_px);
-  masa_get_param("a_py",&a_py);
+  p_0 = masa_get_param("p_0");
+  p_x = masa_get_param("p_x");
+  p_y = masa_get_param("p_y");
 
-  masa_get_param("a_rhox",&a_rhox);
-  masa_get_param("a_rhoy",&a_rhoy);
+  a_px = masa_get_param("a_px");
+  a_py = masa_get_param("a_py");
 
-  masa_get_param("a_ux",&a_ux);
-  masa_get_param("a_uy",&a_uy);
+  a_rhox = masa_get_param("a_rhox");
+  a_rhoy = masa_get_param("a_rhoy");
 
-  masa_get_param("a_vx",&a_vx);
-  masa_get_param("a_vy",&a_vy);
+  a_ux = masa_get_param("a_ux");
+  a_uy = masa_get_param("a_uy");
 
-  masa_get_param("Gamma",&Gamma);
-  masa_get_param("mu",&mu);
-  masa_get_param("L",&L);
+  a_vx = masa_get_param("a_vx");
+  a_vy = masa_get_param("a_vy");
 
-  masa_get_param("R",&R);
-  masa_get_param("k",&k);
+  Gamma = masa_get_param("Gamma");
+  mu    = masa_get_param("mu");
+  L     = masa_get_param("L");
+
+  R = masa_get_param("R");
+  k = masa_get_param("k");
 
   // check that all terms have been initialized
   masa_sanity_check();
@@ -277,22 +278,42 @@ int main()
       {
 	x=i*dx;
 	y=j*dy;
+	
+	//evalulate source terms
+	ufield = masa_eval_u_source  (x,y);
+	vfield = masa_eval_v_source  (x,y);
+	wfield = masa_eval_w_source  (x,y);
+	efield = masa_eval_e_source  (x,y);
+	rho    = masa_eval_rho_source(x,y);
+	
+	//evaluate analytical terms
+	u_an = masa_eval_u_an        (x,y);
+	v_an = masa_eval_v_an        (x,y);
+	w_an = masa_eval_w_an        (x,y);
+	p_an = masa_eval_p_an        (x,y);
+	rho_an = masa_eval_rho_an    (x,y);
 
-	masa_eval_u_source  (x,y,&ufield);
-	masa_eval_v_source  (x,y,&vfield);
-	masa_eval_e_source  (x,y,&efield);
-	masa_eval_rho_source(x,y,&rho);
-
-	ufield2   = SourceQ_u  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);
-	vfield2   = SourceQ_v  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);
-	rho2      = SourceQ_rho(x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);
-	efield2   = SourceQ_e  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L,R,k);
+	// check against maple
+	ufield2 = SourceQ_u   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);
+	vfield2 = SourceQ_v   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);
+	rho2    = SourceQ_rho (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);  
+	efield2 = SourceQ_e   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L,R,k);
+	
+	u_an2   = anQ_u   (x,y,u_0,u_x,u_y,a_ux,a_uy,L);
+	v_an2   = anQ_v   (x,y,v_0,v_x,v_y,a_vx,a_vy,L);
+	rho_an2 = anQ_rho (x,y,rho_0,rho_x,rho_y,a_rhox,a_rhoy,L);
+	p_an2   = anQ_p   (x,y,p_0,p_x,p_y,a_px,a_py,L);
 
 	// test the result is roughly zero
 	ufield = fabs(ufield-ufield2);
 	vfield = fabs(vfield-vfield2);
 	efield = fabs(efield-efield2);
 	rho    = fabs(rho-rho2);
+	
+	u_an   = fabs(u_an-u_an2);
+	v_an3  = fabs(v_an-v_an2);
+	rho_an = fabs(rho_an-rho_an2);
+	p_an   = fabs(p_an-p_an2);
   
 	//cout << endl << ufield << endl << vfield << endl << efield << rho << endl;
 

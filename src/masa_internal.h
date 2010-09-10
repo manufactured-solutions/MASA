@@ -151,8 +151,8 @@ namespace MASA
 
     // member functions solution classes will inherit
     manufactured_solution();                                     // constructor
+    double get_var(string);                                      // returns variable value
     void register_var(string, double*);                          // this registers a variable
-    void get_var(string,double*);                                // returns variable value
     void set_var(string,double);                                 // sets variable value    
     void display_var();                                          // print all variable names and values
     void sanity_check();                                         // checks that all variables to the class have been initalized

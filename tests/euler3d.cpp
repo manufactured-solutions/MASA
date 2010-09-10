@@ -359,54 +359,54 @@ int main()
   masa_init_param();
 
   // get vars for comparison
-  masa_get_param("u_0",&u_0);
-  masa_get_param("u_x",&u_x);
-  masa_get_param("u_y",&u_y);
-  masa_get_param("u_z",&u_z);
+  u_0 = masa_get_param("u_0");
+  u_x = masa_get_param("u_x");
+  u_y = masa_get_param("u_y");
+  u_z = masa_get_param("u_z");
 
-  masa_get_param("v_0",&v_0);
-  masa_get_param("v_x",&v_x);
-  masa_get_param("v_y",&v_y);
-  masa_get_param("v_z",&v_z);
+  v_0 = masa_get_param("v_0");
+  v_x = masa_get_param("v_x");
+  v_y = masa_get_param("v_y");
+  v_z = masa_get_param("v_z");
 
-  masa_get_param("w_0",&w_0);
-  masa_get_param("w_x",&w_x);
-  masa_get_param("w_y",&w_y);
-  masa_get_param("w_z",&w_z);
+  w_0 = masa_get_param("w_0");
+  w_x = masa_get_param("w_x");
+  w_y = masa_get_param("w_y");
+  w_z = masa_get_param("w_z");
 
-  masa_get_param("rho_0",&rho_0);
-  masa_get_param("rho_x",&rho_x);
-  masa_get_param("rho_y",&rho_y);
-  masa_get_param("rho_z",&rho_z);
+  rho_0 = masa_get_param("rho_0");
+  rho_x = masa_get_param("rho_x");
+  rho_y = masa_get_param("rho_y");
+  rho_z = masa_get_param("rho_z");
 
-  masa_get_param("p_0",&p_0);
-  masa_get_param("p_x",&p_x);
-  masa_get_param("p_y",&p_y);
-  masa_get_param("p_z",&p_z);
+  p_0   = masa_get_param("p_0");
+  p_x = masa_get_param("p_x");
+  p_y = masa_get_param("p_y");
+  p_z = masa_get_param("p_z");
 
-  masa_get_param("a_px",&a_px);
-  masa_get_param("a_py",&a_py);
-  masa_get_param("a_pz",&a_pz);
+  a_px = masa_get_param("a_px");
+  a_py = masa_get_param("a_py");
+  a_pz = masa_get_param("a_pz");
 
-  masa_get_param("a_rhox",&a_rhox);
-  masa_get_param("a_rhoy",&a_rhoy);
-  masa_get_param("a_rhoz",&a_rhoz);
+  a_rhox = masa_get_param("a_rhox");
+  a_rhoy = masa_get_param("a_rhoy");
+  a_rhoz = masa_get_param("a_rhoz");
 
-  masa_get_param("a_ux",&a_ux);
-  masa_get_param("a_uy",&a_uy);
-  masa_get_param("a_uz",&a_uz);
+  a_ux = masa_get_param("a_ux");
+  a_uy = masa_get_param("a_uy");
+  a_uz = masa_get_param("a_uz");
 
-  masa_get_param("a_vx",&a_vx);
-  masa_get_param("a_vy",&a_vy);
-  masa_get_param("a_vz",&a_vz);
+  a_vx = masa_get_param("a_vx");
+  a_vy = masa_get_param("a_vy");
+  a_vz = masa_get_param("a_vz");
 
-  masa_get_param("a_wx",&a_wx);
-  masa_get_param("a_wy",&a_wy);
-  masa_get_param("a_wz",&a_wz);
+  a_wx = masa_get_param("a_wx");
+  a_wy = masa_get_param("a_wy");
+  a_wz = masa_get_param("a_wz");
 
-  masa_get_param("Gamma",&Gamma);
-  masa_get_param("mu",&mu);
-  masa_get_param("L",&L);
+  Gamma = masa_get_param("Gamma");
+  mu    = masa_get_param("mu");
+  L     = masa_get_param("L");
 
   // check all vars initialized
   masa_sanity_check();
@@ -421,17 +421,18 @@ int main()
 	  z=k*dz;
 
 	  //evalulate source terms
-	  masa_eval_u_source  (x,y,z,&ufield);
-	  masa_eval_v_source  (x,y,z,&vfield);
-	  masa_eval_w_source  (x,y,z,&wfield);
-	  masa_eval_e_source  (x,y,z,&efield);
-	  masa_eval_rho_source(x,y,z,&rho);
-
+	  ufield = masa_eval_u_source  (x,y,z);
+	  vfield = masa_eval_v_source  (x,y,z);
+	  wfield = masa_eval_w_source  (x,y,z);
+	  efield = masa_eval_e_source  (x,y,z);
+	  rho    = masa_eval_rho_source(x,y,z);
+	  
 	  //evaluate analytical terms
-	  masa_eval_u_an        (x,y,z,&u_an);
-	  masa_eval_v_an        (x,y,z,&v_an);
-	  masa_eval_p_an        (x,y,z,&p_an);
-	  masa_eval_rho_an      (x,y,z,&rho_an);	  
+	  u_an = masa_eval_u_an        (x,y,z);
+	  v_an = masa_eval_v_an        (x,y,z);
+	  w_an = masa_eval_w_an        (x,y,z);
+	  p_an = masa_eval_p_an        (x,y,z);
+	  rho_an = masa_eval_rho_an    (x,y,z);
 
 	  // check against maple output
 	  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,L);

@@ -60,22 +60,22 @@ int main()
   cmasa_display_param();
 
   // lets examine a particular parameter 
-  cmasa_get_param(a,&q);
+  q=cmasa_get_param(a);
   printf("A_x is set to: %g\n", q);
 
   // now lets change that parameters value to something else.
   cmasa_set_param(a,1.984);
-  cmasa_get_param(a,&q);
+  q=cmasa_get_param(a);
   printf("A_x is set to: %g\n", q);
 
   //check all initialized properly
   cmasa_sanity_check();
-  error = cmasa_eval_1d_t_source(x,&sol);
+  sol = cmasa_eval_1d_t_source(x);
   printf("\nt source: %g\n",sol);
   
   cmasa_select_mms("bob");
   cmasa_display_param();
-  error = cmasa_eval_1d_t_source(x2,&sol);
+  sol = cmasa_eval_1d_t_source(x2);
   printf("\nt source: %g\n",sol);
   return 0; // done
 }

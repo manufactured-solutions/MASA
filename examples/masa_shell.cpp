@@ -32,6 +32,8 @@
 
 #include <masa.h>
 #include <iostream>
+#include <stdio.h> 
+#include <string.h>
 
 using namespace std;
 using namespace MASA;
@@ -49,8 +51,9 @@ void masa_shell_choose_solution()
   double dbl2;
   double field;
   double blah;
+  double tfield;
 
-  string str;
+  string str1;
   
   printf("\n\n Now type solution to initialize.");
   printf("\n Remember to place underscores between parameters (e.g. steady_heatequation)");
@@ -59,8 +62,8 @@ void masa_shell_choose_solution()
 
   //masa_map_dimension(userstring,masterstring);
   masa_init("dummy",userstring);
-  masa_get_name(&str);
-  cout << endl << "User has selected: " << str << endl;
+  masa_get_name(&str1);
+  cout << endl << "User has selected: " << str1 << endl;
 
   // now let user register variables, etc.
 
@@ -89,12 +92,12 @@ void masa_shell_choose_solution()
 	  printf("\n User Selected 2: Register Variable");
 	  printf("\n Input variable name:\n");
 	  cin >> userstring;
-	  masa_get_param(userstring,&dbl2);
+	  dbl2 = masa_get_param(userstring);
 	  cout << "currently set to:" << dbl2 << endl;
 	  cout << "\nInput new value (double)" << endl;
 	  cin >> dbl;
 	  masa_set_param(userstring,dbl);
-	  masa_get_param(userstring,&dbl2);
+	  dbl2 = masa_get_param(userstring);
 	  cout << endl << userstring << " is now set to:" << dbl2 << endl;
 	  break;
 
@@ -113,7 +116,7 @@ void masa_shell_choose_solution()
 	      cout << "\nplease input x location: \n";
 	      cin >> x;
 	      
-	      masa_eval_t_source(x,&field);
+	      field = masa_eval_t_source(x);
 	      cout << "source term is:" << field;
 	      break;
 
@@ -124,7 +127,7 @@ void masa_shell_choose_solution()
 	      cout << "\nplease input y location: \n";
 	      cin >> y;
 
-	      masa_eval_u_source(x,y,&field);
+	      field = masa_eval_u_source(x,y);
 	      cout << "source term is:" << field;
 	      break;
 
@@ -138,7 +141,7 @@ void masa_shell_choose_solution()
 	      cout << "\nplease input z location: \n";
 	      cin >> z;
 
-	      masa_eval_u_source(x,y,z,&field);
+	      field = masa_eval_u_source(x,y,z);
 	      cout << "source term is:" << field << endl << endl;
 	      break;
 	      

@@ -87,16 +87,16 @@ int main()
 	tempy=j*dy;
 
 	// evaluate source terms
-	masa_eval_u_source  (tempx,tempy,&ufield);
-	masa_eval_v_source  (tempx,tempy,&vfield);
-	masa_eval_e_source  (tempx,tempy,&efield);
-	masa_eval_rho_source(tempx,tempy,&rho);
+	ufield = masa_eval_u_source  (tempx,tempy);
+	vfield = masa_eval_v_source  (tempx,tempy);
+	efield = masa_eval_e_source  (tempx,tempy);
+	rho    = masa_eval_rho_source(tempx,tempy);
 	
 	//evaluate analytical solution
-	masa_eval_u_an        (tempx,tempy,&u_an);
-	masa_eval_v_an        (tempx,tempy,&v_an);
-	masa_eval_p_an        (tempx,tempy,&p_an);
-	masa_eval_rho_an      (tempx,tempy,&rho_an);
+	u_an   = masa_eval_u_an      (tempx,tempy);
+	v_an   = masa_eval_v_an      (tempx,tempy);
+	p_an   = masa_eval_p_an      (tempx,tempy);
+	rho_an = masa_eval_rho_an    (tempx,tempy);
 
       }
 

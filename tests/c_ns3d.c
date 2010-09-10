@@ -404,57 +404,57 @@ int main()
   cmasa_init_param();
 
   // get vars for comparison
-  cmasa_get_param("u_0",&u_0);
-  cmasa_get_param("u_x",&u_x);
-  cmasa_get_param("u_y",&u_y);
-  cmasa_get_param("u_z",&u_z);
+  u_0 = cmasa_get_param("u_0");
+  u_x = cmasa_get_param("u_x");
+  u_y = cmasa_get_param("u_y");
+  u_z = cmasa_get_param("u_z");
 
-  cmasa_get_param("v_0",&v_0);
-  cmasa_get_param("v_x",&v_x);
-  cmasa_get_param("v_y",&v_y);
-  cmasa_get_param("v_z",&v_z);
+  v_0 = cmasa_get_param("v_0");
+  v_x = cmasa_get_param("v_x");
+  v_y = cmasa_get_param("v_y");
+  v_z = cmasa_get_param("v_z");
 
-  cmasa_get_param("w_0",&w_0);
-  cmasa_get_param("w_x",&w_x);
-  cmasa_get_param("w_y",&w_y);
-  cmasa_get_param("w_z",&w_z);
+  w_0 = cmasa_get_param("w_0");
+  w_x = cmasa_get_param("w_x");
+  w_y = cmasa_get_param("w_y");
+  w_z = cmasa_get_param("w_z");
 
-  cmasa_get_param("rho_0",&rho_0);
-  cmasa_get_param("rho_x",&rho_x);
-  cmasa_get_param("rho_y",&rho_y);
-  cmasa_get_param("rho_z",&rho_z);
+  rho_0 = cmasa_get_param("rho_0");
+  rho_x = cmasa_get_param("rho_x");
+  rho_y = cmasa_get_param("rho_y");
+  rho_z = cmasa_get_param("rho_z");
 
-  cmasa_get_param("p_0",&p_0);
-  cmasa_get_param("p_x",&p_x);
-  cmasa_get_param("p_y",&p_y);
-  cmasa_get_param("p_z",&p_z);
+  p_0 = cmasa_get_param("p_0");
+  p_x = cmasa_get_param("p_x");
+  p_y = cmasa_get_param("p_y");
+  p_z = cmasa_get_param("p_z");
 
-  cmasa_get_param("a_px",&a_px);
-  cmasa_get_param("a_py",&a_py);
-  cmasa_get_param("a_pz",&a_pz);
+  a_px = cmasa_get_param("a_px");
+  a_py = cmasa_get_param("a_py");
+  a_pz = cmasa_get_param("a_pz");
 
-  cmasa_get_param("a_rhox",&a_rhox);
-  cmasa_get_param("a_rhoy",&a_rhoy);
-  cmasa_get_param("a_rhoz",&a_rhoz);
+  a_rhox = cmasa_get_param("a_rhox");
+  a_rhoy = cmasa_get_param("a_rhoy");
+  a_rhoz = cmasa_get_param("a_rhoz");
 
-  cmasa_get_param("a_ux",&a_ux);
-  cmasa_get_param("a_uy",&a_uy);
-  cmasa_get_param("a_uz",&a_uz);
+  a_ux = cmasa_get_param("a_ux");
+  a_uy = cmasa_get_param("a_uy");
+  a_uz = cmasa_get_param("a_uz");
 
-  cmasa_get_param("a_vx",&a_vx);
-  cmasa_get_param("a_vy",&a_vy);
-  cmasa_get_param("a_vz",&a_vz);
+  a_vx = cmasa_get_param("a_vx");
+  a_vy = cmasa_get_param("a_vy");
+  a_vz = cmasa_get_param("a_vz");
 
-  cmasa_get_param("a_wx",&a_wx);
-  cmasa_get_param("a_wy",&a_wy);
-  cmasa_get_param("a_wz",&a_wz);
+  a_wx = cmasa_get_param("a_wx");
+  a_wy = cmasa_get_param("a_wy");
+  a_wz = cmasa_get_param("a_wz");
 
-  cmasa_get_param("Gamma",&Gamma);
-  cmasa_get_param("mu",&mu);
-  cmasa_get_param("L",&L);
+  Gamma = cmasa_get_param("Gamma");
+  mu    = cmasa_get_param("mu");
+  L     = cmasa_get_param("L");
 
-  cmasa_get_param("R",&R);
-  cmasa_get_param("k",&K);
+  R = cmasa_get_param("R");
+  k = cmasa_get_param("k");
 
   // check all vars are initialized
   cmasa_sanity_check();
@@ -468,19 +468,19 @@ int main()
 	  y=j*dy;
 	  z=k*dz;
 
-	  // evalulate source terms
-	  cmasa_eval_3d_u_source  (x,y,z,&ufield);
-	  cmasa_eval_3d_v_source  (x,y,z,&vfield);
-	  cmasa_eval_3d_w_source  (x,y,z,&wfield);
-	  cmasa_eval_3d_e_source  (x,y,z,&efield);
-	  cmasa_eval_3d_rho_source(x,y,z,&rho);
-
-	  // evaluate analytical terms
-	  cmasa_eval_3d_u_an        (x,y,z,&u_an);
-	  cmasa_eval_3d_v_an        (x,y,z,&v_an);
-	  cmasa_eval_3d_w_an        (x,y,z,&w_an);
-	  cmasa_eval_3d_p_an        (x,y,z,&p_an);
-	  cmasa_eval_3d_rho_an      (x,y,z,&rho_an);	  
+	  //evalulate source terms
+	  ufield = cmasa_eval_3d_u_source  (x,y,z);
+	  vfield = cmasa_eval_3d_v_source  (x,y,z);
+	  wfield = cmasa_eval_3d_w_source  (x,y,z);
+	  efield = cmasa_eval_3d_e_source  (x,y,z);
+	  rho    = cmasa_eval_3d_rho_source(x,y,z);
+	  
+	  //evaluate analytical terms
+	  u_an   = cmasa_eval_3d_u_an      (x,y,z);
+	  v_an   = cmasa_eval_3d_v_an      (x,y,z);
+	  w_an   = cmasa_eval_3d_w_an      (x,y,z);
+	  p_an   = cmasa_eval_3d_p_an      (x,y,z);
+	  rho_an = masa_eval_3d_rho_an     (x,y,z);
 
 	  // check against maple output
 	  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);

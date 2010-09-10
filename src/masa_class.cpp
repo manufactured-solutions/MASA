@@ -57,7 +57,7 @@ MASA::manufactured_solution::manufactured_solution()
 const double MASA::manufactured_solution::PI = acos(-1);
 const double MASA::manufactured_solution::MASA_VAR_DEFAULT = -12345.67; // default -- initialize each var to 'crazy' value
 
-void MASA::manufactured_solution::get_var(string var, double* sol)
+double MASA::manufactured_solution::get_var(string var)
 {
   int selector=1;
   int error=1;
@@ -75,13 +75,13 @@ void MASA::manufactured_solution::get_var(string var, double* sol)
   if(selector==0) // no error - the variable exists
     {
       selector = varmap[var];    // find location in pointer array
-      *sol = *vararr[selector];   // set to value 
+      return *vararr[selector];   // set to value 
       
     }
   else 
     {
       cout << "\nMASA ERROR: No such variable  (" << var << ") exists\n";
-      return;
+      return -20;
     } 
     
 }// done with get_var function

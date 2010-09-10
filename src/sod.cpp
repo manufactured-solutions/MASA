@@ -301,6 +301,8 @@ double MASA::sod_1d::func(double pm)
 //
 //////////////////////////////////////////////////////////////////////////
 
+#include <stdio.h>
+
 double MASA::sod_1d::rtbis(double x1,double x2,double xacc)
 {
   int JMAX=100;
