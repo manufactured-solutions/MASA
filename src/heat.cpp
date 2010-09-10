@@ -218,6 +218,17 @@ MASA::heateq_3d_unsteady_const::heateq_3d_unsteady_const()
 void MASA::heateq_3d_unsteady_const::init_var()
 {
 
+  masa_set_param("A_x",1.4);
+  masa_set_param("k_0",.82);
+  masa_set_param("D_t",.12);
+  masa_set_param("cp_0",3.1);
+  masa_set_param("A_t",0.01);
+  masa_set_param("rho",4.0);
+  masa_set_param("B_y",11.01);
+  masa_set_param("B_t",1.01);
+  masa_set_param("C_z",0.90);
+  masa_set_param("C_t",12.34);
+  
 } // done with variable initializer
 
 double MASA::heateq_3d_unsteady_const::eval_q_t(double x,double y, double z,double t)
@@ -406,6 +417,13 @@ MASA::heateq_3d_steady_var::heateq_3d_steady_var()
 
 void MASA::heateq_3d_steady_var::init_var()
 {
+  double param = 1.4;
+  set_var("A_x",param);   
+  set_var("k_0",param);
+  set_var("k_1",param);
+  set_var("k_2",param);
+  set_var("B_y",param);
+  set_var("C_z",param);
 
 } // done with variable initializer
 
