@@ -6,12 +6,8 @@ program main
 
   real*8 :: value
 
-   print*,'Inside Fortran main'
-
-!  call masa_init(C_CHAR_"mytest"//C_NULL_CHAR,C_CHAR_"euler_1d"//C_NULL_CHAR)
   call masa_init('mytest','euler_1d')
   call masa_init_param()
-
 
   call masa_list_mms()
   call masa_sanity_check()
