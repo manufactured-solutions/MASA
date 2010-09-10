@@ -480,7 +480,7 @@ int main()
 	  v_an   = cmasa_eval_3d_v_an      (x,y,z);
 	  w_an   = cmasa_eval_3d_w_an      (x,y,z);
 	  p_an   = cmasa_eval_3d_p_an      (x,y,z);
-	  rho_an = masa_eval_3d_rho_an     (x,y,z);
+	  rho_an = cmasa_eval_3d_rho_an    (x,y,z);
 
 	  // check against maple output
 	  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);

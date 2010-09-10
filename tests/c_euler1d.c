@@ -159,22 +159,25 @@ int main()
   cmasa_init_param();
 
   // get defaults for comparison to source terms
-  cmasa_get_param("u_0",&u_0);
-  cmasa_get_param("u_x",&u_x);
+  // get vars
+  u_0 = cmasa_get_param("u_0");
+  u_x = cmasa_get_param("u_x");
 
-  cmasa_get_param("rho_0",&rho_0);
-  cmasa_get_param("rho_x",&rho_x);
+  rho_0 = cmasa_get_param("rho_0");
+  rho_x = cmasa_get_param("rho_x");
 
-  cmasa_get_param("p_0",&p_0);
-  cmasa_get_param("p_x",&p_x);
+  p_0 = cmasa_get_param("p_0");
+  p_x = cmasa_get_param("p_x");
 
-  cmasa_get_param("a_px",&a_px);
-  cmasa_get_param("a_rhox",&a_rhox);
-  cmasa_get_param("a_ux",&a_ux);
+  a_px = cmasa_get_param("a_px");
 
-  cmasa_get_param("Gamma",&Gamma);
-  cmasa_get_param("mu",&mu);
-  cmasa_get_param("L",&L);
+  a_rhox = cmasa_get_param("a_rhox");
+
+  a_ux = cmasa_get_param("a_ux");
+
+  Gamma = cmasa_get_param("Gamma");
+  mu    = cmasa_get_param("mu");
+  L     = cmasa_get_param("L");
 
   // check that all terms have been initialized
   cmasa_sanity_check();
@@ -183,17 +186,17 @@ int main()
   for(i=0;i<nx;i++)
     {
       x=i*dx;
-      
-      // ask for masa answer
-      cmasa_eval_1d_u_source  (x,&ufield);
-      cmasa_eval_1d_e_source  (x,&efield);
-      cmasa_eval_1d_rho_source(x,&rho);
 
+      //evalulate source terms
+      ufield = cmasa_eval_1d_u_source  (x);
+      efield = cmasa_eval_1d_e_source  (x);
+      rho    = cmasa_eval_1d_rho_source(x);
+	
       //evaluate analytical terms
-      cmasa_eval_1d_u_an        (x,&u_an);
-      cmasa_eval_1d_p_an        (x,&p_an);
-      cmasa_eval_1d_rho_an      (x,&rho_an);
-
+      u_an   = cmasa_eval_1d_u_an      (x);
+      p_an   = cmasa_eval_1d_p_an      (x);
+      rho_an = cmasa_eval_1d_rho_an     (x);
+	
       // get fundamental source term solution
       ufield2   = SourceQ_u  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
       rho2      = SourceQ_rho(x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);

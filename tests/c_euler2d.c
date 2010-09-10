@@ -253,36 +253,37 @@ int main()
   cmasa_init_param();
   
   // get vars
-  cmasa_get_param("u_0",&u_0);
-  cmasa_get_param("u_x",&u_x);
-  cmasa_get_param("u_y",&u_y);
-  cmasa_get_param("v_0",&v_0);
-  cmasa_get_param("v_x",&v_x);
-  cmasa_get_param("v_y",&v_y);
+  u_0 = cmasa_get_param("u_0");
+  u_x = cmasa_get_param("u_x");
+  u_y = cmasa_get_param("u_y");
 
-  cmasa_get_param("rho_0",&rho_0);
-  cmasa_get_param("rho_x",&rho_x);
-  cmasa_get_param("rho_y",&rho_y);
+  v_0 = cmasa_get_param("v_0");
+  v_x = cmasa_get_param("v_x");
+  v_y = cmasa_get_param("v_y");
 
-  cmasa_get_param("p_0",&p_0);
-  cmasa_get_param("p_x",&p_x);
-  cmasa_get_param("p_y",&p_y);
+  rho_0 = cmasa_get_param("rho_0");
+  rho_x = cmasa_get_param("rho_x");
+  rho_y = cmasa_get_param("rho_y");
 
-  cmasa_get_param("a_px",&a_px);
-  cmasa_get_param("a_py",&a_py);
+  p_0 = cmasa_get_param("p_0");
+  p_x = cmasa_get_param("p_x");
+  p_y = cmasa_get_param("p_y");
 
-  cmasa_get_param("a_rhox",&a_rhox);
-  cmasa_get_param("a_rhoy",&a_rhoy);
+  a_px = cmasa_get_param("a_px");
+  a_py = cmasa_get_param("a_py");
 
-  cmasa_get_param("a_ux",&a_ux);
-  cmasa_get_param("a_uy",&a_uy);
+  a_rhox = cmasa_get_param("a_rhox");
+  a_rhoy = cmasa_get_param("a_rhoy");
 
-  cmasa_get_param("a_vx",&a_vx);
-  cmasa_get_param("a_vy",&a_vy);
+  a_ux = cmasa_get_param("a_ux");
+  a_uy = cmasa_get_param("a_uy");
 
-  cmasa_get_param("Gamma",&Gamma);
-  cmasa_get_param("mu",&mu);
-  cmasa_get_param("L",&L);
+  a_vx = cmasa_get_param("a_vx");
+  a_vy = cmasa_get_param("a_vy");
+
+  Gamma = cmasa_get_param("Gamma");
+  mu    = cmasa_get_param("mu");
+  L     = cmasa_get_param("L");
 
   // check that all terms have been initialized
   cmasa_sanity_check();
@@ -295,17 +296,17 @@ int main()
 	y=j*dy;
 	
 	//evalulate source terms
-	cmasa_eval_2d_u_source  (x,y,&ufield);
-	cmasa_eval_2d_v_source  (x,y,&vfield);
-	cmasa_eval_2d_e_source  (x,y,&efield);
-	cmasa_eval_2d_rho_source(x,y,&rho);
-
+	ufield = cmasa_eval_2d_u_source  (x,y);
+	vfield = cmasa_eval_2d_v_source  (x,y);
+	efield = cmasa_eval_2d_e_source  (x,y);
+	rho    = cmasa_eval_2d_rho_source(x,y);
+	
 	//evaluate analytical terms
-	cmasa_eval_2d_u_an        (x,y,&u_an);
-	cmasa_eval_2d_v_an        (x,y,&v_an);
-	cmasa_eval_2d_p_an        (x,y,&p_an);
-	cmasa_eval_2d_rho_an      (x,y,&rho_an);
-	  
+	u_an   = cmasa_eval_2d_u_an      (x,y);
+	v_an   = cmasa_eval_2d_v_an      (x,y);
+	p_an   = cmasa_eval_2d_p_an      (x,y);
+	rho_an = cmasa_eval_2d_rho_an     (x,y);
+	
 	// check against maple
 	ufield2 = SourceQ_u   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
 	vfield2 = SourceQ_v   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
