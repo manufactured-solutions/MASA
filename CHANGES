@@ -1,6 +1,7 @@
 
-Version 0.11 (08 September 2010)
+Version 0.20 (09 September 2010)
 
+  * API modifications
   * bug fix in energy equation for 3d compressible navier stokes
   * added masa.m4 macro that allows users to include: 
     AX_PATH_MASA(version,optional) in configure.ac 
