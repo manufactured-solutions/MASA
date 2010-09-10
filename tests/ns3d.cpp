@@ -336,6 +336,7 @@ int main()
   double mu;
   double Gamma;
   double L;    
+  double k;
 
   double R;
   double K;    

@@ -214,6 +214,12 @@ int main()
   double z;
 
   // solutions
+  double u_an,u_an2;
+  double v_an,v_an2,v_an3;
+  double w_an,w_an2;
+  double p_an,p_an2;
+  double rho_an,rho_an2;
+
   double ufield,ufield2;
   double vfield,vfield2;
   double efield,efield2;
@@ -282,14 +288,12 @@ int main()
 	//evalulate source terms
 	ufield = masa_eval_u_source  (x,y);
 	vfield = masa_eval_v_source  (x,y);
-	wfield = masa_eval_w_source  (x,y);
 	efield = masa_eval_e_source  (x,y);
 	rho    = masa_eval_rho_source(x,y);
 	
 	//evaluate analytical terms
 	u_an = masa_eval_u_an        (x,y);
 	v_an = masa_eval_v_an        (x,y);
-	w_an = masa_eval_w_an        (x,y);
 	p_an = masa_eval_p_an        (x,y);
 	rho_an = masa_eval_rho_an    (x,y);
 
