@@ -355,7 +355,7 @@ int main()
 
   double u_an,u_an2;
   double v_an,v_an2;
-  double w_an,w_an2;
+  double w_an,w_an2,w_an3;
   double p_an,p_an2;
   double rho_an,rho_an2;
 
@@ -476,6 +476,7 @@ int main()
 
 	  u_an    = fabs(u_an-u_an2);
 	  v_an    = fabs(v_an-v_an2);
+	  w_an3   = fabs(w_an-w_an2);
 	  rho_an  = fabs(rho_an-rho_an2);
 	  p_an    = fabs(p_an-p_an2);
   
@@ -525,12 +526,12 @@ int main()
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
-
-	  if(w_an > threshold)
+	  
+	  if(w_an3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
 	      cout << "W Field Analytical Term\n";
-	      cout << "Exceeded Threshold by: " << w_an << endl;
+	      cout << "Exceeded Threshold by: " << w_an3 << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }

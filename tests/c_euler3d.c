@@ -367,7 +367,7 @@ int main()
 
   double u_an,u_an2;
   double v_an,v_an2;
-  double w_an,w_an2;
+  double w_an,w_an2,w_an3;
   double p_an,p_an2;
   double rho_an,rho_an2;
 
@@ -485,6 +485,7 @@ int main()
 
 	  u_an   = fabs(u_an-u_an2);
 	  v_an   = fabs(v_an-v_an2);
+	  w_an3  = fabs(w_an-w_an2);
 	  rho_an = fabs(rho_an-rho_an2);
 	  p_an   = fabs(p_an-p_an2);
 
@@ -524,7 +525,7 @@ int main()
 	      exit(1);
 	    }
 
-	  if(w_an > threshold)
+	  if(w_an3 > threshold)
 	    {
 	      printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-3d\n");
 	      printf("W Field Analytical Term\n");
