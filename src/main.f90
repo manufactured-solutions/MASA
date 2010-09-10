@@ -4,7 +4,8 @@ program main
 
   implicit none
 
-  real*8 :: value
+  real(8) :: value
+  real(8) :: out 
 
   call masa_init('mytest','euler_1d')
   call masa_init_param()
@@ -26,6 +27,9 @@ program main
   value = masa_get_param("L")
 
   print*,'Updated L = ',value
+
+  out = masa_eval_1d_u_source(value)
+  write(6,*) "value is: ", out 
 
   stop
 end program main

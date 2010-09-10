@@ -109,54 +109,86 @@ module masa
      end subroutine masa_set_param_passthrough
   end interface
 
-    contains 
+  ! ---------------------------------
+  ! MMS source term interfaces -- 1d
+  ! ---------------------------------
 
-      ! ----------------------------------------------------------------
-      ! Wrapper routines for functions which include character
-      ! strings; the wrapers insert necessary null terminators for 
-      ! subsequent use with C/C++
-      ! ----------------------------------------------------------------
+  interface 
+     real (c_double) function masa_eval_1d_u_source_passthrough(value) bind (C,name='cmasa_eval_1d_u_source')
+       use iso_c_binding
+       implicit none
+       
+       real (c_double), value :: value
+       
+     end function masa_eval_1d_u_source_passthrough
+  end interface
+  
+  
+contains 
+  
+  ! ----------------------------------------------------------------
+  ! Wrapper routines for functions which include character
+  ! strings; the wrapers insert necessary null terminators for 
+  ! subsequent use with C/C++
+  ! ----------------------------------------------------------------
+  
+  subroutine masa_init(user_tag,desired_mms_function)
+    use iso_c_binding
+    implicit none
 
-      subroutine masa_init(user_tag,desired_mms_function)
-        use iso_c_binding
-        implicit none
+    character(len=*) :: user_tag
+    character(len=*) :: desired_mms_function
 
-        character(len=*) :: user_tag
-        character(len=*) :: desired_mms_function
+    call masa_init_passthrough(user_tag//C_NULL_CHAR,desired_mms_function//C_NULL_CHAR)
+    return
+  end subroutine masa_init
 
-         call masa_init_passthrough(user_tag//C_NULL_CHAR,desired_mms_function//C_NULL_CHAR)
-        return
-      end subroutine masa_init
+  subroutine masa_select_mms(desired_mms_function)
+    use iso_c_binding
+    implicit none
 
-      subroutine masa_select_mms(desired_mms_function)
-        use iso_c_binding
-        implicit none
+    character(len=*) :: desired_mms_function
 
-        character(len=*) :: desired_mms_function
+    call masa_select_mms_passthrough(desired_mms_function//C_NULL_CHAR)
+    return
+  end subroutine masa_select_mms
 
-         call masa_select_mms_passthrough(desired_mms_function//C_NULL_CHAR)
-        return
-      end subroutine masa_select_mms
+  real (c_double) function masa_get_param(param_name)
+    use iso_c_binding
+    implicit none
 
-      real (c_double) function masa_get_param(param_name)
-        use iso_c_binding
-        implicit none
+    character(len=*) :: param_name
 
-        character(len=*) :: param_name
+    masa_get_param =  masa_get_param_passthrough(param_name//C_NULL_CHAR)
 
-        masa_get_param =  masa_get_param_passthrough(param_name//C_NULL_CHAR)
+  end function masa_get_param
 
-      end function masa_get_param
+  subroutine masa_set_param(param_name,value)
+    use iso_c_binding
+    implicit none
 
-      subroutine masa_set_param(param_name,value)
-        use iso_c_binding
-        implicit none
+    character(len=*), intent(in)        :: param_name
+    real (c_double), intent(in), value  :: value
 
-        character(len=*), intent(in)        :: param_name
-        real (c_double), intent(in), value  :: value
+    call masa_set_param_passthrough(param_name//C_NULL_CHAR,value)
 
-        call masa_set_param_passthrough(param_name//C_NULL_CHAR,value)
+  end subroutine masa_set_param
 
-      end subroutine masa_set_param
+  !# -----------------------------------------------------------------------
+  !#
+  !#  1D Source Terms
+  !#
+  !# -----------------------------------------------------------------------
 
+  real (C_double) function masa_eval_1d_u_source(value)
+    use iso_c_binding
+    implicit none
+    
+    real (c_double), intent(in), value  :: value
+    
+    masa_eval_1d_u_source = masa_eval_1d_u_source_passthrough(value)
+
+  end function  masa_eval_1d_u_source
+  
+  
 end module masa
