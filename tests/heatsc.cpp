@@ -107,7 +107,7 @@ int main()
 
   /// -----------------------------------------------------------------------
   // initalize 2D
-  /// -----------------------------------------------------------------------
+  /// ----------------------------------------------------------------------
   masa_init("temp-test-2d","heateq_2d_steady_const");
   masa_init_param();
 
@@ -137,18 +137,19 @@ int main()
   /// -----------------------------------------------------------------------
 
   masa_init("temp-test-3d","heateq_3d_steady_const");
+  string str1;
   masa_init_param();
 
   A_x = masa_get_param("A_x");
   k_0 = masa_get_param("k_0");
-  B_y = masa_get_param("B_y");
+  B_y = masa_get_param("B_y");  
   double C_z = masa_get_param("C_z");
 
   // evaluate source terms (1D)
   masa_sanity_check();
+
   tfield  = masa_eval_t_source(x,y,z);
   tfield2 = SourceQ_t_3d(x,y,z,A_x,B_y,C_z,k_0);
-
   tfield=fabs(tfield-tfield2);
 
   if(tfield > threshold)
@@ -160,7 +161,6 @@ int main()
     }
 
   //cout << "3D Steady Constant Heat Equation: PASSED\n";
-
   // presumably, all tests passed
   return 0;
 
