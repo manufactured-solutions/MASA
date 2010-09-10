@@ -225,7 +225,7 @@ int main()
 
   // evaluate source terms (3D)
   masa_sanity_check();
-  tfield   = masa_eval_t_source(x,y,t);
+  tfield    = masa_eval_t_source(x,y,z,t);
   tfield2   = SourceQ_t_3d(x,y,z,t,A_x,A_t,B_y,B_t,C_z,C_t,D_t,k_0,cp_0,rho);
 
   tfield=fabs(tfield-tfield2);
