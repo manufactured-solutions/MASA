@@ -426,7 +426,7 @@ int main()
   L     = masa_get_param("L");
 
   R = masa_get_param("R");
-  k = masa_get_param("k");
+  K = masa_get_param("k");
 
   // check all vars are initialized
   masa_sanity_check();

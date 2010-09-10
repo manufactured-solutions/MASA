@@ -454,7 +454,7 @@ int main()
   L     = cmasa_get_param("L");
 
   R = cmasa_get_param("R");
-  k = cmasa_get_param("k");
+  K = cmasa_get_param("k");
 
   // check all vars are initialized
   cmasa_sanity_check();
