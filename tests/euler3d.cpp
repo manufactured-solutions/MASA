@@ -332,13 +332,13 @@ int main()
   // solutions
   double ufield,ufield2,ufield3;
   double vfield,vfield2,vfield3;
-  double wfield,wfield2;
+  double wfield,wfield2,wfield3;
   double efield,efield2,efield3;
   double rho,rho2;
 
   double u_an,u_an2;
   double v_an,v_an2;
-  double w_an,w_an2;
+  double w_an,w_an2,w_an3;
   double p_an,p_an2;
   double rho_an,rho_an2;
 
@@ -450,12 +450,13 @@ int main()
 	  // test the result is roughly zero
 	  ufield3 = fabs(ufield-ufield2);
 	  vfield3 = fabs(vfield-vfield2);
-	  wfield  = fabs(wfield-wfield2);
+	  wfield3  = fabs(wfield-wfield2);
 	  efield3 = fabs(efield-efield2);
 	  rho     = fabs(rho-rho2);
 
 	  u_an   = fabs(u_an-u_an2);
 	  v_an   = fabs(v_an-v_an2);
+	  w_an3  = fabs(w_an-w_an2);
 	  rho_an = fabs(rho_an-rho_an2);
 	  p_an   = fabs(p_an-p_an2);
 	  
@@ -505,7 +506,7 @@ int main()
 	      exit(1);
 	    }
 
-	  if(wfield > threshold)
+	  if(wfield3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "W Field Source Term\n";
@@ -515,7 +516,7 @@ int main()
 	      exit(1);
 	    }
 
-	  if(w_an > threshold)
+	  if(w_an3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
 	      cout << "W Field Analytical Term\n";
