@@ -7,7 +7,7 @@ LIBS          = -L$(top_builddir)/src -lmasa
 # License Information
 BUILT_SOURCES = .license.stamp
 
-bin_PROGRAMS  = verify MASAshell euler_example navierstokes_example heat_example switch rans_sa #tester 
+bin_PROGRAMS  = verify MASAshell euler_example navierstokes_example heat_example switch rans_sa_example #tester 
 bin_PROGRAMS += c_heat_example c_euler_example
 
 # ----------------- 
