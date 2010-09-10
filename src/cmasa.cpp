@@ -34,14 +34,24 @@
 #include <masa.h>
 #include <masa.h>
 #include <string>
+#include <string.h>
 
 using namespace std;
 using namespace MASA;
 
+
+
 extern "C" int cmasa_init(const char* specificname,const char* functionname)
 {
+
+  //  printf("sizeofname = %i\n",sizeof(specificname));
+  //  printf("functionname = %i\n",sizeof(functionname));
+  //  printf(" -> %c%c%c\n",specificname[5],specificname[6],specificname[7]);
+  
   string sn(specificname);
   string fn(functionname);
+
+  //  printf("masa_init, received %s %s\n\n",specificname,functionname);
 
   masa_init(sn,fn);
 

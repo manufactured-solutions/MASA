@@ -21,10 +21,23 @@ version_SOURCES         = version.cpp
 version_LDADD           = -L$(top_builddir)/src -lmasa
 version_DEPENDENCIES    = libmasa.la
 
+#--------------------------                                                                                                    
+# Fortran Module Interface                                                                                                     
+#--------------------------                                                                                                    
+
+noinst_PROGRAMS         = test
+standalonedir           = @prefix@/bin
+
+test_SOURCES            = masa.f90 main.f90
+test_LIBTOOLFLAGS       = --tag=FC
+test_LDADD = -L$(top_builddir)/src -lmasa
+
+main.f90: masa.f90
+
 EXTRA_DIST              = lic_utils/update_license.pl
 
 .license.stamp: $(top_srcdir)/LICENSE
 	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE $(cc_sources) $(h_sources)
 	echo 'updated source license headers' >$@
 
-CLEANFILES = .license.stamp
+CLEANFILES = .license.stamp masa.mod
