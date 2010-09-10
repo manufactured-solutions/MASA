@@ -53,13 +53,13 @@ module masa
   end interface
 
   interface
-     subroutine masa_select_mms(desired_mms_function) bind (C,name='cmasa_select_mms')
+     subroutine masa_select_mms_passthrough(desired_mms_function) bind (C,name='cmasa_select_mms')
        use iso_c_binding
        implicit none
 
-       character(c_char), dimension(*), intent(in) :: desired_mms_function
+       character(c_char), intent(in) :: desired_mms_function(*)
 
-     end subroutine masa_select_mms
+     end subroutine masa_select_mms_passthrough
   end interface
 
   interface
@@ -127,6 +127,16 @@ module masa
          call masa_init_passthrough(user_tag//C_NULL_CHAR,desired_mms_function//C_NULL_CHAR)
         return
       end subroutine masa_init
+
+      subroutine masa_select_mms(desired_mms_function)
+        use iso_c_binding
+        implicit none
+
+        character(len=*) :: desired_mms_function
+
+         call masa_select_mms_passthrough(desired_mms_function//C_NULL_CHAR)
+        return
+      end subroutine masa_select_mms
 
       real (c_double) function masa_get_param(param_name)
         use iso_c_binding

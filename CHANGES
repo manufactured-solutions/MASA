@@ -1,11 +1,13 @@
 
-Version 0.20 (09 September 2010)
-
-  * API modifications
+Version 0.20 (September 2010)
+  
+  * API change for numerous functions
+  * initial support for Fortran module interface
+  * fixed support for parallel build
   * bug fix in energy equation for 3d compressible navier stokes
   * added masa.m4 macro that allows users to include: 
     AX_PATH_MASA(version,optional) in configure.ac 
-  * merged masa.h and cmasa.h
+  * merged C/C++ headers into a single masa.h
 
 Version 0.10 (01 September 2010)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.10
