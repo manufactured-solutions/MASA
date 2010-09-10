@@ -170,27 +170,18 @@ int main()
   masa_init("temp-test-3d","heateq_3d_steady_var");
   masa_init_param();
 
-  masa_set_param("A_x",param);
-  A_x=param;
+  double C_z;
 
-  masa_set_param("B_y",param);
-  B_y=param;
-
-  masa_set_param("C_z",param);
-  double C_z=param;
-
-  masa_set_param("k_0",param);
-  k_0=param;
-
-  masa_set_param("k_1",param);
-  k_1=param;
-
-  masa_set_param("k_2",param);
-  k_2=param;
+  A_x = masa_get_param("A_x");
+  B_y = masa_get_param("B_y");
+  C_z = masa_get_param("C_z");
+  k_0 = masa_get_param("k_0");
+  k_1 = masa_get_param("k_1");
+  k_2 = masa_get_param("k_2");
 
   // evaluate source terms (2D)
   masa_sanity_check();
-  tfield    = masa_eval_t_source(x,y);  
+  tfield    = masa_eval_t_source(x,y,z);  
   tfield2   = SourceQ_t_3d(x,y,z,A_x,B_y,C_z,k_0,k_1,k_2);
 
   tfield=fabs(tfield-tfield2);
@@ -202,9 +193,6 @@ int main()
       cout << "Exceeded Threshold by: " << tfield << endl;
       exit(1);
     }
-
-  //cout << "3D Steady Variable Coefficient Heat Equation: PASSED\n";
-  //cout << "Residual: "<< tfield << endl;
 
   // presumably, all tests passed
   return 0;
