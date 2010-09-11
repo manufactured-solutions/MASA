@@ -7,8 +7,14 @@ LIBS          = -L$(top_builddir)/src -lmasa
 # License Information
 BUILT_SOURCES = .license.stamp
 
+# cpp 
 bin_PROGRAMS  = verify MASAshell euler_example navierstokes_example heat_example switch rans_sa_example #tester 
-bin_PROGRAMS += c_heat_example c_euler_example
+
+# c-code 
+bin_PROGRAMS += c_heat_example c_euler_example 
+
+#fortran 
+bin_PROGRAMS += f_euler
 
 # ----------------- 
 #    CPP
@@ -36,16 +42,8 @@ c_euler_example_SOURCES      = c_euler_example.c
 #    Fortran
 # ----------------- 
 
-#noinst_PROGRAMS            = fort_euler_example
-#standalonedir              = @prefix@/bin
-
-#fort_euler_exmaple_SOURCES = masa.f90 main.f90
-#test_LIBTOOLFLAGS          = --tag=FC
-#test_LDADD = -L$(top_builddir)/src -lmasa
-
-#main.f90: masa.f90
-
-
+f_euler_SOURCES         = f_euler.f90 masa.f90
+test_LIBTOOLFLAGS       = --tag=FC
 
 # ----------------- 
 # License
@@ -53,5 +51,3 @@ c_euler_example_SOURCES      = c_euler_example.c
 .license.stamp: $(top_srcdir)/LICENSE
 	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE *.c *.cpp
 	echo 'updated source license headers' >$@
-
-CLEANFILES = .license.stamp
