@@ -14,7 +14,7 @@ bin_PROGRAMS  = verify MASAshell euler_example navierstokes_example heat_example
 bin_PROGRAMS += c_heat_example c_euler_example 
 
 #fortran 
-bin_PROGRAMS += f_euler
+bin_PROGRAMS += f_euler f_cns
 
 # ----------------- 
 #    CPP
@@ -43,6 +43,9 @@ c_euler_example_SOURCES      = c_euler_example.c
 # ----------------- 
 
 f_euler_SOURCES         = f_euler.f90 masa.f90
+test_LIBTOOLFLAGS       = --tag=FC
+
+f_cns_SOURCES         = f_cns.f90 masa.f90
 test_LIBTOOLFLAGS       = --tag=FC
 
 # ----------------- 

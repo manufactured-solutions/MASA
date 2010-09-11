@@ -12,7 +12,7 @@ program main
 
 
   ! initialize the problem
-  call masa_init('mytest','euler_1d')
+  call masa_init('mytest','navierstokes_2d_compressible')
 
   ! initialize the default parameters
   call masa_init_param()
@@ -42,7 +42,7 @@ program main
   print*,'Updated L = ',value
 
   ! evaluate at a particular point
-  out = masa_eval_1d_u_source(value)
+  out = masa_eval_2d_u_source(value,value)
   write(6,*) "value is: ", out 
 
   stop
