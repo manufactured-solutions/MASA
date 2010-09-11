@@ -43,10 +43,10 @@ c_euler_example_SOURCES      = c_euler_example.c
 # ----------------- 
 
 f_euler_SOURCES         = f_euler.f90 masa.f90
-test_LIBTOOLFLAGS       = --tag=FC
+f_euler_LIBTOOLFLAGS       = --tag=FC
 
 f_cns_SOURCES         = f_cns.f90 masa.f90
-test_LIBTOOLFLAGS       = --tag=FC
+f_cns_LIBTOOLFLAGS       = --tag=FC
 
 # ----------------- 
 # License
