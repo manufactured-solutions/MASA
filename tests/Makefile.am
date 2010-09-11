@@ -95,4 +95,4 @@ EXTRA_DIST                 = init.sh \
 	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE *.c *.cpp
 	echo 'updated source license headers' >$@
 
-CLEANFILES = .license.stamp
+CLEANFILES = .license.stamp *.mod
