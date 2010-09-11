@@ -31,6 +31,22 @@ switch_SOURCES               = switch.cpp
 c_heat_example_SOURCES       = c_heat_example.c
 c_euler_example_SOURCES      = c_euler_example.c
 
+
+# ----------------- 
+#    Fortran
+# ----------------- 
+
+#noinst_PROGRAMS            = fort_euler_example
+#standalonedir              = @prefix@/bin
+
+#fort_euler_exmaple_SOURCES = masa.f90 main.f90
+#test_LIBTOOLFLAGS          = --tag=FC
+#test_LDADD = -L$(top_builddir)/src -lmasa
+
+#main.f90: masa.f90
+
+
+
 # ----------------- 
 # License
 # ----------------- 

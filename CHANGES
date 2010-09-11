@@ -2,7 +2,7 @@
 Version 0.20 (September 2010)
   
   * API change for numerous functions
-  * initial support for Fortran module interface
+  * initial support for Fortran interface
   * fixed support for parallel build
   * bug fix in energy equation for 3d compressible navier stokes
   * added masa.m4 macro that allows users to include: 
