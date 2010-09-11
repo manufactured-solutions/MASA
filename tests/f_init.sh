@@ -1,6 +1,7 @@
 #!/bin/bash
 
+echo " "
+echo " "
 echo "-------------------------------------------------------"
-echo "Finalizing MASA Tests, have a well verified day"
+echo "Initializing FortMASA Tests"
 echo "-------------------------------------------------------"
-echo ""

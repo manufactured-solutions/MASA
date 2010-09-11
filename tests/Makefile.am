@@ -24,7 +24,8 @@ check_PROGRAMS   = heat_const_steady   \
 	           c_euler2d           \
                    c_euler3d           \
 	           c_navierstokes2d    \
-	           c_navierstokes3d    
+	           c_navierstokes3d    \
+                   f_euler1d
 
 #----------------------
 # C++ Test Sources
@@ -53,6 +54,11 @@ c_navierstokes2d_SOURCES    = c_ns2d.c
 c_navierstokes3d_SOURCES    = c_ns3d.c
 
 #----------------------
+# Fortran Test Sources
+#----------------------
+f_euler1d_SOURCES           = f_euler1d.f90 masa.f90
+
+#----------------------
 # Regression Tests
 #----------------------
 
@@ -69,14 +75,19 @@ TESTS                      = init.sh              \
                              navierstokes3d       \
                              axi_euler            \
                              axi_cns              \
+			     c_init.sh            \
 	                     c_euler1d            \
 	                     c_euler2d            \
 	                     c_euler3d            \
                              c_navierstokes2d     \
                              c_navierstokes3d     \
+			     f_init.sh            \
+		             f_euler1d            \
                              finalize.sh
 
 EXTRA_DIST                 = init.sh \
+			     c_init.sh \
+	                     f_init.sh \
                              finalize.sh
 
 # License Information
