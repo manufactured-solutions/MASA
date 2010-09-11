@@ -40,4 +40,6 @@ EXTRA_DIST              = lic_utils/update_license.pl
 	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE $(cc_sources) $(h_sources)
 	echo 'updated source license headers' >$@
 
-CLEANFILES = .license.stamp masa.mod
+moduledir   = @libdir@
+module_DATA = masa.mod
+CLEANFILES  = .license.stamp masa.mod
