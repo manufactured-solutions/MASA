@@ -15,22 +15,21 @@ Packager:     karl@ices.utexas.edu
 BuildRoot: /var/tmp/%{name}-%{version}-buildroot
 
 %define _topdir /h1/karl/build/rpms/
-%define APPS /org/centers/pecos/LIBRARIES
-%define MODULES modulefiles
 
-%define INSTALL_DIR %{APPS}/%{name}/%{version}
-%define MODULE_DIR  %{APPS}/%{MODULES}/%{name}
+%define APPS /org/centers/pecos
+%define MODULES derived_modulefiles
 
-# PECOS Library settings
+%include compiler-defines.inc
 
-%define APPS /org/centers/pecos/LIBRARIES
-%define MODULES /org/centers/pecos/modulefiles
+%define INSTALL_DIR %{APPS}/LIBRARIES/%{name}/%{APPSUB}/%{version}
+%define MODULE_DIR  %{APPS}/%{MODULES}/%{APPSUB}/%{name}
 
-%define INSTALL_DIR %{APPS}/%{name}/%{version}
-%define MODULE_DIR  %{MODULES}/%{name}
-
+%package -n %{name}-%{comp_fam_ver}
+Summary:      MASA - Manufactured Analytical Solutions Abstraction Library
+Group:        applications
 
 %description
+%description -n %{name}-%{comp_fam_ver}
 
 MASA is a Manufactured Analytical Solutions Abstraction Library.
 
@@ -43,8 +42,10 @@ mkdir -p $RPM_BUILD_ROOT/%{INSTALL_DIR}
 
 %build
 
-./configure FC=ifort F77=ifort CC=icc CXX=icpc --prefix=%{INSTALL_DIR}
-make
+%include compiler-load.inc
+
+./configure --prefix=%{INSTALL_DIR}
+make -j 1
 make DESTDIR=$RPM_BUILD_ROOT install
 
 rm -rf $RPM_BUILD_ROOT/%{MODULE_DIR}
@@ -74,7 +75,7 @@ puts stderr "\nVersion %{version}"
 }
 
 prepend-path    LD_LIBRARY_PATH   %{INSTALL_DIR}/lib
-prepend-path    PKG_CONFIG_PATH   %{INSTALL_DIR}/lib/pkgconfig
+#prepend-path    PKG_CONFIG_PATH   %{INSTALL_DIR}/lib/pkgconfig
 prepend-path    INCLUDE           %{INSTALL_DIR}/include
 
 setenv MASA_DIR %{INSTALL_DIR}
@@ -92,7 +93,7 @@ cat > $RPM_BUILD_ROOT/%{MODULE_DIR}/.version.%{version} << 'EOF'
 set     ModulesVersion      "%{version}"
 EOF
 
-%files
+%files -n %{name}-%{comp_fam_ver}
 %defattr(-,karl,pecos)
 %{INSTALL_DIR}
 %{MODULE_DIR}
