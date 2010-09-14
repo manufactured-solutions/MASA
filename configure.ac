@@ -46,9 +46,14 @@ AC_PROG_FC
 AC_PROG_F77
 AC_PROG_LIBTOOL
 
-###AM_CONDITIONAL([USE_INTEL],[test "$CXX" = "icpc"])
-###AM_CONDITIONAL([USE_GNU],[test "$CXX" = "g++"])
 AM_SANITY_CHECK
+
+#---------------------------------------------
+# Check for extra-strict regression tolerance
+#---------------------------------------------
+
+ AC_ARG_ENABLE([strict-tests], AC_HELP_STRING([--enable-strict-tests],[enable strict absolute tolerance in regression tests]),
+	       AC_DEFINE(MASA_STRICT_REGRESSION,1,[Define if strict regression enabled]),[])
 
 #--------------------------
 # Checks for code coverage
