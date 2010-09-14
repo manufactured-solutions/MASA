@@ -37,9 +37,15 @@ echo SVN revision number........... : $BUILD_VERSION
 echo
 echo Optional Features:
    if test "$HAVE_GCOV_TOOLS" = "0"; then
-     echo '   'Enable gcov code coverage.. : no
+     echo '   'Enable gcov code coverage.... : no
    else
-     echo '   'Enable gcov code coverage.. : yes
+     echo '   'Enable gcov code coverage.... : yes
+   fi
+
+   if test "$MASA_STRICT_REGRESSION" = "1"; then
+     echo '   'Enable absolute error tests.. : yes
+   else
+     echo '   'Enable absolute error tests.. : no
    fi
 
 echo

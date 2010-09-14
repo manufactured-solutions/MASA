@@ -53,6 +53,8 @@ AM_SANITY_CHECK
 #---------------------------------------------
 
  AC_ARG_ENABLE([strict-tests], AC_HELP_STRING([--enable-strict-tests],[enable strict absolute tolerance in regression tests]),
+# 	       AC_DEFINE(MASA_STRICT_REGRESSION,1,[Define if strict regression enabled]),[])
+ 	       MASA_STRICT_REGRESSION=1 
 	       AC_DEFINE(MASA_STRICT_REGRESSION,1,[Define if strict regression enabled]),[])
 
 #--------------------------
