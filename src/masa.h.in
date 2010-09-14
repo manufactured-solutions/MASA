@@ -47,9 +47,13 @@
 #define MASA_BUILD_VERSION  "@BUILD_VERSION@"
 
 #define MASA_LIB_VERSION    "@VERSION@"
+#define MASA_LIB_RELEASE    "@BUILD_DEVSTATUS@"
 
 #define MASA_CXX            "@CXX@"
 #define MASA_CXXFLAGS       "@CXXFLAGS@"
+
+#define MASA_FC            "@FC@"
+#define MASA_FCFLAGS       "@FCFLAGS@"
 
 
 // This header file contains the public functions designed to be exposed in MASA
