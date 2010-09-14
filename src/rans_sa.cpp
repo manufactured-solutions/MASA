@@ -51,8 +51,21 @@ MASA::rans_sa::rans_sa()
   mmsname = "rans_sa";
   dimension=1;
 
-  register_var("Gamma",&Gamma);
-  register_var("mu",&mu);
+  double cb1;
+  double cb2;
+  double cv1;
+  double cw2;
+  double cw3;
+  double sigma;
+  double kappa;  
+
+  register_var("cb1",  &cb1);
+  register_var("cb2",  &cb2);
+  register_var("cv1",  &cv1);
+  register_var("cw2",  &cw2);
+  register_var("cw3",  &cw3);
+  register_var("sigma",&sigma);
+  register_var("kappa",&kappa);
 
 }// done with constructor
 
@@ -60,7 +73,12 @@ void MASA::rans_sa::init_var()
 {
 
   // currently randomly generated -- these are placeholders for now!
-  set_var("Gamma",1.01);
-  set_var("mu",1.38);
+  set_var("cb1", 0.1355);
+  set_var("cb2",  0.622);
+  set_var("cv1",    7.1);
+  set_var("cw2",    0.3);
+  set_var("cw3",      2);
+  set_var("sigma",  2/3);
+  set_var("kappa", 0.41);
 
 } // done with variable initializer
