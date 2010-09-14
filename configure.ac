@@ -50,6 +50,12 @@ AC_PROG_LIBTOOL
 ###AM_CONDITIONAL([USE_GNU],[test "$CXX" = "g++"])
 AM_SANITY_CHECK
 
+#--------------------------
+# Checks for code coverage
+#-------------------------
+
+AX_CODE_COVERAGE
+
 # Query configuration environment
 
 AX_SUMMARIZE_ENV

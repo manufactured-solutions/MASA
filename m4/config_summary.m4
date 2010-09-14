@@ -34,6 +34,13 @@ echo Build host.................... : $BUILD_HOST
 echo Configure date................ : $BUILD_DATE
 echo Build architecture............ : $BUILD_ARCH
 echo SVN revision number........... : $BUILD_VERSION
+echo
+echo Optional Features:
+   if test "$HAVE_GCOV_TOOLS" = "0"; then
+     echo '   'Enable gcov code coverage.. : no
+   else
+     echo '   'Enable gcov code coverage.. : yes
+   fi
 
 echo
 echo '-------------------------------------------------------------------------------'

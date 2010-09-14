@@ -8,6 +8,7 @@ Version 0.20 (September 2010)
   * added masa.m4 macro that allows users to include: 
     AX_PATH_MASA(version,optional) in configure.ac 
   * merged C/C++ headers into a single masa.h
+  * added support for GNU code coverage analysis (--enable-coverage)
 
 Version 0.10 (01 September 2010)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.10
