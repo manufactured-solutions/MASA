@@ -30,6 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
+#include <config.h> // for MASA_STRICT_REGRESSION
 #include <masa.h>
 #include <math.h>
 
@@ -121,16 +122,18 @@ int main()
   double r;
   double z;
 
-  // solutions -- efield is MASA term, efield2 is maple, efield3 is abs error between them
+  // solutions
   double ufield,ufield2,ufield3;
+  double vfield,vfield2,vfield3;
   double wfield,wfield2,wfield3;
   double efield,efield2,efield3;
-  double rho,rho2;
+  double rho,rho2,rho3;
 
-  double u_an,u_an2;
+  double u_an,u_an2,u_an3;
+  double v_an,v_an2,v_an3;
   double w_an,w_an2,w_an3;
-  double p_an,p_an2;
-  double rho_an,rho_an2;
+  double p_an,p_an2,p_an3;
+  double rho_an,rho_an2,rho_an3;
 
   // initalize
   int nx = 115;  // number of points
@@ -201,15 +204,28 @@ int main()
 	p_an2   = anQ_p   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, PI, L, Gamma);
 	
 	// test the result is roughly zero
+	// choose between abs and rel error
+#ifdef MASA_STRICT_REGRESSION
+	ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
+	wfield3 = fabs(wfield-wfield2)/fabs(wfield2);
+	efield3 = fabs(efield-efield2)/fabs(efield2);
+	rho3    = fabs(rho-rho2)/fabs(rho2);
+	
+	u_an3   = fabs(u_an-u_an2)/fabs(u_an2);
+	w_an3   = fabs(v_an-v_an2)/fabs(w_an2);
+	rho_an3 = fabs(rho_an-rho_an2)/fabs(rho_an2);
+	p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
+#else
 	ufield3 = fabs(ufield-ufield2);
 	wfield3 = fabs(wfield-wfield2);
 	efield3 = fabs(efield-efield2);
-	rho     = fabs(rho-rho2);
+	rho3    = fabs(rho-rho2);
 	
-	u_an   = fabs(u_an-u_an2);
+	u_an3   = fabs(u_an-u_an2);
 	w_an3  = fabs(w_an-w_an2);
-	rho_an = fabs(rho_an-rho_an2);
-	p_an   = fabs(p_an-p_an2);
+	rho_an3 = fabs(rho_an-rho_an2);
+	p_an3   = fabs(p_an-p_an2);
+#endif
 
 	if(ufield3 > threshold)
 	  {
@@ -223,7 +239,7 @@ int main()
 	    exit(1);
 	  }
 
-	if(u_an > threshold)
+	if(u_an3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
 	    cout << "U Field Analytical Term\n";
@@ -269,7 +285,7 @@ int main()
 	    exit(1);
 	  }
 
-	if(p_an > threshold)
+	if(p_an3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
 	    cout << "P Field Analytical Term\n";
@@ -279,7 +295,7 @@ int main()
 	    exit(1);
 	  }
 
-	if(rho > threshold)
+	if(rho3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
 	    cout.precision(16);
@@ -289,7 +305,7 @@ int main()
 	    exit(1);
 	  }
 
-	if(rho_an > threshold)
+	if(rho_an3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
 	    cout.precision(16);

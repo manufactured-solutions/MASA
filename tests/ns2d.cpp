@@ -30,6 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
+#include <config.h>
 #include <masa.h>
 #include <math.h> 
 
@@ -214,16 +215,16 @@ int main()
   double z;
 
   // solutions
-  double u_an,u_an2;
+  double u_an,u_an2,u_an3;
   double v_an,v_an2,v_an3;
-  double w_an,w_an2;
-  double p_an,p_an2;
-  double rho_an,rho_an2;
+  double w_an,w_an2,w_an3;
+  double p_an,p_an2,p_an3;
+  double rho_an,rho_an2,rho_an3;
 
-  double ufield,ufield2;
-  double vfield,vfield2;
-  double efield,efield2;
-  double rho,rho2;
+  double ufield,ufield2,ufield3;
+  double vfield,vfield2,vfield3;
+  double efield,efield2,efield3;
+  double rho,rho2,rho3;
 
   // initalize
   int nx = 10;  // number of points
@@ -309,49 +310,95 @@ int main()
 	p_an2   = anQ_p   (x,y,p_0,p_x,p_y,a_px,a_py,L);
 
 	// test the result is roughly zero
-	ufield = fabs(ufield-ufield2);
-	vfield = fabs(vfield-vfield2);
-	efield = fabs(efield-efield2);
-	rho    = fabs(rho-rho2);
-	
-	u_an   = fabs(u_an-u_an2);
-	v_an3  = fabs(v_an-v_an2);
-	rho_an = fabs(rho_an-rho_an2);
-	p_an   = fabs(p_an-p_an2);
-  
-	//cout << endl << ufield << endl << vfield << endl << efield << rho << endl;
+	// choose between abs and rel error
+#ifdef MASA_STRICT_REGRESSION
+	ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
+	vfield3 = fabs(vfield-vfield2)/fabs(vfield2);
+	efield3 = fabs(efield-efield2)/fabs(efield2);
+	rho3    = fabs(rho-rho2)/fabs(rho2);
 
-	if(ufield > threshold)
+	u_an3   = fabs(u_an-u_an2)/fabs(u_an2);
+	v_an3   = fabs(v_an-v_an2)/fabs(v_an2);
+	rho_an3 = fabs(rho_an-rho_an2)/fabs(rho_an2);
+	p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
+#else
+	ufield3 = fabs(ufield-ufield2);
+	vfield3 = fabs(vfield-vfield2);
+	efield3 = fabs(efield-efield2);
+	rho3    = fabs(rho-rho2);
+
+	u_an3   = fabs(u_an-u_an2);
+	v_an3   = fabs(v_an-v_an2);
+	rho_an3 = fabs(rho_an-rho_an2);
+	p_an3   = fabs(p_an-p_an2);
+#endif
+
+	if(ufield3 > threshold)
 	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
-	    cout << "U Field Source Term\n";
-	    cout << "Exceeded Threshold by: " << ufield << endl;
+	    printf("\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n");
+	    printf("U Field Source Term\n");
 	    exit(1);
 	  }
 
-	if(vfield > threshold)
+	if(u_an3 > threshold)
 	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
-	    cout << "V Field Source Term\n";
-	    cout << "Exceeded Threshold by: " << vfield << endl;
+	    printf("\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n");
+	    printf("U Field Analytical Term\n");
 	    exit(1);
 	  }
 
-	if(efield > threshold)
+	if(vfield3 > threshold)
 	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
-	    cout << "Energy Source Term\n";
-	    cout << "Exceeded Threshold by: " << efield << endl;
+	    printf("\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n");
+	    printf("V Field Source Term\n");
+	    printf("(Relative) Threshold Exceeded: %g\n",vfield3);
+	    printf("CMASA:              %5.16f\n",vfield);
+	    printf("Maple:              %5.16f\n",vfield2);
+	    printf("x,y:                %g %g\n",x,y);
+
 	    exit(1);
 	  }
 
-	if(rho > threshold)
+	if(v_an3 > threshold)
 	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
-	    cout << "RHO Source Term\n";
-	    cout << "Exceeded Threshold by: " << rho << endl;
+	    printf("\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n");
+	    printf("V Field Analytical Term\n");
 	    exit(1);
 	  }
+
+	if(efield3 > threshold)
+	  {
+	    printf("\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n");
+	    printf("E Field Source Term\n");
+	    printf("(Relative) Threshold Exceeded: %g\n",efield3);
+	    printf("CMASA:              %5.16f\n",efield);
+	    printf("Maple:              %5.16f\n",efield2);
+	    printf("x,y:                %g %g\n",x,y);
+	    exit(1);
+	  }
+
+	if(p_an3 > threshold)
+	  {
+	    
+	    printf("\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n");
+	    printf("P Field Analytical Term\n");
+	    exit(1);
+	  }
+
+	if(rho3 > threshold)
+	  {
+	    printf("\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n");
+	    printf("RHO Field Source Term\n");
+	    exit(1);
+	  }
+
+	if(rho_an3 > threshold)
+	  {	    
+	    printf("\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n");
+	    printf("RHO Analytical Term\n");
+	    exit(1);
+	  }
+
       } // done iterating
 
   // tests passed
