@@ -21,6 +21,7 @@ further divided into the following subsections:
 <li> \subpage installation
 <li> \subpage apiC "C/C++ Interface"
 <li> \subpage apiF "Fortran Interface"
+<li> <a href="http://buildbot.ices.utexas.edu/docs/buildbot/masa/build/docs/html/lcov/build/src/index.html">Buildbot Coverage</a>
 </ul>
 
 <!-- \subpage inputFile  Example Input File -->
