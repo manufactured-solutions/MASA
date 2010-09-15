@@ -206,16 +206,7 @@ int main()
 	// test the result is roughly zero
 	// choose between abs and rel error
 #ifdef MASA_STRICT_REGRESSION
-	ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
-	wfield3 = fabs(wfield-wfield2)/fabs(wfield2);
-	efield3 = fabs(efield-efield2)/fabs(efield2);
-	rho3    = fabs(rho-rho2)/fabs(rho2);
-	
-	u_an3   = fabs(u_an-u_an2)/fabs(u_an2);
-	w_an3   = fabs(v_an-v_an2)/fabs(w_an2);
-	rho_an3 = fabs(rho_an-rho_an2)/fabs(rho_an2);
-	p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
-#else
+
 	ufield3 = fabs(ufield-ufield2);
 	wfield3 = fabs(wfield-wfield2);
 	efield3 = fabs(efield-efield2);
@@ -225,6 +216,19 @@ int main()
 	w_an3  = fabs(w_an-w_an2);
 	rho_an3 = fabs(rho_an-rho_an2);
 	p_an3   = fabs(p_an-p_an2);
+
+#else
+
+	ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
+	wfield3 = fabs(wfield-wfield2)/fabs(wfield2);
+	efield3 = fabs(efield-efield2)/fabs(efield2);
+	rho3    = fabs(rho-rho2)/fabs(rho2);
+	
+	u_an3   = fabs(u_an-u_an2)/fabs(u_an2);
+	w_an3   = fabs(v_an-v_an2)/fabs(w_an2);
+	rho_an3 = fabs(rho_an-rho_an2)/fabs(rho_an2);
+	p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
+
 #endif
 
 	if(ufield3 > threshold)
