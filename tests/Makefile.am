@@ -20,6 +20,7 @@ check_PROGRAMS   = heat_const_steady   \
 	           navierstokes3d      \
                    axi_euler           \
                    axi_cns             \
+                   rans_sa             \
 	           c_misc              \
 	           c_euler1d           \
 	           c_euler2d           \
@@ -43,6 +44,7 @@ euler2d_SOURCES             = euler2d.cpp Euler_2d_source.cpp
 euler3d_SOURCES             = euler3d.cpp Euler_3d_source.cpp
 navierstokes2d_SOURCES      = ns2d.cpp Navier-Stokes_2d_compressible_source.cpp
 navierstokes3d_SOURCES      = ns3d.cpp Navier-Stokes_3d_compressible_source.cpp
+rans_sa_SOURCES             = rans_sa.cpp
 
 #----------------------
 # C Test Sources
@@ -80,6 +82,7 @@ TESTS                      = init.sh              \
                              navierstokes3d       \
                              axi_euler            \
                              axi_cns              \
+                             rans_sa              \
 			     c_init.sh            \
 	                     c_misc               \
 	                     c_euler1d            \
