@@ -1,6 +1,5 @@
 program main
   use masa
-  use iso_c_binding
 
   implicit none
 
@@ -28,10 +27,12 @@ program main
   value = masa_get_param("L")
   write(6,*) value
 
-  out1 = fsol(%VAL(x))
-  write(*,*) "out1 is ", out1
+! TODO: below here is funky
+
+!!!  out1 = fsol(%VAL(x))
+!!!  write(*,*) "out1 is ", out1
   ! evaluate at a particular point
-  out = masa_eval_1d_u_source(value)
+!!!  out = masa_eval_1d_u_source(value)
 
   stop
 end program main

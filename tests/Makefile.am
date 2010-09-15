@@ -56,7 +56,10 @@ c_navierstokes3d_SOURCES    = c_ns3d.c
 #----------------------
 # Fortran Test Sources
 #----------------------
-f_euler1d_SOURCES           = f_euler1d.f90 masa.f90 c_euler1d.c
+f_euler1d_SOURCES           = f_euler1d.f90 
+f_euler1d_LDADD             = -lfmasa
+
+#masa.f90 c_euler1d.c
 
 #----------------------
 # Regression Tests
