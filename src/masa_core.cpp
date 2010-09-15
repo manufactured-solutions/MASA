@@ -35,8 +35,23 @@
 
 using namespace MASA;
 
+manufactured_solution* masa_master_pointer = 0;       // pointer to currently selected manufactured solution
+                                                      // setting master pointer to NULL -- 
+                                                      // allows error check that someone initialized it!
 map<string, manufactured_solution*> masa_master_list; // global map between unique name and manufactured class
-manufactured_solution* masa_master_pointer;           // pointer to currently selected manufactured solution
+
+//
+//  this function checks the user has an active mms
+//
+void verify_pointer_sanity()
+{
+  if(masa_master_pointer == 0)
+    {    
+      cout << "MASA FATAL ERROR: No initialized Manufactured Solution!" << endl;
+      cout << "Have you called masa_init?" << endl;
+      exit(1);
+    }  
+}
 
 //
 //  this function selects an already initialized manufactured class
@@ -171,7 +186,7 @@ int MASA::masa_init(string unique_name, string str)
 //
 int MASA::masa_curr_mms(string* str)
 {
-
+  verify_pointer_sanity();
   // lets run though the list to check the variable does exist
   masa_master_pointer->return_name(str);
   // cout << masa_master_list[masa_master_pointer] << endl;    
@@ -258,6 +273,7 @@ int MASA::masa_printid()
 
 void MASA::masa_set_param(string param,double paramval)
 {
+  verify_pointer_sanity();
   masa_master_pointer->set_var(param,paramval);
 }
 
@@ -266,6 +282,7 @@ void MASA::masa_set_param(string param,double paramval)
 //
 int MASA::masa_init_param()
 {
+  verify_pointer_sanity();
   masa_master_pointer->init_var();
   return 0;
 }
@@ -276,12 +293,13 @@ int MASA::masa_init_param()
 
 double MASA::masa_get_param(string param)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->get_var(param);
 }
 
 int MASA::masa_display_param()
 {
-
+  verify_pointer_sanity();
   masa_master_pointer->display_var();
 
   return 0;
@@ -301,31 +319,37 @@ int MASA::masa_display_param()
 
 double MASA::masa_eval_t_source(double x) //x 
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_t(x);
 }
 
 double MASA::masa_eval_t_source(double x,double t) //x,t
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_t(x,t);
 }
 
 double MASA::masa_eval_u_source(double x)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_u(x);
 }
 
 double MASA::masa_eval_rho_source(double x)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_rho(x);
 }
 
 double MASA::masa_eval_rho_u_source(double x,double t)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_rho_u(x,t);
 }
 
 double MASA::masa_eval_e_source(double x)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_e(x);
 }
 
@@ -335,21 +359,25 @@ double MASA::masa_eval_e_source(double x)
 
 double MASA::masa_eval_t_an(double x)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_t(x);
 }
 
 double MASA::masa_eval_u_an(double x)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_u(x);
 }
 
 double MASA::masa_eval_p_an(double x)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_p(x);
 }
 
 double MASA::masa_eval_rho_an(double x)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_rho(x);
 }
 
@@ -367,31 +395,37 @@ double MASA::masa_eval_rho_an(double x)
 
 double MASA::masa_eval_t_source(double x,double y,double t)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_t(x,y,t);
 }
 
 double MASA::masa_eval_u_source(double x,double y)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_u(x,y);
 }
 
 double MASA::masa_eval_v_source(double x,double y)
-{
+{  
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_v(x,y);
 }
 
 double MASA::masa_eval_w_source(double x,double y)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_w(x,y);
 }
 
 double MASA::masa_eval_rho_source(double x,double y)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_rho(x,y);
 }
 
 double MASA::masa_eval_e_source(double x,double y)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_e(x,y);
 }
 
@@ -401,31 +435,37 @@ double MASA::masa_eval_e_source(double x,double y)
 
 double MASA::masa_eval_t_an(double x,double y)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_t(x,y);
 }
 
 double MASA::masa_eval_u_an(double x,double y)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_u(x,y);
 }
 
 double MASA::masa_eval_v_an(double x,double y)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_v(x,y);
 }
 
 double MASA::masa_eval_w_an(double x,double y)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_w(x,y);
 }
 
 double MASA::masa_eval_p_an(double x,double y)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_p(x,y);
 }
 
 double MASA::masa_eval_rho_an(double x,double y)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_rho(x,y);
 }
 
@@ -443,31 +483,37 @@ double MASA::masa_eval_rho_an(double x,double y)
 
 double MASA::masa_eval_t_source(double x,double y,double z,double t)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_t(x,y,z,t);
 }
 
 double MASA::masa_eval_u_source(double x,double y,double z)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_u(x,y,z);
 }
 
 double MASA::masa_eval_v_source(double x,double y,double z)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_v(x,y,z);
 }
 
 double MASA::masa_eval_w_source(double x,double y,double z)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_w(x,y,z);
 }
 
 double MASA::masa_eval_rho_source(double x,double y, double z)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_rho(x,y,z);
 }
 
 double MASA::masa_eval_e_source(double x,double y,double z)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_q_e(x,y,z);
 }
 
@@ -477,31 +523,37 @@ double MASA::masa_eval_e_source(double x,double y,double z)
 
 double MASA::masa_eval_t_an(double x,double y,double z)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_t(x,y,z);
 }
 
 double MASA::masa_eval_u_an(double x,double y,double z)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_u(x,y,z);
 }
 
 double MASA::masa_eval_v_an(double x,double y,double z)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_v(x,y,z);
 }
 
 double MASA::masa_eval_w_an(double x,double y,double z)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_w(x,y,z);
 }
 
 double MASA::masa_eval_p_an(double x,double y,double z)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_p(x,y,z);
 }
 
 double MASA::masa_eval_rho_an(double x,double y,double z)
 {
+  verify_pointer_sanity();
   return masa_master_pointer->eval_an_rho(x,y,z);
 }
 
@@ -514,18 +566,21 @@ double MASA::masa_eval_rho_an(double x,double y,double z)
 
 int MASA::masa_get_name(string* name)
 {
+  verify_pointer_sanity();
   masa_master_pointer->return_name(name); // set string to name
   return 0;
 }
 
 int MASA::masa_get_dimension(int* dim)
 {
+  verify_pointer_sanity();
   masa_master_pointer->return_dim(dim); // set string to name
   return 0;
 }
 
 int MASA::masa_sanity_check()
 {
+  verify_pointer_sanity();
   masa_master_pointer->sanity_check(); // set string to name
   return 0;
 }

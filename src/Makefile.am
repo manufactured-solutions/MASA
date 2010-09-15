@@ -33,7 +33,7 @@ test_LIBTOOLFLAGS       = --tag=FC
 test_LDADD              = -L$(top_builddir)/src -lmasa
 test_DEPENDENCIES       = libmasa.la
 
-main.f90: masa.f90
+main.f90:
 
 EXTRA_DIST              = lic_utils/update_license.pl
 
