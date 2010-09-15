@@ -52,7 +52,7 @@ rans_sa_SOURCES             = rans_sa.cpp
 # C Test Sources
 #----------------------
 
-c_euler1d_SOURCES           = c_misc.c
+c_misc_SOURCES              = c_misc.c
 c_euler1d_SOURCES           = c_euler1d.c
 c_euler2d_SOURCES           = c_euler2d.c
 c_euler3d_SOURCES           = c_euler3d.c
