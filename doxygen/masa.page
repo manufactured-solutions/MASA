@@ -54,7 +54,7 @@ welcome at the same e-mail address.  All bug reports should include:
 
  */
 
-/*! \page inputFile Example libGRVY Input File
+/*! \page inputFile Example libMASA Input File
 
 This is an example input file for use with the libGRVY parsing mechanism.
 Note that hehind the scenes, the library is using
@@ -126,29 +126,46 @@ following will be generated.
 \code
  > make check
 
-1D Steady Constant Heat Equation: PASSED
-2D Steady Constant Heat Equation: PASSED
-3D Steady Constant Heat Equation: PASSED
+-------------------------------------------------------
+Initializing MASA Tests
+-------------------------------------------------------
+PASS: init.sh
 PASS: heat_const_steady
-1D Steady Variable Coefficient Heat Equation: PASSED
-2D Steady Variable Coefficient Heat Equation: PASSED
-3D Steady Variable Coefficient Heat Equation: PASSED
 PASS: heat_var_steady
-1D Unsteady Constant Heat Equation: PASSED
-2D Unsteady Constant Heat Equation: PASSED
-3D Unsteady Constant Heat Equation: PASSED
 PASS: heat_const_unsteady
-1D Unsteady Variable Coefficients Heat Equation: PASSED
-2D Unsteady Variable Coefficients Heat Equation: PASSED
-3D Unsteady Variable Coefficients Heat Equation: PASSED
 PASS: heat_var_unsteady
+PASS: euler1d
 PASS: euler2d
 PASS: euler3d
-PASS: navierstokes3d
 PASS: navierstokes2d
-==================
-All tests passed
-==================
+PASS: navierstokes3d
+PASS: axi_euler
+PASS: axi_cns
+ 
+-------------------------------------------------------
+Initializing CMASA Tests
+-------------------------------------------------------
+PASS: c_init.sh
+PASS: c_euler1d
+PASS: c_euler2d
+PASS: c_euler3d
+PASS: c_navierstokes2d
+PASS: c_navierstokes3d
+ 
+-------------------------------------------------------
+Initializing FortMASA Tests
+-------------------------------------------------------
+ 
+PASS: f_init.sh
+PASS: f_euler1d
+-------------------------------------------------------
+Finalizing MASA Tests, have a well verified day
+-------------------------------------------------------
+
+PASS: finalize.sh
+===================
+All 21 tests passed
+===================
 
 \endcode
 
@@ -162,10 +179,10 @@ installation is shown below:
 
 \code > make install \endcode
 
-Top-level libGRVY installation directory:
+Top-level libMASA installation directory:
 
 \code
- > ls $HOME/bin/grvy/
+ > ls $HOME/bin/masa/
  examples/  include/  lib/
 \endcode
 
@@ -173,34 +190,36 @@ Top-level libGRVY installation directory:
 
 To link an external C/C++ or Fortran application with the library, the
 \c include directory must be added to the compilers include search
-path in order to access the grvy.h header file (or for Fortran, the \c
+path in order to access the masa.h header file (or for Fortran, the \c
 lib directory should be added to access the pre-compiled
-grvy F90 module).  The \c lib directory should also be added
+masa F90 module).  The \c lib directory should also be added
 to the linker search path along with a request to link against the
-libGRVY library.  Several example link steps are provided below.  These
-examples assume that the libGRVY library has been successfully built and
-installed previously in the users's ~/bin/grvy directory:
+libMASA library.  Several example link steps are provided below.  These
+examples assume that the libMASA library has been successfully built and
+installed previously in the users's ~/bin/masa directory:
 
 <h3>C/C++ Example</h3>
 
-\code > $(CC) -I$HOME/bin/grvy/include app.c -L$HOME/bin/grvy/lib -lgrvy \endcode
+\code > $(CC) -I$HOME/bin/masa/include app.c -L$HOME/bin/masa/lib -lmasa \endcode
 
 <h3>Fortran Example</h3>
 
-\code > $(FC) -I$HOME/bin/grvy/lib app.f90 -L$HOME/bin/grvy/lib -lgrvy \endcode
+Fortran applications also require linking against the fmasa library:
 
-To embed the dynamic library search path for the libGRVY library
+\code > $(FC) -I$HOME/bin/masa/lib app.f90 -L$HOME/bin/masa/lib -lfmasa -lmasa \endcode
+
+To embed the dynamic library search path for the libMASA library
 directly into the application executable, use an additional linker
 option as follows:
 
 <h3>C/C++ Example</h3>
 
-\code > $(CC) -I$HOME/bin/grvy/include app.c -L$HOME/bin/grvy/lib \
-         -Wl,-rpath,$HOME/bin/grvy/lib -lgrvy \endcode
+\code > $(CC) -I$HOME/bin/masa/include app.c -L$HOME/bin/masa/lib \
+         -Wl,-rpath,$HOME/bin/masa/lib -lmasa \endcode
 
 
 <b>Important Note:</b> F90 module file formats are not consistent
-across multiple compilers. Therefore, a Fortran application and the libGRVY
+across multiple compilers. Therefore, a Fortran application and the libMASA
 F90 interface \em must be built with the same Fortran compiler family to ensure
 compatibility.
 
