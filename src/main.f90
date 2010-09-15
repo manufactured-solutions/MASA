@@ -1,6 +1,5 @@
 program main
   use masa
-!  use iso_c_binding
 
   implicit none
 
