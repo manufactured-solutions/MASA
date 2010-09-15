@@ -33,7 +33,6 @@
 #include <config.h>
 #include <masa.h>
 #include <math.h>
-#include <stdio.h>
 
 #include <iostream>
 #include <stdlib.h>
@@ -228,9 +227,9 @@ int main()
       if(efield3 > threshold)
 	{
 	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
-	  printf("Threshold Exceeded: %g\n",efield3);
-	  printf("MASA:               %5.16f\n",efield);
-	  printf("Maple:              %5.16f\n",efield2);
+	  cout << "Threshold Exceeded: " << efield3 << endl;
+	  cout << "MASA:               " <<  efield << endl;
+	  cout << "Maple:              " <<  efield2 << endl;
 	  cout << x << endl;
 	  exit(1);
 	}
