@@ -36,7 +36,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifdef MASA_STRICT_REGRESSION
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
+#else
+// forward error propagation: worst case scenario FP error is infinity, wouldn't expect FP error of less than 1000*epsilon. 
+// My best guess of the error level would have been log2(1000)*epsilon, or roughly 10*epsilon. Seeing 8*epsilon. 
+// Thus, weakening for distribution 
+const double threshold = 2.0e-15; // weakening because of O(1000) FP operations failing on some macbooks
+#endif
 
 double anQ_p (double x,double y,double z,double p_0,double p_x,double p_y,double p_z,double a_px,double a_py,double a_pz,double L)
 {
