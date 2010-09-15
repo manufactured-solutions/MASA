@@ -268,4 +268,4 @@ double MASA::MASA_Test::eval_q_u(double x)
   double qt = demo_var_2 + demo_var_3 + dummy;
   return qt;
 
-}//done with constructor
+}
