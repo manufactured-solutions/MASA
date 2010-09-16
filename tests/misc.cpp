@@ -33,8 +33,9 @@
 #include <config.h>
 #include <masa.h>
 #include <math.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <iostream>
 
 using namespace MASA;
 using namespace std;
@@ -42,12 +43,23 @@ using namespace std;
 int main()
 {
   int i;
+  string str;
   masa_init("euler-test","euler_1d");
   masa_get_dimension(&i);
+  masa_get_name(&str);
   
-  if(i==1)
-    return 0;
-  else
-    return 1;
+  if(str.compare("euler_1d") != 0)
+    {
+      cout << "masa_get_name FAILED";
+      return 1;
+    }
+
+  if(i!=1)
+    {
+      cout << "masa_get_dimension FAILED";
+      return 1;
+    }
   
+  return 0; // steady as she goes
+
 }
