@@ -59,6 +59,10 @@ int main()
       cout << "masa_get_dimension FAILED";
       return 1;
     }
+
+  // test a few other functions
+  masa_version_stdout();
+  masa_get_numeric_version();
   
   return 0; // steady as she goes
 
