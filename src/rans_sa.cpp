@@ -51,14 +51,6 @@ MASA::rans_sa::rans_sa()
   mmsname = "rans_sa";
   dimension=1;
 
-  double cb1;
-  double cb2;
-  double cv1;
-  double cw2;
-  double cw3;
-  double sigma;
-  double kappa;  
-
   register_var("cb1",  &cb1);
   register_var("cb2",  &cb2);
   register_var("cv1",  &cv1);
@@ -82,3 +74,34 @@ void MASA::rans_sa::init_var()
   set_var("kappa", 0.41);
 
 } // done with variable initializer
+
+double MASA::rans_sa::eval_q_u(double x)
+{
+  double u_an;
+  u_an=3;
+  return u_an;
+}
+
+double MASA::rans_sa::eval_q_v(double x)
+{
+  double u_an;
+  u_an=3;
+  return u_an;
+}
+
+double MASA::rans_sa::eval_an_u(double x)
+{
+  double u_an;
+  u_an=3;
+  return u_an;
+}
+
+double MASA::rans_sa::eval_an_v(double x)
+{
+  double u_an;
+  u_an=3;
+  return u_an;
+}
+
+// below are the composite functions needed to assemble a SA model
+

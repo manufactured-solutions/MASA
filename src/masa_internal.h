@@ -687,12 +687,24 @@ namespace MASA
   // ------------------------------------------------------
   class rans_sa : public manufactured_solution
   {
-    double Gamma;
-    double mu;
-
+    
+    double cb1;
+    double cb2;
+    double cv1;
+    double cw2;
+    double cw3;
+    double sigma;
+    double kappa;  
+    
   public:
     rans_sa(); // constructor    
     void   init_var();          // default problem values
+    
+    double eval_q_u  (double); // velocity term
+    double eval_q_v  (double); // eddy viscosity term
+    
+    double eval_an_u  (double); // analytical
+    double eval_an_v  (double);
 
   };
 

@@ -285,6 +285,12 @@ double MASA::masa_eval_u_source(double x)
   return masa_master_pointer->eval_q_u(x);
 }
 
+double MASA::masa_eval_v_source(double x)  // for SA model
+{
+  verify_pointer_sanity();
+  return masa_master_pointer->eval_q_v(x);
+}
+
 double MASA::masa_eval_rho_source(double x)
 {
   verify_pointer_sanity();
@@ -317,6 +323,12 @@ double MASA::masa_eval_u_an(double x)
 {
   verify_pointer_sanity();
   return masa_master_pointer->eval_an_u(x);
+}
+
+double MASA::masa_eval_v_an(double x) // for SA model
+{
+  verify_pointer_sanity();
+  return masa_master_pointer->eval_an_v(x);
 }
 
 double MASA::masa_eval_p_an(double x)
