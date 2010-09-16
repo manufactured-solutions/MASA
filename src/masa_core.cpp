@@ -78,17 +78,6 @@ int MASA::masa_select_mms(string name)
   
 }// done with masa_select
 
-// helper function (deprecated!)
-int masa_v2o(void* obid, manufactured_solution** manfac)
-{ 
-  string name;
-  manufactured_solution* temp;
-  temp=static_cast<manufactured_solution*>(obid); // cast the void ptr back as an obj
-  *manfac=temp;
-  return 0;
-
-}
-
 // get list mms
 //
 // this function returns a vector of pointers to 
@@ -210,45 +199,6 @@ int MASA::masa_list_mms()
     }
   return 0;
 }
-
-//
-// function that searches all registered masa solutions
-// for a selected manufactured solution
-// (deprecated)
-int MASA::masa_getid(void** objid,string str)
-{
-  int flag=0;
-  string name;
-  vector<manufactured_solution*> anim;
-
-  get_list_mms(&anim); //construct list 
- 
-  // masa_map();  
-
-  for (vector<manufactured_solution*>::const_iterator it = anim.begin(); it != anim.end(); ++it) {
-    (*it)->return_name(&name); // get name
-    if(str.compare(name) == 0) // strings are identical
-      {
-	*objid=(*it); // cast object pointer as void
-	flag=1;      // set flag
-      }
-    else // strings not identical
-      delete *it; // this calls the deconstructor
-    
-  }// done with for loop 
-
-  if(flag==1)
-    {      
-      //cout << "\nMASA got it\n";
-    }
-  else
-    {
-      cout << "\nMASA FATAL ERROR: No Manufactured Solutions of that Type\n";
-      exit(1); // error code, terminate
-    }
-
-  return 0; // steady as she goes
-}// done with masa getid
 
 //
 // function that prints all registered masa solutions
