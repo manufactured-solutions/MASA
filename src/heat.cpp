@@ -70,7 +70,7 @@ double MASA::heateq_1d_steady_const::eval_q_t(double x)
   return Q_T;
 }
 
-double MASA::heateq_1d_steady_const::eval_an(double x)
+double MASA::heateq_1d_steady_const::eval_an_t(double x)
 {
   double T_an;
   T_an = cos(A_x * x);

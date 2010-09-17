@@ -46,6 +46,13 @@ double SourceQ_t_1d(double x, double A_x, double k_0)
   return Q_T;
 }
 
+double Source_t_1d_an(double A_x,double x)
+{
+  double T_an;
+  T_an = cos(A_x * x);
+  return T_an;
+}
+
 double SourceQ_t_2d (
   double x,
   double y,
@@ -72,7 +79,8 @@ double SourceQ_t_3d (
 
 int main()
 {
-  double tfield,tfield2;
+  double tfield,tfield2,tfield3;
+  double t_an,t_an2,t_an3;
   double param=1.2;
   double x=.5;
   double y=.4;
@@ -90,16 +98,29 @@ int main()
 
   // evaluate source terms (1D)
   masa_sanity_check();
+
   tfield    = masa_eval_t_source(x);
+  t_an      = masa_eval_t_an(x);
+
   tfield2   = SourceQ_t_1d(x,A_x,k_0);
+  t_an2     = Source_t_1d_an(A_x,x);
 
-  tfield=fabs(tfield-tfield2);
+  tfield3 = fabs(tfield-tfield2);
+  t_an3   = fabs(t_an-t_an2);
 
-  if(tfield > threshold)
+  if(tfield3 > threshold)
     {
       cout << "\nMASA REGRESSION TEST FAILED: Heat Equation 1d Steady Constant\n";
       cout << "T Source Term\n";
-      cout << "Exceeded Threshold by: " << tfield << endl;
+      cout << "Exceeded Threshold by: " << tfield3 << endl;
+      exit(1);
+    }
+
+  if(t_an3 > threshold)
+    {
+      cout << "\nMASA REGRESSION TEST FAILED: Heat Equation 1d Steady Constant\n";
+      cout << "T Analytical Term\n";
+      cout << "Exceeded Threshold by: " << t_an3 << endl;
       exit(1);
     }
 

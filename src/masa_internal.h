@@ -222,8 +222,9 @@ namespace MASA
   public:
     heateq_1d_steady_const(); // constructor
     void   init_var();        // default problem values
-    double eval_q_t(double);  // source term evaluator
-    double eval_an(double);   //analytical solution
+    double eval_q_t (double);  // source term evaluator
+    double eval_an_t(double);   //analytical solution
+
   };
 
   class heateq_2d_steady_const : public manufactured_solution 
