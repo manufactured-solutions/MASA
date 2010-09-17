@@ -105,6 +105,8 @@ int main()
   // initalize 1D
   /// -----------------------------------------------------------------------
   masa_init("temp-test-1d","heateq_1d_unsteady_const");
+  
+  masa_init_param();
 
   masa_set_param("A_x",param);
   double A_x=param;
@@ -145,6 +147,8 @@ int main()
   // initalize 2D
   /// -----------------------------------------------------------------------
   masa_init("temp-test-2d","heateq_2d_unsteady_const");
+
+  masa_init_param();
 
   masa_set_param("A_x",param);
   A_x=param;
@@ -192,6 +196,8 @@ int main()
   // initalize 3D
   /// -----------------------------------------------------------------------
   masa_init("temp-test-3d","heateq_3d_unsteady_const");
+
+  masa_init_param();
 
   masa_set_param("A_x",param);
   A_x=param;
