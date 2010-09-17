@@ -695,16 +695,44 @@ namespace MASA
     double cw3;
     double sigma;
     double kappa;  
+    double re_tau;
     
+    // parameters not for users
+    double etam;
+    double a1;
+    double b1;
+
   public:
     rans_sa(); // constructor    
     void   init_var();          // default problem values
     
-    double eval_q_u  (double); // velocity term
-    double eval_q_v  (double); // eddy viscosity term
+    double eval_q_u (double); // velocity term
+    double eval_q_v (double); // eddy viscosity term
+    double eval_an_u(double); // analytical
+    double eval_an_v(double);
+
+    // member functions not exposed by API
+    double   u(double);
+    double  du(double);
+    double d2u(double);
+
+    double   nu(double);
+    double  dnu(double);
+    double d2nu(double);
+
+    double production(double);
+    double destruction(double);
+    double transport(double);
     
-    double eval_an_u  (double); // analytical
-    double eval_an_v  (double);
+    double cw1();
+    double chi(double);
+    double fv1(double);
+    double fv2(double);
+    double   s(double);
+    double   r(double);
+    double   g(double);
+    double  fw(double);
+    double  vt(double);
 
   };
 

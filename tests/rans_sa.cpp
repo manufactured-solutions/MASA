@@ -79,18 +79,6 @@ int main()
   // analytical
   u_an = masa_eval_u_an(x);
   v_an = masa_eval_v_an(x);
-
-  if(u_an != 3)
-    return 1;
-
-  if(v_an != 3)
-    return 1;
-
-  if(ufield != 3)
-    return 1;
-
-  if(vfield != 3)
-    return 1;
   
   return 0;
 }
