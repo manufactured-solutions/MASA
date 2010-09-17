@@ -10,6 +10,7 @@ AM_LDFLAGS       = $(LIBS)
 BUILT_SOURCES = .license.stamp
 
 check_PROGRAMS   = misc                \
+	           uninit              \
 	           heat_const_steady   \
 		   heat_var_steady     \
 	           heat_const_unsteady \
@@ -37,6 +38,7 @@ check_PROGRAMS   = misc                \
 #----------------------
 
 misc_SOURCES                = misc.cpp
+uninit_SOURCES              = uninit.cpp
 heat_const_steady_SOURCES   = heatsc.cpp
 heat_var_steady_SOURCES     = heatsv.cpp
 heat_const_unsteady_SOURCES = heatuc.cpp
@@ -78,6 +80,7 @@ f_euler1d_LDADD             = -lfmasa
 TESTS_ENVIRONMENT          = 
 TESTS                      = init.sh              \
 			     misc                 \
+			     uninit               \
 			     heat_const_steady    \
 			     heat_var_steady      \
 	                     heat_const_unsteady  \

@@ -43,6 +43,10 @@ using namespace std;
 int main()
 {
   int i;
+  double x=0;
+  double y=0;
+  double z=0;
+
   string str;
   masa_init("euler-test","euler_1d");
   masa_get_dimension(&i);
@@ -63,7 +67,7 @@ int main()
   // test a few other functions
   masa_version_stdout();
   masa_get_numeric_version();
-  
+
   return 0; // steady as she goes
 
 }
