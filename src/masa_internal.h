@@ -178,7 +178,7 @@ namespace MASA
     void set_coeffs( const vector<double> & );
     
     // Evaluates polynomial.
-    double operator()( const double & ) const;
+    double operator()( const double &, int *) const;
     
     // Evaluates polynomial and deriviatives up to order specified by user.
     void eval_derivs( const double &, const int &, vector<double> & ) const;

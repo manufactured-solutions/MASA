@@ -187,12 +187,16 @@ void Polynomial::set_coeffs( const std::vector<double> &coeffs_in )
   return;
 }
 
-double Polynomial::operator()( const double &x ) const
-{
+double Polynomial::operator()( const double &x, int *err) const
+{  
   int num_coeffs = coeffs.size();
+  if(num_coeffs == 0)
+    {
+      *err=1;
+      return 0;
+    }
 
   int n = num_coeffs-1;
-
   double y;
 
   // We use Horner's method here. 
@@ -203,6 +207,7 @@ double Polynomial::operator()( const double &x ) const
       y = coeffs[i] + y*x;
     }
 
+  *err = 0; // no errors
   return y;
 
 }
@@ -270,6 +275,7 @@ int MASA::manufactured_solution::poly_test()
   const double double_tol = 1.0e-15;
 
   int return_flag = 0;
+  int ierr = -1;
 
   Polynomial poly;
 
@@ -285,6 +291,10 @@ int MASA::manufactured_solution::poly_test()
   a[2] = a2;
   a[3] = a3;
 
+  // check poly will return failure (1) if no coeff set
+  double computed_value = poly( 0 , &ierr);
+  if(ierr != 1) return_flag=1;
+
   poly.set_coeffs( a );
 
   // Check to make sure we get back what we set
@@ -296,7 +306,11 @@ int MASA::manufactured_solution::poly_test()
   // Check polynomial evaluation
   const double x = 2.0;
   const double exact_value = 49.0;
-  double computed_value = poly( x );
+  
+  // evaluate and check for 'good' return value (0)
+  computed_value = poly( x , &ierr);
+  if(ierr != 0) return_flag=1;
+
   if( fabs( exact_value - computed_value ) > double_tol ) return_flag = 1;
 
   // Check derivatives
