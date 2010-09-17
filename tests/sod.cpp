@@ -50,5 +50,6 @@ int main()
   masa_sanity_check();
   
   out = masa_eval_rho_source(x,t);
+  out = masa_eval_rho_u_source(x,t);
 
 }
