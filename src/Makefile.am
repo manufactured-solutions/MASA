@@ -53,4 +53,4 @@ EXTRA_DIST              = lic_utils/update_license.pl
 
 moduledir   = @libdir@
 module_DATA = masa.mod
-CLEANFILES  = .license.stamp masa.mod
+CLEANFILES  = .license.stamp masa.mod *.gcda *.gcno

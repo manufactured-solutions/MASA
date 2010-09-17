@@ -55,4 +55,4 @@ f_cns_LIBTOOLFLAGS       = --tag=FC
 	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE *.c *.cpp
 	echo 'updated source license headers' >$@
 
-CLEANFILES = .license.stamp *.mod
+CLEANFILES = .license.stamp *.mod *.gcda *.gcno
