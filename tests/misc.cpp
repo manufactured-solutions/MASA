@@ -23,7 +23,7 @@
 //
 //-----------------------------------------------------------------------el-
 // $Author$
-// $Id$
+// $Id:$
 //
 // misc.cpp : program that tests masa helper functions
 //

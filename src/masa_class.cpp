@@ -254,7 +254,7 @@ MASA::MASA_Test::MASA_Test()
 {
   // here, we load up the map so we can key to specific variables
   // using input
-  mmsname = "MASA_test_function";
+  mmsname = "masa_test_function";
   dimension = 1;
 
   register_var("dummy",&dummy);
@@ -263,9 +263,9 @@ MASA::MASA_Test::MASA_Test()
  
 }//done with constructor
 
-double MASA::MASA_Test::eval_q_u(double x)
+/*double MASA::MASA_Test::eval_q_u(double x)
 {
   double qt = demo_var_2 + demo_var_3 + dummy;
   return qt;
 
-}
+  }*/

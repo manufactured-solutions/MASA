@@ -90,7 +90,7 @@ namespace MASA
 
     // functions to override
     virtual ~manufactured_solution(){};       // destructor
-    virtual void init_var(){cout << "MASA ERROR: NO DEFAULT VALUES AVAILABLE";};                                                                             // inits all variables to selected values
+    virtual void init_var(){cout << "MASA ERROR: NO DEFAULT VALUES AVAILABLE";};                                                                           // inits all variables to selected values
 
     // analytical solution(s)
     virtual double eval_an_t(double)                {cout << "MASA ERROR: Analytical Solution (T) is unavailable or not properly loaded."; return -1.33;}; // returns value of analytical solution
@@ -141,7 +141,7 @@ namespace MASA
 
     virtual double eval_q_rho(double)              {cout << "MASA ERROR: Source Term (rho) is unavailable or not properly loaded."; return -1.33;};  // returns value of source term (density)
     virtual double eval_q_rho(double,double)       {cout << "MASA ERROR: Source Term (rho) is unavailable or not properly loaded."; return -1.33;};  // returns value of source term (density)
-    virtual double eval_q_rho_u(double,double)       {cout << "MASA ERROR: Source Term (rho) is unavailable or not properly loaded."; return -1.33;};  // returns value of source term (density) -- 1d Sod
+    virtual double eval_q_rho_u(double,double)     {cout << "MASA ERROR: Source Term (rho) is unavailable or not properly loaded."; return -1.33;};  // returns value of source term (density) -- 1d Sod
     virtual double eval_q_rho(double,double,double){cout << "MASA ERROR: Source Term (rho) is unavailable or not properly loaded."; return -1.33;};  // returns value of source term (density)
 
     // gradient 
@@ -207,8 +207,8 @@ namespace MASA
     double demo_var_3;
   public:
     MASA_Test(); // constructor
-    double eval_q_u(double);
-  }; // done with heat_eq_1d
+    //double eval_q_test(double);
+  }; // done with masa_test
 
   // ------------------------------------------------------
   // ---------- heat equation /steady / constant ------------
