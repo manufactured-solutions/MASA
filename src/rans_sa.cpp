@@ -100,7 +100,7 @@ double MASA::rans_sa::eval_q_u(double eta)
   // this is just the momentum equation simplified for channel
   double source_u;
   // achtung:: do we want to add one here?
-  source_u = d2u(eta)/re_tau + dnu(eta)*du(eta) + nu(eta)*d2u(eta)+1;
+  source_u = d2u(eta)/re_tau + dvt(eta)*du(eta) + vt(eta)*d2u(eta)+1;
   return source_u;
 }
 
@@ -267,6 +267,19 @@ double MASA::rans_sa::fw(double eta)
 
 }
 
+// first derivative of vt
+double MASA::rans_sa::dvt(double eta)
+{
+
+  // see modeling document for this beast
+  double a = 3* pow(cv1,3) * pow(re_tau,3) * pow(nu(eta),4);
+  double b = pow(re_tau,3)*pow(nu(eta),4) + nu(eta)*pow(cv1,3);
+  
+  return a/(b*b);
+
+}
+
+//this is turbulent eddy viscosity
 double MASA::rans_sa::vt(double eta)
 {
 

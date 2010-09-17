@@ -733,6 +733,7 @@ namespace MASA
     double   r(double);
     double   g(double);
     double  fw(double);
+    double dvt(double);
     double  vt(double);
 
   };
