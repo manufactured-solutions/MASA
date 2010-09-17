@@ -75,14 +75,16 @@ void MASA::rans_sa::init_var()
 {
 
   // currently randomly generated -- these are placeholders for now!
-  set_var("cb1", 0.1355);
-  set_var("cb2",  0.622);
-  set_var("cv1",    7.1);
-  set_var("cw2",    0.3);
-  set_var("cw3",      2);
-  set_var("sigma",  2/3);
-  set_var("kappa", 0.41);
-  set_var("re_tau",1000);
+  double twothirds=(double)2/3;
+
+  set_var("cb1",      0.1355);
+  set_var("cb2",       0.622);
+  set_var("cv1",         7.1);
+  set_var("cw2",         0.3);
+  set_var("cw3",           2);
+  set_var("sigma", twothirds);
+  set_var("kappa",      0.41);
+  set_var("re_tau",     1000);
 
 } // done with variable initializer
 
