@@ -165,7 +165,5 @@ int main()
   cmasa_init("temp-test-3d","heateq_3d_steady_const");
   cmasa_init_param();
   cmasa_sanity_check();
-  
-
 
 }
