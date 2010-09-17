@@ -90,7 +90,6 @@ int main()
   // initalize 1D
   /// -----------------------------------------------------------------------
   masa_init("temp-test-1d","heateq_1d_steady_const");
-
   masa_init_param();
 
   double A_x = masa_get_param("A_x");

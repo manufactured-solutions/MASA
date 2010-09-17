@@ -24,6 +24,7 @@ check_PROGRAMS   = misc                \
                    rans_sa             \
                    sod                 \
 	           c_misc              \
+	           c_heat              \
 	           c_euler1d           \
 	           c_euler2d           \
                    c_euler3d           \
@@ -48,13 +49,14 @@ euler3d_SOURCES             = euler3d.cpp Euler_3d_source.cpp
 navierstokes2d_SOURCES      = ns2d.cpp Navier-Stokes_2d_compressible_source.cpp
 navierstokes3d_SOURCES      = ns3d.cpp Navier-Stokes_3d_compressible_source.cpp
 rans_sa_SOURCES             = rans_sa.cpp
-sod_SOURCES             = sod.cpp
+sod_SOURCES                 = sod.cpp
 
 #----------------------
 # C Test Sources
 #----------------------
 
 c_misc_SOURCES              = c_misc.c
+c_heat_SOURCES              = c_heat.c
 c_euler1d_SOURCES           = c_euler1d.c
 c_euler2d_SOURCES           = c_euler2d.c
 c_euler3d_SOURCES           = c_euler3d.c
@@ -91,6 +93,7 @@ TESTS                      = init.sh              \
                              sod                  \
 			     c_init.sh            \
 	                     c_misc               \
+	                     c_heat               \
 	                     c_euler1d            \
 	                     c_euler2d            \
 	                     c_euler3d            \
