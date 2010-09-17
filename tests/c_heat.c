@@ -166,4 +166,6 @@ int main()
   cmasa_init_param();
   cmasa_sanity_check();
 
+  return 0; // steady as she goes
+
 }
