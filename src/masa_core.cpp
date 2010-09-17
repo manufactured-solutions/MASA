@@ -87,7 +87,7 @@ int MASA::masa_select_mms(string name)
 
 int get_list_mms(vector<manufactured_solution*>* anim)
 {
-  anim->push_back(new MASA_Test()); // test function
+  anim->push_back(new masa_test()); // test function
   
   // register solutions here
   anim->push_back(new heateq_1d_steady_const());
@@ -538,6 +538,12 @@ int MASA::masa_get_dimension(int* dim)
   verify_pointer_sanity();
   masa_master_pointer->return_dim(dim); // set string to name
   return 0;
+}
+
+int MASA::masa_test_poly()
+{
+  verify_pointer_sanity();
+  return masa_master_pointer->poly_test(); // return error condition
 }
 
 int MASA::masa_sanity_check()

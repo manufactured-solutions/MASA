@@ -250,7 +250,7 @@ double Polynomial::get_coeffs( const int &coeff_index ) const
  * -----------------------------------------------
  */ 
 
-MASA::MASA_Test::MASA_Test()
+MASA::masa_test::masa_test()
 {
   // here, we load up the map so we can key to specific variables
   // using input
@@ -263,9 +263,56 @@ MASA::MASA_Test::MASA_Test()
  
 }//done with constructor
 
-/*double MASA::MASA_Test::eval_q_u(double x)
+// regression test blatantly stolen from paul bauman in the name of science
+int MASA::manufactured_solution::poly_test()
 {
-  double qt = demo_var_2 + demo_var_3 + dummy;
-  return qt;
 
-  }*/
+  const double double_tol = 1.0e-15;
+
+  int return_flag = 0;
+
+  Polynomial poly;
+
+  // a0 + a1*x + a2*x^2 + a3*x^3
+  const double a0 = 1.0;
+  const double a1 = 2.0;
+  const double a2 = 3.0;
+  const double a3 = 4.0;
+
+  std::vector<double> a(4);
+  a[0] = a0;
+  a[1] = a1;
+  a[2] = a2;
+  a[3] = a3;
+
+  poly.set_coeffs( a );
+
+  // Check to make sure we get back what we set
+  if( fabs( a0 - poly.get_coeffs( 0 ) ) > double_tol ) return_flag = 1;
+  if( fabs( a1 - poly.get_coeffs( 1 ) ) > double_tol ) return_flag = 1;
+  if( fabs( a2 - poly.get_coeffs( 2 ) ) > double_tol ) return_flag = 1;
+  if( fabs( a3 - poly.get_coeffs( 3 ) ) > double_tol ) return_flag = 1;
+
+  // Check polynomial evaluation
+  const double x = 2.0;
+  const double exact_value = 49.0;
+  double computed_value = poly( x );
+  if( fabs( exact_value - computed_value ) > double_tol ) return_flag = 1;
+
+  // Check derivatives
+  const double dx = 62;
+  const double d2x = 54;
+  const double d3x = 24;
+  const double d4x = 0;
+
+  std::vector<double> derivs(4);
+  poly.eval_derivs( x, 4, derivs );
+  
+  if( fabs( exact_value - derivs[0] ) > double_tol ) return_flag = 1;
+  if( fabs( dx - derivs[1] ) > double_tol ) return_flag = 1;
+  if( fabs( d2x - derivs[2] ) > double_tol ) return_flag = 1;
+  if( fabs( d3x - derivs[3] ) > double_tol ) return_flag = 1;
+  if( fabs( d4x - derivs[4] ) > double_tol ) return_flag = 1;
+
+  return return_flag;
+}

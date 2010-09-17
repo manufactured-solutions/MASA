@@ -50,7 +50,7 @@ int main()
   double z=0;
   double t=0;
   
-  masa_init("euler-test","MASA_test_function");
+  masa_init("masa-test","MASA_test_function");
 
   // --------------------------------
   // source term(s) -- 1D

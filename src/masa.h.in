@@ -98,12 +98,12 @@ namespace MASA
   // --------------------------------
   // source term(s) -- 1D
   // --------------------------------
-  double masa_eval_t_source    (double);        // x
-  double masa_eval_t_source    (double,double); // x,t
-  double masa_eval_u_source    (double);
-  double masa_eval_v_source    (double);        // for SA model
-  double masa_eval_e_source    (double);
-  double masa_eval_rho_source  (double);
+  double masa_eval_t_source  (double);        // x
+  double masa_eval_t_source  (double,double); // x,t
+  double masa_eval_u_source  (double);
+  double masa_eval_v_source  (double);        // for SA model
+  double masa_eval_e_source  (double);
+  double masa_eval_rho_source(double);
   double masa_eval_rho_u_source(double,double); // 1d sod: x,t
 
   double masa_eval_t_an      (double);        // x
@@ -116,19 +116,19 @@ namespace MASA
   // --------------------------------
   // source term(s) -- 2D
   // --------------------------------
-  double masa_eval_t_source    (double,double,double); //x,y,t
-  double masa_eval_u_source    (double,double);
-  double masa_eval_v_source    (double,double);
-  double masa_eval_w_source    (double,double); // for axisymmetric
-  double masa_eval_e_source    (double,double);
-  double masa_eval_rho_source  (double,double);
+  double masa_eval_t_source  (double,double,double); //x,y,t
+  double masa_eval_u_source  (double,double);
+  double masa_eval_v_source  (double,double);
+  double masa_eval_w_source  (double,double); // for axisymmetric
+  double masa_eval_e_source  (double,double);
+  double masa_eval_rho_source(double,double);
 
-  double masa_eval_t_an        (double,double,double); //x,y,t
-  double masa_eval_u_an        (double,double);
-  double masa_eval_v_an        (double,double);
-  double masa_eval_w_an        (double,double); // for axisymmetric
-  double masa_eval_p_an        (double,double);
-  double masa_eval_rho_an      (double,double);
+  double masa_eval_t_an      (double,double,double); //x,y,t
+  double masa_eval_u_an      (double,double);
+  double masa_eval_v_an      (double,double);
+  double masa_eval_w_an      (double,double); // for axisymmetric
+  double masa_eval_p_an      (double,double);
+  double masa_eval_rho_an    (double,double);
 
   // --------------------------------
   // source term(s) -- 3D
@@ -159,6 +159,7 @@ namespace MASA
   // --------------------------------
   int masa_map (std::string*);
   int masa_map2(std::string, std::string);
+  int masa_test_poly();                            // test poly -- expose for reg test
 
   // --------------------------------
   // old masa core functions (to be called by user)
@@ -173,7 +174,6 @@ namespace MASA
   // --------------------
   // Versioning routines
   // --------------------
-
   int masa_version_stdout();
   int masa_get_numeric_version();
   

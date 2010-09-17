@@ -36,8 +36,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 int main()
 {
+
 
   // list all currently initialized mms
   cmasa_list_mms();

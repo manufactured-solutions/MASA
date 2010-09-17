@@ -158,6 +158,7 @@ namespace MASA
     void sanity_check();                                         // checks that all variables to the class have been initalized
     void return_name(string* inname){inname->assign(mmsname);};  // method: returns name
     void return_dim (int* indim)    {*indim=dimension;};         // method: returns dimension of solution
+    int poly_test();                                             // regression method for poly class (see below)
     
   }; // done with MMS base class
 
@@ -200,13 +201,14 @@ namespace MASA
   // ---------- all other mms classes ------------
   // ------------------------------------------------------
   // just a demo class
-  class MASA_Test : public manufactured_solution 
+  class masa_test : public manufactured_solution 
   {
   private:
     double demo_var_2;
     double demo_var_3;
   public:
-    MASA_Test(); // constructor
+    masa_test(); // constructor
+    int poly_test();
     //double eval_q_test(double);
   }; // done with masa_test
 
