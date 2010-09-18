@@ -699,7 +699,11 @@ namespace MASA
     double sigma;
     double kappa;  
     double re_tau;
-    
+
+    // adding for modified SA
+    double cv2;
+    double cv3;
+
     // parameters not for users
     double etam;
     double a1;
@@ -732,6 +736,7 @@ namespace MASA
     double fv1(double);
     double fv2(double);
     double   s(double);
+    double  sb(double);
     double   r(double);
     double   g(double);
     double  fw(double);

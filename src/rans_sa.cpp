@@ -69,6 +69,9 @@ MASA::rans_sa::rans_sa()
   register_var("kappa",&kappa);
   register_var("re_tau",&re_tau);
 
+  register_var("cv2",&cv2);
+  register_var("cv3",&cv3);
+
 }// done with constructor
 
 void MASA::rans_sa::init_var()
@@ -85,6 +88,9 @@ void MASA::rans_sa::init_var()
   set_var("sigma", twothirds);
   set_var("kappa",      0.41);
   set_var("re_tau",     1000);
+
+  set_var("cv2",         0.7);
+  set_var("cv3",         0.9);
 
 } // done with variable initializer
 
@@ -237,12 +243,35 @@ double MASA::rans_sa::fv2(double eta)
 
 }
 
+// this is S_over_bar
+double MASA::rans_sa::sb(double eta)
+{
+
+  return nu(eta)*fv2(eta)/(kappa*kappa*eta*eta);
+
+}
+
 // model term for magnitude of mean vorticity 
 double MASA::rans_sa::s(double eta)
 {
   
-  return du(eta) + nu(eta)*fv2(eta)/(kappa*kappa*eta*eta);
+  // old SA
+  //return du(eta) + nu(eta)*fv2(eta)/(kappa*kappa*eta*eta);
   
+  // modified SA
+  double sout;
+  
+  if(sb(eta) >= - cv2* du(eta))
+    {
+      sout = du(eta) + sb(eta); // 'normal'
+    }
+  else
+    {
+      sout = du(eta) + du(eta);
+    }  
+  
+  return sout;
+    
 }
 
 double MASA::rans_sa::r(double eta)
