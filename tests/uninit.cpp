@@ -52,6 +52,9 @@ int main()
   
   masa_init("masa-test","MASA_test_function");
 
+  // start testing uninitialized functions
+  masa_init_param();
+
   // --------------------------------
   // source term(s) -- 1D
   // --------------------------------
@@ -107,6 +110,10 @@ int main()
   derr = masa_eval_rho_an(x);
   if(derr != -1.33) 
     err += 1;  
+
+  //derr = masa_eval_1d_grad(1,x);
+  //if(derr != -1.33) 
+  //  err += 1;  
   
   // --------------------------------
   // source term(s) -- 2D
@@ -158,6 +165,10 @@ int main()
   derr = masa_eval_rho_an(x,y);
   if(derr != -1.33) 
     err += 1;
+  
+  //derr = masa_eval_2d_grad(1,x,y);
+  //if(derr != -1.33) 
+  //  err += 1;
 
   // --------------------------------
   // source term(s) -- 3D
@@ -185,6 +196,10 @@ int main()
   derr = masa_eval_rho_source(x,y,z);
   if(derr != -1.33) 
     err += 1;
+
+  //derr = masa_eval_3d_grad(1,x,y,z);
+  //if(derr != -1.33) 
+  //  err += 1;
   
   //derr = masa_eval_t_an(x,y,z,t);
   //if(derr != -1.33) 
