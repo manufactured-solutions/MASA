@@ -239,7 +239,8 @@ namespace MASA
   public:
     heateq_2d_steady_const();       // constructor
     void   init_var();        // default problem values
-    double eval_q_t(double,double); // source term evaluator
+    double eval_q_t (double,double); // source term evaluator
+    double eval_an_t(double,double); // analytical term evaluator
   };
   
   class heateq_3d_steady_const : public manufactured_solution 
@@ -253,7 +254,8 @@ namespace MASA
   public:
     heateq_3d_steady_const(); // constructor
     void   init_var();        // default problem values
-    double eval_q_t(double,double,double); //evaluate source term
+    double eval_q_t (double,double,double); //evaluate source term
+    double eval_an_t(double,double,double); // analytical term evaluator
   };
   // ------------------------------------------------------
   // ---------- heat equation / unsteady / constant -------

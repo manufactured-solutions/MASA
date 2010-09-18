@@ -38,19 +38,6 @@
 
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
 
-double SourceQ_t_1d(double x, double A_x, double k_0)
-{
-  double Q_T = A_x * A_x * k_0 * cos(A_x * x);
-  return Q_T;
-}
-
-double Source_t_1d_an(double A_x,double x)
-{
-  double T_an;
-  T_an = cos(A_x * x);
-  return T_an;
-}
-
 double SourceQ_t_2d (
   double x,
   double y,
@@ -62,23 +49,17 @@ double SourceQ_t_2d (
   return Q_T;
 }
 
-double SourceQ_t_3d (
-  double x,
-  double y,
-  double z,
-  double A_x,
-  double B_y,
-  double C_z,
-  double k_0)
+double Source_t_2d_an(double A_x,double B_y,double x,double y)
 {
-  double Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * cos(C_z * z) * (A_x * A_x + B_y * B_y + C_z * C_z);
-  return Q_T;
+  double T_an;
+  T_an = cos(A_x * x) * cos(B_y * y);
+  return T_an;
 }
-
 
 int main()
 {
   int i;
+  int j;
 
   double tfield,tfield2,tfield3;
   double t_an,t_an2,t_an3;
@@ -97,28 +78,35 @@ int main()
   int lx=10;     // length
   double dx = (double)lx/(double)nx;
 
+  int ny = 200;  // number of points
+  int ly=10;     // length
+  double dy = (double)ly/(double)ny;
+
   // initalize everyone
-  cmasa_init("temp-test-1d","heateq_1d_steady_const");
+  cmasa_init("temp-test-1d","heateq_2d_steady_const");
   cmasa_init_param();
   cmasa_sanity_check();
 
   A_x = cmasa_get_param("A_x");
   k_0 = cmasa_get_param("k_0"); 
+  B_y = cmasa_get_param("B_y"); 
 
   // evaluate source terms (1D)
   for(i=0;i<nx;i++)
-    {
+    for(j=0;j<ny;j++)      
+      {
       x=i*dx;
+      y=j*dy;
       
       //evalulate source terms
-      tfield = cmasa_eval_1d_t_source(x);
+      tfield = cmasa_eval_2d_t_source(x,y);
       
       //evaluate analytical terms
-      t_an   = cmasa_eval_1d_t_an(x);
+      t_an   = cmasa_eval_2d_t_an(x,y);
 	
       // get fundamental source term solution
-      tfield2   = SourceQ_t_1d  (x,A_x,k_0);
-      t_an2     = Source_t_1d_an(x,A_x);
+      tfield2   = SourceQ_t_2d  (x,y,A_x,B_y,k_0);
+      t_an2     = Source_t_2d_an(A_x,B_y,x,y);
 
       // test the result is roughly zero
       // choose between abs and rel error
@@ -153,16 +141,7 @@ int main()
 	    printf("Maple:              %5.16f\n",t_an2);
 	    exit(1);
 	  }
-    } // done iterating
-
-
-  cmasa_init("temp-test-2d","heateq_2d_steady_const");
-  cmasa_init_param();
-  cmasa_sanity_check();  
-
-  cmasa_init("temp-test-3d","heateq_3d_steady_const");
-  cmasa_init_param();
-  cmasa_sanity_check();
+      } // done iterating
 
   return 0; // steady as she goes
 

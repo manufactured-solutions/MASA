@@ -104,6 +104,12 @@ double MASA::heateq_2d_steady_const::eval_q_t(double x,double y)
   return Q_T;
 }
 
+double MASA::heateq_2d_steady_const::eval_an_t(double x,double y)
+{
+  double T_an;
+  T_an = cos(A_x * x) * cos(B_y * y);
+  return T_an;
+}
 
 MASA::heateq_3d_steady_const::heateq_3d_steady_const()
 {
@@ -133,6 +139,14 @@ double MASA::heateq_3d_steady_const::eval_q_t(double x,double y,double z)
   double Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * cos(C_z * z) * (A_x * A_x + B_y * B_y + C_z * C_z);
   return Q_T;
 }
+
+double MASA::heateq_3d_steady_const::eval_an_t(double x,double y,double z)
+{
+  double T_an;
+  T_an = cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
+  return T_an;
+}
+
 
 
 /* ------------------------------------------------
