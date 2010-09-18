@@ -26,7 +26,7 @@ check_PROGRAMS   = misc                \
                    rans_sa             \
                    sod                 \
 	           c_misc              \
-	           c_heat              \
+	           c_heat1dsc          \
 	           c_euler1d           \
 	           c_euler2d           \
                    c_euler3d           \
@@ -60,7 +60,7 @@ sod_SOURCES                 = sod.cpp
 #----------------------
 
 c_misc_SOURCES              = c_misc.c
-c_heat_SOURCES              = c_heat.c
+c_heat1dsc_SOURCES          = c_heat1dsc.c
 c_euler1d_SOURCES           = c_euler1d.c
 c_euler2d_SOURCES           = c_euler2d.c
 c_euler3d_SOURCES           = c_euler3d.c
