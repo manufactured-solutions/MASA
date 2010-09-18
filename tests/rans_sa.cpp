@@ -22,8 +22,8 @@
 // Boston, MA  02110-1301  USA
 //
 //-----------------------------------------------------------------------el-
-// $Author: nick $
-// $Id: euler1d.cpp 13404 2010-09-15 02:56:33Z nick $
+// $Author$
+// $Id$
 //
 // rans_sa.cpp :program that tests masa against known source term
 //

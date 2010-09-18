@@ -23,7 +23,7 @@
 //
 //-----------------------------------------------------------------------el-
 // $Author$
-// $Id:$
+// $Id$
 //
 // poly.cpp : program that tests polynomial class inside masa
 //

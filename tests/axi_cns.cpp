@@ -22,8 +22,8 @@
 // Boston, MA  02110-1301  USA
 //
 //-----------------------------------------------------------------------el-
-// $Author: nick $
-// $Id: euler2d.cpp 12693 2010-08-26 03:35:34Z nick $
+// $Author$
+// $Id$
 //
 // axi_euler.cpp: program that tests axisymmetric navier stokes
 //

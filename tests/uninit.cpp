@@ -22,8 +22,8 @@
 // Boston, MA  02110-1301  USA
 //
 //-----------------------------------------------------------------------el-
-// $Author: nick $
-// $Id: c_euler1d.c 13404 2010-09-15 02:56:33Z nick $
+// $Author$
+// $Id$
 //
 // uninit.cpp : program that tests error on uninitialized functions
 //
