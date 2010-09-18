@@ -87,7 +87,13 @@ void MASA::rans_sa::init_var()
   set_var("cw3",           2);
   set_var("sigma", twothirds);
   set_var("kappa",      0.41);
-  set_var("re_tau",     1000);
+  //set_var("re_tau",     1000);
+
+  // use lower re_tau for default.  this
+  // lengthens in the inner region and
+  // allows us to achieve asymptotic
+  // results with coarser meshes.
+  set_var("re_tau",     100); 
 
   set_var("cv2",         0.7);
   set_var("cv3",         0.9);
@@ -160,17 +166,17 @@ double MASA::rans_sa::d2u(double eta)
 // eddy viscosity
 double MASA::rans_sa::nu(double eta)
 {
-  return b1*eta - .5*(etam-1)*b1*eta*eta/etam + b1*pow(eta,3)/(3*etam);
+  return b1*eta - .5*(etam+1)*b1*eta*eta/etam + b1*pow(eta,3)/(3*etam);
 }
 
 double MASA::rans_sa::dnu(double eta)
 {
-  return b1 - (etam-1)*b1*eta/etam + b1*eta*eta/etam;
+  return b1 - (etam+1)*b1*eta/etam + b1*eta*eta/etam;
 }
 
 double MASA::rans_sa::d2nu(double eta)
 {
-  return -(etam-1)*b1/etam + 2*b1*eta/etam;
+  return -(etam+1)*b1/etam + 2*b1*eta/etam;
 }
 
 
@@ -218,7 +224,7 @@ double MASA::rans_sa::transport(double eta)
 double MASA::rans_sa::cw1()
 {
 
-  return cb1/kappa*kappa + (1+ cb2)/sigma;
+  return cb1/(kappa*kappa) + (1+ cb2)/sigma;
 
 }
 
@@ -254,37 +260,40 @@ double MASA::rans_sa::sb(double eta)
 // model term for magnitude of mean vorticity 
 double MASA::rans_sa::s(double eta)
 {
-  
-  // old SA
+
+  // original SA
   //return du(eta) + nu(eta)*fv2(eta)/(kappa*kappa*eta*eta);
-  
-  // modified SA
-  double sout;
-  
-  if(sb(eta) >= - cv2* du(eta))
-    {
-      sout = du(eta) + sb(eta); // 'normal'
-    }
+
+
+  // modified SA.  this is modified formulation of S_{sa} due to
+  // Johnson and Allmaras.  See ChIPS model document for more details.
+
+  double Sbar = nu(eta)*fv2(eta)/(kappa*kappa*eta*eta);
+
+  if( Sbar >= - cv2*du(eta) )
+    return du(eta) + Sbar;
   else
-    {
-      sout = du(eta) + sb(eta);
-    }  
-  
-  return sout;
+    return du(eta) + du(eta)*(cv2*cv2*du(eta) + cv3*Sbar)/((cv3-2*cv2)*du(eta) - Sbar);
     
 }
 
 double MASA::rans_sa::r(double eta)
 {
+  // Note: Limiting r to maximum of 10.0 as recommended in original SA
+  // paper (and implemented in ChIPS).
 
-  return nu(eta)/(s(eta)*kappa*kappa*eta*eta);
+  double rtmp = nu(eta)/(s(eta)*kappa*kappa*eta*eta);
 
+  if (rtmp>10.0)
+    return 10.0;
+  else
+    return rtmp;
 }
 
 double MASA::rans_sa::g(double eta)
 {
 
-  return r(eta) + cw3*(pow(r(eta),6) - r(eta));
+  return r(eta) + cw2*(pow(r(eta),6) - r(eta));
 
 }
 
@@ -292,7 +301,7 @@ double MASA::rans_sa::g(double eta)
 double MASA::rans_sa::fw(double eta)
 {
 
-  return g(eta)*pow((1+pow(cw3,6))/(pow(g(eta),6)+pow(cw3,6)),1/6.);
+  return g(eta)*pow((1.+pow(cw3,6))/(pow(g(eta),6)+pow(cw3,6)),1./6.);
 
 }
 
@@ -300,11 +309,21 @@ double MASA::rans_sa::fw(double eta)
 double MASA::rans_sa::dvt(double eta)
 {
 
-  // see modeling document for this beast
-  double a = 3* pow(cv1,3) * pow(re_tau,3) * pow(nu(eta),4);
-  double b = pow(re_tau,3)*pow(nu(eta),4) + nu(eta)*pow(cv1,3);
+  // oliver: I can't reproduce this expresssion... tried again below
+
+//   // see modeling document for this beast
+//   double a = 3* pow(cv1,3) * pow(re_tau,3) * pow(nu(eta),4);
+//   double b = pow(re_tau,3)*pow(nu(eta),4) + nu(eta)*pow(cv1,3);
   
-  return a/(b*b);
+//   return a/(b*b);
+
+  double n = nu(eta);
+  double a = cv1/re_tau;
+
+  double num = n*n*n * ( n*n*n + 4.0*a*a*a ) * dnu(eta);
+  double rde = n*n*n + a*a*a;
+
+  return num/(rde*rde);
 
 }
 
