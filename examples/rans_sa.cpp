@@ -22,8 +22,8 @@
 // Boston, MA  02110-1301  USA
 //
 //-----------------------------------------------------------------------el-
-// $Author: nick $
-// $Id: euler_example.cpp 12695 2010-08-26 03:47:26Z nick $
+// $Author$
+// $Id$
 //
 // euler_example.cpp:
 // this is an example of the API used for calling the spelart alamaras 

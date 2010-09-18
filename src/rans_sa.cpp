@@ -22,8 +22,8 @@
 // Boston, MA  02110-1301  USA
 //
 //-----------------------------------------------------------------------el-
-// $Author: nick $
-// $Id: cns.cpp 13034 2010-09-08 16:17:42Z nick $
+// $Author$
+// $Id$
 //
 // rans_sa.cpp: These are the MASA class member functions and constructors
 //              For a Reynold Averaged Navier Stokes (RANS) model

@@ -53,8 +53,7 @@ double SourceQ_t_3d (
 
 double Source_t_3d_an(double A_x,double B_y,double C_z,double x,double y,double z)
 {
-  double T_an;
-  T_an = cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
+  double T_an = cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
   return T_an;
 }
 
@@ -119,15 +118,11 @@ int main()
 	  // test the result is roughly zero
 	  // choose between abs and rel error
 #ifdef MASA_STRICT_REGRESSION
-
 	  tfield3 = fabs(tfield-tfield2);
 	  t_an3   = fabs(t_an-t_an2);
-
 #else
-
 	  tfield3 = fabs(tfield-tfield2)/fabs(tfield2);
 	  t_an3   = fabs(t_an-t_an2)/fabs(tfield2);
-
 #endif
 
 	  if(tfield3 > threshold)
