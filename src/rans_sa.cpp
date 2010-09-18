@@ -267,7 +267,7 @@ double MASA::rans_sa::s(double eta)
     }
   else
     {
-      sout = du(eta) + du(eta);
+      sout = du(eta) + sb(eta);
     }  
   
   return sout;
