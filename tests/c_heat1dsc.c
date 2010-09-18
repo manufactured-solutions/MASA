@@ -25,7 +25,7 @@
 // $Author$
 // $Id$
 //
-// c_misc.c :program that tests masa helper functions
+// c_heat1dsc.c: program that tests heat equation steady, constant
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
