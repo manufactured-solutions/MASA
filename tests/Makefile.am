@@ -34,6 +34,7 @@ check_PROGRAMS   = misc                \
                    c_euler3d           \
 	           c_navierstokes2d    \
 	           c_navierstokes3d    \
+                   f_misc              \
                    f_euler1d
 
 #----------------------
@@ -74,6 +75,9 @@ c_navierstokes3d_SOURCES    = c_ns3d.c
 #----------------------
 # Fortran Test Sources
 #----------------------
+f_misc_SOURCES              = f_misc.f90 
+f_misc_LDADD                = -lfmasa
+
 f_euler1d_SOURCES           = f_euler1d.f90 
 f_euler1d_LDADD             = -lfmasa
 
@@ -112,6 +116,7 @@ TESTS                      = init.sh              \
                              c_navierstokes2d     \
                              c_navierstokes3d     \
 			     f_init.sh            \
+		             f_misc               \
 		             f_euler1d            \
                              finalize.sh
 
