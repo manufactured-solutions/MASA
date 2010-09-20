@@ -250,7 +250,7 @@ extern "C" {
   extern double cmasa_eval_3d_e_source  (double,double,double);
   extern double cmasa_eval_3d_rho_source(double,double,double);
 
-  extern double cmasa_eval_t_an         (double,double,double);
+  extern double cmasa_eval_3d_t_an      (double,double,double);
   extern double cmasa_eval_3d_u_an      (double,double,double);
   extern double cmasa_eval_3d_v_an      (double,double,double);
   extern double cmasa_eval_3d_w_an      (double,double,double);

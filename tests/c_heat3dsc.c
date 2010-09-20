@@ -38,20 +38,13 @@
 
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
 
-double SourceQ_t_3d (
-  double x,
-  double y,
-  double z,
-  double A_x,
-  double B_y,
-  double C_z,
-  double k_0)
+double SourceQ_t(double x,double y,double z,double A_x,double B_y,double C_z,double k_0)
 {
   double Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * cos(C_z * z) * (A_x * A_x + B_y * B_y + C_z * C_z);
   return Q_T;
 }
 
-double Source_t_3d_an(double A_x,double B_y,double C_z,double x,double y,double z)
+double Source_t_an(double x,double y,double z,double A_x,double B_y,double C_z)
 {
   double T_an = cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
   return T_an;
@@ -101,6 +94,7 @@ int main()
     for(j=0;j<ny;j++)      
       for(k=0;k<nz;k++)      
 	{
+
 	  x=i*dx;
 	  y=j*dy;
 	  z=k*dz;
@@ -112,8 +106,8 @@ int main()
 	  t_an   = cmasa_eval_3d_t_an(x,y,z);
 	
 	  // get fundamental source term solution
-	  tfield2   = SourceQ_t_3d  (x,y,z,A_x,B_y,C_z,k_0);
-	  t_an2     = Source_t_3d_an(A_x,B_y,C_z,x,y,z);
+	  tfield2   = SourceQ_t  (x,y,z,A_x,B_y,C_z,k_0);
+	  t_an2     = Source_t_an(x,y,z,A_x,B_y,C_z);
 
 	  // test the result is roughly zero
 	  // choose between abs and rel error
@@ -122,7 +116,7 @@ int main()
 	  t_an3   = fabs(t_an-t_an2);
 #else
 	  tfield3 = fabs(tfield-tfield2)/fabs(tfield2);
-	  t_an3   = fabs(t_an-t_an2)/fabs(tfield2);
+	  t_an3   = fabs(t_an-t_an2)/fabs(t_an2);
 #endif
 
 	  if(tfield3 > threshold)
@@ -132,6 +126,7 @@ int main()
 	      printf("Threshold Exceeded: %g\n",tfield3);
 	      printf("CMASA:              %5.16f\n",tfield);
 	      printf("Maple:              %5.16f\n",tfield2);
+	      printf("@ x,y,z:            %5.16f %5.16f %5.16f\n",x,y,z);
 	      exit(1);
 	    }
 
@@ -142,6 +137,7 @@ int main()
 	      printf("Threshold Exceeded: %g\n",t_an3);
 	      printf("CMASA:              %5.16f\n",t_an);
 	      printf("Maple:              %5.16f\n",t_an2);
+	      printf("@ x,y,z:            %5.16f %5.16f %5.16f\n",x,y,z);
 	      exit(1);
 	    }
 	} // done iterating
