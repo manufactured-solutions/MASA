@@ -123,7 +123,7 @@ extern "C" double cmasa_eval_1d_rho_an    (double x){return(masa_eval_rho_an(x))
 // source term(s) -- 2D
 // --------------------------------
 
-extern "C" double cmasa_eval_2d_t_source  (double x,double y){return(masa_eval_t_source(x,y));};
+extern "C" double cmasa_eval_2d_t_source  (double x,double y){return masa_eval_t_source(x,y);};
 extern "C" double cmasa_eval_2d_u_source  (double x,double y){return(masa_eval_u_source(x,y));};
 extern "C" double cmasa_eval_2d_v_source  (double x,double y){return(masa_eval_v_source(x,y));};
 extern "C" double cmasa_eval_2d_e_source  (double x,double y){return(masa_eval_e_source(x,y));};

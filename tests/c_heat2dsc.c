@@ -38,18 +38,13 @@
 
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
 
-double SourceQ_t_2d (
-  double x,
-  double y,
-  double A_x,
-  double B_y,
-  double k_0)
+double SourceQ_t(double x,double y,double A_x,double B_y,double k_0)
 {
   double Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * (A_x * A_x + B_y * B_y);
   return Q_T;
 }
 
-double Source_t_2d_an(double A_x,double B_y,double x,double y)
+double Source_t_an(double x,double y,double A_x,double B_y)
 {
   double T_an;
   T_an = cos(A_x * x) * cos(B_y * y);
@@ -105,8 +100,8 @@ int main()
       t_an   = cmasa_eval_2d_t_an(x,y);
 	
       // get fundamental source term solution
-      tfield2   = SourceQ_t_2d  (x,y,A_x,B_y,k_0);
-      t_an2     = Source_t_2d_an(A_x,B_y,x,y);
+      tfield2   = SourceQ_t(x,y,A_x,B_y,k_0);
+      t_an2     = Source_t_an(x,y,A_x,B_y);
 
       // test the result is roughly zero
       // choose between abs and rel error
@@ -129,6 +124,7 @@ int main()
 	    printf("Threshold Exceeded: %g\n",tfield3);
 	    printf("CMASA:              %5.16f\n",tfield);
 	    printf("Maple:              %5.16f\n",tfield2);
+	    printf("@ x,y:              %5.16f %5.16f\n",x,y);
 	    exit(1);
 	  }
 
@@ -139,6 +135,7 @@ int main()
 	    printf("Threshold Exceeded: %g\n",t_an3);
 	    printf("CMASA:              %5.16f\n",t_an);
 	    printf("Maple:              %5.16f\n",t_an2);
+	    printf("@ x,y:              %5.16f %5.16f\n",x,y);
 	    exit(1);
 	  }
       } // done iterating
