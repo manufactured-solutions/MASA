@@ -18,16 +18,11 @@ program main
   call masa_init_param()
   
   ! intialize the various parameters required for Euler 1D
+
+
   ! call the sanity check routine 
   ! (tests that all variables have been initialized)
   call masa_sanity_check()
 
-  value = masa_get_param("L")
-  call masa_set_param("L",3.1415d0)
-  value = masa_get_param("L")
-  write(6,*) value
-
-
-
-  stop
+  call exit(0)
 end program main
