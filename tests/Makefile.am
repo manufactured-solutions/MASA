@@ -35,8 +35,8 @@ check_PROGRAMS   = misc                \
 	           c_navierstokes2d    \
 	           c_navierstokes3d    \
                    f_misc              \
-                   f_euler1d           
-#                   f_euler2d
+                   f_euler1d           \
+                   f_euler2d
 
 #----------------------
 # C++ Test Sources
@@ -82,8 +82,8 @@ f_misc_LDADD                = -lfmasa
 f_euler1d_SOURCES           = f_euler1d.f90 
 f_euler1d_LDADD             = -lfmasa
 
-#f_euler2d_SOURCES           = f_euler2d.f90 euler_source.cpp
-#f_euler2d_LDADD             = -lfmasa
+f_euler2d_SOURCES           = f_euler2d.f90 euler_source.c
+f_euler2d_LDADD             = -lfmasa
 
 #masa.f90 c_euler1d.c
 
@@ -122,6 +122,7 @@ TESTS                      = init.sh              \
 			     f_init.sh            \
 		             f_misc               \
 		             f_euler1d            \
+		             f_euler2d            \
                              finalize.sh
 
 EXTRA_DIST                 = init.sh \
