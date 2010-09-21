@@ -238,7 +238,8 @@ program main
                 %val(a_ux),%val(a_uy),%val(a_uz),%val(a_vx),%val(a_vy),%val(a_vz),%val(a_wx),%val(a_wy),&
                 %val(a_wz),%val(mu),%val(L),%val(R),%val(k2))
 
-           efield2 = eval_3d_e_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),%val(v_0),%val(v_x),%val(v_y), &
+           efield2 = eval_3d_e_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),%val(v_0),&
+                %val(v_x),%val(v_y), &
                 %val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
                 %val(rho_0),%val(rho_x),%val(rho_y),%val(rho_z),%val(p_0),%val(p_x),%val(p_y),%val(p_z), &
                 %val(a_px),%val(a_py),%val(a_pz),%val(a_rhox),%val(a_rhoy),%val(a_rhoz),&
