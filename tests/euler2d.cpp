@@ -411,6 +411,41 @@ int main()
 	    exit(1);
 	  }
 
+	/*
+	// adding a new error check: ensure physical results are coming out!
+	if(0 > rho)
+	  {
+	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+	    cout << "Initial Variables are returning non-physical results!\n";
+	    cout << "RHO\n";
+	    exit(1);
+	  }
+
+	if(0 > rho_an)
+	  {
+	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+	    cout << "Initial Variables are returning non-physical results!\n";
+	    cout << "RHO analytical\n";
+	    exit(1);
+	  }
+
+	if(0 > p_an)
+	  {
+	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+	    cout << "Initial Variables are returning non-physical results!\n";
+	    cout << "Pressure is negative!\n";
+	    exit(1);
+	  }
+
+	if(0 > efield)
+	  {
+	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
+	    cout << "Initial Variables are returning non-physical results!\n";
+	    cout << "Energy is negative!\n";
+	    exit(1);
+	  }
+	*/
+
       } // done iterating
 
   // tests passed

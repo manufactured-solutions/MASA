@@ -209,7 +209,7 @@ int main()
       p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
 
 #endif
-   
+
       if(ufield3 > threshold)
 	{
 	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
@@ -265,6 +265,40 @@ int main()
 	  exit(1);
 	}
 
+      // adding a new error check: ensure physical results are coming out!
+      /*
+	if(0 > rho)
+	{
+	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
+   	  cout << "Initial Variables are returning non-physical results!\n";
+	  cout << "RHO\n";
+	  exit(1);
+	}
+
+      if(0 > rho_an)
+	{
+	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
+   	  cout << "Initial Variables are returning non-physical results!\n";
+	  cout << "RHO analytical\n";
+	  exit(1);
+	}
+
+      if(0 > p_an)
+	{
+	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
+   	  cout << "Initial Variables are returning non-physical results!\n";
+	  cout << "Pressure is negative!\n";
+	  exit(1);
+	}
+
+      if(0 > efield)
+	{
+	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
+   	  cout << "Initial Variables are returning non-physical results!\n";
+	  cout << "Energy is negative!\n";
+	  exit(1);
+	}
+      */
     } // done interating 
 
   // tests passed
