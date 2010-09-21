@@ -41,15 +41,30 @@ using namespace std;
 
 int main()
 {
+  int i,j,k;
   double out;
-  double x=1.1;
-  double t=2.3;
+  double x;
+  double t;
+
+  int nx = 200;  // number of points
+  int lx=10;     // length
+  int nt = 22;
+  int lt=4;   
+  double dx=double(lx)/double(nx);
+  double dt=double(lt)/double(nt);
 
   masa_init("sod-test","sod_1d");
   masa_init_param();
   masa_sanity_check();
   
-  out = masa_eval_rho_source(x,t);
-  out = masa_eval_rho_u_source(x,t);
-
-}
+  for(i=0;i<nx;i++)
+    for(j=0;j<nt;j++)
+      {
+	x=i*dx;
+	t=j*dt;
+	
+	out = masa_eval_rho_source(x,t);
+	out = masa_eval_rho_u_source(x,t);
+      } //done iterating
+  
+}// end program
