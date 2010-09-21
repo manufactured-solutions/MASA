@@ -37,6 +37,7 @@ check_PROGRAMS   = misc                \
                    f_misc              \
                    f_euler1d           \
                    f_euler2d           \
+                   f_euler3d           \
                    f_cns2d
 
 #----------------------
@@ -87,6 +88,9 @@ f_euler1d_LDADD             = -lfmasa
 f_euler2d_SOURCES           = f_euler2d.f90 euler_source.c
 f_euler2d_LDADD             = -lfmasa
 
+f_euler3d_SOURCES           = f_euler3d.f90 euler_source.c
+f_euler3d_LDADD             = -lfmasa
+
 f_cns2d_SOURCES             = f_cns2d.f90 cns_source.c
 f_cns2d_LDADD               = -lfmasa
 
@@ -126,6 +130,7 @@ TESTS                      = init.sh              \
 		             f_misc               \
 		             f_euler1d            \
 		             f_euler2d            \
+		             f_euler3d            \
 		             f_cns2d              \
                              finalize.sh
 
