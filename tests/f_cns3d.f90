@@ -98,7 +98,7 @@ program main
   real(8) :: fsol
   ! problem size
   integer i,j,k
-  integer ::  nx = 71
+  integer ::  nx = 21
   integer ::  ny = 17
   integer ::  nz = 34  
   integer ::  lx=3
@@ -126,7 +126,7 @@ program main
   dy = real(ly)/real(ny)
   dz = real(lz)/real(nz)
 
-  call masa_init('mytest','euler_3d')
+  call masa_init("navier-stokes-test","navierstokes_3d_compressible");
 
   ! initialize the default parameters
   call masa_init_param()
