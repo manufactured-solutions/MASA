@@ -80,7 +80,7 @@ double MASA::manufactured_solution::get_var(string var)
     }
   else 
     {
-      cout << "\nMASA ERROR: No such variable  (" << var << ") exists\n";
+      cout << "\nMASA ERROR:: No such variable  (" << var << ") exists\n";
       return -20;
     } 
     
@@ -90,12 +90,15 @@ void MASA::manufactured_solution::display_var()
 {
   int selector;
 
-  cout << "\n Solution has " << varmap.size() << " variables.\n\n";
+  cout << "\nMASA :: Solution has " << varmap.size() << " variables.\n";
+  cout << "*-------------------------------------*\n" ;
 
   for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
     {      
       cout << it->first <<" is set to: " << *vararr[it->second] << '\n';
     }    
+
+  cout << "*-------------------------------------*\n" ;
   
 } // done with display all variable names
 
@@ -121,7 +124,7 @@ void MASA::manufactured_solution::set_var(string var, double val)
     }
   else 
     {      
-      cout << "\nMASA ERROR: No such variable (" << var << ") exists to be set\n";
+      cout << "\nMASA ERROR:: No such variable (" << var << ") exists to be set\n";
       return;
     } 
 
@@ -133,13 +136,13 @@ void MASA::manufactured_solution::sanity_check()
     {      
       if(*vararr[it->second] == MASA_VAR_DEFAULT)
 	{
-	  cout << "\nMASA WARNING: " << it->first << " has not been initialized!\n";
+	  cout << "\nMASA WARNING:: " << it->first << " has not been initialized!\n";
 	}
     }    
   
   if(varmap.size() != num_vars)
     {
-      cout << "\n MASA FATAL ERROR: mismatch in number of variables registered.\n"; 
+      cout << "\n MASA FATAL ERROR:: mismatch in number of variables registered.\n"; 
       cout << "Are you calling the method manufactured_solution.register_var? This could be causing the error.\n"; 
       cout << "varmap.size() = " << varmap.size() << "; num_vars = " << num_vars << endl << endl;
       exit(1);
