@@ -76,7 +76,9 @@ string remove_whitespace(string string1)
 // -------------------------------------------------------
 // various parameter mappings
 // -------------------------------------------------------
-
+// commenting out for now, as this is not and has never been
+// used in MASA
+/*
 // user chooses 1d,2d, or 3d 
 int MASA::masa_map_dimension(string input_string, string return_string)
 {
@@ -325,7 +327,7 @@ int MASA::masa_map2(string input_string, string return_string)
   
   return 0;
 }
-
+*/
 int MASA::masa_map(string* input_string)
 {
   // fix up the input given
