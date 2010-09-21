@@ -81,7 +81,7 @@ c_navierstokes3d_SOURCES    = c_ns3d.c
 f_misc_SOURCES              = f_misc.f90 
 f_misc_LDADD                = -lfmasa
 
-f_euler1d_SOURCES           = f_euler1d.f90 
+f_euler1d_SOURCES           = f_euler1d.f90 euler_source.c
 f_euler1d_LDADD             = -lfmasa
 
 f_euler2d_SOURCES           = f_euler2d.f90 euler_source.c
