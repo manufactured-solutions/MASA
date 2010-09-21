@@ -21,7 +21,7 @@
 ! 
 ! -----------------------------------------------------------------------el-
 !
-! f_euler3d.f90: Fortran Euler 3d test
+! f_cns3d.f90: Fortran compressible navier stokes 3d test
 !
 ! $Id: masa.f90 13217 2010-09-11 04:30:16Z nick $
 ! --------------------------------------------------------------------------
@@ -87,10 +87,11 @@ program main
   real(8) :: mu
   real(8) :: Gamma
   real(8) :: L    
-
+  real(8) :: R
+  real(8) :: k2
+   
   ! declarations
   real(8) :: value, val
-  real(8) :: out,out1=1
   real(8) :: x
   real(8) :: y
   real(8) :: z
@@ -180,6 +181,9 @@ program main
   mu    = masa_get_param("mu");
   L     = masa_get_param("L");
 
+  R     = masa_get_param("R");
+  k2    = masa_get_param("k");
+
   ! call the sanity check routine 
   call masa_sanity_check()
 
@@ -190,7 +194,7 @@ program main
            x = i * dx
            y = j * dy
            z = k * dz    
-
+           
            ! evalulate source terms
            ufield = masa_eval_3d_u_source  (x,y,z)
            vfield = masa_eval_3d_v_source  (x,y,z)
@@ -206,49 +210,44 @@ program main
            rho_an = masa_eval_3d_rho_an    (x,y,z)
 
            ! check against maple
-           ufield2 = eval_3d_u_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),&
-                %val(u_z),%val(v_0),%val(v_x),%val(v_y), &
-                %val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
+           ufield2 = eval_3d_u_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),%val(v_0),&
+                %val(v_x),%val(v_y),%val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
                 %val(rho_0),%val(rho_x),%val(rho_y),%val(rho_z),%val(p_0),%val(p_x),%val(p_y),%val(p_z), &
                 %val(a_px),%val(a_py),%val(a_pz),%val(a_rhox),%val(a_rhoy),%val(a_rhoz),&
-                %val(a_ux),%val(a_uy),%val(a_uz),%val(a_vx),%val(a_vy),%val(a_vz),%val(a_wx),%val(a_wy), &
-                %val(a_wz),%val(L))
+                %val(a_ux),%val(a_uy),%val(a_uz),%val(a_vx),%val(a_vy),%val(a_vz),%val(a_wx),%val(a_wy),%val(a_wz),&
+                %val(mu),%val(L),%val(R),%val(k2))
 
-           vfield2 = eval_3d_v_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),&
-                %val(u_z),%val(v_0),%val(v_x),%val(v_y), &
-                %val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
+           vfield2 = eval_3d_v_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),%val(v_0),&
+                %val(v_x),%val(v_y),%val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
                 %val(rho_0),%val(rho_x),%val(rho_y),%val(rho_z),%val(p_0),%val(p_x),%val(p_y),%val(p_z), &
                 %val(a_px),%val(a_py),%val(a_pz),%val(a_rhox),%val(a_rhoy),%val(a_rhoz),&
-                %val(a_ux),%val(a_uy),%val(a_uz),%val(a_vx),%val(a_vy),%val(a_vz),%val(a_wx),%val(a_wy),&
-                %val(a_wz),%val(L))
+                %val(a_ux),%val(a_uy),%val(a_uz),%val(a_vx),%val(a_vy),%val(a_vz),%val(a_wx),%val(a_wy),%val(a_wz),&
+                %val(mu),%val(L),%val(R),%val(k2))
 
-           wfield2 = eval_3d_w_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),&
-                %val(v_0),%val(v_x),%val(v_y), &
-                %val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
+           wfield2 = eval_3d_w_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),%val(v_0),&
+                %val(v_x),%val(v_y),%val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
                 %val(rho_0),%val(rho_x),%val(rho_y),%val(rho_z),%val(p_0),%val(p_x),%val(p_y),%val(p_z), &
                 %val(a_px),%val(a_py),%val(a_pz),%val(a_rhox),%val(a_rhoy),%val(a_rhoz),&
-                %val(a_ux),%val(a_uy),%val(a_uz),%val(a_vx),%val(a_vy),%val(a_vz),%val(a_wx),%val(a_wy), &
-                %val(a_wz),%val(L))
+                %val(a_ux),%val(a_uy),%val(a_uz),%val(a_vx),%val(a_vy),%val(a_vz),%val(a_wx),%val(a_wy),%val(a_wz),&
+                %val(mu),%val(L),%val(R),%val(k2))
 
-           rho2    = eval_3d_rho_source(%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),&
-                %val(v_0),%val(v_x),%val(v_y), &
-                %val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
+           rho2    = eval_3d_rho_source(%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),%val(v_0),&
+                %val(v_x),%val(v_y),%val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
                 %val(rho_0),%val(rho_x),%val(rho_y),%val(rho_z),%val(p_0),%val(p_x),%val(p_y),%val(p_z), &
                 %val(a_px),%val(a_py),%val(a_pz),%val(a_rhox),%val(a_rhoy),%val(a_rhoz),&
                 %val(a_ux),%val(a_uy),%val(a_uz),%val(a_vx),%val(a_vy),%val(a_vz),%val(a_wx),%val(a_wy),&
-                %val(a_wz),%val(mu),%val(L))
+                %val(a_wz),%val(mu),%val(L),%val(R),%val(k2))
 
-           efield2 = eval_3d_e_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),&
-                %val(v_0),%val(v_x),%val(v_y), &
+           efield2 = eval_3d_e_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),%val(v_0),%val(v_x),%val(v_y), &
                 %val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
                 %val(rho_0),%val(rho_x),%val(rho_y),%val(rho_z),%val(p_0),%val(p_x),%val(p_y),%val(p_z), &
                 %val(a_px),%val(a_py),%val(a_pz),%val(a_rhox),%val(a_rhoy),%val(a_rhoz),&
                 %val(a_ux),%val(a_uy),%val(a_uz),%val(a_vx),%val(a_vy),%val(a_vz),%val(a_wx),%val(a_wy),%val(a_wz),&
-                %val(mu),%val(Gamma),%val(L))
+                %val(mu),%val(Gamma),%val(L),%val(R),%val(k2))
 
            u_an2   = eval_3d_u_an  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),%val(a_ux),&
                 %val(a_uy),%val(a_uz),%val(L))
-           
+
            v_an2   = eval_3d_v_an  (%val(x),%val(y),%val(z),%val(v_0),%val(v_x),%val(v_y),%val(v_z),%val(a_vx),&
                 %val(a_vy),%val(a_vz),%val(L))
 
@@ -276,7 +275,7 @@ program main
 
            ! just need error checker
            if(ufield3 .gt. thresh) then
-              write(6,*) "FortMASA FATAL ERROR: euler-3d"
+              write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "U Field"
               write(6,*) "exceeded by: ", ufield3
               write(6,*) "masa:        ", ufield
@@ -286,13 +285,13 @@ program main
            endif
 
            if(vfield3 .gt. thresh) then
-              write(6,*) "FortMASA FATAL ERROR: euler-3d"
+              write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "V Field"
               call exit(1)
            endif
 
            if(wfield3 .gt. thresh) then
-              write(6,*) "FortMASA FATAL ERROR: euler-3d"
+              write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "W Field"
               write(6,*) "exceeded by: ", wfield3
               write(6,*) "masa:        ", wfield
@@ -302,44 +301,44 @@ program main
            endif
 
            if(efield3 .gt. thresh) then
-              write(6,*) "FortMASA FATAL ERROR: euler-3d"
+              write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "E Field"
               call exit(1)
            endif
 
            if(rho3 .gt. thresh) then
-              write(6,*) "FortMASA FATAL ERROR: euler-3d"
+              write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "Rho Field"
               call exit(1)
            endif
 
            ! analytical terms now
            if(u_an3 .gt. thresh) then
-              write(6,*) "FortMASA FATAL ERROR: euler-3d"
+              write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "U an"
               call exit(1)
            endif
 
            if(v_an3 .gt. thresh) then
-              write(6,*) "FortMASA FATAL ERROR: euler-3d"
+              write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "V an"
               call exit(1)
            endif
 
            if(w_an3 .gt. thresh) then
-              write(6,*) "FortMASA FATAL ERROR: euler-3d"
+              write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "W an"
               call exit(1)
            endif
 
            if(p_an3 .gt. thresh) then
-              write(6,*) "FortMASA FATAL ERROR: euler-3d"
+              write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "P an"
               call exit(1)
            endif
 
            if(rho_an3 .gt. thresh) then
-              write(6,*) "FortMASA FATAL ERROR: euler-3d"
+              write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "Rho an"
               call exit(1)
            endif

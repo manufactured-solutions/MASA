@@ -38,7 +38,8 @@ check_PROGRAMS   = misc                \
                    f_euler1d           \
                    f_euler2d           \
                    f_euler3d           \
-                   f_cns2d
+                   f_cns2d             \
+                   f_cns3d
 
 #----------------------
 # C++ Test Sources
@@ -94,6 +95,9 @@ f_euler3d_LDADD             = -lfmasa
 f_cns2d_SOURCES             = f_cns2d.f90 cns_source.c
 f_cns2d_LDADD               = -lfmasa
 
+f_cns3d_SOURCES             = f_cns3d.f90 cns_source.c
+f_cns3d_LDADD               = -lfmasa
+
 #----------------------
 # Regression Tests
 #----------------------
@@ -132,6 +136,7 @@ TESTS                      = init.sh              \
 		             f_euler2d            \
 		             f_euler3d            \
 		             f_cns2d              \
+		             f_cns3d              \
                              finalize.sh
 
 EXTRA_DIST                 = init.sh \
