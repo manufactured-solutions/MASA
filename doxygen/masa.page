@@ -44,7 +44,8 @@ welcome at the same e-mail address.  All bug reports should include:
 </ul>
 
 \section licence License
-\copydoc License
+Copyright (C) 2010 The PECOS Development Team
+\copydoc LicenseLGPL
 
 \section acknowledgements Acknowledgments
 \copydoc Acknowledgments

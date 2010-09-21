@@ -181,7 +181,7 @@ TAB_SIZE               = 8
 # You can put \n's in the value part of an alias to insert newlines.
 
 ALIASES                = version=$(VERSION)
-ALIASES               += builddate=$(BUILDDATE)
+ALIASES               += builddate="$(BUILDDATE)"
 ALIASES               += buildhost=$(BUILDHOST)
 ALIASES               += builduser=$(BUILDUSER)
 
