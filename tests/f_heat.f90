@@ -44,10 +44,9 @@ program main
   real(8) :: k_0
 
   ! declarations
-  real(8) :: value, val
-  real(8) :: out,out1=1
   real(8) :: x
   real(8) :: y
+  real(8) :: z
   real(8) :: fsol
   ! problem size
   integer i,j,k
@@ -73,6 +72,10 @@ program main
   dx = real(lx)/real(nx)
   dy = real(ly)/real(ny);
   dz = real(lz)/real(nz);
+
+  ! ---------------------------------------------------------
+  ! evaluate source terms (1D)
+  ! ---------------------------------------------------------
 
   call masa_init("temp-test-1d","heateq_1d_steady_const");
 
@@ -111,7 +114,6 @@ program main
         call exit(1)
      endif
 
-
      ! analytical terms now
      if(t_an3 .gt. thresh) then
         write(6,*) "FortMASA FATAL ERROR: heat-1d"
@@ -119,117 +121,103 @@ program main
         call exit(1)
      endif     
 
-  enddo ! done with 1d
+  enddo
 
-!   ! evaluate source terms (2D)
-!   do i=0, nx
-!      do j=0, ny
+  ! ---------------------------------------------------------
+  ! evaluate source terms (2D)
+  ! ---------------------------------------------------------
+  call masa_init("temp-test-2d","heateq_2d_steady_const");
+  call masa_init_param()
+  A_x = masa_get_param("A_x");
+  B_y = masa_get_param("B_y");
+  k_0 = masa_get_param("k_0");
+  call masa_sanity_check()
+
+  do i=0, nx
+     do j=0, ny
         
-! 	x = i * dx
-!         y = j * dy
-               
-!         ! evalulate source terms
-!         ufield = masa_eval_2d_u_source  (x,y)
-! 	vfield = masa_eval_2d_v_source  (x,y)
-!         efield = masa_eval_2d_e_source  (x,y)
-!         rho    = masa_eval_2d_rho_source(x,y)
-	
-! 	!evaluate analytical terms
-! 	u_an = masa_eval_2d_u_an        (x,y)
-! 	v_an = masa_eval_2d_v_an        (x,y)
-! 	p_an = masa_eval_2d_p_an        (x,y)
-! 	rho_an = masa_eval_2d_rho_an    (x,y)
-		  
-!         ! check against maple
-!         ufield2 = eval_2d_u_source  (%val(x),%val(y),%val(u_0),%val(u_x),%val(u_y),%val(v_0),%val(v_x),%val(v_y), &
-!              %val(rho_0),%val(rho_x),%val(rho_y),%val(p_0),%val(p_x),%val(p_y),%val(a_px),%val(a_py), &
-!              %val(a_rhox),%val(a_rhoy),%val(a_ux),%val(a_uy),%val(a_vx),%val(a_vy),%val(L))
+	x = i * dx
+        y = j * dy
 
-! 	vfield2 = eval_2d_v_source  (%val(x),%val(y),%val(u_0),%val(u_x),%val(u_y),%val(v_0),%val(v_x),%val(v_y), &
-!              %val(rho_0),%val(rho_x),%val(rho_y),%val(p_0),%val(p_x),%val(p_y),%val(a_px),%val(a_py), &
-!              %val(a_rhox),%val(a_rhoy),%val(a_ux),%val(a_uy),%val(a_vx),%val(a_vy),%val(L))
-
-!         rho2    = eval_2d_rho_source(%val(x),%val(y),%val(u_0),%val(u_x),%val(u_y),%val(v_0),%val(v_x),%val(v_y), &
-!              %val(rho_0),%val(rho_x),%val(rho_y),%val(p_0),%val(p_x),%val(p_y),%val(a_px),%val(a_py), &
-!              %val(a_rhox),%val(a_rhoy),%val(a_ux),%val(a_uy),%val(a_vx),%val(a_vy),%val(L))
+        tfield = masa_eval_2d_t_source  (x,y)
+        t_an   = masa_eval_2d_t_an      (x,y)
+        
+        tfield2 = eval_2d_t_source(%val(x),%val(y),%val(A_x),%val(B_y),%val(k_0)) 
+        t_an2   = eval_2d_t_an    (%val(x),%val(y),%val(A_x),%val(B_y))
+        
+        tfield3 = abs(tfield-tfield2)
+        t_an3 = abs(t_an-t_an2)
  
-!         efield2 = eval_2d_e_source  (%val(x),%val(y),%val(u_0),%val(u_x),%val(u_y),%val(v_0),%val(v_x),%val(v_y), &
-!              %val(rho_0),%val(rho_x),%val(rho_y),%val(p_0),%val(p_x),%val(p_y),%val(a_px),%val(a_py), &
-!              %val(a_rhox),%val(a_rhoy),%val(a_ux),%val(a_uy),%val(a_vx),%val(a_vy),%val(Gamma),%val(mu),%val(L))
+        if(tfield3 .gt. thresh) then
+           write(6,*) "FortMASA FATAL ERROR: heat-2d"
+           write(6,*) "T Field"
+           write(6,*) "exceeded by: ", tfield3
+           write(6,*) "masa:        ", tfield
+           write(6,*) "maple:       ", tfield2
+           write(6,*) "@ x,y:       ",x,y
+           call exit(1)
+        endif
 
-!         u_an2   = eval_2d_u_an  (%val(x),%val(y),%val(u_0),%val(u_x),%val(u_y),%val(a_ux),%val(a_uy),%val(L))
-!         v_an2   = eval_2d_v_an  (%val(x),%val(y),%val(v_0),%val(v_x),%val(v_y),%val(a_vx),%val(a_vy),%val(L))
-!         rho_an2 = eval_2d_rho_an(%val(x),%val(y),%val(rho_0),%val(rho_x),%val(rho_y),%val(a_rhox),%val(a_rhoy),%val(L))
-!         p_an2   = eval_2d_p_an  (%val(x),%val(y),%val(p_0),%val(p_x),%val(p_y),%val(a_px),%val(a_py),%val(L))
+        ! analytical terms now
+        if(t_an3 .gt. thresh) then
+           write(6,*) "FortMASA FATAL ERROR: heat-2d"
+           write(6,*) "T an"
+           write(6,*) "@ x,y:       ",x,y
+           call exit(1)
+        endif        
 
-!         ! need to add strict / non-strict regressions
-!         ufield3 = abs(ufield-ufield2)
-! 	vfield3 = abs(vfield-vfield2)
-! 	efield3 = abs(efield-efield2)
-! 	rho3    = abs(rho-rho2)
-	
-! 	u_an3   = abs(u_an-u_an2)
-! 	v_an3   = abs(v_an-v_an2)
-! 	rho_an3 = abs(rho_an-rho_an2)
-! 	p_an3   = abs(p_an-p_an2)
- 
-!         ! just need error checker
-!         if(ufield3 .gt. thresh) then
-!            write(6,*) "FortMASA FATAL ERROR: euler-2d"
-!            write(6,*) "U Field"
-!            write(6,*) "exceeded by: ", ufield3
-!            write(6,*) "masa:        ", ufield
-!            write(6,*) "maple:       ", ufield2
-!            write(6,*) "@ x,y:       ",x,y
-!            call exit(1)
-!         endif
+     enddo
+  enddo
+
+  ! ---------------------------------------------------------
+  ! evaluate source terms (3D)
+  ! ---------------------------------------------------------
+  call masa_init("temp-test-3d","heateq_3d_steady_const");
+  call masa_init_param()
+  A_x = masa_get_param("A_x");
+  B_y = masa_get_param("B_y");
+  C_z = masa_get_param("C_z");
+  k_0 = masa_get_param("k_0");
+  call masa_sanity_check()
+
+  do i=0, nx
+     do j=0, ny
+        do k=0, nz
         
-!         if(vfield3 .gt. thresh) then
-!            write(6,*) "FortMASA FATAL ERROR: euler-2d"
-!            write(6,*) "V Field"
-!            call exit(1)
-!         endif
-        
-!         if(efield3 .gt. thresh) then
-!            write(6,*) "FortMASA FATAL ERROR: euler-2d"
-!            write(6,*) "E Field"
-!            call exit(1)
-!         endif
+           x = i * dx
+           y = j * dy
+           z = k * dz
 
-!         if(rho3 .gt. thresh) then
-!            write(6,*) "FortMASA FATAL ERROR: euler-2d"
-!            write(6,*) "Rho Field"
-!            call exit(1)
-!         endif
+           tfield = masa_eval_3d_t_source  (x,y,z)
+           t_an   = masa_eval_3d_t_an      (x,y,z)
 
-!         ! analytical terms now
-!         if(u_an3 .gt. thresh) then
-!            write(6,*) "FortMASA FATAL ERROR: euler-2d"
-!            write(6,*) "U an"
-!            call exit(1)
-!         endif
+           tfield2 = eval_3d_t_source(%val(x),%val(y),%val(z),%val(A_x),%val(B_y),%val(C_z),%val(k_0)) 
+           t_an2   = eval_3d_t_an    (%val(x),%val(y),%val(z),%val(A_x),%val(B_y),%val(C_z))
 
-!         if(v_an3 .gt. thresh) then
-!            write(6,*) "FortMASA FATAL ERROR: euler-2d"
-!            write(6,*) "V an"
-!            call exit(1)
-!         endif
+           tfield3 = abs(tfield-tfield2)
+           t_an3 = abs(t_an-t_an2)
 
-!         if(p_an3 .gt. thresh) then
-!            write(6,*) "FortMASA FATAL ERROR: euler-2d"
-!            write(6,*) "P an"
-!            call exit(1)
-!         endif
+           if(tfield3 .gt. thresh) then
+              write(6,*) "FortMASA FATAL ERROR: heat-3d"
+              write(6,*) "T Field"
+              write(6,*) "exceeded by: ", tfield3
+              write(6,*) "masa:        ", tfield
+              write(6,*) "maple:       ", tfield2
+              write(6,*) "@ x,y,z:     ",x,y
+              call exit(1)
+           endif
 
-!         if(rho_an3 .gt. thresh) then
-!            write(6,*) "FortMASA FATAL ERROR: euler-2d"
-!            write(6,*) "Rho an"
-!            call exit(1)
-!         endif             
+           ! analytical terms now
+           if(t_an3 .gt. thresh) then
+              write(6,*) "FortMASA FATAL ERROR: heat-3d"
+              write(6,*) "T an"
+              write(6,*) "@ x,y,z:     ",x,y,z
+              call exit(1)
+           endif
 
-!      enddo
-!  enddo
-  
+        enddo
+     enddo
+  enddo
   ! steady as she goes (exit with success)
   call exit(0)
 
