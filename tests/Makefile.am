@@ -36,7 +36,8 @@ check_PROGRAMS   = misc                \
 	           c_navierstokes3d    \
                    f_misc              \
                    f_euler1d           \
-                   f_euler2d
+                   f_euler2d           \
+                   f_cns2d
 
 #----------------------
 # C++ Test Sources
@@ -76,6 +77,7 @@ c_navierstokes3d_SOURCES    = c_ns3d.c
 #----------------------
 # Fortran Test Sources
 #----------------------
+
 f_misc_SOURCES              = f_misc.f90 
 f_misc_LDADD                = -lfmasa
 
@@ -85,7 +87,8 @@ f_euler1d_LDADD             = -lfmasa
 f_euler2d_SOURCES           = f_euler2d.f90 euler_source.c
 f_euler2d_LDADD             = -lfmasa
 
-#masa.f90 c_euler1d.c
+f_cns2d_SOURCES             = f_cns2d.f90 cns_source.c
+f_cns2d_LDADD               = -lfmasa
 
 #----------------------
 # Regression Tests
@@ -123,6 +126,7 @@ TESTS                      = init.sh              \
 		             f_misc               \
 		             f_euler1d            \
 		             f_euler2d            \
+		             f_cns2d              \
                              finalize.sh
 
 EXTRA_DIST                 = init.sh \
