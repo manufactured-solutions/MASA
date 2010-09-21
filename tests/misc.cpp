@@ -42,25 +42,54 @@ using namespace std;
 
 int main()
 {
-  int i;
+  int i,err;
   double x=0;
   double y=0;
   double z=0;
-
   string str;
-  masa_init("euler-test","euler_1d");
-  masa_get_dimension(&i);
-  masa_get_name(&str);
+
+
+  // testing masa_init
+  err = masa_init("euler-test","euler_1d");
+  if(err!=0)
+    {
+      cout << "MASA_INIT FAILED\n";
+      return 1;
+    }
   
+  // test get_dimension
+  masa_get_dimension(&i);
+  if(i!=1)
+    {
+      cout << "masa_get_dimension FAILED";
+      return 1;
+    }
+
+  // test get_name
+  masa_get_name(&str);  
   if(str.compare("euler_1d") != 0)
     {
       cout << "masa_get_name FAILED";
       return 1;
     }
 
-  if(i!=1)
+  // now, test masa_map -- 
+  // it should recognize regardless of: 
+  // capital letters
+  // '-' dashes
+  // ' ' whitespace
+  err = masa_init("euler-test-crazy","Eu l-er_2d");
+  if(err!=0)
     {
-      cout << "masa_get_dimension FAILED";
+      cout << "MASA_INIT FAILED\n";
+      return 1;
+    }
+
+  // lets check this gave us the mms we expected:
+  masa_get_name(&str);  
+  if(str.compare("euler_2d") != 0)
+    {
+      cout << "masa_get_name FAILED";
       return 1;
     }
 
