@@ -191,15 +191,15 @@ program main
         p_an2   = eval_2d_p_an  (%val(x),%val(y),%val(p_0),%val(p_x),%val(p_y),%val(a_px),%val(a_py),%val(L))
 
         ! need to add strict / non-strict regressions
-        ufield3 = abs(ufield-ufield2)
-	vfield3 = abs(vfield-vfield2)
-	efield3 = abs(efield-efield2)
-	rho3    = abs(rho-rho2)
+        ufield3 = abs(ufield-ufield2)/abs(ufield2)
+	vfield3 = abs(vfield-vfield2)/abs(vfield2)
+	efield3 = abs(efield-efield2)/abs(efield2)
+	rho3    = abs(rho-rho2)/abs(rho2)
 	
-	u_an3   = abs(u_an-u_an2)
-	v_an3   = abs(v_an-v_an2)
-	rho_an3 = abs(rho_an-rho_an2)
-	p_an3   = abs(p_an-p_an2)
+	u_an3   = abs(u_an-u_an2)/abs(u_an2)
+	v_an3   = abs(v_an-v_an2)/abs(u_an2)
+	rho_an3 = abs(rho_an-rho_an2)/abs(rho2)
+	p_an3   = abs(p_an-p_an2)/abs(p_an2)
  
         ! just need error checker
         if(ufield3 .gt. thresh) then
@@ -221,6 +221,10 @@ program main
         if(efield3 .gt. thresh) then
            write(6,*) "FortMASA FATAL ERROR: Navier-Stokes-2d"
            write(6,*) "E Field"
+           write(6,*) "exceeded by: ", efield3
+           write(6,*) "masa:        ", efield
+           write(6,*) "maple:       ", efield2
+           write(6,*) "@ x,y:       ",x,y
            call exit(1)
         endif
 
