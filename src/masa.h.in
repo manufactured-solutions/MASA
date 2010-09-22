@@ -85,7 +85,6 @@ namespace MASA
 
   int masa_init      (std::string, std::string);
   int masa_select_mms(std::string);
-  int masa_curr_mms  (std::string*);
   int masa_list_mms  ();
 
   // --------------------------------
@@ -200,7 +199,6 @@ extern "C" {
   // --------------------------------
   extern int cmasa_init      (const char*, const char*);
   extern int cmasa_select_mms(const char*);
-  extern int cmasa_curr_mms  (const char*);
   extern int cmasa_list_mms  ();
 
   // --------------------------------

@@ -162,8 +162,8 @@ void MASA::manufactured_solution::register_var(string in,double* var)
     }
   else  // variable already registered! no unique identifier can exist!
     {
-      cout << "\n MASA FATAL ERROR: \n"; 
-      cout << "\n User has attempted to register two variables of the same name.\n"; 
+      cout << "\n MASA FATAL ERROR:: \n"; 
+      cout << "\n Attempted to register two variables of the same name.\n"; 
       string error;
       return_name(&error);
       cout << " Info: error occured while constructing " << error << endl << endl;

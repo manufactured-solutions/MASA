@@ -47,7 +47,7 @@ void verify_pointer_sanity()
 {
   if(masa_master_pointer == 0)
     {    
-      cout << "MASA FATAL ERROR: No initialized Manufactured Solution!" << endl;
+      cout << "MASA FATAL ERROR:: No initialized Manufactured Solution!" << endl;
       cout << "Have you called masa_init?" << endl;
       exit(1);
     }  
@@ -70,7 +70,7 @@ int MASA::masa_select_mms(string name)
     }      
   else 
     {
-      cout << "\nMASA ERROR: No such manufactured solution (" << name << ") has been initialized.\n";
+      cout << "\nMASA FATAL ERROR:: No such manufactured solution (" << name << ") has been initialized.\n";
       exit(1);
     } 
 
@@ -168,19 +168,6 @@ int MASA::masa_init(string unique_name, string str)
   
   return 0; // steady as she goes
 
-}
-
-//
-//  this function will initiate a masa manufactured class
-//
-int MASA::masa_curr_mms(string* str)
-{
-  verify_pointer_sanity();
-  // lets run though the list to check the variable does exist
-  masa_master_pointer->return_name(str);
-  // cout << masa_master_list[masa_master_pointer] << endl;    
-
-  return 0;
 }
 
 //
