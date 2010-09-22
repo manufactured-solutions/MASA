@@ -75,6 +75,10 @@ int main()
   if(derr != -1.33) 
     err += 1;
 
+  derr = masa_eval_w_source(x);  
+  if(derr != -1.33) 
+    err += 1;
+
   derr = masa_eval_e_source(x);
   if(derr != -1.33) 
     err += 1;
@@ -100,6 +104,10 @@ int main()
     err += 1;
 
   derr = masa_eval_v_an(x);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_w_an(x);
   if(derr != -1.33) 
     err += 1;
 

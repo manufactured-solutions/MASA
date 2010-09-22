@@ -101,12 +101,12 @@ namespace MASA
     virtual double eval_an_u(double,double)         {cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
     virtual double eval_an_u(double,double,double)  {cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
 
-    virtual double eval_an_v(double)                {cout << "MASA ERROR:: Analytical Solution (v) is unavailable for 1D problems."; return -1.33;};        // returns value of analytical solution
+    virtual double eval_an_v(double)                {cout << "MASA ERROR:: Analytical Solution (v) is unavailable for 1D problems.\n"; return -1.33;};        // returns value of analytical solution
     virtual double eval_an_v(double,double)         {cout << "MASA ERROR:: Analytical Solution (v) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
     virtual double eval_an_v(double,double,double)  {cout << "MASA ERROR:: Analytical Solution (v) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
 
-    virtual double eval_an_w(double)                {cout << "MASA ERROR:: Analytical Solution (w) is unavailable for 1d problems."; return -1.33;};        // returns value of analytical solution
-    virtual double eval_an_w(double,double)         {cout << "MASA ERROR:: Analytical Solution (w) is unavailable for 2d problems."; return -1.33;};        // overloaded for 2d problems
+    virtual double eval_an_w(double)                {cout << "MASA ERROR:: Analytical Solution (w) is unavailable for 1d problems.\n"; return -1.33;};        // returns value of analytical solution
+    virtual double eval_an_w(double,double)         {cout << "MASA ERROR:: Analytical Solution (w) is unavailable for 2d problems.\n"; return -1.33;};        // overloaded for 2d problems
     virtual double eval_an_w(double,double,double)  {cout << "MASA ERROR:: Analytical Solution (w) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
     
     virtual double eval_an_p(double)                {cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
