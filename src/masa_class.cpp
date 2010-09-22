@@ -215,11 +215,11 @@ double Polynomial::operator()( const double &x, int *err) const
 
 }
 
-void Polynomial::eval_derivs( const double &x, const int & k, std::vector<double> & derivs ) const
+void Polynomial::eval_derivs( const double x, const int k, std::vector<double> & derivs ) const
 {
 
   // Zero out the vector first.
-  for( int i = 0; i <= k; ++i) derivs[i] = 0.0;
+  for( int i = 0; i < k; ++i) derivs[i] = 0.0;
 
   int num_coeffs = coeffs.size();
 
@@ -232,7 +232,7 @@ void Polynomial::eval_derivs( const double &x, const int & k, std::vector<double
   for( int i = n-1; i >= 0; --i )
     {
 
-      for( int j = k; j > 0; --j)
+      for( int j = k-1; j > 0; --j)
 	{
 	  derivs[j] = j*derivs[j-1] + x*derivs[j]; 
 	}
@@ -323,13 +323,19 @@ int MASA::manufactured_solution::poly_test()
   const double d4x = 0;
 
   std::vector<double> derivs(4);
+
   poly.eval_derivs( x, 4, derivs );
   
   if( fabs( exact_value - derivs[0] ) > double_tol ) return_flag = 1;
   if( fabs( dx - derivs[1] ) > double_tol ) return_flag = 1;
   if( fabs( d2x - derivs[2] ) > double_tol ) return_flag = 1;
   if( fabs( d3x - derivs[3] ) > double_tol ) return_flag = 1;
-  if( fabs( d4x - derivs[4] ) > double_tol ) return_flag = 1;
+
+  //TODO: verify all the off-by-one craziness (Issue #1046).  Am
+  //commenting out the line below as it can't possibly be right, the
+  //vector size is hard-coded to a size of 4 above.
+
+  //  if( fabs( d4x - derivs[4] ) > double_tol ) return_flag = 1;
 
   return return_flag;
 }

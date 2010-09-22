@@ -181,7 +181,7 @@ namespace MASA
     double operator()( const double &, int *) const;
     
     // Evaluates polynomial and deriviatives up to order specified by user.
-    void eval_derivs( const double &, const int &, vector<double> & ) const;
+    void eval_derivs( const double, const int, vector<double> & ) const;
     
     double get_coeffs( const int & ) const;    
     
