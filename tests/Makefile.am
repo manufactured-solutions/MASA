@@ -11,6 +11,7 @@ BUILT_SOURCES = .license.stamp
 
 check_PROGRAMS   = misc                \
 	           poly                \
+	           fail                \
 	           uninit              \
 	           heat_const_steady   \
 		   heat_var_steady     \
@@ -48,6 +49,7 @@ check_PROGRAMS   = misc                \
 
 misc_SOURCES                = misc.cpp
 poly_SOURCES                = poly.cpp
+fail_SOURCES                = fail.cpp
 uninit_SOURCES              = uninit.cpp
 heat_const_steady_SOURCES   = heatsc.cpp
 heat_var_steady_SOURCES     = heatsv.cpp
@@ -109,6 +111,7 @@ f_cns3d_LDADD               = -lfmasa
 TESTS_ENVIRONMENT          = 
 TESTS                      = init.sh              \
 			     misc                 \
+			     fail                 \
 			     poly                 \
 			     uninit               \
 			     heat_const_steady    \
