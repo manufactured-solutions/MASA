@@ -94,6 +94,7 @@ int main()
     }
 
   // test a few other functions
+  masa_printid();
   masa_version_stdout();
   masa_get_numeric_version();
 

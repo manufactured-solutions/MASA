@@ -198,13 +198,17 @@ int MASA::masa_printid()
   get_list_mms(&anim); //construct list 
 
   cout << endl;
-  // masa_map();
+  cout << "\nMASA :: Available Solutions:\n";
+  cout << "*-------------------------------------*" ;
+
   for (vector<manufactured_solution*>::const_iterator it = anim.begin(); it != anim.end(); ++it) {
     (*it)->return_name(&name); // get name
     cout << endl << name;
     delete *it; // this calls the deconstructor
   }// done with for loop 
-  
+
+  cout << "\n*-------------------------------------*\n" ;
+
   return 0; // steady as she goes
 }// done with masa print id
 
