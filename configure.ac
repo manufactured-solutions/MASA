@@ -36,6 +36,12 @@ AC_SUBST(GENERIC_RELEASE)
 AX_CC_MINOPT	# request minimum optimization level for C
 AX_CXX_MINOPT	# request minimum optimization level for CXX
 
+# set suffix to .F90 to get CPP support for testing vendor Fortran compiler
+
+AC_FC_SRCEXT([F90]) 
+
+AX_FC_MINOPT	# request minimum optimization level for FC
+
 # ------------------------------
 # Checks for required programs
 # ------------------------------
