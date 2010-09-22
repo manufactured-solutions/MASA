@@ -123,35 +123,35 @@ double eval_1d_rho_source_(
 //
 //--------------------------------------------------------------------------
 
-double eval_2d_p_an_(double x,double y,double p_0,double p_x,double p_y,double a_px,double a_py,double L)
+double eval_2d_p_an(double x,double y,double p_0,double p_x,double p_y,double a_px,double a_py,double L)
 {
   const double pi = acos(-1);
   double p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
   return p_an;
 }
   
-double eval_2d_u_an_(double x,double y,double u_0,double u_x,double u_y,double a_ux,double a_uy,double L)
+double eval_2d_u_an(double x,double y,double u_0,double u_x,double u_y,double a_ux,double a_uy,double L)
 {
   const double pi = acos(-1);
   double u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
   return u_an;
 } 
  
-double eval_2d_v_an_(double x,double y,double v_0,double v_x,double v_y,double a_vx,double a_vy,double L)
+double eval_2d_v_an(double x,double y,double v_0,double v_x,double v_y,double a_vx,double a_vy,double L)
 {
   const double pi = acos(-1);
   double v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
   return v_an;
 }
 
-double eval_2d_rho_an_(double x,double y,double rho_0,double rho_x,double rho_y,double a_rhox,double a_rhoy,double L)
+double eval_2d_rho_an(double x,double y,double rho_0,double rho_x,double rho_y,double a_rhox,double a_rhoy,double L)
 { 
   const double pi = acos(-1);
   double rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
   return rho_an;
 }
 
-double eval_2d_e_source_(
+double eval_2d_e_source(
 			 double x,
 			 double y,
 			 double u_0,
@@ -184,7 +184,7 @@ double eval_2d_e_source_(
   return(Q_e);
 }
 
-double eval_2d_u_source_(
+double eval_2d_u_source(
 			 double x,
 			 double y,
 			 double u_0,
@@ -216,7 +216,7 @@ double eval_2d_u_source_(
   return(Q_u);
 }
 
-double eval_2d_v_source_(
+double eval_2d_v_source(
 			 double x,
 			 double y,
 			 double u_0,
@@ -247,7 +247,7 @@ double eval_2d_v_source_(
   return(Q_v);
 }
 
-double eval_2d_rho_source_(
+double eval_2d_rho_source(
 			   double x,
 			   double y,
 			   double u_0,
