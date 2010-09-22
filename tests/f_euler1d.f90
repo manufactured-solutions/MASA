@@ -148,37 +148,19 @@ program main
           %val(rho_0),%val(rho_x),%val(p_0),%val(p_x),%val(a_px), &
           %val(a_rhox),%val(a_ux),%val(L))
 
-     print*,'ufield2 = ',ufield2
-
      ! TODO fix my calling sequence below to match euler_source.c
 
      rho2    = eval_1d_rho_source(%val(x),%val(u_0),%val(u_x), &
           %val(rho_0),%val(rho_x),%val(p_0),%val(p_x),%val(a_px), &
           %val(a_rhox),%val(a_ux),%val(L))
 
-     print*,'rho2 = ',rho2
-     print*,'x = ',x
-     print*,'u_0 = ',u_0
-     print*,'u_x = ',u_x
-     print*,'rho_0 = ',rho_0
-     print*,'p_0 = ',p_0
-     print*,'p_x = ',p_x
-     print*,'a_px = ',a_px
-     print*,'a_rhox = ',a_rhox
-     print*,'a_ux = ',a_ux
-     print*,'L = ',L
-
      efield2 = eval_1d_e_source  (%val(x),%val(u_0),%val(u_x), &
           %val(rho_0),%val(rho_x),%val(p_0),%val(p_x),%val(a_px), &
-          %val(a_rhox),%val(a_ux),%val(L))
+          %val(a_rhox),%val(a_ux),%val(Gamma),%val(mu),%val(L))
 
-     print*,'efield2 = ',efield2
-
-     u_an2   = eval_1d_u_an  (%val(x),%val(u_0),%val(u_x),%val(a_ux),%val(a_uy),%val(L))
+     u_an2   = eval_1d_u_an  (%val(x),%val(u_0),%val(u_x),%val(a_ux),%val(L))
      rho_an2 = eval_1d_rho_an(%val(x),%val(rho_0),%val(rho_x),%val(a_rhox),%val(L))
      p_an2   = eval_1d_p_an  (%val(x),%val(p_0),%val(p_x),%val(a_px),%val(L))
-
-     print*,'p_an2 = ',p_an2
 
      ! need to add strict / non-strict regressions
      ufield3 = abs(ufield-ufield2)
@@ -188,8 +170,6 @@ program main
      u_an3   = abs(u_an-u_an2)
      rho_an3 = abs(rho_an-rho_an2)
      p_an3   = abs(p_an-p_an2)
-
-     print*,'p_an3 = ',p_an3
 
      ! just need error checker
      if(ufield3 .gt. thresh) then
