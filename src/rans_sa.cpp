@@ -249,14 +249,6 @@ double MASA::rans_sa::fv2(double eta)
 
 }
 
-// this is S_over_bar
-double MASA::rans_sa::sb(double eta)
-{
-
-  return nu(eta)*fv2(eta)/(kappa*kappa*eta*eta);
-
-}
-
 // model term for magnitude of mean vorticity 
 double MASA::rans_sa::s(double eta)
 {
