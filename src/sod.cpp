@@ -119,8 +119,7 @@ double MASA::sod_1d::eval_q_rho(double x,double t)
 
   // Define the postshock fluid velocity vm.
 
-  vm = 2.e0 * cl / (Gamma - 1.e0) * (1.e0 - pow((pm / pl),
-               ( (Gamma - 1.e0) / (2.e0 * Gamma) )));
+  vm = 2.e0 * cl / (Gamma - 1.e0) * (1.e0 - pow((pm / pl),( (Gamma - 1.e0) / (2.e0 * Gamma) )));
 
   // Define the postshock density rhomr.
 
@@ -143,8 +142,7 @@ double MASA::sod_1d::eval_q_rho(double x,double t)
       if (x <= (-cl*t) )
 	  density = rhol;
       else if (x <= (-vt*t) )
-	  density = pow(rhol * (-mu * (x / (cl * t) ) + (1 - mu) ),
-			  (2.e0 / (Gamma - 1.e0))) ;
+	  density = pow(rhol * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 / (Gamma - 1.e0)));
       else if (x <= (vm*t) )
 	  density = rhoml;
       else if (x <= (vs*t) )
@@ -155,8 +153,7 @@ double MASA::sod_1d::eval_q_rho(double x,double t)
       if (x <= (-cl*t) )
 	pressure = pl;
       else if (x <= (-vt*t) )
-	pressure = pow(pl * (-mu * (x / (cl * t) ) + (1 - mu) ),
-			 (2.e0 * Gamma / (Gamma - 1.e0)));
+	pressure = pow(pl * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 * Gamma / (Gamma - 1.e0)));
       else if (x <= vs * t)
 	pressure = pm;
       else            
@@ -214,8 +211,7 @@ double MASA::sod_1d::eval_q_rho_u(double x,double t)
 
   // Define the postshock fluid velocity vm.
 
-  vm = 2.e0 * cl / (Gamma - 1.e0) * (1.e0 - pow((pm / pl),
-               ( (Gamma - 1.e0) / (2.e0 * Gamma) )));
+  vm = 2.e0 * cl / (Gamma - 1.e0) * (1.e0 - pow((pm / pl),( (Gamma - 1.e0) / (2.e0 * Gamma) )));
 
   // Define the postshock density rhomr.
 
@@ -238,8 +234,7 @@ double MASA::sod_1d::eval_q_rho_u(double x,double t)
       if (x <= (-cl*t) )
 	  density = rhol;
       else if (x <= (-vt*t) )
-	  density = pow(rhol * (-mu * (x / (cl * t) ) + (1 - mu) ),
-			  (2.e0 / (Gamma - 1.e0))) ;
+	  density = pow(rhol * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 / (Gamma - 1.e0))) ;
       else if (x <= (vm*t) )
 	  density = rhoml;
       else if (x <= (vs*t) )
@@ -250,8 +245,7 @@ double MASA::sod_1d::eval_q_rho_u(double x,double t)
       if (x <= (-cl*t) )
 	pressure = pl;
       else if (x <= (-vt*t) )
-	pressure = pow(pl * (-mu * (x / (cl * t) ) + (1 - mu) ),
-			 (2.e0 * Gamma / (Gamma - 1.e0)));
+	pressure = pow(pl * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 * Gamma / (Gamma - 1.e0)));
       else if (x <= vs * t)
 	pressure = pm;
       else            
