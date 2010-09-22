@@ -145,7 +145,7 @@ int main()
   int i;
 
   //problem size
-  int nx = 2000;  // number of points
+  int nx = 200;  // number of points
   int lx=10;     // length
   double dx=(double)(lx)/(double)(nx);
 
@@ -255,23 +255,6 @@ int main()
 	    printf("Threshold Exceeded: %g\n",u_an3);
 	    printf("CMASA:              %5.16f\n",u_an);
 	    printf("Maple:              %5.16f\n",u_an2);
-	    exit(1);
-	  }
-
-	if(vfield3 > threshold)
-	  {
-	    printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
-	    printf("V Field Source Term\n");
-	    printf("Threshold Exceeded: %g\n",vfield3);
-	    printf("CMASA:              %5.16f\n",vfield);
-	    printf("Maple:              %5.16f\n",vfield2);
-	    exit(1);
-	  }
-
-	if(v_an3 > threshold)
-	  {
-	    printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
-	    printf("V Field Analytical Term\n");
 	    exit(1);
 	  }
 

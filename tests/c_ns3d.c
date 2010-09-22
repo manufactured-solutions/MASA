@@ -36,12 +36,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
-//double pi = acos(-1);
-//#define pi 3.1415926535897931
-double pi = 3.1415926535897931;
-// c gives a weird error I need to look up here.
+#ifdef MASA_STRICT_REGRESSION
+const double threshold = 1.0e-15;
+#else
+const double threshold = 2.0e-15; // should be small enough to catch any obvious problems
+#endif
 
+//double pi = acos(-1);
+double pi = 3.1415926535897931;
 
 double anQ_p (double x,double y,double z,double p_0,double p_x,double p_y,double p_z,double a_px,double a_py,double a_pz,double L)
 {
@@ -578,6 +580,10 @@ int main()
 	    {
 	      printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 3d\n");
 	      printf("E Field Source Term\n");
+	      printf("Threshold Exceeded: %g\n",efield3);
+	      printf("CMASA:              %5.16f\n",efield);
+	      printf("Maple:              %5.16f\n",efield2);
+	      printf("x,y,z:              %g %g %g\n",x,y,z);	      
 	      exit(1);
 	    }
 
