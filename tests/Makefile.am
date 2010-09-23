@@ -89,7 +89,7 @@ f_misc_LDADD                = -lfmasa
 f_heat_SOURCES              = f_heat.f90 heat_source.c 
 f_heat_LDADD                = -lfmasa
 
-f_euler1d_SOURCES           = f_euler1d.f90 euler_source.c
+f_euler1d_SOURCES           = f_euler1d.F90 euler_source.c
 f_euler1d_LDADD             = -lfmasa
 
 f_euler2d_SOURCES           = f_euler_source.f90 f_euler2d.f90  euler_source.c 
