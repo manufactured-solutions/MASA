@@ -148,8 +148,6 @@ program main
           %val(rho_0),%val(rho_x),%val(p_0),%val(p_x),%val(a_px), &
           %val(a_rhox),%val(a_ux),%val(L))
 
-     ! TODO fix my calling sequence below to match euler_source.c
-
      rho2    = eval_1d_rho_source(%val(x),%val(u_0),%val(u_x), &
           %val(rho_0),%val(rho_x),%val(p_0),%val(p_x),%val(a_px), &
           %val(a_rhox),%val(a_ux),%val(L))
@@ -162,7 +160,7 @@ program main
      rho_an2 = eval_1d_rho_an(%val(x),%val(rho_0),%val(rho_x),%val(a_rhox),%val(L))
      p_an2   = eval_1d_p_an  (%val(x),%val(p_0),%val(p_x),%val(a_px),%val(L))
 
-     ! need to add strict / non-strict regressions
+#ifdef MASA_STRICT_REGRESSION
      ufield3 = abs(ufield-ufield2)
      efield3 = abs(efield-efield2)
      rho3    = abs(rho-rho2)
@@ -170,6 +168,18 @@ program main
      u_an3   = abs(u_an-u_an2)
      rho_an3 = abs(rho_an-rho_an2)
      p_an3   = abs(p_an-p_an2)
+
+#else
+
+     ufield3 = abs(ufield-ufield2)/abs(ufield2)
+     efield3 = abs(efield-efield2)/abs(efield2)
+     rho3    = abs(rho-rho2)/abs(rho2)
+
+     u_an3   = abs(u_an-u_an2)/abs(u_an2)
+     rho_an3 = abs(rho_an-rho_an2)/abs(rho_an2)
+     p_an3   = abs(p_an-p_an2)/abs(p_an2)
+
+#endif
 
      ! just need error checker
      if(ufield3 .gt. thresh) then

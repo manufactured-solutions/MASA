@@ -3,7 +3,7 @@ LIBS             = -L$(top_builddir)/src -lmasa
 AM_CFLAGS        = $(INCLUDES)
 AM_CXXFLAGS      = $(INCLUDES)
 AM_F77FLAGS      = $(INCLUDES)
-AM_FCFLAGS       = $(INCLUDES)
+AM_FCFLAGS       = $(INCLUDES) $(FC_STRICT_TOL_CPP)
 AM_LDFLAGS       = $(LIBS)
 
 # License Information

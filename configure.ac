@@ -58,10 +58,13 @@ AM_SANITY_CHECK
 # Check for extra-strict regression tolerance
 #---------------------------------------------
 
+FC_STRICT_TOL_CPP=""
+
  AC_ARG_ENABLE([strict-tests], AC_HELP_STRING([--enable-strict-tests],[enable strict absolute tolerance in regression tests]),
-# 	       AC_DEFINE(MASA_STRICT_REGRESSION,1,[Define if strict regression enabled]),[])
  	       MASA_STRICT_REGRESSION=1 
+	       FC_STRICT_TOL_CPP="-DMASA_STRICT_REGRESSION"
 	       AC_DEFINE(MASA_STRICT_REGRESSION,1,[Define if strict regression enabled]),[])
+AC_SUBST(FC_STRICT_TOL_CPP)
 
 #--------------------------
 # Checks for code coverage
