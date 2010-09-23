@@ -11,7 +11,7 @@ BUILT_SOURCES = .license.stamp
 
 check_PROGRAMS   = misc                \
 	           poly                \
-	           fail                \
+	           fail_cond           \
 	           uninit              \
 	           heat_const_steady   \
 		   heat_var_steady     \
@@ -49,7 +49,7 @@ check_PROGRAMS   = misc                \
 
 misc_SOURCES                = misc.cpp
 poly_SOURCES                = poly.cpp
-fail_SOURCES                = fail.cpp
+fail_cond_SOURCES           = fail_cond.cpp
 uninit_SOURCES              = uninit.cpp
 heat_const_steady_SOURCES   = heatsc.cpp
 heat_var_steady_SOURCES     = heatsv.cpp
@@ -83,25 +83,25 @@ c_navierstokes3d_SOURCES    = c_ns3d.c
 # Fortran Test Sources
 #----------------------
 
-f_misc_SOURCES              = f_misc.f90
+f_misc_SOURCES              = f_misc.F90
 f_misc_LDADD                = -lfmasa
 
-f_heat_SOURCES              = f_heat.f90 heat_source.c 
+f_heat_SOURCES              = f_heat.F90 heat_source.c 
 f_heat_LDADD                = -lfmasa
 
 f_euler1d_SOURCES           = f_euler1d.F90 euler_source.c
 f_euler1d_LDADD             = -lfmasa
 
-f_euler2d_SOURCES           = f_euler_source.f90 f_euler2d.f90  euler_source.c 
+f_euler2d_SOURCES           = f_euler_source.F90 f_euler2d.F90  euler_source.c 
 f_euler2d_LDADD             = -lfmasa
 
-f_euler3d_SOURCES           = f_euler3d.f90 euler_source.c
+f_euler3d_SOURCES           = f_euler3d.F90 euler_source.c
 f_euler3d_LDADD             = -lfmasa
 
-f_cns2d_SOURCES             = f_cns2d.f90 cns_source.c
+f_cns2d_SOURCES             = f_cns2d.F90 cns_source.c
 f_cns2d_LDADD               = -lfmasa
 
-f_cns3d_SOURCES             = f_cns3d.f90 cns_source.c
+f_cns3d_SOURCES             = f_cns3d.F90 cns_source.c
 f_cns3d_LDADD               = -lfmasa
 
 #----------------------
@@ -111,7 +111,7 @@ f_cns3d_LDADD               = -lfmasa
 TESTS_ENVIRONMENT          = 
 TESTS                      = init.sh              \
 			     misc                 \
-			     fail                 \
+			     fail_cond            \
 			     poly                 \
 			     uninit               \
 			     heat_const_steady    \
