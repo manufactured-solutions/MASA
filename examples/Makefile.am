@@ -4,17 +4,18 @@ AM_CFLAGS     = $(INCLUDES)
 AM_CPPFLAGS   = $(INCLUDES)
 LIBS          = -L$(top_builddir)/src -lmasa
 
+exampledir    = @prefix@/examples
+
 # License Information
 BUILT_SOURCES = .license.stamp
 
-# cpp 
-bin_PROGRAMS  = verify MASAshell euler_example navierstokes_example heat_example switch rans_sa_example #tester 
+# binaries to insall
 
-# c-code 
-bin_PROGRAMS += c_heat_example c_euler_example 
+bin_PROGRAMS  = MASAshell
 
-#fortran 
-bin_PROGRAMS += f_euler f_cns
+noinst_PROGRAMS  = verify MASAshell euler_example navierstokes_example heat_example switch rans_sa_example #tester 
+noinst_PROGRAMS += c_heat_example c_euler_example 
+noinst_PROGRAMS += f_euler f_cns
 
 # ----------------- 
 #    CPP
@@ -30,6 +31,8 @@ rans_sa_example_SOURCES      = rans_sa.cpp
 switch_SOURCES               = switch.cpp
 #tester_SOURCES               = tester.cpp
 
+example_DATA                 = euler_example.cpp heat-eq.cpp compressible_navier_stokes_example.cpp
+
 # ----------------- 
 #    C
 # ----------------- 
@@ -37,16 +40,20 @@ switch_SOURCES               = switch.cpp
 c_heat_example_SOURCES       = c_heat_example.c
 c_euler_example_SOURCES      = c_euler_example.c
 
+example_DATA                += c_heat_example.c c_euler_example.c
+
 
 # ----------------- 
 #    Fortran
 # ----------------- 
 
-f_euler_SOURCES         = f_euler.f90 masa.f90
-f_euler_LIBTOOLFLAGS       = --tag=FC
+f_euler_SOURCES              = f_euler.f90 masa.f90
+f_euler_LIBTOOLFLAGS         = --tag=FC
 
-f_cns_SOURCES         = f_cns.f90 masa.f90
-f_cns_LIBTOOLFLAGS       = --tag=FC
+f_cns_SOURCES                = f_cns.f90 masa.f90
+f_cns_LIBTOOLFLAGS           = --tag=FC
+
+example_DATA                += f_euler.f90
 
 # ----------------- 
 # License
