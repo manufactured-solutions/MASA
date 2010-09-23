@@ -34,6 +34,7 @@
 #include <masa.h>
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include <iostream>
 
@@ -47,9 +48,6 @@ int main()
   double y=0;
   double z=0;
   string str;
-
-
-
 
   // testing masa_init
   err = masa_init("euler-test","euler_1d");
