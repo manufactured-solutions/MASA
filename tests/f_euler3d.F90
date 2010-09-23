@@ -262,7 +262,6 @@ program main
            p_an2   = eval_3d_p_an  (%val(x),%val(y),%val(z),%val(p_0),%val(p_x),%val(p_y),%val(p_z),%val(a_px),&
                 %val(a_py),%val(a_pz),%val(L))
            
-           ! need to add strict / non-strict regressions
 #ifdef MASA_STRICT_REGRESSION
            ufield3 = abs(ufield-ufield2)
            vfield3 = abs(vfield-vfield2)

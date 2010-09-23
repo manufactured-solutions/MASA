@@ -191,16 +191,30 @@ program main
         rho_an2 = eval_2d_rho_an(%val(x),%val(y),%val(rho_0),%val(rho_x),%val(rho_y),%val(a_rhox),%val(a_rhoy),%val(L))
         p_an2   = eval_2d_p_an  (%val(x),%val(y),%val(p_0),%val(p_x),%val(p_y),%val(a_px),%val(a_py),%val(L))
 
-        ! need to add strict / non-strict regressions
+#ifdef MASA_STRICT_REGRESSION
+        ufield3 = abs(ufield-ufield2)
+	vfield3 = abs(vfield-vfield2)
+        efield3 = abs(efield-efield2)
+        rho3    = abs(rho-rho2)
+        
+        u_an3   = abs(u_an-u_an2)
+	v_an3   = abs(v_an-v_an2)
+        rho_an3 = abs(rho_an-rho_an2)
+        p_an3   = abs(p_an-p_an2)
+        
+#else
+
         ufield3 = abs(ufield-ufield2)/abs(ufield2)
-	vfield3 = abs(vfield-vfield2)/abs(vfield2)
-	efield3 = abs(efield-efield2)/abs(efield2)
-	rho3    = abs(rho-rho2)/abs(rho2)
-	
-	u_an3   = abs(u_an-u_an2)/abs(u_an2)
-	v_an3   = abs(v_an-v_an2)/abs(u_an2)
-	rho_an3 = abs(rho_an-rho_an2)/abs(rho2)
-	p_an3   = abs(p_an-p_an2)/abs(p_an2)
+        vfield3 = abs(vfield-vfield2)/abs(vfield2)
+        efield3 = abs(efield-efield2)/abs(efield2)
+        rho3    = abs(rho-rho2)/abs(rho2)
+        
+        u_an3   = abs(u_an-u_an2)/abs(u_an2)
+        v_an3   = abs(v_an-v_an2)/abs(v_an2)
+        rho_an3 = abs(rho_an-rho_an2)/abs(rho_an2)
+        p_an3   = abs(p_an-p_an2)/abs(p_an2)
+        
+#endif 
  
         ! just need error checker
         if(ufield3 .gt. thresh) then
