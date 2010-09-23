@@ -331,11 +331,5 @@ int MASA::manufactured_solution::poly_test()
   if( fabs( d2x - derivs[2] ) > double_tol ) return_flag = 1;
   if( fabs( d3x - derivs[3] ) > double_tol ) return_flag = 1;
 
-  //TODO: verify all the off-by-one craziness (Issue #1046).  Am
-  //commenting out the line below as it can't possibly be right, the
-  //vector size is hard-coded to a size of 4 above.
-
-  //  if( fabs( d4x - derivs[4] ) > double_tol ) return_flag = 1;
-
   return return_flag;
 }
