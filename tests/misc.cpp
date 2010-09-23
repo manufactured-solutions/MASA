@@ -49,6 +49,8 @@ int main()
   string str;
 
 
+
+
   // testing masa_init
   err = masa_init("euler-test","euler_1d");
   if(err!=0)
@@ -92,6 +94,12 @@ int main()
       cout << "masa_get_name FAILED";
       return 1;
     }
+
+  // reroute stdout for regressions: TODO remove when logger mechanism
+  // is used inside masa; these tests currently just verify functions
+  // run successfully.
+
+  freopen("/dev/null","w",stdout);
 
   // test a few other functions
   masa_printid();

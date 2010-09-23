@@ -52,6 +52,11 @@ int main()
   
   masa_init("masa-test","MASA_test_function");
 
+  // reroute stdout for regressions: TODO remove when logger mechanism
+  // is used inside masa.
+
+  freopen("/dev/null","w",stdout);
+
   // start testing uninitialized functions
   masa_init_param();
 

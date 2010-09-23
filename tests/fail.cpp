@@ -43,12 +43,20 @@ int main()
 
   masa_init("temp-test-1d","heateq_1d_steady_const");
 
+  // reroute stdout for regressions: TODO remove when logger mechanism
+  // is used inside masa; these tests currently just verify functions
+  // run successfully.
+
+  freopen("/dev/null","w",stdout);
+
   masa_set_param("A_x",0);
   masa_set_param("A_1",0); // does not exist
   // we are intentionally not setting k_0
 
   // test error on sanity check when user has not initialized variables
   masa_sanity_check();
+
+
 
   // now try to 'get_var' that does not exist
   test = masa_get_param("A_1");
