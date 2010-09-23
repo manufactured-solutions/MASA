@@ -190,17 +190,30 @@ program main
 
         ! need to add strict / non-strict regressions
 
+#ifdef MASA_STRICT_REGRESSION
         ufield3 = abs(ufield-ufield2)
 	vfield3 = abs(vfield-vfield2)
-	efield3 = abs(efield-efield2)
-	rho3    = abs(rho-rho2)
-	
-	u_an3   = abs(u_an-u_an2)
+        efield3 = abs(efield-efield2)
+        rho3    = abs(rho-rho2)
+        
+        u_an3   = abs(u_an-u_an2)
 	v_an3   = abs(v_an-v_an2)
-	rho_an3 = abs(rho_an-rho_an2)
-	p_an3   = abs(p_an-p_an2)
- 
-        ! just need error checker
+        rho_an3 = abs(rho_an-rho_an2)
+        p_an3   = abs(p_an-p_an2)
+        
+#else
+
+        ufield3 = abs(ufield-ufield2)/abs(ufield2)
+        vfield3 = abs(vfield-vfield2)/abs(vfield2)
+        efield3 = abs(efield-efield2)/abs(efield2)
+        rho3    = abs(rho-rho2)/abs(rho2)
+        
+        u_an3   = abs(u_an-u_an2)/abs(u_an2)
+        v_an3   = abs(v_an-v_an2)/abs(v_an2)
+        rho_an3 = abs(rho_an-rho_an2)/abs(rho_an2)
+        p_an3   = abs(p_an-p_an2)/abs(p_an2)
+        
+#endif 
 
         if(ufield3 .gt. thresh) then
            write(6,*) "FortMASA FATAL ERROR: euler-2d"
