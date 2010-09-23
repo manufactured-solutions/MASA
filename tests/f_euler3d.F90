@@ -261,8 +261,9 @@ program main
 
            p_an2   = eval_3d_p_an  (%val(x),%val(y),%val(z),%val(p_0),%val(p_x),%val(p_y),%val(p_z),%val(a_px),&
                 %val(a_py),%val(a_pz),%val(L))
-
+           
            ! need to add strict / non-strict regressions
+#ifdef MASA_STRICT_REGRESSION
            ufield3 = abs(ufield-ufield2)
            vfield3 = abs(vfield-vfield2)
            wfield3 = abs(wfield-wfield2)
@@ -274,6 +275,22 @@ program main
            w_an3   = abs(w_an-w_an2)
            rho_an3 = abs(rho_an-rho_an2)
            p_an3   = abs(p_an-p_an2)
+
+#else
+
+           ufield3 = abs(ufield-ufield2)/abs(ufield2)
+           vfield3 = abs(vfield-vfield2)/abs(vfield2)
+           wfield3 = abs(wfield-wfield2)/abs(wfield2)
+           efield3 = abs(efield-efield2)/abs(efield2)
+           rho3    = abs(rho-rho2)/abs(rho2)
+
+           u_an3   = abs(u_an-u_an2)/abs(u_an2)
+           v_an3   = abs(v_an-v_an2)/abs(v_an2)
+           w_an3   = abs(w_an-w_an2)/abs(w_an2)
+           rho_an3 = abs(rho_an-rho_an2)/abs(rho_an2)
+           p_an3   = abs(p_an-p_an2)/abs(p_an2)
+        
+#endif 
 
            ! just need error checker
            if(ufield3 .gt. thresh) then
