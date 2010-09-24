@@ -25,7 +25,7 @@
 // $Author$
 // $Id$
 //
-// ns3d.cpp: program that tests navier-stokes-3d against known source term
+// ns-2d-3d.cpp: program that tests navier-stokes-3d against ns2d, when w=0
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
@@ -42,259 +42,6 @@ using namespace MASA;
 
 const double pi = acos(-1);
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
-
-double anQ_p (double x,double y,double z,double p_0,double p_x,double p_y,double p_z,double a_px,double a_py,double a_pz,double L)
-{
-  double p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_z * cos(a_pz * pi * z / L);
-  return p_an;
-}
- 
-double anQ_u (double x,double y,double z,double u_0,double u_x,double u_y,double u_z,double a_ux,double a_uy,double a_uz,double L)
-{
-  double u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_z * cos(a_uz * pi * z / L);  
-  return u_an;
-} 
- 
-double anQ_v (double x,double y,double z,double v_0,double v_x,double v_y,double v_z,double a_vx,double a_vy,double a_vz,double L)
-{
-  double v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_z * sin(a_vz * pi * z / L);
-  return v_an;
-}
-
-double anQ_w (double x,double y,double z,double w_0,double w_x,double w_y,double w_z,double a_wx,double a_wy,double a_wz,double L)
-{
-  double w_an = w_0 + w_x * sin(a_wx * pi * x / L) + w_y * sin(a_wy * pi * y / L) + w_z * cos(a_wz * pi * z / L);
-  return w_an;
-}
-
-double anQ_rho (double x,double y,double z,double rho_0,double rho_x,double rho_y,double rho_z,double a_rhox,double a_rhoy,double a_rhoz,double L)
-{ 
-  double rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_z * sin(a_rhoz * pi * z / L);
-  return rho_an;
-}
-
-double SourceQ_e (
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
-
-
-double SourceQ_u (
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
-
-
-double SourceQ_v (
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
-
-double SourceQ_w (
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
-
-double SourceQ_rho(
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
 
 int main()
 {
@@ -371,95 +118,39 @@ int main()
   double dy=double(ly)/double(ny);
   double dz=double(lz)/double(nz);
 
-  masa_init("navier-stokes-test","navierstokes_3d_compressible");
+  masa_init("ns3d","navierstokes_3d_compressible");
 
-  // set params -- do not call default values for this problem!
-  masa_set_param("R",1.01);
-  masa_set_param("k",1.38);
-  masa_set_param("u_0",2.27);
-  masa_set_param("u_x",6.00);
-  masa_set_param("u_y",1.35);
-  masa_set_param("u_z",5.34);
-  masa_set_param("v_0",3.46);
-  masa_set_param("v_x",6.13);
-  masa_set_param("v_y",.54);
-  masa_set_param("v_z",.30);
-  masa_set_param("w_0",.411);
-  masa_set_param("w_x",3.14);
-  masa_set_param("w_y",5.68);
-  masa_set_param("w_z",6.51);
-  masa_set_param("rho_0",1.63);
-  masa_set_param("rho_x",4.7);
-  masa_set_param("rho_y",0.85);
-  masa_set_param("rho_z",12.15);
-  masa_set_param("p_0",1.135);
-  masa_set_param("p_x",.73);
-  masa_set_param("p_y",4.9);
-  masa_set_param("p_z",1.8);
-  masa_set_param("a_px",8.8);
-  masa_set_param("a_py",0.1);
-  masa_set_param("a_pz",38.5);
-  masa_set_param("a_rhox",.82);
-  masa_set_param("a_rhoy",.41);
-  masa_set_param("a_rhoz",.44);
-  masa_set_param("a_ux",.46);
-  masa_set_param("a_uy",.425);
-  masa_set_param("a_uz",.42);
-  masa_set_param("a_vx",.52);
-  masa_set_param("a_vy",.23);
-  masa_set_param("a_vz",1.2);
-  masa_set_param("a_wx",1.05);
-  masa_set_param("a_wy",1.8);
-  masa_set_param("a_wz",13.6);
-  masa_set_param("Gamma",2.5);
-  masa_set_param("mu",2.01);
-  masa_set_param("L",1.0);
+  // set params
+  masa_init_params();
 
   // now set reference values for maple compare
   u_0 = masa_get_param("u_0");
   u_x = masa_get_param("u_x");
   u_y = masa_get_param("u_y");
-  u_z = masa_get_param("u_z");
 
   v_0 = masa_get_param("v_0");
   v_x = masa_get_param("v_x");
   v_y = masa_get_param("v_y");
-  v_z = masa_get_param("v_z");
-
-  w_0 = masa_get_param("w_0");
-  w_x = masa_get_param("w_x");
-  w_y = masa_get_param("w_y");
-  w_z = masa_get_param("w_z");
 
   rho_0 = masa_get_param("rho_0");
   rho_x = masa_get_param("rho_x");
   rho_y = masa_get_param("rho_y");
-  rho_z = masa_get_param("rho_z");
 
   p_0 = masa_get_param("p_0");
   p_x = masa_get_param("p_x");
   p_y = masa_get_param("p_y");
-  p_z = masa_get_param("p_z");
 
   a_px = masa_get_param("a_px");
   a_py = masa_get_param("a_py");
-  a_pz = masa_get_param("a_pz");
 
   a_rhox = masa_get_param("a_rhox");
   a_rhoy = masa_get_param("a_rhoy");
-  a_rhoz = masa_get_param("a_rhoz");
 
   a_ux = masa_get_param("a_ux");
   a_uy = masa_get_param("a_uy");
-  a_uz = masa_get_param("a_uz");
 
   a_vx = masa_get_param("a_vx");
   a_vy = masa_get_param("a_vy");
-  a_vz = masa_get_param("a_vz");
-
-  a_wx = masa_get_param("a_wx");
-  a_wy = masa_get_param("a_wy");
-  a_wz = masa_get_param("a_wz");
 
   Gamma = masa_get_param("Gamma");
   mu    = masa_get_param("mu");
@@ -467,6 +158,53 @@ int main()
 
   R = masa_get_param("R");
   K = masa_get_param("k");
+
+  // check all vars are initialized
+  int err = masa_sanity_check();
+  if(err != 0)
+    {
+      cout << "MASA :: Sanity Check Failed!\n";
+      exit(1);
+    }
+  
+  // now start up 2d case
+  masa_init("ns2d","navierstokes_2d_compressible");
+
+  // set as reference values
+  masa_set_param("u_0",u_0);
+  masa_set_param("u_x",u_x);
+  masa_set_param("u_y",u_y);
+
+  masa_set_param("v_0",v_0);
+  masa_set_param("v_x",v_x);
+  masa_set_param("v_y",v_y);
+
+  masa_set_param("rho_0",rho_0);
+  masa_set_param("rho_x",rho_x);
+  masa_set_param("rho_y",rho_y);
+
+  masa_set_param("p_0",p_0);
+  masa_set_param("p_x",p_x);
+  masa_set_param("p_y",p_y);
+
+  masa_set_param("a_px",a_px);
+  masa_set_param("a_py",a_py);
+
+  masa_set_param("a_rhox",a_rhox);
+  masa_set_param("a_rhoy",a_rhoy);
+
+  masa_set_param("a_ux",a_ux);
+  masa_set_param("a_uy",a_uy);
+
+  masa_set_param("a_vx",a_vx);
+  masa_set_param("a_vy",a_vy);
+
+  masa_set_param("Gamma",Gamma);
+  masa_set_param("mu",mu);
+  masa_set_param("L",L);
+
+  masa_set_param("R",R);
+  masa_set_param("k",k);
 
   // check all vars are initialized
   int err = masa_sanity_check();
@@ -485,6 +223,9 @@ int main()
 	  y=j*dy;
 	  z=k*dz;
 
+	  // switch to 3D
+	  masa_select_mms("ns3d");
+
 	  // evalulate source terms
 	  ufield = masa_eval_u_source  (x,y,z);
 	  vfield = masa_eval_v_source  (x,y,z);
@@ -499,21 +240,23 @@ int main()
 	  p_an = masa_eval_p_an        (x,y,z);
 	  rho_an = masa_eval_rho_an    (x,y,z);
 
-	  // check against maple output
-	  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
-	  vfield2   = SourceQ_v  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
-	  wfield2   = SourceQ_w  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
-	  rho2      = SourceQ_rho(x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
-	  efield2   = SourceQ_e  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,Gamma,L,R,K);
+	  // now switch to 2D and do the same
+	  masa_select_mms("ns2d");
 
-	  u_an2     = anQ_u   (x,y,z,u_0,u_x,u_y,u_z,a_ux,a_uy,a_uz,L);
-	  v_an2     = anQ_v   (x,y,z,v_0,v_x,v_y,v_z,a_vx,a_vy,a_vz,L);
-	  w_an2     = anQ_w   (x,y,z,w_0,w_x,w_y,w_z,a_wx,a_wy,a_wz,L);
-	  rho_an2   = anQ_rho (x,y,z,rho_0,rho_x,rho_y,rho_z,a_rhox,a_rhoy,a_rhoz,L);
-	  p_an2     = anQ_p   (x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L);
+	  // evalulate source terms
+	  ufield2 = masa_eval_u_source  (x,y);
+	  vfield2 = masa_eval_v_source  (x,y);
+	  wfield2 = masa_eval_w_source  (x,y);
+	  efield2 = masa_eval_e_source  (x,y);
+	  rho2    = masa_eval_rho_source(x,y);
 
-	  // test the result is roughly zero
-	  // choose between abs and rel error
+	  // evaluate analytical terms
+	  u_an2   = masa_eval_u_an      (x,y);
+	  v_an2   = masa_eval_v_an      (x,y);
+	  w_an2   = masa_eval_w_an      (x,y);
+	  p_an2   = masa_eval_p_an      (x,y);
+	  rho_an2 = masa_eval_rho_an    (x,y);
+
 #ifdef MASA_STRICT_REGRESSION
 
 	  ufield3 = fabs(ufield-ufield2);
