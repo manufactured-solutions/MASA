@@ -410,7 +410,13 @@ int main()
   L     = masa_get_param("L");
 
   // check all vars initialized
-  masa_sanity_check();
+  int err = masa_sanity_check();
+  if(err != 0)
+    {
+      cout << "MASA :: Sanity Check Failed!\n";
+      exit(1);
+    }
+  
 
   // evaluate source terms (3D)
   for(int i=0;i<nx;i++)

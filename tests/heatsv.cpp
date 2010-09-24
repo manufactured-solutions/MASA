@@ -108,7 +108,14 @@ int main()
   double k_2=param;
 
   // evaluate source terms (1D)
-  masa_sanity_check();
+  int err = masa_sanity_check();
+  if(err != 0)
+    {
+      cout << "MASA :: Sanity Check Failed!\n";
+      exit(1);
+    }
+  
+
   tfield    = masa_eval_t_source(x);  
   tfield2   = SourceQ_t_1d(x,A_x,k_0,k_1,k_2);
 
@@ -147,7 +154,13 @@ int main()
   k_2=param;
 
   // evaluate source terms (2D)
-  masa_sanity_check();
+  err = masa_sanity_check();
+  if(err != 0)
+    {
+      cout << "MASA :: Sanity Check Failed!\n";
+      exit(1);
+    }
+  
   tfield    = masa_eval_t_source(x,y);  
   tfield2   = SourceQ_t_2d(x,y,A_x,B_y,k_0,k_1,k_2);
 
@@ -180,7 +193,13 @@ int main()
   k_2 = masa_get_param("k_2");
 
   // evaluate source terms (2D)
-  masa_sanity_check();
+  err = masa_sanity_check();
+  if(err != 0)
+    {
+      cout << "MASA :: Sanity Check Failed!\n";
+      exit(1);
+    }
+  
   tfield    = masa_eval_t_source(x,y,z);  
   tfield2   = SourceQ_t_3d(x,y,z,A_x,B_y,C_z,k_0,k_1,k_2);
 

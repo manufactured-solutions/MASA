@@ -96,7 +96,13 @@ int main()
   double k_0 = masa_get_param("k_0");
 
   // evaluate source terms (1D)
-  masa_sanity_check();
+  int err = masa_sanity_check();
+  if(err != 0)
+    {
+      cout << "MASA :: Sanity Check Failed!\n";
+      exit(1);
+    }
+  
 
   tfield    = masa_eval_t_source(x);
   t_an      = masa_eval_t_an(x);

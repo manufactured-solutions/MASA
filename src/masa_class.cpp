@@ -130,13 +130,16 @@ void MASA::manufactured_solution::set_var(string var, double val)
 
 }// done with set_var function
 
-void MASA::manufactured_solution::sanity_check()
+int MASA::manufactured_solution::sanity_check()
 {
+  int flag=0;
+
   for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
     {      
       if(*vararr[it->second] == MASA_VAR_DEFAULT)
 	{
 	  cout << "\nMASA WARNING:: " << it->first << " has not been initialized!\n";
+	  flag += 1;
 	}
     }    
   
@@ -147,6 +150,17 @@ void MASA::manufactured_solution::sanity_check()
       cout << "varmap.size() = " << varmap.size() << "; num_vars = " << num_vars << endl << endl;
       exit(1);
     }
+
+  if(flag != 0)
+    {
+      return 1; // not all values init
+    }
+  else
+    {
+      return 0; // all values init: smooth sailing
+    }
+  
+
 }// done with set_var function
 
 void MASA::manufactured_solution::register_var(string in,double* var)

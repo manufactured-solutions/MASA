@@ -374,9 +374,49 @@ int main()
   masa_init("navier-stokes-test","navierstokes_3d_compressible");
 
   // set params
-  masa_init_param();
+  masa_set_param("R",1.01);
+  masa_set_param("k",1.38);
 
-  // get vars for comparison
+  masa_set_param("u_0",2.27);
+  masa_set_param("u_x",6.00);
+  masa_set_param("u_y",1.35);
+  masa_set_param("u_z",5.34);
+  masa_set_param("v_0",3.46);
+  masa_set_param("v_x",6.13);
+  masa_set_param("v_y",.54);
+  masa_set_param("v_z",.30);
+  masa_set_param("w_0",.411);
+  masa_set_param("w_x",3.14);
+  masa_set_param("w_y",5.68);
+  masa_set_param("w_z",6.51);
+  masa_set_param("rho_0",1.63);
+  masa_set_param("rho_x",4.7);
+  masa_set_param("rho_y",0.85);
+  masa_set_param("rho_z",12.15);
+  masa_set_param("p_0",1.135);
+  masa_set_param("p_x",.73);
+  masa_set_param("p_y",4.9);
+  masa_set_param("p_z",1.8);
+  masa_set_param("a_px",8.8);
+  masa_set_param("a_py",0.1);
+  masa_set_param("a_pz",38.5);
+  masa_set_param("a_rhox",.82);
+  masa_set_param("a_rhoy",.41);
+  masa_set_param("a_rhoz",.44);
+  masa_set_param("a_ux",.46);
+  masa_set_param("a_uy",.425);
+  masa_set_param("a_uz",.42);
+  masa_set_param("a_vx",.52);
+  masa_set_param("a_vy",.23);
+  masa_set_param("a_vz",1.2);
+  masa_set_param("a_wx",1.05);
+  masa_set_param("a_wy",1.8);
+  masa_set_param("a_wz",13.6);
+  masa_set_param("Gamma",2.5);
+  masa_set_param("mu",2.01);
+  masa_set_param("L",1.0);
+
+  // now set reference values for maple compare
   u_0 = masa_get_param("u_0");
   u_x = masa_get_param("u_x");
   u_y = masa_get_param("u_y");
@@ -430,8 +470,13 @@ int main()
   K = masa_get_param("k");
 
   // check all vars are initialized
-  masa_sanity_check();
-
+  int err = masa_sanity_check();
+  if(err != 0)
+    {
+      cout << "MASA :: Sanity Check Failed!\n";
+      exit(1);
+    }
+  
   // evaluate source terms (3D)
   for(int i=0;i<nx;i++)
     for(int j=0;j<ny;j++)    
@@ -441,14 +486,14 @@ int main()
 	  y=j*dy;
 	  z=k*dz;
 
-	  //evalulate source terms
+	  // evalulate source terms
 	  ufield = masa_eval_u_source  (x,y,z);
 	  vfield = masa_eval_v_source  (x,y,z);
 	  wfield = masa_eval_w_source  (x,y,z);
 	  efield = masa_eval_e_source  (x,y,z);
 	  rho    = masa_eval_rho_source(x,y,z);
 	  
-	  //evaluate analytical terms
+	  // evaluate analytical terms
 	  u_an = masa_eval_u_an        (x,y,z);
 	  v_an = masa_eval_v_an        (x,y,z);
 	  w_an = masa_eval_w_an        (x,y,z);

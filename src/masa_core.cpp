@@ -569,8 +569,7 @@ int MASA::masa_test_poly()
 int MASA::masa_sanity_check()
 {
   verify_pointer_sanity();
-  masa_master_pointer->sanity_check(); // set string to name
-  return 0;
+  return masa_master_pointer->sanity_check(); // set string to name
 }
 
 int MASA::masa_version_stdout()

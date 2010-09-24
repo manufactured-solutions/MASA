@@ -33,7 +33,7 @@
 #include <config.h>
 #include <masa.h>
 #include <math.h> 
-
+#include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -227,6 +227,7 @@ int main()
   double rho,rho2,rho3;
 
   // initalize
+  int err;
   int nx = 10;  // number of points
   int ny = 8;  
   int lx=2;     // length
@@ -277,7 +278,12 @@ int main()
   k = masa_get_param("k");
 
   // check that all terms have been initialized
-  masa_sanity_check();
+  err = masa_sanity_check();
+  if(err != 0)
+    {
+      cout << "MASA :: Sanity Check Failed!\n";
+      exit(1);
+    }  
 
   // evaluate source terms (2D)
   for(int i=0;i<nx;i++)

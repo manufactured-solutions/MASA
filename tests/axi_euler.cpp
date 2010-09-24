@@ -171,7 +171,12 @@ int main()
   mu     = masa_get_param("mu");
 
   // check that all terms have been initialized
-  masa_sanity_check();
+  int err = masa_sanity_check();
+  if(err != 0)
+    {
+      cout << "MASA :: Sanity Check Failed!\n";
+      exit(1);
+    }  
 
   // evaluate source terms (2D)
   for(int i=0;i<nx;i++)

@@ -155,9 +155,9 @@ namespace MASA
     void register_var(string, double*);                          // this registers a variable
     void set_var(string,double);                                 // sets variable value    
     void display_var();                                          // print all variable names and values
-    void sanity_check();                                         // checks that all variables to the class have been initalized
     void return_name(string* inname){inname->assign(mmsname);};  // method: returns name
     void return_dim (int* indim)    {*indim=dimension;};         // method: returns dimension of solution
+    int sanity_check();                                          // checks that all variables to the class have been initalized
     int poly_test();                                             // regression method for poly class (see below)
     
   }; // done with MMS base class
