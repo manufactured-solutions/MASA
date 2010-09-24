@@ -237,48 +237,62 @@ MASA::navierstokes_3d_compressible::navierstokes_3d_compressible()
 void MASA::navierstokes_3d_compressible::init_var()
 {
 
-  // set params
-  set_var("R",1.01);
-  set_var("k",1.38);
-
-  set_var("u_0",2.27);
-  set_var("u_x",6.00);
-  set_var("u_y",1.35);
-  set_var("u_z",5.34);
-  set_var("v_0",3.46);
-  set_var("v_x",6.13);
-  set_var("v_y",.54);
-  set_var("v_z",.30);
-  set_var("w_0",.411);
-  set_var("w_x",3.14);
-  set_var("w_y",5.68);
-  set_var("w_z",6.51);
-  set_var("rho_0",1.63);
-  set_var("rho_x",4.7);
-  set_var("rho_y",0.85);
-  set_var("rho_z",12.15);
-  set_var("p_0",1.135);
-  set_var("p_x",.73);
-  set_var("p_y",4.9);
-  set_var("p_z",1.8);
-  set_var("a_px",8.8);
-  set_var("a_py",0.1);
-  set_var("a_pz",38.5);
-  set_var("a_rhox",.82);
-  set_var("a_rhoy",.41);
-  set_var("a_rhoz",.44);
-  set_var("a_ux",.46);
-  set_var("a_uy",.425);
-  set_var("a_uz",.42);
-  set_var("a_vx",.52);
-  set_var("a_vy",.23);
-  set_var("a_vz",1.2);
-  set_var("a_wx",1.05);
-  set_var("a_wy",1.8);
-  set_var("a_wz",13.6);
-  set_var("Gamma",2.5);
-  set_var("mu",2.01);
+  // set using values from table A.5 
+  // in a paper in AIAA 2002 by C.J. Roy et. al.
+  set_var("Gamma",1.4);
   set_var("L",1.0);
+  set_var("R",287);
+
+  set_var("a_px",1);
+  set_var("a_py",1.25);
+
+  set_var("a_rhox",.75);
+  set_var("a_rhoy",1);
+
+  set_var("a_ux",5/3);
+  set_var("a_uy",1.5);
+
+  set_var("a_vx",1.5);
+  set_var("a_vy",1);
+
+  set_var("a_wx",0);
+  set_var("a_wy",0);
+
+  set_var("k",0.0256833);
+  set_var("mu",1.84e-5);
+
+  set_var("p_0",100000);
+  set_var("p_x",-30000);
+  set_var("p_y",20000);
+
+  set_var("rho_0",1);
+  set_var("rho_x",0.1);
+  set_var("rho_y",0.15);
+
+  set_var("u_0",70);
+  set_var("u_x",4);
+  set_var("u_y",-12);
+
+  set_var("v_0",90);
+  set_var("v_x",-20);
+  set_var("v_y",4);
+
+  // all Z components are 0
+  set_var("w_0",0);
+  set_var("w_x",0);
+  set_var("w_y",0);
+
+  set_var("w_z",0);
+  set_var("v_z",0);
+  set_var("u_z",0);
+  set_var("rho_z",0);
+  set_var("a_vz",0);
+  set_var("a_uz",0);
+  set_var("a_rhoz",0);  
+  set_var("a_pz",0);
+  set_var("a_wz",0.0);
+  set_var("p_z",0);
+
 
 } // done with variable initializer
 
