@@ -41,7 +41,7 @@ using namespace std;
 using namespace MASA;
 
 const double pi = acos(-1);
-const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
+const double threshold = 5.0e-13; // should be small enough to catch any obvious problems
 
 int main()
 {
@@ -121,7 +121,7 @@ int main()
   masa_init("ns3d","navierstokes_3d_compressible");
 
   // set params
-  masa_init_params();
+  masa_init_param();
 
   // now set reference values for maple compare
   u_0 = masa_get_param("u_0");
@@ -204,16 +204,22 @@ int main()
   masa_set_param("L",L);
 
   masa_set_param("R",R);
-  masa_set_param("k",k);
+  masa_set_param("k",K);
 
   // check all vars are initialized
-  int err = masa_sanity_check();
+  err = masa_sanity_check();
   if(err != 0)
     {
       cout << "MASA :: Sanity Check Failed!\n";
       exit(1);
     }
   
+
+  // reroute stdout for regressions: TODO remove when logger mechanism
+  // is used inside masa.
+
+  freopen("/dev/null","w",stdout);
+
   // evaluate source terms (3D)
   for(int i=0;i<nx;i++)
     for(int j=0;j<ny;j++)    
@@ -229,14 +235,12 @@ int main()
 	  // evalulate source terms
 	  ufield = masa_eval_u_source  (x,y,z);
 	  vfield = masa_eval_v_source  (x,y,z);
-	  wfield = masa_eval_w_source  (x,y,z);
 	  efield = masa_eval_e_source  (x,y,z);
 	  rho    = masa_eval_rho_source(x,y,z);
 	  
 	  // evaluate analytical terms
 	  u_an = masa_eval_u_an        (x,y,z);
 	  v_an = masa_eval_v_an        (x,y,z);
-	  w_an = masa_eval_w_an        (x,y,z);
 	  p_an = masa_eval_p_an        (x,y,z);
 	  rho_an = masa_eval_rho_an    (x,y,z);
 
@@ -246,14 +250,12 @@ int main()
 	  // evalulate source terms
 	  ufield2 = masa_eval_u_source  (x,y);
 	  vfield2 = masa_eval_v_source  (x,y);
-	  wfield2 = masa_eval_w_source  (x,y);
 	  efield2 = masa_eval_e_source  (x,y);
 	  rho2    = masa_eval_rho_source(x,y);
 
 	  // evaluate analytical terms
 	  u_an2   = masa_eval_u_an      (x,y);
 	  v_an2   = masa_eval_v_an      (x,y);
-	  w_an2   = masa_eval_w_an      (x,y);
 	  p_an2   = masa_eval_p_an      (x,y);
 	  rho_an2 = masa_eval_rho_an    (x,y);
 
@@ -261,26 +263,22 @@ int main()
 
 	  ufield3 = fabs(ufield-ufield2);
 	  vfield3 = fabs(vfield-vfield2);
-	  wfield3 = fabs(wfield-wfield2);
 	  efield3 = fabs(efield-efield2);
 	  rho3    = fabs(rho-rho2);
 
 	  u_an3   = fabs(u_an-u_an2);
 	  v_an3   = fabs(v_an-v_an2);
-	  w_an3   = fabs(w_an-w_an2);
 	  rho_an3 = fabs(rho_an-rho_an2);
 	  p_an3   = fabs(p_an-p_an2);
 
 #else
 	  ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
 	  vfield3 = fabs(vfield-vfield2)/fabs(vfield2);
-	  wfield3 = fabs(wfield-wfield2)/fabs(wfield2);
 	  efield3 = fabs(efield-efield2)/fabs(efield2);
 	  rho3    = fabs(rho-rho2)/fabs(rho2);
 
 	  u_an3   = fabs(u_an-u_an2)/fabs(u_an2);
 	  v_an3   = fabs(v_an-v_an2)/fabs(v_an2);
-	  w_an3   = fabs(w_an-w_an2)/fabs(w_an2);
 	  rho_an3 = fabs(rho_an-rho_an2)/fabs(rho_an2);
 	  p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
 #endif
@@ -321,24 +319,6 @@ int main()
 	      exit(1);
 	    }
 
-	  if(wfield3 > threshold)
-	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
-	      cout << "W Field Source Term\n";
-	      cout << "Exceeded Threshold by: " << wfield << endl;
-	      cout << x << " " << y << " " << z << endl;
-	      exit(1);
-	    }
-	  
-	  if(w_an3 > threshold)
-	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
-	      cout << "W Field Analytical Term\n";
-	      cout << "Exceeded Threshold by: " << w_an3 << endl;
-	      cout << x << " " << y << " " << z << endl;
-	      exit(1);
-	    }
-
 	  if(efield3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
@@ -364,7 +344,7 @@ int main()
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
 	      cout << "RHO Source Term\n";
-	      cout << "Exceeded Threshold by: " << rho << endl;
+	      cout << "Exceeded Threshold by: " << rho3 << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }

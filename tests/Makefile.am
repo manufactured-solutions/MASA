@@ -22,6 +22,7 @@ check_PROGRAMS   = misc                \
                    euler3d             \
 	           navierstokes2d      \
 	           navierstokes3d      \
+	           n2d3d               \
                    axi_euler           \
                    axi_cns             \
                    rans_sa             \
@@ -62,6 +63,7 @@ euler2d_SOURCES             = euler2d.cpp Euler_2d_source.cpp
 euler3d_SOURCES             = euler3d.cpp Euler_3d_source.cpp
 navierstokes2d_SOURCES      = ns2d.cpp Navier-Stokes_2d_compressible_source.cpp
 navierstokes3d_SOURCES      = ns3d.cpp Navier-Stokes_3d_compressible_source.cpp
+n2d3d_SOURCES               = ns-2d-3d.cpp
 rans_sa_SOURCES             = rans_sa.cpp
 sod_SOURCES                 = sod.cpp
 
@@ -123,6 +125,7 @@ TESTS                      = init.sh              \
 	                     euler3d              \
                              navierstokes2d       \
                              navierstokes3d       \
+	       	             n2d3d                \
                              axi_euler            \
                              axi_cns              \
                              rans_sa              \
