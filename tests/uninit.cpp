@@ -125,9 +125,9 @@ int main()
   if(derr != -1.33) 
     err += 1;  
 
-  //derr = masa_eval_1d_grad(1,x);
-  //if(derr != -1.33) 
-  //  err += 1;  
+  derr = masa_eval_1d_grad(1,x);
+  if(derr != -1.33) 
+    err += 1;  
   
   // --------------------------------
   // source term(s) -- 2D
@@ -180,9 +180,9 @@ int main()
   if(derr != -1.33) 
     err += 1;
   
-  //derr = masa_eval_2d_grad(1,x,y);
-  //if(derr != -1.33) 
-  //  err += 1;
+  derr = masa_eval_2d_grad(1,x,y);
+  if(derr != -1.33) 
+    err += 1;
 
   // --------------------------------
   // source term(s) -- 3D
@@ -211,9 +211,9 @@ int main()
   if(derr != -1.33) 
     err += 1;
 
-  //derr = masa_eval_3d_grad(1,x,y,z);
-  //if(derr != -1.33) 
-  //  err += 1;
+  derr = masa_eval_3d_grad(1,x,y,z);
+  if(derr != -1.33) 
+    err += 1;
   
   //derr = masa_eval_t_an(x,y,z,t);
   //if(derr != -1.33) 
