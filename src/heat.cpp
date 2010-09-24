@@ -58,8 +58,8 @@ MASA::heateq_1d_steady_const::heateq_1d_steady_const()
 void MASA::heateq_1d_steady_const::init_var()
 {
   
-  masa_set_param("A_x",1.4);
-  masa_set_param("k_0",.82);
+  set_var("A_x",1.4);
+  set_var("k_0",.82);
   
 }
 
@@ -92,9 +92,9 @@ void MASA::heateq_2d_steady_const::init_var()
 {
   double param=1.2;
 
-  masa_set_param("A_x",param);
-  masa_set_param("B_y",param);
-  masa_set_param("k_0",param);
+  set_var("A_x",param);
+  set_var("B_y",param);
+  set_var("k_0",param);
 
 } // done with variable initializer
 
@@ -127,10 +127,10 @@ void MASA::heateq_3d_steady_const::init_var()
 {
   double param=1.2;
 
-  masa_set_param("A_x",param);
-  masa_set_param("B_y",param);
-  masa_set_param("k_0",param);
-  masa_set_param("C_z",param);
+  set_var("A_x",param);
+  set_var("B_y",param);
+  set_var("k_0",param);
+  set_var("C_z",param);
 
 } // done with variable initializer
 
@@ -175,12 +175,12 @@ MASA::heateq_1d_unsteady_const::heateq_1d_unsteady_const()
 void MASA::heateq_1d_unsteady_const::init_var()
 {
 
-  masa_set_param("A_x",1.817);
-  masa_set_param("k_0",.1984);
-  masa_set_param("D_t",181.4);
-  masa_set_param("cp_0",.104);
-  masa_set_param("A_t", 12.4);
-  masa_set_param("rho",.2380);
+  set_var("A_x",1.817);
+  set_var("k_0",.1984);
+  set_var("D_t",181.4);
+  set_var("cp_0",.104);
+  set_var("A_t", 12.4);
+  set_var("rho",.2380);
 
 } // done with variable initializer
 
@@ -249,16 +249,16 @@ MASA::heateq_3d_unsteady_const::heateq_3d_unsteady_const()
 void MASA::heateq_3d_unsteady_const::init_var()
 {
 
-  masa_set_param("A_x",1.4);
-  masa_set_param("k_0",.82);
-  masa_set_param("D_t",.12);
-  masa_set_param("cp_0",3.1);
-  masa_set_param("A_t",0.01);
-  masa_set_param("rho",4.0);
-  masa_set_param("B_y",11.01);
-  masa_set_param("B_t",1.01);
-  masa_set_param("C_z",0.90);
-  masa_set_param("C_t",12.34);
+  set_var("A_x",1.4);
+  set_var("k_0",.82);
+  set_var("D_t",.12);
+  set_var("cp_0",3.1);
+  set_var("A_t",0.01);
+  set_var("rho",4.0);
+  set_var("B_y",11.01);
+  set_var("B_t",1.01);
+  set_var("C_z",0.90);
+  set_var("C_t",12.34);
   
 } // done with variable initializer
 
