@@ -451,7 +451,7 @@ int main()
 
 	  if(ufield3 > threshold)
 	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "U Field Source Term\n";
 	      cout << "Exceeded Threshold by: " << ufield3 << endl;
 	      cout << x << " " << y << " " << z << endl;
@@ -460,7 +460,7 @@ int main()
 
 	  if(u_an3 > threshold)
 	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "U Field Analytical Term\n";
 	      cout << "Exceeded Threshold by: " << u_an3 << endl;
 	      cout << x << " " << y << " " << z << endl;
@@ -469,7 +469,7 @@ int main()
 
 	  if(vfield3 > threshold)
 	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "V Field Source Term\n";
 	      cout << "Exceeded Threshold by: " << vfield3 << endl;
 	      cout << x << " " << y << " " << z << endl;
@@ -478,7 +478,7 @@ int main()
 	  
 	  if(v_an3 > threshold)
 	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "V Field Analytical Term\n";
 	      cout << "Exceeded Threshold by: " << v_an3 << endl;
 	      cout << x << " " << y << " " << z << endl;
@@ -487,7 +487,7 @@ int main()
 
 	  if(wfield3 > threshold)
 	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "W Field Source Term\n";
 	      cout << "Exceeded Threshold by: " << wfield3 << endl;
 	      cout << x << " " << y << " " << z << endl;
@@ -496,7 +496,7 @@ int main()
 	  
 	  if(w_an3 > threshold)
 	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "W Field Analytical Term\n";
 	      cout << "Exceeded Threshold by: " << w_an3 << endl;
 	      cout << x << " " << y << " " << z << endl;
@@ -505,7 +505,7 @@ int main()
 
 	  if(efield3 > threshold)
 	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "Energy Source Term\n";
 	      cout.precision(16);
 	      cout << "Exceeded Threshold by: " << efield3 << endl;
@@ -517,7 +517,7 @@ int main()
 
 	  if(p_an3 > threshold)
 	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "P Field Analytical Term\n";
 	      cout << "Exceeded Threshold by: " << p_an3 << endl;
 	      cout << x << " " << y << " " << z << endl;
@@ -526,7 +526,7 @@ int main()
 
 	  if(rho3 > threshold)
 	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "RHO Source Term\n";
 	      cout << "Exceeded Threshold by: " << rho3 << endl;
 	      cout << x << " " << y << " " << z << endl;
@@ -535,7 +535,7 @@ int main()
 
 	  if(rho_an3 > threshold)
 	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "RHO Analytical Term\n";
 	      cout << "Exceeded Threshold by: " << rho_an3 << endl;
 	      cout << x << " " << y << " " << z << endl;

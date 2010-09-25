@@ -41,7 +41,9 @@ using namespace std;
 using namespace MASA;
 
 const double pi = acos(-1);
-const double threshold = 5.0e-13; // should be small enough to catch any obvious problems
+
+// with strict, between 7-8 decimals
+const double threshold = 1.0e-7; // should be small enough to catch any obvious problems
 
 int main()
 {
@@ -214,11 +216,15 @@ int main()
       exit(1);
     }
   
+  masa_display_param();
+  masa_select_mms("ns3d");
+  masa_display_param();
+  exit(1);
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa.
 
-  freopen("/dev/null","w",stdout);
+  //freopen("/dev/null","w",stdout);
 
   // evaluate source terms (3D)
   for(int i=0;i<nx;i++)
