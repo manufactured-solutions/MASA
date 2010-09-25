@@ -414,6 +414,7 @@ int main()
 	  efield2   = SourceQ_e  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,Gamma,L,R,K);
 
 	  u_an2     = anQ_u   (x,y,z,u_0,u_x,u_y,u_z,a_ux,a_uy,a_uz,L);
+	  cout << "u_an2: " << u_an2 << endl;
 	  v_an2     = anQ_v   (x,y,z,v_0,v_x,v_y,v_z,a_vx,a_vy,a_vz,L);
 	  w_an2     = anQ_w   (x,y,z,w_0,w_x,w_y,w_z,a_wx,a_wy,a_wz,L);
 	  rho_an2   = anQ_rho (x,y,z,rho_0,rho_x,rho_y,rho_z,a_rhox,a_rhoy,a_rhoz,L);
@@ -436,12 +437,15 @@ int main()
 	  p_an3   = fabs(p_an-p_an2);
 
 #else
+	  // adding a hack in the event one of the source terms is zero...
+
 	  ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
 	  vfield3 = fabs(vfield-vfield2)/fabs(vfield2);
 	  wfield3 = fabs(wfield-wfield2)/fabs(wfield2);
 	  efield3 = fabs(efield-efield2)/fabs(efield2);
 	  rho3    = fabs(rho-rho2)/fabs(rho2);
-
+ 	  cout << "u_an : " << u_an << endl;
+	  cout << "u_an2: " << u_an2 << endl;
 	  u_an3   = fabs(u_an-u_an2)/fabs(u_an2);
 	  v_an3   = fabs(v_an-v_an2)/fabs(v_an2);
 	  w_an3   = fabs(w_an-w_an2)/fabs(w_an2);

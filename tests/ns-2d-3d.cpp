@@ -216,15 +216,14 @@ int main()
       exit(1);
     }
   
-  masa_display_param();
-  masa_select_mms("ns3d");
-  masa_display_param();
-  exit(1);
+  //masa_display_param();
+  //masa_select_mms("ns3d");
+  //masa_display_param();
+  //exit(1);
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa.
-
-  //freopen("/dev/null","w",stdout);
+  freopen("/dev/null","w",stdout);
 
   // evaluate source terms (3D)
   for(int i=0;i<nx;i++)
