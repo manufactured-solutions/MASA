@@ -68,7 +68,7 @@ double MASA::manufactured_solution::get_var(string var)
       error=var.rfind(it->first); // one value must be 0, as in equal, to exit with success
       if (error!=string::npos) // found a value
       {
-	selector=0; // set flag for variable existance 
+	selector=0; // set flag for variable existence 
       }
     }    
   
@@ -113,7 +113,7 @@ int MASA::manufactured_solution::set_var(string var, double val)
       error=var.rfind(it->first); // one value must be 0, as in equal, to exit with success
       if (error!=string::npos) // found a value
       {
-	selector=0; // set flag for variable existance 
+	selector=0; // set flag for variable existence 
       }
     }    
   
