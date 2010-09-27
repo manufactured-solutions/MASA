@@ -61,7 +61,11 @@ int main()
   double rho_an,rho_an2,rho_an3;
   
   // parameters
-  double x = 1;
+  int nx = 200;  // number of points
+  int lx=1;     // length
+  double dx=double(lx)/double(nx);
+
+  double x;
 
   // initalize
   masa_init("spelart alamaras test","rans_sa");
@@ -72,13 +76,19 @@ int main()
   // check that all terms have been initialized
   masa_sanity_check();
 
-  // simple source term check
-  ufield = masa_eval_u_source(x);
-  vfield = masa_eval_v_source(x);
+  for(int i=0;i<nx;i++)
+    {
+      x=i*dx;
 
-  // analytical
-  u_an = masa_eval_u_an(x);
-  v_an = masa_eval_v_an(x);
+      // analytical
+      u_an = masa_eval_u_an(x);
+      v_an = masa_eval_v_an(x);
+
+      // simple source term check
+      ufield = masa_eval_u_source(x);
+      vfield = masa_eval_v_source(x);      
+
+    } 
   
   return 0;
 }
