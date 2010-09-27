@@ -368,3 +368,8 @@ int MASA::masa_test::init_var()
   return err;
 
 }
+
+MASA::masa_uninit::masa_uninit()
+{
+  // nothing to see here
+}

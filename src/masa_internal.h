@@ -152,14 +152,14 @@ namespace MASA
 
     // member functions solution classes will inherit
     manufactured_solution();                                     // constructor
+    int set_var(string,double);                                  // sets variable value    
+    int register_var(string, double*);                           // this registers a variable
+    int sanity_check();                                          // checks that all variables to the class have been initalized
+    int poly_test();                                             // regression method for poly class (see below)
     double get_var(string);                                      // returns variable value
     void display_var();                                          // print all variable names and values
     void return_name(string* inname){inname->assign(mmsname);};  // method: returns name
     void return_dim (int* indim)    {*indim=dimension;};         // method: returns dimension of solution
-    int set_var(string,double);                                 // sets variable value    
-    int register_var(string, double*);                          // this registers a variable
-    int sanity_check();                                          // checks that all variables to the class have been initalized
-    int poly_test();                                             // regression method for poly class (see below)
     
   }; // done with MMS base class
 
@@ -201,6 +201,7 @@ namespace MASA
   // ------------------------------------------------------
   // ---------- all other mms classes ------------
   // ------------------------------------------------------
+
   // just a demo class
   class masa_test : public manufactured_solution 
   {
@@ -211,8 +212,18 @@ namespace MASA
     masa_test(); // constructor
     int init_var();        // default problem values
     int poly_test();
-    //double eval_q_test(double);
+    //double eval_q_t(double);
   }; // done with masa_test
+
+
+  // class with no source/analytical terms, to test virtual function defaults
+  class masa_uninit : public manufactured_solution 
+  {
+  private:
+
+  public:
+    masa_uninit(); // constructor
+  }; 
 
   // ------------------------------------------------------
   // ---------- heat equation /steady / constant ------------

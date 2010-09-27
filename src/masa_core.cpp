@@ -87,7 +87,8 @@ int MASA::masa_select_mms(string name)
 
 int get_list_mms(vector<manufactured_solution*>* anim)
 {
-  anim->push_back(new masa_test()); // test function
+  anim->push_back(new masa_test());   // test function
+  anim->push_back(new masa_uninit()); // another test function
   
   // register solutions here
   anim->push_back(new heateq_1d_steady_const());

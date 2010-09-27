@@ -51,7 +51,7 @@ int main()
   double z=0;
   double t=0;
   
-  masa_init("masa-test","MASA_test");
+  masa_init("masa-test","masa_uninit");
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa.
