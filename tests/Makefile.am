@@ -12,6 +12,7 @@ BUILT_SOURCES = .license.stamp
 check_PROGRAMS   = misc                \
 	           poly                \
 	           fail_cond           \
+	           register            \
 	           uninit              \
 	           heat_const_steady   \
 		   heat_var_steady     \
@@ -52,6 +53,7 @@ check_PROGRAMS   = misc                \
 misc_SOURCES                = misc.cpp
 poly_SOURCES                = poly.cpp
 fail_cond_SOURCES           = fail_cond.cpp
+register_SOURCES            = register.cpp
 uninit_SOURCES              = uninit.cpp
 heat_const_steady_SOURCES   = heatsc.cpp
 heat_var_steady_SOURCES     = heatsv.cpp
@@ -116,6 +118,7 @@ TESTS_ENVIRONMENT          =
 TESTS                      = init.sh              \
 			     misc                 \
 			     fail_cond            \
+			     register             \
 			     poly                 \
 			     uninit               \
 			     heat_const_steady    \
