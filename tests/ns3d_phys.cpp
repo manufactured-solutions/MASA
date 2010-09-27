@@ -365,8 +365,8 @@ int main()
   int ny = 10;
   int nz = 30;
   int lx=1;                // length
-  int ly=2; 
-  int lz=3;     
+  int ly=1; 
+  int lz=1;     
   double dx=double(lx)/double(nx);
   double dy=double(ly)/double(ny);
   double dz=double(lz)/double(nz);
@@ -489,8 +489,6 @@ int main()
 	  p_an3   = fabs(p_an-p_an2);
 
 #else
-	  // adding a hack in the event one of the source terms is zero...
-
 	  ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
 	  vfield3 = fabs(vfield-vfield2)/fabs(vfield2);
 	  wfield3 = fabs(wfield-wfield2)/fabs(wfield2);
@@ -596,7 +594,27 @@ int main()
 	      exit(1);
 	    }
 
-	  // need to add realizability test here
+	  // adding realizability test here
+	  if(rho <= 0)
+	    {
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
+	      cout << "Realizability constrait violated for: RHO\n";
+	      cout << "RHO is: " << rho << endl;
+	    }
+
+	  if(efield <= 0)
+	    {
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
+	      cout << "Realizability constrait violated for: Energy\n";
+	      cout << "Energy is: " << efield << endl;
+	    }
+
+	  if(efield <= 0)
+	    {
+	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
+	      cout << "Realizability constrait violated for: Pressure\n";
+	      cout << "Pressure is: " << p_an << endl;
+	    }
 
 	} // done iterating
 

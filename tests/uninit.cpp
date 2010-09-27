@@ -187,9 +187,10 @@ int main()
   // --------------------------------
   // source term(s) -- 3D
   // --------------------------------
-  //derr = masa_eval_t_source(x,y,z,t);
-  //if(derr != -1.33) 
-  //  err += 1;
+
+  derr = masa_eval_t_source(x,y,z,t);
+  if(derr != -1.33) 
+    err += 1;
 
   derr = masa_eval_u_source(x,y,z);
   if(derr != -1.33) 
