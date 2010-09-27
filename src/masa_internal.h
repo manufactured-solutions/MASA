@@ -90,7 +90,7 @@ namespace MASA
 
     // functions to override
     virtual ~manufactured_solution(){};       // destructor
-    virtual void init_var(){cout << "MASA ERROR:: NO DEFAULT VALUES AVAILABLE\n";};                                                                           // inits all variables to selected values
+    virtual int init_var(){cout << "MASA ERROR:: NO DEFAULT VALUES AVAILABLE\n"; return 1;};                                                                  // inits all variables to selected values
 
     // analytical solution(s)
     virtual double eval_an_t(double)                {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
@@ -153,11 +153,11 @@ namespace MASA
     // member functions solution classes will inherit
     manufactured_solution();                                     // constructor
     double get_var(string);                                      // returns variable value
-    void register_var(string, double*);                          // this registers a variable
-    void set_var(string,double);                                 // sets variable value    
     void display_var();                                          // print all variable names and values
     void return_name(string* inname){inname->assign(mmsname);};  // method: returns name
     void return_dim (int* indim)    {*indim=dimension;};         // method: returns dimension of solution
+    int set_var(string,double);                                 // sets variable value    
+    int register_var(string, double*);                          // this registers a variable
     int sanity_check();                                          // checks that all variables to the class have been initalized
     int poly_test();                                             // regression method for poly class (see below)
     
@@ -209,6 +209,7 @@ namespace MASA
     double demo_var_3;
   public:
     masa_test(); // constructor
+    int init_var();        // default problem values
     int poly_test();
     //double eval_q_test(double);
   }; // done with masa_test
@@ -224,7 +225,7 @@ namespace MASA
     double k_0;    
   public:
     heateq_1d_steady_const(); // constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
     double eval_q_t (double);  // source term evaluator
     double eval_an_t(double);   //analytical solution
 
@@ -239,7 +240,7 @@ namespace MASA
 
   public:
     heateq_2d_steady_const();       // constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
     double eval_q_t (double,double); // source term evaluator
     double eval_an_t(double,double); // analytical term evaluator
   };
@@ -254,7 +255,7 @@ namespace MASA
 
   public:
     heateq_3d_steady_const(); // constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
     double eval_q_t (double,double,double); //evaluate source term
     double eval_an_t(double,double,double); // analytical term evaluator
   };
@@ -274,7 +275,7 @@ namespace MASA
     
   public:
     heateq_1d_unsteady_const(); // constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
     double eval_q_t(double,double); // needs x,t
   };
 
@@ -292,7 +293,7 @@ namespace MASA
 
   public:
     heateq_2d_unsteady_const(); // constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
     double eval_q_t(double,double,double); // needs x,y,t
   };
   
@@ -312,7 +313,7 @@ namespace MASA
     
   public:
     heateq_3d_unsteady_const(); // constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
     double eval_q_t(double,double,double,double); // needs x,y,z,t    
   };
 
@@ -336,7 +337,7 @@ namespace MASA
     
   public:
     heateq_1d_unsteady_var(); // constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
     double eval_q_t(double,double); // needs x,t
   };
 
@@ -358,7 +359,7 @@ namespace MASA
 
   public:
     heateq_2d_unsteady_var(); // constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
     double eval_q_t(double,double,double); // needs x,y,t    
   };
   
@@ -382,7 +383,7 @@ namespace MASA
 
   public:
     heateq_3d_unsteady_var(); // constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
     double eval_q_t(double,double,double,double); // needs x,y,z,t    
   };
 
@@ -400,7 +401,7 @@ namespace MASA
 
   public:
     heateq_1d_steady_var(); // constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
     double eval_q_t(double); // needs x
   };
 
@@ -415,7 +416,7 @@ namespace MASA
 
   public:
     heateq_2d_steady_var(); // constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
     double eval_q_t(double,double); // needs x,y
   };
   
@@ -431,7 +432,7 @@ namespace MASA
 
   public:
     heateq_3d_steady_var(); // constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
     double eval_q_t(double,double,double); // needs x,y,z
     
   };
@@ -461,7 +462,7 @@ namespace MASA
 
   public:
     euler_1d(); // constructor    
-    void   init_var();          // default problem values
+    int init_var();          // default problem values
 
     double eval_q_u   (double); // source terms
     double eval_q_e   (double);
@@ -505,7 +506,7 @@ namespace MASA
     
   public:
     euler_2d(); // constructor    
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
 
     double eval_q_u  (double,double);
     double eval_q_v  (double,double);
@@ -565,7 +566,7 @@ namespace MASA
     
   public:
     euler_3d(); // constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
 
     double eval_q_u  (double,double,double); // source terms
     double eval_q_v  (double,double,double);
@@ -611,7 +612,7 @@ namespace MASA
 
   public:
     axi_euler(); // constructor    
-    void   init_var();          // default problem values
+    int init_var();          // default problem values
 
     double eval_q_u   (double,double); // radial velocity 
     double eval_q_w   (double,double); // axial 
@@ -655,7 +656,7 @@ namespace MASA
    
   public:
     axi_cns(); // constructor    
-    void   init_var();          // default problem values
+    int init_var();          // default problem values
 
     double eval_q_u   (double,double); // radial velocity 
     double eval_q_w   (double,double); // axial 
@@ -679,7 +680,7 @@ namespace MASA
 
   public:
     sod_1d(); // constructor    
-    void   init_var();          // default problem values
+    int init_var();          // default problem values
 
     double eval_q_rho   (double,double);
     double eval_q_rho_u (double,double);
@@ -714,7 +715,7 @@ namespace MASA
 
   public:
     rans_sa(); // constructor    
-    void   init_var();          // default problem values
+    int init_var();          // default problem values
     
     double eval_q_u (double); // velocity term
     double eval_q_v (double); // eddy viscosity term
@@ -783,7 +784,7 @@ namespace MASA
     
   public:
     navierstokes_2d_compressible(); // constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
 
     double eval_q_u  (double,double);
     double eval_q_v  (double,double);
@@ -843,7 +844,7 @@ namespace MASA
     
   public:
     navierstokes_3d_compressible(); //constructor
-    void   init_var();        // default problem values
+    int init_var();        // default problem values
 
     double eval_q_u  (double,double,double); // source terms
     double eval_q_v  (double,double,double);

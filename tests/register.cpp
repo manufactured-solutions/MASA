@@ -22,10 +22,10 @@
 // Boston, MA  02110-1301  USA
 //
 //-----------------------------------------------------------------------el-
-// $Author$
-// $Id$
+// $Author: nick $
+// $Id: misc.cpp 13998 2010-09-23 18:31:43Z nick $
 //
-// misc.cpp : program that tests masa helper functions
+// register.cpp : program that tests masa register var
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
@@ -50,60 +50,28 @@ int main()
   string str;
 
   // testing masa_init
-  err = masa_init("euler-test","euler_1d");
+  err = masa_init("masa-test","masa_test");
   if(err!=0)
     {
       cout << "masa_init FAILED\n";
       return 1;
     }
+
+  err = masa_init_var();
+  if(err!=1) // function designed to fail for masa_test mms
+    {
+      cout << "masa_init fail condition not triggered properly!\n";
+      return 1;
+    }
   
-  // test get_dimension
-  masa_get_dimension(&i);
-  if(i!=1)
+  masa_init("masa-test","euler1d");
+  err = masa_init_var();
+  if(err!=0) // test function returns correct error value for properly built function
     {
-      cout << "masa_get_dimension FAILED";
+      cout << "masa_init success condition not triggered properly!\n";
       return 1;
     }
-
-  // test get_name
-  masa_get_name(&str);  
-  if(str.compare("euler_1d") != 0)
-    {
-      cout << "masa_get_name FAILED";
-      return 1;
-    }
-
-  // now, test masa_map -- 
-  // it should recognize regardless of: 
-  // capital letters
-  // '-' dashes
-  // ' ' whitespace
-  err = masa_init("euler-test-crazy","Eu l-er_2d");
-  if(err!=0)
-    {
-      cout << "MASA_INIT FAILED\n";
-      return 1;
-    }
-
-  // lets check this gave us the mms we expected:
-  masa_get_name(&str);  
-  if(str.compare("euler_2d") != 0)
-    {
-      cout << "masa_get_name FAILED";
-      return 1;
-    }
-
-  // reroute stdout for regressions: TODO remove when logger mechanism
-  // is used inside masa; these tests currently just verify functions
-  // run successfully.
-
-  freopen("/dev/null","w",stdout);
-
-  // test a few other functions
-  masa_printid();
-  masa_version_stdout();
-  masa_get_numeric_version();
-
+  
   return 0; // steady as she goes
 
 }

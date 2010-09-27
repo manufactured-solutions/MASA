@@ -55,12 +55,15 @@ MASA::heateq_1d_steady_const::heateq_1d_steady_const()
 
 }//done with constructor
 
-void MASA::heateq_1d_steady_const::init_var()
+int MASA::heateq_1d_steady_const::init_var()
 {
+  int err = 0;
+
+  err += set_var("A_x",1.4);
+  err += set_var("k_0",.82);
   
-  set_var("A_x",1.4);
-  set_var("k_0",.82);
-  
+  return err;
+
 }
 
 double MASA::heateq_1d_steady_const::eval_q_t(double x)
@@ -88,13 +91,18 @@ MASA::heateq_2d_steady_const::heateq_2d_steady_const()
     
 }//done with constructor
 
-void MASA::heateq_2d_steady_const::init_var()
+int MASA::heateq_2d_steady_const::init_var()
 {
+  int err = 0;
+
+  // default
   double param=1.2;
 
-  set_var("A_x",param);
-  set_var("B_y",param);
-  set_var("k_0",param);
+  err += set_var("A_x",param);
+  err += set_var("B_y",param);
+  err += set_var("k_0",param);
+  
+  return err;
 
 } // done with variable initializer
 
@@ -123,14 +131,20 @@ MASA::heateq_3d_steady_const::heateq_3d_steady_const()
 
 }//done with constructor
 
-void MASA::heateq_3d_steady_const::init_var()
+int MASA::heateq_3d_steady_const::init_var()
 {
+  int err = 0;
+  
+  // default
   double param=1.2;
 
-  set_var("A_x",param);
-  set_var("B_y",param);
-  set_var("k_0",param);
-  set_var("C_z",param);
+
+  err += set_var("A_x",param);
+  err += set_var("B_y",param);
+  err += set_var("k_0",param);
+  err += set_var("C_z",param);
+
+  return err;
 
 } // done with variable initializer
 
@@ -172,15 +186,18 @@ MASA::heateq_1d_unsteady_const::heateq_1d_unsteady_const()
 
 }//done with constructor
 
-void MASA::heateq_1d_unsteady_const::init_var()
+int MASA::heateq_1d_unsteady_const::init_var()
 {
+  int err=0;
 
-  set_var("A_x",1.817);
-  set_var("k_0",.1984);
-  set_var("D_t",181.4);
-  set_var("cp_0",.104);
-  set_var("A_t", 12.4);
-  set_var("rho",.2380);
+  err += set_var("A_x",1.817);
+  err += set_var("k_0",.1984);
+  err += set_var("D_t",181.4);
+  err += set_var("cp_0",.104);
+  err += set_var("A_t", 12.4);
+  err += set_var("rho",.2380);
+
+  return err;
 
 } // done with variable initializer
 
@@ -207,18 +224,20 @@ MASA::heateq_2d_unsteady_const::heateq_2d_unsteady_const()
 
 }//done with constructor
 
-void MASA::heateq_2d_unsteady_const::init_var()
+int MASA::heateq_2d_unsteady_const::init_var()
 {
+  int err = 0;
 
+  err += set_var("A_x",1.1);   
+  err += set_var("k_0",5.3);
+  err += set_var("D_t",7.8);
+  err += set_var("cp_0",0.1);
+  err += set_var("A_t",12.3);
+  err += set_var("rho",1.2);
+  err += set_var("B_y",5.4);
+  err += set_var("B_t",8.09);
 
-  set_var("A_x",1.1);   
-  set_var("k_0",5.3);
-  set_var("D_t",7.8);
-  set_var("cp_0",0.1);
-  set_var("A_t",12.3);
-  set_var("rho",1.2);
-  set_var("B_y",5.4);
-  set_var("B_t",8.09);
+  return err;
 
 } // done with variable initializer
 
@@ -246,20 +265,23 @@ MASA::heateq_3d_unsteady_const::heateq_3d_unsteady_const()
 
 }//done with constructor
 
-void MASA::heateq_3d_unsteady_const::init_var()
+int MASA::heateq_3d_unsteady_const::init_var()
 {
+  int err = 0;
 
-  set_var("A_x",1.4);
-  set_var("k_0",.82);
-  set_var("D_t",.12);
-  set_var("cp_0",3.1);
-  set_var("A_t",0.01);
-  set_var("rho",4.0);
-  set_var("B_y",11.01);
-  set_var("B_t",1.01);
-  set_var("C_z",0.90);
-  set_var("C_t",12.34);
+  err += set_var("A_x",1.4);
+  err += set_var("k_0",.82);
+  err += set_var("D_t",.12);
+  err += set_var("cp_0",3.1);
+  err += set_var("A_t",0.01);
+  err += set_var("rho",4.0);
+  err += set_var("B_y",11.01);
+  err += set_var("B_t",1.01);
+  err += set_var("C_z",0.90);
+  err += set_var("C_t",12.34);
   
+  return err;
+
 } // done with variable initializer
 
 double MASA::heateq_3d_unsteady_const::eval_q_t(double x,double y, double z,double t)
@@ -295,20 +317,24 @@ MASA::heateq_1d_unsteady_var::heateq_1d_unsteady_var()
 
 }//done with constructor
 
-void MASA::heateq_1d_unsteady_var::init_var()
+int MASA::heateq_1d_unsteady_var::init_var()
 {
+  int err = 0;
+
   double param =1.093;
 
-  set_var("A_x",param);   
-  set_var("k_0",param);
-  set_var("D_t",param);
-  set_var("cp_0",param);
-  set_var("A_t",param);
-  set_var("rho",param);
-  set_var("cp_1",param);
-  set_var("cp_2",param);
-  set_var("k_1",param);
-  set_var("k_2",param);
+  err += set_var("A_x",param);   
+  err += set_var("k_0",param);
+  err += set_var("D_t",param);
+  err += set_var("cp_0",param);
+  err += set_var("A_t",param);
+  err += set_var("rho",param);
+  err += set_var("cp_1",param);
+  err += set_var("cp_2",param);
+  err += set_var("k_1",param);
+  err += set_var("k_2",param);
+
+  return err;
 
 } // done with variable initializer
 
@@ -338,22 +364,25 @@ MASA::heateq_2d_unsteady_var::heateq_2d_unsteady_var()
 
 }//done with constructor
 
-void MASA::heateq_2d_unsteady_var::init_var()
+int MASA::heateq_2d_unsteady_var::init_var()
 {
+  int err = 0;
   double param =1.093;
 
-  set_var("A_x",param);   
-  set_var("k_0",param);
-  set_var("D_t",param);
-  set_var("cp_0",param);
-  set_var("A_t",param);
-  set_var("rho",param);
-  set_var("cp_1",param);
-  set_var("cp_2",param);
-  set_var("k_1",param);
-  set_var("k_2",param);
-  set_var("B_y",param);
-  set_var("B_t",param);
+  err += set_var("A_x",param);   
+  err += set_var("k_0",param);
+  err += set_var("D_t",param);
+  err += set_var("cp_0",param);
+  err += set_var("A_t",param);
+  err += set_var("rho",param);
+  err += set_var("cp_1",param);
+  err += set_var("cp_2",param);
+  err += set_var("k_1",param);
+  err += set_var("k_2",param);
+  err += set_var("B_y",param);
+  err += set_var("B_t",param);
+
+  return err;
 
 } // done with variable initializer
 
@@ -385,25 +414,27 @@ MASA::heateq_3d_unsteady_var::heateq_3d_unsteady_var()
 
 }//done with constructor
 
-void MASA::heateq_3d_unsteady_var::init_var()
+int MASA::heateq_3d_unsteady_var::init_var()
 {
-
+  int err = 0;
   double param =1.093;
 
-  set_var("A_x",param);   
-  set_var("k_0",param);
-  set_var("D_t",param);
-  set_var("cp_0",param);
-  set_var("A_t",param);
-  set_var("rho",param);
-  set_var("cp_1",param);
-  set_var("cp_2",param);
-  set_var("k_1",param);
-  set_var("k_2",param);
-  set_var("B_y",param);
-  set_var("B_t",param);
-  set_var("C_z",param);
-  set_var("C_t",param);
+  err += set_var("A_x",param);   
+  err += set_var("k_0",param);
+  err += set_var("D_t",param);
+  err += set_var("cp_0",param);
+  err += set_var("A_t",param);
+  err += set_var("rho",param);
+  err += set_var("cp_1",param);
+  err += set_var("cp_2",param);
+  err += set_var("k_1",param);
+  err += set_var("k_2",param);
+  err += set_var("B_y",param);
+  err += set_var("B_t",param);
+  err += set_var("C_z",param);
+  err += set_var("C_t",param);
+
+  return err;
 
 } // done with variable initializer
 
@@ -438,13 +469,16 @@ MASA::heateq_1d_steady_var::heateq_1d_steady_var()
 
 }//done with constructor
 
-void MASA::heateq_1d_steady_var::init_var()
+int MASA::heateq_1d_steady_var::init_var()
 {
+  int err = 0;
   double param = 1.4;
-  set_var("A_x",param);   
-  set_var("k_0",param);
-  set_var("k_1",param);
-  set_var("k_2",param);
+  err += set_var("A_x",param);   
+  err += set_var("k_0",param);
+  err += set_var("k_1",param);
+  err += set_var("k_2",param);
+
+  return err;
 
 } // done with variable initializer
 
@@ -467,14 +501,16 @@ MASA::heateq_2d_steady_var::heateq_2d_steady_var()
 
 }//done with constructor
 
-void MASA::heateq_2d_steady_var::init_var()
+int MASA::heateq_2d_steady_var::init_var()
 {
+  int err = 0;
   double param = 1.4;
-  set_var("A_x",param);   
-  set_var("k_0",param);
-  set_var("k_1",param);
-  set_var("k_2",param);
-  set_var("B_y",param);
+  err += set_var("A_x",param);   
+  err += set_var("k_0",param);
+  err += set_var("k_1",param);
+  err += set_var("k_2",param);
+  err += set_var("B_y",param);
+  return err;
 
 } // done with variable initializer
 
@@ -500,16 +536,17 @@ MASA::heateq_3d_steady_var::heateq_3d_steady_var()
 
 }//done with constructor
 
-void MASA::heateq_3d_steady_var::init_var()
-{
+int MASA::heateq_3d_steady_var::init_var()
+{  
+  int err = 0;
   double param = 1.4;
-  set_var("A_x",param);   
-  set_var("k_0",param);
-  set_var("k_1",param);
-  set_var("k_2",param);
-  set_var("B_y",param);
-  set_var("C_z",param);
-
+  err += set_var("A_x",param);   
+  err += set_var("k_0",param);
+  err += set_var("k_1",param);
+  err += set_var("k_2",param);
+  err += set_var("B_y",param);
+  err += set_var("C_z",param);
+  return err;
 } // done with variable initializer
 
 double MASA::heateq_3d_steady_var::eval_q_t(double x,double y,double z)

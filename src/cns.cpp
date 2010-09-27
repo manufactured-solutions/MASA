@@ -79,36 +79,39 @@ MASA::navierstokes_2d_compressible::navierstokes_2d_compressible()
 
 }//done with constructor
 
-void MASA::navierstokes_2d_compressible::init_var()
+int MASA::navierstokes_2d_compressible::init_var()
 {
+  int err = 0;
 
   // currently randomly generated
-  set_var("R",1.01);
-  set_var("k",1.38);
+  err += set_var("R",1.01);
+  err += set_var("k",1.38);
 
-  set_var("u_0",1.23);
-  set_var("u_x",1.1);
-  set_var("u_y",.08);
-  set_var("v_0",12);
-  set_var("v_x",1.6);
-  set_var("v_y",.67);
-  set_var("rho_0",1.02);
-  set_var("rho_x",7.2);
-  set_var("rho_y",9.8);
-  set_var("p_0",1.2);
-  set_var("p_x",.91);
-  set_var("p_y",.623);
-  set_var("a_px",.165);
-  set_var("a_py",.612);
-  set_var("a_rhox",.627);
-  set_var("a_rhoy",.828);
-  set_var("a_ux",.1987);
-  set_var("a_uy",1.189);
-  set_var("a_vx",1.91);
-  set_var("a_vy",2.901);
-  set_var("Gamma",1.01);
-  set_var("mu",.918);
-  set_var("L",3.02);
+  err += set_var("u_0",1.23);
+  err += set_var("u_x",1.1);
+  err += set_var("u_y",.08);
+  err += set_var("v_0",12);
+  err += set_var("v_x",1.6);
+  err += set_var("v_y",.67);
+  err += set_var("rho_0",1.02);
+  err += set_var("rho_x",7.2);
+  err += set_var("rho_y",9.8);
+  err += set_var("p_0",1.2);
+  err += set_var("p_x",.91);
+  err += set_var("p_y",.623);
+  err += set_var("a_px",.165);
+  err += set_var("a_py",.612);
+  err += set_var("a_rhox",.627);
+  err += set_var("a_rhoy",.828);
+  err += set_var("a_ux",.1987);
+  err += set_var("a_uy",1.189);
+  err += set_var("a_vx",1.91);
+  err += set_var("a_vy",2.901);
+  err += set_var("Gamma",1.01);
+  err += set_var("mu",.918);
+  err += set_var("L",3.02);
+
+  return err;
 
 } // done with variable initializer
 
@@ -234,65 +237,67 @@ MASA::navierstokes_3d_compressible::navierstokes_3d_compressible()
 
 }//done with constructor
 
-void MASA::navierstokes_3d_compressible::init_var()
+int MASA::navierstokes_3d_compressible::init_var()
 {
+  int err = 0;
 
   // set using values from table A.5 
   // in a paper in AIAA 2002 by C.J. Roy et. al.
-  set_var("Gamma",1.4);
-  set_var("L",1.0);
-  set_var("R",287);
+  err += set_var("Gamma",1.4);
+  err += set_var("L",1.0);
+  err += set_var("R",287);
 
-  set_var("a_px",1);
-  set_var("a_py",1.25);
+  err += set_var("a_px",1);
+  err += set_var("a_py",1.25);
 
-  set_var("a_rhox",.75);
-  set_var("a_rhoy",1);
+  err += set_var("a_rhox",.75);
+  err += set_var("a_rhoy",1);
 
-  set_var("a_ux",5/3);
-  set_var("a_uy",1.5);
+  err += set_var("a_ux",5/3);
+  err += set_var("a_uy",1.5);
 
-  set_var("a_vx",1.5);
-  set_var("a_vy",1);
+  err += set_var("a_vx",1.5);
+  err += set_var("a_vy",1);
 
-  set_var("a_wx",0);
-  set_var("a_wy",0);
+  err += set_var("a_wx",0);
+  err += set_var("a_wy",0);
 
-  set_var("k",0.0256833);
-  set_var("mu",1.84e-5);
+  err += set_var("k",0.0256833);
+  err += set_var("mu",1.84e-5);
 
-  set_var("p_0",100000);
-  set_var("p_x",-30000);
-  set_var("p_y",20000);
+  err += set_var("p_0",100000);
+  err += set_var("p_x",-30000);
+  err += set_var("p_y",20000);
 
-  set_var("rho_0",1);
-  set_var("rho_x",0.1);
-  set_var("rho_y",0.15);
+  err += set_var("rho_0",1);
+  err += set_var("rho_x",0.1);
+  err += set_var("rho_y",0.15);
 
-  set_var("u_0",70);
-  set_var("u_x",4);
-  set_var("u_y",-12);
+  err += set_var("u_0",70);
+  err += set_var("u_x",4);
+  err += set_var("u_y",-12);
 
-  set_var("v_0",90);
-  set_var("v_x",-20);
-  set_var("v_y",4);
+  err += set_var("v_0",90);
+  err += set_var("v_x",-20);
+  err += set_var("v_y",4);
 
   // all Z components are 0
-  set_var("w_0",0);
-  set_var("w_x",0);
-  set_var("w_y",0);
+  err += set_var("w_0",0);
+  err += set_var("w_x",0);
+  err += set_var("w_y",0);
 
-  set_var("w_z",0);
-  set_var("v_z",0);
-  set_var("u_z",0);
-  set_var("rho_z",0);
-  set_var("a_vz",0);
-  set_var("a_uz",0);
-  set_var("a_rhoz",0);  
-  set_var("a_pz",0);
-  set_var("a_wz",0.0);
-  set_var("p_z",0);
+  err += set_var("w_z",0);
+  err += set_var("v_z",0);
+  err += set_var("u_z",0);
+  err += set_var("rho_z",0);
+  err += set_var("a_vz",0);
+  err += set_var("a_uz",0);
+  err += set_var("a_rhoz",0);  
+  err += set_var("a_pz",0);
+  err += set_var("a_wz",0.0);
+  err += set_var("p_z",0);
 
+  return err;
 
 } // done with variable initializer
 

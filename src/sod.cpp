@@ -75,11 +75,15 @@ MASA::sod_1d::sod_1d()
 
 }//done with constructor
 
-void MASA::sod_1d::init_var()
+int MASA::sod_1d::init_var()
 {
-  set_var("Gamma",1.4e0);
+  int err = 0;
+
+  err += set_var("Gamma",1.4e0);
   double temp = ((Gamma - 1.e0) / (Gamma + 1.e0));
-  set_var("mu",temp);
+  err += set_var("mu",temp);
+
+  return err;
 
 } // done with variable initializer
 

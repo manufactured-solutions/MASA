@@ -224,8 +224,7 @@ void MASA::masa_set_param(string param,double paramval)
 int MASA::masa_init_param()
 {
   verify_pointer_sanity();
-  masa_master_pointer->init_var();
-  return 0;
+  return masa_master_pointer->init_var();
 }
 
 //

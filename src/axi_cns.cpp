@@ -73,33 +73,35 @@ MASA::axi_cns::axi_cns()
 
 }//done with constructor
 
-void MASA::axi_cns::init_var()
+int MASA::axi_cns::init_var()
 {
+  int err = 0;
 
   // currently randomly generated
-  set_var("R",1.01);
-  set_var("k",.1791);
+  err += set_var("R",1.01);
+  err += set_var("k",.1791);
 
-  set_var("p_0",.381);
-  set_var("p_1",.1791);
-  set_var("rho_0",.1791);
-  set_var("rho_1",.1791);
-  set_var("u_1",.1791);
-  set_var("w_0",.1791);
-  set_var("w_1",.1791);
-  set_var("a_pr",.1791);
-  set_var("a_pz",.1791);
-  set_var("a_rhor",.1791);
-  set_var("a_rhoz",.1791);
-  set_var("a_ur",.1791);
-  set_var("a_uz",.1791);
-  set_var("a_wr",.1791);
-  set_var("a_wz",.1791);
-  set_var("L",1);
+  err += set_var("p_0",.381);
+  err += set_var("p_1",.1791);
+  err += set_var("rho_0",.1791);
+  err += set_var("rho_1",.1791);
+  err += set_var("u_1",.1791);
+  err += set_var("w_0",.1791);
+  err += set_var("w_1",.1791);
+  err += set_var("a_pr",.1791);
+  err += set_var("a_pz",.1791);
+  err += set_var("a_rhor",.1791);
+  err += set_var("a_rhoz",.1791);
+  err += set_var("a_ur",.1791);
+  err += set_var("a_uz",.1791);
+  err += set_var("a_wr",.1791);
+  err += set_var("a_wz",.1791);
+  err += set_var("L",1);
 
-  set_var("Gamma",.1791);
-  set_var("mu",.1791);
+  err += set_var("Gamma",.1791);
+  err += set_var("mu",.1791);
 
+  return err;
 
 } // done with variable initializer
 

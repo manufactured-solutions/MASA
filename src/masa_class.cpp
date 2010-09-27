@@ -102,7 +102,7 @@ void MASA::manufactured_solution::display_var()
   
 } // done with display all variable names
 
-void MASA::manufactured_solution::set_var(string var, double val)
+int MASA::manufactured_solution::set_var(string var, double val)
 {
   int selector=1;
   int error=1;
@@ -125,8 +125,10 @@ void MASA::manufactured_solution::set_var(string var, double val)
   else 
     {      
       cout << "\nMASA ERROR:: No such variable (" << var << ") exists to be set\n";
-      return;
+      return 1;
     } 
+
+  return 0;
 
 }// done with set_var function
 
@@ -145,7 +147,7 @@ int MASA::manufactured_solution::sanity_check()
   
   if(varmap.size() != num_vars)
     {
-      cout << "\n MASA FATAL ERROR:: mismatch in number of variables registered.\n"; 
+      cout << "\n MASA Warning:: mismatch in number of variables registered.\n"; 
       cout << "Are you calling the method manufactured_solution.register_var? This could be causing the error.\n"; 
       cout << "varmap.size() = " << varmap.size() << "; num_vars = " << num_vars << endl << endl;
       exit(1);
@@ -163,13 +165,13 @@ int MASA::manufactured_solution::sanity_check()
 
 }// done with set_var function
 
-void MASA::manufactured_solution::register_var(string in,double* var)
+int MASA::manufactured_solution::register_var(string in,double* var)
 {
   // first, check to ensure that no such variable has already been mapped
   if(varmap[in] <= 0) // 0 implies variable has not been registered
     {  
       // if variable has not been registered, register the variable
-      num_vars++;           // this is not a bug-- we want to step num_vars up by one ONLY when adding a new variable.
+      num_vars++;           // we want to step num_vars up by one ONLY when adding a new variable.
       varmap[in]=num_vars;
       *var=MASA_VAR_DEFAULT;
       vararr.push_back(var);
@@ -181,8 +183,10 @@ void MASA::manufactured_solution::register_var(string in,double* var)
       string error;
       return_name(&error);
       cout << " Info: error occured while constructing " << error << endl << endl;
-      exit(1);      
+      return 1;
     }
+
+  return 0; // smooth sailing
   
 }// done with set_var function
 
@@ -346,4 +350,21 @@ int MASA::manufactured_solution::poly_test()
   if( fabs( d3x - derivs[3] ) > double_tol ) return_flag = 1;
 
   return return_flag;
+}
+
+int MASA::masa_test::init_var()
+{
+  int err = 0;
+
+  // WARNING: this is designed to fail! 
+  // This function tests the MASA error handling for: 
+  // registering two variables of the same name
+  err += register_var("A_x",&demo_var_2);   
+  err += register_var("A_x",&demo_var_3); 
+
+  // note: does not have to be the same variable,
+  // just same variable identifier string
+
+  return err;
+
 }

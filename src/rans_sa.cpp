@@ -74,29 +74,32 @@ MASA::rans_sa::rans_sa()
 
 }// done with constructor
 
-void MASA::rans_sa::init_var()
+int MASA::rans_sa::init_var()
 {
+  int err = 0;
 
   // currently randomly generated -- these are placeholders for now!
   double twothirds=(double)2/3;
 
-  set_var("cb1",      0.1355);
-  set_var("cb2",       0.622);
-  set_var("cv1",         7.1);
-  set_var("cw2",         0.3);
-  set_var("cw3",           2);
-  set_var("sigma", twothirds);
-  set_var("kappa",      0.41);
+  err += set_var("cb1",      0.1355);
+  err += set_var("cb2",       0.622);
+  err += set_var("cv1",         7.1);
+  err += set_var("cw2",         0.3);
+  err += set_var("cw3",           2);
+  err += set_var("sigma", twothirds);
+  err += set_var("kappa",      0.41);
   //set_var("re_tau",     1000);
 
   // use lower re_tau for default.  this
   // lengthens in the inner region and
   // allows us to achieve asymptotic
   // results with coarser meshes.
-  set_var("re_tau",     100); 
+  err += set_var("re_tau",     100); 
 
-  set_var("cv2",         0.7);
-  set_var("cv3",         0.9);
+  err += set_var("cv2",         0.7);
+  err += set_var("cv3",         0.9);
+
+  return err;
 
 } // done with variable initializer
 

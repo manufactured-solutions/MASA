@@ -55,9 +55,12 @@ int main()
   // we are intentionally not setting k_0
 
   // test error on sanity check when user has not initialized variables
-  masa_sanity_check();
-
-
+  int err = masa_sanity_check();
+  if(err!=1)
+    {
+      cout << "masa_sanity_check FAILED\n";
+      return 1;
+    }
 
   // now try to 'get_var' that does not exist
   test = masa_get_param("A_1");
@@ -65,6 +68,7 @@ int main()
     {
       cout << "REGRESSION TEST FAILED: masa_get_param error condition not triggered\n";
     }
+
 
   // fatal error check:
   //masa_init("temp-test-1d","heateq_1d_steady_const");

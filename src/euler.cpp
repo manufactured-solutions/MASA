@@ -68,24 +68,28 @@ MASA::euler_1d::euler_1d()
 
 }//done with constructor
 
-void MASA::euler_1d::init_var()
+int MASA::euler_1d::init_var()
 {
-  // randomly generated
-  set_var("R",1.01);
-  set_var("k",1.38);
+  int err = 0;
 
-  set_var("u_0",.191);
-  set_var("u_x",1.63);
-  set_var("rho_0",91.5);
-  set_var("rho_x",5.13);
-  set_var("p_0",.1984);
-  set_var("p_x",3.151);
-  set_var("a_px",6.151);
-  set_var("a_rhox",1.2);
-  set_var("a_ux",.03);
-  set_var("L",3.02);
-  set_var("Gamma",16.1);
-  set_var("mu",.091);
+  // randomly generated
+  err += set_var("R",1.01);
+  err += set_var("k",1.38);
+
+  err += set_var("u_0",.191);
+  err += set_var("u_x",1.63);
+  err += set_var("rho_0",91.5);
+  err += set_var("rho_x",5.13);
+  err += set_var("p_0",.1984);
+  err += set_var("p_x",3.151);
+  err += set_var("a_px",6.151);
+  err += set_var("a_rhox",1.2);
+  err += set_var("a_ux",.03);
+  err += set_var("L",3.02);
+  err += set_var("Gamma",16.1);
+  err += set_var("mu",.091);
+
+  return err;
 
 } // done with variable initializer
 
@@ -184,36 +188,39 @@ MASA::euler_2d::euler_2d()
 
 }//done with constructor
 
-void MASA::euler_2d::init_var()
+int MASA::euler_2d::init_var()
 {
+  int err = 0;
 
   // currently randomly generated
-  set_var("R",1.01);
-  set_var("k",1.38);
+  err += set_var("R",1.01);
+  err += set_var("k",1.38);
 
-  set_var("u_0",1.23);
-  set_var("u_x",1.1);
-  set_var("u_y",.08);
-  set_var("v_0",12);
-  set_var("v_x",1.6);
-  set_var("v_y",.67);
-  set_var("rho_0",1.02);
-  set_var("rho_x",7.2);
-  set_var("rho_y",9.8);
-  set_var("p_0",1.2);
-  set_var("p_x",.91);
-  set_var("p_y",.623);
-  set_var("a_px",.165);
-  set_var("a_py",.612);
-  set_var("a_rhox",.627);
-  set_var("a_rhoy",.828);
-  set_var("a_ux",.1987);
-  set_var("a_uy",1.189);
-  set_var("a_vx",1.91);
-  set_var("a_vy",2.901);
-  set_var("Gamma",1.01);
-  set_var("mu",.918);
-  set_var("L",3.02);
+  err += set_var("u_0",1.23);
+  err += set_var("u_x",1.1);
+  err += set_var("u_y",.08);
+  err += set_var("v_0",12);
+  err += set_var("v_x",1.6);
+  err += set_var("v_y",.67);
+  err += set_var("rho_0",1.02);
+  err += set_var("rho_x",7.2);
+  err += set_var("rho_y",9.8);
+  err += set_var("p_0",1.2);
+  err += set_var("p_x",.91);
+  err += set_var("p_y",.623);
+  err += set_var("a_px",.165);
+  err += set_var("a_py",.612);
+  err += set_var("a_rhox",.627);
+  err += set_var("a_rhoy",.828);
+  err += set_var("a_ux",.1987);
+  err += set_var("a_uy",1.189);
+  err += set_var("a_vx",1.91);
+  err += set_var("a_vy",2.901);
+  err += set_var("Gamma",1.01);
+  err += set_var("mu",.918);
+  err += set_var("L",3.02);
+
+  return err;
 
 } // done with variable initializer
 
@@ -340,51 +347,54 @@ MASA::euler_3d::euler_3d()
 
 }//done with constructor
 
-void MASA::euler_3d::init_var()
+int MASA::euler_3d::init_var()
 {
+  int err = 0;
 
   // set params (random currenly)
-  set_var("R",1.01);
-  set_var("k",1.38);
+  err += set_var("R",1.01);
+  err += set_var("k",1.38);
 
-  set_var("u_0",2.27);
-  set_var("u_x",6.00);
-  set_var("u_y",5.35);
-  set_var("u_z",5.34);
-  set_var("v_0",3.46);
-  set_var("v_x",6.13);
-  set_var("v_y",.54);
-  set_var("v_z",.30);
-  set_var("w_0",.411);
-  set_var("w_x",3.14);
-  set_var("w_y",5.68);
-  set_var("w_z",6.51);
-  set_var("rho_0",1.63);
-  set_var("rho_x",4.7);
-  set_var("rho_y",20.85);
-  set_var("rho_z",12.15);
-  set_var("p_0",50.135);
-  set_var("p_x",.73);
-  set_var("p_y",49);
-  set_var("p_z",60.8);
-  set_var("a_px",388.8);
-  set_var("a_py",40.1);
-  set_var("a_pz",38.5);
-  set_var("a_rhox",.82);
-  set_var("a_rhoy",.41);
-  set_var("a_rhoz",.44);
-  set_var("a_ux",.46);
-  set_var("a_uy",.425);
-  set_var("a_uz",.42);
-  set_var("a_vx",.52);
-  set_var("a_vy",.23);
-  set_var("a_vz",16.2);
-  set_var("a_wx",11.05);
-  set_var("a_wy",21.8);
-  set_var("a_wz",13.6);
-  set_var("Gamma",27.5);
-  set_var("mu",12.01);
-  set_var("L",3.02);
+  err += set_var("u_0",2.27);
+  err += set_var("u_x",6.00);
+  err += set_var("u_y",5.35);
+  err += set_var("u_z",5.34);
+  err += set_var("v_0",3.46);
+  err += set_var("v_x",6.13);
+  err += set_var("v_y",.54);
+  err += set_var("v_z",.30);
+  err += set_var("w_0",.411);
+  err += set_var("w_x",3.14);
+  err += set_var("w_y",5.68);
+  err += set_var("w_z",6.51);
+  err += set_var("rho_0",1.63);
+  err += set_var("rho_x",4.7);
+  err += set_var("rho_y",20.85);
+  err += set_var("rho_z",12.15);
+  err += set_var("p_0",50.135);
+  err += set_var("p_x",.73);
+  err += set_var("p_y",49);
+  err += set_var("p_z",60.8);
+  err += set_var("a_px",388.8);
+  err += set_var("a_py",40.1);
+  err += set_var("a_pz",38.5);
+  err += set_var("a_rhox",.82);
+  err += set_var("a_rhoy",.41);
+  err += set_var("a_rhoz",.44);
+  err += set_var("a_ux",.46);
+  err += set_var("a_uy",.425);
+  err += set_var("a_uz",.42);
+  err += set_var("a_vx",.52);
+  err += set_var("a_vy",.23);
+  err += set_var("a_vz",16.2);
+  err += set_var("a_wx",11.05);
+  err += set_var("a_wy",21.8);
+  err += set_var("a_wz",13.6);
+  err += set_var("Gamma",27.5);
+  err += set_var("mu",12.01);
+  err += set_var("L",3.02);
+
+  return err;
 
 } // done with variable initializer
 
