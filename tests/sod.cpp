@@ -67,4 +67,10 @@ int main()
 	out = masa_eval_rho_u_source(x,t);
       } //done iterating
   
+  // now test rarefaction wave before origin
+  x = -1;
+  t =  1;
+  out = masa_eval_rho_source(x,t);
+  out = masa_eval_rho_u_source(x,t);
+  
 }// end program
