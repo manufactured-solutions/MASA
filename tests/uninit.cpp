@@ -216,9 +216,9 @@ int main()
   if(derr != -1.33) 
     err += 1;
   
-  //derr = masa_eval_t_an(x,y,z,t);
-  //if(derr != -1.33) 
-  //err += 1;
+  derr = masa_eval_t_an(x,y,z,t);
+  if(derr != -1.33) 
+  err += 1;
 
   derr = masa_eval_u_an(x,y,z);
   if(derr != -1.33) 

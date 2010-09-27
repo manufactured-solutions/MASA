@@ -503,6 +503,12 @@ double MASA::masa_eval_t_an(double x,double y,double z)
   return masa_master_pointer->eval_an_t(x,y,z);
 }
 
+double MASA::masa_eval_t_an(double x,double y,double z,double t)
+{
+  verify_pointer_sanity();
+  return masa_master_pointer->eval_an_t(x,y,z,t);
+}
+
 double MASA::masa_eval_u_an(double x,double y,double z)
 {
   verify_pointer_sanity();

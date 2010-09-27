@@ -96,6 +96,7 @@ namespace MASA
     virtual double eval_an_t(double)                {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
     virtual double eval_an_t(double,double)         {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
     virtual double eval_an_t(double,double,double)  {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
+    virtual double eval_an_t(double,double,double,double)  {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 4d problems
 
     virtual double eval_an_u(double)                {cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
     virtual double eval_an_u(double,double)         {cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
