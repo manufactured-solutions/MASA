@@ -58,7 +58,7 @@ int main()
       return 1;
     }
 
-  err = masa_init("masa-test","MASA_test_function");
+  err = masa_init("masa-test","MASA_test");
   if(err!=0)
     {
       cout << "masa_init FAILED\n";

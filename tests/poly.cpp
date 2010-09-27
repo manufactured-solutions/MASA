@@ -38,6 +38,6 @@ using namespace MASA;
 
 int main()
 {
-  masa_init("masa-test","MASA_test_function");
+  masa_init("masa-test","MASA_test");
   return masa_test_poly();
 }

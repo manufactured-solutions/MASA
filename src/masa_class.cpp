@@ -280,7 +280,7 @@ MASA::masa_test::masa_test()
 {
   // here, we load up the map so we can key to specific variables
   // using input
-  mmsname = "masa_test_function";
+  mmsname = "masa_test";
   dimension = 1;
 
   register_var("dummy",&dummy);

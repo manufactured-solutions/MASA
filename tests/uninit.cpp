@@ -51,15 +51,17 @@ int main()
   double z=0;
   double t=0;
   
-  masa_init("masa-test","MASA_test_function");
+  masa_init("masa-test","MASA_test");
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa.
   freopen("/dev/null","w",stdout);
 
   // start testing uninitialized functions
-  masa_init_param();
-
+  derr = masa_init_param();
+  if(derr != 1) 
+    err += 1;
+  
   // --------------------------------
   // source term(s) -- 1D
   // --------------------------------
