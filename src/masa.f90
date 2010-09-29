@@ -115,10 +115,6 @@ module masa
   ! MMS source term interfaces -- 1d
   ! ---------------------------------
 
-  ! TODO: only functions which have character strings as arguments
-  ! need the passthrough treatment; update source terms to access C
-  ! api directly; i just did the 1D source terms so far....
-
   interface 
      real (c_double) function masa_eval_1d_t_source(value) bind (C,name='cmasa_eval_1d_t_source')
        use iso_c_binding
@@ -164,58 +160,58 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_2d_t_source_passthrough(value,value2) bind (C,name='cmasa_eval_2d_t_source')
+     real (c_double) function masa_eval_2d_t_source(value,value2) bind (C,name='cmasa_eval_2d_t_source')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_t_source_passthrough
+     end function masa_eval_2d_t_source
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_u_source_passthrough(value,value2) bind (C,name='cmasa_eval_2d_u_source')
+     real (c_double) function masa_eval_2d_u_source(value,value2) bind (C,name='cmasa_eval_2d_u_source')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
 
-     end function masa_eval_2d_u_source_passthrough
+     end function masa_eval_2d_u_source
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_v_source_passthrough(value,value2) bind (C,name='cmasa_eval_2d_v_source')
+     real (c_double) function masa_eval_2d_v_source(value,value2) bind (C,name='cmasa_eval_2d_v_source')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_v_source_passthrough
+     end function masa_eval_2d_v_source
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_e_source_passthrough(value,value2) bind (C,name='cmasa_eval_2d_e_source')
+     real (c_double) function masa_eval_2d_e_source(value,value2) bind (C,name='cmasa_eval_2d_e_source')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_e_source_passthrough
+     end function masa_eval_2d_e_source
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_rho_source_passthrough(value,value2) bind (C,name='cmasa_eval_2d_rho_source')
+     real (c_double) function masa_eval_2d_rho_source(value,value2) bind (C,name='cmasa_eval_2d_rho_source')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_rho_source_passthrough
+     end function masa_eval_2d_rho_source
   end interface  
 
   ! ---------------------------------
@@ -223,7 +219,7 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_3d_t_source_passthrough(value,value2,value3) bind (C,name='cmasa_eval_3d_t_source')
+     real (c_double) function masa_eval_3d_t_source(value,value2,value3) bind (C,name='cmasa_eval_3d_t_source')
        use iso_c_binding
        implicit none
        
@@ -231,11 +227,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3
        
-     end function masa_eval_3d_t_source_passthrough
+     end function masa_eval_3d_t_source
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_u_source_passthrough(value,value2,value3) bind (C,name='cmasa_eval_3d_u_source')
+     real (c_double) function masa_eval_3d_u_source(value,value2,value3) bind (C,name='cmasa_eval_3d_u_source')
        use iso_c_binding
        implicit none
        
@@ -243,11 +239,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3
        
-     end function masa_eval_3d_u_source_passthrough
+     end function masa_eval_3d_u_source
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_v_source_passthrough(value,value2,value3) bind (C,name='cmasa_eval_3d_v_source')
+     real (c_double) function masa_eval_3d_v_source(value,value2,value3) bind (C,name='cmasa_eval_3d_v_source')
        use iso_c_binding
        implicit none
        
@@ -255,11 +251,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
 
-     end function masa_eval_3d_v_source_passthrough
+     end function masa_eval_3d_v_source
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_w_source_passthrough(value,value2,value3) bind (C,name='cmasa_eval_3d_w_source')
+     real (c_double) function masa_eval_3d_w_source(value,value2,value3) bind (C,name='cmasa_eval_3d_w_source')
        use iso_c_binding
        implicit none
        
@@ -267,11 +263,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
 
-     end function masa_eval_3d_w_source_passthrough
+     end function masa_eval_3d_w_source
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_e_source_passthrough(value,value2,value3) bind (C,name='cmasa_eval_3d_e_source')
+     real (c_double) function masa_eval_3d_e_source(value,value2,value3) bind (C,name='cmasa_eval_3d_e_source')
        use iso_c_binding
        implicit none
        
@@ -279,11 +275,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3
        
-     end function masa_eval_3d_e_source_passthrough
+     end function masa_eval_3d_e_source
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_rho_source_passthrough(value,value2,value3) bind (C,name='cmasa_eval_3d_rho_source')
+     real (c_double) function masa_eval_3d_rho_source(value,value2,value3) bind (C,name='cmasa_eval_3d_rho_source')
        use iso_c_binding
        implicit none
        
@@ -291,7 +287,7 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
 
-     end function masa_eval_3d_rho_source_passthrough
+     end function masa_eval_3d_rho_source
   end interface  
 
   ! ---------------------------------
@@ -299,43 +295,43 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_1d_t_an_passthrough(value) bind (C,name='cmasa_eval_1d_t_an')
+     real (c_double) function masa_eval_1d_t_an(value) bind (C,name='cmasa_eval_1d_t_an')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_t_an_passthrough
+     end function masa_eval_1d_t_an
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_u_an_passthrough(value) bind (C,name='cmasa_eval_1d_u_an')
+     real (c_double) function masa_eval_1d_u_an(value) bind (C,name='cmasa_eval_1d_u_an')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_u_an_passthrough
+     end function masa_eval_1d_u_an
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_p_an_passthrough(value) bind (C,name='cmasa_eval_1d_p_an')
+     real (c_double) function masa_eval_1d_p_an(value) bind (C,name='cmasa_eval_1d_p_an')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_p_an_passthrough
+     end function masa_eval_1d_p_an
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_rho_an_passthrough(value) bind (C,name='cmasa_eval_1d_rho_an')
+     real (c_double) function masa_eval_1d_rho_an(value) bind (C,name='cmasa_eval_1d_rho_an')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_rho_an_passthrough
+     end function masa_eval_1d_rho_an
   end interface
 
   ! ---------------------------------
@@ -343,58 +339,58 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_2d_t_an_passthrough(value,value2) bind (C,name='cmasa_eval_2d_t_an')
+     real (c_double) function masa_eval_2d_t_an(value,value2) bind (C,name='cmasa_eval_2d_t_an')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_t_an_passthrough
+     end function masa_eval_2d_t_an
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_u_an_passthrough(value,value2) bind (C,name='cmasa_eval_2d_u_an')
+     real (c_double) function masa_eval_2d_u_an(value,value2) bind (C,name='cmasa_eval_2d_u_an')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_u_an_passthrough
+     end function masa_eval_2d_u_an
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_v_an_passthrough(value,value2) bind (C,name='cmasa_eval_2d_v_an')
+     real (c_double) function masa_eval_2d_v_an(value,value2) bind (C,name='cmasa_eval_2d_v_an')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_v_an_passthrough
+     end function masa_eval_2d_v_an
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_p_an_passthrough(value,value2) bind (C,name='cmasa_eval_2d_p_an')
+     real (c_double) function masa_eval_2d_p_an(value,value2) bind (C,name='cmasa_eval_2d_p_an')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_p_an_passthrough
+     end function masa_eval_2d_p_an
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_rho_an_passthrough(value,value2) bind (C,name='cmasa_eval_2d_rho_an')
+     real (c_double) function masa_eval_2d_rho_an(value,value2) bind (C,name='cmasa_eval_2d_rho_an')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_rho_an_passthrough
+     end function masa_eval_2d_rho_an
   end interface
 
   ! ---------------------------------
@@ -402,7 +398,7 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_3d_t_an_passthrough(value,value2,value3) bind (C,name='cmasa_eval_3d_t_an')
+     real (c_double) function masa_eval_3d_t_an(value,value2,value3) bind (C,name='cmasa_eval_3d_t_an')
        use iso_c_binding
        implicit none
        
@@ -410,11 +406,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
 
-     end function masa_eval_3d_t_an_passthrough
+     end function masa_eval_3d_t_an
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_u_an_passthrough(value,value2,value3) bind (C,name='cmasa_eval_3d_u_an')
+     real (c_double) function masa_eval_3d_u_an(value,value2,value3) bind (C,name='cmasa_eval_3d_u_an')
        use iso_c_binding
        implicit none
        
@@ -422,11 +418,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
        
-     end function masa_eval_3d_u_an_passthrough
+     end function masa_eval_3d_u_an
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_v_an_passthrough(value,value2,value3) bind (C,name='cmasa_eval_3d_v_an')
+     real (c_double) function masa_eval_3d_v_an(value,value2,value3) bind (C,name='cmasa_eval_3d_v_an')
        use iso_c_binding
        implicit none
        
@@ -434,11 +430,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
        
-     end function masa_eval_3d_v_an_passthrough
+     end function masa_eval_3d_v_an
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_w_an_passthrough(value,value2,value3) bind (C,name='cmasa_eval_3d_w_an')
+     real (c_double) function masa_eval_3d_w_an(value,value2,value3) bind (C,name='cmasa_eval_3d_w_an')
        use iso_c_binding
        implicit none
        
@@ -446,11 +442,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
        
-     end function masa_eval_3d_w_an_passthrough
+     end function masa_eval_3d_w_an
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_p_an_passthrough(value,value2,value3) bind (C,name='cmasa_eval_3d_p_an')
+     real (c_double) function masa_eval_3d_p_an(value,value2,value3) bind (C,name='cmasa_eval_3d_p_an')
        use iso_c_binding
        implicit none
        
@@ -458,11 +454,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
        
-     end function masa_eval_3d_p_an_passthrough
+     end function masa_eval_3d_p_an
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_rho_an_passthrough(value,value2,value3) bind (C,name='cmasa_eval_3d_rho_an')
+     real (c_double) function masa_eval_3d_rho_an(value,value2,value3) bind (C,name='cmasa_eval_3d_rho_an')
        use iso_c_binding
        implicit none
        
@@ -470,7 +466,7 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
        
-     end function masa_eval_3d_rho_an_passthrough
+     end function masa_eval_3d_rho_an
   end interface
   
 contains 
@@ -522,335 +518,5 @@ contains
     call masa_set_param_passthrough(param_name//C_NULL_CHAR,value)
 
   end subroutine masa_set_param
-
-  !# -----------------------------------------------------------------------
-  !#
-  !#  2D Source Terms
-  !#
-  !# -----------------------------------------------------------------------
-
-  real (C_double) function masa_eval_2d_t_source(value,value2)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    
-    masa_eval_2d_t_source = masa_eval_2d_t_source_passthrough(value,value2)
-
-  end function  masa_eval_2d_t_source
-
-  real (C_double) function masa_eval_2d_u_source(value,value2)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    
-    masa_eval_2d_u_source = masa_eval_2d_u_source_passthrough(value,value2)
-
-  end function  masa_eval_2d_u_source
-
-  real (C_double) function masa_eval_2d_v_source(value,value2)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    
-    masa_eval_2d_v_source = masa_eval_2d_v_source_passthrough(value,value2)
-    
-  end function  masa_eval_2d_v_source
-
-  real (C_double) function masa_eval_2d_e_source(value,value2)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    
-    masa_eval_2d_e_source = masa_eval_2d_e_source_passthrough(value,value2)
-    
-  end function  masa_eval_2d_e_source
-
-  real (C_double) function masa_eval_2d_rho_source(value,value2)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    
-    masa_eval_2d_rho_source = masa_eval_2d_rho_source_passthrough(value,value2)
-
-  end function  masa_eval_2d_rho_source
-  
-  !# -----------------------------------------------------------------------
-  !#
-  !#  3D Source Terms
-  !#
-  !# -----------------------------------------------------------------------
-
-  real (C_double) function masa_eval_3d_t_source(value,value2,value3)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value :: value
-    real (c_double), intent(in), value :: value2
-    real (c_double), intent(in), value :: value3       
-    
-    masa_eval_3d_t_source = masa_eval_3d_t_source_passthrough(value,value2,value3)
-
-  end function  masa_eval_3d_t_source
-
-  real (C_double) function masa_eval_3d_u_source(value,value2,value3)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    real (c_double), intent(in), value  :: value3       
-    
-    masa_eval_3d_u_source = masa_eval_3d_u_source_passthrough(value,value2,value3)
-
-  end function  masa_eval_3d_u_source
-
-  real (C_double) function masa_eval_3d_v_source(value,value2,value3)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    real (c_double), intent(in), value  :: value3       
-    
-    masa_eval_3d_v_source = masa_eval_3d_v_source_passthrough(value,value2,value3)
-    
-  end function  masa_eval_3d_v_source
-
-  real (C_double) function masa_eval_3d_w_source(value,value2,value3)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    real (c_double), intent(in), value  :: value3       
-    
-    masa_eval_3d_w_source = masa_eval_3d_w_source_passthrough(value,value2,value3)
-    
-  end function  masa_eval_3d_w_source
-
-  real (C_double) function masa_eval_3d_e_source(value,value2,value3)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    real (c_double), intent(in), value  :: value3       
-    
-    masa_eval_3d_e_source = masa_eval_3d_e_source_passthrough(value,value2,value3)
-    
-  end function  masa_eval_3d_e_source
-
-  real (C_double) function masa_eval_3d_rho_source(value,value2,value3)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    real (c_double), intent(in), value  :: value3       
-    
-    masa_eval_3d_rho_source = masa_eval_3d_rho_source_passthrough(value,value2,value3)
-
-  end function  masa_eval_3d_rho_source
-
-  !# -----------------------------------------------------------------------
-  !#
-  !#  1D analytical Terms
-  !#
-  !# -----------------------------------------------------------------------
-
-  real (C_double) function masa_eval_1d_t_an(value)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    
-    masa_eval_1d_t_an = masa_eval_1d_t_an_passthrough(value)
-
-  end function  masa_eval_1d_t_an
-
-
-  real (C_double) function masa_eval_1d_u_an(value)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    
-    masa_eval_1d_u_an = masa_eval_1d_u_an_passthrough(value)
-
-  end function  masa_eval_1d_u_an
-
-  real (C_double) function masa_eval_1d_p_an(value)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    
-    masa_eval_1d_p_an = masa_eval_1d_p_an_passthrough(value)
-    
-  end function  masa_eval_1d_p_an
-
-  real (C_double) function masa_eval_1d_rho_an(value)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    
-    masa_eval_1d_rho_an = masa_eval_1d_rho_an_passthrough(value)
-    
-  end function  masa_eval_1d_rho_an
-  
-
-  !# -----------------------------------------------------------------------
-  !#
-  !#  2D Source Terms
-  !#
-  !# -----------------------------------------------------------------------
-
-  real (C_double) function masa_eval_2d_t_an(value,value2)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    
-    masa_eval_2d_t_an = masa_eval_2d_t_an_passthrough(value,value2)
-
-  end function  masa_eval_2d_t_an
-
-  real (C_double) function masa_eval_2d_u_an(value,value2)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    
-    masa_eval_2d_u_an = masa_eval_2d_u_an_passthrough(value,value2)
-
-  end function  masa_eval_2d_u_an
-
-  real (C_double) function masa_eval_2d_v_an(value,value2)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    
-    masa_eval_2d_v_an = masa_eval_2d_v_an_passthrough(value,value2)
-    
-  end function  masa_eval_2d_v_an
-
-  real (C_double) function masa_eval_2d_p_an(value,value2)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    
-    masa_eval_2d_p_an = masa_eval_2d_p_an_passthrough(value,value2)
-    
-  end function  masa_eval_2d_p_an
-
-  real (C_double) function masa_eval_2d_rho_an(value,value2)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    
-    masa_eval_2d_rho_an = masa_eval_2d_rho_an_passthrough(value,value2)
-
-  end function  masa_eval_2d_rho_an
-  
-  !# -----------------------------------------------------------------------
-  !#
-  !#  3D Source Terms
-  !#
-  !# -----------------------------------------------------------------------
-
-  real (C_double) function masa_eval_3d_t_an(value,value2,value3)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    real (c_double), intent(in), value  :: value3       
-    
-    masa_eval_3d_t_an = masa_eval_3d_t_an_passthrough(value,value2,value3)
-
-  end function  masa_eval_3d_t_an
-
-  real (C_double) function masa_eval_3d_u_an(value,value2,value3)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    real (c_double), intent(in), value  :: value3       
-    
-    masa_eval_3d_u_an = masa_eval_3d_u_an_passthrough(value,value2,value3)
-
-  end function  masa_eval_3d_u_an
-
-  real (C_double) function masa_eval_3d_v_an(value,value2,value3)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    real (c_double), intent(in), value  :: value3       
-    
-    masa_eval_3d_v_an = masa_eval_3d_v_an_passthrough(value,value2,value3)
-    
-  end function  masa_eval_3d_v_an
-
-  real (C_double) function masa_eval_3d_w_an(value,value2,value3)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    real (c_double), intent(in), value  :: value3       
-    
-    masa_eval_3d_w_an = masa_eval_3d_w_an_passthrough(value,value2,value3)
-    
-  end function  masa_eval_3d_w_an
-
-  real (C_double) function masa_eval_3d_p_an(value,value2,value3)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    real (c_double), intent(in), value  :: value3       
-    
-    masa_eval_3d_p_an = masa_eval_3d_p_an_passthrough(value,value2,value3)
-    
-  end function  masa_eval_3d_p_an
-
-  real (C_double) function masa_eval_3d_rho_an(value,value2,value3)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    real (c_double), intent(in), value  :: value2
-    real (c_double), intent(in), value  :: value3       
-    
-    masa_eval_3d_rho_an = masa_eval_3d_rho_an_passthrough(value,value2,value3)
-
-  end function  masa_eval_3d_rho_an
-
-  !# -----------------------------------------------------------------------
-  !#     finis
-  !# -----------------------------------------------------------------------
 
 end module masa
