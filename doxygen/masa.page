@@ -55,7 +55,7 @@ Copyright (C) 2010 The PECOS Development Team
 
  */
 
-/*! \page Library Overview
+/*! \page model Library Overview
 
 The MASA (Manufactured Analytical Solutions Abstraction) library is a software interface that provides access 
 to various manufactured solutions for a wide variety of differential equations. The library is written in C++, 
