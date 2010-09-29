@@ -283,7 +283,6 @@ MASA::masa_test::masa_test()
   mmsname = "masa_test";
   dimension = 1;
 
-  register_var("dummy",&dummy);
   register_var("demo_var_2",&demo_var_2);
   register_var("demo_var_3",&demo_var_3);
  
@@ -359,8 +358,8 @@ int MASA::masa_test::init_var()
   // WARNING: this is designed to fail! 
   // This function tests the MASA error handling for: 
   // registering two variables of the same name
-  err += register_var("A_x",&demo_var_2);   
-  err += register_var("A_x",&demo_var_3); 
+  err += set_var("demo_var_2",1);   
+  err += set_var("demo_var_3",2);   
 
   // note: does not have to be the same variable,
   // just same variable identifier string

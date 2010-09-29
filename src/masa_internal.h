@@ -206,6 +206,7 @@ namespace MASA
   class masa_test : public manufactured_solution 
   {
   private:
+    double dummy;
     double demo_var_2;
     double demo_var_3;
   public:
