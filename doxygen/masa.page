@@ -55,6 +55,66 @@ Copyright (C) 2010 The PECOS Development Team
 
  */
 
+/*! \page Library Overview
+
+The MASA (Manufactured Analytical Solutions Abstraction) library is a software interface that provides access 
+to various manufactured solutions for a wide variety of differential equations. The library is written in C++, 
+and provides an API for development in C and Fortran.
+
+<h2>Software Verification</h2>
+
+Verification of numerical computations, in which one asks if numerical results are an accurate representation of the solution 
+to the mathematical model that is being solved, is relatively well understood. It requires 
+careful attention to good software engineering practices, continuous software testing, and control of numerical 
+discretization errors, through error estimation and adaptivity. While verification processes are well understood, 
+they require substantial effort. As verification of numerical results is a prerequisite for reliable computational 
+predictions, verification processes are integral to all activities in scientific computation.
+
+MASA is designed to simplify the verification process by providing a common repository of manufactured solutions 
+for common problems in scientific computation. 
+
+<h2>Available Solutions</h2>
+
+Euler Equations
+Compressible Navier-Stokes 
+Sod Shock Tube 
+Various RANS models
+
+<h2>Manufactured Solution Generation</h2>
+
+The analytical solutions used in this library were generated using symbolic manipulation software, such as Maple.
+
+<h2>PECOS Center Background</h2>
+
+The Center for Predictive Engineering and COmputational Sciences (PECOS) is a DOE-funded Center 
+of Excellence within the Institute for Computational Engineering and Sciences (ICES) 
+at The University of Texas at Austin. PECOS is one of five such centers sponsored under 
+the Predictive Science Academic Alliance Program (PSAAP) of the National Nuclear Security 
+Administration’s Advanced Simulation and Computing Program.
+
+PECOS brings together an interdisciplinary, multi-university team with partners at the 
+DOE National Labs and NASA. The goal of the PECOS Center is to develop the next generation 
+of advanced computational methods for predictive simulation of multiscale, multiphysics phenomena, 
+and to apply these methods to the analysis of vehicles reentering the atmosphere. In pursuing 
+this research, PECOS is advancing the science and modeling of atmospheric reentry, and 
+the science of predictive simulation.
+
+<h2> Developers </h2>
+
+Developers of the MASA library include:
+
+Paul Bauman
+Kemelli Estacio-Hiroms
+Nicholas Malaya
+Todd Oliver
+Onkar Sahni
+Karl W. Schulz
+Chris Simmons
+Roy Stogner
+
+*/
+
+
 /*! \page installation Installation/Linkage
 
 libMASA uses the GNU autotools suite (autoconf, automake, and libtool)
