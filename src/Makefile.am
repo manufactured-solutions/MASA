@@ -32,9 +32,9 @@ version_SOURCES         = version.cpp masa.h libmasa.la
 version_LDADD           = -L$(top_builddir)/src -lmasa
 version_DEPENDENCIES    = libmasa.la
 
-#--------------------------                                                                                                    
-# Fortran Module Interface                                                                                                     
-#--------------------------                                                                                                    
+#-------------------------- 
+# Fortran Module Interface
+# --------------------------
 
 noinst_PROGRAMS         = test
 standalonedir           = @prefix@/bin

@@ -98,7 +98,9 @@ module masa
        character(c_char), intent(in) :: param_name(*)
 
      end function masa_get_param_passthrough
+  end interface
 
+  interface
      subroutine masa_set_param_passthrough(param_name,value) bind (C,name='cmasa_set_param')
        use iso_c_binding
        implicit none
@@ -113,44 +115,48 @@ module masa
   ! MMS source term interfaces -- 1d
   ! ---------------------------------
 
+  ! TODO: only functions which have character strings as arguments
+  ! need the passthrough treatment; update source terms to access C
+  ! api directly; i just did the 1D source terms so far....
+
   interface 
-     real (c_double) function masa_eval_1d_t_source_passthrough(value) bind (C,name='cmasa_eval_1d_t_source')
+     real (c_double) function masa_eval_1d_t_source(value) bind (C,name='cmasa_eval_1d_t_source')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_t_source_passthrough
+     end function masa_eval_1d_t_source
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_u_source_passthrough(value) bind (C,name='cmasa_eval_1d_u_source')
+     real (c_double) function masa_eval_1d_u_source(value) bind (C,name='cmasa_eval_1d_u_source')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_u_source_passthrough
+     end function masa_eval_1d_u_source
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_e_source_passthrough(value) bind (C,name='cmasa_eval_1d_e_source')
+     real (c_double) function masa_eval_1d_e_source(value) bind (C,name='cmasa_eval_1d_e_source')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_e_source_passthrough
+     end function masa_eval_1d_e_source
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_rho_source_passthrough(value) bind (C,name='cmasa_eval_1d_rho_source')
+     real (c_double) function masa_eval_1d_rho_source(value) bind (C,name='cmasa_eval_1d_rho_source')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_rho_source_passthrough
+     end function masa_eval_1d_rho_source
   end interface  
 
   ! ---------------------------------
@@ -516,54 +522,6 @@ contains
     call masa_set_param_passthrough(param_name//C_NULL_CHAR,value)
 
   end subroutine masa_set_param
-
-  !# -----------------------------------------------------------------------
-  !#
-  !#  1D Source Terms
-  !#
-  !# -----------------------------------------------------------------------
-
-  real (C_double) function masa_eval_1d_t_source(value)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    
-    masa_eval_1d_t_source = masa_eval_1d_t_source_passthrough(value)
-
-  end function  masa_eval_1d_t_source
-
-
-  real (C_double) function masa_eval_1d_u_source(value)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    
-    masa_eval_1d_u_source = masa_eval_1d_u_source_passthrough(value)
-
-  end function  masa_eval_1d_u_source
-
-  real (C_double) function masa_eval_1d_e_source(value)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    
-    masa_eval_1d_e_source = masa_eval_1d_e_source_passthrough(value)
-    
-  end function  masa_eval_1d_e_source
-
-  real (C_double) function masa_eval_1d_rho_source(value)
-    use iso_c_binding
-    implicit none
-    
-    real (c_double), intent(in), value  :: value
-    
-    masa_eval_1d_rho_source = masa_eval_1d_rho_source_passthrough(value)
-
-  end function  masa_eval_1d_rho_source
-
 
   !# -----------------------------------------------------------------------
   !#
