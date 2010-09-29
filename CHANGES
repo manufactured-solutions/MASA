@@ -1,6 +1,9 @@
 Version 0.21 (in progress)
 
-  * modifications to Fortran interface (no API change though)
+  * modifications to Fortran interface (no API changes)
+  * added doxygen documentation for all c/cpp/fortran functions
+  * edited navier stokes default parameters, added realizability regression test
+  * added reynolds averaged navier stokes solution
 
 Version 0.20 (23 September 2010)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.20
@@ -15,6 +18,8 @@ https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.20
   * added support for GNU code coverage analysis (--enable-coverage)
   * added support for absolute error check in regressions ( --enable-strict-tests)
   * regression testing greatly expanded--code has 95% line coverage
+  * added axisymmetric compressible navier-stokes
+  * added axisymmetric euler
 
 Version 0.10 (01 September 2010)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.10

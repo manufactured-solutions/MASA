@@ -63,8 +63,11 @@
 \brief MASA header file containing all public C/C++ API
 
 MASA.h is a header file that contains all the public objects and member functions for the C/C++ interfaces. 
-This file MUST be included in any C or C++ programs calling MASA routines. In addition, all functions are 
+To use, be sure to #include <masa.h> in any C or C++ programs calling MASA routines. In addition, all functions are 
 encapsulated in a MASA namespace, and thus C++ routines require 'using namespace MASA' for access.
+
+Several Simple examples for using these functions are provided in the examples section. 
+Functions which have an integer return value return "0" upon success.
 
 */
 
