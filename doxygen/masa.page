@@ -76,8 +76,11 @@ for common problems in scientific computation.
 <h2>Available Solutions</h2>
 
 Euler Equations
+
 Compressible Navier-Stokes 
+
 Sod Shock Tube 
+
 Various RANS models
 
 <h2>Manufactured Solution Generation</h2>
@@ -104,12 +107,19 @@ the science of predictive simulation.
 Developers of the MASA library include:
 
 Paul Bauman
+
 Kemelli Estacio-Hiroms
+
 Nicholas Malaya
+
 Todd Oliver
+
 Onkar Sahni
+
 Karl W. Schulz
+
 Chris Simmons
+
 Roy Stogner
 
 */
