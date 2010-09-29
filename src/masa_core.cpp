@@ -87,7 +87,7 @@ int MASA::masa_select_mms(string name)
 
 int get_list_mms(vector<manufactured_solution*>* anim)
 {
-  anim->push_back(new masa_test());   // test function
+  anim->push_back(new masa_test_function());   // test function
   anim->push_back(new masa_uninit()); // another test function
   
   // register solutions here
@@ -143,6 +143,10 @@ int MASA::masa_init(string unique_name, string str)
   for (vector<manufactured_solution*>::const_iterator it = anim.begin(); it != anim.end(); ++it) 
     {
       (*it)->return_name(&name); // get name
+
+      // check the name of this mms is not null!
+      if(name.empty()) {cout << "MASA FATAL ERROR:: manufactured solution has no name!\n"; exit(1);} 
+
       error=temp.rfind(name);   // look for name -- must be identical to full name, after masa_map edits
       if (error!=string::npos) // found a value
 	{
@@ -157,11 +161,7 @@ int MASA::masa_init(string unique_name, string str)
     }// done with for loop 
   
   
-  if(flag==1)
-    {      
-      //cout << "\nMASA got it\n";
-    }
-  else
+  if(flag != 1)
     {
       cout << "\nMASA FATAL ERROR: No Manufactured Solutions of that Type\n";
       exit(1); // error code, terminate

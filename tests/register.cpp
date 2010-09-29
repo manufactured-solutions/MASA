@@ -58,24 +58,24 @@ int main()
       return 1;
     }
 
-  err = masa_init("masa-test","masa_test");
-  if(err!=0)
+  err = masa_init("masa-test","masa_test_function");
+  if(err!=0) 
     {
-      cout << "masa_init FAILED\n";
+      cout << "masa_init success condition not triggered properly!\n";
       return 1;
     }
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa.
-  //freopen("/dev/null","w",stdout);
+  freopen("/dev/null","w",stdout);
 
-  /*err = masa_init_param();
-  if(err!=3) // function designed to fail for masa_test mms
+  err = masa_init_param();
+  if(err!=2) // function designed to fail (twice) for masa_test mms
     {
       cout << "masa_init fail condition not triggered properly!\n";
       return 1;
     }
-  */
+  
   return 0; // steady as she goes
 
 }

@@ -276,13 +276,17 @@ double Polynomial::get_coeffs( const int &coeff_index ) const
  * -----------------------------------------------
  */ 
 
-MASA::masa_test::masa_test()
+MASA::masa_test_function::masa_test_function()
 {
   // here, we load up the map so we can key to specific variables
   // using input
-  mmsname = "masa_test";
+  mmsname = "masa_test_function";
   dimension = 1;
 
+  // to do 
+  // WARNING: this is designed to fail! 
+  // This function tests the MASA error handling for: 
+  // registering two variables of the same name
   register_var("demo_var_2",&demo_var_2);
   register_var("demo_var_3",&demo_var_3);
  
@@ -351,18 +355,15 @@ int MASA::manufactured_solution::poly_test()
   return return_flag;
 }
 
-int MASA::masa_test::init_var()
+int MASA::masa_test_function::init_var()
 {
   int err = 0;
 
-  // WARNING: this is designed to fail! 
-  // This function tests the MASA error handling for: 
-  // registering two variables of the same name
+  // designed to fail -- 2nd var does not exist
+  // 3rd var has already been registered
   err += set_var("demo_var_2",1);   
-  err += set_var("demo_var_3",2);   
-
-  // note: does not have to be the same variable,
-  // just same variable identifier string
+  err += set_var("demo_var_12",1);   
+  err += register_var("demo_var_3",&demo_var_3);
 
   return err;
 
@@ -371,4 +372,6 @@ int MASA::masa_test::init_var()
 MASA::masa_uninit::masa_uninit()
 {
   // nothing to see here
+  mmsname = "masa_uninit";
+  dimension = 1;
 }

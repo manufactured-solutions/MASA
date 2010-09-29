@@ -203,14 +203,14 @@ namespace MASA
   // ------------------------------------------------------
 
   // just a demo class
-  class masa_test : public manufactured_solution 
+  class masa_test_function : public manufactured_solution 
   {
   private:
     double dummy;
     double demo_var_2;
     double demo_var_3;
   public:
-    masa_test(); // constructor
+    masa_test_function(); // constructor
     int init_var();        // default problem values
     int poly_test();
     //double eval_q_t(double);
