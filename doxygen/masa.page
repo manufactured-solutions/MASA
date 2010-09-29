@@ -55,33 +55,6 @@ Copyright (C) 2010 The PECOS Development Team
 
  */
 
-/*! \page inputFile Example libMASA Input File
-
-This is an example input file for use with the libGRVY parsing mechanism.
-Note that hehind the scenes, the library is using
-the <a href="http://getpot.sourceforge.net/">GetPot</a> parsing tool
-to provide a flexible parsing mechanism for C/C++ and Fortran.  Note
-that the default comment delimiter is defined as the \# sign and
-comments can begin at the beginning of a line or after a variable
-declaration to aid in documenting the input file.  The parsing
-mechansism is keyword driven and can be organized into multiple
-sections.  Consequently, you are allowed to have variables of the same
-name so long as they are within unique section definitions.  Note also
-that because the parsing mechanism is keyword driven, the input
-directives can be specified in \e arbitrary order.  There is no
-requirement to maintain a specific variable declaration pattern.
-
-<b>Important Note for Fortran Programmers</b> The input parser can
-handle double precision input using standard C style notation;
-however, it will not support Fortran's "d" delimiter. So, please specify
-double precision values as \e 1.2345e6 as opposed to \e 1.2345d6.
-
-<hr>
-
-\include pecos-input.txt
-
-*/
-
 /*! \page installation Installation/Linkage
 
 libMASA uses the GNU autotools suite (autoconf, automake, and libtool)
@@ -131,6 +104,11 @@ following will be generated.
 Initializing MASA Tests
 -------------------------------------------------------
 PASS: init.sh
+PASS: misc
+PASS: fail_cond
+PASS: register
+PASS: poly
+FAIL: uninit
 PASS: heat_const_steady
 PASS: heat_var_steady
 PASS: heat_const_unsteady
@@ -138,15 +116,23 @@ PASS: heat_var_unsteady
 PASS: euler1d
 PASS: euler2d
 PASS: euler3d
-PASS: navierstokes2d
-PASS: navierstokes3d
+PASS: ns2d
+PASS: ns3d
+PASS: ns3d_phys
+PASS: n2d3d
 PASS: axi_euler
 PASS: axi_cns
+PASS: rans_sa
+PASS: sod
  
 -------------------------------------------------------
 Initializing CMASA Tests
 -------------------------------------------------------
 PASS: c_init.sh
+PASS: c_misc
+PASS: c_heat1dsc
+PASS: c_heat2dsc
+PASS: c_heat3dsc
 PASS: c_euler1d
 PASS: c_euler2d
 PASS: c_euler3d
@@ -158,15 +144,22 @@ Initializing FortMASA Tests
 -------------------------------------------------------
  
 PASS: f_init.sh
+MASA :: selected mytest
+PASS: f_misc
+PASS: f_heat
 PASS: f_euler1d
+PASS: f_euler2d
+PASS: f_euler3d
+PASS: f_cns2d
+PASS: f_cns3d
 -------------------------------------------------------
 Finalizing MASA Tests, have a well verified day
 -------------------------------------------------------
 
 PASS: finalize.sh
-===================
-All 21 tests passed
-===================
+=====================================
+All 40 tests failed
+=====================================
 
 \endcode
 
