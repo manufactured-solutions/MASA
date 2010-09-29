@@ -114,7 +114,6 @@ Roy Stogner
 
 */
 
-
 /*! \page installation Installation/Linkage
 
 libMASA uses the GNU autotools suite (autoconf, automake, and libtool)
