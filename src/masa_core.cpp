@@ -46,7 +46,7 @@ map<string, manufactured_solution*> masa_master_list; // global map between uniq
 int masa_exit(int ex)
 {
 
-#ifdef masa_enable_exceptions
+#ifdef MASA_EXCEPTIONS
   cout << 'MASA:: caught exception ' << ex << endl;
 #else
   exit(ex);
