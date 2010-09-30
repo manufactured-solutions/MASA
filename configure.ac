@@ -71,7 +71,7 @@ AC_SUBST(FC_STRICT_TOL_CPP)
 # Check for exception handling
 #---------------------------------------------
 
-AC_ARG_ENABLE([masa_exceptions], AC_HELP_STRING([--enable-masa-exceptions],[enable exception handling in masa]),
+AC_ARG_ENABLE([masa-exceptions], AC_HELP_STRING([--enable-masa-exceptions],[enable exception handling in masa]),
  	       MASA_EXCEPTIONS=1 
 	       AC_DEFINE(MASA_EXCEPTIONS,1,[Define if exception handling enabled]),[])
 

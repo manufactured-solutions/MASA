@@ -31,6 +31,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
+#include <config.h>        // for MASA_EXCEPTIONS conditional
 #include <masa_internal.h>
 
 using namespace MASA;
@@ -47,7 +48,7 @@ void masa_exit(int ex)
 {
 
 #ifdef MASA_EXCEPTIONS
-  cout << 'MASA:: caught exception ' << ex << endl;
+  cout << "MASA:: caught exception " << ex << endl;
   throw(ex);
 #else
   cout << "MASA:: ABORTING\n";

@@ -47,7 +47,6 @@ int main()
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa; these tests currently just verify functions
   // run successfully.
-
   freopen("/dev/null","w",stdout);
 
   masa_set_param("A_x",0);
@@ -68,9 +67,5 @@ int main()
     {
       cout << "REGRESSION TEST FAILED: masa_get_param error condition not triggered\n";
     }
-
-
-  // fatal error check:
-  //masa_init("temp-test-1d","heateq_1d_steady_const");
 
 }
