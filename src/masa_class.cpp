@@ -375,3 +375,10 @@ MASA::masa_uninit::masa_uninit()
   mmsname = "masa_uninit";
   dimension = 1;
 }
+
+int MASA::masa_uninit::init_var()
+{
+
+  return 0;
+
+}

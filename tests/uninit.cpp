@@ -59,7 +59,7 @@ int main()
 
   // start testing uninitialized functions
   derr = masa_init_param();
-  if(derr != 1) 
+  if(derr != 0) 
     err += 1;
   
   // --------------------------------

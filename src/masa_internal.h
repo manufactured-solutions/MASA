@@ -90,7 +90,8 @@ namespace MASA
 
     // functions to override
     virtual ~manufactured_solution(){};       // destructor
-    virtual int init_var(){cout << "MASA ERROR:: NO DEFAULT VALUES AVAILABLE\n"; return 1;};                                                                  // inits all variables to selected values
+    //virtual int init_var(){cout << "MASA ERROR:: NO DEFAULT VALUES AVAILABLE\n"; return 1;};                                                                  // inits all variables to selected values
+    virtual int init_var() = 0;                                                                  // inits all variables to selected values
 
     // analytical solution(s)
     virtual double eval_an_t(double)                {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
@@ -223,7 +224,8 @@ namespace MASA
   private:
 
   public:
-    masa_uninit(); // constructor
+    masa_uninit();  // constructor
+    int init_var(); // default problem values
   }; 
 
   // ------------------------------------------------------
