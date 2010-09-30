@@ -43,15 +43,17 @@ map<string, manufactured_solution*> masa_master_list; // global map between uniq
 //
 //  limited masa exception handling
 //
-int masa_exit(int ex)
+void masa_exit(int ex)
 {
 
 #ifdef MASA_EXCEPTIONS
   cout << 'MASA:: caught exception ' << ex << endl;
+  throw(ex);
 #else
+  cout << "MASA:: ABORTING\n";
   exit(ex);
 #endif
-
+  
 }
 
 //
@@ -159,11 +161,7 @@ int MASA::masa_init(string unique_name, string str)
       (*it)->return_name(&name); // get name
 
       // check the name of this mms is not null!
-      if(name.empty())
-	{
-	  cout << "MASA FATAL ERROR:: manufactured solution has no name!\n"; 
-	  masa_exit(1);
-	} 
+      if(name.empty()){cout << "MASA FATAL ERROR:: manufactured solution has no name!\n";masa_exit(1);} 
 
       error=temp.rfind(name);   // look for name -- must be identical to full name, after masa_map edits
       if (error!=string::npos) // found a value
