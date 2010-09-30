@@ -60,11 +60,20 @@ AM_SANITY_CHECK
 
 FC_STRICT_TOL_CPP=""
 
- AC_ARG_ENABLE([strict-tests], AC_HELP_STRING([--enable-strict-tests],[enable strict absolute tolerance in regression tests]),
+AC_ARG_ENABLE([strict-tests], AC_HELP_STRING([--enable-strict-tests],[enable strict absolute tolerance in regression tests]),
  	       MASA_STRICT_REGRESSION=1 
 	       FC_STRICT_TOL_CPP="-DMASA_STRICT_REGRESSION"
 	       AC_DEFINE(MASA_STRICT_REGRESSION,1,[Define if strict regression enabled]),[])
+
 AC_SUBST(FC_STRICT_TOL_CPP)
+
+#---------------------------------------------
+# Check for exception handling
+#---------------------------------------------
+
+AC_ARG_ENABLE([masa_exceptions], AC_HELP_STRING([--enable-masa-exceptions],[enable exception handling in masa]),
+ 	       MASA_EXCEPTIONS=1 
+	       AC_DEFINE(MASA_EXCEPTIONS,1,[Define if exception handling enabled]),[])
 
 #--------------------------
 # Checks for code coverage
