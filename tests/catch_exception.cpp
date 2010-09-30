@@ -49,7 +49,21 @@ int main()
   // run successfully.
   freopen("/dev/null","w",stdout);
 
-  // fatal error check:  
+  // verify_pointer_sanity
+  try
+    {
+      masa_eval_t_source(1.0);
+    }
+  catch(int err) // return one on fatal error
+    {
+      if(err != 1)
+	{
+	  cout << "regression test failed: masa pointer sanity fatal error condition not triggered!\n";
+	  return 1; // fail
+	}      
+    }
+ 
+  // masa_init
   try
     {
       masa_init("it is pitch black","grue"); // grue is not a valid masa mms, nor should it be
@@ -63,6 +77,7 @@ int main()
 	}      
     }
  
+  // masa_select_mms
   try
     {
       masa_select_mms("cthulhu"); // cthulhu is not a valid masa solution, nor has it been intialized
