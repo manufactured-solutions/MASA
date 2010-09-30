@@ -41,6 +41,20 @@ manufactured_solution* masa_master_pointer = 0;       // pointer to currently se
 map<string, manufactured_solution*> masa_master_list; // global map between unique name and manufactured class
 
 //
+//  limited masa exception handling
+//
+int masa_exit(int ex)
+{
+
+#ifdef masa_enable_exceptions
+  cout << 'MASA:: caught exception ' << ex << endl;
+#else
+  exit(ex);
+#endif
+
+}
+
+//
 //  this function checks the user has an active mms
 //
 void verify_pointer_sanity()
@@ -49,7 +63,7 @@ void verify_pointer_sanity()
     {    
       cout << "MASA FATAL ERROR:: No initialized Manufactured Solution!" << endl;
       cout << "Have you called masa_init?" << endl;
-      exit(1);
+      masa_exit(1);
     }  
 }
 
@@ -71,7 +85,7 @@ int MASA::masa_select_mms(string name)
   else 
     {
       cout << "\nMASA FATAL ERROR:: No such manufactured solution (" << name << ") has been initialized.\n";
-      exit(1);
+      masa_exit(1);
     } 
 
   return 0;
@@ -145,7 +159,11 @@ int MASA::masa_init(string unique_name, string str)
       (*it)->return_name(&name); // get name
 
       // check the name of this mms is not null!
-      if(name.empty()) {cout << "MASA FATAL ERROR:: manufactured solution has no name!\n"; exit(1);} 
+      if(name.empty())
+	{
+	  cout << "MASA FATAL ERROR:: manufactured solution has no name!\n"; 
+	  masa_exit(1);
+	} 
 
       error=temp.rfind(name);   // look for name -- must be identical to full name, after masa_map edits
       if (error!=string::npos) // found a value
@@ -164,7 +182,7 @@ int MASA::masa_init(string unique_name, string str)
   if(flag != 1)
     {
       cout << "\nMASA FATAL ERROR: No Manufactured Solutions of that Type\n";
-      exit(1); // error code, terminate
+      masa_exit(1); // error code, terminate
     }
   
   return 0; // steady as she goes
