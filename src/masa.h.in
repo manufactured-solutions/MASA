@@ -163,6 +163,7 @@ namespace MASA
   // --------------------------------
   // internal masa functions user might want to call
   // --------------------------------
+  void masa_exit(int);                             // calls exit() but with exception handling
   int masa_map (std::string*);
   int masa_map2(std::string, std::string);
   int masa_test_poly();                            // test poly -- expose for reg test

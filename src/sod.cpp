@@ -314,7 +314,7 @@ double MASA::sod_1d::rtbis(double x1,double x2,double xacc)
   if(f*fmid >= 0.)
     {
       printf("root must be bracketed in rtbis\n");
-      exit(1);
+      masa_exit(1);
     }
      
   if(f < 0.)

@@ -44,7 +44,7 @@ map<string, manufactured_solution*> masa_master_list; // global map between uniq
 //
 //  limited masa exception handling
 //
-void masa_exit(int ex)
+void MASA::masa_exit(int ex)
 {
 
 #ifdef MASA_EXCEPTIONS
