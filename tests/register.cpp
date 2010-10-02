@@ -75,7 +75,23 @@ int main()
       cout << "masa_init fail condition not triggered properly!\n";
       return 1;
     }
-  
+
+#ifdef MASA_EXCEPTIONS
+  // also will fail -- because user is mucking with vararray
+  try
+    {
+      masa_sanity_check();
+    }
+  catch(int err) // return one on fatal error
+    {
+      if(err != 1)
+	{
+	  cout << "regression test failed: masa sanity_check error condition not triggered!\n";
+	  return 1; // fail
+	}      
+    } 
+#endif
+
   return 0; // steady as she goes
 
 }

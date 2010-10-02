@@ -147,7 +147,7 @@ int MASA::manufactured_solution::sanity_check()
   
   if(varmap.size() != num_vars)
     {
-      cout << "\n MASA Warning:: mismatch in number of variables registered.\n"; 
+      cout << "\n MASA FATAL ERROR:: mismatch in number of variables registered.\n"; 
       cout << "Are you calling the method manufactured_solution.register_var? This could be causing the error.\n"; 
       cout << "varmap.size() = " << varmap.size() << "; num_vars = " << num_vars << endl << endl;
       masa_exit(1);
@@ -364,6 +364,11 @@ int MASA::masa_test_function::init_var()
   err += set_var("demo_var_2",1);   
   err += set_var("demo_var_12",1);   
   err += register_var("demo_var_3",&demo_var_3);
+
+  // now for a really epic fail: user sets var 
+  // array instead of calling register_var method
+  //vararr.push_back(&demo_var_3);
+  num_vars++;
 
   return err;
 

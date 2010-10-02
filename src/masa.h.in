@@ -87,7 +87,6 @@ namespace MASA
   // --------------------------------
   // new masa api function
   // --------------------------------
-
   int masa_init      (std::string, std::string);
   int masa_select_mms(std::string);
   int masa_list_mms  ();
