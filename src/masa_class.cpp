@@ -150,7 +150,7 @@ int MASA::manufactured_solution::sanity_check()
       cout << "\n MASA Warning:: mismatch in number of variables registered.\n"; 
       cout << "Are you calling the method manufactured_solution.register_var? This could be causing the error.\n"; 
       cout << "varmap.size() = " << varmap.size() << "; num_vars = " << num_vars << endl << endl;
-      exit(1);
+      masa_exit(1);
     }
 
   if(flag != 0)
