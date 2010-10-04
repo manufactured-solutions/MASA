@@ -384,9 +384,6 @@ double MASA::sod_1d::rtbis(double x1,double x2,double xacc,int JMAX)
     }
   
   printf("MASA Error:: Too many bisection in rtbis (sod)\n");
-  masa_exit(1);
-
   return(-1);
-  
 
 }
