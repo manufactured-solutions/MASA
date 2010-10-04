@@ -35,6 +35,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 
 using namespace MASA;
 using namespace std;
@@ -66,11 +67,54 @@ int main()
 	out = masa_eval_rho_source(x,t);
 	out = masa_eval_rho_u_source(x,t);
       } //done iterating
+
+  // below are barely a regression test: 
+  // mostly 'touching' code for coverage
+
   
   // now test rarefaction wave before origin
   x = -1;
   t =  1;
   out = masa_eval_rho_source(x,t);
   out = masa_eval_rho_u_source(x,t);
+
+  // touching sod error condition if root not bracketed in rtbis
+  x = 1;
+  t = 2;
+
+  // nonphysical gamma, but useful to test coverage in rtbis
+  masa_set_param("Gamma",-1.0);
+  out = masa_eval_rho_source(x,t);
+
+#ifdef MASA_EXCEPTIONS
+
+  try
+    {
+      out = masa_eval_t_source(x);
+    }
+  catch(int err) // return one on fatal error
+    {
+      if(err != 1)
+	{
+	  cout << "regression test failed: sod rtbis root not bracketed error condition not triggered!\n";
+	  return 1; // fail
+	}      
+    }
+
+  try
+    {
+      out = masa_eval_t_source(x,t);
+    }
+  catch(int err) // return one on fatal error
+    {
+      if(err != 1)
+	{
+	  cout << "regression test failed: sod rtbis `too many bisections` condition not triggered!\n";
+	  return 1; // fail
+	}      
+    }
+
+#endif 
   
+
 }// end program

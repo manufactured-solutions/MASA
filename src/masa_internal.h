@@ -699,8 +699,9 @@ namespace MASA
     double eval_q_rho   (double,double);
     double eval_q_rho_u (double,double);
     double func         (double);  // helper function
-    double rtbis(double,double,double);
-
+    double rtbis        (double,double,double,int);
+    double eval_q_t     (double); // regression test function
+    double eval_q_t     (double,double); // regression test function
   };
 
   // ------------------------------------------------------

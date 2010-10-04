@@ -87,6 +87,22 @@ int MASA::sod_1d::init_var()
 
 } // done with variable initializer
 
+double MASA::sod_1d::eval_q_t(double x)
+{
+  double out;
+  // will hit masa_exit --root not bracketed!
+  return out = rtbis(1,1,1,100);
+
+}
+
+double MASA::sod_1d::eval_q_t(double x,double t)
+{
+  double out;
+  // will hit 'too many bisections' 
+  return out = rtbis(-1,2,1,1);
+
+}
+
 double MASA::sod_1d::eval_q_rho(double x,double t)
 {
   double xm;
@@ -115,7 +131,7 @@ double MASA::sod_1d::eval_q_rho(double x,double t)
 
   // Solve for the postshock pressure pm.
 
-  pm = rtbis (pr, pl, 1.e-16);
+  pm = rtbis (pr, pl, 1.e-16,100);
 
   // Define the density to the left of the contact discontinuity rhoml.
  
@@ -207,7 +223,7 @@ double MASA::sod_1d::eval_q_rho_u(double x,double t)
 
   // Solve for the postshock pressure pm.
 
-  pm = rtbis (pr, pl, 1.e-16);
+  pm = rtbis (pr, pl, 1.e-16,100);
 
   // Define the density to the left of the contact discontinuity rhoml.
  
@@ -300,10 +316,10 @@ double MASA::sod_1d::func(double pm)
 //////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
+#include <iostream>
 
-double MASA::sod_1d::rtbis(double x1,double x2,double xacc)
+double MASA::sod_1d::rtbis(double x1,double x2,double xacc,int JMAX)
 {
-  int JMAX=100;
   int j;
   double dx,f,fmid,xmid;
   double myval;
@@ -311,9 +327,10 @@ double MASA::sod_1d::rtbis(double x1,double x2,double xacc)
   fmid=func(x2);
 
   f=func(x1);
+
   if(f*fmid >= 0.)
     {
-      printf("root must be bracketed in rtbis\n");
+      printf("MASA ERROR:: root must be bracketed in rtbis (sod)\n");
       masa_exit(1);
     }
      
@@ -338,7 +355,9 @@ double MASA::sod_1d::rtbis(double x1,double x2,double xacc)
 	return(myval);
     }
   
-  printf("** Error: Too many bisection in rtbis\n");
+  printf("MASA Error:: Too many bisection in rtbis (sod)\n");
+  masa_exit(1);
+
   return(-1);
   
 
