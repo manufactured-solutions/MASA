@@ -70,9 +70,8 @@ int main()
 
   // below are barely a regression test: 
   // mostly 'touching' code for coverage
-
   
-  // now test rarefaction wave before origin
+  // test rarefaction wave before origin
   x = -1;
   t =  1;
   out = masa_eval_rho_source(x,t);
@@ -87,6 +86,8 @@ int main()
   out = masa_eval_rho_source(x,t);
 
 #ifdef MASA_EXCEPTIONS
+  
+  masa_set_param("Gamma",1.2);
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa; these tests currently just verify functions

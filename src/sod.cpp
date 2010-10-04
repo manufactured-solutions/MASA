@@ -60,6 +60,7 @@
 // 
 
 #include <masa_internal.h> 
+#include <iostream>
 
 using namespace MASA;
 
@@ -89,14 +90,41 @@ int MASA::sod_1d::init_var()
 
 double MASA::sod_1d::eval_q_t(double x)
 {
+  // Define the Sod problem initial conditions for the left and right states.
+
+  pl = 1.e0;
+  pr = 0.125;
+
+  rhol = 1.e0;
+  rhor = 0.125;
+
+  // Define sound speeds for the left and right sides of tube.
+
+  cl = sqrt (Gamma * pl / rhol);
+  cr = sqrt (Gamma * pr / rhor);
+
   double out;
   // will hit masa_exit --root not bracketed!
-  return out = rtbis(1,1,1,100);
+  out = rtbis(1.,20.,1.,100);
+  return out;
 
 }
 
 double MASA::sod_1d::eval_q_t(double x,double t)
 {
+  // Define the Sod problem initial conditions for the left and right states.
+
+  pl = 1.e0;
+  pr = 0.125;
+
+  rhol = 1.e0;
+  rhor = 0.125;
+
+  // Define sound speeds for the left and right sides of tube.
+
+  cl = sqrt (Gamma * pl / rhol);
+  cr = sqrt (Gamma * pr / rhor);
+
   double out;
   // will hit 'too many bisections' 
   return out = rtbis(-1,2,1,1);
@@ -316,7 +344,6 @@ double MASA::sod_1d::func(double pm)
 //////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
-#include <iostream>
 
 double MASA::sod_1d::rtbis(double x1,double x2,double xacc,int JMAX)
 {
@@ -325,9 +352,8 @@ double MASA::sod_1d::rtbis(double x1,double x2,double xacc,int JMAX)
   double myval;
 
   fmid=func(x2);
-
   f=func(x1);
-
+  
   if(f*fmid >= 0.)
     {
       printf("MASA ERROR:: root must be bracketed in rtbis (sod)\n");
