@@ -339,7 +339,9 @@ double MASA::sod_1d::func(double pm)
 // which we use to solve for pm using a call to func.
 //
 // Note that the arguments to rtbis have been altered and the value of
-// JMAX increased. Otherwise, it is identical to the NR version.
+// JMAX is now passed to the function. 
+// 
+// Otherwise, it is identical to the NR version.
 //
 //////////////////////////////////////////////////////////////////////////
 

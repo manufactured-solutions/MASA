@@ -1,5 +1,6 @@
 Version 0.21 (in progress)
 
+  * code has 99%+ line coverage	
   * adding new conditional (--masa-exceptions) that adds exception handling
   * modifications to Fortran interface (no API changes)
   * added doxygen documentation for all c/cpp/fortran functions
