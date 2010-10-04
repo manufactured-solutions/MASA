@@ -105,8 +105,7 @@ double MASA::sod_1d::eval_q_t(double x)
 
   double out;
   // will hit masa_exit --root not bracketed!
-  out = rtbis(1.,20.,1.,100);
-  return out;
+  return out = rtbis(1.,20.,1.,100);
 
 }
 
