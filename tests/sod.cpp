@@ -88,6 +88,11 @@ int main()
 
 #ifdef MASA_EXCEPTIONS
 
+  // reroute stdout for regressions: TODO remove when logger mechanism
+  // is used inside masa; these tests currently just verify functions
+  // run successfully.
+  freopen("/dev/null","w",stdout);
+
   try
     {
       out = masa_eval_t_source(x);
