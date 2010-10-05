@@ -25,7 +25,7 @@
 // $Author$
 // $Id$
 //
-// euler2d.cpp :program that tests masa against known source term
+// euler2d.cpp :program that tests euler2d from masa against known source term
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
