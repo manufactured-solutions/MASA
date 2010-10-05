@@ -53,11 +53,10 @@ namespace MASA
   int masa_map_coeff     (string, string); 
   int masa_map           (string, string);
   int masa_map_dimension (string, string);
- 
-  // masa_shell
-  //void masa_shell_choose_solution();
 
-  /* -------------------------------------------------------------------------------------------   
+  /* 
+   * -------------------------------------------------------------------------------------------   
+   *
    * manufactured_solution Base Class
    *
    * this is an abstract class
@@ -67,6 +66,7 @@ namespace MASA
    *
    * -------------------------------------------------------------------------------------------   
    */ 
+
   class manufactured_solution 
   {
     
@@ -89,11 +89,17 @@ namespace MASA
   public: 
 
     // functions to override
-    virtual ~manufactured_solution(){};       // destructor
-    //virtual int init_var(){cout << "MASA ERROR:: NO DEFAULT VALUES AVAILABLE\n"; return 1;};                                                                  // inits all variables to selected values
-    virtual int init_var() = 0;                                                                  // inits all variables to selected values
+    virtual ~manufactured_solution(){};   // destructor
+    virtual int init_var() = 0;           // inits all variables to selected values
 
-    // analytical solution(s)
+  /* 
+   * -------------------------------------------------------------------------------------------   
+   *
+   * analytical solution(s)
+   * 
+   * -------------------------------------------------------------------------------------------
+   */
+
     virtual double eval_an_t(double)                {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
     virtual double eval_an_t(double,double)         {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
     virtual double eval_an_t(double,double,double)  {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
@@ -119,7 +125,15 @@ namespace MASA
     virtual double eval_an_rho(double,double)       {cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
     virtual double eval_an_rho(double,double,double){cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
    
-    // source terms
+
+  /* 
+   * -------------------------------------------------------------------------------------------   
+   *
+   * source terms
+   * 
+   * -------------------------------------------------------------------------------------------
+   */
+
     virtual double eval_q_t(double)                {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
     virtual double eval_q_t(double, double)        {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
     virtual double eval_q_t(double,double,double)  {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
@@ -146,12 +160,25 @@ namespace MASA
     virtual double eval_q_rho_u(double,double)     {cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density) -- 1d Sod
     virtual double eval_q_rho(double,double,double){cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
 
-    // gradient 
+  /* 
+   * -------------------------------------------------------------------------------------------   
+   *
+   * Gradient Terms
+   * 
+   * -------------------------------------------------------------------------------------------
+   */
+
     virtual double eval_1d_g(double)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
     virtual double eval_2d_g(double,double,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
     virtual double eval_3d_g(double,double,double,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
-    // member functions solution classes will inherit
+  /* 
+   * -------------------------------------------------------------------------------------------   
+   *
+   * member functions solution classes will inherit (not override)
+   * 
+   * -------------------------------------------------------------------------------------------
+   */
     manufactured_solution();                                     // constructor
     int set_var(string,double);                                  // sets variable value    
     int register_var(string, double*);                           // this registers a variable
@@ -164,7 +191,9 @@ namespace MASA
     
   }; // done with MMS base class
 
-  /* -------------------------------------------------------------------------------------------   
+  /* 
+   * -------------------------------------------------------------------------------------------   
+   * 
    * Polynomial Base Class
    *
    * Blatantly stealing paul bauman's polynomial class definitions in the name of science
@@ -200,7 +229,7 @@ namespace MASA
   };  
 
   // ------------------------------------------------------
-  // ---------- all other mms classes ------------
+  // ---------- all other mms classes ---------------------
   // ------------------------------------------------------
 
   // just a demo class
@@ -229,7 +258,7 @@ namespace MASA
   }; 
 
   // ------------------------------------------------------
-  // ---------- heat equation /steady / constant ------------
+  // ---------- heat equation /steady / constant ----------
   // ------------------------------------------------------
 
   class heateq_1d_steady_const : public manufactured_solution 
@@ -402,7 +431,7 @@ namespace MASA
   };
 
   // ------------------------------------------------------
-  // ---------- heat equation / steady / var ------------
+  // ---------- heat equation / steady / var --------------
   // ------------------------------------------------------
 
   class heateq_1d_steady_var : public manufactured_solution 
@@ -452,7 +481,7 @@ namespace MASA
   };
 
   // ------------------------------------------------------
-  // ---------- euler ------------
+  // ------------------------- euler ----------------------
   // ------------------------------------------------------
   class euler_1d : public manufactured_solution
   {
@@ -604,7 +633,7 @@ namespace MASA
   };
 
   // ------------------------------------------------------
-  // ---------- axisymmetric euler ------------
+  // ---------------- axisymmetric euler ------------------
   // ------------------------------------------------------
   class axi_euler : public manufactured_solution
   {
@@ -691,7 +720,7 @@ namespace MASA
   };
 
   // ------------------------------------------------------
-  // ---------- sod 1d ------------
+  // --------------------- sod 1d -------------------------
   // ------------------------------------------------------
   class sod_1d : public manufactured_solution
   {
@@ -711,7 +740,7 @@ namespace MASA
   };
 
   // ------------------------------------------------------
-  // ---------- RANS: Spelart Alamaras Channel  ------------
+  // ---------- RANS: Spelart Alamaras (Channel) ----------
   // ------------------------------------------------------
   class rans_sa : public manufactured_solution
   {
@@ -771,7 +800,7 @@ namespace MASA
   };
 
   // ------------------------------------------------------
-  // ---------- compressible navier stokes  ------------
+  // ------------- compressible navier stokes  ------------
   // ------------------------------------------------------
 
   class navierstokes_2d_compressible : public manufactured_solution
