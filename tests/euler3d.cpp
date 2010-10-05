@@ -33,7 +33,7 @@
 #include <config.h>
 #include <masa.h>
 #include <math.h>
-
+#include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
 

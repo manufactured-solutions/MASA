@@ -33,7 +33,7 @@
 #include <config.h> // for MASA_STRICT_REGRESSION
 #include <masa.h>
 #include <math.h>
-
+#include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
 
