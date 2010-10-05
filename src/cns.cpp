@@ -148,6 +148,41 @@ double MASA::navierstokes_2d_compressible::eval_q_e(double x,double y)
 }
 
 // ----------------------------------------
+//   Gradient of Source Terms
+// ----------------------------------------
+
+double MASA::navierstokes_2d_compressible::eval_2d_g(double x,double y, int i)
+{
+
+  double grad = -1;
+
+  switch(i)
+    {
+    case 0:
+      cout << "MASA error:: eval_2d_g has no 0th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+      
+    case 1:
+      
+      break;
+
+    case 2:
+
+      break;
+
+    default:
+      cout << "MASA error:: eval_2d_g has no " << i << "th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+
+    }// done with switch
+  
+  return grad;
+
+}
+
+// ----------------------------------------
 //   Analytical Solutions
 // ----------------------------------------
 
@@ -360,6 +395,44 @@ int MASA::navierstokes_3d_compressible::init_var()
 
 } // done with variable initializer
 
+// ----------------------------------------
+//   Gradient of Source Terms
+// ----------------------------------------
+
+double MASA::navierstokes_3d_compressible::eval_3d_g(double x,double y,double z,int i)
+{
+
+  double grad = -1;
+
+  switch(i)
+    {
+    case 0:
+      cout << "MASA error:: masa_eval_3d_grad has no 0th component\n";
+      cout << "Try 1,2 or 3\n";
+      break;
+      
+    case 1:
+      
+      break;
+
+    case 2:
+
+      break;
+
+    case 3:
+
+      break;
+
+    default:
+      cout << "MASA error:: masa_eval_3d_grad has no " << i << "th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+
+    }// done with switch
+  
+  return grad;
+
+}
 
 // ----------------------------------------
 //   Source Terms

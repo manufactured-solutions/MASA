@@ -817,6 +817,8 @@ namespace MASA
     double eval_an_p  (double,double);
     double eval_an_rho(double,double);
 
+    double eval_2d_g(double,double,int);   // gradient of source term
+
   };
   
   class navierstokes_3d_compressible : public manufactured_solution
@@ -879,6 +881,8 @@ namespace MASA
     double eval_an_q  (double,double,double);
     double eval_an_p  (double,double,double);
     double eval_an_rho(double,double,double);
+
+    double eval_3d_g(double,double,double,int);   // gradient of source term
 
   }; // done with navier stokes 3d class
   
