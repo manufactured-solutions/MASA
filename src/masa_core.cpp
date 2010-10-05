@@ -363,10 +363,10 @@ double MASA::masa_eval_rho_an(double x)
   return masa_master_pointer->eval_an_rho(x);
 }
 
-double MASA::masa_eval_1d_grad(int i,double x)
+double MASA::masa_eval_1d_grad(double x)
 {
   verify_pointer_sanity();
-  return masa_master_pointer->eval_1d_g(i,x);
+  return masa_master_pointer->eval_1d_g(x);
 }
 
 
@@ -457,10 +457,10 @@ double MASA::masa_eval_rho_an(double x,double y)
   return masa_master_pointer->eval_an_rho(x,y);
 }
 
-double MASA::masa_eval_2d_grad(int i,double x,double y)
+double MASA::masa_eval_2d_grad(double x,double y,int i)
 {
   verify_pointer_sanity();
-  return masa_master_pointer->eval_2d_g(i,x,y);
+  return masa_master_pointer->eval_2d_g(x,y,i);
 }
 
 /* ------------------------------------------------
@@ -556,10 +556,10 @@ double MASA::masa_eval_rho_an(double x,double y,double z)
   return masa_master_pointer->eval_an_rho(x,y,z);
 }
 
-double MASA::masa_eval_3d_grad(int i,double x,double y,double z)
+double MASA::masa_eval_3d_grad(double x,double y,double z,int i)
 {
   verify_pointer_sanity();
-  return masa_master_pointer->eval_3d_g(i,x,y,z);
+  return masa_master_pointer->eval_3d_g(x,y,z,i);
 }
 
 /* ------------------------------------------------

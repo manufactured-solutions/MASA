@@ -147,9 +147,9 @@ namespace MASA
     virtual double eval_q_rho(double,double,double){cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
 
     // gradient 
-    virtual double eval_1d_g(int,double)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual double eval_2d_g(int,double,double)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual double eval_3d_g(int,double,double,double) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual double eval_1d_g(double)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual double eval_2d_g(double,double,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual double eval_3d_g(double,double,double,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
     // member functions solution classes will inherit
     manufactured_solution();                                     // constructor
@@ -486,6 +486,8 @@ namespace MASA
     double eval_an_p  (double);
     double eval_an_rho(double);
 
+    double eval_1d_g(double);   // gradient of source term
+
   };
 
   class euler_2d : public manufactured_solution
@@ -531,6 +533,8 @@ namespace MASA
     double eval_an_v  (double,double);
     double eval_an_p  (double,double);
     double eval_an_rho(double,double);
+
+    double eval_2d_g(double,double,int);   // gradient of source term
 
   };
 
@@ -594,6 +598,8 @@ namespace MASA
     double eval_an_q  (double,double,double);
     double eval_an_p  (double,double,double);
     double eval_an_rho(double,double,double);
+
+    double eval_3d_g(double,double,double,int);   // gradient of source term
 
   };
 

@@ -155,9 +155,9 @@ namespace MASA
   // --------------------------------
   // gradient of analytical solution
   // --------------------------------
-  double masa_eval_1d_grad(int,double);
-  double masa_eval_2d_grad(int,double,double);
-  double masa_eval_3d_grad(int,double,double,double);
+  double masa_eval_1d_grad(double);
+  double masa_eval_2d_grad(double,double,int);
+  double masa_eval_3d_grad(double,double,double,int);
 
   // --------------------------------
   // internal masa functions user might want to call

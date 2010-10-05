@@ -120,6 +120,18 @@ double MASA::euler_1d::eval_q_rho(double x)
 }
 
 // ----------------------------------------
+//   Gradient of Source Terms
+// ----------------------------------------
+
+double MASA::euler_1d::eval_1d_g(double x)
+{
+
+  return 0;
+
+
+}
+
+// ----------------------------------------
 //   Analytical Solutions
 // ----------------------------------------
 
@@ -254,6 +266,41 @@ double MASA::euler_2d::eval_q_rho(double x,double y)
   double Q_rho;
   Q_rho = rho_x * cos(a_rhox * PI * x / L) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L)) * a_rhox * PI / L - rho_y * sin(a_rhoy * PI * y / L) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L)) * a_rhoy * PI / L + u_x * cos(a_ux * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)) * a_ux * PI / L + v_y * cos(a_vy * PI * y / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)) * a_vy * PI / L;
   return(Q_rho);
+}
+
+// ----------------------------------------
+//   Gradient of Source Terms
+// ----------------------------------------
+
+double MASA::euler_2d::eval_2d_g(double x,double y, int i)
+{
+
+  double grad = -1;
+
+  switch(i)
+    {
+    case 0:
+      cout << "MASA error:: eval_2d_g has no 0th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+      
+    case 1:
+      
+      break;
+
+    case 2:
+
+      break;
+
+    default:
+      cout << "MASA error:: eval_2d_g has no " << i << "th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+
+    }// done with switch
+  
+  return grad;
+
 }
 
 // ----------------------------------------
@@ -398,6 +445,44 @@ int MASA::euler_3d::init_var()
 
 } // done with variable initializer
 
+// ----------------------------------------
+//   Gradient of Source Terms
+// ----------------------------------------
+
+double MASA::euler_3d::eval_3d_g(double x,double y,double z,int i)
+{
+
+  double grad = -1;
+
+  switch(i)
+    {
+    case 0:
+      cout << "MASA error:: masa_eval_3d_grad has no 0th component\n";
+      cout << "Try 1,2 or 3\n";
+      break;
+      
+    case 1:
+      
+      break;
+
+    case 2:
+
+      break;
+
+    case 3:
+
+      break;
+
+    default:
+      cout << "MASA error:: masa_eval_3d_grad has no " << i << "th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+
+    }// done with switch
+  
+  return grad;
+
+}
 
 // ----------------------------------------
 //   Source Term
