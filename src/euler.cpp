@@ -126,6 +126,18 @@ double MASA::euler_1d::eval_q_rho(double x)
 double MASA::euler_1d::eval_1d_g(double x)
 {
 
+  /*
+  grad_rho_an[0] = rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
+  grad_rho_an[1] = 0;
+  grad_rho_an[2] = 0;
+  grad_p_an[0] = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
+  grad_p_an[1] = 0;
+  grad_p_an[2] = 0;
+  grad_u_an[0] = u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
+  grad_u_an[1] = 0;
+  grad_u_an[2] = 0;
+  */
+
   return 0;
 
 
@@ -274,6 +286,16 @@ double MASA::euler_2d::eval_q_rho(double x,double y)
 
 double MASA::euler_2d::eval_2d_g(double x,double y, int i)
 {
+  /*
+  grad_rho_an[0] = rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
+  grad_rho_an[1] = -rho_y * sin(a_rhoy * pi * y / L) * a_rhoy * pi / L;
+  grad_p_an[0] = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
+  grad_p_an[1] = p_y * cos(a_py * pi * y / L) * a_py * pi / L;
+  grad_u_an[0] = u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
+  grad_u_an[1] = -u_y * sin(a_uy * pi * y / L) * a_uy * pi / L;
+  grad_v_an[0] = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
+  grad_v_an[1] = v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
+  */
 
   double grad = -1;
 
@@ -451,6 +473,23 @@ int MASA::euler_3d::init_var()
 
 double MASA::euler_3d::eval_3d_g(double x,double y,double z,int i)
 {
+  /*
+    grad_rho_an[0] = rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
+    grad_rho_an[1] = -rho_y * sin(a_rhoy * pi * y / L) * a_rhoy * pi / L;
+    grad_rho_an[2] = rho_z * cos(a_rhoz * pi * z / L) * a_rhoz * pi / L;
+    grad_p_an[0] = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
+    grad_p_an[1] = p_y * cos(a_py * pi * y / L) * a_py * pi / L;
+    grad_p_an[2] = -p_z * sin(a_pz * pi * z / L) * a_pz * pi / L;
+    grad_u_an[0] = u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
+    grad_u_an[1] = -u_y * sin(a_uy * pi * y / L) * a_uy * pi / L;
+    grad_u_an[2] = -u_z * sin(a_uz * pi * z / L) * a_uz * pi / L;
+    grad_v_an[0] = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
+    grad_v_an[1] = v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
+    grad_v_an[2] = v_z * cos(a_vz * pi * z / L) * a_vz * pi / L;
+    grad_w_an[0] = w_x * cos(a_wx * pi * x / L) * a_wx * pi / L;
+    grad_w_an[1] = w_y * cos(a_wy * pi * y / L) * a_wy * pi / L;
+    grad_w_an[2] = -w_z * sin(a_wz * pi * z / L) * a_wz * pi / L;
+  */
 
   double grad = -1;
 
