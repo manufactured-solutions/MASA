@@ -130,6 +130,7 @@ int main()
   double ufield,ufield2,ufield3;
   double efield,efield2,efield3;
   double rho,rho2,rho3;
+  double gradx,grady,gradz;
 
   double u_an,u_an2,u_an3;
   double p_an,p_an2,p_an3;
@@ -176,6 +177,9 @@ int main()
       u_an = masa_eval_u_an        (x);
       p_an = masa_eval_p_an        (x);
       rho_an = masa_eval_rho_an    (x);
+
+      // eval gradient terms
+      gradx = masa_eval_1d_grad(x);
 
       // get fundamental source term solution
       ufield2   = SourceQ_u  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);

@@ -336,6 +336,7 @@ int main()
   double wfield,wfield2,wfield3;
   double efield,efield2,efield3;
   double rho,rho2,rho3;
+  double gradx,grady,gradz;
 
   double u_an,u_an2,u_an3;
   double v_an,v_an2,v_an3;
@@ -416,7 +417,6 @@ int main()
       cout << "MASA :: Sanity Check Failed!\n";
       exit(1);
     }
-  
 
   // evaluate source terms (3D)
   for(int i=0;i<nx;i++)
@@ -440,6 +440,11 @@ int main()
 	  w_an = masa_eval_w_an        (x,y,z);
 	  p_an = masa_eval_p_an        (x,y,z);
 	  rho_an = masa_eval_rho_an    (x,y,z);
+
+	  // eval gradient terms
+	  gradx = masa_eval_3d_grad(x,y,z,1);
+	  grady = masa_eval_3d_grad(x,y,z,2);
+	  gradz = masa_eval_3d_grad(x,y,z,3);
 
 	  // check against maple output
 	  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,L);
@@ -594,6 +599,26 @@ int main()
 	  
 	}// done iterating
 
-  // tests passed
+  // reroute stdout for regressions: TODO remove when logger mechanism
+  // is used inside masa; these tests currently just verify functions
+  // run successfully.
+  freopen("/dev/null","w",stdout);
+
+  // test gradient error terms
+  double derr = masa_eval_3d_grad(0,0,0,0);
+  if(derr != -1)
+    {
+      cout << "MASA :: gradient (0) error condition failed!\n";
+      exit(1);
+    }
+  
+  derr = masa_eval_3d_grad(0,0,0,4);
+  if(derr != -1)
+    {
+      cout << "MASA :: gradient (4) error condition failed!\n";
+      exit(1);
+    }
+
+  // all tests passed
   return 0;
 }

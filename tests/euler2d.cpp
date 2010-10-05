@@ -209,6 +209,7 @@ int main()
   double vfield,vfield2,vfield3;
   double efield,efield2,efield3;
   double rho,rho2,rho3;
+  double gradx,grady,gradz;
 
   double u_an,u_an2,u_an3;
   double v_an,v_an2,v_an3;
@@ -288,7 +289,11 @@ int main()
 	v_an = masa_eval_v_an        (x,y);
 	p_an = masa_eval_p_an        (x,y);
 	rho_an = masa_eval_rho_an    (x,y);
-		  
+
+	// eval gradient terms
+	gradx = masa_eval_2d_grad(x,y,1);
+	grady = masa_eval_2d_grad(x,y,2);		
+  
 	// check against maple
 	ufield2 = SourceQ_u   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
 	vfield2 = SourceQ_v   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
@@ -450,9 +455,29 @@ int main()
 	    exit(1);
 	  }
 	*/
-
+	
       } // done iterating
+  
+  // reroute stdout for regressions: TODO remove when logger mechanism
+  // is used inside masa; these tests currently just verify functions
+  // run successfully.
+  freopen("/dev/null","w",stdout);
 
-  // tests passed
+  // test gradient error terms
+  double derr = masa_eval_2d_grad(0,0,0);
+  if(derr != -1)
+    {
+      cout << "MASA :: gradient (0) error condition failed!\n";
+      exit(1);
+    }
+  
+  derr = masa_eval_2d_grad(0,0,3);
+  if(derr != -1)
+    {
+      cout << "MASA :: gradient (3) error condition failed!\n";
+      exit(1);
+    }
+
+  // all tests passed
   return 0;
 }
