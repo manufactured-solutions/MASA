@@ -231,6 +231,7 @@ int main()
 	
 	u_an3   = fabs(u_an-u_an2)/fabs(u_an2);
 	w_an3   = fabs(v_an-v_an2)/fabs(w_an2);
+	w_an3   = fabs(v_an-v_an2);
 	rho_an3 = fabs(rho_an-rho_an2)/fabs(rho_an2);
 	p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
 
@@ -269,7 +270,8 @@ int main()
 	    cout << r << " " << z << endl;
 	    exit(1);
 	  }
-
+	
+	// this is the 'bad' term: rho_0 is corrupting somehow
 	if(w_an3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
