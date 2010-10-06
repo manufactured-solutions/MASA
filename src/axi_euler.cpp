@@ -101,7 +101,7 @@ int MASA::axi_euler::init_var()
   err += set_var("L",1);
 
   err += set_var("Gamma",.1791);
-  err += set_var("mu",.1791);
+  err += set_var("mu",1.1);
 
   return err;
 

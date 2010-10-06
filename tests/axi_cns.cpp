@@ -65,7 +65,7 @@ double anQ_u (double r,double z,double p_0,double p_1,double rho_0,double rho_1,
   return u_an;
 } 
  
-double anQ_w (double r,double z,double p_0,double p_1,double rho_0,double rho_1,double u_1,double w_0,double w_1,double a_pr,double a_pz,double a_rhor,double a_rhoz,double a_ur,double a_uz,double a_wr,double a_wz,double pi,double L,double Gamma,double mu)
+double anQ_w (double r,double z,double w_0,double w_1,double a_wr,double a_wz,double pi,double L)
 {
   double w_an = w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L);
   return w_an;
@@ -190,7 +190,6 @@ int main()
       exit(1);
     }
   
-
   // evaluate source terms (2D)
   for(int i=1;i<nx;i++)
     for(int j=1;j<ny;j++)    
@@ -217,7 +216,7 @@ int main()
 	efield2 = SourceQ_e   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma, mu,k,R);
 	
 	u_an2   = anQ_u   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma, mu);
-	w_an2   = anQ_w   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma, mu);
+	w_an2   = anQ_w   (r, z, w_0, w_1, a_wr, a_wz, pi, L);
 	rho_an2 = anQ_rho (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma, mu);
 	p_an2   = anQ_p   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma, mu);
 
@@ -242,7 +241,7 @@ int main()
 	rho3    = fabs(rho-rho2)/fabs(rho2);
 	
 	u_an3   = fabs(u_an-u_an2)/fabs(u_an2);
-	w_an3   = fabs(v_an-v_an2)/fabs(w_an2);
+	w_an3   = fabs(w_an-w_an2)/fabs(w_an2);
 	rho_an3 = fabs(rho_an-rho_an2)/fabs(rho_an2);
 	p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
 #endif
@@ -291,6 +290,7 @@ int main()
 	    exit(1);
 	  }
 
+	// this guy is broken
 	if(w_an3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Navier-Stokes\n";
