@@ -43,6 +43,16 @@ using namespace std;
 const double pi = acos(-1);
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
 
+double nancheck(double x)
+{
+  if(isnan(x))
+    {
+      cout << "MASA REGRESSION FAILURE:: nan found!\n";
+      exit(1);
+    }
+  return 1;
+}
+
 double anQ_p (double x,double p_0,double p_x,double a_px,double L)
 {
   double p_an = p_0 + p_x * cos(a_px * pi * x / L);

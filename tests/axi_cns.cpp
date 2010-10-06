@@ -43,6 +43,16 @@ using namespace std;
 const double pi = acos(-1);
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
 
+double nancheck(double x)
+{
+  if(isnan(x))
+    {
+      cout << "MASA REGRESSION FAILURE:: nan found!\n";
+      exit(1);
+    }
+  return 1;
+}
+
 double anQ_p(double r,double z,double p_0,double p_1,double rho_0,double rho_1,double u_1,double w_0,double w_1,double a_pr,double a_pz,double a_rhor,double a_rhoz,double a_ur,double a_uz,double a_wr,double a_wz,double pi,double L,double Gamma,double mu)
 {
   double p_an = p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L);
@@ -236,6 +246,20 @@ int main()
 	rho_an3 = fabs(rho_an-rho_an2)/fabs(rho_an2);
 	p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
 #endif
+
+	/*
+	nancheck(ufield3);
+	nancheck(vfield3);
+	nancheck(wfield3);
+	nancheck(efield3);
+	nancheck(rho3);
+
+	nancheck(u_an3);
+	nancheck(v_an3);
+	nancheck(w_an3);
+	nancheck(rho_an3);
+	nancheck(p_an3);
+	*/
 
 	if(ufield3 > threshold)
 	  {
