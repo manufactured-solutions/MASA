@@ -499,6 +499,19 @@ int main()
 	  rho_an3 = fabs(rho_an-rho_an2)/fabs(rho_an2);
 	  p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
 #endif	  
+
+	  nancheck(ufield3);
+	  nancheck(vfield3);
+	  nancheck(wfield3);
+	  nancheck(efield3);
+	  nancheck(rho3);
+	  
+	  nancheck(u_an3);
+	  nancheck(v_an3);
+	  nancheck(w_an3);
+	  nancheck(rho_an3);
+	  nancheck(p_an3);
+
 	  //masa_display_param();  
 	  //cout << endl << ufield << endl << vfield << endl << efield << rho << endl;
 

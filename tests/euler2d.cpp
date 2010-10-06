@@ -342,6 +342,16 @@ int main()
 	p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
 
 #endif
+
+	nancheck(ufield3);
+	nancheck(vfield3);
+	nancheck(efield3);
+	nancheck(rho3);
+	
+	nancheck(u_an3);
+	nancheck(v_an3);
+	nancheck(rho_an3);
+	nancheck(p_an3);
 	
 	if(ufield3 > threshold)
 	  {

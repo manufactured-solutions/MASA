@@ -224,6 +224,14 @@ int main()
 
 #endif
 
+      nancheck(ufield3);
+      nancheck(efield3);
+      nancheck(rho3);
+      
+      nancheck(u_an3);
+      nancheck(rho_an3);
+      nancheck(p_an3);
+      
       if(ufield3 > threshold)
 	{
 	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
