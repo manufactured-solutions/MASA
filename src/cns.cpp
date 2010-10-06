@@ -151,7 +151,7 @@ double MASA::navierstokes_2d_compressible::eval_q_e(double x,double y)
 //   Gradient of Source Terms
 // ----------------------------------------
 
-double MASA::navierstokes_2d_compressible::eval_2d_g(double x,double y, int i)
+double MASA::navierstokes_2d_compressible::eval_2d_g_u(double x,double y, int i)
 {
 
   double grad = -1;
@@ -160,8 +160,6 @@ double MASA::navierstokes_2d_compressible::eval_2d_g(double x,double y, int i)
     grad_rho_an[1] = -rho_y * sin(a_rhoy * pi * y / L) * a_rhoy * pi / L;
     grad_p_an[0] = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
     grad_p_an[1] = p_y * cos(a_py * pi * y / L) * a_py * pi / L;
-    grad_u_an[0] = u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
-    grad_u_an[1] = -u_y * sin(a_uy * pi * y / L) * a_uy * pi / L;
     grad_v_an[0] = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
     grad_v_an[1] = v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
   */
@@ -169,20 +167,20 @@ double MASA::navierstokes_2d_compressible::eval_2d_g(double x,double y, int i)
   switch(i)
     {
     case 0:
-      cout << "MASA error:: eval_2d_g has no 0th component\n";
+      cout << "MASA error:: eval_2d_g_u has no 0th component\n";
       cout << "Try 1 or 2\n";
       break;
       
     case 1:
-      
+      grad =  u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;      
       break;
 
     case 2:
-
+      grad = -u_y * sin(a_uy * pi * y / L) * a_uy * pi / L;
       break;
 
     default:
-      cout << "MASA error:: eval_2d_g has no " << i << "th component\n";
+      cout << "MASA error:: eval_2d_g_u has no " << i << "th component\n";
       cout << "Try 1 or 2\n";
       break;
 
@@ -409,7 +407,7 @@ int MASA::navierstokes_3d_compressible::init_var()
 //   Gradient of Source Terms
 // ----------------------------------------
 
-double MASA::navierstokes_3d_compressible::eval_3d_g(double x,double y,double z,int i)
+double MASA::navierstokes_3d_compressible::eval_3d_g_u(double x,double y,double z,int i)
 {
 
   double grad = -1;
@@ -421,9 +419,6 @@ double MASA::navierstokes_3d_compressible::eval_3d_g(double x,double y,double z,
     grad_p_an[0] = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
     grad_p_an[1] = p_y * cos(a_py * pi * y / L) * a_py * pi / L;
     grad_p_an[2] = -p_z * sin(a_pz * pi * z / L) * a_pz * pi / L;
-    grad_u_an[0] = u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
-    grad_u_an[1] = -u_y * sin(a_uy * pi * y / L) * a_uy * pi / L;
-    grad_u_an[2] = -u_z * sin(a_uz * pi * z / L) * a_uz * pi / L;
     grad_v_an[0] = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
     grad_v_an[1] = v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
     grad_v_an[2] = v_z * cos(a_vz * pi * z / L) * a_vz * pi / L;
@@ -435,24 +430,25 @@ double MASA::navierstokes_3d_compressible::eval_3d_g(double x,double y,double z,
   switch(i)
     {
     case 0:
-      cout << "MASA error:: masa_eval_3d_grad has no 0th component\n";
+      cout << "MASA error:: masa_eval_3d_grad_u has no 0th component\n";
       cout << "Try 1,2 or 3\n";
       break;
       
     case 1:
+      grad =  u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
       
       break;
 
     case 2:
-
+      grad = -u_y * sin(a_uy * pi * y / L) * a_uy * pi / L;
       break;
 
     case 3:
-
+      grad = -u_z * sin(a_uz * pi * z / L) * a_uz * pi / L;
       break;
 
     default:
-      cout << "MASA error:: masa_eval_3d_grad has no " << i << "th component\n";
+      cout << "MASA error:: masa_eval_3d_grad_u has no " << i << "th component\n";
       cout << "Try 1 or 2\n";
       break;
 

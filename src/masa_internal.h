@@ -77,6 +77,7 @@ namespace MASA
     
   protected:
     static const double PI;              // 3.1415... defined in constructor
+    static const double pi;              // 3.1415... defined in constructor
     static const double MASA_VAR_DEFAULT;   
     double dummy;
     int num_vars;
@@ -168,9 +169,9 @@ namespace MASA
    * -------------------------------------------------------------------------------------------
    */
 
-    virtual double eval_1d_g(double)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual double eval_2d_g(double,double,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual double eval_3d_g(double,double,double,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual double eval_1d_g_u(double)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual double eval_2d_g_u(double,double,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual double eval_3d_g_u(double,double,double,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
   /* 
    * -------------------------------------------------------------------------------------------   
@@ -515,7 +516,7 @@ namespace MASA
     double eval_an_p  (double);
     double eval_an_rho(double);
 
-    double eval_1d_g(double);   // gradient of source term
+    double eval_1d_g_u(double);   // gradient of source term
 
   };
 
@@ -563,7 +564,7 @@ namespace MASA
     double eval_an_p  (double,double);
     double eval_an_rho(double,double);
 
-    double eval_2d_g(double,double,int);   // gradient of source term
+    double eval_2d_g_u(double,double,int);   // gradient of source term
 
   };
 
@@ -628,7 +629,7 @@ namespace MASA
     double eval_an_p  (double,double,double);
     double eval_an_rho(double,double,double);
 
-    double eval_3d_g(double,double,double,int);   // gradient of source term
+    double eval_3d_g_u(double,double,double,int);   // gradient of source term
 
   };
 
@@ -846,7 +847,7 @@ namespace MASA
     double eval_an_p  (double,double);
     double eval_an_rho(double,double);
 
-    double eval_2d_g(double,double,int);   // gradient of source term
+    double eval_2d_g_u(double,double,int);   // gradient of source term
 
   };
   
@@ -911,7 +912,7 @@ namespace MASA
     double eval_an_p  (double,double,double);
     double eval_an_rho(double,double,double);
 
-    double eval_3d_g(double,double,double,int);   // gradient of source term
+    double eval_3d_g_u(double,double,double,int);   // gradient of source term
 
   }; // done with navier stokes 3d class
   

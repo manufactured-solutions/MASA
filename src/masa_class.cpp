@@ -55,6 +55,7 @@ MASA::manufactured_solution::manufactured_solution()
 
 // define PI and other constants
 const double MASA::manufactured_solution::PI = acos(-1);
+const double MASA::manufactured_solution::pi = acos(-1);
 const double MASA::manufactured_solution::MASA_VAR_DEFAULT = -12345.67; // default -- initialize each var to 'crazy' value
 
 double MASA::manufactured_solution::get_var(string var)
