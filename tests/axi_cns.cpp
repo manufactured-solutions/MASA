@@ -192,8 +192,8 @@ int main()
   
 
   // evaluate source terms (2D)
-  for(int i=0;i<nx;i++)
-    for(int j=0;j<ny;j++)    
+  for(int i=1;i<nx;i++)
+    for(int j=1;j<ny;j++)    
       {
 	r=i*dx;
 	z=j*dy;
@@ -247,19 +247,15 @@ int main()
 	p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
 #endif
 
-	/*
 	nancheck(ufield3);
-	nancheck(vfield3);
 	nancheck(wfield3);
 	nancheck(efield3);
 	nancheck(rho3);
 
 	nancheck(u_an3);
-	nancheck(v_an3);
 	nancheck(w_an3);
 	nancheck(rho_an3);
 	nancheck(p_an3);
-	*/
 
 	if(ufield3 > threshold)
 	  {

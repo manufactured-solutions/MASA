@@ -189,8 +189,8 @@ int main()
     }  
 
   // evaluate source terms (2D)
-  for(int i=0;i<nx;i++)
-    for(int j=0;j<ny;j++)    
+  for(int i=1;i<nx;i++)    // this is the radial term -- thus, do not start at 0!
+    for(int j=1;j<ny;j++)  // z component  
       {
 	r=i*dx;
 	z=j*dy;
@@ -247,7 +247,6 @@ int main()
 
 #endif
 
-	/*
 	nancheck(ufield3);
 	nancheck(wfield3);
 	nancheck(efield3);
@@ -257,7 +256,6 @@ int main()
 	nancheck(w_an3);
 	nancheck(rho_an3);
 	nancheck(p_an3);
-	*/
 
 	if(ufield3 > threshold)
 	  {
