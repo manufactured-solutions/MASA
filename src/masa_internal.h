@@ -532,7 +532,9 @@ namespace MASA
     double eval_an_p  (double);
     double eval_an_rho(double);
 
-    double eval_1d_g_u(double);   // gradient of source term
+    double eval_1d_g_u  (double);   // gradient of source term
+    double eval_1d_g_p  (double);
+    double eval_1d_g_rho(double);
 
   };
 

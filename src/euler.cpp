@@ -126,22 +126,28 @@ double MASA::euler_1d::eval_q_rho(double x)
 double MASA::euler_1d::eval_1d_g_u(double x)
 {
 
-  /*
-  grad_rho_an[0] = rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
-  grad_rho_an[1] = 0;
-  grad_rho_an[2] = 0;
-  grad_p_an[0] = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
-  grad_p_an[1] = 0;
-  grad_p_an[2] = 0;
-  grad_u_an[0] = u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
-  grad_u_an[1] = 0;
-  grad_u_an[2] = 0;
-  */
-
-  return 0;
+  double grad_u = u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
+  return grad_u;
 
 
 }
+
+double MASA::euler_1d::eval_1d_g_p(double x)
+{
+
+  double grad_p = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
+  return grad_p;
+
+}
+
+double MASA::euler_1d::eval_1d_g_rho(double x)
+{
+
+  double grad_rho = rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
+  return grad_rho;
+
+}
+
 
 // ----------------------------------------
 //   Analytical Solutions
