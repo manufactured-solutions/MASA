@@ -129,6 +129,22 @@ int main()
   derr = masa_eval_1d_grad_u(x);
   if(derr != -1.33) 
     err += 1;  
+
+  derr = masa_eval_1d_grad_v(x);
+  if(derr != -1.33) 
+    err += 1;  
+
+  derr = masa_eval_1d_grad_w(x);
+  if(derr != -1.33) 
+    err += 1;  
+
+  derr = masa_eval_1d_grad_p(x);
+  if(derr != -1.33) 
+    err += 1;  
+
+  derr = masa_eval_1d_grad_rho(x);
+  if(derr != -1.33) 
+    err += 1;  
   
   // --------------------------------
   // source term(s) -- 2D
@@ -181,11 +197,45 @@ int main()
   if(derr != -1.33) 
     err += 1;
   
+  // gradient terms
+
   derr = masa_eval_2d_grad_u(x,y,1);
   if(derr != -1.33) 
     err += 1;
 
   derr = masa_eval_2d_grad_u(x,y,2);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_2d_grad_v(x,y,1);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_2d_grad_v(x,y,2);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_2d_grad_w(x,y,1);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_2d_grad_w(x,y,2);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_2d_grad_p(x,y,1);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_2d_grad_p(x,y,2);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_2d_grad_rho(x,y,1);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_2d_grad_rho(x,y,2);
   if(derr != -1.33) 
     err += 1;
 
@@ -217,6 +267,7 @@ int main()
   if(derr != -1.33) 
     err += 1;
 
+  // gradient terms
   derr = masa_eval_3d_grad_u(x,y,z,1);
   if(derr != -1.33) 
     err += 1;
@@ -229,6 +280,55 @@ int main()
   if(derr != -1.33) 
     err += 1;
   
+  derr = masa_eval_3d_grad_v(x,y,z,1);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_3d_grad_v(x,y,z,2);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_3d_grad_v(x,y,z,3);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_3d_grad_w(x,y,z,1);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_3d_grad_w(x,y,z,2);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_3d_grad_w(x,y,z,3);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_3d_grad_p(x,y,z,1);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_3d_grad_p(x,y,z,2);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_3d_grad_p(x,y,z,3);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_3d_grad_rho(x,y,z,1);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_3d_grad_rho(x,y,z,2);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_3d_grad_rho(x,y,z,3);
+  if(derr != -1.33) 
+    err += 1;
+
+  // done with gradient
   derr = masa_eval_t_an(x,y,z,t);
   if(derr != -1.33) 
   err += 1;
