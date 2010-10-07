@@ -173,6 +173,14 @@ namespace MASA
     virtual double eval_2d_g_u(double,double,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
     virtual double eval_3d_g_u(double,double,double,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
+    virtual double eval_1d_g_v(double)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual double eval_2d_g_v(double,double,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual double eval_3d_g_v(double,double,double,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+
+    virtual double eval_1d_g_w(double)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual double eval_2d_g_w(double,double,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual double eval_3d_g_w(double,double,double,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+
   /* 
    * -------------------------------------------------------------------------------------------   
    *
