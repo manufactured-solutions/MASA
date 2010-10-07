@@ -583,6 +583,10 @@ namespace MASA
     double eval_an_rho(double,double);
 
     double eval_2d_g_u(double,double,int);   // gradient of source term
+    double eval_2d_g_v(double,double,int);
+    double eval_2d_g_p(double,double,int);
+
+    double eval_2d_g_rho(double,double,int);
 
   };
 
@@ -648,6 +652,11 @@ namespace MASA
     double eval_an_rho(double,double,double);
 
     double eval_3d_g_u(double,double,double,int);   // gradient of source term
+    double eval_3d_g_v(double,double,double,int);
+    double eval_3d_g_w(double,double,double,int);
+
+    double eval_3d_g_p  (double,double,double,int);
+    double eval_3d_g_rho(double,double,double,int);
 
   };
 
@@ -866,6 +875,11 @@ namespace MASA
     double eval_an_rho(double,double);
 
     double eval_2d_g_u(double,double,int);   // gradient of source term
+    double eval_2d_g_v(double,double,int);
+    double eval_2d_g_p(double,double,int);
+
+    double eval_2d_g_rho(double,double,int);
+
 
   };
   
@@ -931,6 +945,11 @@ namespace MASA
     double eval_an_rho(double,double,double);
 
     double eval_3d_g_u(double,double,double,int);   // gradient of source term
+    double eval_3d_g_v(double,double,double,int);
+    double eval_3d_g_w(double,double,double,int);
+
+    double eval_3d_g_p  (double,double,double,int);
+    double eval_3d_g_rho(double,double,double,int);
 
   }; // done with navier stokes 3d class
   

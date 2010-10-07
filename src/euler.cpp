@@ -292,14 +292,6 @@ double MASA::euler_2d::eval_q_rho(double x,double y)
 
 double MASA::euler_2d::eval_2d_g_u(double x,double y, int i)
 {
-  /*
-  grad_rho_an[0] = rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
-  grad_rho_an[1] = -rho_y * sin(a_rhoy * pi * y / L) * a_rhoy * pi / L;
-  grad_p_an[0] = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
-  grad_p_an[1] = p_y * cos(a_py * pi * y / L) * a_py * pi / L;
-  grad_v_an[0] = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
-  grad_v_an[1] = v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
-  */
 
   double grad = -1;
 
@@ -320,6 +312,100 @@ double MASA::euler_2d::eval_2d_g_u(double x,double y, int i)
 
     default:
       cout << "MASA error:: eval_2d_g_u has no " << i << "th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+
+    }// done with switch
+  
+  return grad;
+
+}
+
+
+double MASA::euler_2d::eval_2d_g_v(double x,double y, int i)
+{
+
+  double grad = -1;
+
+  switch(i)
+    {
+    case 0:
+      cout << "MASA error:: eval_2d_g_v has no 0th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+      
+    case 1:
+      grad = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
+      break;
+
+    case 2:
+      grad =  v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
+      break;
+
+    default:
+      cout << "MASA error:: eval_2d_g_v has no " << i << "th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+
+    }// done with switch
+  
+  return grad;
+
+}
+
+double MASA::euler_2d::eval_2d_g_p(double x,double y, int i)
+{
+
+  double grad = -1;
+
+  switch(i)
+    {
+    case 0:
+      cout << "MASA error:: eval_2d_g_p has no 0th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+      
+    case 1:
+      grad = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
+      break;
+
+    case 2:
+      grad =  p_y * cos(a_py * pi * y / L) * a_py * pi / L;
+      break;
+
+    default:
+      cout << "MASA error:: eval_2d_g_p has no " << i << "th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+
+    }// done with switch
+  
+  return grad;
+
+}
+
+double MASA::euler_2d::eval_2d_g_rho(double x,double y, int i)
+{
+
+  double grad = -1;
+
+  switch(i)
+    {
+    case 0:
+      cout << "MASA error:: eval_2d_g_rho has no 0th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+      
+    case 1:
+      grad =  rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
+      break;
+
+    case 2:
+      grad = -rho_y * sin(a_rhoy * pi * y / L) * a_rhoy * pi / L;
+      break;
+
+    default:
+      cout << "MASA error:: eval_2d_g_rho has no " << i << "th component\n";
       cout << "Try 1 or 2\n";
       break;
 
@@ -477,20 +563,6 @@ int MASA::euler_3d::init_var()
 
 double MASA::euler_3d::eval_3d_g_u(double x,double y,double z,int i)
 {
-  /*
-    grad_rho_an[0] = rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
-    grad_rho_an[1] = -rho_y * sin(a_rhoy * pi * y / L) * a_rhoy * pi / L;
-    grad_rho_an[2] = rho_z * cos(a_rhoz * pi * z / L) * a_rhoz * pi / L;
-    grad_p_an[0] = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
-    grad_p_an[1] = p_y * cos(a_py * pi * y / L) * a_py * pi / L;
-    grad_p_an[2] = -p_z * sin(a_pz * pi * z / L) * a_pz * pi / L;
-    grad_v_an[0] = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
-    grad_v_an[1] = v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
-    grad_v_an[2] = v_z * cos(a_vz * pi * z / L) * a_vz * pi / L;
-    grad_w_an[0] = w_x * cos(a_wx * pi * x / L) * a_wx * pi / L;
-    grad_w_an[1] = w_y * cos(a_wy * pi * y / L) * a_wy * pi / L;
-    grad_w_an[2] = -w_z * sin(a_wz * pi * z / L) * a_wz * pi / L;
-  */
 
   double grad = -1;
 
@@ -502,7 +574,7 @@ double MASA::euler_3d::eval_3d_g_u(double x,double y,double z,int i)
       break;
       
     case 1:
-      grad =  u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;      
+      grad =  u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
       break;
 
     case 2:
@@ -515,6 +587,146 @@ double MASA::euler_3d::eval_3d_g_u(double x,double y,double z,int i)
 
     default:
       cout << "MASA error:: masa_eval_3d_grad_u has no " << i << "th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+
+    }// done with switch
+  
+  return grad;
+
+}
+
+
+double MASA::euler_3d::eval_3d_g_v(double x,double y,double z,int i)
+{
+
+  double grad = -1;
+
+  switch(i)
+    {
+    case 0:
+      cout << "MASA error:: masa_eval_3d_grad_v has no 0th component\n";
+      cout << "Try 1,2 or 3\n";
+      break;
+      
+    case 1:
+      grad = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
+      break;
+
+    case 2:
+      grad =  v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
+      break;
+
+    case 3:
+      grad =  v_z * cos(a_vz * pi * z / L) * a_vz * pi / L;
+      break;
+
+    default:
+      cout << "MASA error:: masa_eval_3d_grad_v has no " << i << "th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+
+    }// done with switch
+  
+  return grad;
+
+}
+
+double MASA::euler_3d::eval_3d_g_w(double x,double y,double z,int i)
+{
+
+  double grad = -1;
+
+  switch(i)
+    {
+    case 0:
+      cout << "MASA error:: masa_eval_3d_grad_w has no 0th component\n";
+      cout << "Try 1,2 or 3\n";
+      break;
+      
+    case 1:
+      grad =  w_x * cos(a_wx * pi * x / L) * a_wx * pi / L;
+      break;
+
+    case 2:
+      grad =  w_y * cos(a_wy * pi * y / L) * a_wy * pi / L;
+      break;
+
+    case 3:
+      grad = -w_z * sin(a_wz * pi * z / L) * a_wz * pi / L;
+      break;
+
+    default:
+      cout << "MASA error:: masa_eval_3d_grad_w has no " << i << "th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+
+    }// done with switch
+  
+  return grad;
+
+}
+double MASA::euler_3d::eval_3d_g_p(double x,double y,double z,int i)
+{
+
+  double grad = -1;
+
+  switch(i)
+    {
+    case 0:
+      cout << "MASA error:: masa_eval_3d_grad_p has no 0th component\n";
+      cout << "Try 1,2 or 3\n";
+      break;
+      
+    case 1:
+      grad = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
+      break;
+
+    case 2:
+      grad =  p_y * cos(a_py * pi * y / L) * a_py * pi / L;
+      break;
+
+    case 3:
+      grad = -p_z * sin(a_pz * pi * z / L) * a_pz * pi / L;
+      break;
+
+    default:
+      cout << "MASA error:: masa_eval_3d_grad_p has no " << i << "th component\n";
+      cout << "Try 1 or 2\n";
+      break;
+
+    }// done with switch
+  
+  return grad;
+
+}
+
+double MASA::euler_3d::eval_3d_g_rho(double x,double y,double z,int i)
+{
+
+  double grad = -1;
+
+  switch(i)
+    {
+    case 0:
+      cout << "MASA error:: masa_eval_3d_grad_rho has no 0th component\n";
+      cout << "Try 1,2 or 3\n";
+      break;
+      
+    case 1:
+      grad = rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
+      break;
+      
+    case 2:
+      grad = -rho_y * sin(a_rhoy * pi * y / L) * a_rhoy * pi / L;
+      break;
+      
+    case 3:
+      grad = rho_z * cos(a_rhoz * pi * z / L) * a_rhoz * pi / L;
+      break;
+
+    default:
+      cout << "MASA error:: masa_eval_3d_grad_rho has no " << i << "th component\n";
       cout << "Try 1 or 2\n";
       break;
 
