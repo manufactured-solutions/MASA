@@ -230,7 +230,7 @@ int main()
   double w_an,w_an2,w_an3;
   double p_an,p_an2,p_an3;
   double rho_an,rho_an2,rho_an3;
-  double gradx,grady,gradz;
+  double gradx,grady,gradz,gradp,gradrho;
 
   double ufield,ufield2,ufield3;
   double vfield,vfield2,vfield3;
@@ -317,8 +317,17 @@ int main()
 	
 	// eval gradient terms
 	gradx = masa_eval_2d_grad_u(x,y,1);
-	grady = masa_eval_2d_grad_u(x,y,2);
-		
+	grady = masa_eval_2d_grad_u(x,y,2);		
+
+	gradx = masa_eval_2d_grad_v(x,y,1);
+	grady = masa_eval_2d_grad_v(x,y,2);		
+
+	gradx = masa_eval_2d_grad_p(x,y,1);
+	grady = masa_eval_2d_grad_p(x,y,2);		
+  
+	gradx = masa_eval_2d_grad_rho(x,y,1);
+	grady = masa_eval_2d_grad_rho(x,y,2);		
+
 	// check against maple
 	ufield2 = SourceQ_u   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);
 	vfield2 = SourceQ_v   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);

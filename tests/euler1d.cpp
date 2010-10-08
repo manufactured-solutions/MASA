@@ -140,7 +140,7 @@ int main()
   double ufield,ufield2,ufield3;
   double efield,efield2,efield3;
   double rho,rho2,rho3;
-  double gradx,grady,gradz;
+  double gradx,grady,gradz,gradp,gradrho;
 
   double u_an,u_an2,u_an3;
   double p_an,p_an2,p_an3;
