@@ -637,7 +637,7 @@ int main()
 	    }
 	  
 	}// done iterating
-
+  
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa; these tests currently just verify functions
   // run successfully.
@@ -655,6 +655,51 @@ int main()
   if(derr != -1)
     {
       cout << "MASA :: gradient (4) error condition failed!\n";
+      exit(1);
+    }
+
+  // v
+  derr = masa_eval_3d_grad_v(0,0,0,0);
+  if(derr != -1)
+    {
+      cout << "MASA :: v gradient (0) error condition failed!\n";
+      exit(1);
+    }
+  
+  derr = masa_eval_3d_grad_v(0,0,0,4);
+  if(derr != -1)
+    {
+      cout << "MASA :: v gradient (4) error condition failed!\n";
+      exit(1);
+    }
+
+  // p
+  derr = masa_eval_3d_grad_p(0,0,0,0);
+  if(derr != -1)
+    {
+      cout << "MASA :: p gradient (0) error condition failed!\n";
+      exit(1);
+    }
+  
+  derr = masa_eval_3d_grad_p(0,0,0,4);
+  if(derr != -1)
+    {
+      cout << "MASA :: p gradient (4) error condition failed!\n";
+      exit(1);
+    }
+
+  // rho
+  derr = masa_eval_3d_grad_rho(0,0,0,0);
+  if(derr != -1)
+    {
+      cout << "MASA :: rho gradient (0) error condition failed!\n";
+      exit(1);
+    }
+  
+  derr = masa_eval_3d_grad_rho(0,0,0,4);
+  if(derr != -1)
+    {
+      cout << "MASA :: rho gradient (4) error condition failed!\n";
       exit(1);
     }
 

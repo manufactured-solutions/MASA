@@ -64,8 +64,9 @@ int main()
 	x=i*dx;
 	t=j*dt;
 	
-	out = masa_eval_rho_source(x,t);
+	out = masa_eval_rho_source  (x,t);
 	out = masa_eval_rho_u_source(x,t);
+	//out = masa_eval_p_source    (x,t);
       } //done iterating
 
   // below are barely a regression test: 
