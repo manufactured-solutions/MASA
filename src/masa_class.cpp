@@ -89,7 +89,6 @@ double MASA::manufactured_solution::get_var(string var)
 
 void MASA::manufactured_solution::display_var()
 {
-  int selector;
 
   cout << "\nMASA :: Solution has " << varmap.size() << " variables.\n";
   cout << "*-------------------------------------*\n" ;
@@ -342,7 +341,6 @@ int MASA::manufactured_solution::poly_test()
   const double dx = 62;
   const double d2x = 54;
   const double d3x = 24;
-  const double d4x = 0;
 
   std::vector<double> derivs(4);
 

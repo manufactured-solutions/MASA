@@ -76,7 +76,7 @@ void verify_pointer_sanity()
 int MASA::masa_select_mms(string name)
 {
   string nametemp;
-  int selector;
+
   // lets run though the list to check the variable does exist
   map<string,manufactured_solution*>::iterator it;
   it=masa_master_list.find(name);
