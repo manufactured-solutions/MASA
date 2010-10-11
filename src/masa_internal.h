@@ -760,6 +760,7 @@ namespace MASA
     int init_var();          // default problem values
 
     double eval_q_rho   (double,double);
+    double eval_q_p     (double,double);
     double eval_q_rho_u (double,double);
     double func         (double);  // helper function
     double rtbis        (double,double,double,int);

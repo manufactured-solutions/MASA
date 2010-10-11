@@ -103,9 +103,8 @@ double MASA::sod_1d::eval_q_t(double x)
   cl = sqrt (Gamma * pl / rhol);
   cr = sqrt (Gamma * pr / rhor);
 
-  double out;
   // will hit masa_exit --root not bracketed!
-  return out = rtbis(1.,20.,1.,100);
+  return rtbis(1.,20.,1.,100);
 
 }
 
@@ -124,24 +123,19 @@ double MASA::sod_1d::eval_q_t(double x,double t)
   cl = sqrt (Gamma * pl / rhol);
   cr = sqrt (Gamma * pr / rhor);
 
-  double out;
   // will hit 'too many bisections' 
-  return out = rtbis(-1,2,1,1);
+  return rtbis(-1,2,1,1);
 
 }
 
 double MASA::sod_1d::eval_q_rho(double x,double t)
 {
-  double xm;
-
   // xmax determines the size of the computational domain (-xmax, +xmax).
   // numcells determines the number of cells in the output table.          
   // double xmax 	= 5.e0;
 
-  double pm, pressure;
-  double rhoml, vs, vt, rhomr, vm, density, velocity;
-  int i;
-  FILE *fp;
+  double pm;
+  double rhoml, vs, vt, rhomr, vm, density;
 
   // Define the Sod problem initial conditions for the left and right states.
 
@@ -197,24 +191,6 @@ double MASA::sod_1d::eval_q_rho(double x,double t)
       else
 	density = rhor;
       
-      if (x <= (-cl*t) )
-	pressure = pl;
-      else if (x <= (-vt*t) )
-	pressure = pow(pl * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 * Gamma / (Gamma - 1.e0)));
-      else if (x <= vs * t)
-	pressure = pm;
-      else            
-	pressure = pr;
-      
-      if (x <= (-cl*t) )
-	velocity = 0.0;
-      else if (x <= (-vt*t) )
-	velocity = (1 - mu) * (x / t + cl);
-      else if (x <= (vs*t) )
-	velocity = vm;
-      else 
-	velocity = 0.0;
-
       double out_soln = density;
       return out_soln;
 
@@ -224,16 +200,12 @@ double MASA::sod_1d::eval_q_rho(double x,double t)
 // 
 double MASA::sod_1d::eval_q_rho_u(double x,double t)
 {
-  double xm;
-
   // xmax determines the size of the computational domain (-xmax, +xmax).
   // numcells determines the number of cells in the output table.          
   // double xmax 	= 5.e0;
 
-  double pm, pressure;
+  double pm;
   double rhoml, vs, vt, rhomr, vm, density, velocity;
-  int i;
-  FILE *fp;
 
   // Define the Sod problem initial conditions for the left and right states.
 
@@ -290,15 +262,6 @@ double MASA::sod_1d::eval_q_rho_u(double x,double t)
 	density = rhor;
       
       if (x <= (-cl*t) )
-	pressure = pl;
-      else if (x <= (-vt*t) )
-	pressure = pow(pl * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 * Gamma / (Gamma - 1.e0)));
-      else if (x <= vs * t)
-	pressure = pm;
-      else            
-	pressure = pr;
-      
-      if (x <= (-cl*t) )
 	velocity = 0.0;
       else if (x <= (-vt*t) )
 	velocity = (1 - mu) * (x / t + cl);
@@ -309,6 +272,65 @@ double MASA::sod_1d::eval_q_rho_u(double x,double t)
 
       double out_soln = density*velocity;
       return out_soln;
+}
+
+// return pressure
+// 
+double MASA::sod_1d::eval_q_p(double x,double t)
+{
+
+  double pm, pressure;
+  double vs, vt, rhomr, vm;
+
+  // Define the Sod problem initial conditions for the left and right states.
+
+  pl = 1.e0;
+  pr = 0.125;
+
+  rhol = 1.e0;
+  rhor = 0.125;
+
+  // Define sound speeds for the left and right sides of tube.
+
+  cl = sqrt (Gamma * pl / rhol);
+  cr = sqrt (Gamma * pr / rhor);
+
+  // Solve for the postshock pressure pm.
+
+  pm = rtbis (pr, pl, 1.e-16,100);
+
+  // Define the postshock fluid velocity vm.
+
+  vm = 2.e0 * cl / (Gamma - 1.e0) * (1.e0 - pow((pm / pl),( (Gamma - 1.e0) / (2.e0 * Gamma) )));
+
+  // Define the postshock density rhomr.
+
+  rhomr = rhor *  ( (pm + mu * pr) / (pr + mu * pm) );
+
+  // Define the shock velocity vs.
+
+  vs = vm / (1.e0 - rhor / rhomr);
+
+  // Define the velocity of the rarefraction tail, vt.
+
+  vt = cl - vm / (1.e0 - mu);
+
+  // Output tables of pressure at time t.
+  //  for(i=0;i<numnodes;i++)
+  //    {
+  //x = - xmax +  2.e0 * xmax * i / numnodes;
+  
+  if (x <= (-cl*t) )
+    pressure = pl;
+  else if (x <= (-vt*t) )
+    pressure = pow(pl * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 * Gamma / (Gamma - 1.e0)));
+  else if (x <= vs * t)
+    pressure = pm;
+  else            
+    pressure = pr;
+  
+  double out_soln = pressure;
+  return out_soln;
 }
 
 double MASA::sod_1d::func(double pm)
