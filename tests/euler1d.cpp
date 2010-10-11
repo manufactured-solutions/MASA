@@ -189,7 +189,9 @@ int main()
       rho_an = masa_eval_rho_an    (x);
 
       // eval gradient terms
-      gradx = masa_eval_1d_grad_u(x);
+      gradx   = masa_eval_1d_grad_u  (x);
+      gradp   = masa_eval_1d_grad_p  (x);
+      gradrho = masa_eval_1d_grad_rho(x);
 
       // get fundamental source term solution
       ufield2   = SourceQ_u  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);

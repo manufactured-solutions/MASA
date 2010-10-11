@@ -465,6 +465,51 @@ int main()
       exit(1);
     }
 
+  // v
+  derr = masa_eval_2d_grad_v(0,0,0);
+  if(derr != -1)
+    {
+      cout << "MASA :: v gradient (0) error condition failed!\n";
+      exit(1);
+    }
+  
+  derr = masa_eval_2d_grad_v(0,0,3);
+  if(derr != -1)
+    {
+      cout << "MASA :: v gradient (3) error condition failed!\n";
+      exit(1);
+    }
+
+  // p
+  derr = masa_eval_2d_grad_p(0,0,0);
+  if(derr != -1)
+    {
+      cout << "MASA :: p gradient (0) error condition failed!\n";
+      exit(1);
+    }
+  
+  derr = masa_eval_2d_grad_p(0,0,3);
+  if(derr != -1)
+    {
+      cout << "MASA :: p gradient (3) error condition failed!\n";
+      exit(1);
+    }
+
+  // rho
+  derr = masa_eval_2d_grad_rho(0,0,0);
+  if(derr != -1)
+    {
+      cout << "MASA :: rho gradient (0) error condition failed!\n";
+      exit(1);
+    }
+  
+  derr = masa_eval_2d_grad_rho(0,0,3);
+  if(derr != -1)
+    {
+      cout << "MASA :: rho gradient (3) error condition failed!\n";
+      exit(1);
+    }
+
   // tests passed
   return 0;
 }
