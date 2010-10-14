@@ -673,6 +673,21 @@ int main()
       exit(1);
     }
 
+  // w
+  derr = masa_eval_3d_grad_w(0,0,0,0);
+  if(derr != -1)
+    {
+      cout << "MASA :: w gradient (0) error condition failed!\n";
+      exit(1);
+    }
+  
+  derr = masa_eval_3d_grad_w(0,0,0,4);
+  if(derr != -1)
+    {
+      cout << "MASA :: w gradient (4) error condition failed!\n";
+      exit(1);
+    }
+
   // p
   derr = masa_eval_3d_grad_p(0,0,0,0);
   if(derr != -1)
