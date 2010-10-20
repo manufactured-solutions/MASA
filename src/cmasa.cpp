@@ -36,10 +36,7 @@
 #include <string>
 #include <string.h>
 
-using namespace std;
 using namespace MASA;
-
-
 
 extern "C" int cmasa_init(const char* specificname,const char* functionname)
 {
@@ -48,8 +45,8 @@ extern "C" int cmasa_init(const char* specificname,const char* functionname)
   //  printf("functionname = %i\n",sizeof(functionname));
   //  printf(" -> %c%c%c\n",specificname[5],specificname[6],specificname[7]);
   
-  string sn(specificname);
-  string fn(functionname);
+  std::string sn(specificname);
+  std::string fn(functionname);
 
   //  printf("masa_init, received %s %s\n\n",specificname,functionname);
 
@@ -60,7 +57,7 @@ extern "C" int cmasa_init(const char* specificname,const char* functionname)
 
 extern "C" int cmasa_select_mms(const char* function_user_wants)
 {
-  string fuw(function_user_wants);
+  std::string fuw(function_user_wants);
   masa_select_mms<double>(fuw);
   return 0;
 }
