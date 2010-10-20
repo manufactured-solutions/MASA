@@ -37,6 +37,7 @@
 
 using namespace MASA;
 using namespace std;
+
 // Anonymous namespace for local helper class/functions
 namespace {
 
@@ -49,7 +50,7 @@ public:
   MasterMS () : _master_pointer(NULL), _master_map() {}
 
   ~MasterMS () {
-    for(typename map<string,manufactured_solution<Scalar>*>::iterator iter = this->_master_map.begin(); iter != this->_master_map.end(); iter++)
+    for(typename map<std::string,manufactured_solution<Scalar>*>::iterator iter = this->_master_map.begin(); iter != this->_master_map.end(); iter++)
       delete iter->second;
   }
 
@@ -141,8 +142,8 @@ void MasterMS<Scalar>::verify_pointer_sanity() const
 {
   if(_master_pointer == 0)
     {    
-      std::cout << "MASA FATAL ERROR:: No initialized Manufactured Solution!" << endl;
-      std::cout << "Have you called masa_init?" << endl;
+      std::cout << "MASA FATAL ERROR:: No initialized Manufactured Solution!" << std::endl;
+      std::cout << "Have you called masa_init?" << std::endl;
       masa_exit(1);
     }  
 }
@@ -155,7 +156,7 @@ void MASA::masa_exit(int ex)
 {
 
 #ifdef MASA_EXCEPTIONS
-  std::cout << "MASA:: caught exception " << ex << endl;
+  std::cout << "MASA:: caught exception " << ex << std::endl;
   throw(ex);
 #else
   std::cout << "MASA:: ABORTING\n";
@@ -175,7 +176,7 @@ void MasterMS<Scalar>::select_mms(const std::string& my_name)
   typename std::map<std::string, manufactured_solution<Scalar> *>::iterator it=_master_map.find(my_name);
   if(it != _master_map.end()) // found a name
     { 
-      std::cout << "MASA :: selected " << my_name << endl;
+      std::cout << "MASA :: selected " << my_name << std::endl;
       _master_pointer=it->second; // set pointer to currently selected solution      
     }      
   else 
@@ -242,14 +243,14 @@ void MasterMS<Scalar>::init_mms(const std::string& my_name,
 template <typename Scalar>
 void MasterMS<Scalar>::list_mms() const
 {
-  string str;
+  std::string str;
 
   // output the size of the map
-  std::cout << "Number of initialized solutions: " << this->size() << endl;
-  for(typename map<string,manufactured_solution<Scalar>*>::const_iterator iter = this->_master_map.begin(); iter != this->_master_map.end(); iter++)
+  std::cout << "Number of initialized solutions: " << this->size() << std::endl;
+  for(typename map<std::string,manufactured_solution<Scalar>*>::const_iterator iter = this->_master_map.begin(); iter != this->_master_map.end(); iter++)
     {
       (iter->second)->return_name(&str);
-      std::cout << iter->first << " : " << str << endl;
+      std::cout << iter->first << " : " << str << std::endl;
     }
 }
 
@@ -272,7 +273,7 @@ int MASA::masa_printid()
 
   get_list_mms(anim); //construct list 
 
-  std::cout << endl;
+  std::cout << std::endl;
   std::cout << "\nMASA :: Available Solutions:\n";
   std::cout << "*-------------------------------------*" ;
 
@@ -280,7 +281,7 @@ int MASA::masa_printid()
     {
       std::string name;
       (*it)->return_name(&name); // get name
-      std::cout << endl << name;
+      std::cout << std::endl << name;
       delete *it;
     } // done with for loop 
 
@@ -290,7 +291,7 @@ int MASA::masa_printid()
 }// done with masa print id
 
 template <typename Scalar>
-void MASA::masa_set_param(string param,Scalar paramval)
+void MASA::masa_set_param(std::string param,Scalar paramval)
 {
   masa_master<Scalar>().get_ms().set_var(param,paramval);
 }
@@ -309,7 +310,7 @@ int MASA::masa_init_param()
 // 
 
 template <typename Scalar>
-Scalar MASA::masa_get_param(string param)
+Scalar MASA::masa_get_param(std::string param)
 {
   return masa_master<Scalar>().get_ms().get_var(param);
 }
@@ -703,7 +704,7 @@ Scalar MASA::masa_eval_3d_grad_rho(Scalar x,Scalar y,Scalar z,int i)
 
 
 template <typename Scalar>
-int MASA::masa_get_name(string* name)
+int MASA::masa_get_name(std::string* name)
 {
   masa_master<Scalar>().get_ms().return_name(name); // set string to name
   return 0;

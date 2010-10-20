@@ -37,7 +37,6 @@
 #include <masa_internal.h>
 #include <assert.h>
 
-using namespace std;
 using namespace MASA;
 
 /* ------------------------------------------------
@@ -66,16 +65,16 @@ template <typename Scalar>
 const Scalar MASA::manufactured_solution<Scalar>::MASA_VAR_DEFAULT = -12345.67; // default -- initialize each var to 'crazy' value
 
 template <typename Scalar>
-Scalar MASA::manufactured_solution<Scalar>::get_var(string var)
+Scalar MASA::manufactured_solution<Scalar>::get_var(std::string var)
 {
   int selector=1;
   int error=1;
   
   // lets run though the list to check the variable does exist
-  for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
+  for(std::map<std::string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
     {          
       error=var.rfind(it->first); // one value must be 0, as in equal, to exit with success
-      if (error!=string::npos) // found a value
+      if (error!=std::string::npos) // found a value
       {
 	selector=0; // set flag for variable existence 
       }
@@ -89,7 +88,7 @@ Scalar MASA::manufactured_solution<Scalar>::get_var(string var)
     }
   else 
     {
-      cout << "\nMASA ERROR:: No such variable  (" << var << ") exists\n";
+      std::cout << "\nMASA ERROR:: No such variable  (" << var << ") exists\n";
       return -20;
     } 
     
@@ -99,40 +98,40 @@ template <typename Scalar>
 void MASA::manufactured_solution<Scalar>::display_var()
 {
 
-  cout << "\nMASA :: Solution has " << varmap.size() << " variables.\n";
-  cout << "*-------------------------------------*\n" ;
+  std::cout << "\nMASA :: Solution has " << varmap.size() << " variables.\n";
+  std::cout << "*-------------------------------------*\n" ;
 
-  for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
+  for(std::map<std::string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
     {   
       // adding conditional to avoid confusing our users about uninitalized variables
       // this is because the default is a bit odd... -12345.7 might appear 'set'
       if(*vararr[it->second] == MASA_VAR_DEFAULT)
 	{
-	  cout << it->first <<" is set to: Uninitialized\n";
+	  std::cout << it->first <<" is set to: Uninitialized\n";
 	}
       else //value has been set
 	{
-	  cout.precision(16);
-	  cout << it->first <<" is set to: " << *vararr[it->second] << '\n';
+	  std::cout.precision(16);
+	  std::cout << it->first <<" is set to: " << *vararr[it->second] << '\n';
 	}
       
     }    
 
-  cout << "*-------------------------------------*\n" ;
+  std::cout << "*-------------------------------------*\n" ;
   
 } // done with display all variable names
 
 template <typename Scalar>
-int MASA::manufactured_solution<Scalar>::set_var(string var, Scalar val)
+int MASA::manufactured_solution<Scalar>::set_var(std::string var, Scalar val)
 {
   int selector=1;
   int error=1;
 
   // lets run though the list to check the variable does exist
-  for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
+  for(std::map<std::string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
     {          
       error=var.rfind(it->first); // one value must be 0, as in equal, to exit with success
-      if (error!=string::npos) // found a value
+      if (error!=std::string::npos) // found a value
       {
 	selector=0; // set flag for variable existence 
       }
@@ -145,7 +144,7 @@ int MASA::manufactured_solution<Scalar>::set_var(string var, Scalar val)
     }
   else 
     {      
-      cout << "\nMASA ERROR:: No such variable (" << var << ") exists to be set\n";
+      std::cout << "\nMASA ERROR:: No such variable (" << var << ") exists to be set\n";
       return 1;
     } 
 
@@ -158,20 +157,20 @@ int MASA::manufactured_solution<Scalar>::sanity_check()
 {
   int flag=0;
 
-  for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
+  for(std::map<std::string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
     {      
       if(*vararr[it->second] == MASA_VAR_DEFAULT)
 	{
-	  cout << "\nMASA WARNING:: " << it->first << " has not been initialized!\n";
+	  std::cout << "\nMASA WARNING:: " << it->first << " has not been initialized!\n";
 	  flag += 1;
 	}
     }    
   
   if(varmap.size() != num_vars)
     {
-      cout << "\n MASA FATAL ERROR:: mismatch in number of variables registered.\n"; 
-      cout << "Are you calling the method manufactured_solution.register_var? This could be causing the error.\n"; 
-      cout << "varmap.size() = " << varmap.size() << "; num_vars = " << num_vars << endl << endl;
+      std::cout << "\n MASA FATAL ERROR:: mismatch in number of variables registered.\n"; 
+      std::cout << "Are you calling the method manufactured_solution.register_var? This could be causing the error.\n"; 
+      std::cout << "varmap.size() = " << varmap.size() << "; num_vars = " << num_vars << std::endl << std::endl;
       masa_exit(1);
     }
 
@@ -188,7 +187,7 @@ int MASA::manufactured_solution<Scalar>::sanity_check()
 }// done with set_var function
 
 template <typename Scalar>
-int MASA::manufactured_solution<Scalar>::register_var(string in,Scalar* var)
+int MASA::manufactured_solution<Scalar>::register_var(std::string in,Scalar* var)
 {
   // first, check to ensure that no such variable has already been mapped
   if(varmap[in] <= 0) // 0 implies variable has not been registered
@@ -201,11 +200,11 @@ int MASA::manufactured_solution<Scalar>::register_var(string in,Scalar* var)
     }
   else  // variable already registered! no unique identifier can exist!
     {
-      cout << "\n MASA FATAL ERROR:: \n"; 
-      cout << "\n Attempted to register two variables of the same name.\n"; 
-      string error;
+      std::cout << "\n MASA FATAL ERROR:: \n"; 
+      std::cout << "\n Attempted to register two variables of the same name.\n"; 
+      std::string error;
       return_name(&error);
-      cout << " Info: error occured while constructing " << error << endl << endl;
+      std::cout << " Info: error occured while constructing " << error << std::endl << std::endl;
       return 1;
     }
 
