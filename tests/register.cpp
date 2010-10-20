@@ -41,24 +41,26 @@
 using namespace MASA;
 using namespace std;
 
+typedef double Scalar;
+
 int main()
 {
   int i,err;
-  double x=0;
-  double y=0;
-  double z=0;
+  Scalar x=0;
+  Scalar y=0;
+  Scalar z=0;
   string str;
 
   // testing masa_init
-  masa_init("masa-test","euler_1d");
-  err = masa_init_param();
+  masa_init<Scalar>("masa-test","euler_1d");
+  err = masa_init_param<Scalar>();
   if(err!=0) // test function returns correct error value for properly built function
     {
       cout << "masa_init success condition not triggered properly!\n";
       return 1;
     }
 
-  err = masa_init("masa-test","masa_test_function");
+  err = masa_init<Scalar>("masa-test","masa_test_function");
   if(err!=0) 
     {
       cout << "masa_init success condition not triggered properly!\n";
@@ -69,7 +71,7 @@ int main()
   // is used inside masa.
   freopen("/dev/null","w",stdout);
 
-  err = masa_init_param();
+  err = masa_init_param<Scalar>();
   if(err!=2) // function designed to fail (twice) for masa_test mms
     {
       cout << "masa_init fail condition not triggered properly!\n";
@@ -80,7 +82,7 @@ int main()
   // also will fail -- because user is mucking with vararray
   try
     {
-      masa_sanity_check();
+      masa_sanity_check<Scalar>();
     }
   catch(int err) // return one on fatal error
     {

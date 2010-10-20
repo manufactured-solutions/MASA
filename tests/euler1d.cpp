@@ -40,10 +40,12 @@
 using namespace MASA;
 using namespace std;
 
-const double pi = acos(-1);
-const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
+typedef double FP;
 
-double nancheck(double x)
+const FP pi = acos(-1);
+const FP threshold = 1.0e-15; // should be small enough to catch any obvious problems
+
+FP nancheck(FP x)
 {
   if(isnan(x))
     {
@@ -53,125 +55,125 @@ double nancheck(double x)
   return 1;
 }
 
-double anQ_p (double x,double p_0,double p_x,double a_px,double L)
+FP anQ_p (FP x,FP p_0,FP p_x,FP a_px,FP L)
 {
-  double p_an = p_0 + p_x * cos(a_px * pi * x / L);
+  FP p_an = p_0 + p_x * cos(a_px * pi * x / L);
   return p_an;
 }
   
-double anQ_u (double x,double u_0,double u_x,double a_ux,double L)
+FP anQ_u (FP x,FP u_0,FP u_x,FP a_ux,FP L)
 {
-  double u_an = u_0 + u_x * sin(a_ux * pi * x / L);
+  FP u_an = u_0 + u_x * sin(a_ux * pi * x / L);
   return u_an;
 } 
  
-double anQ_rho (double x,double rho_0,double rho_x,double a_rhox,double L)
+FP anQ_rho (FP x,FP rho_0,FP rho_x,FP a_rhox,FP L)
 { 
-  double rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L);
+  FP rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L);
   return rho_an;
 }
 
-double SourceQ_e ( // 12
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
+FP SourceQ_e ( // 12
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP);
 
-double SourceQ_u ( // should be 10
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
+FP SourceQ_u ( // should be 10
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP);
 
-double SourceQ_rho ( // 10
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
+FP SourceQ_rho ( // 10
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP,
+  FP);
 
 int main()
 {
   //variables 
-  double u_0;
-  double u_x;
-  double rho_0;
-  double rho_x;
-  double p_0;
-  double p_x;
-  double a_px;
-  double a_rhox;
-  double a_ux;
-  double Gamma;
-  double mu;
-  double L;
+  FP u_0;
+  FP u_x;
+  FP rho_0;
+  FP rho_x;
+  FP p_0;
+  FP p_x;
+  FP a_px;
+  FP a_rhox;
+  FP a_ux;
+  FP Gamma;
+  FP mu;
+  FP L;
 
   // parameters
-  double x;
+  FP x;
 
   //problem size
   int nx = 200;  // number of points
   int lx=10;     // length
-  double dx=double(lx)/double(nx);
+  FP dx=FP(lx)/FP(nx);
 
   // solutions
-  double ufield,ufield2,ufield3;
-  double efield,efield2,efield3;
-  double rho,rho2,rho3;
-  double gradx,grady,gradz,gradp,gradrho;
+  FP ufield,ufield2,ufield3;
+  FP efield,efield2,efield3;
+  FP rho,rho2,rho3;
+  FP gradx,grady,gradz,gradp,gradrho;
 
-  double u_an,u_an2,u_an3;
-  double p_an,p_an2,p_an3;
-  double rho_an,rho_an2,rho_an3;
+  FP u_an,u_an2,u_an3;
+  FP p_an,p_an2,p_an3;
+  FP rho_an,rho_an2,rho_an3;
 
   // initalize
-  masa_init("euler-test","euler_1d");
+  masa_init<FP>("euler-test","euler_1d");
 
   // initialize the default parameters
-  masa_init_param();
+  masa_init_param<FP>();
 
   // get defaults for comparison to source terms
   // get vars
-  u_0 = masa_get_param("u_0");
-  u_x = masa_get_param("u_x");
-  rho_0 = masa_get_param("rho_0");
-  rho_x = masa_get_param("rho_x");
+  u_0 = masa_get_param<FP>("u_0");
+  u_x = masa_get_param<FP>("u_x");
+  rho_0 = masa_get_param<FP>("rho_0");
+  rho_x = masa_get_param<FP>("rho_x");
 
-  p_0 = masa_get_param("p_0");
-  p_x = masa_get_param("p_x");
+  p_0 = masa_get_param<FP>("p_0");
+  p_x = masa_get_param<FP>("p_x");
 
-  a_px = masa_get_param("a_px");
-  a_rhox = masa_get_param("a_rhox");
-  a_ux = masa_get_param("a_ux");
+  a_px = masa_get_param<FP>("a_px");
+  a_rhox = masa_get_param<FP>("a_rhox");
+  a_ux = masa_get_param<FP>("a_ux");
 
-  Gamma = masa_get_param("Gamma");
-  mu    = masa_get_param("mu");
-  L     = masa_get_param("L");
+  Gamma = masa_get_param<FP>("Gamma");
+  mu    = masa_get_param<FP>("mu");
+  L     = masa_get_param<FP>("L");
 
   // check that all terms have been initialized
-  masa_sanity_check();
+  masa_sanity_check<FP>();
 
   // evaluate source terms (1D)
   for(int i=0;i<nx;i++)
@@ -179,14 +181,14 @@ int main()
       x=i*dx;
       	
       //evalulate source terms
-      ufield = masa_eval_u_source  (x);
-      efield = masa_eval_e_source  (x);
-      rho    = masa_eval_rho_source(x);
+      ufield = masa_eval_u_source  <FP>(x);
+      efield = masa_eval_e_source  <FP>(x);
+      rho    = masa_eval_rho_source<FP>(x);
       
       //evaluate analytical terms
-      u_an = masa_eval_u_an        (x);
-      p_an = masa_eval_p_an        (x);
-      rho_an = masa_eval_rho_an    (x);
+      u_an = masa_eval_u_an        <FP>(x);
+      p_an = masa_eval_p_an        <FP>(x);
+      rho_an = masa_eval_rho_an    <FP>(x);
 
       // eval gradient terms
       gradx   = masa_eval_1d_grad_u  (x);

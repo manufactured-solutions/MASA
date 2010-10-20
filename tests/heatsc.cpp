@@ -38,65 +38,67 @@
 using namespace std;
 using namespace MASA;
 
-const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
+typedef double Scalar;
 
-double SourceQ_t_1d(double x, double A_x, double k_0)
+const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
+
+Scalar SourceQ_t_1d(Scalar x, Scalar A_x, Scalar k_0)
 {
-  double Q_T = A_x * A_x * k_0 * cos(A_x * x);
+  Scalar Q_T = A_x * A_x * k_0 * cos(A_x * x);
   return Q_T;
 }
 
-double Source_t_1d_an(double A_x,double x)
+Scalar Source_t_1d_an(Scalar A_x,Scalar x)
 {
-  double T_an;
+  Scalar T_an;
   T_an = cos(A_x * x);
   return T_an;
 }
 
-double SourceQ_t_2d (
-  double x,
-  double y,
-  double A_x,
-  double B_y,
-  double k_0)
+Scalar SourceQ_t_2d (
+  Scalar x,
+  Scalar y,
+  Scalar A_x,
+  Scalar B_y,
+  Scalar k_0)
 {
-  double Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * (A_x * A_x + B_y * B_y);
+  Scalar Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * (A_x * A_x + B_y * B_y);
   return Q_T;
 }
 
-double SourceQ_t_3d (
-  double x,
-  double y,
-  double z,
-  double A_x,
-  double B_y,
-  double C_z,
-  double k_0)
+Scalar SourceQ_t_3d (
+  Scalar x,
+  Scalar y,
+  Scalar z,
+  Scalar A_x,
+  Scalar B_y,
+  Scalar C_z,
+  Scalar k_0)
 {
-  double Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * cos(C_z * z) * (A_x * A_x + B_y * B_y + C_z * C_z);
+  Scalar Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * cos(C_z * z) * (A_x * A_x + B_y * B_y + C_z * C_z);
   return Q_T;
 }
 
 int main()
 {
-  double tfield,tfield2,tfield3;
-  double t_an,t_an2,t_an3;
-  double param=1.2;
-  double x=.5;
-  double y=.4;
-  double z=.3;
+  Scalar tfield,tfield2,tfield3;
+  Scalar t_an,t_an2,t_an3;
+  Scalar param=1.2;
+  Scalar x=.5;
+  Scalar y=.4;
+  Scalar z=.3;
 
   /// -----------------------------------------------------------------------
   // initalize 1D
   /// -----------------------------------------------------------------------
-  masa_init("temp-test-1d","heateq_1d_steady_const");
-  masa_init_param();
+  masa_init<Scalar>("temp-test-1d","heateq_1d_steady_const");
+  masa_init_param<Scalar>();
 
-  double A_x = masa_get_param("A_x");
-  double k_0 = masa_get_param("k_0");
+  Scalar A_x = masa_get_param<Scalar>("A_x");
+  Scalar k_0 = masa_get_param<Scalar>("k_0");
 
   // evaluate source terms (1D)
-  int err = masa_sanity_check();
+  int err = masa_sanity_check<Scalar>();
   if(err != 0)
     {
       cout << "MASA :: Sanity Check Failed!\n";
@@ -104,8 +106,8 @@ int main()
     }
   
 
-  tfield    = masa_eval_t_source(x);
-  t_an      = masa_eval_t_an(x);
+  tfield    = masa_eval_t_source<Scalar>(x);
+  t_an      = masa_eval_t_an<Scalar>(x);
 
   tfield2   = SourceQ_t_1d(x,A_x,k_0);
   t_an2     = Source_t_1d_an(A_x,x);
@@ -134,16 +136,16 @@ int main()
   /// -----------------------------------------------------------------------
   // initalize 2D
   /// ----------------------------------------------------------------------
-  masa_init("temp-test-2d","heateq_2d_steady_const");
-  masa_init_param();
+  masa_init<Scalar>("temp-test-2d","heateq_2d_steady_const");
+  masa_init_param<Scalar>();
 
-  A_x = masa_get_param("A_x");
-  k_0 = masa_get_param("k_0");
-  double B_y = masa_get_param("B_y");
+  A_x = masa_get_param<Scalar>("A_x");
+  k_0 = masa_get_param<Scalar>("k_0");
+  Scalar B_y = masa_get_param<Scalar>("B_y");
 
   // evaluate source terms (1D)
-  masa_sanity_check();
-  tfield    = masa_eval_t_source(x,y);
+  masa_sanity_check<Scalar>();
+  tfield    = masa_eval_t_source<Scalar>(x,y);
   tfield2   = SourceQ_t_2d(x,y,A_x,B_y,k_0);
 
   tfield=fabs(tfield-tfield2);
@@ -162,19 +164,19 @@ int main()
   // initalize 3D
   /// -----------------------------------------------------------------------
 
-  masa_init("temp-test-3d","heateq_3d_steady_const");
+  masa_init<Scalar>("temp-test-3d","heateq_3d_steady_const");
   string str1;
-  masa_init_param();
+  masa_init_param<Scalar>();
 
-  A_x = masa_get_param("A_x");
-  k_0 = masa_get_param("k_0");
-  B_y = masa_get_param("B_y");  
-  double C_z = masa_get_param("C_z");
+  A_x = masa_get_param<Scalar>("A_x");
+  k_0 = masa_get_param<Scalar>("k_0");
+  B_y = masa_get_param<Scalar>("B_y");  
+  Scalar C_z = masa_get_param<Scalar>("C_z");
 
   // evaluate source terms (1D)
-  masa_sanity_check();
+  masa_sanity_check<Scalar>();
 
-  tfield  = masa_eval_t_source(x,y,z);
+  tfield  = masa_eval_t_source<Scalar>(x,y,z);
   tfield2 = SourceQ_t_3d(x,y,z,A_x,B_y,C_z,k_0);
   tfield=fabs(tfield-tfield2);
 

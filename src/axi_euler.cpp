@@ -44,64 +44,66 @@ using namespace MASA;
  * -----------------------------------------------
  */ 
 
-MASA::axi_euler::axi_euler()
+template <typename Scalar>
+MASA::axi_euler<Scalar>::axi_euler()
 {
-  mmsname = "axisymmetric_euler";
-  dimension=2;
+  this->mmsname = "axisymmetric_euler";
+  this->dimension=2;
 
-  register_var("R",&R);
-  //register_var("k",&k);
+  this->register_var("R",&R);
+  //this->register_var("k",&k);
 
-  register_var("p_0",&p_0);
-  register_var("p_1",&p_1);
-  register_var("rho_0",&rho_0);
-  register_var("rho_1",&rho_1);
-  register_var("u_1",&u_1);
-  register_var("w_0",&w_0);
-  register_var("w_1",&w_1);
-  register_var("a_pr",&a_pr);
-  register_var("a_pz",&a_pz);
-  register_var("a_rhor",&a_rhor);
-  register_var("a_rhoz",&a_rhoz);
-  register_var("a_ur",&a_ur);
-  register_var("a_uz",&a_uz);
-  register_var("a_wr",&a_wr);
-  register_var("a_wz",&a_wz);
-  register_var("L",&L);
+  this->register_var("p_0",&p_0);
+  this->register_var("p_1",&p_1);
+  this->register_var("rho_0",&rho_0);
+  this->register_var("rho_1",&rho_1);
+  this->register_var("u_1",&u_1);
+  this->register_var("w_0",&w_0);
+  this->register_var("w_1",&w_1);
+  this->register_var("a_pr",&a_pr);
+  this->register_var("a_pz",&a_pz);
+  this->register_var("a_rhor",&a_rhor);
+  this->register_var("a_rhoz",&a_rhoz);
+  this->register_var("a_ur",&a_ur);
+  this->register_var("a_uz",&a_uz);
+  this->register_var("a_wr",&a_wr);
+  this->register_var("a_wz",&a_wz);
+  this->register_var("L",&L);
 
-  register_var("Gamma",&Gamma);
-  register_var("mu",&mu);
+  this->register_var("Gamma",&Gamma);
+  this->register_var("mu",&mu);
 
 }//done with constructor
 
-int MASA::axi_euler::init_var()
+template <typename Scalar>
+int MASA::axi_euler<Scalar>::init_var()
 {
 
   int err = 0;
 
   // currently randomly generated
-  err += set_var("R",1.01);
+  err += this->set_var("R",1.01);
 
-  //err += set_var("k",.1791);
-  err += set_var("p_0",.381);
-  err += set_var("p_1",.1791);
-  err += set_var("rho_0",.11);
-  err += set_var("rho_1",1.9);
-  err += set_var("u_1",.07);
-  err += set_var("w_0",.11);
-  err += set_var("w_1",2.14);
-  err += set_var("a_pr",1.91);
-  err += set_var("a_pz",.1711);
-  err += set_var("a_rhor",1.789);
-  err += set_var("a_rhoz",4.6);
-  err += set_var("a_ur",12.01);
-  err += set_var("a_uz",3.01);
-  err += set_var("a_wr",1.01);
-  err += set_var("a_wz",.2);
-  err += set_var("L",1);
+  //err += this->set_var("k",.1791);
+  err += this->set_var("p_0",.381);
+  err += this->set_var("p_1",.1791);
+  err += this->set_var("rho_0",.11);
+  err += this->set_var("rho_1",1.9);
+  err += this->set_var("u_1",.07);
+  err += this->set_var("w_0",.11);
+  err += this->set_var("w_1",2.14);
+  err += this->set_var("a_pr",1.91);
+  err += this->set_var("a_pz",.1711);
+  err += this->set_var("a_rhor",1.789);
+  err += this->set_var("a_rhoz",4.6);
+  err += this->set_var("a_ur",12.01);
+  err += this->set_var("a_uz",3.01);
+  err += this->set_var("a_wr",1.01);
+  err += this->set_var("a_wz",.2);
+  err += this->set_var("L",1);
 
-  err += set_var("Gamma",.1791);
-  err += set_var("mu",1.1);
+  err += this->set_var("Gamma",.1791);
+  err += this->set_var("mu",1.1);
 
   return err;
 
@@ -112,31 +114,35 @@ int MASA::axi_euler::init_var()
 //   Source Terms
 // ----------------------------------------
 
-double MASA::axi_euler::eval_q_u(double r,double z)
+template <typename Scalar>
+Scalar MASA::axi_euler<Scalar>::eval_q_u(Scalar r,Scalar z)
 {
-  double Q_u;
-  Q_u = p_1 * cos(a_pr * PI * r / L) * cos(a_pz * PI * z / L) * a_pr * PI / L - u_1 * u_1 * pow(sin(a_uz * PI * z / L), 0.2e1) * pow(cos(a_ur * PI * r / L) - 0.1e1, 0.2e1) * rho_1 * sin(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L) * a_rhor * PI / L + u_1 * (cos(a_ur * PI * r / L) - 0.1e1) * rho_1 * cos(a_rhor * PI * r / L) * cos(a_rhoz * PI * z / L) * sin(a_uz * PI * z / L) * (w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L)) * a_rhoz * PI / L - 0.2e1 * u_1 * u_1 * pow(sin(a_uz * PI * z / L), 0.2e1) * (cos(a_ur * PI * r / L) - 0.1e1) * sin(a_ur * PI * r / L) * (rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L)) * a_ur * PI / L + u_1 * (cos(a_ur * PI * r / L) - 0.1e1) * cos(a_uz * PI * z / L) * (rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L)) * (w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L)) * a_uz * PI / L + u_1 * (cos(a_ur * PI * r / L) - 0.1e1) * w_1 * cos(a_wr * PI * r / L) * cos(a_wz * PI * z / L) * sin(a_uz * PI * z / L) * (rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L)) * a_wz * PI / L + u_1 * u_1 * pow(sin(a_uz * PI * z / L), 0.2e1) * pow(cos(a_ur * PI * r / L) - 0.1e1, 0.2e1) * (rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L)) / r;
+  Scalar Q_u;
+  Q_u = p_1 * cos(a_pr * this->PI * r / L) * cos(a_pz * this->PI * z / L) * a_pr * this->PI / L - u_1 * u_1 * pow(sin(a_uz * this->PI * z / L), Scalar(2)) * pow(cos(a_ur * this->PI * r / L) - Scalar(1), Scalar(2)) * rho_1 * sin(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L) * a_rhor * this->PI / L + u_1 * (cos(a_ur * this->PI * r / L) - Scalar(1)) * rho_1 * cos(a_rhor * this->PI * r / L) * cos(a_rhoz * this->PI * z / L) * sin(a_uz * this->PI * z / L) * (w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L)) * a_rhoz * this->PI / L - Scalar(2) * u_1 * u_1 * pow(sin(a_uz * this->PI * z / L), Scalar(2)) * (cos(a_ur * this->PI * r / L) - Scalar(1)) * sin(a_ur * this->PI * r / L) * (rho_0 + rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L)) * a_ur * this->PI / L + u_1 * (cos(a_ur * this->PI * r / L) - Scalar(1)) * cos(a_uz * this->PI * z / L) * (rho_0 + rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L)) * (w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L)) * a_uz * this->PI / L + u_1 * (cos(a_ur * this->PI * r / L) - Scalar(1)) * w_1 * cos(a_wr * this->PI * r / L) * cos(a_wz * this->PI * z / L) * sin(a_uz * this->PI * z / L) * (rho_0 + rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L)) * a_wz * this->PI / L + u_1 * u_1 * pow(sin(a_uz * this->PI * z / L), Scalar(2)) * pow(cos(a_ur * this->PI * r / L) - Scalar(1), Scalar(2)) * (rho_0 + rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L)) / r;
   return(Q_u);
 }
 
-double MASA::axi_euler::eval_q_w(double r,double z)
+template <typename Scalar>
+Scalar MASA::axi_euler<Scalar>::eval_q_w(Scalar r,Scalar z)
 {
-  double Q_w;
-  Q_w = -p_1 * sin(a_pr * PI * r / L) * sin(a_pz * PI * z / L) * a_pz * PI / L - u_1 * sin(a_uz * PI * z / L) * rho_1 * sin(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L) * (w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L)) * (cos(a_ur * PI * r / L) - 0.1e1) * a_rhor * PI / L + pow(w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L), 0.2e1) * rho_1 * cos(a_rhor * PI * r / L) * cos(a_rhoz * PI * z / L) * a_rhoz * PI / L - u_1 * sin(a_uz * PI * z / L) * sin(a_ur * PI * r / L) * (rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L)) * (w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L)) * a_ur * PI / L - u_1 * sin(a_uz * PI * z / L) * w_1 * sin(a_wr * PI * r / L) * sin(a_wz * PI * z / L) * (rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L)) * (cos(a_ur * PI * r / L) - 0.1e1) * a_wr * PI / L + (0.2e1 * w_0 + 0.2e1 * w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L)) * w_1 * cos(a_wr * PI * r / L) * cos(a_wz * PI * z / L) * (rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L)) * a_wz * PI / L + u_1 * sin(a_uz * PI * z / L) * (rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L)) * (w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L)) * (cos(a_ur * PI * r / L) - 0.1e1) / r;
+  Scalar Q_w;
+  Q_w = -p_1 * sin(a_pr * this->PI * r / L) * sin(a_pz * this->PI * z / L) * a_pz * this->PI / L - u_1 * sin(a_uz * this->PI * z / L) * rho_1 * sin(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L) * (w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L)) * (cos(a_ur * this->PI * r / L) - Scalar(1)) * a_rhor * this->PI / L + pow(w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L), Scalar(2)) * rho_1 * cos(a_rhor * this->PI * r / L) * cos(a_rhoz * this->PI * z / L) * a_rhoz * this->PI / L - u_1 * sin(a_uz * this->PI * z / L) * sin(a_ur * this->PI * r / L) * (rho_0 + rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L)) * (w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L)) * a_ur * this->PI / L - u_1 * sin(a_uz * this->PI * z / L) * w_1 * sin(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L) * (rho_0 + rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L)) * (cos(a_ur * this->PI * r / L) - Scalar(1)) * a_wr * this->PI / L + (Scalar(2) * w_0 + Scalar(2) * w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L)) * w_1 * cos(a_wr * this->PI * r / L) * cos(a_wz * this->PI * z / L) * (rho_0 + rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L)) * a_wz * this->PI / L + u_1 * sin(a_uz * this->PI * z / L) * (rho_0 + rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L)) * (w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L)) * (cos(a_ur * this->PI * r / L) - Scalar(1)) / r;
   return(Q_w);
 }
 
-double MASA::axi_euler::eval_q_rho(double r,double z)
+template <typename Scalar>
+Scalar MASA::axi_euler<Scalar>::eval_q_rho(Scalar r,Scalar z)
 {
-  double Q_rho;
-  Q_rho = -(cos(a_ur * PI * r / L) - 0.1e1) * a_rhor * PI * rho_1 * u_1 * sin(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L) * sin(a_uz * PI * z / L) / L + (w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L) + w_0) * a_rhoz * PI * rho_1 * cos(a_rhor * PI * r / L) * cos(a_rhoz * PI * z / L) / L - (rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L) + rho_0) * a_ur * PI * u_1 * sin(a_ur * PI * r / L) * sin(a_uz * PI * z / L) / L + (rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L) + rho_0) * a_wz * PI * w_1 * cos(a_wr * PI * r / L) * cos(a_wz * PI * z / L) / L + (rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L) + rho_0) * (cos(a_ur * PI * r / L) - 0.1e1) * u_1 * sin(a_uz * PI * z / L) / r;
+  Scalar Q_rho;
+  Q_rho = -(cos(a_ur * this->PI * r / L) - Scalar(1)) * a_rhor * this->PI * rho_1 * u_1 * sin(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L) * sin(a_uz * this->PI * z / L) / L + (w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L) + w_0) * a_rhoz * this->PI * rho_1 * cos(a_rhor * this->PI * r / L) * cos(a_rhoz * this->PI * z / L) / L - (rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L) + rho_0) * a_ur * this->PI * u_1 * sin(a_ur * this->PI * r / L) * sin(a_uz * this->PI * z / L) / L + (rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L) + rho_0) * a_wz * this->PI * w_1 * cos(a_wr * this->PI * r / L) * cos(a_wz * this->PI * z / L) / L + (rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L) + rho_0) * (cos(a_ur * this->PI * r / L) - Scalar(1)) * u_1 * sin(a_uz * this->PI * z / L) / r;
   return(Q_rho);
 }
 
-double MASA::axi_euler::eval_q_e(double r,double z)
+template <typename Scalar>
+Scalar MASA::axi_euler<Scalar>::eval_q_e(Scalar r,Scalar z)
 {
-  double Q_e;
-  Q_e = Gamma * cos(a_pz * PI * z / L) * cos(a_pr * PI * r / L) * p_1 * u_1 * (cos(a_ur * PI * r / L) - 0.1e1) * sin(a_uz * PI * z / L) * a_pr * PI / L / (Gamma - 0.1e1) - Gamma * sin(a_pz * PI * z / L) * sin(a_pr * PI * r / L) * p_1 * (w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L)) * a_pz * PI / L / (Gamma - 0.1e1) - sin(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L) * sin(a_uz * PI * z / L) * u_1 * (cos(a_ur * PI * r / L) - 0.1e1) * (pow(w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L), 0.2e1) + pow(sin(a_uz * PI * z / L), 0.2e1) * pow(cos(a_ur * PI * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_rhor * PI * rho_1 / L / 0.2e1 + cos(a_rhor * PI * r / L) * cos(a_rhoz * PI * z / L) * (w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L)) * (pow(w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L), 0.2e1) + pow(sin(a_uz * PI * z / L), 0.2e1) * pow(cos(a_ur * PI * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_rhoz * PI * rho_1 / L / 0.2e1 - sin(a_uz * PI * z / L) * sin(a_ur * PI * r / L) * (p_0 + p_1 * sin(a_pr * PI * r / L) * cos(a_pz * PI * z / L)) * a_ur * PI * u_1 * Gamma / L / (Gamma - 0.1e1) - sin(a_uz * PI * z / L) * sin(a_ur * PI * r / L) * (rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L)) * (pow(w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L), 0.2e1) + 0.3e1 * pow(sin(a_uz * PI * z / L), 0.2e1) * pow(cos(a_ur * PI * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_ur * PI * u_1 / L / 0.2e1 + (w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L)) * u_1 * u_1 * cos(a_uz * PI * z / L) * sin(a_uz * PI * z / L) * pow(cos(a_ur * PI * r / L) - 0.1e1, 0.2e1) * (rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L)) * a_uz * PI / L - sin(a_uz * PI * z / L) * (cos(a_ur * PI * r / L) - 0.1e1) * u_1 * w_1 * sin(a_wr * PI * r / L) * sin(a_wz * PI * z / L) * (rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L)) * (w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L)) * a_wr * PI / L + cos(a_wr * PI * r / L) * cos(a_wz * PI * z / L) * (p_0 + p_1 * sin(a_pr * PI * r / L) * cos(a_pz * PI * z / L)) * a_wz * PI * w_1 * Gamma / L / (Gamma - 0.1e1) + cos(a_wr * PI * r / L) * cos(a_wz * PI * z / L) * (rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L)) * (0.3e1 * pow(w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L), 0.2e1) + pow(sin(a_uz * PI * z / L), 0.2e1) * pow(cos(a_ur * PI * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_wz * PI * w_1 / L / 0.2e1 + sin(a_uz * PI * z / L) * (cos(a_ur * PI * r / L) - 0.1e1) * u_1 * (p_0 + p_1 * sin(a_pr * PI * r / L) * cos(a_pz * PI * z / L)) * Gamma / (Gamma - 0.1e1) / r + sin(a_uz * PI * z / L) * (cos(a_ur * PI * r / L) - 0.1e1) * u_1 * (rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L)) * (pow(w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L), 0.2e1) + pow(sin(a_uz * PI * z / L), 0.2e1) * pow(cos(a_ur * PI * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) / r / 0.2e1;
+  Scalar Q_e;
+  Q_e = Gamma * cos(a_pz * this->PI * z / L) * cos(a_pr * this->PI * r / L) * p_1 * u_1 * (cos(a_ur * this->PI * r / L) - Scalar(1)) * sin(a_uz * this->PI * z / L) * a_pr * this->PI / L / (Gamma - Scalar(1)) - Gamma * sin(a_pz * this->PI * z / L) * sin(a_pr * this->PI * r / L) * p_1 * (w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L)) * a_pz * this->PI / L / (Gamma - Scalar(1)) - sin(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L) * sin(a_uz * this->PI * z / L) * u_1 * (cos(a_ur * this->PI * r / L) - Scalar(1)) * (pow(w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L), Scalar(2)) + pow(sin(a_uz * this->PI * z / L), Scalar(2)) * pow(cos(a_ur * this->PI * r / L) - Scalar(1), Scalar(2)) * u_1 * u_1) * a_rhor * this->PI * rho_1 / L / Scalar(2) + cos(a_rhor * this->PI * r / L) * cos(a_rhoz * this->PI * z / L) * (w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L)) * (pow(w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L), Scalar(2)) + pow(sin(a_uz * this->PI * z / L), Scalar(2)) * pow(cos(a_ur * this->PI * r / L) - Scalar(1), Scalar(2)) * u_1 * u_1) * a_rhoz * this->PI * rho_1 / L / Scalar(2) - sin(a_uz * this->PI * z / L) * sin(a_ur * this->PI * r / L) * (p_0 + p_1 * sin(a_pr * this->PI * r / L) * cos(a_pz * this->PI * z / L)) * a_ur * this->PI * u_1 * Gamma / L / (Gamma - Scalar(1)) - sin(a_uz * this->PI * z / L) * sin(a_ur * this->PI * r / L) * (rho_0 + rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L)) * (pow(w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L), Scalar(2)) + Scalar(3) * pow(sin(a_uz * this->PI * z / L), Scalar(2)) * pow(cos(a_ur * this->PI * r / L) - Scalar(1), Scalar(2)) * u_1 * u_1) * a_ur * this->PI * u_1 / L / Scalar(2) + (w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L)) * u_1 * u_1 * cos(a_uz * this->PI * z / L) * sin(a_uz * this->PI * z / L) * pow(cos(a_ur * this->PI * r / L) - Scalar(1), Scalar(2)) * (rho_0 + rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L)) * a_uz * this->PI / L - sin(a_uz * this->PI * z / L) * (cos(a_ur * this->PI * r / L) - Scalar(1)) * u_1 * w_1 * sin(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L) * (rho_0 + rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L)) * (w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L)) * a_wr * this->PI / L + cos(a_wr * this->PI * r / L) * cos(a_wz * this->PI * z / L) * (p_0 + p_1 * sin(a_pr * this->PI * r / L) * cos(a_pz * this->PI * z / L)) * a_wz * this->PI * w_1 * Gamma / L / (Gamma - Scalar(1)) + cos(a_wr * this->PI * r / L) * cos(a_wz * this->PI * z / L) * (rho_0 + rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L)) * (Scalar(3) * pow(w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L), Scalar(2)) + pow(sin(a_uz * this->PI * z / L), Scalar(2)) * pow(cos(a_ur * this->PI * r / L) - Scalar(1), Scalar(2)) * u_1 * u_1) * a_wz * this->PI * w_1 / L / Scalar(2) + sin(a_uz * this->PI * z / L) * (cos(a_ur * this->PI * r / L) - Scalar(1)) * u_1 * (p_0 + p_1 * sin(a_pr * this->PI * r / L) * cos(a_pz * this->PI * z / L)) * Gamma / (Gamma - Scalar(1)) / r + sin(a_uz * this->PI * z / L) * (cos(a_ur * this->PI * r / L) - Scalar(1)) * u_1 * (rho_0 + rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L)) * (pow(w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L), Scalar(2)) + pow(sin(a_uz * this->PI * z / L), Scalar(2)) * pow(cos(a_ur * this->PI * r / L) - Scalar(1), Scalar(2)) * u_1 * u_1) / r / Scalar(2);
   return(Q_e);
 }
 
@@ -144,30 +150,40 @@ double MASA::axi_euler::eval_q_e(double r,double z)
 //   Analytical Solutions
 // ----------------------------------------
 
-double MASA::axi_euler::eval_an_u(double r,double z)
+template <typename Scalar>
+Scalar MASA::axi_euler<Scalar>::eval_an_u(Scalar r,Scalar z)
 {
-  double u_an;
-  u_an = u_1 * (cos(a_ur * PI * r / L) - 0.1e1) * sin(a_uz * PI * z / L);
+  Scalar u_an;
+  u_an = u_1 * (cos(a_ur * this->PI * r / L) - Scalar(1)) * sin(a_uz * this->PI * z / L);
   return u_an;
 }
 
-double MASA::axi_euler::eval_an_w(double r,double z)
+template <typename Scalar>
+Scalar MASA::axi_euler<Scalar>::eval_an_w(Scalar r,Scalar z)
 {
-  double w_an;
-  w_an = w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L);
+  Scalar w_an;
+  w_an = w_0 + w_1 * cos(a_wr * this->PI * r / L) * sin(a_wz * this->PI * z / L);
   return w_an;
 }
 
-double MASA::axi_euler::eval_an_p(double r,double z)
+template <typename Scalar>
+Scalar MASA::axi_euler<Scalar>::eval_an_p(Scalar r,Scalar z)
 {
-  double p_an;
-  p_an = p_0 + p_1 * sin(a_pr * PI * r / L) * cos(a_pz * PI * z / L);
+  Scalar p_an;
+  p_an = p_0 + p_1 * sin(a_pr * this->PI * r / L) * cos(a_pz * this->PI * z / L);
   return p_an;
 }
 
-double MASA::axi_euler::eval_an_rho(double r,double z)
+template <typename Scalar>
+Scalar MASA::axi_euler<Scalar>::eval_an_rho(Scalar r,Scalar z)
 {
-  double rho_an;
-  rho_an = rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L);
+  Scalar rho_an;
+  rho_an = rho_0 + rho_1 * cos(a_rhor * this->PI * r / L) * sin(a_rhoz * this->PI * z / L);
   return rho_an;
 }
+
+// ----------------------------------------
+//   Template Instantiation(s)
+// ----------------------------------------
+
+MASA_INSTANTIATE_ALL(MASA::axi_euler);

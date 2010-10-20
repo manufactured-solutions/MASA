@@ -33,13 +33,120 @@
 
 #include <config.h>        // for MASA_EXCEPTIONS conditional
 #include <masa_internal.h>
+#include <map>
 
 using namespace MASA;
 
-manufactured_solution* masa_master_pointer = 0;       // pointer to currently selected manufactured solution
-                                                      // setting master pointer to NULL -- 
-                                                      // allows error check that someone initialized it!
-map<string, manufactured_solution*> masa_master_list; // global map between unique name and manufactured class
+// Anonymous namespace for local helper class/functions
+namespace {
+
+using namespace MASA;
+
+template <typename Scalar>
+class MasterMS
+{
+public:
+  MasterMS () : _master_pointer(NULL), _master_map() {}
+
+  ~MasterMS () {
+    for(typename map<string,manufactured_solution<Scalar>*>::iterator iter = this->_master_map.begin(); iter != this->_master_map.end(); iter++)
+      delete iter->second;
+  }
+
+  const manufactured_solution<Scalar>& get_ms() const {
+    verify_pointer_sanity();
+    return *_master_pointer;
+  }
+
+  manufactured_solution<Scalar>& get_ms() {
+    verify_pointer_sanity();
+    return *_master_pointer;
+  }
+
+  void select_mms(const std::string& my_name);
+
+  void init_mms(const std::string& my_name, const std::string& masa_name);
+
+  void list_mms() const;
+
+  unsigned int size() const { return _master_map.size(); }
+
+private:
+  //
+  //  this function checks the user has an active mms
+  //
+  void verify_pointer_sanity() const;
+
+  manufactured_solution<Scalar>*             _master_pointer; // pointer to currently selected manufactured solution
+  std::map<std::string, manufactured_solution<Scalar> *> _master_map;     // global map between unique name and manufactured class
+};
+
+
+template <typename Scalar>
+int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
+{
+  // Build a temporary vector of MMS objects, then sort them into our map by name
+  anim.push_back(new masa_test_function<Scalar>());   // test function
+  anim.push_back(new masa_uninit<Scalar>()); // another test function
+  
+  // register solutions here
+  anim.push_back(new heateq_1d_steady_const<Scalar>());
+  anim.push_back(new heateq_2d_steady_const<Scalar>());
+  anim.push_back(new heateq_3d_steady_const<Scalar>());
+
+  anim.push_back(new heateq_1d_unsteady_const<Scalar>());
+  anim.push_back(new heateq_2d_unsteady_const<Scalar>());
+  anim.push_back(new heateq_3d_unsteady_const<Scalar>());
+
+  anim.push_back(new heateq_1d_unsteady_var<Scalar>());
+  anim.push_back(new heateq_2d_unsteady_var<Scalar>());
+  anim.push_back(new heateq_3d_unsteady_var<Scalar>());
+
+  anim.push_back(new heateq_1d_steady_var<Scalar>());
+  anim.push_back(new heateq_2d_steady_var<Scalar>());
+  anim.push_back(new heateq_3d_steady_var<Scalar>());
+
+  anim.push_back(new euler_1d<Scalar>());
+  anim.push_back(new euler_2d<Scalar>());
+  anim.push_back(new euler_3d<Scalar>());
+
+  anim.push_back(new sod_1d<Scalar>());
+
+  anim.push_back(new navierstokes_2d_compressible<Scalar>());
+  anim.push_back(new navierstokes_3d_compressible<Scalar>());
+
+  anim.push_back(new axi_euler<Scalar>());
+  anim.push_back(new axi_cns<Scalar>());
+
+  anim.push_back(new rans_sa<Scalar>());
+
+  return 0;
+}
+
+// Instantiations for every precision
+
+MasterMS<double>      masa_master_double;
+MasterMS<long double> masa_master_longdouble;
+
+// Function to return a MasterMS by precision
+template <typename Scalar>
+MasterMS<Scalar>&      masa_master() { return masa_master_double; }
+template <>
+MasterMS<long double>& masa_master() { return masa_master_longdouble; }
+
+}
+
+template <typename Scalar>
+void MasterMS<Scalar>::verify_pointer_sanity() const
+{
+  if(_master_pointer == 0)
+    {    
+      std::cout << "MASA FATAL ERROR:: No initialized Manufactured Solution!" << endl;
+      std::cout << "Have you called masa_init?" << endl;
+      masa_exit(1);
+    }  
+}
+
 
 //
 //  limited masa exception handling
@@ -48,217 +155,170 @@ void MASA::masa_exit(int ex)
 {
 
 #ifdef MASA_EXCEPTIONS
-  cout << "MASA:: caught exception " << ex << endl;
+  std::cout << "MASA:: caught exception " << ex << endl;
   throw(ex);
 #else
-  cout << "MASA:: ABORTING\n";
+  std::cout << "MASA:: ABORTING\n";
   exit(ex);
 #endif
   
 }
 
-//
-//  this function checks the user has an active mms
-//
-void verify_pointer_sanity()
-{
-  if(masa_master_pointer == 0)
-    {    
-      cout << "MASA FATAL ERROR:: No initialized Manufactured Solution!" << endl;
-      cout << "Have you called masa_init?" << endl;
-      masa_exit(1);
-    }  
-}
 
 //
 //  this function selects an already initialized manufactured class
 //
-int MASA::masa_select_mms(string name)
+template <typename Scalar>
+void MasterMS<Scalar>::select_mms(const std::string& my_name)
 {
-  string nametemp;
-
-  // lets run though the list to check the variable does exist
-  map<string,manufactured_solution*>::iterator it;
-  it=masa_master_list.find(name);
-  if(it != masa_master_list.end()) // found a name
+  // check that the class does exist
+  typename std::map<std::string, manufactured_solution<Scalar> *>::iterator it=_master_map.find(my_name);
+  if(it != _master_map.end()) // found a name
     { 
-      cout << "MASA :: selected " << name << endl;
-      masa_master_pointer=masa_master_list[name]; // set pointer to currently selected solution      
+      std::cout << "MASA :: selected " << my_name << endl;
+      _master_pointer=it->second; // set pointer to currently selected solution      
     }      
   else 
     {
-      cout << "\nMASA FATAL ERROR:: No such manufactured solution (" << name << ") has been initialized.\n";
+      std::cout << "\nMASA FATAL ERROR:: No such manufactured solution (" << my_name << ") has been initialized.\n";
+      this->list_mms();
       masa_exit(1);
     } 
+}
 
-  return 0;
-  
-}// done with masa_select
 
-// get list mms
-//
-// this function returns a vector of pointers to 
-// manufactured solutions available
-//
-// adding function because it is called in several places
-
-int get_list_mms(vector<manufactured_solution*>* anim)
+template <typename Scalar>
+int MASA::masa_select_mms(std::string name)
 {
-  anim->push_back(new masa_test_function());   // test function
-  anim->push_back(new masa_uninit()); // another test function
-  
-  // register solutions here
-  anim->push_back(new heateq_1d_steady_const());
-  anim->push_back(new heateq_2d_steady_const());
-  anim->push_back(new heateq_3d_steady_const());
-
-  anim->push_back(new heateq_1d_unsteady_const());
-  anim->push_back(new heateq_2d_unsteady_const());
-  anim->push_back(new heateq_3d_unsteady_const());
-
-  anim->push_back(new heateq_1d_unsteady_var());
-  anim->push_back(new heateq_2d_unsteady_var());
-  anim->push_back(new heateq_3d_unsteady_var());
-
-  anim->push_back(new heateq_1d_steady_var());
-  anim->push_back(new heateq_2d_steady_var());
-  anim->push_back(new heateq_3d_steady_var());
-
-  anim->push_back(new euler_1d());
-  anim->push_back(new euler_2d());
-  anim->push_back(new euler_3d());
-
-  anim->push_back(new sod_1d());
-
-  anim->push_back(new navierstokes_2d_compressible());
-  anim->push_back(new navierstokes_3d_compressible());
-
-  anim->push_back(new axi_euler());
-  anim->push_back(new axi_cns());
-
-  anim->push_back(new rans_sa());
-
+  masa_master<Scalar>().select_mms(name);
   return 0;
-
 }
 
 //
 //  this function will initiate a masa manufactured class
 //
-int MASA::masa_init(string unique_name, string str)
+template <typename Scalar>
+int MASA::masa_init(std::string unique_name, std::string str)
 {
-  int flag=0;
-  string name,temp;
-  int error=1;
-  vector<manufactured_solution*> anim;
-
-  get_list_mms(&anim); //construct list 
-  
-  temp=str;
-  masa_map(&temp); // remove lowercase, etc.
-
-  for (vector<manufactured_solution*>::const_iterator it = anim.begin(); it != anim.end(); ++it) 
-    {
-      (*it)->return_name(&name); // get name
-
-      // check the name of this mms is not null!
-      if(name.empty()){cout << "MASA FATAL ERROR:: manufactured solution has no name!\n";masa_exit(1);} 
-
-      error=temp.rfind(name);   // look for name -- must be identical to full name, after masa_map edits
-      if (error!=string::npos) // found a value
-	{
-	  masa_master_list[unique_name]=*it; // write down name 
-	  masa_master_pointer=*it; // set as currently active manufactured solution
-	  flag=1;                 // set exit flag
-	}
-      else // strings not identical
-	{
-	  delete *it; // this calls the deconstructor
-	}
-    }// done with for loop 
-  
-  
-  if(flag != 1)
-    {
-      cout << "\nMASA FATAL ERROR: No Manufactured Solutions of that Type\n";
-      masa_exit(1); // error code, terminate
-    }
+  masa_master<Scalar>().init_mms(unique_name, str);
   
   return 0; // steady as she goes
-
 }
 
-//
-//  this function will initiate a masa manufactured class
-//
-int MASA::masa_list_mms()
+
+template <typename Scalar>
+void MasterMS<Scalar>::init_mms(const std::string& my_name,
+                                const std::string& masa_name)
+{
+  std::vector<manufactured_solution<Scalar>*> anim;
+  get_list_mms<Scalar>(anim); //construct maps of MMS objects
+
+  std::string mapped_name = masa_name;
+  MASA::masa_map(&mapped_name);
+
+  for (unsigned int i=0; i != anim.size(); ++i)
+    {
+      std::string name;
+      anim[i]->return_name(&name);
+      if (name.empty())
+        {
+          std::cout << "MASA FATAL ERROR:: manufactured solution has no name!\n";
+          masa_exit(1);
+        }
+      if (name == mapped_name)
+        {
+          _master_map[my_name] = _master_pointer = anim[i];
+          return;
+        }
+      else
+        delete anim[i];
+    }
+
+  std::cout << "MASA FATAL ERROR:: no manufactured solution named " << masa_name << " found!\n";
+  masa_exit(1);
+}
+
+
+template <typename Scalar>
+void MasterMS<Scalar>::list_mms() const
 {
   string str;
 
   // output the size of the map
-  cout << "Number of initialized solutions: " << masa_master_list.size() << endl;
-  for(map<string,manufactured_solution*>::iterator iter = masa_master_list.begin(); iter != masa_master_list.end(); iter++)
+  std::cout << "Number of initialized solutions: " << this->size() << endl;
+  for(typename map<string,manufactured_solution<Scalar>*>::const_iterator iter = this->_master_map.begin(); iter != this->_master_map.end(); iter++)
     {
       (iter->second)->return_name(&str);
-      cout << iter->first << " : " << str << endl;
+      std::cout << iter->first << " : " << str << endl;
     }
+}
+
+
+
+template <typename Scalar>
+int MASA::masa_list_mms()
+{
+  masa_master<Scalar>().list_mms();
   return 0;
 }
 
 //
 // function that prints all registered masa solutions
 //
+template <typename Scalar>
 int MASA::masa_printid()
 {
-  vector<manufactured_solution*> anim;
-  string name;
+  std::vector<manufactured_solution<Scalar>*> anim;
 
-  get_list_mms(&anim); //construct list 
+  get_list_mms(anim); //construct list 
 
-  cout << endl;
-  cout << "\nMASA :: Available Solutions:\n";
-  cout << "*-------------------------------------*" ;
+  std::cout << endl;
+  std::cout << "\nMASA :: Available Solutions:\n";
+  std::cout << "*-------------------------------------*" ;
 
-  for (vector<manufactured_solution*>::const_iterator it = anim.begin(); it != anim.end(); ++it) {
-    (*it)->return_name(&name); // get name
-    cout << endl << name;
-    delete *it; // this calls the deconstructor
-  }// done with for loop 
+  for (typename std::vector<manufactured_solution<Scalar>*>::const_iterator it = anim.begin(); it != anim.end(); ++it) 
+    {
+      std::string name;
+      (*it)->return_name(&name); // get name
+      std::cout << endl << name;
+      delete *it;
+    } // done with for loop 
 
-  cout << "\n*-------------------------------------*\n" ;
+  std::cout << "\n*-------------------------------------*\n" ;
 
   return 0; // steady as she goes
 }// done with masa print id
 
-void MASA::masa_set_param(string param,double paramval)
+template <typename Scalar>
+void MASA::masa_set_param(string param,Scalar paramval)
 {
-  verify_pointer_sanity();
-  masa_master_pointer->set_var(param,paramval);
+  masa_master<Scalar>().get_ms().set_var(param,paramval);
 }
 
 //
 // Set all parameters to default values
 //
+template <typename Scalar>
 int MASA::masa_init_param()
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->init_var();
+  return masa_master<Scalar>().get_ms().init_var();
 }
 
 //
 // Function that returns value of parameter selected by string
 // 
 
-double MASA::masa_get_param(string param)
+template <typename Scalar>
+Scalar MASA::masa_get_param(string param)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->get_var(param);
+  return masa_master<Scalar>().get_ms().get_var(param);
 }
 
+
+template <typename Scalar>
 int MASA::masa_display_param()
 {
-  verify_pointer_sanity();
-  masa_master_pointer->display_var();
+  masa_master<Scalar>().get_ms().display_var();
 
   return 0;
 }
@@ -275,122 +335,122 @@ int MASA::masa_display_param()
   // source terms
   // --------------------------------
 
-double MASA::masa_eval_t_source(double x) //x 
+template <typename Scalar>
+Scalar MASA::masa_eval_t_source(Scalar x) //x 
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_t(x);
+  return masa_master<Scalar>().get_ms().eval_q_t(x);
 }
 
-double MASA::masa_eval_t_source(double x,double t) //x,t
+template <typename Scalar>
+Scalar MASA::masa_eval_t_source(Scalar x,Scalar t) //x,t
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_t(x,t);
+  return masa_master<Scalar>().get_ms().eval_q_t(x,t);
 }
 
-double MASA::masa_eval_u_source(double x)
+template <typename Scalar>
+Scalar MASA::masa_eval_u_source(Scalar x)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_u(x);
+  return masa_master<Scalar>().get_ms().eval_q_u(x);
 }
 
-double MASA::masa_eval_v_source(double x)  // for SA model
+template <typename Scalar>
+Scalar MASA::masa_eval_v_source(Scalar x)  // for SA model
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_v(x);
+  return masa_master<Scalar>().get_ms().eval_q_v(x);
 }
 
-double MASA::masa_eval_w_source(double x)
+template <typename Scalar>
+Scalar MASA::masa_eval_w_source(Scalar x)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_w(x);
+  return masa_master<Scalar>().get_ms().eval_q_w(x);
 }
 
-double MASA::masa_eval_rho_source(double x)
+template <typename Scalar>
+Scalar MASA::masa_eval_rho_source(Scalar x)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_rho(x);
+  return masa_master<Scalar>().get_ms().eval_q_rho(x);
 }
 
-double MASA::masa_eval_rho_u_source(double x,double t)
+template <typename Scalar>
+Scalar MASA::masa_eval_rho_u_source(Scalar x,Scalar t)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_rho_u(x,t);
+  return masa_master<Scalar>().get_ms().eval_q_rho_u(x,t);
 }
 
-double MASA::masa_eval_e_source(double x)
+template <typename Scalar>
+Scalar MASA::masa_eval_e_source(Scalar x)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_e(x);
+  return masa_master<Scalar>().get_ms().eval_q_e(x);
 }
 
   // --------------------------------
   // analytical terms
   // --------------------------------
 
-double MASA::masa_eval_t_an(double x)
+template <typename Scalar>
+Scalar MASA::masa_eval_t_an(Scalar x)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_t(x);
+  return masa_master<Scalar>().get_ms().eval_an_t(x);
 }
 
-double MASA::masa_eval_u_an(double x)
+template <typename Scalar>
+Scalar MASA::masa_eval_u_an(Scalar x)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_u(x);
+  return masa_master<Scalar>().get_ms().eval_an_u(x);
 }
 
-double MASA::masa_eval_v_an(double x) // for SA model
+template <typename Scalar>
+Scalar MASA::masa_eval_v_an(Scalar x) // for SA model
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_v(x);
+  return masa_master<Scalar>().get_ms().eval_an_v(x);
 }
 
-double MASA::masa_eval_w_an(double x)
+template <typename Scalar>
+Scalar MASA::masa_eval_w_an(Scalar x)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_w(x);
+  return masa_master<Scalar>().get_ms().eval_an_w(x);
 }
 
-double MASA::masa_eval_p_an(double x)
+template <typename Scalar>
+Scalar MASA::masa_eval_p_an(Scalar x)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_p(x);
+  return masa_master<Scalar>().get_ms().eval_an_p(x);
 }
 
-double MASA::masa_eval_rho_an(double x)
+template <typename Scalar>
+Scalar MASA::masa_eval_rho_an(Scalar x)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_rho(x);
+  return masa_master<Scalar>().get_ms().eval_an_rho(x);
 }
 
-double MASA::masa_eval_1d_grad_u(double x)
+template <typename Scalar>
+Scalar MASA::masa_eval_1d_grad_u(Scalar x)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_1d_g_u(x);
+  return masa_master<Scalar>().get_ms().eval_1d_g_u(x);
 }
 
-double MASA::masa_eval_1d_grad_v(double x)
+template <typename Scalar>
+Scalar MASA::masa_eval_1d_grad_v(Scalar x)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_1d_g_v(x);
+  return masa_master<Scalar>().get_ms().eval_1d_g_v(x);
 }
 
-double MASA::masa_eval_1d_grad_w(double x)
+template <typename Scalar>
+Scalar MASA::masa_eval_1d_grad_w(Scalar x)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_1d_g_w(x);
+  return masa_master<Scalar>().get_ms().eval_1d_g_w(x);
 }
 
-double MASA::masa_eval_1d_grad_p(double x)
+template <typename Scalar>
+Scalar MASA::masa_eval_1d_grad_p(Scalar x)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_1d_g_p(x);
+  return masa_master<Scalar>().get_ms().eval_1d_g_p(x);
 }
 
-double MASA::masa_eval_1d_grad_rho(double x)
+template <typename Scalar>
+Scalar MASA::masa_eval_1d_grad_rho(Scalar x)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_1d_g_rho(x);
+  return masa_master<Scalar>().get_ms().eval_1d_g_rho(x);
 }
 
 
@@ -405,108 +465,110 @@ double MASA::masa_eval_1d_grad_rho(double x)
   // source terms
   // --------------------------------
 
-double MASA::masa_eval_t_source(double x,double y,double t)
+template <typename Scalar>
+Scalar MASA::masa_eval_t_source(Scalar x,Scalar y,Scalar t)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_t(x,y,t);
+  return masa_master<Scalar>().get_ms().eval_q_t(x,y,t);
 }
 
-double MASA::masa_eval_u_source(double x,double y)
+template <typename Scalar>
+Scalar MASA::masa_eval_u_source(Scalar x,Scalar y)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_u(x,y);
+  return masa_master<Scalar>().get_ms().eval_q_u(x,y);
 }
 
-double MASA::masa_eval_v_source(double x,double y)
+template <typename Scalar>
+Scalar MASA::masa_eval_v_source(Scalar x,Scalar y)
 {  
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_v(x,y);
+  return masa_master<Scalar>().get_ms().eval_q_v(x,y);
 }
 
-double MASA::masa_eval_w_source(double x,double y)
+template <typename Scalar>
+Scalar MASA::masa_eval_w_source(Scalar x,Scalar y)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_w(x,y);
+  return masa_master<Scalar>().get_ms().eval_q_w(x,y);
 }
 
-double MASA::masa_eval_rho_source(double x,double y)
+template <typename Scalar>
+Scalar MASA::masa_eval_rho_source(Scalar x,Scalar y)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_rho(x,y);
+  return masa_master<Scalar>().get_ms().eval_q_rho(x,y);
 }
 
-double MASA::masa_eval_e_source(double x,double y)
+template <typename Scalar>
+Scalar MASA::masa_eval_e_source(Scalar x,Scalar y)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_e(x,y);
+  return masa_master<Scalar>().get_ms().eval_q_e(x,y);
 }
 
   // --------------------------------
   // analytical terms
   // --------------------------------
 
-double MASA::masa_eval_t_an(double x,double y)
+template <typename Scalar>
+Scalar MASA::masa_eval_t_an(Scalar x,Scalar y)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_t(x,y);
+  return masa_master<Scalar>().get_ms().eval_an_t(x,y);
 }
 
-double MASA::masa_eval_u_an(double x,double y)
+template <typename Scalar>
+Scalar MASA::masa_eval_u_an(Scalar x,Scalar y)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_u(x,y);
+  return masa_master<Scalar>().get_ms().eval_an_u(x,y);
 }
 
-double MASA::masa_eval_v_an(double x,double y)
+template <typename Scalar>
+Scalar MASA::masa_eval_v_an(Scalar x,Scalar y)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_v(x,y);
+  return masa_master<Scalar>().get_ms().eval_an_v(x,y);
 }
 
-double MASA::masa_eval_w_an(double x,double y)
+template <typename Scalar>
+Scalar MASA::masa_eval_w_an(Scalar x,Scalar y)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_w(x,y);
+  return masa_master<Scalar>().get_ms().eval_an_w(x,y);
 }
 
-double MASA::masa_eval_p_an(double x,double y)
+template <typename Scalar>
+Scalar MASA::masa_eval_p_an(Scalar x,Scalar y)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_p(x,y);
+  return masa_master<Scalar>().get_ms().eval_an_p(x,y);
 }
 
-double MASA::masa_eval_rho_an(double x,double y)
+template <typename Scalar>
+Scalar MASA::masa_eval_rho_an(Scalar x,Scalar y)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_rho(x,y);
+  return masa_master<Scalar>().get_ms().eval_an_rho(x,y);
 }
 
-double MASA::masa_eval_2d_grad_u(double x,double y,int i)
+template <typename Scalar>
+Scalar MASA::masa_eval_2d_grad_u(Scalar x,Scalar y,int i)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_2d_g_u(x,y,i);
+  return masa_master<Scalar>().get_ms().eval_2d_g_u(x,y,i);
 }
 
-double MASA::masa_eval_2d_grad_v(double x,double y,int i)
+template <typename Scalar>
+Scalar MASA::masa_eval_2d_grad_v(Scalar x,Scalar y,int i)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_2d_g_v(x,y,i);
+  return masa_master<Scalar>().get_ms().eval_2d_g_v(x,y,i);
 }
 
-double MASA::masa_eval_2d_grad_w(double x,double y,int i)
+template <typename Scalar>
+Scalar MASA::masa_eval_2d_grad_w(Scalar x,Scalar y,int i)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_2d_g_w(x,y,i);
+  return masa_master<Scalar>().get_ms().eval_2d_g_w(x,y,i);
 }
-double MASA::masa_eval_2d_grad_p(double x,double y,int i)
+
+template <typename Scalar>
+Scalar MASA::masa_eval_2d_grad_p(Scalar x,Scalar y,int i)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_2d_g_p(x,y,i);
+  return masa_master<Scalar>().get_ms().eval_2d_g_p(x,y,i);
 }
-double MASA::masa_eval_2d_grad_rho(double x,double y,int i)
+
+template <typename Scalar>
+Scalar MASA::masa_eval_2d_grad_rho(Scalar x,Scalar y,int i)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_2d_g_rho(x,y,i);
+  return masa_master<Scalar>().get_ms().eval_2d_g_rho(x,y,i);
 }
 
 /* ------------------------------------------------
@@ -520,116 +582,116 @@ double MASA::masa_eval_2d_grad_rho(double x,double y,int i)
   // source terms
   // --------------------------------
 
-double MASA::masa_eval_t_source(double x,double y,double z,double t)
+template <typename Scalar>
+Scalar MASA::masa_eval_t_source(Scalar x,Scalar y,Scalar z,Scalar t)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_t(x,y,z,t);
+  return masa_master<Scalar>().get_ms().eval_q_t(x,y,z,t);
 }
 
-double MASA::masa_eval_u_source(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::masa_eval_u_source(Scalar x,Scalar y,Scalar z)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_u(x,y,z);
+  return masa_master<Scalar>().get_ms().eval_q_u(x,y,z);
 }
 
-double MASA::masa_eval_v_source(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::masa_eval_v_source(Scalar x,Scalar y,Scalar z)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_v(x,y,z);
+  return masa_master<Scalar>().get_ms().eval_q_v(x,y,z);
 }
 
-double MASA::masa_eval_w_source(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::masa_eval_w_source(Scalar x,Scalar y,Scalar z)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_w(x,y,z);
+  return masa_master<Scalar>().get_ms().eval_q_w(x,y,z);
 }
 
-double MASA::masa_eval_rho_source(double x,double y, double z)
+template <typename Scalar>
+Scalar MASA::masa_eval_rho_source(Scalar x,Scalar y, Scalar z)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_rho(x,y,z);
+  return masa_master<Scalar>().get_ms().eval_q_rho(x,y,z);
 }
 
-double MASA::masa_eval_e_source(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::masa_eval_e_source(Scalar x,Scalar y,Scalar z)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_q_e(x,y,z);
+  return masa_master<Scalar>().get_ms().eval_q_e(x,y,z);
 }
 
   // --------------------------------
   // analytical terms
   // --------------------------------
 
-double MASA::masa_eval_t_an(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::masa_eval_t_an(Scalar x,Scalar y,Scalar z)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_t(x,y,z);
+  return masa_master<Scalar>().get_ms().eval_an_t(x,y,z);
 }
 
-double MASA::masa_eval_t_an(double x,double y,double z,double t)
+template <typename Scalar>
+Scalar MASA::masa_eval_t_an(Scalar x,Scalar y,Scalar z,Scalar t)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_t(x,y,z,t);
+  return masa_master<Scalar>().get_ms().eval_an_t(x,y,z,t);
 }
 
-double MASA::masa_eval_u_an(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::masa_eval_u_an(Scalar x,Scalar y,Scalar z)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_u(x,y,z);
+  return masa_master<Scalar>().get_ms().eval_an_u(x,y,z);
 }
 
-double MASA::masa_eval_v_an(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::masa_eval_v_an(Scalar x,Scalar y,Scalar z)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_v(x,y,z);
+  return masa_master<Scalar>().get_ms().eval_an_v(x,y,z);
 }
 
-double MASA::masa_eval_w_an(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::masa_eval_w_an(Scalar x,Scalar y,Scalar z)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_w(x,y,z);
+  return masa_master<Scalar>().get_ms().eval_an_w(x,y,z);
 }
 
-double MASA::masa_eval_p_an(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::masa_eval_p_an(Scalar x,Scalar y,Scalar z)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_p(x,y,z);
+  return masa_master<Scalar>().get_ms().eval_an_p(x,y,z);
 }
 
-double MASA::masa_eval_rho_an(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::masa_eval_rho_an(Scalar x,Scalar y,Scalar z)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_an_rho(x,y,z);
+  return masa_master<Scalar>().get_ms().eval_an_rho(x,y,z);
 }
 
-double MASA::masa_eval_3d_grad_u(double x,double y,double z,int i)
+template <typename Scalar>
+Scalar MASA::masa_eval_3d_grad_u(Scalar x,Scalar y,Scalar z,int i)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_3d_g_u(x,y,z,i);
+  return masa_master<Scalar>().get_ms().eval_3d_g_u(x,y,z,i);
 }
 
-double MASA::masa_eval_3d_grad_v(double x,double y,double z,int i)
+template <typename Scalar>
+Scalar MASA::masa_eval_3d_grad_v(Scalar x,Scalar y,Scalar z,int i)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_3d_g_v(x,y,z,i);
+  return masa_master<Scalar>().get_ms().eval_3d_g_v(x,y,z,i);
 }
 
-double MASA::masa_eval_3d_grad_w(double x,double y,double z,int i)
+template <typename Scalar>
+Scalar MASA::masa_eval_3d_grad_w(Scalar x,Scalar y,Scalar z,int i)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_3d_g_w(x,y,z,i);
+  return masa_master<Scalar>().get_ms().eval_3d_g_w(x,y,z,i);
 }
 
-double MASA::masa_eval_3d_grad_p(double x,double y,double z,int i)
+template <typename Scalar>
+Scalar MASA::masa_eval_3d_grad_p(Scalar x,Scalar y,Scalar z,int i)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_3d_g_p(x,y,z,i);
+  return masa_master<Scalar>().get_ms().eval_3d_g_p(x,y,z,i);
 }
 
-double MASA::masa_eval_3d_grad_rho(double x,double y,double z,int i)
+template <typename Scalar>
+Scalar MASA::masa_eval_3d_grad_rho(Scalar x,Scalar y,Scalar z,int i)
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->eval_3d_g_rho(x,y,z,i);
+  return masa_master<Scalar>().get_ms().eval_3d_g_rho(x,y,z,i);
 }
 
 /* ------------------------------------------------
@@ -639,30 +701,34 @@ double MASA::masa_eval_3d_grad_rho(double x,double y,double z,int i)
  * -----------------------------------------------
  */ 
 
+
+template <typename Scalar>
 int MASA::masa_get_name(string* name)
 {
-  verify_pointer_sanity();
-  masa_master_pointer->return_name(name); // set string to name
+  masa_master<Scalar>().get_ms().return_name(name); // set string to name
   return 0;
 }
 
+
+template <typename Scalar>
 int MASA::masa_get_dimension(int* dim)
 {
-  verify_pointer_sanity();
-  masa_master_pointer->return_dim(dim); // set string to name
+  masa_master<Scalar>().get_ms().return_dim(dim); // set string to name
   return 0;
 }
 
+
+template <typename Scalar>
 int MASA::masa_test_poly()
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->poly_test(); // return error condition
+  return masa_master<Scalar>().get_ms().poly_test(); // return error condition
 }
 
+
+template <typename Scalar>
 int MASA::masa_sanity_check()
 {
-  verify_pointer_sanity();
-  return masa_master_pointer->sanity_check(); // set string to name
+  return masa_master<Scalar>().get_ms().sanity_check(); // set string to name
 }
 
 int MASA::masa_version_stdout()
@@ -718,3 +784,76 @@ int MASA::masa_get_numeric_version()
 
 }
 
+
+// Instantiations
+
+#define INSTANTIATE_ALL_FUNCTIONS(Scalar) \
+  template int masa_init      <Scalar>(std::string, std::string); \
+  template int masa_select_mms<Scalar>(std::string); \
+  template int masa_list_mms  <Scalar>(); \
+  template int    masa_init_param<Scalar>(); \
+  template void   masa_set_param<Scalar>(std::string,Scalar); \
+  template Scalar masa_get_param<Scalar>(std::string); \
+  template Scalar masa_eval_t_source  <Scalar>(Scalar);         \
+  template Scalar masa_eval_t_source  <Scalar>(Scalar,Scalar);  \
+  template Scalar masa_eval_u_source  <Scalar>(Scalar); \
+  template Scalar masa_eval_v_source  <Scalar>(Scalar);         \
+  template Scalar masa_eval_w_source  <Scalar>(Scalar); \
+  template Scalar masa_eval_e_source  <Scalar>(Scalar); \
+  template Scalar masa_eval_rho_source<Scalar>(Scalar); \
+  template Scalar masa_eval_rho_u_source<Scalar>(Scalar,Scalar);  \
+  template Scalar masa_eval_t_an      <Scalar>(Scalar);         \
+  template Scalar masa_eval_t_an      <Scalar>(Scalar,Scalar);  \
+  template Scalar masa_eval_u_an      <Scalar>(Scalar); \
+  template Scalar masa_eval_v_an      <Scalar>(Scalar);         \
+  template Scalar masa_eval_w_an      <Scalar>(Scalar); \
+  template Scalar masa_eval_p_an      <Scalar>(Scalar); \
+  template Scalar masa_eval_rho_an    <Scalar>(Scalar); \
+  template Scalar masa_eval_t_source  <Scalar>(Scalar,Scalar,Scalar);  \
+  template Scalar masa_eval_u_source  <Scalar>(Scalar,Scalar); \
+  template Scalar masa_eval_v_source  <Scalar>(Scalar,Scalar); \
+  template Scalar masa_eval_w_source  <Scalar>(Scalar,Scalar);  \
+  template Scalar masa_eval_e_source  <Scalar>(Scalar,Scalar); \
+  template Scalar masa_eval_rho_source<Scalar>(Scalar,Scalar); \
+  template Scalar masa_eval_t_an      <Scalar>(Scalar,Scalar,Scalar);  \
+  template Scalar masa_eval_u_an      <Scalar>(Scalar,Scalar); \
+  template Scalar masa_eval_v_an      <Scalar>(Scalar,Scalar); \
+  template Scalar masa_eval_w_an      <Scalar>(Scalar,Scalar);  \
+  template Scalar masa_eval_p_an      <Scalar>(Scalar,Scalar); \
+  template Scalar masa_eval_rho_an    <Scalar>(Scalar,Scalar); \
+  template Scalar masa_eval_t_source  <Scalar>(Scalar,Scalar,Scalar,Scalar);  \
+  template Scalar masa_eval_u_source  <Scalar>(Scalar,Scalar,Scalar); \
+  template Scalar masa_eval_v_source  <Scalar>(Scalar,Scalar,Scalar); \
+  template Scalar masa_eval_w_source  <Scalar>(Scalar,Scalar,Scalar); \
+  template Scalar masa_eval_e_source  <Scalar>(Scalar,Scalar,Scalar); \
+  template Scalar masa_eval_rho_source<Scalar>(Scalar,Scalar,Scalar); \
+  template Scalar masa_eval_t_an      <Scalar>(Scalar,Scalar,Scalar,Scalar);  \
+  template Scalar masa_eval_u_an      <Scalar>(Scalar,Scalar,Scalar); \
+  template Scalar masa_eval_v_an      <Scalar>(Scalar,Scalar,Scalar); \
+  template Scalar masa_eval_w_an      <Scalar>(Scalar,Scalar,Scalar); \
+  template Scalar masa_eval_p_an      <Scalar>(Scalar,Scalar,Scalar); \
+  template Scalar masa_eval_rho_an    <Scalar>(Scalar,Scalar,Scalar); \
+  template Scalar masa_eval_1d_grad_u  <Scalar>(Scalar); \
+  template Scalar masa_eval_2d_grad_u  <Scalar>(Scalar,Scalar,int); \
+  template Scalar masa_eval_3d_grad_u  <Scalar>(Scalar,Scalar,Scalar,int); \
+  template Scalar masa_eval_1d_grad_v  <Scalar>(Scalar); \
+  template Scalar masa_eval_2d_grad_v  <Scalar>(Scalar,Scalar,int); \
+  template Scalar masa_eval_3d_grad_v  <Scalar>(Scalar,Scalar,Scalar,int); \
+  template Scalar masa_eval_1d_grad_w  <Scalar>(Scalar); \
+  template Scalar masa_eval_2d_grad_w  <Scalar>(Scalar,Scalar,int); \
+  template Scalar masa_eval_3d_grad_w  <Scalar>(Scalar,Scalar,Scalar,int); \
+  template Scalar masa_eval_1d_grad_p  <Scalar>(Scalar); \
+  template Scalar masa_eval_2d_grad_p  <Scalar>(Scalar,Scalar,int); \
+  template Scalar masa_eval_3d_grad_p  <Scalar>(Scalar,Scalar,Scalar,int); \
+  template Scalar masa_eval_1d_grad_rho<Scalar>(Scalar); \
+  template Scalar masa_eval_2d_grad_rho<Scalar>(Scalar,Scalar,int); \
+  template Scalar masa_eval_3d_grad_rho<Scalar>(Scalar,Scalar,Scalar,int); \
+  template int masa_test_poly<Scalar>();                             \
+  template int masa_printid<Scalar>(); \
+  template int masa_display_param<Scalar>(); \
+  template int masa_get_name<Scalar>(std::string*); \
+  template int masa_get_dimension<Scalar>(int*); \
+  template int masa_sanity_check<Scalar>()
+
+INSTANTIATE_ALL_FUNCTIONS(double);
+INSTANTIATE_ALL_FUNCTIONS(long double);

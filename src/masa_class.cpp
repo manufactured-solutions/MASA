@@ -46,7 +46,8 @@ using namespace MASA;
  * -----------------------------------------------
  */ 
 
-MASA::manufactured_solution::manufactured_solution()
+template <typename Scalar>
+MASA::manufactured_solution<Scalar>::manufactured_solution()
 {  
   num_vars=0;                   // default -- will ++ for each registered variable
   dummy=0;
@@ -54,11 +55,17 @@ MASA::manufactured_solution::manufactured_solution()
 }
 
 // define PI and other constants
-const double MASA::manufactured_solution::PI = acos(-1);
-const double MASA::manufactured_solution::pi = acos(-1);
-const double MASA::manufactured_solution::MASA_VAR_DEFAULT = -12345.67; // default -- initialize each var to 'crazy' value
+template <typename Scalar>
+const Scalar MASA::manufactured_solution<Scalar>::PI = acos(Scalar(-1));
 
-double MASA::manufactured_solution::get_var(string var)
+template <typename Scalar>
+const Scalar MASA::manufactured_solution<Scalar>::pi = acos(Scalar(-1));
+
+template <typename Scalar>
+const Scalar MASA::manufactured_solution<Scalar>::MASA_VAR_DEFAULT = -12345.67; // default -- initialize each var to 'crazy' value
+
+template <typename Scalar>
+Scalar MASA::manufactured_solution<Scalar>::get_var(string var)
 {
   int selector=1;
   int error=1;
@@ -87,7 +94,8 @@ double MASA::manufactured_solution::get_var(string var)
     
 }// done with get_var function
 
-void MASA::manufactured_solution::display_var()
+template <typename Scalar>
+void MASA::manufactured_solution<Scalar>::display_var()
 {
 
   cout << "\nMASA :: Solution has " << varmap.size() << " variables.\n";
@@ -102,7 +110,8 @@ void MASA::manufactured_solution::display_var()
   
 } // done with display all variable names
 
-int MASA::manufactured_solution::set_var(string var, double val)
+template <typename Scalar>
+int MASA::manufactured_solution<Scalar>::set_var(string var, Scalar val)
 {
   int selector=1;
   int error=1;
@@ -132,7 +141,8 @@ int MASA::manufactured_solution::set_var(string var, double val)
 
 }// done with set_var function
 
-int MASA::manufactured_solution::sanity_check()
+template <typename Scalar>
+int MASA::manufactured_solution<Scalar>::sanity_check()
 {
   int flag=0;
 
@@ -165,7 +175,8 @@ int MASA::manufactured_solution::sanity_check()
 
 }// done with set_var function
 
-int MASA::manufactured_solution::register_var(string in,double* var)
+template <typename Scalar>
+int MASA::manufactured_solution<Scalar>::register_var(string in,Scalar* var)
 {
   // first, check to ensure that no such variable has already been mapped
   if(varmap[in] <= 0) // 0 implies variable has not been registered
@@ -197,7 +208,8 @@ int MASA::manufactured_solution::register_var(string in,double* var)
  * -----------------------------------------------
  */ 
 
-void Polynomial::set_coeffs( const std::vector<double> &coeffs_in )
+template <typename Scalar>
+void Polynomial<Scalar>::set_coeffs( const std::vector<Scalar> &coeffs_in )
 {
   int num_coeffs = coeffs_in.size();
 
@@ -208,7 +220,8 @@ void Polynomial::set_coeffs( const std::vector<double> &coeffs_in )
   return;
 }
 
-double Polynomial::operator()( const double &x, int *err) const
+template <typename Scalar>
+Scalar Polynomial<Scalar>::operator()( const Scalar &x, int *err) const
 {  
   int num_coeffs = coeffs.size();
   if(num_coeffs == 0)
@@ -218,7 +231,7 @@ double Polynomial::operator()( const double &x, int *err) const
     }
 
   int n = num_coeffs-1;
-  double y;
+  Scalar y;
 
   // We use Horner's method here. 
   y = coeffs[n];
@@ -233,7 +246,8 @@ double Polynomial::operator()( const double &x, int *err) const
 
 }
 
-void Polynomial::eval_derivs( const double x, const int k, std::vector<double> & derivs ) const
+template <typename Scalar>
+void Polynomial<Scalar>::eval_derivs( const Scalar x, const int k, std::vector<Scalar> & derivs ) const
 {
 
   // Zero out the vector first.
@@ -262,7 +276,8 @@ void Polynomial::eval_derivs( const double x, const int k, std::vector<double> &
   return;
 }
 
-double Polynomial::get_coeffs( const int &coeff_index ) const
+template <typename Scalar>
+Scalar Polynomial<Scalar>::get_coeffs( const int &coeff_index ) const
 {
   assert( coeff_index >= 0 );
   assert( coeff_index <= (coeffs.size()-1) );
@@ -276,12 +291,13 @@ double Polynomial::get_coeffs( const int &coeff_index ) const
  * -----------------------------------------------
  */ 
 
-MASA::masa_test_function::masa_test_function()
+template <typename Scalar>
+MASA::masa_test_function<Scalar>::masa_test_function()
 {
   // here, we load up the map so we can key to specific variables
   // using input
-  mmsname = "masa_test_function";
-  dimension = 1;
+  this->mmsname = "masa_test_function";
+  this->dimension = 1;
 
   // to do 
   // WARNING: this is designed to fail! 
@@ -293,96 +309,109 @@ MASA::masa_test_function::masa_test_function()
 }//done with constructor
 
 // regression test blatantly stolen from paul bauman in the name of science
-int MASA::manufactured_solution::poly_test()
+template <typename Scalar>
+int MASA::manufactured_solution<Scalar>::poly_test()
 {
 
-  const double double_tol = 1.0e-15;
+  const Scalar Scalar_tol = 1.0e-15;
 
   int return_flag = 0;
   int ierr = -1;
 
-  Polynomial poly;
+  Polynomial<Scalar> poly;
 
   // a0 + a1*x + a2*x^2 + a3*x^3
-  const double a0 = 1.0;
-  const double a1 = 2.0;
-  const double a2 = 3.0;
-  const double a3 = 4.0;
+  const Scalar a0 = 1.0;
+  const Scalar a1 = 2.0;
+  const Scalar a2 = 3.0;
+  const Scalar a3 = 4.0;
 
-  std::vector<double> a(4);
+  std::vector<Scalar> a(4);
   a[0] = a0;
   a[1] = a1;
   a[2] = a2;
   a[3] = a3;
 
   // check poly will return failure (1) if no coeff set
-  double computed_value = poly( 0 , &ierr);
+  Scalar computed_value = poly( 0 , &ierr);
   if(ierr != 1) return_flag=1;
 
   poly.set_coeffs( a );
 
   // Check to make sure we get back what we set
-  if( fabs( a0 - poly.get_coeffs( 0 ) ) > double_tol ) return_flag = 1;
-  if( fabs( a1 - poly.get_coeffs( 1 ) ) > double_tol ) return_flag = 1;
-  if( fabs( a2 - poly.get_coeffs( 2 ) ) > double_tol ) return_flag = 1;
-  if( fabs( a3 - poly.get_coeffs( 3 ) ) > double_tol ) return_flag = 1;
+  if( fabs( a0 - poly.get_coeffs( 0 ) ) > Scalar_tol ) return_flag = 1;
+  if( fabs( a1 - poly.get_coeffs( 1 ) ) > Scalar_tol ) return_flag = 1;
+  if( fabs( a2 - poly.get_coeffs( 2 ) ) > Scalar_tol ) return_flag = 1;
+  if( fabs( a3 - poly.get_coeffs( 3 ) ) > Scalar_tol ) return_flag = 1;
 
   // Check polynomial evaluation
-  const double x = 2.0;
-  const double exact_value = 49.0;
+  const Scalar x = 2.0;
+  const Scalar exact_value = 49.0;
   
   // evaluate and check for 'good' return value (0)
   computed_value = poly( x , &ierr);
   if(ierr != 0) return_flag=1;
 
-  if( fabs( exact_value - computed_value ) > double_tol ) return_flag = 1;
+  if( fabs( exact_value - computed_value ) > Scalar_tol ) return_flag = 1;
 
   // Check derivatives
-  const double dx = 62;
-  const double d2x = 54;
-  const double d3x = 24;
+  const Scalar dx = 62;
+  const Scalar d2x = 54;
+  const Scalar d3x = 24;
 
-  std::vector<double> derivs(4);
+  std::vector<Scalar> derivs(4);
 
   poly.eval_derivs( x, 4, derivs );
   
-  if( fabs( exact_value - derivs[0] ) > double_tol ) return_flag = 1;
-  if( fabs( dx - derivs[1] ) > double_tol ) return_flag = 1;
-  if( fabs( d2x - derivs[2] ) > double_tol ) return_flag = 1;
-  if( fabs( d3x - derivs[3] ) > double_tol ) return_flag = 1;
+  if( fabs( exact_value - derivs[0] ) > Scalar_tol ) return_flag = 1;
+  if( fabs( dx - derivs[1] ) > Scalar_tol ) return_flag = 1;
+  if( fabs( d2x - derivs[2] ) > Scalar_tol ) return_flag = 1;
+  if( fabs( d3x - derivs[3] ) > Scalar_tol ) return_flag = 1;
 
   return return_flag;
 }
 
-int MASA::masa_test_function::init_var()
+template <typename Scalar>
+int MASA::masa_test_function<Scalar>::init_var()
 {
   int err = 0;
 
   // designed to fail -- 2nd var does not exist
   // 3rd var has already been registered
-  err += set_var("demo_var_2",1);   
-  err += set_var("demo_var_12",1);   
-  err += register_var("demo_var_3",&demo_var_3);
+  err += this->set_var("demo_var_2",1);   
+  err += this->set_var("demo_var_12",1);   
+  err += this->register_var("demo_var_3",&demo_var_3);
 
   // now for a really epic fail: user sets var 
   // array instead of calling register_var method
   //vararr.push_back(&demo_var_3);
-  num_vars++;
+  this->num_vars++;
 
   return err;
 
 }
 
-MASA::masa_uninit::masa_uninit()
+template <typename Scalar>
+MASA::masa_uninit<Scalar>::masa_uninit()
 {
   // nothing to see here
-  mmsname = "masa_uninit";
-  dimension = 1;
+  this->mmsname = "masa_uninit";
+  this->dimension = 1;
 }
 
-int MASA::masa_uninit::init_var()
+template <typename Scalar>
+int MASA::masa_uninit<Scalar>::init_var()
 {
 
   return 0;
 
 }
+
+// ----------------------------------------
+//   Template Instantiation(s)
+// ----------------------------------------
+
+MASA_INSTANTIATE_ALL(MASA::manufactured_solution);
+MASA_INSTANTIATE_ALL(MASA::masa_test_function);
+MASA_INSTANTIATE_ALL(MASA::masa_uninit);
+MASA_INSTANTIATE_ALL(MASA::Polynomial);

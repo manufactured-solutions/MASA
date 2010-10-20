@@ -38,6 +38,8 @@
 using namespace std;
 using namespace MASA;
 
+typedef double Scalar;
+
 void masa_shell_choose_solution()
 {
   char userstring[100],masterstring[100];
@@ -46,12 +48,12 @@ void masa_shell_choose_solution()
   int q = 1;
   int dimension;
 
-  double x,y,z;
-  double dbl;
-  double dbl2;
-  double field;
-  double blah;
-  double tfield;
+  Scalar x,y,z;
+  Scalar dbl;
+  Scalar dbl2;
+  Scalar field;
+  Scalar blah;
+  Scalar tfield;
 
   string str1;
   
@@ -61,8 +63,8 @@ void masa_shell_choose_solution()
   cin >> userstring;
 
   //masa_map_dimension(userstring,masterstring);
-  masa_init("dummy",userstring);
-  masa_get_name(&str1);
+  masa_init<Scalar>("dummy",userstring);
+  masa_get_name<Scalar>(&str1);
   cout << endl << "User has selected: " << str1 << endl;
 
   // now let user register variables, etc.
@@ -85,38 +87,38 @@ void masa_shell_choose_solution()
 
 	case 1:
 	  printf("\n User Selected 1: Display all variables\n");
-	  masa_display_param();
+	  masa_display_param<Scalar>();
 	  break;
 	  
 	case 2:
 	  printf("\n User Selected 2: Register Variable");
 	  printf("\n Input variable name:\n");
 	  cin >> userstring;
-	  dbl2 = masa_get_param(userstring);
+	  dbl2 = masa_get_param<Scalar>(userstring);
 	  cout << "currently set to:" << dbl2 << endl;
 	  cout << "\nInput new value (double)" << endl;
 	  cin >> dbl;
-	  masa_set_param(userstring,dbl);
-	  dbl2 = masa_get_param(userstring);
+	  masa_set_param<Scalar>(userstring,dbl);
+	  dbl2 = masa_get_param<Scalar>(userstring);
 	  cout << endl << userstring << " is now set to:" << dbl2 << endl;
 	  break;
 
 	case 3:
 	  printf("\n User Selected 3: Set to default values\n");
-	  masa_init_param();
+	  masa_init_param<Scalar>();
 	  break;
 	  
 	case 4:
 	  printf("\n User Selected 4: Evaluate");
-	  masa_sanity_check();
-	  masa_get_dimension(&dimension);	 
+	  masa_sanity_check<Scalar>();
+	  masa_get_dimension<Scalar>(&dimension);	 
 	  switch(dimension)
 	    {
 	    case 1:
 	      cout << "\nplease input x location: \n";
 	      cin >> x;
 	      
-	      field = masa_eval_t_source(x);
+	      field = masa_eval_t_source<Scalar>(x);
 	      cout << "source term is:" << field;
 	      break;
 
@@ -127,7 +129,7 @@ void masa_shell_choose_solution()
 	      cout << "\nplease input y location: \n";
 	      cin >> y;
 
-	      field = masa_eval_u_source(x,y);
+	      field = masa_eval_u_source<Scalar>(x,y);
 	      cout << "source term is:" << field;
 	      break;
 
@@ -141,7 +143,7 @@ void masa_shell_choose_solution()
 	      cout << "\nplease input z location: \n";
 	      cin >> z;
 
-	      field = masa_eval_u_source(x,y,z);
+	      field = masa_eval_u_source<Scalar>(x,y,z);
 	      cout << "source term is:" << field << endl << endl;
 	      break;
 	      
@@ -165,7 +167,7 @@ void masa_shell_print_avail()
 {
   // this function prints the available manufactured solutions -- 
   // obviously needs to get a handle on the manufactured solutions class here
-  masa_printid();
+  masa_printid<Scalar>();
 }
 
 int main()

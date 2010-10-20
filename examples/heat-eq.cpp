@@ -36,16 +36,18 @@
 
 using namespace MASA;
 
+typedef double Scalar;
+
 int main()
 {
   // declarations
-  double x,y;
-  double tfield;
-  double tempx,tempy;
+  Scalar x,y;
+  Scalar tfield;
+  Scalar tempx,tempy;
 
   //problem size
-  double lx,ly;
-  double dx,dy;
+  Scalar lx,ly;
+  Scalar dx,dy;
   int nx,ny;
 
   // initialize
@@ -54,19 +56,19 @@ int main()
   lx=1;     // length
   ly=1; 
 
-  dx=double(lx/nx);
-  dy=double(ly/ny);
+  dx=lx/nx;
+  dy=ly/ny;
 
   // initialize the problem
-  masa_init("heat equation example","heateq_2d_steady_const");
+  masa_init<Scalar>("heat equation example","heateq_2d_steady_const");
 
   // initialize the default parameters
-  masa_init_param();
+  masa_init_param<Scalar>();
 
   // intialize the various parameters required for Euler 2D
   // call the sanity check routine 
   // (tests that all variables have been initialized)
-  masa_sanity_check();
+  masa_sanity_check<Scalar>();
 
   // evaluate source terms over the domain (0<x<1, 0<y<1) 
   for(int i=0;i<nx;i++)
@@ -75,7 +77,7 @@ int main()
 	tempx=i*dx;
 	tempy=j*dy;
 
-	tfield = masa_eval_t_source  (tempx,tempy);
+	tfield = masa_eval_t_source<Scalar>  (tempx,tempy);
 	
       }
 

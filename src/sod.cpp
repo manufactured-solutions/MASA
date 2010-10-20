@@ -61,34 +61,36 @@
 
 #include <masa_internal.h> 
 #include <iostream>
+#include <limits>
 
 using namespace MASA;
 
-double pl, pr, rhol, rhor, cl, cr;
-
-MASA::sod_1d::sod_1d()
+template <typename Scalar>
+MASA::sod_1d<Scalar>::sod_1d()
 {
-  mmsname = "sod_1d";
-  dimension=1;
+  this->mmsname = "sod_1d";
+  this->dimension=1;
 
-  register_var("Gamma",&Gamma);
-  register_var("mu",&mu);
+  this->register_var("Gamma",&Gamma);
+  this->register_var("mu",&mu);
 
 }//done with constructor
 
-int MASA::sod_1d::init_var()
+template <typename Scalar>
+int MASA::sod_1d<Scalar>::init_var()
 {
   int err = 0;
 
-  err += set_var("Gamma",1.4e0);
-  double temp = ((Gamma - 1.e0) / (Gamma + 1.e0));
-  err += set_var("mu",temp);
+  err += this->set_var("Gamma",1.4e0);
+  Scalar temp = ((Gamma - 1.e0) / (Gamma + 1.e0));
+  err += this->set_var("mu",temp);
 
   return err;
 
 } // done with variable initializer
 
-double MASA::sod_1d::eval_q_t(double x)
+template <typename Scalar>
+Scalar MASA::sod_1d<Scalar>::eval_q_t(Scalar x)
 {
   // Define the Sod problem initial conditions for the left and right states.
 
@@ -108,7 +110,8 @@ double MASA::sod_1d::eval_q_t(double x)
 
 }
 
-double MASA::sod_1d::eval_q_t(double x,double t)
+template <typename Scalar>
+Scalar MASA::sod_1d<Scalar>::eval_q_t(Scalar x,Scalar t)
 {
   // Define the Sod problem initial conditions for the left and right states.
 
@@ -128,14 +131,15 @@ double MASA::sod_1d::eval_q_t(double x,double t)
 
 }
 
-double MASA::sod_1d::eval_q_rho(double x,double t)
+template <typename Scalar>
+Scalar MASA::sod_1d<Scalar>::eval_q_rho(Scalar x,Scalar t)
 {
   // xmax determines the size of the computational domain (-xmax, +xmax).
   // numcells determines the number of cells in the output table.          
-  // double xmax 	= 5.e0;
+  // Scalar xmax 	= 5.e0;
 
-  double pm;
-  double rhoml, vs, vt, rhomr, vm, density;
+  Scalar pm;
+  Scalar rhoml, vs, vt, rhomr, vm, density;
 
   // Define the Sod problem initial conditions for the left and right states.
 
@@ -152,7 +156,7 @@ double MASA::sod_1d::eval_q_rho(double x,double t)
 
   // Solve for the postshock pressure pm.
 
-  pm = rtbis (pr, pl, 1.e-16,100);
+  pm = rtbis (pr, pl, std::numeric_limits<Scalar>::epsilon(),100);
 
   // Define the density to the left of the contact discontinuity rhoml.
  
@@ -191,21 +195,22 @@ double MASA::sod_1d::eval_q_rho(double x,double t)
       else
 	density = rhor;
       
-      double out_soln = density;
+      Scalar out_soln = density;
       return out_soln;
 
 }
 
 // return product of rho and u
 // 
-double MASA::sod_1d::eval_q_rho_u(double x,double t)
+template <typename Scalar>
+Scalar MASA::sod_1d<Scalar>::eval_q_rho_u(Scalar x,Scalar t)
 {
   // xmax determines the size of the computational domain (-xmax, +xmax).
   // numcells determines the number of cells in the output table.          
-  // double xmax 	= 5.e0;
+  // Scalar xmax 	= 5.e0;
 
-  double pm;
-  double rhoml, vs, vt, rhomr, vm, density, velocity;
+  Scalar pm;
+  Scalar rhoml, vs, vt, rhomr, vm, density, velocity;
 
   // Define the Sod problem initial conditions for the left and right states.
 
@@ -222,7 +227,7 @@ double MASA::sod_1d::eval_q_rho_u(double x,double t)
 
   // Solve for the postshock pressure pm.
 
-  pm = rtbis (pr, pl, 1.e-16,100);
+  pm = rtbis (pr, pl, std::numeric_limits<Scalar>::epsilon(),100);
 
   // Define the density to the left of the contact discontinuity rhoml.
  
@@ -270,17 +275,18 @@ double MASA::sod_1d::eval_q_rho_u(double x,double t)
       else 
 	velocity = 0.0;
 
-      double out_soln = density*velocity;
+      Scalar out_soln = density*velocity;
       return out_soln;
 }
 
 // return pressure
 // 
-double MASA::sod_1d::eval_q_p(double x,double t)
+template <typename Scalar>
+Scalar MASA::sod_1d<Scalar>::eval_q_p(Scalar x,Scalar t)
 {
 
-  double pm, pressure;
-  double vs, vt, rhomr, vm;
+  Scalar pm, pressure;
+  Scalar vs, vt, rhomr, vm;
 
   // Define the Sod problem initial conditions for the left and right states.
 
@@ -297,7 +303,7 @@ double MASA::sod_1d::eval_q_p(double x,double t)
 
   // Solve for the postshock pressure pm.
 
-  pm = rtbis (pr, pl, 1.e-16,100);
+  pm = rtbis (pr, pl, std::numeric_limits<Scalar>::epsilon(),100);
 
   // Define the postshock fluid velocity vm.
 
@@ -329,11 +335,12 @@ double MASA::sod_1d::eval_q_p(double x,double t)
   else            
     pressure = pr;
   
-  double out_soln = pressure;
+  Scalar out_soln = pressure;
   return out_soln;
 }
 
-double MASA::sod_1d::func(double pm)
+template <typename Scalar>
+Scalar MASA::sod_1d<Scalar>::func(Scalar pm)
 {
 
 ///////////////////////////////////////////////////////////////////////
@@ -345,7 +352,7 @@ double MASA::sod_1d::func(double pm)
 //
 ///////////////////////////////////////////////////////////////////////
  
-  double myval;
+  Scalar myval;
  
   myval = -2*cl*(1 - pow((pm/pl),((-1 + Gamma)/(2*Gamma))))/
     (cr*(-1 + Gamma)) +
@@ -368,11 +375,12 @@ double MASA::sod_1d::func(double pm)
 
 #include <stdio.h>
 
-double MASA::sod_1d::rtbis(double x1,double x2,double xacc,int JMAX)
+template <typename Scalar>
+Scalar MASA::sod_1d<Scalar>::rtbis(Scalar x1,Scalar x2,Scalar xacc,int JMAX)
 {
   int j;
-  double dx,f,fmid,xmid;
-  double myval;
+  Scalar dx,f,fmid,xmid;
+  Scalar myval;
 
   fmid=func(x2);
   f=func(x1);
@@ -408,3 +416,9 @@ double MASA::sod_1d::rtbis(double x1,double x2,double xacc,int JMAX)
   return(-1);
 
 }
+
+// ----------------------------------------
+//   Template Instantiation(s)
+// ----------------------------------------
+
+MASA_INSTANTIATE_ALL(MASA::sod_1d);

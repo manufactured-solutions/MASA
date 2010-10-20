@@ -36,7 +36,7 @@
 
 #include <config.h>
 #include <masa.h>
-#include <math.h>
+#include <cmath>
 
 #include <iostream>
 #include <stdlib.h>
@@ -44,49 +44,51 @@
 using namespace MASA;
 using namespace std;
 
-const double pi = acos(-1);
-const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
+typedef double Scalar;
+
+const Scalar pi = std::acos(Scalar(-1));
+const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
 
 int main()
 {
   // solutions
-  double ufield,ufield2,ufield3;
-  double vfield,vfield2,vfield3;
-  double efield,efield2,efield3;
-  double rho,rho2,rho3;
+  Scalar ufield,ufield2,ufield3;
+  Scalar vfield,vfield2,vfield3;
+  Scalar efield,efield2,efield3;
+  Scalar rho,rho2,rho3;
 
-  double u_an,u_an2,u_an3;
-  double v_an,v_an2,v_an3;
-  double p_an,p_an2,p_an3;
-  double rho_an,rho_an2,rho_an3;
+  Scalar u_an,u_an2,u_an3;
+  Scalar v_an,v_an2,v_an3;
+  Scalar p_an,p_an2,p_an3;
+  Scalar rho_an,rho_an2,rho_an3;
   
   // parameters
   int nx = 200;  // number of points
   int lx=1;     // length
-  double dx=double(lx)/double(nx);
+  Scalar dx=Scalar(lx)/Scalar(nx);
 
-  double x;
+  Scalar x;
 
   // initalize
-  masa_init("spelart alamaras test","rans_sa");
+  masa_init<Scalar>("spelart alamaras test","rans_sa");
 
   // initialize the default parameters
-  masa_init_param();
+  masa_init_param<Scalar>();
 
   // check that all terms have been initialized
-  masa_sanity_check();
+  masa_sanity_check<Scalar>();
 
   for(int i=0;i<nx;i++)
     {
       x=i*dx;
 
       // analytical
-      u_an = masa_eval_u_an(x);
-      v_an = masa_eval_v_an(x);
+      u_an = masa_eval_u_an<Scalar>(x);
+      v_an = masa_eval_v_an<Scalar>(x);
 
       // simple source term check
-      ufield = masa_eval_u_source(x);
-      vfield = masa_eval_v_source(x);      
+      ufield = masa_eval_u_source<Scalar>(x);
+      vfield = masa_eval_v_source<Scalar>(x);      
 
     } 
   

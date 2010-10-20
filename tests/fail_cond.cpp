@@ -38,23 +38,25 @@
 using namespace MASA;
 using namespace std;
 
+typedef double Scalar;
+
 int main()
 {
   int test;
 
-  masa_init("temp-test-1d","heateq_1d_steady_const");
+  masa_init<Scalar>("temp-test-1d","heateq_1d_steady_const");
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa; these tests currently just verify functions
   // run successfully.
   freopen("/dev/null","w",stdout);
 
-  masa_set_param("A_x",0);
-  masa_set_param("A_1",0); // does not exist
+  masa_set_param<Scalar>("A_x",0);
+  masa_set_param<Scalar>("A_1",0); // does not exist
   // we are intentionally not setting k_0
 
   // test error on sanity check when user has not initialized variables
-  int err = masa_sanity_check();
+  int err = masa_sanity_check<Scalar>();
   if(err!=1)
     {
       cout << "masa_sanity_check FAILED\n";
@@ -62,7 +64,7 @@ int main()
     }
 
   // now try to 'get_var' that does not exist
-  test = masa_get_param("A_1");
+  test = masa_get_param<Scalar>("A_1");
   if(test != -20)
     {
       cout << "REGRESSION TEST FAILED: masa_get_param error condition not triggered\n";

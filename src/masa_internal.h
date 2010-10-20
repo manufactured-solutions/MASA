@@ -42,9 +42,12 @@
 
 using namespace std;
 
+// Macro for declaring MASA classes with all supported Scalar types
+#define MASA_INSTANTIATE_ALL(my_class) template class my_class<double>; \
+                                       template class my_class<long double>
+
 namespace MASA 
 {
-
   // masa map functions here
   // probably want to hide this from the user eventually
   
@@ -67,23 +70,24 @@ namespace MASA
    * -------------------------------------------------------------------------------------------   
    */ 
 
-  class manufactured_solution 
+  template <typename Scalar>
+  class manufactured_solution
   {
     
   private: 
-    double Tan;                          // analytical solution 
-    double Q;                            // source term
-    double gradT;                        // gradient 
+    Scalar Tan;                          // analytical solution 
+    Scalar Q;                            // source term
+    Scalar gradT;                        // gradient 
     
   protected:
-    static const double PI;              // 3.1415... defined in constructor
-    static const double pi;              // 3.1415... defined in constructor
-    static const double MASA_VAR_DEFAULT;   
-    double dummy;
+    static const Scalar pi;
+    static const Scalar PI;
+    static const Scalar MASA_VAR_DEFAULT;   
+    Scalar dummy;
     int num_vars;
 
     map<string,int> varmap;               // map to each variable
-    vector<double*>  vararr;              // arr of pointers to each variable
+    vector<Scalar*>  vararr;              // arr of pointers to each variable
     string mmsname;                       // the name of the manufactured solution  
     int dimension;                        // dimension of the solution
 
@@ -101,30 +105,30 @@ namespace MASA
    * -------------------------------------------------------------------------------------------
    */
 
-    virtual double eval_an_t(double)                {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
-    virtual double eval_an_t(double,double)         {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
-    virtual double eval_an_t(double,double,double)  {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
-    virtual double eval_an_t(double,double,double,double)  {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 4d problems
+    virtual Scalar eval_an_t(Scalar)                {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
+    virtual Scalar eval_an_t(Scalar,Scalar)         {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
+    virtual Scalar eval_an_t(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
+    virtual Scalar eval_an_t(Scalar,Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 4d problems
 
-    virtual double eval_an_u(double)                {cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
-    virtual double eval_an_u(double,double)         {cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
-    virtual double eval_an_u(double,double,double)  {cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
+    virtual Scalar eval_an_u(Scalar)                {cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
+    virtual Scalar eval_an_u(Scalar,Scalar)         {cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
+    virtual Scalar eval_an_u(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
 
-    virtual double eval_an_v(double)                {cout << "MASA ERROR:: Analytical Solution (v) is unavailable for 1D problems.\n"; return -1.33;};        // returns value of analytical solution
-    virtual double eval_an_v(double,double)         {cout << "MASA ERROR:: Analytical Solution (v) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
-    virtual double eval_an_v(double,double,double)  {cout << "MASA ERROR:: Analytical Solution (v) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
+    virtual Scalar eval_an_v(Scalar)                {cout << "MASA ERROR:: Analytical Solution (v) is unavailable for 1D problems.\n"; return -1.33;};        // returns value of analytical solution
+    virtual Scalar eval_an_v(Scalar,Scalar)         {cout << "MASA ERROR:: Analytical Solution (v) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
+    virtual Scalar eval_an_v(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Analytical Solution (v) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
 
-    virtual double eval_an_w(double)                {cout << "MASA ERROR:: Analytical Solution (w) is unavailable for 1d problems.\n"; return -1.33;};        // returns value of analytical solution
-    virtual double eval_an_w(double,double)         {cout << "MASA ERROR:: Analytical Solution (w) is unavailable for 2d problems.\n"; return -1.33;};        // overloaded for 2d problems
-    virtual double eval_an_w(double,double,double)  {cout << "MASA ERROR:: Analytical Solution (w) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
+    virtual Scalar eval_an_w(Scalar)                {cout << "MASA ERROR:: Analytical Solution (w) is unavailable for 1d problems.\n"; return -1.33;};        // returns value of analytical solution
+    virtual Scalar eval_an_w(Scalar,Scalar)         {cout << "MASA ERROR:: Analytical Solution (w) is unavailable for 2d problems.\n"; return -1.33;};        // overloaded for 2d problems
+    virtual Scalar eval_an_w(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Analytical Solution (w) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
     
-    virtual double eval_an_p(double)                {cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
-    virtual double eval_an_p(double,double)         {cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
-    virtual double eval_an_p(double,double,double)  {cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
+    virtual Scalar eval_an_p(Scalar)                {cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
+    virtual Scalar eval_an_p(Scalar,Scalar)         {cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
+    virtual Scalar eval_an_p(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
 
-    virtual double eval_an_rho(double)              {cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
-    virtual double eval_an_rho(double,double)       {cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
-    virtual double eval_an_rho(double,double,double){cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
+    virtual Scalar eval_an_rho(Scalar)              {cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
+    virtual Scalar eval_an_rho(Scalar,Scalar)       {cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
+    virtual Scalar eval_an_rho(Scalar,Scalar,Scalar){cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
    
 
   /* 
@@ -135,31 +139,31 @@ namespace MASA
    * -------------------------------------------------------------------------------------------
    */
 
-    virtual double eval_q_t(double)                {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
-    virtual double eval_q_t(double, double)        {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
-    virtual double eval_q_t(double,double,double)  {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
-    virtual double eval_q_t(double,double,double,double)  {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};             // returns value of source term (x,y,z,t)
+    virtual Scalar eval_q_t(Scalar)                {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
+    virtual Scalar eval_q_t(Scalar, Scalar)        {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
+    virtual Scalar eval_q_t(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
+    virtual Scalar eval_q_t(Scalar,Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};             // returns value of source term (x,y,z,t)
 
-    virtual double eval_q_u(double)                {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (u)
-    virtual double eval_q_u(double,double)         {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // overloaded for 2d problems
-    virtual double eval_q_u(double,double,double)  {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // overloaded for 3d problems
+    virtual Scalar eval_q_u(Scalar)                {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (u)
+    virtual Scalar eval_q_u(Scalar,Scalar)         {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // overloaded for 2d problems
+    virtual Scalar eval_q_u(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // overloaded for 3d problems
 
-    virtual double eval_q_v(double)                {cout << "MASA ERROR:: Source term (v) is unavailable for 1d problems -- eval_q_v has too few arguments.\n"; return -1.33;}; // returns value of source term (v)
-    virtual double eval_q_v(double,double)         {cout << "MASA ERROR:: Source term (v) is unavailable or not properly loaded.\n"; return -1.33;};                            // overloaded for 2d problems
-    virtual double eval_q_v(double,double,double)  {cout << "MASA ERROR:: Source term (v) is unavailable or not properly loaded.\n"; return -1.33;};                            // overloaded for 3d problems 
+    virtual Scalar eval_q_v(Scalar)                {cout << "MASA ERROR:: Source term (v) is unavailable for 1d problems -- eval_q_v has too few arguments.\n"; return -1.33;}; // returns value of source term (v)
+    virtual Scalar eval_q_v(Scalar,Scalar)         {cout << "MASA ERROR:: Source term (v) is unavailable or not properly loaded.\n"; return -1.33;};                            // overloaded for 2d problems
+    virtual Scalar eval_q_v(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Source term (v) is unavailable or not properly loaded.\n"; return -1.33;};                            // overloaded for 3d problems 
 
-    virtual double eval_q_w(double)                {cout << "MASA ERROR:: Source term (w) is unavailable for 1d problems -- eval_q_w has too few arguments.\n"; return -1.33;};  // returns value of source term (w)
-    virtual double eval_q_w(double,double)         {cout << "MASA ERROR:: Source term (w) is unavailable for 2d problems -- eval_q_w has too few arguments.\n"; return -1.33;};  // overloaded for 2d problems
-    virtual double eval_q_w(double,double,double)  {cout << "MASA ERROR:: Source Term (w) is unavailable or not properly loaded.\n"; return -1.33;};                             // overloaded for 3d problems
+    virtual Scalar eval_q_w(Scalar)                {cout << "MASA ERROR:: Source term (w) is unavailable for 1d problems -- eval_q_w has too few arguments.\n"; return -1.33;};  // returns value of source term (w)
+    virtual Scalar eval_q_w(Scalar,Scalar)         {cout << "MASA ERROR:: Source term (w) is unavailable for 2d problems -- eval_q_w has too few arguments.\n"; return -1.33;};  // overloaded for 2d problems
+    virtual Scalar eval_q_w(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Source Term (w) is unavailable or not properly loaded.\n"; return -1.33;};                             // overloaded for 3d problems
 
-    virtual double eval_q_e(double)                {cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
-    virtual double eval_q_e(double,double)         {cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
-    virtual double eval_q_e(double,double,double)  {cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
+    virtual Scalar eval_q_e(Scalar)                {cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
+    virtual Scalar eval_q_e(Scalar,Scalar)         {cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
+    virtual Scalar eval_q_e(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
 
-    virtual double eval_q_rho(double)              {cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
-    virtual double eval_q_rho(double,double)       {cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
-    virtual double eval_q_rho_u(double,double)     {cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density) -- 1d Sod
-    virtual double eval_q_rho(double,double,double){cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
+    virtual Scalar eval_q_rho(Scalar)              {cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
+    virtual Scalar eval_q_rho(Scalar,Scalar)       {cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
+    virtual Scalar eval_q_rho_u(Scalar,Scalar)     {cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density) -- 1d Sod
+    virtual Scalar eval_q_rho(Scalar,Scalar,Scalar){cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
 
   /* 
    * -------------------------------------------------------------------------------------------   
@@ -169,25 +173,25 @@ namespace MASA
    * -------------------------------------------------------------------------------------------
    */
 
-    virtual double eval_1d_g_u(double)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual double eval_2d_g_u(double,double,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual double eval_3d_g_u(double,double,double,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_1d_g_u(Scalar)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_2d_g_u(Scalar,Scalar,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_3d_g_u(Scalar,Scalar,Scalar,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
-    virtual double eval_1d_g_v(double)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual double eval_2d_g_v(double,double,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual double eval_3d_g_v(double,double,double,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_1d_g_v(Scalar)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_2d_g_v(Scalar,Scalar,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_3d_g_v(Scalar,Scalar,Scalar,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
-    virtual double eval_1d_g_w(double)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual double eval_2d_g_w(double,double,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual double eval_3d_g_w(double,double,double,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_1d_g_w(Scalar)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_2d_g_w(Scalar,Scalar,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_3d_g_w(Scalar,Scalar,Scalar,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
-    virtual double eval_1d_g_p(double)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual double eval_2d_g_p(double,double,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual double eval_3d_g_p(double,double,double,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_1d_g_p(Scalar)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_2d_g_p(Scalar,Scalar,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_3d_g_p(Scalar,Scalar,Scalar,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
-    virtual double eval_1d_g_rho(double)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual double eval_2d_g_rho(double,double,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual double eval_3d_g_rho(double,double,double,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_1d_g_rho(Scalar)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_2d_g_rho(Scalar,Scalar,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_3d_g_rho(Scalar,Scalar,Scalar,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
   /* 
    * -------------------------------------------------------------------------------------------   
@@ -197,11 +201,11 @@ namespace MASA
    * -------------------------------------------------------------------------------------------
    */
     manufactured_solution();                                     // constructor
-    int set_var(string,double);                                  // sets variable value    
-    int register_var(string, double*);                           // this registers a variable
+    int set_var(string,Scalar);                                  // sets variable value    
+    int register_var(string, Scalar*);                           // this registers a variable
     int sanity_check();                                          // checks that all variables to the class have been initalized
     int poly_test();                                             // regression method for poly class (see below)
-    double get_var(string);                                      // returns variable value
+    Scalar get_var(string);                                      // returns variable value
     void display_var();                                          // print all variable names and values
     void return_name(string* inname){inname->assign(mmsname);};  // method: returns name
     void return_dim (int* indim)    {*indim=dimension;};         // method: returns dimension of solution
@@ -219,19 +223,20 @@ namespace MASA
    *
    * -------------------------------------------------------------------------------------------   
    */ 
+  template <typename Scalar>
   class Polynomial
   {
   public:
     
-    void set_coeffs( const vector<double> & );
+    void set_coeffs( const vector<Scalar> & );
     
     // Evaluates polynomial.
-    double operator()( const double &, int *) const;
+    Scalar operator()( const Scalar &, int *) const;
     
     // Evaluates polynomial and deriviatives up to order specified by user.
-    void eval_derivs( const double, const int, vector<double> & ) const;
+    void eval_derivs( const Scalar, const int, vector<Scalar> & ) const;
     
-    double get_coeffs( const int & ) const;    
+    Scalar get_coeffs( const int & ) const;    
     
   protected:
     
@@ -241,7 +246,7 @@ namespace MASA
     // coeffs[0] = a0
     // coeffs[1] = a1
     // and so on.
-    vector<double> coeffs;
+    vector<Scalar> coeffs;
     
   };  
 
@@ -250,22 +255,24 @@ namespace MASA
   // ------------------------------------------------------
 
   // just a demo class
-  class masa_test_function : public manufactured_solution 
+  template <typename Scalar>
+  class masa_test_function : public manufactured_solution<Scalar>
   {
   private:
-    double dummy;
-    double demo_var_2;
-    double demo_var_3;
+    Scalar dummy;
+    Scalar demo_var_2;
+    Scalar demo_var_3;
   public:
     masa_test_function(); // constructor
     int init_var();        // default problem values
     int poly_test();
-    //double eval_q_t(double);
+    //Scalar eval_q_t(Scalar);
   }; // done with masa_test
 
 
   // class with no source/analytical terms, to test virtual function defaults
-  class masa_uninit : public manufactured_solution 
+  template <typename Scalar>
+  class masa_uninit : public manufactured_solution<Scalar>
   {
   private:
 
@@ -278,553 +285,573 @@ namespace MASA
   // ---------- heat equation /steady / constant ----------
   // ------------------------------------------------------
 
-  class heateq_1d_steady_const : public manufactured_solution 
+  template <typename Scalar>
+  class heateq_1d_steady_const : public manufactured_solution<Scalar>
   {
   private:
-    double A_x;
-    double k_0;    
+    Scalar A_x;
+    Scalar k_0;    
   public:
     heateq_1d_steady_const(); // constructor
     int init_var();        // default problem values
-    double eval_q_t (double);  // source term evaluator
-    double eval_an_t(double);   //analytical solution
+    Scalar eval_q_t (Scalar);  // source term evaluator
+    Scalar eval_an_t(Scalar);   //analytical solution
 
   };
 
-  class heateq_2d_steady_const : public manufactured_solution 
+  template <typename Scalar>
+  class heateq_2d_steady_const : public manufactured_solution<Scalar>
   {
   private:
-    double A_x;
-    double k_0;
-    double B_y;
+    Scalar A_x;
+    Scalar k_0;
+    Scalar B_y;
 
   public:
     heateq_2d_steady_const();       // constructor
     int init_var();        // default problem values
-    double eval_q_t (double,double); // source term evaluator
-    double eval_an_t(double,double); // analytical term evaluator
+    Scalar eval_q_t (Scalar,Scalar); // source term evaluator
+    Scalar eval_an_t(Scalar,Scalar); // analytical term evaluator
   };
   
-  class heateq_3d_steady_const : public manufactured_solution 
+  template <typename Scalar>
+  class heateq_3d_steady_const : public manufactured_solution<Scalar>
   {
   private:
-    double A_x;
-    double k_0;
-    double B_y;
-    double C_z;
+    Scalar A_x;
+    Scalar k_0;
+    Scalar B_y;
+    Scalar C_z;
 
   public:
     heateq_3d_steady_const(); // constructor
     int init_var();        // default problem values
-    double eval_q_t (double,double,double); //evaluate source term
-    double eval_an_t(double,double,double); // analytical term evaluator
+    Scalar eval_q_t (Scalar,Scalar,Scalar); //evaluate source term
+    Scalar eval_an_t(Scalar,Scalar,Scalar); // analytical term evaluator
   };
   // ------------------------------------------------------
   // ---------- heat equation / unsteady / constant -------
   // ------------------------------------------------------
 
-  class heateq_1d_unsteady_const : public manufactured_solution 
+  template <typename Scalar>
+  class heateq_1d_unsteady_const : public manufactured_solution<Scalar>
   {
   private:
-    double A_x;
-    double A_t;
-    double D_t;
-    double k_0;
-    double cp_0;
-    double rho;
+    Scalar A_x;
+    Scalar A_t;
+    Scalar D_t;
+    Scalar k_0;
+    Scalar cp_0;
+    Scalar rho;
     
   public:
     heateq_1d_unsteady_const(); // constructor
     int init_var();        // default problem values
-    double eval_q_t(double,double); // needs x,t
+    Scalar eval_q_t(Scalar,Scalar); // needs x,t
   };
 
-  class heateq_2d_unsteady_const : public manufactured_solution 
+  template <typename Scalar>
+  class heateq_2d_unsteady_const : public manufactured_solution<Scalar>
   {
   private:
-    double A_x;
-    double A_t;
-    double B_y;
-    double B_t;
-    double D_t;
-    double rho;
-    double k_0;
-    double cp_0;
+    Scalar A_x;
+    Scalar A_t;
+    Scalar B_y;
+    Scalar B_t;
+    Scalar D_t;
+    Scalar rho;
+    Scalar k_0;
+    Scalar cp_0;
 
   public:
     heateq_2d_unsteady_const(); // constructor
     int init_var();        // default problem values
-    double eval_q_t(double,double,double); // needs x,y,t
+    Scalar eval_q_t(Scalar,Scalar,Scalar); // needs x,y,t
   };
   
-  class heateq_3d_unsteady_const : public manufactured_solution 
+  template <typename Scalar>
+  class heateq_3d_unsteady_const : public manufactured_solution<Scalar>
   {
   private:
-    double A_x;
-    double A_t;
-    double B_y;
-    double B_t;
-    double C_z;
-    double C_t;
-    double D_t;
-    double k_0;
-    double cp_0;
-    double rho;
+    Scalar A_x;
+    Scalar A_t;
+    Scalar B_y;
+    Scalar B_t;
+    Scalar C_z;
+    Scalar C_t;
+    Scalar D_t;
+    Scalar k_0;
+    Scalar cp_0;
+    Scalar rho;
     
   public:
     heateq_3d_unsteady_const(); // constructor
     int init_var();        // default problem values
-    double eval_q_t(double,double,double,double); // needs x,y,z,t    
+    Scalar eval_q_t(Scalar,Scalar,Scalar,Scalar); // needs x,y,z,t    
   };
 
   // ------------------------------------------------------
   // ---------- heat equation / unsteady / var ------------
   // ------------------------------------------------------
 
-  class heateq_1d_unsteady_var : public manufactured_solution 
+  template <typename Scalar>
+  class heateq_1d_unsteady_var : public manufactured_solution<Scalar>
   {
   private:
-    double A_x;
-    double A_t;
-    double D_t;
-    double rho;
-    double k_0;
-    double k_1;
-    double k_2;
-    double cp_0;
-    double cp_1;
-    double cp_2;
+    Scalar A_x;
+    Scalar A_t;
+    Scalar D_t;
+    Scalar rho;
+    Scalar k_0;
+    Scalar k_1;
+    Scalar k_2;
+    Scalar cp_0;
+    Scalar cp_1;
+    Scalar cp_2;
     
   public:
     heateq_1d_unsteady_var(); // constructor
     int init_var();        // default problem values
-    double eval_q_t(double,double); // needs x,t
+    Scalar eval_q_t(Scalar,Scalar); // needs x,t
   };
 
-  class heateq_2d_unsteady_var : public manufactured_solution 
+  template <typename Scalar>
+  class heateq_2d_unsteady_var : public manufactured_solution<Scalar>
   {
   private:
-    double A_x;
-    double A_t;
-    double B_y;
-    double B_t;
-    double D_t;
-    double rho;
-    double k_0;
-    double k_1;
-    double k_2;
-    double cp_0;
-    double cp_1;
-    double cp_2;
+    Scalar A_x;
+    Scalar A_t;
+    Scalar B_y;
+    Scalar B_t;
+    Scalar D_t;
+    Scalar rho;
+    Scalar k_0;
+    Scalar k_1;
+    Scalar k_2;
+    Scalar cp_0;
+    Scalar cp_1;
+    Scalar cp_2;
 
   public:
     heateq_2d_unsteady_var(); // constructor
     int init_var();        // default problem values
-    double eval_q_t(double,double,double); // needs x,y,t    
+    Scalar eval_q_t(Scalar,Scalar,Scalar); // needs x,y,t    
   };
   
-  class heateq_3d_unsteady_var : public manufactured_solution 
+  template <typename Scalar>
+  class heateq_3d_unsteady_var : public manufactured_solution<Scalar>
   {
   private:
-    double A_x;
-    double A_t;
-    double B_y;
-    double B_t;
-    double C_z;
-    double C_t;
-    double D_t;
-    double rho;
-    double k_0;
-    double k_1;
-    double k_2;
-    double cp_0;
-    double cp_1;
-    double cp_2;
+    Scalar A_x;
+    Scalar A_t;
+    Scalar B_y;
+    Scalar B_t;
+    Scalar C_z;
+    Scalar C_t;
+    Scalar D_t;
+    Scalar rho;
+    Scalar k_0;
+    Scalar k_1;
+    Scalar k_2;
+    Scalar cp_0;
+    Scalar cp_1;
+    Scalar cp_2;
 
   public:
     heateq_3d_unsteady_var(); // constructor
     int init_var();        // default problem values
-    double eval_q_t(double,double,double,double); // needs x,y,z,t    
+    Scalar eval_q_t(Scalar,Scalar,Scalar,Scalar); // needs x,y,z,t    
   };
 
   // ------------------------------------------------------
   // ---------- heat equation / steady / var --------------
   // ------------------------------------------------------
 
-  class heateq_1d_steady_var : public manufactured_solution 
+  template <typename Scalar>
+  class heateq_1d_steady_var : public manufactured_solution<Scalar>
   {
   private:
-    double A_x;
-    double k_0;
-    double k_1;
-    double k_2;
+    Scalar A_x;
+    Scalar k_0;
+    Scalar k_1;
+    Scalar k_2;
 
   public:
     heateq_1d_steady_var(); // constructor
     int init_var();        // default problem values
-    double eval_q_t(double); // needs x
+    Scalar eval_q_t(Scalar); // needs x
   };
 
-  class heateq_2d_steady_var : public manufactured_solution 
+  template <typename Scalar>
+  class heateq_2d_steady_var : public manufactured_solution<Scalar>
   {
   private:
-    double A_x;
-    double k_0;
-    double k_1;
-    double k_2;
-    double B_y;
+    Scalar A_x;
+    Scalar k_0;
+    Scalar k_1;
+    Scalar k_2;
+    Scalar B_y;
 
   public:
     heateq_2d_steady_var(); // constructor
     int init_var();        // default problem values
-    double eval_q_t(double,double); // needs x,y
+    Scalar eval_q_t(Scalar,Scalar); // needs x,y
   };
   
-  class heateq_3d_steady_var : public manufactured_solution 
+  template <typename Scalar>
+  class heateq_3d_steady_var : public manufactured_solution<Scalar>
   {
   private:
-    double A_x;
-    double k_0;
-    double k_1;
-    double k_2;
-    double B_y;
-    double C_z;
+    Scalar A_x;
+    Scalar k_0;
+    Scalar k_1;
+    Scalar k_2;
+    Scalar B_y;
+    Scalar C_z;
 
   public:
     heateq_3d_steady_var(); // constructor
     int init_var();        // default problem values
-    double eval_q_t(double,double,double); // needs x,y,z
+    Scalar eval_q_t(Scalar,Scalar,Scalar); // needs x,y,z
     
   };
 
   // ------------------------------------------------------
   // ------------------------- euler ----------------------
   // ------------------------------------------------------
-  class euler_1d : public manufactured_solution
+  template <typename Scalar>
+  class euler_1d : public manufactured_solution<Scalar>
   {
 
-    double R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
-    double k;                             // Boltzmanns constant
+    Scalar R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+    Scalar k;                             // Boltzmanns constant
 
-    double u_0;
-    double u_x;
-    double rho_0;
-    double rho_x;
-    double p_0;
-    double p_x;
-    double a_px;
-    double a_rhox;
-    double a_ux;
-    double Gamma;
-    double mu;
-    double L;
+    Scalar u_0;
+    Scalar u_x;
+    Scalar rho_0;
+    Scalar rho_x;
+    Scalar p_0;
+    Scalar p_x;
+    Scalar a_px;
+    Scalar a_rhox;
+    Scalar a_ux;
+    Scalar Gamma;
+    Scalar mu;
+    Scalar L;
     
 
   public:
     euler_1d(); // constructor    
     int init_var();          // default problem values
 
-    double eval_q_u   (double); // source terms
-    double eval_q_e   (double);
-    double eval_q_rho (double);
+    Scalar eval_q_u   (Scalar); // source terms
+    Scalar eval_q_e   (Scalar);
+    Scalar eval_q_rho (Scalar);
     
-    double eval_an_u  (double); // analytical
-    double eval_an_p  (double);
-    double eval_an_rho(double);
+    Scalar eval_an_u  (Scalar); // analytical
+    Scalar eval_an_p  (Scalar);
+    Scalar eval_an_rho(Scalar);
 
-    double eval_1d_g_u  (double);   // gradient of source term
-    double eval_1d_g_p  (double);
-    double eval_1d_g_rho(double);
+    Scalar eval_1d_g_u  (Scalar);   // gradient of source term
+    Scalar eval_1d_g_p  (Scalar);
+    Scalar eval_1d_g_rho(Scalar);
 
   };
 
-  class euler_2d : public manufactured_solution
+  template <typename Scalar>
+  class euler_2d : public manufactured_solution<Scalar>
   {
 
-    double R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
-    double k;     // Boltzmanns constant
+    Scalar R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+    Scalar k;     // Boltzmanns constant
 
-    double u_0;
-    double u_x;
-    double u_y;
-    double v_0;
-    double v_x;
-    double v_y;
-    double rho_0;
-    double rho_x;
-    double rho_y;
-    double p_0;
-    double p_x;
-    double p_y;
-    double a_px;
-    double a_py;
-    double a_rhox;
-    double a_rhoy;
-    double a_ux;
-    double a_uy;
-    double a_vx;
-    double a_vy;
-    double Gamma;
-    double mu;
-    double L;
+    Scalar u_0;
+    Scalar u_x;
+    Scalar u_y;
+    Scalar v_0;
+    Scalar v_x;
+    Scalar v_y;
+    Scalar rho_0;
+    Scalar rho_x;
+    Scalar rho_y;
+    Scalar p_0;
+    Scalar p_x;
+    Scalar p_y;
+    Scalar a_px;
+    Scalar a_py;
+    Scalar a_rhox;
+    Scalar a_rhoy;
+    Scalar a_ux;
+    Scalar a_uy;
+    Scalar a_vx;
+    Scalar a_vy;
+    Scalar Gamma;
+    Scalar mu;
+    Scalar L;
     
   public:
     euler_2d(); // constructor    
     int init_var();        // default problem values
 
-    double eval_q_u  (double,double);
-    double eval_q_v  (double,double);
-    double eval_q_e  (double,double);
-    double eval_q_rho(double,double);
+    Scalar eval_q_u  (Scalar,Scalar);
+    Scalar eval_q_v  (Scalar,Scalar);
+    Scalar eval_q_e  (Scalar,Scalar);
+    Scalar eval_q_rho(Scalar,Scalar);
 
-    double eval_an_u  (double,double); // analytical
-    double eval_an_v  (double,double);
-    double eval_an_p  (double,double);
-    double eval_an_rho(double,double);
+    Scalar eval_an_u  (Scalar,Scalar); // analytical
+    Scalar eval_an_v  (Scalar,Scalar);
+    Scalar eval_an_p  (Scalar,Scalar);
+    Scalar eval_an_rho(Scalar,Scalar);
 
-    double eval_2d_g_u(double,double,int);   // gradient of source term
-    double eval_2d_g_v(double,double,int);
-    double eval_2d_g_p(double,double,int);
+    Scalar eval_2d_g_u(Scalar,Scalar,int);   // gradient of source term
+    Scalar eval_2d_g_v(Scalar,Scalar,int);
+    Scalar eval_2d_g_p(Scalar,Scalar,int);
 
-    double eval_2d_g_rho(double,double,int);
+    Scalar eval_2d_g_rho(Scalar,Scalar,int);
 
   };
 
-  class euler_3d : public manufactured_solution
+  template <typename Scalar>
+  class euler_3d : public manufactured_solution<Scalar>
   {
-    double R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
-    double k;     // Boltzmanns constant
+    Scalar R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+    Scalar k;     // Boltzmanns constant
 
-    double u_0;
-    double u_x;
-    double u_y;
-    double u_z;
-    double v_0;
-    double v_x;
-    double v_y;
-    double v_z;
-    double w_0;
-    double w_x;
-    double w_y;
-    double w_z;
-    double rho_0;
-    double rho_x;
-    double rho_y;
-    double rho_z;
-    double p_0;
-    double p_x;
-    double p_y;
-    double p_z;
-    double a_px;
-    double a_py;
-    double a_pz;
-    double a_rhox;
-    double a_rhoy;
-    double a_rhoz;
-    double a_ux;
-    double a_uy;
-    double a_uz;
-    double a_vx;
-    double a_vy;
-    double a_vz;
-    double a_wx;
-    double a_wy;
-    double a_wz;
-    double mu;
-    double Gamma;
-    double L;    
+    Scalar u_0;
+    Scalar u_x;
+    Scalar u_y;
+    Scalar u_z;
+    Scalar v_0;
+    Scalar v_x;
+    Scalar v_y;
+    Scalar v_z;
+    Scalar w_0;
+    Scalar w_x;
+    Scalar w_y;
+    Scalar w_z;
+    Scalar rho_0;
+    Scalar rho_x;
+    Scalar rho_y;
+    Scalar rho_z;
+    Scalar p_0;
+    Scalar p_x;
+    Scalar p_y;
+    Scalar p_z;
+    Scalar a_px;
+    Scalar a_py;
+    Scalar a_pz;
+    Scalar a_rhox;
+    Scalar a_rhoy;
+    Scalar a_rhoz;
+    Scalar a_ux;
+    Scalar a_uy;
+    Scalar a_uz;
+    Scalar a_vx;
+    Scalar a_vy;
+    Scalar a_vz;
+    Scalar a_wx;
+    Scalar a_wy;
+    Scalar a_wz;
+    Scalar mu;
+    Scalar Gamma;
+    Scalar L;    
     
   public:
     euler_3d(); // constructor
     int init_var();        // default problem values
 
-    double eval_q_u  (double,double,double); // source terms
-    double eval_q_v  (double,double,double);
-    double eval_q_w  (double,double,double);
-    double eval_q_e  (double,double,double);
-    double eval_q_rho(double,double,double);
+    Scalar eval_q_u  (Scalar,Scalar,Scalar); // source terms
+    Scalar eval_q_v  (Scalar,Scalar,Scalar);
+    Scalar eval_q_w  (Scalar,Scalar,Scalar);
+    Scalar eval_q_e  (Scalar,Scalar,Scalar);
+    Scalar eval_q_rho(Scalar,Scalar,Scalar);
 
-    double eval_an_u  (double,double,double); // analytical
-    double eval_an_v  (double,double,double);
-    double eval_an_w  (double,double,double);
-    double eval_an_q  (double,double,double);
-    double eval_an_p  (double,double,double);
-    double eval_an_rho(double,double,double);
+    Scalar eval_an_u  (Scalar,Scalar,Scalar); // analytical
+    Scalar eval_an_v  (Scalar,Scalar,Scalar);
+    Scalar eval_an_w  (Scalar,Scalar,Scalar);
+    Scalar eval_an_q  (Scalar,Scalar,Scalar);
+    Scalar eval_an_p  (Scalar,Scalar,Scalar);
+    Scalar eval_an_rho(Scalar,Scalar,Scalar);
 
-    double eval_3d_g_u(double,double,double,int);   // gradient of source term
-    double eval_3d_g_v(double,double,double,int);
-    double eval_3d_g_w(double,double,double,int);
+    Scalar eval_3d_g_u(Scalar,Scalar,Scalar,int);   // gradient of source term
+    Scalar eval_3d_g_v(Scalar,Scalar,Scalar,int);
+    Scalar eval_3d_g_w(Scalar,Scalar,Scalar,int);
 
-    double eval_3d_g_p  (double,double,double,int);
-    double eval_3d_g_rho(double,double,double,int);
+    Scalar eval_3d_g_p  (Scalar,Scalar,Scalar,int);
+    Scalar eval_3d_g_rho(Scalar,Scalar,Scalar,int);
 
   };
 
   // ------------------------------------------------------
   // ---------------- axisymmetric euler ------------------
   // ------------------------------------------------------
-  class axi_euler : public manufactured_solution
+  template <typename Scalar>
+  class axi_euler : public manufactured_solution<Scalar>
   {
 
-    double R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+    Scalar R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
 
-    double p_0;
-    double p_1;
-    double rho_0;
-    double rho_1;
-    double u_1;
-    double w_0;
-    double w_1;
-    double a_pr;
-    double a_pz;
-    double a_rhor;
-    double a_rhoz;
-    double a_ur;
-    double a_uz;
-    double a_wr;
-    double a_wz;
-    double L;
-    double mu;
-    double Gamma;    
+    Scalar p_0;
+    Scalar p_1;
+    Scalar rho_0;
+    Scalar rho_1;
+    Scalar u_1;
+    Scalar w_0;
+    Scalar w_1;
+    Scalar a_pr;
+    Scalar a_pz;
+    Scalar a_rhor;
+    Scalar a_rhoz;
+    Scalar a_ur;
+    Scalar a_uz;
+    Scalar a_wr;
+    Scalar a_wz;
+    Scalar L;
+    Scalar mu;
+    Scalar Gamma;    
 
   public:
     axi_euler(); // constructor    
     int init_var();          // default problem values
 
-    double eval_q_u   (double,double); // radial velocity 
-    double eval_q_w   (double,double); // axial 
-    double eval_q_e   (double,double);
-    double eval_q_rho (double,double);
+    Scalar eval_q_u   (Scalar,Scalar); // radial velocity 
+    Scalar eval_q_w   (Scalar,Scalar); // axial 
+    Scalar eval_q_e   (Scalar,Scalar);
+    Scalar eval_q_rho (Scalar,Scalar);
     
-    double eval_an_u  (double,double); // analytical
-    double eval_an_w  (double,double);
-    double eval_an_p  (double,double);
-    double eval_an_rho(double,double);
+    Scalar eval_an_u  (Scalar,Scalar); // analytical
+    Scalar eval_an_w  (Scalar,Scalar);
+    Scalar eval_an_p  (Scalar,Scalar);
+    Scalar eval_an_rho(Scalar,Scalar);
 
   };
 
   // ------------------------------------------------------
   // ---------- axisymmetric compressible navier stokes ---
   // ------------------------------------------------------
-  class axi_cns : public manufactured_solution
+  template <typename Scalar>
+  class axi_cns : public manufactured_solution<Scalar>
   {
 
-    double R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
-    double k;                             // Boltzmanns constant
+    Scalar R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+    Scalar k;                             // Boltzmanns constant
 
-    double p_0;
-    double p_1;
-    double rho_0;
-    double rho_1;
-    double u_1;
-    double w_0;
-    double w_1;
-    double a_pr;
-    double a_pz;
-    double a_rhor;
-    double a_rhoz;
-    double a_ur;
-    double a_uz;
-    double a_wr;
-    double a_wz;
-    double L;
-    double mu;
-    double Gamma;
+    Scalar p_0;
+    Scalar p_1;
+    Scalar rho_0;
+    Scalar rho_1;
+    Scalar u_1;
+    Scalar w_0;
+    Scalar w_1;
+    Scalar a_pr;
+    Scalar a_pz;
+    Scalar a_rhor;
+    Scalar a_rhoz;
+    Scalar a_ur;
+    Scalar a_uz;
+    Scalar a_wr;
+    Scalar a_wz;
+    Scalar L;
+    Scalar mu;
+    Scalar Gamma;
    
   public:
     axi_cns(); // constructor    
     int init_var();          // default problem values
 
-    double eval_q_u   (double,double); // radial velocity 
-    double eval_q_w   (double,double); // axial 
-    double eval_q_e   (double,double);
-    double eval_q_rho (double,double);
+    Scalar eval_q_u   (Scalar,Scalar); // radial velocity 
+    Scalar eval_q_w   (Scalar,Scalar); // axial 
+    Scalar eval_q_e   (Scalar,Scalar);
+    Scalar eval_q_rho (Scalar,Scalar);
     
-    double eval_an_u  (double,double); // analytical
-    double eval_an_w  (double,double);
-    double eval_an_p  (double,double);
-    double eval_an_rho(double,double);
+    Scalar eval_an_u  (Scalar,Scalar); // analytical
+    Scalar eval_an_w  (Scalar,Scalar);
+    Scalar eval_an_p  (Scalar,Scalar);
+    Scalar eval_an_rho(Scalar,Scalar);
 
   };
 
   // ------------------------------------------------------
   // --------------------- sod 1d -------------------------
   // ------------------------------------------------------
-  class sod_1d : public manufactured_solution
+  template <typename Scalar>
+  class sod_1d : public manufactured_solution<Scalar>
   {
-    double Gamma;
-    double mu;
+    Scalar Gamma;
+    Scalar mu;
+    Scalar pl, pr, rhol, rhor, cl, cr;
 
   public:
     sod_1d(); // constructor    
     int init_var();          // default problem values
 
-    double eval_q_rho   (double,double);
-    double eval_q_p     (double,double);
-    double eval_q_rho_u (double,double);
-    double func         (double);  // helper function
-    double rtbis        (double,double,double,int);
-    double eval_q_t     (double); // regression test function
-    double eval_q_t     (double,double); // regression test function
+    Scalar eval_q_rho   (Scalar,Scalar);
+    Scalar eval_q_p     (Scalar,Scalar);
+    Scalar eval_q_rho_u (Scalar,Scalar);
+    Scalar func         (Scalar);  // helper function
+    Scalar rtbis        (Scalar,Scalar,Scalar,int);
+    Scalar eval_q_t     (Scalar); // regression test function
+    Scalar eval_q_t     (Scalar,Scalar); // regression test function
   };
 
   // ------------------------------------------------------
   // ---------- RANS: Spelart Alamaras (Channel) ----------
   // ------------------------------------------------------
-  class rans_sa : public manufactured_solution
+  template <typename Scalar>
+  class rans_sa : public manufactured_solution<Scalar>
   {
     
-    double cb1;
-    double cb2;
-    double cv1;
-    double cw2;
-    double cw3;
-    double sigma;
-    double kappa;  
-    double re_tau;
+    Scalar cb1;
+    Scalar cb2;
+    Scalar cv1;
+    Scalar cw2;
+    Scalar cw3;
+    Scalar sigma;
+    Scalar kappa;  
+    Scalar re_tau;
 
     // adding for modified SA
-    double cv2;
-    double cv3;
+    Scalar cv2;
+    Scalar cv3;
 
     // parameters not for users
-    double etam;
-    double a1;
-    double b1;
+    Scalar etam;
+    Scalar a1;
+    Scalar b1;
 
   public:
     rans_sa(); // constructor    
     int init_var();          // default problem values
     
-    double eval_q_u (double); // velocity term
-    double eval_q_v (double); // eddy viscosity term
-    double eval_an_u(double); // analytical
-    double eval_an_v(double);
+    Scalar eval_q_u (Scalar); // velocity term
+    Scalar eval_q_v (Scalar); // eddy viscosity term
+    Scalar eval_an_u(Scalar); // analytical
+    Scalar eval_an_v(Scalar);
 
     // member functions not exposed by API
-    double   u(double);
-    double  du(double);
-    double d2u(double);
+    Scalar   u(Scalar);
+    Scalar  du(Scalar);
+    Scalar d2u(Scalar);
 
-    double   nu(double);
-    double  dnu(double);
-    double d2nu(double);
+    Scalar   nu(Scalar);
+    Scalar  dnu(Scalar);
+    Scalar d2nu(Scalar);
 
-    double production(double);
-    double destruction(double);
-    double transport(double);
+    Scalar production(Scalar);
+    Scalar destruction(Scalar);
+    Scalar transport(Scalar);
     
-    double cw1();
-    double chi(double);
-    double fv1(double);
-    double fv2(double);
-    double   s(double);
-    double  sb(double);
-    double   r(double);
-    double   g(double);
-    double  fw(double);
-    double dvt(double);
-    double  vt(double);
+    Scalar cw1();
+    Scalar chi(Scalar);
+    Scalar fv1(Scalar);
+    Scalar fv2(Scalar);
+    Scalar   s(Scalar);
+    Scalar  sb(Scalar);
+    Scalar   r(Scalar);
+    Scalar   g(Scalar);
+    Scalar  fw(Scalar);
+    Scalar dvt(Scalar);
+    Scalar  vt(Scalar);
 
   };
 
@@ -832,125 +859,127 @@ namespace MASA
   // ------------- compressible navier stokes  ------------
   // ------------------------------------------------------
 
-  class navierstokes_2d_compressible : public manufactured_solution
+  template <typename Scalar>
+  class navierstokes_2d_compressible : public manufactured_solution<Scalar>
   {    
-    double R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
-    double k;     // Boltzmanns constant
+    Scalar R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+    Scalar k;     // Boltzmanns constant
 
-    double u_0;
-    double u_x;
-    double u_y;
-    double v_0;
-    double v_x;
-    double v_y;
-    double rho_0;
-    double rho_x;
-    double rho_y;
-    double p_0;
-    double p_x;
-    double p_y;
-    double a_px;
-    double a_py;
-    double a_rhox;
-    double a_rhoy;
-    double a_ux;
-    double a_uy;
-    double a_vx;
-    double a_vy;
-    double Gamma;
-    double mu;
-    double L;
+    Scalar u_0;
+    Scalar u_x;
+    Scalar u_y;
+    Scalar v_0;
+    Scalar v_x;
+    Scalar v_y;
+    Scalar rho_0;
+    Scalar rho_x;
+    Scalar rho_y;
+    Scalar p_0;
+    Scalar p_x;
+    Scalar p_y;
+    Scalar a_px;
+    Scalar a_py;
+    Scalar a_rhox;
+    Scalar a_rhoy;
+    Scalar a_ux;
+    Scalar a_uy;
+    Scalar a_vx;
+    Scalar a_vy;
+    Scalar Gamma;
+    Scalar mu;
+    Scalar L;
     
   public:
     navierstokes_2d_compressible(); // constructor
     int init_var();        // default problem values
 
-    double eval_q_u  (double,double);
-    double eval_q_v  (double,double);
-    double eval_q_e  (double,double);
-    double eval_q_rho(double,double);
+    Scalar eval_q_u  (Scalar,Scalar);
+    Scalar eval_q_v  (Scalar,Scalar);
+    Scalar eval_q_e  (Scalar,Scalar);
+    Scalar eval_q_rho(Scalar,Scalar);
 
-    double eval_an_u  (double,double); // analytical
-    double eval_an_v  (double,double);
-    double eval_an_p  (double,double);
-    double eval_an_rho(double,double);
+    Scalar eval_an_u  (Scalar,Scalar); // analytical
+    Scalar eval_an_v  (Scalar,Scalar);
+    Scalar eval_an_p  (Scalar,Scalar);
+    Scalar eval_an_rho(Scalar,Scalar);
 
-    double eval_2d_g_u(double,double,int);   // gradient of source term
-    double eval_2d_g_v(double,double,int);
-    double eval_2d_g_p(double,double,int);
+    Scalar eval_2d_g_u(Scalar,Scalar,int);   // gradient of source term
+    Scalar eval_2d_g_v(Scalar,Scalar,int);
+    Scalar eval_2d_g_p(Scalar,Scalar,int);
 
-    double eval_2d_g_rho(double,double,int);
+    Scalar eval_2d_g_rho(Scalar,Scalar,int);
 
 
   };
   
-  class navierstokes_3d_compressible : public manufactured_solution
+  template <typename Scalar>
+  class navierstokes_3d_compressible : public manufactured_solution<Scalar>
   {
-    double R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
-    double k;     // Boltzmanns constant
+    Scalar R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
+    Scalar k;     // Boltzmanns constant
 
-    double u_0;
-    double u_x;
-    double u_y;
-    double u_z;
-    double v_0;
-    double v_x;
-    double v_y;
-    double v_z;
-    double w_0;
-    double w_x;
-    double w_y;
-    double w_z;
-    double rho_0;
-    double rho_x;
-    double rho_y;
-    double rho_z;
-    double p_0;
-    double p_x;
-    double p_y;
-    double p_z;
-    double a_px;
-    double a_py;
-    double a_pz;
-    double a_rhox;
-    double a_rhoy;
-    double a_rhoz;
-    double a_ux;
-    double a_uy;
-    double a_uz;
-    double a_vx;
-    double a_vy;
-    double a_vz;
-    double a_wx;
-    double a_wy;
-    double a_wz;
-    double mu;
-    double Gamma;
-    double L;    
+    Scalar u_0;
+    Scalar u_x;
+    Scalar u_y;
+    Scalar u_z;
+    Scalar v_0;
+    Scalar v_x;
+    Scalar v_y;
+    Scalar v_z;
+    Scalar w_0;
+    Scalar w_x;
+    Scalar w_y;
+    Scalar w_z;
+    Scalar rho_0;
+    Scalar rho_x;
+    Scalar rho_y;
+    Scalar rho_z;
+    Scalar p_0;
+    Scalar p_x;
+    Scalar p_y;
+    Scalar p_z;
+    Scalar a_px;
+    Scalar a_py;
+    Scalar a_pz;
+    Scalar a_rhox;
+    Scalar a_rhoy;
+    Scalar a_rhoz;
+    Scalar a_ux;
+    Scalar a_uy;
+    Scalar a_uz;
+    Scalar a_vx;
+    Scalar a_vy;
+    Scalar a_vz;
+    Scalar a_wx;
+    Scalar a_wy;
+    Scalar a_wz;
+    Scalar mu;
+    Scalar Gamma;
+    Scalar L;    
     
   public:
     navierstokes_3d_compressible(); //constructor
     int init_var();        // default problem values
 
-    double eval_q_u  (double,double,double); // source terms
-    double eval_q_v  (double,double,double);
-    double eval_q_w  (double,double,double);
-    double eval_q_e  (double,double,double);
-    double eval_q_rho(double,double,double);
+    Scalar eval_q_u  (Scalar,Scalar,Scalar); // source terms
+    Scalar eval_q_v  (Scalar,Scalar,Scalar);
+    Scalar eval_q_w  (Scalar,Scalar,Scalar);
+    Scalar eval_q_e  (Scalar,Scalar,Scalar);
+    Scalar eval_q_rho(Scalar,Scalar,Scalar);
 
-    double eval_an_u  (double,double,double); // analytical
-    double eval_an_v  (double,double,double);
-    double eval_an_w  (double,double,double);
-    double eval_an_q  (double,double,double);
-    double eval_an_p  (double,double,double);
-    double eval_an_rho(double,double,double);
+    Scalar eval_an_u  (Scalar,Scalar,Scalar); // analytical
+    Scalar eval_an_v  (Scalar,Scalar,Scalar);
+    Scalar eval_an_w  (Scalar,Scalar,Scalar);
+    Scalar eval_an_q  (Scalar,Scalar,Scalar);
+    Scalar eval_an_p  (Scalar,Scalar,Scalar);
+    Scalar eval_an_rho(Scalar,Scalar,Scalar);
 
-    double eval_3d_g_u(double,double,double,int);   // gradient of source term
-    double eval_3d_g_v(double,double,double,int);
-    double eval_3d_g_w(double,double,double,int);
+    Scalar eval_3d_g_u(Scalar,Scalar,Scalar,int);   // gradient of source term
+    Scalar eval_3d_g_v(Scalar,Scalar,Scalar,int);
+    Scalar eval_3d_g_w(Scalar,Scalar,Scalar,int);
 
-    double eval_3d_g_p  (double,double,double,int);
-    double eval_3d_g_rho(double,double,double,int);
+    Scalar eval_3d_g_p  (Scalar,Scalar,Scalar,int);
+    Scalar eval_3d_g_rho(Scalar,Scalar,Scalar,int);
 
   }; // done with navier stokes 3d class
   

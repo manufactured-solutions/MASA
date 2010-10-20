@@ -45,49 +45,51 @@ using namespace MASA;
  * -----------------------------------------------
  */ 
 
-MASA::euler_1d::euler_1d()
+template <typename Scalar>
+MASA::euler_1d<Scalar>::euler_1d()
 {
-  mmsname = "euler_1d";
-  dimension=1;
+  this->mmsname = "euler_1d";
+  this->dimension=1;
 
-  register_var("R",&R);
-  register_var("k",&k);
+  this->register_var("R",&R);
+  this->register_var("k",&k);
 
-  register_var("u_0",&u_0);
-  register_var("u_x",&u_x);
-  register_var("rho_0",&rho_0);
-  register_var("rho_x",&rho_x);
-  register_var("p_0",&p_0);
-  register_var("p_x",&p_x);
-  register_var("a_px",&a_px);
-  register_var("a_rhox",&a_rhox);
-  register_var("a_ux",&a_ux);
-  register_var("L",&L);
-  register_var("Gamma",&Gamma);
-  register_var("mu",&mu);
+  this->register_var("u_0",&u_0);
+  this->register_var("u_x",&u_x);
+  this->register_var("rho_0",&rho_0);
+  this->register_var("rho_x",&rho_x);
+  this->register_var("p_0",&p_0);
+  this->register_var("p_x",&p_x);
+  this->register_var("a_px",&a_px);
+  this->register_var("a_rhox",&a_rhox);
+  this->register_var("a_ux",&a_ux);
+  this->register_var("L",&L);
+  this->register_var("Gamma",&Gamma);
+  this->register_var("mu",&mu);
 
 }//done with constructor
 
-int MASA::euler_1d::init_var()
+template <typename Scalar>
+int MASA::euler_1d<Scalar>::init_var()
 {
   int err = 0;
 
   // randomly generated
-  err += set_var("R",1.01);
-  err += set_var("k",1.38);
+  err += this->set_var("R",1.01);
+  err += this->set_var("k",1.38);
 
-  err += set_var("u_0",.191);
-  err += set_var("u_x",1.63);
-  err += set_var("rho_0",91.5);
-  err += set_var("rho_x",5.13);
-  err += set_var("p_0",.1984);
-  err += set_var("p_x",3.151);
-  err += set_var("a_px",6.151);
-  err += set_var("a_rhox",1.2);
-  err += set_var("a_ux",.03);
-  err += set_var("L",3.02);
-  err += set_var("Gamma",16.1);
-  err += set_var("mu",.091);
+  err += this->set_var("u_0",.191);
+  err += this->set_var("u_x",1.63);
+  err += this->set_var("rho_0",91.5);
+  err += this->set_var("rho_x",5.13);
+  err += this->set_var("p_0",.1984);
+  err += this->set_var("p_x",3.151);
+  err += this->set_var("a_px",6.151);
+  err += this->set_var("a_rhox",1.2);
+  err += this->set_var("a_ux",.03);
+  err += this->set_var("L",3.02);
+  err += this->set_var("Gamma",16.1);
+  err += this->set_var("mu",.091);
 
   return err;
 
@@ -98,24 +100,27 @@ int MASA::euler_1d::init_var()
 //   Source Terms
 // ----------------------------------------
 
-double MASA::euler_1d::eval_q_u(double x)
+template <typename Scalar>
+Scalar MASA::euler_1d<Scalar>::eval_q_u(Scalar x)
 {
-  double Q_u;
-  Q_u = -sin(a_px * PI * x / L) * a_px * PI * p_x / L + rho_x * cos(a_rhox * PI * x / L) * pow(u_0 + u_x * sin(a_ux * PI * x / L), 0.2e1) * a_rhox * PI / L + 0.2e1 * u_x * cos(a_ux * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L)) * (u_0 + u_x * sin(a_ux * PI * x / L)) * a_ux * PI / L;
+  Scalar Q_u;
+  Q_u = -sin(a_px * this->PI * x / L) * a_px * this->PI * p_x / L + rho_x * cos(a_rhox * this->PI * x / L) * pow(u_0 + u_x * sin(a_ux * this->PI * x / L), Scalar(2)) * a_rhox * this->PI / L + Scalar(2) * u_x * cos(a_ux * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L)) * a_ux * this->PI / L;
   return Q_u;
 }
 
-double MASA::euler_1d::eval_q_e(double x)
+template <typename Scalar>
+Scalar MASA::euler_1d<Scalar>::eval_q_e(Scalar x)
 {
-  double Q_e;
-  Q_e = cos(a_rhox * PI * x / L) * rho_x * pow(u_0 + u_x * sin(a_ux * PI * x / L), 0.3e1) * a_rhox * PI / L / 0.2e1 + cos(a_ux * PI * x / L) * (p_0 + p_x * cos(a_px * PI * x / L)) * a_ux * PI * u_x * Gamma / L / (Gamma - 0.1e1) - Gamma * p_x * sin(a_px * PI * x / L) * (u_0 + u_x * sin(a_ux * PI * x / L)) * a_px * PI / L / (Gamma - 0.1e1) + 0.3e1 / 0.2e1 * cos(a_ux * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L)) * pow(u_0 + u_x * sin(a_ux * PI * x / L), 0.2e1) * a_ux * PI * u_x / L;
+  Scalar Q_e;
+  Q_e = cos(a_rhox * this->PI * x / L) * rho_x * pow(u_0 + u_x * sin(a_ux * this->PI * x / L), Scalar(3)) * a_rhox * this->PI / L / Scalar(2) + cos(a_ux * this->PI * x / L) * (p_0 + p_x * cos(a_px * this->PI * x / L)) * a_ux * this->PI * u_x * Gamma / L / (Gamma - Scalar(1)) - Gamma * p_x * sin(a_px * this->PI * x / L) * (u_0 + u_x * sin(a_ux * this->PI * x / L)) * a_px * this->PI / L / (Gamma - Scalar(1)) + Scalar(3) / Scalar(2) * cos(a_ux * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L)) * pow(u_0 + u_x * sin(a_ux * this->PI * x / L), Scalar(2)) * a_ux * this->PI * u_x / L;
   return(Q_e);
 }
 
-double MASA::euler_1d::eval_q_rho(double x)
+template <typename Scalar>
+Scalar MASA::euler_1d<Scalar>::eval_q_rho(Scalar x)
 {
-  double Q_rho;
-  Q_rho = rho_x * cos(a_rhox * PI * x / L) * (u_0 + u_x * sin(a_ux * PI * x / L)) * a_rhox * PI / L + u_x * cos(a_ux * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L)) * a_ux * PI / L;
+  Scalar Q_rho;
+  Q_rho = rho_x * cos(a_rhox * this->PI * x / L) * (u_0 + u_x * sin(a_ux * this->PI * x / L)) * a_rhox * this->PI / L + u_x * cos(a_ux * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L)) * a_ux * this->PI / L;
   return(Q_rho);
 }
 
@@ -123,27 +128,30 @@ double MASA::euler_1d::eval_q_rho(double x)
 //   Gradient of Source Terms
 // ----------------------------------------
 
-double MASA::euler_1d::eval_1d_g_u(double x)
+template <typename Scalar>
+Scalar MASA::euler_1d<Scalar>::eval_1d_g_u(Scalar x)
 {
 
-  double grad_u = u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
+  Scalar grad_u = u_x * cos(a_ux * this->pi * x / L) * a_ux * this->pi / L;
   return grad_u;
 
 
 }
 
-double MASA::euler_1d::eval_1d_g_p(double x)
+template <typename Scalar>
+Scalar MASA::euler_1d<Scalar>::eval_1d_g_p(Scalar x)
 {
 
-  double grad_p = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
+  Scalar grad_p = -p_x * sin(a_px * this->pi * x / L) * a_px * this->pi / L;
   return grad_p;
 
 }
 
-double MASA::euler_1d::eval_1d_g_rho(double x)
+template <typename Scalar>
+Scalar MASA::euler_1d<Scalar>::eval_1d_g_rho(Scalar x)
 {
 
-  double grad_rho = rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
+  Scalar grad_rho = rho_x * cos(a_rhox * this->pi * x / L) * a_rhox * this->pi / L;
   return grad_rho;
 
 }
@@ -153,24 +161,27 @@ double MASA::euler_1d::eval_1d_g_rho(double x)
 //   Analytical Solutions
 // ----------------------------------------
 
-double MASA::euler_1d::eval_an_u(double x)
+template <typename Scalar>
+Scalar MASA::euler_1d<Scalar>::eval_an_u(Scalar x)
 {
-  double u_an;
-  u_an = u_0 + u_x * sin(a_ux * PI * x / L);
+  Scalar u_an;
+  u_an = u_0 + u_x * sin(a_ux * this->PI * x / L);
   return u_an;
 }
 
-double MASA::euler_1d::eval_an_p(double x)
+template <typename Scalar>
+Scalar MASA::euler_1d<Scalar>::eval_an_p(Scalar x)
 {
-  double p_an;
-  p_an = p_0 + p_x * cos(a_px * PI * x / L);
+  Scalar p_an;
+  p_an = p_0 + p_x * cos(a_px * this->PI * x / L);
   return p_an;
 }
 
-double MASA::euler_1d::eval_an_rho(double x)
+template <typename Scalar>
+Scalar MASA::euler_1d<Scalar>::eval_an_rho(Scalar x)
 {
-  double rho_an;
-  rho_an = rho_0 + rho_x * sin(a_rhox * PI * x / L);                                                                                                                                                                                           
+  Scalar rho_an;
+  rho_an = rho_0 + rho_x * sin(a_rhox * this->PI * x / L);                                                                                                                                                                                           
   return rho_an;
 }
 
@@ -184,71 +195,73 @@ double MASA::euler_1d::eval_an_rho(double x)
  * -----------------------------------------------
  */ 
 
-MASA::euler_2d::euler_2d()
+template <typename Scalar>
+MASA::euler_2d<Scalar>::euler_2d()
 {
-  mmsname = "euler_2d";
-  dimension=2;
+  this->mmsname = "euler_2d";
+  this->dimension=2;
 
-  register_var("R",&R);
-  register_var("k",&k);
+  this->register_var("R",&R);
+  this->register_var("k",&k);
 
-  register_var("u_0",&u_0);
-  register_var("u_x",&u_x);
-  register_var("u_y",&u_y);
-  register_var("v_0",&v_0);
-  register_var("v_x",&v_x);
-  register_var("v_y",&v_y);
-  register_var("rho_0",&rho_0);
-  register_var("rho_x",&rho_x);
-  register_var("rho_y",&rho_y);
-  register_var("p_0",&p_0);
-  register_var("p_x",&p_x);
-  register_var("p_y",&p_y);
-  register_var("a_px",&a_px);
-  register_var("a_py",&a_py);
-  register_var("a_rhox",&a_rhox);
-  register_var("a_rhoy",&a_rhoy);
-  register_var("a_ux",&a_ux);
-  register_var("a_uy",&a_uy);
-  register_var("a_vx",&a_vx);
-  register_var("a_vy",&a_vy);
-  register_var("L",&L);
-  register_var("Gamma",&Gamma);
-  register_var("mu",&mu);
+  this->register_var("u_0",&u_0);
+  this->register_var("u_x",&u_x);
+  this->register_var("u_y",&u_y);
+  this->register_var("v_0",&v_0);
+  this->register_var("v_x",&v_x);
+  this->register_var("v_y",&v_y);
+  this->register_var("rho_0",&rho_0);
+  this->register_var("rho_x",&rho_x);
+  this->register_var("rho_y",&rho_y);
+  this->register_var("p_0",&p_0);
+  this->register_var("p_x",&p_x);
+  this->register_var("p_y",&p_y);
+  this->register_var("a_px",&a_px);
+  this->register_var("a_py",&a_py);
+  this->register_var("a_rhox",&a_rhox);
+  this->register_var("a_rhoy",&a_rhoy);
+  this->register_var("a_ux",&a_ux);
+  this->register_var("a_uy",&a_uy);
+  this->register_var("a_vx",&a_vx);
+  this->register_var("a_vy",&a_vy);
+  this->register_var("L",&L);
+  this->register_var("Gamma",&Gamma);
+  this->register_var("mu",&mu);
 
 }//done with constructor
 
-int MASA::euler_2d::init_var()
+template <typename Scalar>
+int MASA::euler_2d<Scalar>::init_var()
 {
   int err = 0;
 
   // currently randomly generated
-  err += set_var("R",1.01);
-  err += set_var("k",1.38);
+  err += this->set_var("R",1.01);
+  err += this->set_var("k",1.38);
 
-  err += set_var("u_0",1.23);
-  err += set_var("u_x",1.1);
-  err += set_var("u_y",.08);
-  err += set_var("v_0",12);
-  err += set_var("v_x",1.6);
-  err += set_var("v_y",.67);
-  err += set_var("rho_0",1.02);
-  err += set_var("rho_x",7.2);
-  err += set_var("rho_y",9.8);
-  err += set_var("p_0",1.2);
-  err += set_var("p_x",.91);
-  err += set_var("p_y",.623);
-  err += set_var("a_px",.165);
-  err += set_var("a_py",.612);
-  err += set_var("a_rhox",.627);
-  err += set_var("a_rhoy",.828);
-  err += set_var("a_ux",.1987);
-  err += set_var("a_uy",1.189);
-  err += set_var("a_vx",1.91);
-  err += set_var("a_vy",2.901);
-  err += set_var("Gamma",1.01);
-  err += set_var("mu",.918);
-  err += set_var("L",3.02);
+  err += this->set_var("u_0",1.23);
+  err += this->set_var("u_x",1.1);
+  err += this->set_var("u_y",.08);
+  err += this->set_var("v_0",12);
+  err += this->set_var("v_x",1.6);
+  err += this->set_var("v_y",.67);
+  err += this->set_var("rho_0",1.02);
+  err += this->set_var("rho_x",7.2);
+  err += this->set_var("rho_y",9.8);
+  err += this->set_var("p_0",1.2);
+  err += this->set_var("p_x",.91);
+  err += this->set_var("p_y",.623);
+  err += this->set_var("a_px",.165);
+  err += this->set_var("a_py",.612);
+  err += this->set_var("a_rhox",.627);
+  err += this->set_var("a_rhoy",.828);
+  err += this->set_var("a_ux",.1987);
+  err += this->set_var("a_uy",1.189);
+  err += this->set_var("a_vx",1.91);
+  err += this->set_var("a_vy",2.901);
+  err += this->set_var("Gamma",1.01);
+  err += this->set_var("mu",.918);
+  err += this->set_var("L",3.02);
 
   return err;
 
@@ -258,31 +271,35 @@ int MASA::euler_2d::init_var()
 //   Source Terms
 // ----------------------------------------
 
-double MASA::euler_2d::eval_q_u(double x,double y)
+template <typename Scalar>
+Scalar MASA::euler_2d<Scalar>::eval_q_u(Scalar x,Scalar y)
 {
-  double Q_u;
-  Q_u = -p_x * sin(a_px * PI * x / L) * a_px * PI / L + rho_x * cos(a_rhox * PI * x / L) * pow(u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L), 0.2e1) * a_rhox * PI / L - rho_y * sin(a_rhoy * PI * y / L) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L)) * a_rhoy * PI / L + 0.2e1 * u_x * cos(a_ux * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L)) * a_ux * PI / L - u_y * sin(a_uy * PI * y / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L)) * a_uy * PI / L + v_y * cos(a_vy * PI * y / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L)) * a_vy * PI / L;
+  Scalar Q_u;
+  Q_u = -p_x * sin(a_px * this->PI * x / L) * a_px * this->PI / L + rho_x * cos(a_rhox * this->PI * x / L) * pow(u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L), Scalar(2)) * a_rhox * this->PI / L - rho_y * sin(a_rhoy * this->PI * y / L) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L)) * a_rhoy * this->PI / L + Scalar(2) * u_x * cos(a_ux * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L)) * a_ux * this->PI / L - u_y * sin(a_uy * this->PI * y / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L)) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L)) * a_uy * this->PI / L + v_y * cos(a_vy * this->PI * y / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L)) * a_vy * this->PI / L;
   return Q_u;
 }
 
-double MASA::euler_2d::eval_q_v(double x,double y)
+template <typename Scalar>
+Scalar MASA::euler_2d<Scalar>::eval_q_v(Scalar x,Scalar y)
 {
-  double Q_v;
-  Q_v = p_y * cos(a_py * PI * y / L) * a_py * PI / L + rho_x * cos(a_rhox * PI * x / L) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L)) * a_rhox * PI / L - sin(a_rhoy * PI * y / L) * rho_y * pow(v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L), 0.2e1) * a_rhoy * PI / L + cos(a_ux * PI * x / L) * u_x * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L)) * a_ux * PI / L - sin(a_vx * PI * x / L) * v_x * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L)) * a_vx * PI / L + 0.2e1 * cos(a_vy * PI * y / L) * v_y * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L)) * a_vy * PI / L;
+  Scalar Q_v;
+  Q_v = p_y * cos(a_py * this->PI * y / L) * a_py * this->PI / L + rho_x * cos(a_rhox * this->PI * x / L) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L)) * a_rhox * this->PI / L - sin(a_rhoy * this->PI * y / L) * rho_y * pow(v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L), Scalar(2)) * a_rhoy * this->PI / L + cos(a_ux * this->PI * x / L) * u_x * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L)) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L)) * a_ux * this->PI / L - sin(a_vx * this->PI * x / L) * v_x * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L)) * a_vx * this->PI / L + Scalar(2) * cos(a_vy * this->PI * y / L) * v_y * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L)) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L)) * a_vy * this->PI / L;
   return Q_v;
 }
 
-double MASA::euler_2d::eval_q_e(double x,double y)
+template <typename Scalar>
+Scalar MASA::euler_2d<Scalar>::eval_q_e(Scalar x,Scalar y)
 {
-  double Q_e;
-  Q_e = -Gamma * (u_x * sin(x * a_ux * PI / L) + u_y * cos(a_uy * PI * y / L) + u_0) * a_px * p_x * PI * sin(a_px * PI * x / L) / (Gamma - 0.1e1) / L + Gamma * (v_x * cos(a_vx * PI * x / L) + v_y * sin(y * a_vy * PI / L) + v_0) * a_py * p_y * PI * cos(a_py * PI * y / L) / (Gamma - 0.1e1) / L + a_rhox * PI * rho_x * cos(a_rhox * PI * x / L) * (u_x * sin(x * a_ux * PI / L) + u_y * cos(a_uy * PI * y / L) + u_0) * (pow(v_x * cos(a_vx * PI * x / L) + v_y * sin(y * a_vy * PI / L) + v_0, 0.2e1) + pow(u_x * sin(x * a_ux * PI / L) + u_y * cos(a_uy * PI * y / L) + u_0, 0.2e1)) / L / 0.2e1 - a_rhoy * PI * rho_y * sin(a_rhoy * PI * y / L) * (v_x * cos(a_vx * PI * x / L) + v_y * sin(y * a_vy * PI / L) + v_0) * (pow(v_x * cos(a_vx * PI * x / L) + v_y * sin(y * a_vy * PI / L) + v_0, 0.2e1) + pow(u_x * sin(x * a_ux * PI / L) + u_y * cos(a_uy * PI * y / L) + u_0, 0.2e1)) / L / 0.2e1 + (p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_0) * a_ux * PI * u_x * cos(x * a_ux * PI / L) * Gamma / (Gamma - 0.1e1) / L + (pow(v_x * cos(a_vx * PI * x / L) + v_y * sin(y * a_vy * PI / L) + v_0, 0.2e1) + 0.3e1 * pow(u_x * sin(x * a_ux * PI / L) + u_y * cos(a_uy * PI * y / L) + u_0, 0.2e1)) * (rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_0) * a_ux * PI * u_x * cos(x * a_ux * PI / L) / L / 0.2e1 + (p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_0) * a_vy * PI * v_y * cos(y * a_vy * PI / L) * Gamma / (Gamma - 0.1e1) / L + (0.3e1 * pow(v_x * cos(a_vx * PI * x / L) + v_y * sin(y * a_vy * PI / L) + v_0, 0.2e1) + pow(u_x * sin(x * a_ux * PI / L) + u_y * cos(a_uy * PI * y / L) + u_0, 0.2e1)) * (rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_0) * a_vy * PI * v_y * cos(y * a_vy * PI / L) / L / 0.2e1 - (v_x * cos(a_vx * PI * x / L) + v_y * sin(y * a_vy * PI / L) + v_0) * (rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_0) * (u_x * sin(x * a_ux * PI / L) + u_y * cos(a_uy * PI * y / L) + u_0) * PI * a_uy * u_y * sin(a_uy * PI * y / L) / L - (v_x * cos(a_vx * PI * x / L) + v_y * sin(y * a_vy * PI / L) + v_0) * (rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_0) * (u_x * sin(x * a_ux * PI / L) + u_y * cos(a_uy * PI * y / L) + u_0) * PI * a_vx * v_x * sin(a_vx * PI * x / L) / L;
+  Scalar Q_e;
+  Q_e = -Gamma * (u_x * sin(x * a_ux * this->PI / L) + u_y * cos(a_uy * this->PI * y / L) + u_0) * a_px * p_x * this->PI * sin(a_px * this->PI * x / L) / (Gamma - Scalar(1)) / L + Gamma * (v_x * cos(a_vx * this->PI * x / L) + v_y * sin(y * a_vy * this->PI / L) + v_0) * a_py * p_y * this->PI * cos(a_py * this->PI * y / L) / (Gamma - Scalar(1)) / L + a_rhox * this->PI * rho_x * cos(a_rhox * this->PI * x / L) * (u_x * sin(x * a_ux * this->PI / L) + u_y * cos(a_uy * this->PI * y / L) + u_0) * (pow(v_x * cos(a_vx * this->PI * x / L) + v_y * sin(y * a_vy * this->PI / L) + v_0, Scalar(2)) + pow(u_x * sin(x * a_ux * this->PI / L) + u_y * cos(a_uy * this->PI * y / L) + u_0, Scalar(2))) / L / Scalar(2) - a_rhoy * this->PI * rho_y * sin(a_rhoy * this->PI * y / L) * (v_x * cos(a_vx * this->PI * x / L) + v_y * sin(y * a_vy * this->PI / L) + v_0) * (pow(v_x * cos(a_vx * this->PI * x / L) + v_y * sin(y * a_vy * this->PI / L) + v_0, Scalar(2)) + pow(u_x * sin(x * a_ux * this->PI / L) + u_y * cos(a_uy * this->PI * y / L) + u_0, Scalar(2))) / L / Scalar(2) + (p_x * cos(a_px * this->PI * x / L) + p_y * sin(a_py * this->PI * y / L) + p_0) * a_ux * this->PI * u_x * cos(x * a_ux * this->PI / L) * Gamma / (Gamma - Scalar(1)) / L + (pow(v_x * cos(a_vx * this->PI * x / L) + v_y * sin(y * a_vy * this->PI / L) + v_0, Scalar(2)) + Scalar(3) * pow(u_x * sin(x * a_ux * this->PI / L) + u_y * cos(a_uy * this->PI * y / L) + u_0, Scalar(2))) * (rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_0) * a_ux * this->PI * u_x * cos(x * a_ux * this->PI / L) / L / Scalar(2) + (p_x * cos(a_px * this->PI * x / L) + p_y * sin(a_py * this->PI * y / L) + p_0) * a_vy * this->PI * v_y * cos(y * a_vy * this->PI / L) * Gamma / (Gamma - Scalar(1)) / L + (Scalar(3) * pow(v_x * cos(a_vx * this->PI * x / L) + v_y * sin(y * a_vy * this->PI / L) + v_0, Scalar(2)) + pow(u_x * sin(x * a_ux * this->PI / L) + u_y * cos(a_uy * this->PI * y / L) + u_0, Scalar(2))) * (rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_0) * a_vy * this->PI * v_y * cos(y * a_vy * this->PI / L) / L / Scalar(2) - (v_x * cos(a_vx * this->PI * x / L) + v_y * sin(y * a_vy * this->PI / L) + v_0) * (rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_0) * (u_x * sin(x * a_ux * this->PI / L) + u_y * cos(a_uy * this->PI * y / L) + u_0) * this->PI * a_uy * u_y * sin(a_uy * this->PI * y / L) / L - (v_x * cos(a_vx * this->PI * x / L) + v_y * sin(y * a_vy * this->PI / L) + v_0) * (rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_0) * (u_x * sin(x * a_ux * this->PI / L) + u_y * cos(a_uy * this->PI * y / L) + u_0) * this->PI * a_vx * v_x * sin(a_vx * this->PI * x / L) / L;
   return(Q_e);
 }
 
-double MASA::euler_2d::eval_q_rho(double x,double y)
+template <typename Scalar>
+Scalar MASA::euler_2d<Scalar>::eval_q_rho(Scalar x,Scalar y)
 {
-  double Q_rho;
-  Q_rho = rho_x * cos(a_rhox * PI * x / L) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L)) * a_rhox * PI / L - rho_y * sin(a_rhoy * PI * y / L) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L)) * a_rhoy * PI / L + u_x * cos(a_ux * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)) * a_ux * PI / L + v_y * cos(a_vy * PI * y / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)) * a_vy * PI / L;
+  Scalar Q_rho;
+  Q_rho = rho_x * cos(a_rhox * this->PI * x / L) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L)) * a_rhox * this->PI / L - rho_y * sin(a_rhoy * this->PI * y / L) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L)) * a_rhoy * this->PI / L + u_x * cos(a_ux * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L)) * a_ux * this->PI / L + v_y * cos(a_vy * this->PI * y / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L)) * a_vy * this->PI / L;
   return(Q_rho);
 }
 
@@ -290,10 +307,11 @@ double MASA::euler_2d::eval_q_rho(double x,double y)
 //   Gradient of Source Terms
 // ----------------------------------------
 
-double MASA::euler_2d::eval_2d_g_u(double x,double y, int i)
+template <typename Scalar>
+Scalar MASA::euler_2d<Scalar>::eval_2d_g_u(Scalar x,Scalar y, int i)
 {
 
-  double grad = -1;
+  Scalar grad = -1;
 
   switch(i)
     {
@@ -303,11 +321,11 @@ double MASA::euler_2d::eval_2d_g_u(double x,double y, int i)
       break;
       
     case 1:
-      grad =  u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;      
+      grad =  u_x * cos(a_ux * this->pi * x / L) * a_ux * this->pi / L;      
       break;
 
     case 2:
-      grad = -u_y * sin(a_uy * pi * y / L) * a_uy * pi / L;
+      grad = -u_y * sin(a_uy * this->pi * y / L) * a_uy * this->pi / L;
       break;
 
     default:
@@ -322,10 +340,11 @@ double MASA::euler_2d::eval_2d_g_u(double x,double y, int i)
 }
 
 
-double MASA::euler_2d::eval_2d_g_v(double x,double y, int i)
+template <typename Scalar>
+Scalar MASA::euler_2d<Scalar>::eval_2d_g_v(Scalar x,Scalar y, int i)
 {
 
-  double grad = -1;
+  Scalar grad = -1;
 
   switch(i)
     {
@@ -335,11 +354,11 @@ double MASA::euler_2d::eval_2d_g_v(double x,double y, int i)
       break;
       
     case 1:
-      grad = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
+      grad = -v_x * sin(a_vx * this->pi * x / L) * a_vx * this->pi / L;
       break;
 
     case 2:
-      grad =  v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
+      grad =  v_y * cos(a_vy * this->pi * y / L) * a_vy * this->pi / L;
       break;
 
     default:
@@ -353,10 +372,11 @@ double MASA::euler_2d::eval_2d_g_v(double x,double y, int i)
 
 }
 
-double MASA::euler_2d::eval_2d_g_p(double x,double y, int i)
+template <typename Scalar>
+Scalar MASA::euler_2d<Scalar>::eval_2d_g_p(Scalar x,Scalar y, int i)
 {
 
-  double grad = -1;
+  Scalar grad = -1;
 
   switch(i)
     {
@@ -366,11 +386,11 @@ double MASA::euler_2d::eval_2d_g_p(double x,double y, int i)
       break;
       
     case 1:
-      grad = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
+      grad = -p_x * sin(a_px * this->pi * x / L) * a_px * this->pi / L;
       break;
 
     case 2:
-      grad =  p_y * cos(a_py * pi * y / L) * a_py * pi / L;
+      grad =  p_y * cos(a_py * this->pi * y / L) * a_py * this->pi / L;
       break;
 
     default:
@@ -384,10 +404,11 @@ double MASA::euler_2d::eval_2d_g_p(double x,double y, int i)
 
 }
 
-double MASA::euler_2d::eval_2d_g_rho(double x,double y, int i)
+template <typename Scalar>
+Scalar MASA::euler_2d<Scalar>::eval_2d_g_rho(Scalar x,Scalar y, int i)
 {
 
-  double grad = -1;
+  Scalar grad = -1;
 
   switch(i)
     {
@@ -397,11 +418,11 @@ double MASA::euler_2d::eval_2d_g_rho(double x,double y, int i)
       break;
       
     case 1:
-      grad =  rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
+      grad =  rho_x * cos(a_rhox * this->pi * x / L) * a_rhox * this->pi / L;
       break;
 
     case 2:
-      grad = -rho_y * sin(a_rhoy * pi * y / L) * a_rhoy * pi / L;
+      grad = -rho_y * sin(a_rhoy * this->pi * y / L) * a_rhoy * this->pi / L;
       break;
 
     default:
@@ -419,31 +440,35 @@ double MASA::euler_2d::eval_2d_g_rho(double x,double y, int i)
 //   Analytical Solutions
 // ----------------------------------------
 
-double MASA::euler_2d::eval_an_u(double x,double y)
+template <typename Scalar>
+Scalar MASA::euler_2d<Scalar>::eval_an_u(Scalar x,Scalar y)
 {
-  double u_an;
-  u_an = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L); 
+  Scalar u_an;
+  u_an = u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L); 
   return u_an;
 }
 
-double MASA::euler_2d::eval_an_v(double x,double y)
+template <typename Scalar>
+Scalar MASA::euler_2d<Scalar>::eval_an_v(Scalar x,Scalar y)
 {
-  double v_an;
-  v_an = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
+  Scalar v_an;
+  v_an = v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L);
   return v_an;
 }
 
-double MASA::euler_2d::eval_an_p(double x,double y)
+template <typename Scalar>
+Scalar MASA::euler_2d<Scalar>::eval_an_p(Scalar x,Scalar y)
 {
-  double p_an;
-  p_an = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L);
+  Scalar p_an;
+  p_an = p_0 + p_x * cos(a_px * this->PI * x / L) + p_y * sin(a_py * this->PI * y / L);
   return p_an;
 }
 
-double MASA::euler_2d::eval_an_rho(double x,double y)
+template <typename Scalar>
+Scalar MASA::euler_2d<Scalar>::eval_an_rho(Scalar x,Scalar y)
 {
-  double rho_an;
-  rho_an = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L); 
+  Scalar rho_an;
+  rho_an = rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L); 
   return rho_an;
 }
 
@@ -457,101 +482,103 @@ double MASA::euler_2d::eval_an_rho(double x,double y)
  */ 
 
 
-MASA::euler_3d::euler_3d()
+template <typename Scalar>
+MASA::euler_3d<Scalar>::euler_3d()
 {
-  mmsname = "euler_3d";
-  dimension=3;
+  this->mmsname = "euler_3d";
+  this->dimension=3;
 
-  register_var("R",&R);
-  register_var("k",&k);
+  this->register_var("R",&R);
+  this->register_var("k",&k);
 
-  register_var("u_0",&u_0);
-  register_var("u_x",&u_x);
-  register_var("u_y",&u_y);
-  register_var("u_z",&u_z);
-  register_var("v_0",&v_0);
-  register_var("v_x",&v_x);
-  register_var("v_y",&v_y);
-  register_var("v_z",&v_z);
-  register_var("rho_0",&rho_0);
-  register_var("rho_x",&rho_x);
-  register_var("rho_y",&rho_y);
-  register_var("rho_z",&rho_z);
-  register_var("p_0",&p_0);
-  register_var("p_x",&p_x);
-  register_var("p_y",&p_y);
-  register_var("p_z",&p_z);
-  register_var("a_px",&a_px);
-  register_var("a_py",&a_py);
-  register_var("a_rhox",&a_rhox);
-  register_var("a_rhoy",&a_rhoy);
-  register_var("a_ux",&a_ux);
-  register_var("a_uy",&a_uy);
-  register_var("a_uz",&a_uz);
-  register_var("a_vx",&a_vx);
-  register_var("a_vy",&a_vy);
-  register_var("L",&L);
-  register_var("Gamma",&Gamma);
-  register_var("mu",&mu);
-  register_var("a_pz",&a_pz);
-  register_var("a_rhoz",&a_rhoz);
-  register_var("a_vz",&a_vz);
-  register_var("a_wz",&a_wz);
-  register_var("a_wx",&a_wx);
-  register_var("a_wy",&a_wy);
-  register_var("w_0",&w_0);
-  register_var("w_x",&w_x);
-  register_var("w_y",&w_y);
-  register_var("w_z",&w_z);
+  this->register_var("u_0",&u_0);
+  this->register_var("u_x",&u_x);
+  this->register_var("u_y",&u_y);
+  this->register_var("u_z",&u_z);
+  this->register_var("v_0",&v_0);
+  this->register_var("v_x",&v_x);
+  this->register_var("v_y",&v_y);
+  this->register_var("v_z",&v_z);
+  this->register_var("rho_0",&rho_0);
+  this->register_var("rho_x",&rho_x);
+  this->register_var("rho_y",&rho_y);
+  this->register_var("rho_z",&rho_z);
+  this->register_var("p_0",&p_0);
+  this->register_var("p_x",&p_x);
+  this->register_var("p_y",&p_y);
+  this->register_var("p_z",&p_z);
+  this->register_var("a_px",&a_px);
+  this->register_var("a_py",&a_py);
+  this->register_var("a_rhox",&a_rhox);
+  this->register_var("a_rhoy",&a_rhoy);
+  this->register_var("a_ux",&a_ux);
+  this->register_var("a_uy",&a_uy);
+  this->register_var("a_uz",&a_uz);
+  this->register_var("a_vx",&a_vx);
+  this->register_var("a_vy",&a_vy);
+  this->register_var("L",&L);
+  this->register_var("Gamma",&Gamma);
+  this->register_var("mu",&mu);
+  this->register_var("a_pz",&a_pz);
+  this->register_var("a_rhoz",&a_rhoz);
+  this->register_var("a_vz",&a_vz);
+  this->register_var("a_wz",&a_wz);
+  this->register_var("a_wx",&a_wx);
+  this->register_var("a_wy",&a_wy);
+  this->register_var("w_0",&w_0);
+  this->register_var("w_x",&w_x);
+  this->register_var("w_y",&w_y);
+  this->register_var("w_z",&w_z);
 
 }//done with constructor
 
-int MASA::euler_3d::init_var()
+template <typename Scalar>
+int MASA::euler_3d<Scalar>::init_var()
 {
   int err = 0;
 
   // set params (random currenly)
-  err += set_var("R",1.01);
-  err += set_var("k",1.38);
+  err += this->set_var("R",1.01);
+  err += this->set_var("k",1.38);
 
-  err += set_var("u_0",2.27);
-  err += set_var("u_x",6.00);
-  err += set_var("u_y",5.35);
-  err += set_var("u_z",5.34);
-  err += set_var("v_0",3.46);
-  err += set_var("v_x",6.13);
-  err += set_var("v_y",.54);
-  err += set_var("v_z",.30);
-  err += set_var("w_0",.411);
-  err += set_var("w_x",3.14);
-  err += set_var("w_y",5.68);
-  err += set_var("w_z",6.51);
-  err += set_var("rho_0",1.63);
-  err += set_var("rho_x",4.7);
-  err += set_var("rho_y",20.85);
-  err += set_var("rho_z",12.15);
-  err += set_var("p_0",50.135);
-  err += set_var("p_x",.73);
-  err += set_var("p_y",49);
-  err += set_var("p_z",60.8);
-  err += set_var("a_px",388.8);
-  err += set_var("a_py",40.1);
-  err += set_var("a_pz",38.5);
-  err += set_var("a_rhox",.82);
-  err += set_var("a_rhoy",.41);
-  err += set_var("a_rhoz",.44);
-  err += set_var("a_ux",.46);
-  err += set_var("a_uy",.425);
-  err += set_var("a_uz",.42);
-  err += set_var("a_vx",.52);
-  err += set_var("a_vy",.23);
-  err += set_var("a_vz",16.2);
-  err += set_var("a_wx",11.05);
-  err += set_var("a_wy",21.8);
-  err += set_var("a_wz",13.6);
-  err += set_var("Gamma",27.5);
-  err += set_var("mu",12.01);
-  err += set_var("L",3.02);
+  err += this->set_var("u_0",2.27);
+  err += this->set_var("u_x",6.00);
+  err += this->set_var("u_y",5.35);
+  err += this->set_var("u_z",5.34);
+  err += this->set_var("v_0",3.46);
+  err += this->set_var("v_x",6.13);
+  err += this->set_var("v_y",.54);
+  err += this->set_var("v_z",.30);
+  err += this->set_var("w_0",.411);
+  err += this->set_var("w_x",3.14);
+  err += this->set_var("w_y",5.68);
+  err += this->set_var("w_z",6.51);
+  err += this->set_var("rho_0",1.63);
+  err += this->set_var("rho_x",4.7);
+  err += this->set_var("rho_y",20.85);
+  err += this->set_var("rho_z",12.15);
+  err += this->set_var("p_0",50.135);
+  err += this->set_var("p_x",.73);
+  err += this->set_var("p_y",49);
+  err += this->set_var("p_z",60.8);
+  err += this->set_var("a_px",388.8);
+  err += this->set_var("a_py",40.1);
+  err += this->set_var("a_pz",38.5);
+  err += this->set_var("a_rhox",.82);
+  err += this->set_var("a_rhoy",.41);
+  err += this->set_var("a_rhoz",.44);
+  err += this->set_var("a_ux",.46);
+  err += this->set_var("a_uy",.425);
+  err += this->set_var("a_uz",.42);
+  err += this->set_var("a_vx",.52);
+  err += this->set_var("a_vy",.23);
+  err += this->set_var("a_vz",16.2);
+  err += this->set_var("a_wx",11.05);
+  err += this->set_var("a_wy",21.8);
+  err += this->set_var("a_wz",13.6);
+  err += this->set_var("Gamma",27.5);
+  err += this->set_var("mu",12.01);
+  err += this->set_var("L",3.02);
 
   return err;
 
@@ -561,10 +588,11 @@ int MASA::euler_3d::init_var()
 //   Gradient of Source Terms
 // ----------------------------------------
 
-double MASA::euler_3d::eval_3d_g_u(double x,double y,double z,int i)
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_3d_g_u(Scalar x,Scalar y,Scalar z,int i)
 {
 
-  double grad = -1;
+  Scalar grad = -1;
 
   switch(i)
     {
@@ -574,15 +602,15 @@ double MASA::euler_3d::eval_3d_g_u(double x,double y,double z,int i)
       break;
       
     case 1:
-      grad =  u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
+      grad =  u_x * cos(a_ux * this->pi * x / L) * a_ux * this->pi / L;
       break;
 
     case 2:
-      grad = -u_y * sin(a_uy * pi * y / L) * a_uy * pi / L;
+      grad = -u_y * sin(a_uy * this->pi * y / L) * a_uy * this->pi / L;
       break;
 
     case 3:
-      grad = -u_z * sin(a_uz * pi * z / L) * a_uz * pi / L;
+      grad = -u_z * sin(a_uz * this->pi * z / L) * a_uz * this->pi / L;
       break;
 
     default:
@@ -597,10 +625,11 @@ double MASA::euler_3d::eval_3d_g_u(double x,double y,double z,int i)
 }
 
 
-double MASA::euler_3d::eval_3d_g_v(double x,double y,double z,int i)
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_3d_g_v(Scalar x,Scalar y,Scalar z,int i)
 {
 
-  double grad = -1;
+  Scalar grad = -1;
 
   switch(i)
     {
@@ -610,15 +639,15 @@ double MASA::euler_3d::eval_3d_g_v(double x,double y,double z,int i)
       break;
       
     case 1:
-      grad = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
+      grad = -v_x * sin(a_vx * this->pi * x / L) * a_vx * this->pi / L;
       break;
 
     case 2:
-      grad =  v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
+      grad =  v_y * cos(a_vy * this->pi * y / L) * a_vy * this->pi / L;
       break;
 
     case 3:
-      grad =  v_z * cos(a_vz * pi * z / L) * a_vz * pi / L;
+      grad =  v_z * cos(a_vz * this->pi * z / L) * a_vz * this->pi / L;
       break;
 
     default:
@@ -632,10 +661,11 @@ double MASA::euler_3d::eval_3d_g_v(double x,double y,double z,int i)
 
 }
 
-double MASA::euler_3d::eval_3d_g_w(double x,double y,double z,int i)
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_3d_g_w(Scalar x,Scalar y,Scalar z,int i)
 {
 
-  double grad = -1;
+  Scalar grad = -1;
 
   switch(i)
     {
@@ -645,15 +675,15 @@ double MASA::euler_3d::eval_3d_g_w(double x,double y,double z,int i)
       break;
       
     case 1:
-      grad =  w_x * cos(a_wx * pi * x / L) * a_wx * pi / L;
+      grad =  w_x * cos(a_wx * this->pi * x / L) * a_wx * this->pi / L;
       break;
 
     case 2:
-      grad =  w_y * cos(a_wy * pi * y / L) * a_wy * pi / L;
+      grad =  w_y * cos(a_wy * this->pi * y / L) * a_wy * this->pi / L;
       break;
 
     case 3:
-      grad = -w_z * sin(a_wz * pi * z / L) * a_wz * pi / L;
+      grad = -w_z * sin(a_wz * this->pi * z / L) * a_wz * this->pi / L;
       break;
 
     default:
@@ -666,10 +696,12 @@ double MASA::euler_3d::eval_3d_g_w(double x,double y,double z,int i)
   return grad;
 
 }
-double MASA::euler_3d::eval_3d_g_p(double x,double y,double z,int i)
+
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_3d_g_p(Scalar x,Scalar y,Scalar z,int i)
 {
 
-  double grad = -1;
+  Scalar grad = -1;
 
   switch(i)
     {
@@ -679,15 +711,15 @@ double MASA::euler_3d::eval_3d_g_p(double x,double y,double z,int i)
       break;
       
     case 1:
-      grad = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
+      grad = -p_x * sin(a_px * this->pi * x / L) * a_px * this->pi / L;
       break;
 
     case 2:
-      grad =  p_y * cos(a_py * pi * y / L) * a_py * pi / L;
+      grad =  p_y * cos(a_py * this->pi * y / L) * a_py * this->pi / L;
       break;
 
     case 3:
-      grad = -p_z * sin(a_pz * pi * z / L) * a_pz * pi / L;
+      grad = -p_z * sin(a_pz * this->pi * z / L) * a_pz * this->pi / L;
       break;
 
     default:
@@ -701,10 +733,11 @@ double MASA::euler_3d::eval_3d_g_p(double x,double y,double z,int i)
 
 }
 
-double MASA::euler_3d::eval_3d_g_rho(double x,double y,double z,int i)
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_3d_g_rho(Scalar x,Scalar y,Scalar z,int i)
 {
 
-  double grad = -1;
+  Scalar grad = -1;
 
   switch(i)
     {
@@ -714,15 +747,15 @@ double MASA::euler_3d::eval_3d_g_rho(double x,double y,double z,int i)
       break;
       
     case 1:
-      grad = rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
+      grad = rho_x * cos(a_rhox * this->pi * x / L) * a_rhox * this->pi / L;
       break;
       
     case 2:
-      grad = -rho_y * sin(a_rhoy * pi * y / L) * a_rhoy * pi / L;
+      grad = -rho_y * sin(a_rhoy * this->pi * y / L) * a_rhoy * this->pi / L;
       break;
       
     case 3:
-      grad = rho_z * cos(a_rhoz * pi * z / L) * a_rhoz * pi / L;
+      grad = rho_z * cos(a_rhoz * this->pi * z / L) * a_rhoz * this->pi / L;
       break;
 
     default:
@@ -740,38 +773,43 @@ double MASA::euler_3d::eval_3d_g_rho(double x,double y,double z,int i)
 //   Source Term
 // ----------------------------------------
 
-double MASA::euler_3d::eval_q_u(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_q_u(Scalar x,Scalar y,Scalar z)
 {
-  double Q_u;
-  Q_u = -p_x * sin(a_px * PI * x / L) * a_px * PI / L + rho_x * cos(a_rhox * PI * x / L) * pow(u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L), 0.2e1) * a_rhox * PI / L - rho_y * sin(a_rhoy * PI * y / L) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * a_rhoy * PI / L + rho_z * cos(a_rhoz * PI * z / L) * (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * a_rhoz * PI / L + 0.2e1 * u_x * cos(a_ux * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * a_ux * PI / L - u_y * sin(a_uy * PI * y / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * a_uy * PI / L - u_z * sin(a_uz * PI * z / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * a_uz * PI / L + v_y * cos(a_vy * PI * y / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * a_vy * PI / L - w_z * sin(a_wz * PI * z / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * a_wz * PI / L;
+  Scalar Q_u;
+  Q_u = -p_x * sin(a_px * this->PI * x / L) * a_px * this->PI / L + rho_x * cos(a_rhox * this->PI * x / L) * pow(u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L), Scalar(2)) * a_rhox * this->PI / L - rho_y * sin(a_rhoy * this->PI * y / L) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * a_rhoy * this->PI / L + rho_z * cos(a_rhoz * this->PI * z / L) * (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * a_rhoz * this->PI / L + Scalar(2) * u_x * cos(a_ux * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * a_ux * this->PI / L - u_y * sin(a_uy * this->PI * y / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * a_uy * this->PI / L - u_z * sin(a_uz * this->PI * z / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * a_uz * this->PI / L + v_y * cos(a_vy * this->PI * y / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * a_vy * this->PI / L - w_z * sin(a_wz * this->PI * z / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * a_wz * this->PI / L;
   return(Q_u);
 }
 
-double MASA::euler_3d::eval_q_v(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_q_v(Scalar x,Scalar y,Scalar z)
 {
-  double Q_v;
-  Q_v = p_y * cos(a_py * PI * y / L) * a_py * PI / L + rho_x * cos(a_rhox * PI * x / L) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * a_rhox * PI / L - rho_y * sin(a_rhoy * PI * y / L) * pow(v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L), 0.2e1) * a_rhoy * PI / L + rho_z * cos(a_rhoz * PI * z / L) * (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * a_rhoz * PI / L + u_x * cos(a_ux * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * a_ux * PI / L - v_x * sin(a_vx * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * a_vx * PI / L + 0.2e1 * v_y * cos(a_vy * PI * y / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * a_vy * PI / L + v_z * cos(a_vz * PI * z / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * a_vz * PI / L - w_z * sin(a_wz * PI * z / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * a_wz * PI / L;
+  Scalar Q_v;
+  Q_v = p_y * cos(a_py * this->PI * y / L) * a_py * this->PI / L + rho_x * cos(a_rhox * this->PI * x / L) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * a_rhox * this->PI / L - rho_y * sin(a_rhoy * this->PI * y / L) * pow(v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L), Scalar(2)) * a_rhoy * this->PI / L + rho_z * cos(a_rhoz * this->PI * z / L) * (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * a_rhoz * this->PI / L + u_x * cos(a_ux * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * a_ux * this->PI / L - v_x * sin(a_vx * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * a_vx * this->PI / L + Scalar(2) * v_y * cos(a_vy * this->PI * y / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * a_vy * this->PI / L + v_z * cos(a_vz * this->PI * z / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * a_vz * this->PI / L - w_z * sin(a_wz * this->PI * z / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * a_wz * this->PI / L;
   return(Q_v);
 }
 
-double MASA::euler_3d::eval_q_w(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_q_w(Scalar x,Scalar y,Scalar z)
 {
-  double Q_w;
-  Q_w = -p_z * sin(a_pz * PI * z / L) * a_pz * PI / L + rho_x * cos(a_rhox * PI * x / L) * (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * a_rhox * PI / L - rho_y * sin(a_rhoy * PI * y / L) * (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * a_rhoy * PI / L + rho_z * cos(a_rhoz * PI * z / L) * pow(w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L), 0.2e1) * a_rhoz * PI / L + u_x * cos(a_ux * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * a_ux * PI / L + v_y * cos(a_vy * PI * y / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * a_vy * PI / L + w_x * cos(a_wx * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * a_wx * PI / L + w_y * cos(a_wy * PI * y / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * a_wy * PI / L - 0.2e1 * w_z * sin(a_wz * PI * z / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * a_wz * PI / L;
+  Scalar Q_w;
+  Q_w = -p_z * sin(a_pz * this->PI * z / L) * a_pz * this->PI / L + rho_x * cos(a_rhox * this->PI * x / L) * (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * a_rhox * this->PI / L - rho_y * sin(a_rhoy * this->PI * y / L) * (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * a_rhoy * this->PI / L + rho_z * cos(a_rhoz * this->PI * z / L) * pow(w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L), Scalar(2)) * a_rhoz * this->PI / L + u_x * cos(a_ux * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * a_ux * this->PI / L + v_y * cos(a_vy * this->PI * y / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * a_vy * this->PI / L + w_x * cos(a_wx * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * a_wx * this->PI / L + w_y * cos(a_wy * this->PI * y / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * a_wy * this->PI / L - Scalar(2) * w_z * sin(a_wz * this->PI * z / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * a_wz * this->PI / L;
   return(Q_w);
 }
 
-double MASA::euler_3d::eval_q_e(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_q_e(Scalar x,Scalar y,Scalar z)
 {
-  double Q_e;
-  Q_e = -Gamma * p_x * sin(a_px * PI * x / L) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * a_px * PI / L / (Gamma - 0.1e1) + Gamma * p_y * cos(a_py * PI * y / L) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * a_py * PI / L / (Gamma - 0.1e1) - Gamma * p_z * sin(a_pz * PI * z / L) * (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * a_pz * PI / L / (Gamma - 0.1e1) + (pow(u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L), 0.2e1) + pow(v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L), 0.2e1) + pow(w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L), 0.2e1)) * a_rhox * PI * rho_x * cos(a_rhox * PI * x / L) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) / L / 0.2e1 - (pow(u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L), 0.2e1) + pow(v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L), 0.2e1) + pow(w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L), 0.2e1)) * a_rhoy * PI * rho_y * sin(a_rhoy * PI * y / L) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) / L / 0.2e1 + (pow(u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L), 0.2e1) + pow(v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L), 0.2e1) + pow(w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L), 0.2e1)) * a_rhoz * PI * rho_z * cos(a_rhoz * PI * z / L) * (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) / L / 0.2e1 + a_ux * PI * u_x * cos(a_ux * PI * x / L) * ((0.3e1 * rho_x * sin(a_rhox * PI * x / L) + 0.3e1 * rho_y * cos(a_rhoy * PI * y / L) + 0.3e1 * rho_z * sin(a_rhoz * PI * z / L) + 0.3e1 * rho_0) * pow(u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L), 0.2e1) + (rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L) + rho_0) * pow(v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L), 0.2e1) + (rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L) + rho_0) * pow(w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L), 0.2e1)) / L / 0.2e1 + Gamma * a_ux * PI * u_x * cos(a_ux * PI * x / L) * (p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_z * cos(a_pz * PI * z / L) + p_0) / L / (Gamma - 0.1e1) - (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * (rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L) + rho_0) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * PI * a_uy * u_y * sin(a_uy * PI * y / L) / L - (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * (rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L) + rho_0) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * PI * a_uz * u_z * sin(a_uz * PI * z / L) / L - (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * (rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L) + rho_0) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * PI * a_vx * v_x * sin(a_vx * PI * x / L) / L + a_vy * PI * v_y * cos(a_vy * PI * y / L) * ((rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L) + rho_0) * pow(u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L), 0.2e1) + (0.3e1 * rho_x * sin(a_rhox * PI * x / L) + 0.3e1 * rho_y * cos(a_rhoy * PI * y / L) + 0.3e1 * rho_z * sin(a_rhoz * PI * z / L) + 0.3e1 * rho_0) * pow(v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L), 0.2e1) + (rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L) + rho_0) * pow(w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L), 0.2e1)) / L / 0.2e1 + Gamma * a_vy * PI * v_y * cos(a_vy * PI * y / L) * (p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_z * cos(a_pz * PI * z / L) + p_0) / L / (Gamma - 0.1e1) + (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * (rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L) + rho_0) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * PI * a_vz * v_z * cos(a_vz * PI * z / L) / L + (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * (rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L) + rho_0) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * PI * a_wx * w_x * cos(a_wx * PI * x / L) / L + (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * (rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L) + rho_0) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * PI * a_wy * w_y * cos(a_wy * PI * y / L) / L - a_wz * PI * w_z * sin(a_wz * PI * z / L) * ((rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L) + rho_0) * pow(u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L), 0.2e1) + (rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L) + rho_0) * pow(v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L), 0.2e1) + (0.3e1 * rho_x * sin(a_rhox * PI * x / L) + 0.3e1 * rho_y * cos(a_rhoy * PI * y / L) + 0.3e1 * rho_z * sin(a_rhoz * PI * z / L) + 0.3e1 * rho_0) * pow(w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L), 0.2e1)) / L / 0.2e1 - Gamma * a_wz * PI * w_z * sin(a_wz * PI * z / L) * (p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_z * cos(a_pz * PI * z / L) + p_0) / L / (Gamma - 0.1e1);
+  Scalar Q_e;
+  Q_e = -Gamma * p_x * sin(a_px * this->PI * x / L) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * a_px * this->PI / L / (Gamma - Scalar(1)) + Gamma * p_y * cos(a_py * this->PI * y / L) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * a_py * this->PI / L / (Gamma - Scalar(1)) - Gamma * p_z * sin(a_pz * this->PI * z / L) * (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * a_pz * this->PI / L / (Gamma - Scalar(1)) + (pow(u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L), Scalar(2)) + pow(v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L), Scalar(2)) + pow(w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L), Scalar(2))) * a_rhox * this->PI * rho_x * cos(a_rhox * this->PI * x / L) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) / L / Scalar(2) - (pow(u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L), Scalar(2)) + pow(v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L), Scalar(2)) + pow(w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L), Scalar(2))) * a_rhoy * this->PI * rho_y * sin(a_rhoy * this->PI * y / L) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) / L / Scalar(2) + (pow(u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L), Scalar(2)) + pow(v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L), Scalar(2)) + pow(w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L), Scalar(2))) * a_rhoz * this->PI * rho_z * cos(a_rhoz * this->PI * z / L) * (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) / L / Scalar(2) + a_ux * this->PI * u_x * cos(a_ux * this->PI * x / L) * ((Scalar(3) * rho_x * sin(a_rhox * this->PI * x / L) + Scalar(3) * rho_y * cos(a_rhoy * this->PI * y / L) + Scalar(3) * rho_z * sin(a_rhoz * this->PI * z / L) + Scalar(3) * rho_0) * pow(u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L), Scalar(2)) + (rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L) + rho_0) * pow(v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L), Scalar(2)) + (rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L) + rho_0) * pow(w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L), Scalar(2))) / L / Scalar(2) + Gamma * a_ux * this->PI * u_x * cos(a_ux * this->PI * x / L) * (p_x * cos(a_px * this->PI * x / L) + p_y * sin(a_py * this->PI * y / L) + p_z * cos(a_pz * this->PI * z / L) + p_0) / L / (Gamma - Scalar(1)) - (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * (rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L) + rho_0) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * this->PI * a_uy * u_y * sin(a_uy * this->PI * y / L) / L - (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * (rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L) + rho_0) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * this->PI * a_uz * u_z * sin(a_uz * this->PI * z / L) / L - (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * (rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L) + rho_0) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * this->PI * a_vx * v_x * sin(a_vx * this->PI * x / L) / L + a_vy * this->PI * v_y * cos(a_vy * this->PI * y / L) * ((rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L) + rho_0) * pow(u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L), Scalar(2)) + (Scalar(3) * rho_x * sin(a_rhox * this->PI * x / L) + Scalar(3) * rho_y * cos(a_rhoy * this->PI * y / L) + Scalar(3) * rho_z * sin(a_rhoz * this->PI * z / L) + Scalar(3) * rho_0) * pow(v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L), Scalar(2)) + (rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L) + rho_0) * pow(w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L), Scalar(2))) / L / Scalar(2) + Gamma * a_vy * this->PI * v_y * cos(a_vy * this->PI * y / L) * (p_x * cos(a_px * this->PI * x / L) + p_y * sin(a_py * this->PI * y / L) + p_z * cos(a_pz * this->PI * z / L) + p_0) / L / (Gamma - Scalar(1)) + (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * (rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L) + rho_0) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * this->PI * a_vz * v_z * cos(a_vz * this->PI * z / L) / L + (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * (rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L) + rho_0) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * this->PI * a_wx * w_x * cos(a_wx * this->PI * x / L) / L + (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * (rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L) + rho_0) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * this->PI * a_wy * w_y * cos(a_wy * this->PI * y / L) / L - a_wz * this->PI * w_z * sin(a_wz * this->PI * z / L) * ((rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L) + rho_0) * pow(u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L), Scalar(2)) + (rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L) + rho_0) * pow(v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L), Scalar(2)) + (Scalar(3) * rho_x * sin(a_rhox * this->PI * x / L) + Scalar(3) * rho_y * cos(a_rhoy * this->PI * y / L) + Scalar(3) * rho_z * sin(a_rhoz * this->PI * z / L) + Scalar(3) * rho_0) * pow(w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L), Scalar(2))) / L / Scalar(2) - Gamma * a_wz * this->PI * w_z * sin(a_wz * this->PI * z / L) * (p_x * cos(a_px * this->PI * x / L) + p_y * sin(a_py * this->PI * y / L) + p_z * cos(a_pz * this->PI * z / L) + p_0) / L / (Gamma - Scalar(1));
   return(Q_e);
 }
 
-double MASA::euler_3d::eval_q_rho(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_q_rho(Scalar x,Scalar y,Scalar z)
 {
-  double Q_rho;
-  Q_rho = rho_x * cos(a_rhox * PI * x / L) * (u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L)) * a_rhox * PI / L - rho_y * sin(a_rhoy * PI * y / L) * (v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L)) * a_rhoy * PI / L + rho_z * cos(a_rhoz * PI * z / L) * (w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L)) * a_rhoz * PI / L + u_x * cos(a_ux * PI * x / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * a_ux * PI / L + v_y * cos(a_vy * PI * y / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * a_vy * PI / L - w_z * sin(a_wz * PI * z / L) * (rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L)) * a_wz * PI / L;
+  Scalar Q_rho;
+  Q_rho = rho_x * cos(a_rhox * this->PI * x / L) * (u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L)) * a_rhox * this->PI / L - rho_y * sin(a_rhoy * this->PI * y / L) * (v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L)) * a_rhoy * this->PI / L + rho_z * cos(a_rhoz * this->PI * z / L) * (w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L)) * a_rhoz * this->PI / L + u_x * cos(a_ux * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * a_ux * this->PI / L + v_y * cos(a_vy * this->PI * y / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * a_vy * this->PI / L - w_z * sin(a_wz * this->PI * z / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L)) * a_wz * this->PI / L;
   return(Q_rho);
 }
 
@@ -779,37 +817,50 @@ double MASA::euler_3d::eval_q_rho(double x,double y,double z)
 //   Analytical Solutions
 // ----------------------------------------
 
-double MASA::euler_3d::eval_an_u(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_an_u(Scalar x,Scalar y,Scalar z)
 {
-  double u_an;
-  u_an = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);
+  Scalar u_an;
+  u_an = u_0 + u_x * sin(a_ux * this->PI * x / L) + u_y * cos(a_uy * this->PI * y / L) + u_z * cos(a_uz * this->PI * z / L);
   return u_an;
 }
 
-double MASA::euler_3d::eval_an_v(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_an_v(Scalar x,Scalar y,Scalar z)
 {
-  double v_an;
-  v_an = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
+  Scalar v_an;
+  v_an = v_0 + v_x * cos(a_vx * this->PI * x / L) + v_y * sin(a_vy * this->PI * y / L) + v_z * sin(a_vz * this->PI * z / L);
   return v_an;
 }
 
-double MASA::euler_3d::eval_an_w(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_an_w(Scalar x,Scalar y,Scalar z)
 {
-  double w_an;
-  w_an = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);  
+  Scalar w_an;
+  w_an = w_0 + w_x * sin(a_wx * this->PI * x / L) + w_y * sin(a_wy * this->PI * y / L) + w_z * cos(a_wz * this->PI * z / L);  
   return w_an;
 }
 
-double MASA::euler_3d::eval_an_p(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_an_p(Scalar x,Scalar y,Scalar z)
 {
-  double p_an;
-  p_an = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_z * cos(a_pz * PI * z / L);
+  Scalar p_an;
+  p_an = p_0 + p_x * cos(a_px * this->PI * x / L) + p_y * sin(a_py * this->PI * y / L) + p_z * cos(a_pz * this->PI * z / L);
   return p_an;
 }
 
-double MASA::euler_3d::eval_an_rho(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::euler_3d<Scalar>::eval_an_rho(Scalar x,Scalar y,Scalar z)
 {
-  double rho_an;
-  rho_an = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L);
+  Scalar rho_an;
+  rho_an = rho_0 + rho_x * sin(a_rhox * this->PI * x / L) + rho_y * cos(a_rhoy * this->PI * y / L) + rho_z * sin(a_rhoz * this->PI * z / L);
   return rho_an;
 }
+
+// ----------------------------------------
+//   Template Instantiation(s)
+// ----------------------------------------
+
+MASA_INSTANTIATE_ALL(MASA::euler_1d);
+MASA_INSTANTIATE_ALL(MASA::euler_2d);
+MASA_INSTANTIATE_ALL(MASA::euler_3d);

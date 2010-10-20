@@ -191,12 +191,12 @@ int main()
   // start up masa
   double tempx,tfield;
 
-  /*  masa_init("polynomial example","poly_example");
-  masa_init_param();
-  masa_sanity_check();
+  /*  masa_init<double>("polynomial example","poly_example");
+  masa_init_param<double>();
+  masa_sanity_check<double>();
 
   finite_diff(10,2);
-  masa_eval_t_source  (tempx,&tfield);
+  masa_eval_t_source<double>  (tempx,&tfield);
   
   finite_diff(20,2);
 

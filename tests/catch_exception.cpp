@@ -52,7 +52,7 @@ int main()
   // verify_pointer_sanity
   try
     {
-      masa_eval_t_source(1.0);
+      masa_eval_t_source<double>(1.0);
     }
   catch(int err) // return one on fatal error
     {
@@ -66,7 +66,7 @@ int main()
   // masa_init
   try
     {
-      masa_init("it is pitch black","grue"); // grue is not a valid masa mms, nor should it be
+      masa_init<double>("it is pitch black","grue"); // grue is not a valid masa mms, nor should it be
     }
   catch(int err) // return one on fatal error
     {
@@ -80,7 +80,7 @@ int main()
   // masa_select_mms
   try
     {
-      masa_select_mms("cthulhu"); // cthulhu is not a valid masa solution, nor has it been intialized
+      masa_select_mms<double>("cthulhu"); // cthulhu is not a valid masa solution, nor has it been intialized
     }
   catch(int err)
     {

@@ -40,325 +40,327 @@
 using namespace std;
 using namespace MASA;
 
-const double pi = acos(-1);
-const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
+typedef double Scalar;
 
-double anQ_p (double x,double y,double z,double p_0,double p_x,double p_y,double p_z,double a_px,double a_py,double a_pz,double L)
+const Scalar pi = acos(-1);
+const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
+
+Scalar anQ_p (Scalar x,Scalar y,Scalar z,Scalar p_0,Scalar p_x,Scalar p_y,Scalar p_z,Scalar a_px,Scalar a_py,Scalar a_pz,Scalar L)
 {
-  double p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_z * cos(a_pz * pi * z / L);
+  Scalar p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_z * cos(a_pz * pi * z / L);
   return p_an;
 }
  
-double anQ_u (double x,double y,double z,double u_0,double u_x,double u_y,double u_z,double a_ux,double a_uy,double a_uz,double L)
+Scalar anQ_u (Scalar x,Scalar y,Scalar z,Scalar u_0,Scalar u_x,Scalar u_y,Scalar u_z,Scalar a_ux,Scalar a_uy,Scalar a_uz,Scalar L)
 {
-  double u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_z * cos(a_uz * pi * z / L);  
+  Scalar u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_z * cos(a_uz * pi * z / L);  
   return u_an;
 } 
  
-double anQ_v (double x,double y,double z,double v_0,double v_x,double v_y,double v_z,double a_vx,double a_vy,double a_vz,double L)
+Scalar anQ_v (Scalar x,Scalar y,Scalar z,Scalar v_0,Scalar v_x,Scalar v_y,Scalar v_z,Scalar a_vx,Scalar a_vy,Scalar a_vz,Scalar L)
 {
-  double v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_z * sin(a_vz * pi * z / L);
+  Scalar v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_z * sin(a_vz * pi * z / L);
   return v_an;
 }
 
-double anQ_w (double x,double y,double z,double w_0,double w_x,double w_y,double w_z,double a_wx,double a_wy,double a_wz,double L)
+Scalar anQ_w (Scalar x,Scalar y,Scalar z,Scalar w_0,Scalar w_x,Scalar w_y,Scalar w_z,Scalar a_wx,Scalar a_wy,Scalar a_wz,Scalar L)
 {
-  double w_an = w_0 + w_x * sin(a_wx * pi * x / L) + w_y * sin(a_wy * pi * y / L) + w_z * cos(a_wz * pi * z / L);
+  Scalar w_an = w_0 + w_x * sin(a_wx * pi * x / L) + w_y * sin(a_wy * pi * y / L) + w_z * cos(a_wz * pi * z / L);
   return w_an;
 }
 
-double anQ_rho (double x,double y,double z,double rho_0,double rho_x,double rho_y,double rho_z,double a_rhox,double a_rhoy,double a_rhoz,double L)
+Scalar anQ_rho (Scalar x,Scalar y,Scalar z,Scalar rho_0,Scalar rho_x,Scalar rho_y,Scalar rho_z,Scalar a_rhox,Scalar a_rhoy,Scalar a_rhoz,Scalar L)
 { 
-  double rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_z * sin(a_rhoz * pi * z / L);
+  Scalar rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_z * sin(a_rhoz * pi * z / L);
   return rho_an;
 }
 
-double SourceQ_e (
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
+Scalar SourceQ_e (
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar);
 
 
-double SourceQ_u (
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
+Scalar SourceQ_u (
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar);
 
 
-double SourceQ_v (
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
+Scalar SourceQ_v (
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar);
 
-double SourceQ_w (
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
+Scalar SourceQ_w (
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar);
 
-double SourceQ_rho(
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
+Scalar SourceQ_rho(
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar);
 
 int main()
 {
   //variables
-  double u_0;
-  double u_x;
-  double u_y;
-  double u_z;
-  double v_0;
-  double v_x;
-  double v_y;
-  double v_z;
-  double w_0;
-  double w_x;
-  double w_y;
-  double w_z;
-  double rho_0;
-  double rho_x;
-  double rho_y;
-  double rho_z;
-  double p_0;
-  double p_x;
-  double p_y;
-  double p_z;
-  double a_px;
-  double a_py;
-  double a_pz;
-  double a_rhox;
-  double a_rhoy;
-  double a_rhoz;
-  double a_ux;
-  double a_uy;
-  double a_uz;
-  double a_vx;
-  double a_vy;
-  double a_vz;
-  double a_wx;
-  double a_wy;
-  double a_wz;
-  double mu;
-  double Gamma;
-  double L;    
-  double k;
+  Scalar u_0;
+  Scalar u_x;
+  Scalar u_y;
+  Scalar u_z;
+  Scalar v_0;
+  Scalar v_x;
+  Scalar v_y;
+  Scalar v_z;
+  Scalar w_0;
+  Scalar w_x;
+  Scalar w_y;
+  Scalar w_z;
+  Scalar rho_0;
+  Scalar rho_x;
+  Scalar rho_y;
+  Scalar rho_z;
+  Scalar p_0;
+  Scalar p_x;
+  Scalar p_y;
+  Scalar p_z;
+  Scalar a_px;
+  Scalar a_py;
+  Scalar a_pz;
+  Scalar a_rhox;
+  Scalar a_rhoy;
+  Scalar a_rhoz;
+  Scalar a_ux;
+  Scalar a_uy;
+  Scalar a_uz;
+  Scalar a_vx;
+  Scalar a_vy;
+  Scalar a_vz;
+  Scalar a_wx;
+  Scalar a_wy;
+  Scalar a_wz;
+  Scalar mu;
+  Scalar Gamma;
+  Scalar L;    
+  Scalar k;
 
-  double R;
-  double K;    
+  Scalar R;
+  Scalar K;    
 
   // parameters
-  double x;
-  double y;
-  double z;
+  Scalar x;
+  Scalar y;
+  Scalar z;
 
   // solutions
-  double ufield,ufield2,ufield3;
-  double vfield,vfield2,vfield3;
-  double wfield,wfield2,wfield3;
-  double efield,efield2,efield3;
-  double rho,rho2,rho3;
+  Scalar ufield,ufield2,ufield3;
+  Scalar vfield,vfield2,vfield3;
+  Scalar wfield,wfield2,wfield3;
+  Scalar efield,efield2,efield3;
+  Scalar rho,rho2,rho3;
 
-  double u_an,u_an2,u_an3;
-  double v_an,v_an2,v_an3;
-  double w_an,w_an2,w_an3;
-  double p_an,p_an2,p_an3;
-  double rho_an,rho_an2,rho_an3;
+  Scalar u_an,u_an2,u_an3;
+  Scalar v_an,v_an2,v_an3;
+  Scalar w_an,w_an2,w_an3;
+  Scalar p_an,p_an2,p_an3;
+  Scalar rho_an,rho_an2,rho_an3;
 
   // initalize
   int nx = 20;             // number of points
@@ -367,16 +369,16 @@ int main()
   int lx=1;                // length
   int ly=1; 
   int lz=1;     
-  double dx=double(lx)/double(nx);
-  double dy=double(ly)/double(ny);
-  double dz=double(lz)/double(nz);
+  Scalar dx=Scalar(lx)/Scalar(nx);
+  Scalar dy=Scalar(ly)/Scalar(ny);
+  Scalar dz=Scalar(lz)/Scalar(nz);
 
-  masa_init("navier-stokes-test","navierstokes_3d_compressible");
+  masa_init<Scalar>("navier-stokes-test","navierstokes_3d_compressible");
 
-  masa_init_param();
+  masa_init_param<Scalar>();
 
   // check all vars are initialized
-  int err = masa_sanity_check();
+  int err = masa_sanity_check<Scalar>();
   if(err != 0)
     {
       cout << "MASA :: Sanity Check Failed!\n";
@@ -384,57 +386,57 @@ int main()
     }
 
   // now set reference values for maple compare
-  u_0 = masa_get_param("u_0");
-  u_x = masa_get_param("u_x");
-  u_y = masa_get_param("u_y");
-  u_z = masa_get_param("u_z");
+  u_0 = masa_get_param<Scalar>("u_0");
+  u_x = masa_get_param<Scalar>("u_x");
+  u_y = masa_get_param<Scalar>("u_y");
+  u_z = masa_get_param<Scalar>("u_z");
 
-  v_0 = masa_get_param("v_0");
-  v_x = masa_get_param("v_x");
-  v_y = masa_get_param("v_y");
-  v_z = masa_get_param("v_z");
+  v_0 = masa_get_param<Scalar>("v_0");
+  v_x = masa_get_param<Scalar>("v_x");
+  v_y = masa_get_param<Scalar>("v_y");
+  v_z = masa_get_param<Scalar>("v_z");
 
-  w_0 = masa_get_param("w_0");
-  w_x = masa_get_param("w_x");
-  w_y = masa_get_param("w_y");
-  w_z = masa_get_param("w_z");
+  w_0 = masa_get_param<Scalar>("w_0");
+  w_x = masa_get_param<Scalar>("w_x");
+  w_y = masa_get_param<Scalar>("w_y");
+  w_z = masa_get_param<Scalar>("w_z");
 
-  rho_0 = masa_get_param("rho_0");
-  rho_x = masa_get_param("rho_x");
-  rho_y = masa_get_param("rho_y");
-  rho_z = masa_get_param("rho_z");
+  rho_0 = masa_get_param<Scalar>("rho_0");
+  rho_x = masa_get_param<Scalar>("rho_x");
+  rho_y = masa_get_param<Scalar>("rho_y");
+  rho_z = masa_get_param<Scalar>("rho_z");
 
-  p_0 = masa_get_param("p_0");
-  p_x = masa_get_param("p_x");
-  p_y = masa_get_param("p_y");
-  p_z = masa_get_param("p_z");
+  p_0 = masa_get_param<Scalar>("p_0");
+  p_x = masa_get_param<Scalar>("p_x");
+  p_y = masa_get_param<Scalar>("p_y");
+  p_z = masa_get_param<Scalar>("p_z");
 
-  a_px = masa_get_param("a_px");
-  a_py = masa_get_param("a_py");
-  a_pz = masa_get_param("a_pz");
+  a_px = masa_get_param<Scalar>("a_px");
+  a_py = masa_get_param<Scalar>("a_py");
+  a_pz = masa_get_param<Scalar>("a_pz");
 
-  a_rhox = masa_get_param("a_rhox");
-  a_rhoy = masa_get_param("a_rhoy");
-  a_rhoz = masa_get_param("a_rhoz");
+  a_rhox = masa_get_param<Scalar>("a_rhox");
+  a_rhoy = masa_get_param<Scalar>("a_rhoy");
+  a_rhoz = masa_get_param<Scalar>("a_rhoz");
 
-  a_ux = masa_get_param("a_ux");
-  a_uy = masa_get_param("a_uy");
-  a_uz = masa_get_param("a_uz");
+  a_ux = masa_get_param<Scalar>("a_ux");
+  a_uy = masa_get_param<Scalar>("a_uy");
+  a_uz = masa_get_param<Scalar>("a_uz");
 
-  a_vx = masa_get_param("a_vx");
-  a_vy = masa_get_param("a_vy");
-  a_vz = masa_get_param("a_vz");
+  a_vx = masa_get_param<Scalar>("a_vx");
+  a_vy = masa_get_param<Scalar>("a_vy");
+  a_vz = masa_get_param<Scalar>("a_vz");
 
-  a_wx = masa_get_param("a_wx");
-  a_wy = masa_get_param("a_wy");
-  a_wz = masa_get_param("a_wz");
+  a_wx = masa_get_param<Scalar>("a_wx");
+  a_wy = masa_get_param<Scalar>("a_wy");
+  a_wz = masa_get_param<Scalar>("a_wz");
 
-  Gamma = masa_get_param("Gamma");
-  mu    = masa_get_param("mu");
-  L     = masa_get_param("L");
+  Gamma = masa_get_param<Scalar>("Gamma");
+  mu    = masa_get_param<Scalar>("mu");
+  L     = masa_get_param<Scalar>("L");
 
-  R = masa_get_param("R");
-  K = masa_get_param("k");
+  R = masa_get_param<Scalar>("R");
+  K = masa_get_param<Scalar>("k");
   
   // evaluate source terms (3D)
   for(int i=0;i<nx;i++)
@@ -446,18 +448,18 @@ int main()
 	  z=k*dz;
 
 	  // evalulate source terms
-	  ufield = masa_eval_u_source  (x,y,z);
-	  vfield = masa_eval_v_source  (x,y,z);
-	  wfield = masa_eval_w_source  (x,y,z);
-	  efield = masa_eval_e_source  (x,y,z);
-	  rho    = masa_eval_rho_source(x,y,z);
+	  ufield = masa_eval_u_source  <Scalar>(x,y,z);
+	  vfield = masa_eval_v_source  <Scalar>(x,y,z);
+	  wfield = masa_eval_w_source  <Scalar>(x,y,z);
+	  efield = masa_eval_e_source  <Scalar>(x,y,z);
+	  rho    = masa_eval_rho_source<Scalar>(x,y,z);
 	  
 	  // evaluate analytical terms
-	  u_an = masa_eval_u_an        (x,y,z);
-	  v_an = masa_eval_v_an        (x,y,z);
-	  w_an = masa_eval_w_an        (x,y,z);
-	  p_an = masa_eval_p_an        (x,y,z);
-	  rho_an = masa_eval_rho_an    (x,y,z);
+	  u_an = masa_eval_u_an        <Scalar>(x,y,z);
+	  v_an = masa_eval_v_an        <Scalar>(x,y,z);
+	  w_an = masa_eval_w_an        <Scalar>(x,y,z);
+	  p_an = masa_eval_p_an        <Scalar>(x,y,z);
+	  rho_an = masa_eval_rho_an    <Scalar>(x,y,z);
 
 	  // check against maple output
 	  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);

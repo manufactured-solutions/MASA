@@ -40,23 +40,25 @@
 using namespace MASA;
 using namespace std;
 
+typedef double Scalar;
+
 int main()
 {
   int i,j,k;
-  double out;
-  double x;
-  double t;
+  Scalar out;
+  Scalar x;
+  Scalar t;
 
   int nx = 200;  // number of points
   int lx=10;     // length
   int nt = 22;
   int lt=4;   
-  double dx=double(lx)/double(nx);
-  double dt=double(lt)/double(nt);
+  Scalar dx=Scalar(lx)/Scalar(nx);
+  Scalar dt=Scalar(lt)/Scalar(nt);
 
-  masa_init("sod-test","sod_1d");
-  masa_init_param();
-  masa_sanity_check();
+  masa_init<Scalar>("sod-test","sod_1d");
+  masa_init_param<Scalar>();
+  masa_sanity_check<Scalar>();
   
   for(i=0;i<nx;i++)
     for(j=0;j<nt;j++)
@@ -64,9 +66,9 @@ int main()
 	x=i*dx;
 	t=j*dt;
 	
-	out = masa_eval_rho_source  (x,t);
-	out = masa_eval_rho_u_source(x,t);
-	//out = masa_eval_p_source    (x,t);
+	out = masa_eval_rho_source  <Scalar>(x,t);
+	out = masa_eval_rho_u_source<Scalar>(x,t);
+	//out = masa_eval_p_source    <Scalar>(x,t);
       } //done iterating
 
   // below are barely a regression test: 
@@ -75,20 +77,20 @@ int main()
   // test rarefaction wave before origin
   x = -1;
   t =  1;
-  out = masa_eval_rho_source(x,t);
-  out = masa_eval_rho_u_source(x,t);
+  out = masa_eval_rho_source<Scalar>(x,t);
+  out = masa_eval_rho_u_source<Scalar>(x,t);
 
   // touching sod error condition if root not bracketed in rtbis
   x = 1;
   t = 2;
 
   // nonphysical gamma, but useful to test coverage in rtbis
-  masa_set_param("Gamma",-1.0);
-  out = masa_eval_rho_source(x,t);
+  masa_set_param<Scalar>("Gamma",-1.0);
+  out = masa_eval_rho_source<Scalar>(x,t);
 
 #ifdef MASA_EXCEPTIONS
   
-  masa_set_param("Gamma",1.2);
+  masa_set_param<Scalar>("Gamma",1.2);
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa; these tests currently just verify functions
@@ -97,7 +99,7 @@ int main()
 
   try
     {
-      out = masa_eval_t_source(x);
+      out = masa_eval_t_source<Scalar>(x);
     }
   catch(int err) // return one on fatal error
     {
@@ -110,7 +112,7 @@ int main()
 
   try
     {
-      out = masa_eval_t_source(x,t);
+      out = masa_eval_t_source<Scalar>(x,t);
     }
   catch(int err) // return one on fatal error
     {

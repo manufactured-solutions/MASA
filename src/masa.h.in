@@ -87,93 +87,212 @@ namespace MASA
   // --------------------------------
   // new masa api function
   // --------------------------------
+  template <typename Scalar>
   int masa_init      (std::string, std::string);
+
+  template <typename Scalar>
   int masa_select_mms(std::string);
+
+  template <typename Scalar>
   int masa_list_mms  ();
 
   // --------------------------------
   // interact with mms variables
   // --------------------------------
+
+  template <typename Scalar>
   int    masa_init_param();
-  void   masa_set_param(std::string,double);
-  double masa_get_param(std::string);
+
+  template <typename Scalar>
+  void   masa_set_param(std::string,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_get_param(std::string);
 
   // --------------------------------
   // source term(s) -- 1D
   // --------------------------------
-  double masa_eval_t_source  (double);        // x
-  double masa_eval_t_source  (double,double); // x,t
-  double masa_eval_u_source  (double);
-  double masa_eval_v_source  (double);        // for SA model
-  double masa_eval_w_source  (double);
-  double masa_eval_e_source  (double);
-  double masa_eval_rho_source(double);
-  double masa_eval_rho_u_source(double,double); // 1d sod: x,t
 
-  double masa_eval_t_an      (double);        // x
-  double masa_eval_t_an      (double,double); // x,t
-  double masa_eval_u_an      (double);
-  double masa_eval_v_an      (double);        // for SA model
-  double masa_eval_w_an      (double);
-  double masa_eval_p_an      (double);
-  double masa_eval_rho_an    (double);
+  template <typename Scalar>
+  Scalar masa_eval_t_source  (Scalar);        // x
+
+  template <typename Scalar>
+  Scalar masa_eval_t_source  (Scalar,Scalar); // x,t
+
+  template <typename Scalar>
+  Scalar masa_eval_u_source  (Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_v_source  (Scalar);        // for SA model
+
+  template <typename Scalar>
+  Scalar masa_eval_w_source  (Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_e_source  (Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_rho_source(Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_rho_u_source(Scalar,Scalar); // 1d sod: x,t
+
+
+  template <typename Scalar>
+  Scalar masa_eval_t_an      (Scalar);        // x
+
+  template <typename Scalar>
+  Scalar masa_eval_t_an      (Scalar,Scalar); // x,t
+
+  template <typename Scalar>
+  Scalar masa_eval_u_an      (Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_v_an      (Scalar);        // for SA model
+
+  template <typename Scalar>
+  Scalar masa_eval_w_an      (Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_p_an      (Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_rho_an    (Scalar);
 
   // --------------------------------
   // source term(s) -- 2D
   // --------------------------------
-  double masa_eval_t_source  (double,double,double); //x,y,t
-  double masa_eval_u_source  (double,double);
-  double masa_eval_v_source  (double,double);
-  double masa_eval_w_source  (double,double); // for axisymmetric
-  double masa_eval_e_source  (double,double);
-  double masa_eval_rho_source(double,double);
 
-  double masa_eval_t_an      (double,double,double); //x,y,t
-  double masa_eval_u_an      (double,double);
-  double masa_eval_v_an      (double,double);
-  double masa_eval_w_an      (double,double); // for axisymmetric
-  double masa_eval_p_an      (double,double);
-  double masa_eval_rho_an    (double,double);
+  template <typename Scalar>
+  Scalar masa_eval_t_source  (Scalar,Scalar,Scalar); //x,y,t
+
+  template <typename Scalar>
+  Scalar masa_eval_u_source  (Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_v_source  (Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_w_source  (Scalar,Scalar); // for axisymmetric
+
+  template <typename Scalar>
+  Scalar masa_eval_e_source  (Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_rho_source(Scalar,Scalar);
+
+
+  template <typename Scalar>
+  Scalar masa_eval_t_an      (Scalar,Scalar,Scalar); //x,y,t
+
+  template <typename Scalar>
+  Scalar masa_eval_u_an      (Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_v_an      (Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_w_an      (Scalar,Scalar); // for axisymmetric
+
+  template <typename Scalar>
+  Scalar masa_eval_p_an      (Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_rho_an    (Scalar,Scalar);
 
   // --------------------------------
   // source term(s) -- 3D
   // --------------------------------
-  double masa_eval_t_source  (double,double,double,double); // x,y,z,t
-  double masa_eval_u_source  (double,double,double);
-  double masa_eval_v_source  (double,double,double);
-  double masa_eval_w_source  (double,double,double);
-  double masa_eval_e_source  (double,double,double);
-  double masa_eval_rho_source(double,double,double);
+
+  template <typename Scalar>
+  Scalar masa_eval_t_source  (Scalar,Scalar,Scalar,Scalar); // x,y,z,t
+
+  template <typename Scalar>
+  Scalar masa_eval_u_source  (Scalar,Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_v_source  (Scalar,Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_w_source  (Scalar,Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_e_source  (Scalar,Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_rho_source(Scalar,Scalar,Scalar);
   
-  double masa_eval_t_an      (double,double,double,double); // x,y,z,t
-  double masa_eval_u_an      (double,double,double);
-  double masa_eval_v_an      (double,double,double);
-  double masa_eval_w_an      (double,double,double);
-  double masa_eval_p_an      (double,double,double);
-  double masa_eval_rho_an    (double,double,double);
+
+  template <typename Scalar>
+  Scalar masa_eval_t_an      (Scalar,Scalar,Scalar,Scalar); // x,y,z,t
+
+  template <typename Scalar>
+  Scalar masa_eval_u_an      (Scalar,Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_v_an      (Scalar,Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_w_an      (Scalar,Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_p_an      (Scalar,Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_rho_an    (Scalar,Scalar,Scalar);
 
   // --------------------------------
   // gradient of analytical solutions
   // --------------------------------
-  double masa_eval_1d_grad_u  (double);
-  double masa_eval_2d_grad_u  (double,double,int);
-  double masa_eval_3d_grad_u  (double,double,double,int);
 
-  double masa_eval_1d_grad_v  (double);
-  double masa_eval_2d_grad_v  (double,double,int);
-  double masa_eval_3d_grad_v  (double,double,double,int);
+  template <typename Scalar>
+  Scalar masa_eval_1d_grad_u  (Scalar);
 
-  double masa_eval_1d_grad_w  (double);
-  double masa_eval_2d_grad_w  (double,double,int);
-  double masa_eval_3d_grad_w  (double,double,double,int);
+  template <typename Scalar>
+  Scalar masa_eval_2d_grad_u  (Scalar,Scalar,int);
 
-  double masa_eval_1d_grad_p  (double);
-  double masa_eval_2d_grad_p  (double,double,int);
-  double masa_eval_3d_grad_p  (double,double,double,int);
+  template <typename Scalar>
+  Scalar masa_eval_3d_grad_u  (Scalar,Scalar,Scalar,int);
 
-  double masa_eval_1d_grad_rho(double);
-  double masa_eval_2d_grad_rho(double,double,int);
-  double masa_eval_3d_grad_rho(double,double,double,int);
+
+  template <typename Scalar>
+  Scalar masa_eval_1d_grad_v  (Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_2d_grad_v  (Scalar,Scalar,int);
+
+  template <typename Scalar>
+  Scalar masa_eval_3d_grad_v  (Scalar,Scalar,Scalar,int);
+
+
+  template <typename Scalar>
+  Scalar masa_eval_1d_grad_w  (Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_2d_grad_w  (Scalar,Scalar,int);
+
+  template <typename Scalar>
+  Scalar masa_eval_3d_grad_w  (Scalar,Scalar,Scalar,int);
+
+
+  template <typename Scalar>
+  Scalar masa_eval_1d_grad_p  (Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_2d_grad_p  (Scalar,Scalar,int);
+
+  template <typename Scalar>
+  Scalar masa_eval_3d_grad_p  (Scalar,Scalar,Scalar,int);
+
+
+  template <typename Scalar>
+  Scalar masa_eval_1d_grad_rho(Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_2d_grad_rho(Scalar,Scalar,int);
+
+  template <typename Scalar>
+  Scalar masa_eval_3d_grad_rho(Scalar,Scalar,Scalar,int);
 
   // --------------------------------
   // internal masa functions user might want to call
@@ -181,16 +300,30 @@ namespace MASA
   void masa_exit(int);                             // calls exit() but with exception handling
   int masa_map (std::string*);
   int masa_map2(std::string, std::string);
+
+  template <typename Scalar>
   int masa_test_poly();                            // test poly -- expose for reg test
 
   // --------------------------------
   // old masa core functions (to be called by user)
   // --------------------------------
+
+  template <typename Scalar>
   int masa_getid(void**,std::string);
+
+  template <typename Scalar>
   int masa_printid();
+
+  template <typename Scalar>
   int masa_display_param();
+
+  template <typename Scalar>
   int masa_get_name(std::string*);
+
+  template <typename Scalar>
   int masa_get_dimension(int*);
+
+  template <typename Scalar>
   int masa_sanity_check();
 
   // --------------------

@@ -40,10 +40,12 @@
 using namespace MASA;
 using namespace std;
 
-const double pi = acos(-1);
-const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
+typedef double Scalar;
 
-double nancheck(double x)
+const Scalar pi = acos(-1);
+const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
+
+Scalar nancheck(Scalar x)
 {
   if(isnan(x))
     {
@@ -53,178 +55,178 @@ double nancheck(double x)
   return 1;
 }
 
-double anQ_p (double x,double y,double p_0,double p_x,double p_y,double a_px,double a_py,double L)
+Scalar anQ_p (Scalar x,Scalar y,Scalar p_0,Scalar p_x,Scalar p_y,Scalar a_px,Scalar a_py,Scalar L)
 {
-  double p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
+  Scalar p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
   return p_an;
 }
   
-double anQ_u (double x,double y,double u_0,double u_x,double u_y,double a_ux,double a_uy,double L)
+Scalar anQ_u (Scalar x,Scalar y,Scalar u_0,Scalar u_x,Scalar u_y,Scalar a_ux,Scalar a_uy,Scalar L)
 {
-  double u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  Scalar u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
   return u_an;
 } 
  
-double anQ_v (double x,double y,double v_0,double v_x,double v_y,double a_vx,double a_vy,double L)
+Scalar anQ_v (Scalar x,Scalar y,Scalar v_0,Scalar v_x,Scalar v_y,Scalar a_vx,Scalar a_vy,Scalar L)
 {
-  double v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  Scalar v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
   return v_an;
 }
 
-double anQ_rho (double x,double y,double rho_0,double rho_x,double rho_y,double a_rhox,double a_rhoy,double L)
+Scalar anQ_rho (Scalar x,Scalar y,Scalar rho_0,Scalar rho_x,Scalar rho_y,Scalar a_rhox,Scalar a_rhoy,Scalar L)
 { 
-  double rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
+  Scalar rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
   return rho_an;
 }
 
-double SourceQ_e ( // 24
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
+Scalar SourceQ_e ( // 24
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar);
 
 
-double SourceQ_u ( // should be 22
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
+Scalar SourceQ_u ( // should be 22
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar);
 
 
-double SourceQ_v ( // 22
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
+Scalar SourceQ_v ( // 22
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar);
 
 
-double SourceQ_rho ( // 22
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double,
-  double);
+Scalar SourceQ_rho ( // 22
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar,
+  Scalar);
 
 
 int main()
 
 {  //variables
-  double u_0;
-  double u_x;
-  double u_y;
-  double v_0;
-  double v_x;
-  double v_y;
-  double rho_0;
-  double rho_x;
-  double rho_y;
-  double p_0;
-  double p_x;
-  double p_y;
-  double a_px;
-  double a_py;
-  double a_rhox;
-  double a_rhoy;
-  double a_ux;
-  double a_uy;
-  double a_vx;
-  double a_vy;
-  double Gamma;
-  double mu;
-  double L;
+  Scalar u_0;
+  Scalar u_x;
+  Scalar u_y;
+  Scalar v_0;
+  Scalar v_x;
+  Scalar v_y;
+  Scalar rho_0;
+  Scalar rho_x;
+  Scalar rho_y;
+  Scalar p_0;
+  Scalar p_x;
+  Scalar p_y;
+  Scalar a_px;
+  Scalar a_py;
+  Scalar a_rhox;
+  Scalar a_rhoy;
+  Scalar a_ux;
+  Scalar a_uy;
+  Scalar a_vx;
+  Scalar a_vy;
+  Scalar Gamma;
+  Scalar mu;
+  Scalar L;
 
   // parameters
-  double x;
-  double y;
+  Scalar x;
+  Scalar y;
 
   // solutions -- efield is MASA term, efield2 is maple, efield3 is abs error between them
-  double ufield,ufield2,ufield3;
-  double vfield,vfield2,vfield3;
-  double efield,efield2,efield3;
-  double rho,rho2,rho3;
-  double gradx,grady,gradz,gradp,gradprho;
+  Scalar ufield,ufield2,ufield3;
+  Scalar vfield,vfield2,vfield3;
+  Scalar efield,efield2,efield3;
+  Scalar rho,rho2,rho3;
+  Scalar gradx,grady,gradz,gradp,gradprho;
 
-  double u_an,u_an2,u_an3;
-  double v_an,v_an2,v_an3;
-  double p_an,p_an2,p_an3;
-  double rho_an,rho_an2,rho_an3;
+  Scalar u_an,u_an2,u_an3;
+  Scalar v_an,v_an2,v_an3;
+  Scalar p_an,p_an2,p_an3;
+  Scalar rho_an,rho_an2,rho_an3;
 
   // initalize
   int nx = 115;  // number of points
@@ -232,49 +234,49 @@ int main()
   int lx=3;     // length
   int ly=1; 
   
-  double dx=double(lx)/double(nx);
-  double dy=double(ly)/double(ny);
+  Scalar dx=Scalar(lx)/Scalar(nx);
+  Scalar dy=Scalar(ly)/Scalar(ny);
 
-  masa_init("euler-test","euler_2d");
+  masa_init<double>("euler-test","euler_2d");
 
   // set params
-  masa_init_param();
+  masa_init_param<double>();
   
   // get vars
-  u_0 = masa_get_param("u_0");
-  u_x = masa_get_param("u_x");
-  u_y = masa_get_param("u_y");
+  u_0 = masa_get_param<Scalar>("u_0");
+  u_x = masa_get_param<Scalar>("u_x");
+  u_y = masa_get_param<Scalar>("u_y");
 
-  v_0 = masa_get_param("v_0");
-  v_x = masa_get_param("v_x");
-  v_y = masa_get_param("v_y");
+  v_0 = masa_get_param<Scalar>("v_0");
+  v_x = masa_get_param<Scalar>("v_x");
+  v_y = masa_get_param<Scalar>("v_y");
 
-  rho_0 = masa_get_param("rho_0");
-  rho_x = masa_get_param("rho_x");
-  rho_y = masa_get_param("rho_y");
+  rho_0 = masa_get_param<Scalar>("rho_0");
+  rho_x = masa_get_param<Scalar>("rho_x");
+  rho_y = masa_get_param<Scalar>("rho_y");
 
-  p_0 = masa_get_param("p_0");
-  p_x = masa_get_param("p_x");
-  p_y = masa_get_param("p_y");
+  p_0 = masa_get_param<Scalar>("p_0");
+  p_x = masa_get_param<Scalar>("p_x");
+  p_y = masa_get_param<Scalar>("p_y");
 
-  a_px = masa_get_param("a_px");
-  a_py = masa_get_param("a_py");
+  a_px = masa_get_param<Scalar>("a_px");
+  a_py = masa_get_param<Scalar>("a_py");
 
-  a_rhox = masa_get_param("a_rhox");
-  a_rhoy = masa_get_param("a_rhoy");
+  a_rhox = masa_get_param<Scalar>("a_rhox");
+  a_rhoy = masa_get_param<Scalar>("a_rhoy");
 
-  a_ux = masa_get_param("a_ux");
-  a_uy = masa_get_param("a_uy");
+  a_ux = masa_get_param<Scalar>("a_ux");
+  a_uy = masa_get_param<Scalar>("a_uy");
 
-  a_vx = masa_get_param("a_vx");
-  a_vy = masa_get_param("a_vy");
+  a_vx = masa_get_param<Scalar>("a_vx");
+  a_vy = masa_get_param<Scalar>("a_vy");
 
-  Gamma = masa_get_param("Gamma");
-  mu    = masa_get_param("mu");
-  L     = masa_get_param("L");
+  Gamma = masa_get_param<Scalar>("Gamma");
+  mu    = masa_get_param<Scalar>("mu");
+  L     = masa_get_param<Scalar>("L");
 
   // check that all terms have been initialized
-  int err = masa_sanity_check();
+  int err = masa_sanity_check<Scalar>();
   if(err != 0)
     {
       cout << "MASA :: Sanity Check Failed!\n";
@@ -289,29 +291,29 @@ int main()
 	y=j*dy;
 	
 	//evalulate source terms
-	ufield = masa_eval_u_source  (x,y);
-	vfield = masa_eval_v_source  (x,y);
-	efield = masa_eval_e_source  (x,y);
-	rho    = masa_eval_rho_source(x,y);
+	ufield = masa_eval_u_source  <Scalar>(x,y);
+	vfield = masa_eval_v_source  <Scalar>(x,y);
+	efield = masa_eval_e_source  <Scalar>(x,y);
+	rho    = masa_eval_rho_source<Scalar>(x,y);
 	
 	//evaluate analytical terms
-	u_an = masa_eval_u_an        (x,y);
-	v_an = masa_eval_v_an        (x,y);
-	p_an = masa_eval_p_an        (x,y);
-	rho_an = masa_eval_rho_an    (x,y);
+	u_an = masa_eval_u_an        <Scalar>(x,y);
+	v_an = masa_eval_v_an        <Scalar>(x,y);
+	p_an = masa_eval_p_an        <Scalar>(x,y);
+	rho_an = masa_eval_rho_an    <Scalar>(x,y);
 
 	// eval gradient terms
-	gradx = masa_eval_2d_grad_u(x,y,1);
-	grady = masa_eval_2d_grad_u(x,y,2);		
+	gradx = masa_eval_2d_grad_u<Scalar>(x,y,1);
+	grady = masa_eval_2d_grad_u<Scalar>(x,y,2);		
 
-	gradx = masa_eval_2d_grad_v(x,y,1);
-	grady = masa_eval_2d_grad_v(x,y,2);		
+	gradx = masa_eval_2d_grad_v<Scalar>(x,y,1);
+	grady = masa_eval_2d_grad_v<Scalar>(x,y,2);		
 
-	gradx = masa_eval_2d_grad_p(x,y,1);
-	grady = masa_eval_2d_grad_p(x,y,2);		
+	gradx = masa_eval_2d_grad_p<Scalar>(x,y,1);
+	grady = masa_eval_2d_grad_p<Scalar>(x,y,2);		
   
-	gradx = masa_eval_2d_grad_rho(x,y,1);
-	grady = masa_eval_2d_grad_rho(x,y,2);		
+	gradx = masa_eval_2d_grad_rho<Scalar>(x,y,1);
+	grady = masa_eval_2d_grad_rho<Scalar>(x,y,2);		
 
 	// check against maple
 	ufield2 = SourceQ_u   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
@@ -493,14 +495,14 @@ int main()
   freopen("/dev/null","w",stdout);
 
   // test gradient error terms
-  double derr = masa_eval_2d_grad_u(0,0,0);
+  Scalar derr = masa_eval_2d_grad_u<Scalar>(0,0,0);
   if(derr != -1)
     {
       cout << "MASA :: gradient (0) error condition failed!\n";
       exit(1);
     }
   
-  derr = masa_eval_2d_grad_u(0,0,3);
+  derr = masa_eval_2d_grad_u<Scalar>(0,0,3);
   if(derr != -1)
     {
       cout << "MASA :: gradient (3) error condition failed!\n";
@@ -508,14 +510,14 @@ int main()
     }
 
   // v
-  derr = masa_eval_2d_grad_v(0,0,0);
+  derr = masa_eval_2d_grad_v<Scalar>(0,0,0);
   if(derr != -1)
     {
       cout << "MASA :: v gradient (0) error condition failed!\n";
       exit(1);
     }
   
-  derr = masa_eval_2d_grad_v(0,0,3);
+  derr = masa_eval_2d_grad_v<Scalar>(0,0,3);
   if(derr != -1)
     {
       cout << "MASA :: v gradient (3) error condition failed!\n";
@@ -523,14 +525,14 @@ int main()
     }
 
   // p
-  derr = masa_eval_2d_grad_p(0,0,0);
+  derr = masa_eval_2d_grad_p<Scalar>(0,0,0);
   if(derr != -1)
     {
       cout << "MASA :: p gradient (0) error condition failed!\n";
       exit(1);
     }
   
-  derr = masa_eval_2d_grad_p(0,0,3);
+  derr = masa_eval_2d_grad_p<Scalar>(0,0,3);
   if(derr != -1)
     {
       cout << "MASA :: p gradient (3) error condition failed!\n";
@@ -538,14 +540,14 @@ int main()
     }
 
   // rho
-  derr = masa_eval_2d_grad_rho(0,0,0);
+  derr = masa_eval_2d_grad_rho<Scalar>(0,0,0);
   if(derr != -1)
     {
       cout << "MASA :: rho gradient (0) error condition failed!\n";
       exit(1);
     }
   
-  derr = masa_eval_2d_grad_rho(0,0,3);
+  derr = masa_eval_2d_grad_rho<Scalar>(0,0,3);
   if(derr != -1)
     {
       cout << "MASA :: rho gradient (3) error condition failed!\n";

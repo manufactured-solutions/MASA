@@ -41,16 +41,18 @@
 using namespace MASA;
 using namespace std;
 
+typedef double Real;
+
 int main()
 {
   int i,err;
-  double x=0;
-  double y=0;
-  double z=0;
+  Real x=0;
+  Real y=0;
+  Real z=0;
   string str;
 
   // testing masa_init
-  err = masa_init("euler-test","euler_1d");
+  err = masa_init<Real>("euler-test","euler_1d");
   if(err!=0)
     {
       cout << "masa_init FAILED\n";
@@ -58,7 +60,7 @@ int main()
     }
   
   // test get_dimension
-  masa_get_dimension(&i);
+  masa_get_dimension<Real>(&i);
   if(i!=1)
     {
       cout << "masa_get_dimension FAILED";
@@ -66,7 +68,7 @@ int main()
     }
 
   // test get_name
-  masa_get_name(&str);  
+  masa_get_name<Real>(&str);  
   if(str.compare("euler_1d") != 0)
     {
       cout << "masa_get_name FAILED";
@@ -78,7 +80,7 @@ int main()
   // capital letters
   // '-' dashes
   // ' ' whitespace
-  err = masa_init("euler-test-crazy","Eu l-er_2d");
+  err = masa_init<Real>("euler-test-crazy","Eu l-er_2d");
   if(err!=0)
     {
       cout << "MASA_INIT FAILED\n";
@@ -86,7 +88,7 @@ int main()
     }
 
   // lets check this gave us the mms we expected:
-  masa_get_name(&str);  
+  masa_get_name<Real>(&str);  
   if(str.compare("euler_2d") != 0)
     {
       cout << "masa_get_name FAILED";
@@ -100,7 +102,7 @@ int main()
   freopen("/dev/null","w",stdout);
 
   // test a few other functions
-  masa_printid();
+  masa_printid<Real>();
   masa_version_stdout();
   masa_get_numeric_version();
 

@@ -38,7 +38,7 @@ using namespace MASA;
 
 int main()
 {
-  masa_init("masa-test","MASA_test_function");
-  masa_init_param;
-  return masa_test_poly();
+  masa_init<double>("masa-test","MASA_test_function");
+  masa_init_param<double>();
+  return masa_test_poly<double>();
 }

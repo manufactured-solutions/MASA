@@ -38,25 +38,27 @@
 
 using namespace MASA;
 
+typedef double Scalar;
+
 int main()
 {
   // declarations
-  double x,y;
-  double tempx,tempy;
+  Scalar x,y;
+  Scalar tempx,tempy;
 
-  double ufield;
-  double vfield;
-  double efield;
-  double rho;
+  Scalar ufield;
+  Scalar vfield;
+  Scalar efield;
+  Scalar rho;
 
-  double u_an;
-  double v_an;
-  double p_an;
-  double rho_an;
+  Scalar u_an;
+  Scalar v_an;
+  Scalar p_an;
+  Scalar rho_an;
 
   //problem size
-  double lx,ly;
-  double dx,dy;
+  Scalar lx,ly;
+  Scalar dx,dy;
   int nx,ny;
 
   // initialize
@@ -65,19 +67,19 @@ int main()
   lx=1;     // length
   ly=1; 
 
-  dx=double(lx/nx);
-  dy=double(ly/ny);
+  dx=lx/nx;
+  dy=ly/ny;
 
   // initialize the problem
-  masa_init("euler-example","euler_2d");
+  masa_init<Scalar>("euler-example","euler_2d");
 
   // initialize the default parameters
-  masa_init_param();
+  masa_init_param<Scalar>();
 
   // intialize the various parameters required for Euler 2D
   // call the sanity check routine 
   // (tests that all variables have been initialized)
-  masa_sanity_check();
+  masa_sanity_check<Scalar>();
 
   // evaluate source terms over the domain (0<x<1, 0<y<1) 
   for(int i=0;i<nx;i++)
@@ -87,16 +89,16 @@ int main()
 	tempy=j*dy;
 
 	// evaluate source terms
-	ufield = masa_eval_u_source  (tempx,tempy);
-	vfield = masa_eval_v_source  (tempx,tempy);
-	efield = masa_eval_e_source  (tempx,tempy);
-	rho    = masa_eval_rho_source(tempx,tempy);
+	ufield = masa_eval_u_source<Scalar>  (tempx,tempy);
+	vfield = masa_eval_v_source<Scalar>  (tempx,tempy);
+	efield = masa_eval_e_source<Scalar>  (tempx,tempy);
+	rho    = masa_eval_rho_source<Scalar>(tempx,tempy);
 	
 	//evaluate analytical solution
-	u_an   = masa_eval_u_an      (tempx,tempy);
-	v_an   = masa_eval_v_an      (tempx,tempy);
-	p_an   = masa_eval_p_an      (tempx,tempy);
-	rho_an = masa_eval_rho_an    (tempx,tempy);
+	u_an   = masa_eval_u_an<Scalar>      (tempx,tempy);
+	v_an   = masa_eval_v_an<Scalar>      (tempx,tempy);
+	p_an   = masa_eval_p_an<Scalar>      (tempx,tempy);
+	rho_an = masa_eval_rho_an<Scalar>    (tempx,tempy);
 
       }
 

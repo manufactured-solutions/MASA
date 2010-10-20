@@ -40,35 +40,37 @@
 using namespace MASA;
 using namespace std;
 
+typedef double Scalar;
+
 int main()
 {
-  double solution;
+  Scalar solution;
 
   // print all solutions
-  masa_printid();
+  masa_printid<Scalar>();
   cout << endl << endl;
 
   // initialize first solution
-  masa_init("alice","heateq_1d_steady_const");
-  masa_init_param();
+  masa_init<Scalar>("alice","heateq_1d_steady_const");
+  masa_init_param<Scalar>();
 
   // initialize 2nd solution
-  masa_init("bob"  ,"euler_2d");
-  masa_init_param();
+  masa_init<Scalar>("bob"  ,"euler_2d");
+  masa_init_param<Scalar>();
   
   // list all initialized solutions
-  masa_list_mms();
+  masa_list_mms<Scalar>();
 
   // lets manipulate the alice set
-  masa_select_mms("alice");
-  masa_display_param();
-  solution = masa_eval_t_source(1.2);
+  masa_select_mms<Scalar>("alice");
+  masa_display_param<Scalar>();
+  solution = masa_eval_t_source<Scalar>(1.2);
   cout << solution << endl;
 
   // now switch to and edit bob
-  masa_select_mms("bob");
-  masa_display_param();
-  solution = masa_eval_u_source(1,1);
+  masa_select_mms<Scalar>("bob");
+  masa_display_param<Scalar>();
+  solution = masa_eval_u_source<Scalar>(1,1);
   cout << solution << endl;
 
 }

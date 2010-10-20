@@ -45,118 +45,130 @@ using namespace MASA;
  * -----------------------------------------------
  */ 
 
-MASA::heateq_1d_steady_const::heateq_1d_steady_const()
+template <typename Scalar>
+MASA::heateq_1d_steady_const<Scalar>::heateq_1d_steady_const()
 {
-    mmsname = "heateq_1d_steady_const";
-    dimension=1;
+    this->mmsname = "heateq_1d_steady_const";
+    this->dimension=1;
 
-    register_var("A_x",&A_x);   
-    register_var("k_0",&k_0);
+    this->register_var("A_x",&A_x);   
+    this->register_var("k_0",&k_0);
 
 }//done with constructor
 
-int MASA::heateq_1d_steady_const::init_var()
+template <typename Scalar>
+int MASA::heateq_1d_steady_const<Scalar>::init_var()
 {
   int err = 0;
 
-  err += set_var("A_x",1.4);
-  err += set_var("k_0",.82);
+  err += this->set_var("A_x",1.4);
+  err += this->set_var("k_0",.82);
   
   return err;
 
 }
 
-double MASA::heateq_1d_steady_const::eval_q_t(double x)
+template <typename Scalar>
+Scalar MASA::heateq_1d_steady_const<Scalar>::eval_q_t(Scalar x)
 {
-  double Q_T;
+  Scalar Q_T;
   Q_T = A_x * A_x * k_0 * cos(A_x * x);
   return Q_T;
 }
 
-double MASA::heateq_1d_steady_const::eval_an_t(double x)
+template <typename Scalar>
+Scalar MASA::heateq_1d_steady_const<Scalar>::eval_an_t(Scalar x)
 {
-  double T_an;
+  Scalar T_an;
   T_an = cos(A_x * x);
   return T_an;
 }
 
-MASA::heateq_2d_steady_const::heateq_2d_steady_const()
+template <typename Scalar>
+MASA::heateq_2d_steady_const<Scalar>::heateq_2d_steady_const()
 {
-    mmsname = "heateq_2d_steady_const";
-    dimension=2;
+    this->mmsname = "heateq_2d_steady_const";
+    this->dimension=2;
 
-    register_var("A_x",&A_x);   
-    register_var("k_0",&k_0);
-    register_var("B_y",&B_y);
+    this->register_var("A_x",&A_x);   
+    this->register_var("k_0",&k_0);
+    this->register_var("B_y",&B_y);
     
 }//done with constructor
 
-int MASA::heateq_2d_steady_const::init_var()
+template <typename Scalar>
+int MASA::heateq_2d_steady_const<Scalar>::init_var()
 {
   int err = 0;
 
   // default
-  double param=1.2;
+  Scalar param=1.2;
 
-  err += set_var("A_x",param);
-  err += set_var("B_y",param);
-  err += set_var("k_0",param);
+  err += this->set_var("A_x",param);
+  err += this->set_var("B_y",param);
+  err += this->set_var("k_0",param);
   
   return err;
 
 } // done with variable initializer
 
-double MASA::heateq_2d_steady_const::eval_q_t(double x,double y)
+template <typename Scalar>
+Scalar MASA::heateq_2d_steady_const<Scalar>::eval_q_t(Scalar x,Scalar y)
 {
-  double Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * (A_x * A_x + B_y * B_y);
+  Scalar Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * (A_x * A_x + B_y * B_y);
   return Q_T;
 }
 
-double MASA::heateq_2d_steady_const::eval_an_t(double x,double y)
+template <typename Scalar>
+Scalar MASA::heateq_2d_steady_const<Scalar>::eval_an_t(Scalar x,Scalar y)
 {
-  double T_an;
+  Scalar T_an;
   T_an = cos(A_x * x) * cos(B_y * y);
   return T_an;
 }
 
-MASA::heateq_3d_steady_const::heateq_3d_steady_const()
+template <typename Scalar>
+MASA::heateq_3d_steady_const<Scalar>::heateq_3d_steady_const()
 {
-    mmsname = "heateq_3d_steady_const";
-    dimension=3;
+    this->mmsname = "heateq_3d_steady_const";
+    this->dimension=3;
 
-    register_var("A_x",&A_x);   
-    register_var("k_0",&k_0);
-    register_var("B_y",&B_y);
-    register_var("C_z",&C_z);
+    this->register_var("A_x",&A_x);   
+    this->register_var("k_0",&k_0);
+    this->register_var("B_y",&B_y);
+    this->register_var("C_z",&C_z);
 
 }//done with constructor
 
-int MASA::heateq_3d_steady_const::init_var()
+template <typename Scalar>
+int MASA::heateq_3d_steady_const<Scalar>::init_var()
 {
   int err = 0;
   
   // default
-  double param=1.2;
+  Scalar param=1.2;
 
 
-  err += set_var("A_x",param);
-  err += set_var("B_y",param);
-  err += set_var("k_0",param);
-  err += set_var("C_z",param);
+  err += this->set_var("A_x",param);
+  err += this->set_var("B_y",param);
+  err += this->set_var("k_0",param);
+  err += this->set_var("C_z",param);
 
   return err;
 
 } // done with variable initializer
 
-double MASA::heateq_3d_steady_const::eval_q_t(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::heateq_3d_steady_const<Scalar>::eval_q_t(Scalar x,Scalar y,Scalar z)
 {
-  double Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * cos(C_z * z) * (A_x * A_x + B_y * B_y + C_z * C_z);
+  Scalar Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * cos(C_z * z) * (A_x * A_x + B_y * B_y + C_z * C_z);
   return Q_T;
 }
 
-double MASA::heateq_3d_steady_const::eval_an_t(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::heateq_3d_steady_const<Scalar>::eval_an_t(Scalar x,Scalar y,Scalar z)
 {
-  double T_an;
+  Scalar T_an;
   T_an = cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
   return T_an;
 }
@@ -172,121 +184,130 @@ double MASA::heateq_3d_steady_const::eval_an_t(double x,double y,double z)
  * -----------------------------------------------
  */ 
 
-MASA::heateq_1d_unsteady_const::heateq_1d_unsteady_const()
+template <typename Scalar>
+MASA::heateq_1d_unsteady_const<Scalar>::heateq_1d_unsteady_const()
 {
-  mmsname = "heateq_1d_unsteady_const";
-  dimension=1;
+  this->mmsname = "heateq_1d_unsteady_const";
+  this->dimension=1;
 
-  register_var("A_x",&A_x);   
-  register_var("k_0",&k_0);
-  register_var("D_t",&D_t);
-  register_var("cp_0",&cp_0);
-  register_var("A_t",&A_t);
-  register_var("rho",&rho);
+  this->register_var("A_x",&A_x);   
+  this->register_var("k_0",&k_0);
+  this->register_var("D_t",&D_t);
+  this->register_var("cp_0",&cp_0);
+  this->register_var("A_t",&A_t);
+  this->register_var("rho",&rho);
 
 }//done with constructor
 
-int MASA::heateq_1d_unsteady_const::init_var()
+template <typename Scalar>
+int MASA::heateq_1d_unsteady_const<Scalar>::init_var()
 {
   int err=0;
 
-  err += set_var("A_x",1.817);
-  err += set_var("k_0",.1984);
-  err += set_var("D_t",181.4);
-  err += set_var("cp_0",.104);
-  err += set_var("A_t", 12.4);
-  err += set_var("rho",.2380);
+  err += this->set_var("A_x",1.817);
+  err += this->set_var("k_0",.1984);
+  err += this->set_var("D_t",181.4);
+  err += this->set_var("cp_0",.104);
+  err += this->set_var("A_t", 12.4);
+  err += this->set_var("rho",.2380);
 
   return err;
 
 } // done with variable initializer
 
-double MASA::heateq_1d_unsteady_const::eval_q_t(double x,double t)
+template <typename Scalar>
+Scalar MASA::heateq_1d_unsteady_const<Scalar>::eval_q_t(Scalar x,Scalar t)
 {
-  double Q_T = cos(A_x * x + A_t * t) * cos(D_t * t) * k_0 * A_x * A_x - (sin(A_x * x + A_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(D_t * t) * D_t) * rho * cp_0;
+  Scalar Q_T = cos(A_x * x + A_t * t) * cos(D_t * t) * k_0 * A_x * A_x - (sin(A_x * x + A_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(D_t * t) * D_t) * rho * cp_0;
   return Q_T;
 }
 
 
-MASA::heateq_2d_unsteady_const::heateq_2d_unsteady_const()
+template <typename Scalar>
+MASA::heateq_2d_unsteady_const<Scalar>::heateq_2d_unsteady_const()
 {
-  mmsname = "heateq_2d_unsteady_const";
-  dimension=2;
+  this->mmsname = "heateq_2d_unsteady_const";
+  this->dimension=2;
     
-  register_var("A_x",&A_x);   
-  register_var("k_0",&k_0);
-  register_var("D_t",&D_t);
-  register_var("cp_0",&cp_0);
-  register_var("A_t",&A_t);
-  register_var("rho",&rho);
-  register_var("B_y",&B_y);
-  register_var("B_t",&B_t);
+  this->register_var("A_x",&A_x);   
+  this->register_var("k_0",&k_0);
+  this->register_var("D_t",&D_t);
+  this->register_var("cp_0",&cp_0);
+  this->register_var("A_t",&A_t);
+  this->register_var("rho",&rho);
+  this->register_var("B_y",&B_y);
+  this->register_var("B_t",&B_t);
 
 }//done with constructor
 
-int MASA::heateq_2d_unsteady_const::init_var()
+template <typename Scalar>
+int MASA::heateq_2d_unsteady_const<Scalar>::init_var()
 {
   int err = 0;
 
-  err += set_var("A_x",1.1);   
-  err += set_var("k_0",5.3);
-  err += set_var("D_t",7.8);
-  err += set_var("cp_0",0.1);
-  err += set_var("A_t",12.3);
-  err += set_var("rho",1.2);
-  err += set_var("B_y",5.4);
-  err += set_var("B_t",8.09);
+  err += this->set_var("A_x",1.1);   
+  err += this->set_var("k_0",5.3);
+  err += this->set_var("D_t",7.8);
+  err += this->set_var("cp_0",0.1);
+  err += this->set_var("A_t",12.3);
+  err += this->set_var("rho",1.2);
+  err += this->set_var("B_y",5.4);
+  err += this->set_var("B_t",8.09);
 
   return err;
 
 } // done with variable initializer
 
-double MASA::heateq_2d_unsteady_const::eval_q_t(double x,double y, double t)
+template <typename Scalar>
+Scalar MASA::heateq_2d_unsteady_const<Scalar>::eval_q_t(Scalar x,Scalar y, Scalar t)
 {
-  double Q_T = -(sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * k_0;
+  Scalar Q_T = -(sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * k_0;
   return Q_T;
 }
 
-MASA::heateq_3d_unsteady_const::heateq_3d_unsteady_const()
+template <typename Scalar>
+MASA::heateq_3d_unsteady_const<Scalar>::heateq_3d_unsteady_const()
 {
-  mmsname = "heateq_3d_unsteady_const";
-  dimension=3;
+  this->mmsname = "heateq_3d_unsteady_const";
+  this->dimension=3;
   
-  register_var("A_x",&A_x);   
-  register_var("k_0",&k_0);
-  register_var("D_t",&D_t);
-  register_var("cp_0",&cp_0);
-  register_var("A_t",&A_t);
-  register_var("rho",&rho);
-  register_var("B_y",&B_y);
-  register_var("B_t",&B_t);
-  register_var("C_z",&C_z);
-  register_var("C_t",&C_t);
+  this->register_var("A_x",&A_x);   
+  this->register_var("k_0",&k_0);
+  this->register_var("D_t",&D_t);
+  this->register_var("cp_0",&cp_0);
+  this->register_var("A_t",&A_t);
+  this->register_var("rho",&rho);
+  this->register_var("B_y",&B_y);
+  this->register_var("B_t",&B_t);
+  this->register_var("C_z",&C_z);
+  this->register_var("C_t",&C_t);
 
 }//done with constructor
 
-int MASA::heateq_3d_unsteady_const::init_var()
+template <typename Scalar>
+int MASA::heateq_3d_unsteady_const<Scalar>::init_var()
 {
   int err = 0;
 
-  err += set_var("A_x",1.4);
-  err += set_var("k_0",.82);
-  err += set_var("D_t",.12);
-  err += set_var("cp_0",3.1);
-  err += set_var("A_t",0.01);
-  err += set_var("rho",4.0);
-  err += set_var("B_y",11.01);
-  err += set_var("B_t",1.01);
-  err += set_var("C_z",0.90);
-  err += set_var("C_t",12.34);
+  err += this->set_var("A_x",1.4);
+  err += this->set_var("k_0",.82);
+  err += this->set_var("D_t",.12);
+  err += this->set_var("cp_0",3.1);
+  err += this->set_var("A_t",0.01);
+  err += this->set_var("rho",4.0);
+  err += this->set_var("B_y",11.01);
+  err += this->set_var("B_t",1.01);
+  err += this->set_var("C_z",0.90);
+  err += this->set_var("C_t",12.34);
   
   return err;
 
 } // done with variable initializer
 
-double MASA::heateq_3d_unsteady_const::eval_q_t(double x,double y, double z,double t)
+template <typename Scalar>
+Scalar MASA::heateq_3d_unsteady_const<Scalar>::eval_q_t(Scalar x,Scalar y, Scalar z,Scalar t)
 {
-  double Q_T = -(sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * B_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * C_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y + C_z * C_z) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * k_0;
+  Scalar Q_T = -(sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * B_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * C_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y + C_z * C_z) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * k_0;
   return Q_T;
 }
 
@@ -299,148 +320,157 @@ double MASA::heateq_3d_unsteady_const::eval_q_t(double x,double y, double z,doub
  * -----------------------------------------------
  */ 
 
-MASA::heateq_1d_unsteady_var::heateq_1d_unsteady_var()
+template <typename Scalar>
+MASA::heateq_1d_unsteady_var<Scalar>::heateq_1d_unsteady_var()
 {
-  mmsname = "heateq_1d_unsteady_var";
-  dimension=1;
+  this->mmsname = "heateq_1d_unsteady_var";
+  this->dimension=1;
 
-  register_var("A_x",&A_x);   
-  register_var("k_0",&k_0);
-  register_var("D_t",&D_t);
-  register_var("cp_0",&cp_0);
-  register_var("A_t",&A_t);
-  register_var("rho",&rho);
-  register_var("cp_1",&cp_1);
-  register_var("cp_2",&cp_2);
-  register_var("k_1",&k_1);
-  register_var("k_2",&k_2);
+  this->register_var("A_x",&A_x);   
+  this->register_var("k_0",&k_0);
+  this->register_var("D_t",&D_t);
+  this->register_var("cp_0",&cp_0);
+  this->register_var("A_t",&A_t);
+  this->register_var("rho",&rho);
+  this->register_var("cp_1",&cp_1);
+  this->register_var("cp_2",&cp_2);
+  this->register_var("k_1",&k_1);
+  this->register_var("k_2",&k_2);
 
 }//done with constructor
 
-int MASA::heateq_1d_unsteady_var::init_var()
+template <typename Scalar>
+int MASA::heateq_1d_unsteady_var<Scalar>::init_var()
 {
   int err = 0;
 
-  double param =1.093;
+  Scalar param =1.093;
 
-  err += set_var("A_x",param);   
-  err += set_var("k_0",param);
-  err += set_var("D_t",param);
-  err += set_var("cp_0",param);
-  err += set_var("A_t",param);
-  err += set_var("rho",param);
-  err += set_var("cp_1",param);
-  err += set_var("cp_2",param);
-  err += set_var("k_1",param);
-  err += set_var("k_2",param);
+  err += this->set_var("A_x",param);   
+  err += this->set_var("k_0",param);
+  err += this->set_var("D_t",param);
+  err += this->set_var("cp_0",param);
+  err += this->set_var("A_t",param);
+  err += this->set_var("rho",param);
+  err += this->set_var("cp_1",param);
+  err += this->set_var("cp_2",param);
+  err += this->set_var("k_1",param);
+  err += this->set_var("k_2",param);
 
   return err;
 
 } // done with variable initializer
 
-double MASA::heateq_1d_unsteady_var::eval_q_t(double x, double t)
+template <typename Scalar>
+Scalar MASA::heateq_1d_unsteady_var<Scalar>::eval_q_t(Scalar x, Scalar t)
 {
-  double Q_T = -pow(cos(D_t * t), 0.2e1) * A_x * A_x * k_1 + 0.3e1 * pow(cos(A_x * x + A_t * t), 0.3e1) * pow(cos(D_t * t), 0.3e1) * A_x * A_x * k_2 - sin(A_x * x + A_t * t) * cos(D_t * t) * A_t * rho * cp_0 - cos(A_x * x + A_t * t) * sin(D_t * t) * D_t * rho * cp_0 + (A_x * A_x * k_0 - 0.2e1 * pow(cos(D_t * t), 0.2e1) * A_x * A_x * k_2 - sin(A_x * x + A_t * t) * cos(D_t * t) * A_t * rho * cp_1 - cos(A_x * x + A_t * t) * sin(D_t * t) * D_t * rho * cp_1) * cos(A_x * x + A_t * t) * cos(D_t * t) + (0.2e1 * A_x * A_x * k_1 - sin(A_x * x + A_t * t) * cos(D_t * t) * A_t * rho * cp_2 - cos(A_x * x + A_t * t) * sin(D_t * t) * D_t * rho * cp_2) * pow(cos(A_x * x + A_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1);
+  Scalar Q_T = -pow(cos(D_t * t), Scalar(2)) * A_x * A_x * k_1 + Scalar(3) * pow(cos(A_x * x + A_t * t), Scalar(3)) * pow(cos(D_t * t), Scalar(3)) * A_x * A_x * k_2 - sin(A_x * x + A_t * t) * cos(D_t * t) * A_t * rho * cp_0 - cos(A_x * x + A_t * t) * sin(D_t * t) * D_t * rho * cp_0 + (A_x * A_x * k_0 - Scalar(2) * pow(cos(D_t * t), Scalar(2)) * A_x * A_x * k_2 - sin(A_x * x + A_t * t) * cos(D_t * t) * A_t * rho * cp_1 - cos(A_x * x + A_t * t) * sin(D_t * t) * D_t * rho * cp_1) * cos(A_x * x + A_t * t) * cos(D_t * t) + (Scalar(2) * A_x * A_x * k_1 - sin(A_x * x + A_t * t) * cos(D_t * t) * A_t * rho * cp_2 - cos(A_x * x + A_t * t) * sin(D_t * t) * D_t * rho * cp_2) * pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2));
   return Q_T;
 }
 
-MASA::heateq_2d_unsteady_var::heateq_2d_unsteady_var()
+template <typename Scalar>
+MASA::heateq_2d_unsteady_var<Scalar>::heateq_2d_unsteady_var()
 {
-  mmsname = "heateq_2d_unsteady_var";
-  dimension=2;
+  this->mmsname = "heateq_2d_unsteady_var";
+  this->dimension=2;
 
-  register_var("A_x",&A_x);   
-  register_var("k_0",&k_0);
-  register_var("D_t",&D_t);
-  register_var("cp_0",&cp_0);
-  register_var("A_t",&A_t);
-  register_var("rho",&rho);
-  register_var("cp_1",&cp_1);
-  register_var("cp_2",&cp_2);
-  register_var("k_1",&k_1);
-  register_var("k_2",&k_2);
-  register_var("B_y",&B_y);
-  register_var("B_t",&B_t);
+  this->register_var("A_x",&A_x);   
+  this->register_var("k_0",&k_0);
+  this->register_var("D_t",&D_t);
+  this->register_var("cp_0",&cp_0);
+  this->register_var("A_t",&A_t);
+  this->register_var("rho",&rho);
+  this->register_var("cp_1",&cp_1);
+  this->register_var("cp_2",&cp_2);
+  this->register_var("k_1",&k_1);
+  this->register_var("k_2",&k_2);
+  this->register_var("B_y",&B_y);
+  this->register_var("B_t",&B_t);
 
 }//done with constructor
 
-int MASA::heateq_2d_unsteady_var::init_var()
+template <typename Scalar>
+int MASA::heateq_2d_unsteady_var<Scalar>::init_var()
 {
   int err = 0;
-  double param =1.093;
+  Scalar param =1.093;
 
-  err += set_var("A_x",param);   
-  err += set_var("k_0",param);
-  err += set_var("D_t",param);
-  err += set_var("cp_0",param);
-  err += set_var("A_t",param);
-  err += set_var("rho",param);
-  err += set_var("cp_1",param);
-  err += set_var("cp_2",param);
-  err += set_var("k_1",param);
-  err += set_var("k_2",param);
-  err += set_var("B_y",param);
-  err += set_var("B_t",param);
+  err += this->set_var("A_x",param);   
+  err += this->set_var("k_0",param);
+  err += this->set_var("D_t",param);
+  err += this->set_var("cp_0",param);
+  err += this->set_var("A_t",param);
+  err += this->set_var("rho",param);
+  err += this->set_var("cp_1",param);
+  err += this->set_var("cp_2",param);
+  err += this->set_var("k_1",param);
+  err += this->set_var("k_2",param);
+  err += this->set_var("B_y",param);
+  err += this->set_var("B_t",param);
 
   return err;
 
 } // done with variable initializer
 
-double MASA::heateq_2d_unsteady_var::eval_q_t(double x,double y,double t)
+template <typename Scalar>
+Scalar MASA::heateq_2d_unsteady_var<Scalar>::eval_q_t(Scalar x,Scalar y,Scalar t)
 {
-  double Q_T = -pow(cos(B_y * y + B_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) * A_x * A_x * k_1 - sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t * rho * cp_0 - pow(cos(A_x * x + A_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) * B_y * B_y * k_1 - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t * rho * cp_0 - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t * rho * cp_0 + 0.3e1 * pow(cos(A_x * x + A_t * t), 0.3e1) * pow(cos(B_y * y + B_t * t), 0.3e1) * pow(cos(D_t * t), 0.3e1) * (A_x * A_x + B_y * B_y) * k_2 + (0.2e1 * A_x * A_x * k_1 - sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t * rho * cp_2 + 0.2e1 * B_y * B_y * k_1 - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t * rho * cp_2 - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t * rho * cp_2) * pow(cos(A_x * x + A_t * t), 0.2e1) * pow(cos(B_y * y + B_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) + (A_x * A_x * k_0 - 0.2e1 * pow(cos(B_y * y + B_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) * A_x * A_x * k_2 - sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t * rho * cp_1 + B_y * B_y * k_0 - 0.2e1 * pow(cos(A_x * x + A_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) * B_y * B_y * k_2 - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t * rho * cp_1 - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t * rho * cp_1) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t);
+  Scalar Q_T = -pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * A_x * A_x * k_1 - sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t * rho * cp_0 - pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * B_y * B_y * k_1 - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t * rho * cp_0 - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t * rho * cp_0 + Scalar(3) * pow(cos(A_x * x + A_t * t), Scalar(3)) * pow(cos(B_y * y + B_t * t), Scalar(3)) * pow(cos(D_t * t), Scalar(3)) * (A_x * A_x + B_y * B_y) * k_2 + (Scalar(2) * A_x * A_x * k_1 - sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t * rho * cp_2 + Scalar(2) * B_y * B_y * k_1 - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t * rho * cp_2 - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t * rho * cp_2) * pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) + (A_x * A_x * k_0 - Scalar(2) * pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * A_x * A_x * k_2 - sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t * rho * cp_1 + B_y * B_y * k_0 - Scalar(2) * pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * B_y * B_y * k_2 - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t * rho * cp_1 - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t * rho * cp_1) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t);
   return Q_T;
 }
 
-MASA::heateq_3d_unsteady_var::heateq_3d_unsteady_var()
+template <typename Scalar>
+MASA::heateq_3d_unsteady_var<Scalar>::heateq_3d_unsteady_var()
 {
-  mmsname = "heateq_3d_unsteady_var";
-  dimension=3;
+  this->mmsname = "heateq_3d_unsteady_var";
+  this->dimension=3;
 
-  register_var("A_x",&A_x);   
-  register_var("k_0",&k_0);
-  register_var("D_t",&D_t);
-  register_var("cp_0",&cp_0);
-  register_var("A_t",&A_t);
-  register_var("rho",&rho);
-  register_var("cp_1",&cp_1);
-  register_var("cp_2",&cp_2);
-  register_var("k_1",&k_1);
-  register_var("k_2",&k_2);
-  register_var("B_y",&B_y);
-  register_var("B_t",&B_t);
-  register_var("C_z",&C_z);
-  register_var("C_t",&C_t);
+  this->register_var("A_x",&A_x);   
+  this->register_var("k_0",&k_0);
+  this->register_var("D_t",&D_t);
+  this->register_var("cp_0",&cp_0);
+  this->register_var("A_t",&A_t);
+  this->register_var("rho",&rho);
+  this->register_var("cp_1",&cp_1);
+  this->register_var("cp_2",&cp_2);
+  this->register_var("k_1",&k_1);
+  this->register_var("k_2",&k_2);
+  this->register_var("B_y",&B_y);
+  this->register_var("B_t",&B_t);
+  this->register_var("C_z",&C_z);
+  this->register_var("C_t",&C_t);
 
 }//done with constructor
 
-int MASA::heateq_3d_unsteady_var::init_var()
+template <typename Scalar>
+int MASA::heateq_3d_unsteady_var<Scalar>::init_var()
 {
   int err = 0;
-  double param =1.093;
+  Scalar param =1.093;
 
-  err += set_var("A_x",param);   
-  err += set_var("k_0",param);
-  err += set_var("D_t",param);
-  err += set_var("cp_0",param);
-  err += set_var("A_t",param);
-  err += set_var("rho",param);
-  err += set_var("cp_1",param);
-  err += set_var("cp_2",param);
-  err += set_var("k_1",param);
-  err += set_var("k_2",param);
-  err += set_var("B_y",param);
-  err += set_var("B_t",param);
-  err += set_var("C_z",param);
-  err += set_var("C_t",param);
+  err += this->set_var("A_x",param);   
+  err += this->set_var("k_0",param);
+  err += this->set_var("D_t",param);
+  err += this->set_var("cp_0",param);
+  err += this->set_var("A_t",param);
+  err += this->set_var("rho",param);
+  err += this->set_var("cp_1",param);
+  err += this->set_var("cp_2",param);
+  err += this->set_var("k_1",param);
+  err += this->set_var("k_2",param);
+  err += this->set_var("B_y",param);
+  err += this->set_var("B_t",param);
+  err += this->set_var("C_z",param);
+  err += this->set_var("C_t",param);
 
   return err;
 
 } // done with variable initializer
 
-double MASA::heateq_3d_unsteady_var::eval_q_t(double x,double y,double z,double t)
+template <typename Scalar>
+Scalar MASA::heateq_3d_unsteady_var<Scalar>::eval_q_t(Scalar x,Scalar y,Scalar z,Scalar t)
 {
-  double Q_T = -sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_0 * A_t - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_0 * B_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_0 * C_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * rho * cp_0 * D_t - pow(cos(B_y * y + B_t * t), 0.2e1) * pow(cos(C_z * z + C_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) * k_1 * A_x * A_x - pow(cos(A_x * x + A_t * t), 0.2e1) * pow(cos(C_z * z + C_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) * k_1 * B_y * B_y - pow(cos(A_x * x + A_t * t), 0.2e1) * pow(cos(B_y * y + B_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) * k_1 * C_z * C_z + 0.3e1 * pow(cos(A_x * x + A_t * t), 0.3e1) * pow(cos(B_y * y + B_t * t), 0.3e1) * pow(cos(C_z * z + C_t * t), 0.3e1) * pow(cos(D_t * t), 0.3e1) * (A_x * A_x + B_y * B_y + C_z * C_z) * k_2 + (-sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_1 * A_t - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_1 * B_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_1 * C_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * rho * cp_1 * D_t + k_0 * A_x * A_x + k_0 * B_y * B_y + k_0 * C_z * C_z - 0.2e1 * pow(cos(B_y * y + B_t * t), 0.2e1) * pow(cos(C_z * z + C_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) * k_2 * A_x * A_x - 0.2e1 * pow(cos(A_x * x + A_t * t), 0.2e1) * pow(cos(C_z * z + C_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) * k_2 * B_y * B_y - 0.2e1 * pow(cos(A_x * x + A_t * t), 0.2e1) * pow(cos(B_y * y + B_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) * k_2 * C_z * C_z) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) + (-sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_2 * A_t - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_2 * B_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_2 * C_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * rho * cp_2 * D_t + 0.2e1 * k_1 * A_x * A_x + 0.2e1 * k_1 * B_y * B_y + 0.2e1 * k_1 * C_z * C_z) * pow(cos(A_x * x + A_t * t), 0.2e1) * pow(cos(B_y * y + B_t * t), 0.2e1) * pow(cos(C_z * z + C_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1);
+  Scalar Q_T = -sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_0 * A_t - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_0 * B_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_0 * C_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * rho * cp_0 * D_t - pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(C_z * z + C_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * k_1 * A_x * A_x - pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(C_z * z + C_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * k_1 * B_y * B_y - pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * k_1 * C_z * C_z + Scalar(3) * pow(cos(A_x * x + A_t * t), Scalar(3)) * pow(cos(B_y * y + B_t * t), Scalar(3)) * pow(cos(C_z * z + C_t * t), Scalar(3)) * pow(cos(D_t * t), Scalar(3)) * (A_x * A_x + B_y * B_y + C_z * C_z) * k_2 + (-sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_1 * A_t - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_1 * B_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_1 * C_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * rho * cp_1 * D_t + k_0 * A_x * A_x + k_0 * B_y * B_y + k_0 * C_z * C_z - Scalar(2) * pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(C_z * z + C_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * k_2 * A_x * A_x - Scalar(2) * pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(C_z * z + C_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * k_2 * B_y * B_y - Scalar(2) * pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * k_2 * C_z * C_z) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) + (-sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_2 * A_t - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_2 * B_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_2 * C_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * rho * cp_2 * D_t + Scalar(2) * k_1 * A_x * A_x + Scalar(2) * k_1 * B_y * B_y + Scalar(2) * k_1 * C_z * C_z) * pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(C_z * z + C_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2));
   return Q_T;
 }
 
@@ -457,100 +487,126 @@ double MASA::heateq_3d_unsteady_var::eval_q_t(double x,double y,double z,double 
  * -----------------------------------------------
  */ 
 
-MASA::heateq_1d_steady_var::heateq_1d_steady_var()
+template <typename Scalar>
+MASA::heateq_1d_steady_var<Scalar>::heateq_1d_steady_var()
 {
-  mmsname = "heateq_1d_steady_var";
-  dimension=1;
+  this->mmsname = "heateq_1d_steady_var";
+  this->dimension=1;
 
-  register_var("A_x",&A_x);   
-  register_var("k_0",&k_0);
-  register_var("k_1",&k_1);
-  register_var("k_2",&k_2);
+  this->register_var("A_x",&A_x);   
+  this->register_var("k_0",&k_0);
+  this->register_var("k_1",&k_1);
+  this->register_var("k_2",&k_2);
 
 }//done with constructor
 
-int MASA::heateq_1d_steady_var::init_var()
+template <typename Scalar>
+int MASA::heateq_1d_steady_var<Scalar>::init_var()
 {
   int err = 0;
-  double param = 1.4;
-  err += set_var("A_x",param);   
-  err += set_var("k_0",param);
-  err += set_var("k_1",param);
-  err += set_var("k_2",param);
+  Scalar param = 1.4;
+  err += this->set_var("A_x",param);   
+  err += this->set_var("k_0",param);
+  err += this->set_var("k_1",param);
+  err += this->set_var("k_2",param);
 
   return err;
 
 } // done with variable initializer
 
-double MASA::heateq_1d_steady_var::eval_q_t(double x)
+template <typename Scalar>
+Scalar MASA::heateq_1d_steady_var<Scalar>::eval_q_t(Scalar x)
 {
-  double Q_T = 0.3e1 * A_x * A_x * k_2 * pow(cos(A_x * x), 0.3e1) + 0.2e1 * A_x * A_x * k_1 * pow(cos(A_x * x), 0.2e1) - A_x * A_x * k_1 + (k_0 - 0.2e1 * k_2) * A_x * A_x * cos(A_x * x);
+  Scalar Q_T = Scalar(3) * A_x * A_x * k_2 * pow(cos(A_x * x), Scalar(3)) + Scalar(2) * A_x * A_x * k_1 * pow(cos(A_x * x), Scalar(2)) - A_x * A_x * k_1 + (k_0 - Scalar(2) * k_2) * A_x * A_x * cos(A_x * x);
   return Q_T;
 }
 
-MASA::heateq_2d_steady_var::heateq_2d_steady_var()
+template <typename Scalar>
+MASA::heateq_2d_steady_var<Scalar>::heateq_2d_steady_var()
 {
-  mmsname = "heateq_2d_steady_var";
-  dimension=2;
+  this->mmsname = "heateq_2d_steady_var";
+  this->dimension=2;
 
-  register_var("A_x",&A_x);   
-  register_var("k_0",&k_0);
-  register_var("k_1",&k_1);
-  register_var("k_2",&k_2);
-  register_var("B_y",&B_y);
+  this->register_var("A_x",&A_x);   
+  this->register_var("k_0",&k_0);
+  this->register_var("k_1",&k_1);
+  this->register_var("k_2",&k_2);
+  this->register_var("B_y",&B_y);
 
 }//done with constructor
 
-int MASA::heateq_2d_steady_var::init_var()
+template <typename Scalar>
+int MASA::heateq_2d_steady_var<Scalar>::init_var()
 {
   int err = 0;
-  double param = 1.4;
-  err += set_var("A_x",param);   
-  err += set_var("k_0",param);
-  err += set_var("k_1",param);
-  err += set_var("k_2",param);
-  err += set_var("B_y",param);
+  Scalar param = 1.4;
+  err += this->set_var("A_x",param);   
+  err += this->set_var("k_0",param);
+  err += this->set_var("k_1",param);
+  err += this->set_var("k_2",param);
+  err += this->set_var("B_y",param);
   return err;
 
 } // done with variable initializer
 
 
-double MASA::heateq_2d_steady_var::eval_q_t(double x,double y)
+template <typename Scalar>
+Scalar MASA::heateq_2d_steady_var<Scalar>::eval_q_t(Scalar x,Scalar y)
 {
-  double Q_T = (0.3e1 * A_x * A_x + 0.3e1 * B_y * B_y) * k_2 * pow(cos(A_x * x), 0.3e1) * pow(cos(B_y * y), 0.3e1) + (0.2e1 * A_x * A_x + 0.2e1 * B_y * B_y) * k_1 * pow(cos(A_x * x), 0.2e1) * pow(cos(B_y * y), 0.2e1) - (pow(cos(B_y * y), 0.2e1) * A_x * A_x + pow(cos(A_x * x), 0.2e1) * B_y * B_y) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y - 0.2e1 * pow(cos(B_y * y), 0.2e1) * k_2 * A_x * A_x - 0.2e1 * pow(cos(A_x * x), 0.2e1) * k_2 * B_y * B_y) * cos(A_x * x) * cos(B_y * y);
+  Scalar Q_T = (Scalar(3) * A_x * A_x + Scalar(3) * B_y * B_y) * k_2 * pow(cos(A_x * x), Scalar(3)) * pow(cos(B_y * y), Scalar(3)) + (Scalar(2) * A_x * A_x + Scalar(2) * B_y * B_y) * k_1 * pow(cos(A_x * x), Scalar(2)) * pow(cos(B_y * y), Scalar(2)) - (pow(cos(B_y * y), Scalar(2)) * A_x * A_x + pow(cos(A_x * x), Scalar(2)) * B_y * B_y) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y - Scalar(2) * pow(cos(B_y * y), Scalar(2)) * k_2 * A_x * A_x - Scalar(2) * pow(cos(A_x * x), Scalar(2)) * k_2 * B_y * B_y) * cos(A_x * x) * cos(B_y * y);
   return Q_T;
 }
 
 
-MASA::heateq_3d_steady_var::heateq_3d_steady_var()
+template <typename Scalar>
+MASA::heateq_3d_steady_var<Scalar>::heateq_3d_steady_var()
 {
-  mmsname = "heateq_3d_steady_var";
-  dimension=3;
+  this->mmsname = "heateq_3d_steady_var";
+  this->dimension=3;
 
-  register_var("A_x",&A_x);   
-  register_var("k_0",&k_0);
-  register_var("k_1",&k_1);
-  register_var("k_2",&k_2);
-  register_var("B_y",&B_y);
-  register_var("C_z",&C_z);
+  this->register_var("A_x",&A_x);   
+  this->register_var("k_0",&k_0);
+  this->register_var("k_1",&k_1);
+  this->register_var("k_2",&k_2);
+  this->register_var("B_y",&B_y);
+  this->register_var("C_z",&C_z);
 
 }//done with constructor
 
-int MASA::heateq_3d_steady_var::init_var()
+template <typename Scalar>
+int MASA::heateq_3d_steady_var<Scalar>::init_var()
 {  
   int err = 0;
-  double param = 1.4;
-  err += set_var("A_x",param);   
-  err += set_var("k_0",param);
-  err += set_var("k_1",param);
-  err += set_var("k_2",param);
-  err += set_var("B_y",param);
-  err += set_var("C_z",param);
+  Scalar param = 1.4;
+  err += this->set_var("A_x",param);   
+  err += this->set_var("k_0",param);
+  err += this->set_var("k_1",param);
+  err += this->set_var("k_2",param);
+  err += this->set_var("B_y",param);
+  err += this->set_var("C_z",param);
   return err;
 } // done with variable initializer
 
-double MASA::heateq_3d_steady_var::eval_q_t(double x,double y,double z)
+template <typename Scalar>
+Scalar MASA::heateq_3d_steady_var<Scalar>::eval_q_t(Scalar x,Scalar y,Scalar z)
 {
-  double Q_T = (0.3e1 * A_x * A_x + 0.3e1 * B_y * B_y + 0.3e1 * C_z * C_z) * k_2 * pow(cos(A_x * x), 0.3e1) * pow(cos(B_y * y), 0.3e1) * pow(cos(C_z * z), 0.3e1) + (0.2e1 * A_x * A_x + 0.2e1 * B_y * B_y + 0.2e1 * C_z * C_z) * k_1 * pow(cos(A_x * x), 0.2e1) * pow(cos(B_y * y), 0.2e1) * pow(cos(C_z * z), 0.2e1) - (pow(cos(B_y * y), 0.2e1) * pow(cos(C_z * z), 0.2e1) * A_x * A_x + pow(cos(A_x * x), 0.2e1) * pow(cos(C_z * z), 0.2e1) * B_y * B_y + pow(cos(A_x * x), 0.2e1) * pow(cos(B_y * y), 0.2e1) * C_z * C_z) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y + k_0 * C_z * C_z - 0.2e1 * pow(cos(B_y * y), 0.2e1) * pow(cos(C_z * z), 0.2e1) * k_2 * A_x * A_x - 0.2e1 * pow(cos(A_x * x), 0.2e1) * pow(cos(C_z * z), 0.2e1) * k_2 * B_y * B_y - 0.2e1 * pow(cos(A_x * x), 0.2e1) * pow(cos(B_y * y), 0.2e1) * k_2 * C_z * C_z) * cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
+  Scalar Q_T = (Scalar(3) * A_x * A_x + Scalar(3) * B_y * B_y + Scalar(3) * C_z * C_z) * k_2 * pow(cos(A_x * x), Scalar(3)) * pow(cos(B_y * y), Scalar(3)) * pow(cos(C_z * z), Scalar(3)) + (Scalar(2) * A_x * A_x + Scalar(2) * B_y * B_y + Scalar(2) * C_z * C_z) * k_1 * pow(cos(A_x * x), Scalar(2)) * pow(cos(B_y * y), Scalar(2)) * pow(cos(C_z * z), Scalar(2)) - (pow(cos(B_y * y), Scalar(2)) * pow(cos(C_z * z), Scalar(2)) * A_x * A_x + pow(cos(A_x * x), Scalar(2)) * pow(cos(C_z * z), Scalar(2)) * B_y * B_y + pow(cos(A_x * x), Scalar(2)) * pow(cos(B_y * y), Scalar(2)) * C_z * C_z) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y + k_0 * C_z * C_z - Scalar(2) * pow(cos(B_y * y), Scalar(2)) * pow(cos(C_z * z), Scalar(2)) * k_2 * A_x * A_x - Scalar(2) * pow(cos(A_x * x), Scalar(2)) * pow(cos(C_z * z), Scalar(2)) * k_2 * B_y * B_y - Scalar(2) * pow(cos(A_x * x), Scalar(2)) * pow(cos(B_y * y), Scalar(2)) * k_2 * C_z * C_z) * cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
   return Q_T;
 }
+
+// ----------------------------------------
+//   Template Instantiation(s)
+// ----------------------------------------
+
+MASA_INSTANTIATE_ALL(MASA::heateq_1d_steady_const);
+MASA_INSTANTIATE_ALL(MASA::heateq_2d_steady_const);
+MASA_INSTANTIATE_ALL(MASA::heateq_3d_steady_const);
+MASA_INSTANTIATE_ALL(MASA::heateq_1d_steady_var);
+MASA_INSTANTIATE_ALL(MASA::heateq_2d_steady_var);
+MASA_INSTANTIATE_ALL(MASA::heateq_3d_steady_var);
+MASA_INSTANTIATE_ALL(MASA::heateq_1d_unsteady_const);
+MASA_INSTANTIATE_ALL(MASA::heateq_2d_unsteady_const);
+MASA_INSTANTIATE_ALL(MASA::heateq_3d_unsteady_const);
+MASA_INSTANTIATE_ALL(MASA::heateq_1d_unsteady_var);
+MASA_INSTANTIATE_ALL(MASA::heateq_2d_unsteady_var);
+MASA_INSTANTIATE_ALL(MASA::heateq_3d_unsteady_var);
