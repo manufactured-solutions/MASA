@@ -36,7 +36,7 @@
 #include <map>
 
 using namespace MASA;
-
+using namespace std;
 // Anonymous namespace for local helper class/functions
 namespace {
 

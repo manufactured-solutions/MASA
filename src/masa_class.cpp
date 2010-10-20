@@ -37,6 +37,7 @@
 #include <masa_internal.h>
 #include <assert.h>
 
+using namespace std;
 using namespace MASA;
 
 /* ------------------------------------------------

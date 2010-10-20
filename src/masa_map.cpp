@@ -42,7 +42,7 @@ using namespace MASA;
 
 // all this does is convert a string to entirely lower case
 // should simplify our user stuff
-string uptolow(string str) 
+std::string uptolow(std::string str) 
 {
   for (int i=0;i<strlen(str.c_str());i++) 
     if (str[i] >= 0x41 && str[i] <= 0x5A) 
@@ -51,10 +51,10 @@ string uptolow(string str)
 }
 
 // remove dashes from strings
-string remove_line(string string1)
+std::string remove_line(std::string string1)
 {
   int position = string1.find( "-" ); // find first space
-  while ( position != string::npos )
+  while ( position != std::string::npos )
     {
       string1.replace( position, 1, "" );
       position = string1.find( "-", position + 1 );
@@ -62,10 +62,10 @@ string remove_line(string string1)
   return string1;
 }
 
-string remove_whitespace(string string1)
+std::string remove_whitespace(std::string string1)
 {
   int position = string1.find( " " ); // find first space
-  while ( position != string::npos )
+  while ( position != std::string::npos )
     {
       string1.replace( position, 1, "" );
       position = string1.find( " ", position + 1 );
@@ -328,10 +328,10 @@ int MASA::masa_map2(string input_string, string return_string)
   return 0;
 }
 */
-int MASA::masa_map(string* input_string)
+int MASA::masa_map(std::string* input_string)
 {
   // fix up the input given
-  string temp;
+  std::string temp;
   temp = *input_string;
   temp = uptolow(temp);
   temp = remove_line(temp);

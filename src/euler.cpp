@@ -316,8 +316,8 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_u(Scalar x,Scalar y, int i)
   switch(i)
     {
     case 0:
-      cout << "MASA error:: eval_2d_g_u has no 0th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_u has no 0th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
       
     case 1:
@@ -329,8 +329,8 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_u(Scalar x,Scalar y, int i)
       break;
 
     default:
-      cout << "MASA error:: eval_2d_g_u has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_u has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -349,8 +349,8 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_v(Scalar x,Scalar y, int i)
   switch(i)
     {
     case 0:
-      cout << "MASA error:: eval_2d_g_v has no 0th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_v has no 0th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
       
     case 1:
@@ -362,8 +362,8 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_v(Scalar x,Scalar y, int i)
       break;
 
     default:
-      cout << "MASA error:: eval_2d_g_v has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_v has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -381,8 +381,8 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_p(Scalar x,Scalar y, int i)
   switch(i)
     {
     case 0:
-      cout << "MASA error:: eval_2d_g_p has no 0th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_p has no 0th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
       
     case 1:
@@ -394,8 +394,8 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_p(Scalar x,Scalar y, int i)
       break;
 
     default:
-      cout << "MASA error:: eval_2d_g_p has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_p has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -413,8 +413,8 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_rho(Scalar x,Scalar y, int i)
   switch(i)
     {
     case 0:
-      cout << "MASA error:: eval_2d_g_rho has no 0th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_rho has no 0th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
       
     case 1:
@@ -426,8 +426,8 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_rho(Scalar x,Scalar y, int i)
       break;
 
     default:
-      cout << "MASA error:: eval_2d_g_rho has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_rho has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -597,8 +597,8 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_u(Scalar x,Scalar y,Scalar z,int i)
   switch(i)
     {
     case 0:
-      cout << "MASA error:: masa_eval_3d_grad_u has no 0th component\n";
-      cout << "Try 1,2 or 3\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_u has no 0th component\n";
+      std::cout << "Try 1,2 or 3\n";
       break;
       
     case 1:
@@ -614,8 +614,8 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_u(Scalar x,Scalar y,Scalar z,int i)
       break;
 
     default:
-      cout << "MASA error:: masa_eval_3d_grad_u has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_u has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -634,8 +634,8 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_v(Scalar x,Scalar y,Scalar z,int i)
   switch(i)
     {
     case 0:
-      cout << "MASA error:: masa_eval_3d_grad_v has no 0th component\n";
-      cout << "Try 1,2 or 3\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_v has no 0th component\n";
+      std::cout << "Try 1,2 or 3\n";
       break;
       
     case 1:
@@ -651,8 +651,8 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_v(Scalar x,Scalar y,Scalar z,int i)
       break;
 
     default:
-      cout << "MASA error:: masa_eval_3d_grad_v has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_v has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -670,8 +670,8 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_w(Scalar x,Scalar y,Scalar z,int i)
   switch(i)
     {
     case 0:
-      cout << "MASA error:: masa_eval_3d_grad_w has no 0th component\n";
-      cout << "Try 1,2 or 3\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_w has no 0th component\n";
+      std::cout << "Try 1,2 or 3\n";
       break;
       
     case 1:
@@ -687,8 +687,8 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_w(Scalar x,Scalar y,Scalar z,int i)
       break;
 
     default:
-      cout << "MASA error:: masa_eval_3d_grad_w has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_w has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -706,8 +706,8 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_p(Scalar x,Scalar y,Scalar z,int i)
   switch(i)
     {
     case 0:
-      cout << "MASA error:: masa_eval_3d_grad_p has no 0th component\n";
-      cout << "Try 1,2 or 3\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_p has no 0th component\n";
+      std::cout << "Try 1,2 or 3\n";
       break;
       
     case 1:
@@ -723,8 +723,8 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_p(Scalar x,Scalar y,Scalar z,int i)
       break;
 
     default:
-      cout << "MASA error:: masa_eval_3d_grad_p has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_p has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -742,8 +742,8 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_rho(Scalar x,Scalar y,Scalar z,int i)
   switch(i)
     {
     case 0:
-      cout << "MASA error:: masa_eval_3d_grad_rho has no 0th component\n";
-      cout << "Try 1,2 or 3\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_rho has no 0th component\n";
+      std::cout << "Try 1,2 or 3\n";
       break;
       
     case 1:
@@ -759,8 +759,8 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_rho(Scalar x,Scalar y,Scalar z,int i)
       break;
 
     default:
-      cout << "MASA error:: masa_eval_3d_grad_rho has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_rho has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch

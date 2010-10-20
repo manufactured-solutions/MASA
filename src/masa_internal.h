@@ -40,22 +40,19 @@
 #include <vector>
 #include <stdlib.h>
 
-using namespace std;
-
 // Macro for declaring MASA classes with all supported Scalar types
 #define MASA_INSTANTIATE_ALL(my_class) template class my_class<double>; \
                                        template class my_class<long double>
-
 namespace MASA 
 {
   // masa map functions here
   // probably want to hide this from the user eventually
   
-  int masa_map_solution  (string, string);
-  int masa_map_temporal  (string, string);
-  int masa_map_coeff     (string, string); 
-  int masa_map           (string, string);
-  int masa_map_dimension (string, string);
+  int masa_map_solution  (std::string, std::string);
+  int masa_map_temporal  (std::string, std::string);
+  int masa_map_coeff     (std::string, std::string); 
+  int masa_map           (std::string, std::string);
+  int masa_map_dimension (std::string, std::string);
 
   /* 
    * -------------------------------------------------------------------------------------------   
@@ -86,9 +83,9 @@ namespace MASA
     Scalar dummy;
     int num_vars;
 
-    map<string,int> varmap;               // map to each variable
-    vector<Scalar*>  vararr;              // arr of pointers to each variable
-    string mmsname;                       // the name of the manufactured solution  
+    std::map<std::string,int> varmap;               // map to each variable
+    std::vector<Scalar*>  vararr;              // arr of pointers to each variable
+    std::string mmsname;                       // the name of the manufactured solution  
     int dimension;                        // dimension of the solution
 
   public: 
@@ -105,30 +102,30 @@ namespace MASA
    * -------------------------------------------------------------------------------------------
    */
 
-    virtual Scalar eval_an_t(Scalar)                {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
-    virtual Scalar eval_an_t(Scalar,Scalar)         {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
-    virtual Scalar eval_an_t(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
-    virtual Scalar eval_an_t(Scalar,Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 4d problems
+    virtual Scalar eval_an_t(Scalar)                {std::cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
+    virtual Scalar eval_an_t(Scalar,Scalar)         {std::cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
+    virtual Scalar eval_an_t(Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
+    virtual Scalar eval_an_t(Scalar,Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Analytical Solution (T) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 4d problems
 
-    virtual Scalar eval_an_u(Scalar)                {cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
-    virtual Scalar eval_an_u(Scalar,Scalar)         {cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
-    virtual Scalar eval_an_u(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
+    virtual Scalar eval_an_u(Scalar)                {std::cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
+    virtual Scalar eval_an_u(Scalar,Scalar)         {std::cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
+    virtual Scalar eval_an_u(Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Analytical Solution (u) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
 
-    virtual Scalar eval_an_v(Scalar)                {cout << "MASA ERROR:: Analytical Solution (v) is unavailable for 1D problems.\n"; return -1.33;};        // returns value of analytical solution
-    virtual Scalar eval_an_v(Scalar,Scalar)         {cout << "MASA ERROR:: Analytical Solution (v) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
-    virtual Scalar eval_an_v(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Analytical Solution (v) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
+    virtual Scalar eval_an_v(Scalar)                {std::cout << "MASA ERROR:: Analytical Solution (v) is unavailable for 1D problems.\n"; return -1.33;};        // returns value of analytical solution
+    virtual Scalar eval_an_v(Scalar,Scalar)         {std::cout << "MASA ERROR:: Analytical Solution (v) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
+    virtual Scalar eval_an_v(Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Analytical Solution (v) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
 
-    virtual Scalar eval_an_w(Scalar)                {cout << "MASA ERROR:: Analytical Solution (w) is unavailable for 1d problems.\n"; return -1.33;};        // returns value of analytical solution
-    virtual Scalar eval_an_w(Scalar,Scalar)         {cout << "MASA ERROR:: Analytical Solution (w) is unavailable for 2d problems.\n"; return -1.33;};        // overloaded for 2d problems
-    virtual Scalar eval_an_w(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Analytical Solution (w) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
+    virtual Scalar eval_an_w(Scalar)                {std::cout << "MASA ERROR:: Analytical Solution (w) is unavailable for 1d problems.\n"; return -1.33;};        // returns value of analytical solution
+    virtual Scalar eval_an_w(Scalar,Scalar)         {std::cout << "MASA ERROR:: Analytical Solution (w) is unavailable for 2d problems.\n"; return -1.33;};        // overloaded for 2d problems
+    virtual Scalar eval_an_w(Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Analytical Solution (w) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
     
-    virtual Scalar eval_an_p(Scalar)                {cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
-    virtual Scalar eval_an_p(Scalar,Scalar)         {cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
-    virtual Scalar eval_an_p(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
+    virtual Scalar eval_an_p(Scalar)                {std::cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
+    virtual Scalar eval_an_p(Scalar,Scalar)         {std::cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
+    virtual Scalar eval_an_p(Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
 
-    virtual Scalar eval_an_rho(Scalar)              {cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
-    virtual Scalar eval_an_rho(Scalar,Scalar)       {cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
-    virtual Scalar eval_an_rho(Scalar,Scalar,Scalar){cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
+    virtual Scalar eval_an_rho(Scalar)              {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
+    virtual Scalar eval_an_rho(Scalar,Scalar)       {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
+    virtual Scalar eval_an_rho(Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
    
 
   /* 
@@ -139,31 +136,31 @@ namespace MASA
    * -------------------------------------------------------------------------------------------
    */
 
-    virtual Scalar eval_q_t(Scalar)                {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
-    virtual Scalar eval_q_t(Scalar, Scalar)        {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
-    virtual Scalar eval_q_t(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
-    virtual Scalar eval_q_t(Scalar,Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};             // returns value of source term (x,y,z,t)
+    virtual Scalar eval_q_t(Scalar)                {std::cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
+    virtual Scalar eval_q_t(Scalar, Scalar)        {std::cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
+    virtual Scalar eval_q_t(Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (temp)
+    virtual Scalar eval_q_t(Scalar,Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};             // returns value of source term (x,y,z,t)
 
-    virtual Scalar eval_q_u(Scalar)                {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (u)
-    virtual Scalar eval_q_u(Scalar,Scalar)         {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // overloaded for 2d problems
-    virtual Scalar eval_q_u(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // overloaded for 3d problems
+    virtual Scalar eval_q_u(Scalar)                {std::cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // returns value of source term (u)
+    virtual Scalar eval_q_u(Scalar,Scalar)         {std::cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // overloaded for 2d problems
+    virtual Scalar eval_q_u(Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};                    // overloaded for 3d problems
 
-    virtual Scalar eval_q_v(Scalar)                {cout << "MASA ERROR:: Source term (v) is unavailable for 1d problems -- eval_q_v has too few arguments.\n"; return -1.33;}; // returns value of source term (v)
-    virtual Scalar eval_q_v(Scalar,Scalar)         {cout << "MASA ERROR:: Source term (v) is unavailable or not properly loaded.\n"; return -1.33;};                            // overloaded for 2d problems
-    virtual Scalar eval_q_v(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Source term (v) is unavailable or not properly loaded.\n"; return -1.33;};                            // overloaded for 3d problems 
+    virtual Scalar eval_q_v(Scalar)                {std::cout << "MASA ERROR:: Source term (v) is unavailable for 1d problems -- eval_q_v has too few arguments.\n"; return -1.33;}; // returns value of source term (v)
+    virtual Scalar eval_q_v(Scalar,Scalar)         {std::cout << "MASA ERROR:: Source term (v) is unavailable or not properly loaded.\n"; return -1.33;};                            // overloaded for 2d problems
+    virtual Scalar eval_q_v(Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Source term (v) is unavailable or not properly loaded.\n"; return -1.33;};                            // overloaded for 3d problems 
 
-    virtual Scalar eval_q_w(Scalar)                {cout << "MASA ERROR:: Source term (w) is unavailable for 1d problems -- eval_q_w has too few arguments.\n"; return -1.33;};  // returns value of source term (w)
-    virtual Scalar eval_q_w(Scalar,Scalar)         {cout << "MASA ERROR:: Source term (w) is unavailable for 2d problems -- eval_q_w has too few arguments.\n"; return -1.33;};  // overloaded for 2d problems
-    virtual Scalar eval_q_w(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Source Term (w) is unavailable or not properly loaded.\n"; return -1.33;};                             // overloaded for 3d problems
+    virtual Scalar eval_q_w(Scalar)                {std::cout << "MASA ERROR:: Source term (w) is unavailable for 1d problems -- eval_q_w has too few arguments.\n"; return -1.33;};  // returns value of source term (w)
+    virtual Scalar eval_q_w(Scalar,Scalar)         {std::cout << "MASA ERROR:: Source term (w) is unavailable for 2d problems -- eval_q_w has too few arguments.\n"; return -1.33;};  // overloaded for 2d problems
+    virtual Scalar eval_q_w(Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Source Term (w) is unavailable or not properly loaded.\n"; return -1.33;};                             // overloaded for 3d problems
 
-    virtual Scalar eval_q_e(Scalar)                {cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
-    virtual Scalar eval_q_e(Scalar,Scalar)         {cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
-    virtual Scalar eval_q_e(Scalar,Scalar,Scalar)  {cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
+    virtual Scalar eval_q_e(Scalar)                {std::cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
+    virtual Scalar eval_q_e(Scalar,Scalar)         {std::cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
+    virtual Scalar eval_q_e(Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
 
-    virtual Scalar eval_q_rho(Scalar)              {cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
-    virtual Scalar eval_q_rho(Scalar,Scalar)       {cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
-    virtual Scalar eval_q_rho_u(Scalar,Scalar)     {cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density) -- 1d Sod
-    virtual Scalar eval_q_rho(Scalar,Scalar,Scalar){cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
+    virtual Scalar eval_q_rho(Scalar)              {std::cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
+    virtual Scalar eval_q_rho(Scalar,Scalar)       {std::cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
+    virtual Scalar eval_q_rho_u(Scalar,Scalar)     {std::cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density) -- 1d Sod
+    virtual Scalar eval_q_rho(Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
 
   /* 
    * -------------------------------------------------------------------------------------------   
@@ -173,25 +170,25 @@ namespace MASA
    * -------------------------------------------------------------------------------------------
    */
 
-    virtual Scalar eval_1d_g_u(Scalar)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual Scalar eval_2d_g_u(Scalar,Scalar,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual Scalar eval_3d_g_u(Scalar,Scalar,Scalar,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_1d_g_u(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_2d_g_u(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_3d_g_u(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
-    virtual Scalar eval_1d_g_v(Scalar)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual Scalar eval_2d_g_v(Scalar,Scalar,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual Scalar eval_3d_g_v(Scalar,Scalar,Scalar,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_1d_g_v(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_2d_g_v(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_3d_g_v(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
-    virtual Scalar eval_1d_g_w(Scalar)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual Scalar eval_2d_g_w(Scalar,Scalar,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual Scalar eval_3d_g_w(Scalar,Scalar,Scalar,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_1d_g_w(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_2d_g_w(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_3d_g_w(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
-    virtual Scalar eval_1d_g_p(Scalar)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual Scalar eval_2d_g_p(Scalar,Scalar,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual Scalar eval_3d_g_p(Scalar,Scalar,Scalar,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_1d_g_p(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_2d_g_p(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_3d_g_p(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
-    virtual Scalar eval_1d_g_rho(Scalar)               {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual Scalar eval_2d_g_rho(Scalar,Scalar,int)        {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual Scalar eval_3d_g_rho(Scalar,Scalar,Scalar,int) {cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_1d_g_rho(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_2d_g_rho(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_3d_g_rho(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
   /* 
    * -------------------------------------------------------------------------------------------   
@@ -201,13 +198,13 @@ namespace MASA
    * -------------------------------------------------------------------------------------------
    */
     manufactured_solution();                                     // constructor
-    int set_var(string,Scalar);                                  // sets variable value    
-    int register_var(string, Scalar*);                           // this registers a variable
+    int set_var(std::string,Scalar);                                  // sets variable value    
+    int register_var(std::string, Scalar*);                           // this registers a variable
     int sanity_check();                                          // checks that all variables to the class have been initalized
     int poly_test();                                             // regression method for poly class (see below)
-    Scalar get_var(string);                                      // returns variable value
+    Scalar get_var(std::string);                                      // returns variable value
     void display_var();                                          // print all variable names and values
-    void return_name(string* inname){inname->assign(mmsname);};  // method: returns name
+    void return_name(std::string* inname){inname->assign(mmsname);};  // method: returns name
     void return_dim (int* indim)    {*indim=dimension;};         // method: returns dimension of solution
     
   }; // done with MMS base class
@@ -228,13 +225,13 @@ namespace MASA
   {
   public:
     
-    void set_coeffs( const vector<Scalar> & );
+    void set_coeffs( const std::vector<Scalar> & );
     
     // Evaluates polynomial.
     Scalar operator()( const Scalar &, int *) const;
     
     // Evaluates polynomial and deriviatives up to order specified by user.
-    void eval_derivs( const Scalar, const int, vector<Scalar> & ) const;
+    void eval_derivs( const Scalar, const int, std::vector<Scalar> & ) const;
     
     Scalar get_coeffs( const int & ) const;    
     
@@ -246,7 +243,7 @@ namespace MASA
     // coeffs[0] = a0
     // coeffs[1] = a1
     // and so on.
-    vector<Scalar> coeffs;
+    std::vector<Scalar> coeffs;
     
   };  
 

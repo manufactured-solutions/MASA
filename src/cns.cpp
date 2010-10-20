@@ -166,8 +166,8 @@ Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_u(Scalar x,Scalar y
   switch(i)
     {
     case 0:
-      cout << "MASA error:: eval_2d_g_u has no 0th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_u has no 0th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
       
     case 1:
@@ -179,8 +179,8 @@ Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_u(Scalar x,Scalar y
       break;
 
     default:
-      cout << "MASA error:: eval_2d_g_u has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_u has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -198,8 +198,8 @@ Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_v(Scalar x,Scalar y
   switch(i)
     {
     case 0:
-      cout << "MASA error:: eval_2d_g_v has no 0th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_v has no 0th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
       
     case 1:
@@ -211,8 +211,8 @@ Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_v(Scalar x,Scalar y
       break;
 
     default:
-      cout << "MASA error:: eval_2d_g_v has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_v has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -230,8 +230,8 @@ Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_p(Scalar x,Scalar y
   switch(i)
     {
     case 0:
-      cout << "MASA error:: eval_2d_g_p has no 0th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_p has no 0th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
       
     case 1:
@@ -243,8 +243,8 @@ Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_p(Scalar x,Scalar y
       break;
 
     default:
-      cout << "MASA error:: eval_2d_g_p has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_p has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -262,8 +262,8 @@ Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_rho(Scalar x,Scalar
   switch(i)
     {
     case 0:
-      cout << "MASA error:: eval_2d_g_rho has no 0th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_rho has no 0th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
       
     case 1:
@@ -275,8 +275,8 @@ Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_rho(Scalar x,Scalar
       break;
 
     default:
-      cout << "MASA error:: eval_2d_g_rho has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: eval_2d_g_rho has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -517,8 +517,8 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_u(Scalar x,Scalar y
   switch(i)
     {
     case 0:
-      cout << "MASA error:: masa_eval_3d_grad_u has no 0th component\n";
-      cout << "Try 1,2 or 3\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_u has no 0th component\n";
+      std::cout << "Try 1,2 or 3\n";
       break;
       
     case 1:
@@ -535,8 +535,8 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_u(Scalar x,Scalar y
       break;
 
     default:
-      cout << "MASA error:: masa_eval_3d_grad_u has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_u has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -554,8 +554,8 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_v(Scalar x,Scalar y
   switch(i)
     {
     case 0:
-      cout << "MASA error:: masa_eval_3d_grad_v has no 0th component\n";
-      cout << "Try 1,2 or 3\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_v has no 0th component\n";
+      std::cout << "Try 1,2 or 3\n";
       break;
       
     case 1:
@@ -571,8 +571,8 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_v(Scalar x,Scalar y
       break;
 
     default:
-      cout << "MASA error:: masa_eval_3d_grad_v has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_v has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -590,8 +590,8 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_w(Scalar x,Scalar y
   switch(i)
     {
     case 0:
-      cout << "MASA error:: masa_eval_3d_grad_w has no 0th component\n";
-      cout << "Try 1,2 or 3\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_w has no 0th component\n";
+      std::cout << "Try 1,2 or 3\n";
       break;
       
     case 1:
@@ -607,8 +607,8 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_w(Scalar x,Scalar y
       break;
 
     default:
-      cout << "MASA error:: masa_eval_3d_grad_w has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_w has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -626,8 +626,8 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_p(Scalar x,Scalar y
   switch(i)
     {
     case 0:
-      cout << "MASA error:: masa_eval_3d_grad_p has no 0th component\n";
-      cout << "Try 1,2 or 3\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_p has no 0th component\n";
+      std::cout << "Try 1,2 or 3\n";
       break;
       
     case 1:
@@ -643,8 +643,8 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_p(Scalar x,Scalar y
       break;
 
     default:
-      cout << "MASA error:: masa_eval_3d_grad_p has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_p has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
@@ -674,8 +674,8 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_rho(Scalar x,Scalar
   switch(i)
     {
     case 0:
-      cout << "MASA error:: masa_eval_3d_grad_rho has no 0th component\n";
-      cout << "Try 1,2 or 3\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_rho has no 0th component\n";
+      std::cout << "Try 1,2 or 3\n";
       break;
       
     case 1:
@@ -691,8 +691,8 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_rho(Scalar x,Scalar
       break;
 
     default:
-      cout << "MASA error:: masa_eval_3d_grad_rho has no " << i << "th component\n";
-      cout << "Try 1 or 2\n";
+      std::cout << "MASA error:: masa_eval_3d_grad_rho has no " << i << "th component\n";
+      std::cout << "Try 1 or 2\n";
       break;
 
     }// done with switch
