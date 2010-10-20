@@ -11,6 +11,7 @@ Version 0.21 (in progress)
   * added check for presence of 'nan's within regression tests
   * fixed bug for axisymmetric euler and navier-stokes in 32 bit compilers
   * added support for PGI compilers (tested on version 10.8)
+  * documentation heavily updated (make doc) and now slightly useful
 
 Version 0.20 (23 September 2010)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.20

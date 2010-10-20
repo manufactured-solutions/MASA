@@ -66,14 +66,14 @@ MASA.h is a header file that contains all the public objects and member function
 To use, be sure to #include <masa.h> in any C or C++ programs calling MASA routines. In addition, all functions are 
 encapsulated in a MASA namespace, and thus C++ routines require 'using namespace MASA' for access.
 
-Several Simple examples for using these functions are provided in the examples section. 
+Several simple examples for using these functions are provided in the examples section. 
 Functions which have an integer return value return "0" upon success.
 
 */
 
 /*! \fn int masa_init(string unique_name, string mms)
   \brief Initialize a MASA manufactured solution class
-  \param unique_name This is a string that provides a unique identity for the initialized manufactured class, e.g. "bob"
+  \param unique_name This is a string that provides a unique identity for the initialized manufactured class, e.g. "nick"
   \param mms This is the manufactured class to be initialized, e.g. "euler_1d"
 */
 
@@ -87,6 +87,22 @@ namespace MASA
   // --------------------------------
   // new masa api function
   // --------------------------------
+
+  /**
+   * masa_init: 
+   * masa equivalent to masa_init. 
+   * 
+   * masa_init initalizes a masa manufactured solution class.
+   * 
+   * This routine takes two arguments, both strings of characters. 
+   * The first character string is a handle for the newly initalized 
+   * class. ("nick")
+   * 
+   * The second character string is the unique masa identifier string
+   * for a particular masa class. ("euler_1d")
+   * 
+   */
+
   template <typename Scalar>
   int masa_init      (std::string, std::string);
 
@@ -353,62 +369,568 @@ extern "C" {
   // --------------------------------
   // new masa api function
   // --------------------------------
+
+  /**
+   *  cmasa_init: 
+   * cmasa equivalent to masa_init. 
+   * 
+   * cmasa_init initalizes a masa manufactured solution class.
+   * 
+   * This routine takes two arguments, both strings of characters. 
+   * The first character string is a handle for the newly initalized 
+   * class. ("nick")
+   * 
+   * The second character string is the unique masa identifier string
+   * for a particular masa class. ("euler_1d")
+   * 
+   * The routine returns an integer 0 for success. It will throw an 
+   * exception and return 1 if no manufactured solutions of the 2nd
+   * argument exist. 
+   *
+   */
   extern int cmasa_init      (const char*, const char*);
+
+  /**
+   * cmasa_select_mms: cmasa equivalent to masa_select_mms
+   *
+   * cmasa_select_mms selects an already initalized 
+   * manufactured solution class.
+   *
+   * Thus, if the user had created two manufactured classes (say, nick and bob)
+   * using cmasa_init, he could switch between them by passing the 
+   * handle to this routine. 
+   * 
+   * ex. cmasa_select_mms("nick")
+   * 
+   * Subroutine returns integer 0 for success.
+   */
   extern int cmasa_select_mms(const char*);
+
+  /**
+   * cmasa_list_mms: cmasa equivalent to masa_list_mms
+   * 
+   * cmasa_list_mms will display (to stdout) the number of 
+   * user initalized solutions. 
+   * 
+   * In addition, it will then display each solutions unique handle and 
+   * full manufactured class name
+   *
+   * Subroutine returns integer 0 for success.
+   */
   extern int cmasa_list_mms  ();
 
   // --------------------------------
   // interact with mms variables
   // --------------------------------
+
+  /**
+   * cmasa_init_param: cmasa equivalent to masa_init_param
+   *
+   * cmasa_init_param is a subroutine that will initalize
+   * all the registered variables to selected defaults
+   * for the currently selected manufactured solution class. 
+   *
+   * Subroutine returns integer 0 for success. A return value of n indicates 
+   * n failures within init_param, generally from calling set_var()
+   * with incorrect arguments.
+   *
+   */
   extern int    cmasa_init_param();
+
+  /**
+   * cmasa_set_param: cmasa equivalent to masa_set_param
+   *
+   * cmasa_set_param is a subroutine that will set 
+   * a particular registered variables inside 
+   * the currently selected manufactured solution class. 
+   *
+   * This routine takes two arguments: a character string for
+   * the particular variable to be set, and a double precision
+   * number to use as the new value of the variable.
+   * 
+   * This routine can be called multiple times, with subsequent
+   * calls overwriting the previously held variable value. 
+   */
   extern void   cmasa_set_param(const char*,double);
+
+  /**
+   * cmasa_get_param: cmasa equivalent to masa_get_param
+   *
+   * cmasa_get_param is a subroutine that will return
+   * a particular registered variables inside 
+   * the currently selected manufactured solution class. 
+   *
+   * This routine takes one argument: a character string for
+   * the particular variable value to be returned.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_get_param(const char*);
 
   // --------------------------------
   // source term(s) -- 1D
   // --------------------------------
+
+  /**
+   * cmasa_eval_1d_t_source: cmasa equivalent to masa_eval_1d_t_source
+   *
+   * cmasa_eval_1d_t_source is a subroutine that will return
+   * the value of the source term for the temperature of the currently selected
+   * 1 dimensional cmasa function 
+   *
+   * This subroutine takes as input a double precision number
+   * which specifies the current x location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_1d_t_source  (double);
+
+  /**
+   * cmasa_eval_1d_u_source: cmasa equivalent to masa_eval_1d_u_source
+   *
+   * cmasa_eval_1d_u_source is a subroutine that will return
+   * the value of the source term for the u component of velocity
+   * of the currently selected
+   * one dimensional cmasa function 
+   *
+   * This subroutine takes as input a double precision number
+   * which specifies the current x location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_1d_u_source  (double);
+
+  /**
+   * cmasa_eval_1d_e_source: cmasa equivalent to masa_eval_1d_e_source
+   *
+   * cmasa_eval_1d_e_source is a subroutine that will return
+   * the value of the source term for the energy
+   * of the currently selected
+   * one dimensional cmasa function 
+   *
+   * This subroutine takes as input a double precision number
+   * which specifies the current x location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_1d_e_source  (double);
+
+  /**
+   * cmasa_eval_1d_rho_source: cmasa equivalent to masa_eval_1d_rho_source
+   *
+   * cmasa_eval_1d_rho_source is a subroutine that will return
+   * the value of the source term for the density
+   * of the currently selected
+   * one dimensional cmasa function 
+   *
+   * This subroutine takes as input a double precision number
+   * which specifies the current x location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_1d_rho_source(double);
 
+  /**
+   * cmasa_eval_1d_t_an: cmasa equivalent to masa_eval_1d_t_an
+   *
+   * cmasa_eval_1d_t_an is a subroutine that will return
+   * the value of the analytical term for the temperature
+   * of the currently selected one dimensional cmasa function.
+   *
+   * This subroutine takes as input a single double precision number
+   * which specifies the current x location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_1d_t_an      (double);
+
+  /**
+   * cmasa_eval_1d_u_an: cmasa equivalent to masa_eval_1d_u_an
+   *
+   * cmasa_eval_1d_u_an is a subroutine that will return
+   * the value of the analytical term for the u component of velocity
+   * of the currently selected one dimensional cmasa function.
+   *
+   * This subroutine takes as input a single double precision number
+   * which specifies the current x location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_1d_u_an      (double);
+
+  /**
+   * cmasa_eval_1d_p_an: cmasa equivalent to masa_eval_1d_p_an
+   *
+   * cmasa_eval_1d_p_an is a subroutine that will return
+   * the value of the analytical term for the pressure
+   * of the currently selected one dimensional cmasa function.
+   *
+   * This subroutine takes as input a single double precision number
+   * which specifies the current x location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_1d_p_an      (double);
+
+  /**
+   * cmasa_eval_1d_rho_an: cmasa equivalent to masa_eval_1d_rho_an
+   *
+   * cmasa_eval_1d_rho_an is a subroutine that will return
+   * the value of the analytical term for the u component of velocity
+   * of the currently selected one dimensional cmasa function.
+   *
+   * This subroutine takes as input a single double precision number
+   * which specifies the current x location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_1d_rho_an    (double);
 
   // --------------------------------
   // source term(s) -- 2D
   // --------------------------------
 
+  /**
+   * cmasa_eval_2d_t_source: cmasa equivalent to masa_eval_2d_t_source
+   *
+   * cmasa_eval_2d_t_source is a subroutine that will return
+   * the value of the source term for the temperature of the currently selected
+   * 2 dimensional cmasa function 
+   *
+   * This subroutine takes as input two double precision numbers
+   * which specifies the current x and y locations of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_2d_t_source  (double,double);
+
+  /**
+   * cmasa_eval_2d_u_source: cmasa equivalent to masa_eval_2d_u_source
+   *
+   * cmasa_eval_2d_u_source is a subroutine that will return
+   * the value of the source term for the u component of velocity
+   * for the currently selected two dimensional cmasa function.
+   *
+   * This subroutine takes as input two double precision numbers
+   * which specifies the current x and y location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_2d_u_source  (double,double);
+
+  /**
+   * cmasa_eval_2d_v_source: cmasa equivalent to masa_eval_2d_v_source
+   *
+   * cmasa_eval_2d_v_source is a subroutine that will return
+   * the value of the source term for the v component of velocity
+   * for the currently selected two dimensional cmasa function.
+   *
+   * This subroutine takes as input two double precision numbers
+   * which specifies the current x and y location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_2d_v_source  (double,double);
+
+  /**
+   * cmasa_eval_2d_e_source: cmasa equivalent to masa_eval_2d_e_source
+   *
+   * cmasa_eval_2d_e_source is a subroutine that will return
+   * the value of the source term for the energy
+   * of the currently selected two dimensional cmasa function.
+   *
+   * This subroutine takes as input two double precision numbers
+   * which specifies the current x and y location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_2d_e_source  (double,double);
+
+  /**
+   * cmasa_eval_2d_rho_source: cmasa equivalent to masa_eval_2d_rho_source
+   *
+   * cmasa_eval_2d_rho_source is a subroutine that will return
+   * the value of the source term for the density
+   * of the currently selected two dimensional cmasa function.
+   *
+   * This subroutine takes as input two double precision numbers
+   * which specifies the current x and y location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_2d_rho_source(double,double);
 
+  /**
+   * cmasa_eval_2d_t_an: cmasa equivalent to masa_eval_2d_t_an
+   *
+   * cmasa_eval_2d_t_an is a subroutine that will return
+   * the value of the analytical term for the temperature
+   * of the currently selected two dimensional cmasa function.
+   *
+   * This subroutine takes as input two double precision numbers
+   * which specifies the current x and y location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_2d_t_an      (double,double);
+
+  /**
+   * cmasa_eval_2d_u_an: cmasa equivalent to masa_eval_2d_u_an
+   *
+   * cmasa_eval_2d_u_an is a subroutine that will return
+   * the value of the analytical term for the u component of velocity
+   * of the currently selected two dimensional cmasa function.
+   *
+   * This subroutine takes as input two double precision numbers
+   * which specifies the current x and y location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_2d_u_an      (double,double);
+
+  /**
+   * cmasa_eval_2d_v_an: cmasa equivalent to masa_eval_2d_v_an
+   *
+   * cmasa_eval_2d_v_an is a subroutine that will return
+   * the value of the analytical term for the v component of velocity
+   * of the currently selected two dimensional cmasa function.
+   *
+   * This subroutine takes as input two double precision numbers
+   * which specifies the current x and y location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_2d_v_an      (double,double);
+
+  /**
+   * cmasa_eval_2d_p_an: cmasa equivalent to masa_eval_2d_p_an
+   *
+   * cmasa_eval_2d_p_an is a subroutine that will return
+   * the value of the analytical term for the pressure
+   * of the currently selected two dimensional cmasa function.
+   *
+   * This subroutine takes as input two double precision numbers
+   * which specifies the current x and y location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_2d_p_an      (double,double);
+
+  /**
+   * cmasa_eval_2d_rho_an: cmasa equivalent to masa_eval_2d_rho_an
+   *
+   * cmasa_eval_2d_rho_an is a subroutine that will return
+   * the value of the analytical term for the density
+   * of the currently selected two dimensional cmasa function.
+   *
+   * This subroutine takes as input two double precision numbers
+   * which specifies the current x and y location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_2d_rho_an    (double,double);
 
   // --------------------------------
   // source term(s) -- 3D
   // --------------------------------
 
+  /**
+   * cmasa_eval_3d_t_source: cmasa equivalent to masa_eval_3d_t_source
+   *
+   * cmasa_eval_3d_t_source is a subroutine that will return
+   * the value of the source term for the temperature of the currently selected
+   * three dimensional cmasa function 
+   *
+   * This subroutine takes as input three double precision numbers
+   * which specifies the current x,y and z location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_3d_t_source  (double,double,double);
+
+  /**
+   * cmasa_eval_3d_u_source: cmasa equivalent to masa_eval_3d_u_source
+   *
+   * cmasa_eval_3d_u_source is a subroutine that will return
+   * the value of the source term for the u component of velocity
+   * for the currently selected three dimensional cmasa function.
+   *
+   * This subroutine takes as input three double precision numbers
+   * which specifies the current x,y and z location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_3d_u_source  (double,double,double);
+
+  /**
+   * cmasa_eval_3d_v_source: cmasa equivalent to masa_eval_3d_v_source
+   *
+   * cmasa_eval_3d_v_source is a subroutine that will return
+   * the value of the source term for the v component of velocity
+   * for the currently selected three dimensional cmasa function.
+   *
+   * This subroutine takes as input three double precision numbers
+   * which specifies the current x,y and z location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_3d_v_source  (double,double,double);
+
+  /**
+   * cmasa_eval_3d_w_source: cmasa equivalent to masa_eval_3d_w_source
+   *
+   * cmasa_eval_3d_w_source is a subroutine that will return
+   * the value of the source term for the w component of velocity
+   * for the currently selected three dimensional cmasa function.
+   *
+   * This subroutine takes as input three double precision numbers
+   * which specifies the current x,y and z location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_3d_w_source  (double,double,double);
+
+  /**
+   * cmasa_eval_3d_e_source: cmasa equivalent to masa_eval_3d_e_source
+   *
+   * cmasa_eval_3d_e_source is a subroutine that will return
+   * the value of the source term for the energy
+   * of the currently selected three dimensional cmasa function.
+   *
+   * This subroutine takes as input three double precision numbers
+   * which specifies the current x,y and z location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_3d_e_source  (double,double,double);
+
+  /**
+   * cmasa_eval_3d_rho_source: cmasa equivalent to masa_eval_3d_rho_source
+   *
+   * cmasa_eval_3d_rho_source is a subroutine that will return
+   * the value of the source term for the density
+   * of the currently selected three dimensional cmasa function.
+   *
+   * This subroutine takes as input three double precision numbers
+   * which specifies the current x,y and z location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_3d_rho_source(double,double,double);
 
+  /**
+   * cmasa_eval_3d_t_an: cmasa equivalent to masa_eval_3d_t_an
+   *
+   * cmasa_eval_3d_t_an is a subroutine that will return
+   * the value of the analytical term for the temperature of the 
+   * currently selected three dimensional cmasa function.
+   *
+   * This subroutine takes as input three double precision numbers
+   * which specifies the current x,y and z location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_3d_t_an      (double,double,double);
+
+  /**
+   * cmasa_eval_3d_u_an: cmasa equivalent to masa_eval_3d_u_an
+   *
+   * cmasa_eval_3d_u_an is a subroutine that will return
+   * the value of the analytical term for the u component of velocity
+   * of the currently selected three dimensional cmasa function.
+   *
+   * This subroutine takes as input three double precision numbers
+   * which specifies the current x,y and z location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_3d_u_an      (double,double,double);
+
+  /**
+   * cmasa_eval_3d_v_an: cmasa equivalent to masa_eval_3d_v_an
+   *
+   * cmasa_eval_3d_v_an is a subroutine that will return
+   * the value of the analytical term for the v component of velocity
+   * of the currently selected three dimensional cmasa function.
+   *
+   * This subroutine takes as input three double precision numbers
+   * which specifies the current x,y and z location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_3d_v_an      (double,double,double);
+
+  /**
+   * cmasa_eval_3d_w_an: cmasa equivalent to masa_eval_3d_w_an
+   *
+   * cmasa_eval_3d_w_an is a subroutine that will return
+   * the value of the analytical term for the w component of velocity
+   * of the currently selected three dimensional cmasa function.
+   *
+   * This subroutine takes as input three double precision numbers
+   * which specifies the current x,y and z location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_3d_w_an      (double,double,double);
+
+  /**
+   * cmasa_eval_3d_p_an: cmasa equivalent to masa_eval_3d_p_an
+   *
+   * cmasa_eval_3d_p_an is a subroutine that will return
+   * the value of the analytical term for the pressure
+   * of the currently selected three dimensional cmasa function.
+   *
+   * This subroutine takes as input three double precision numbers
+   * which specifies the current x,y and z location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_3d_p_an      (double,double,double);
+
+  /**
+   * cmasa_eval_3d_rho_an: cmasa equivalent to masa_eval_3d_rho_an
+   *
+   * cmasa_eval_3d_p_an is a subroutine that will return
+   * the value of the analytical term for the density
+   * of the currently selected three dimensional cmasa function.
+   *
+   * This subroutine takes as input three double precision numbers
+   * which specifies the current x,y and z location of the source term.
+   * 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
   extern double cmasa_eval_3d_rho_an    (double,double,double);
 
   // --------------------------------
@@ -422,9 +944,34 @@ extern "C" {
   // old masa core functions (to be called by user)
   // --------------------------------
   
+  /**
+   * cmasa_get_name:
+   *
+   * Subroutine will return a string with the current manufactured solution
+   * name.
+   * 
+   */       
   extern int cmasa_get_name(const char*);
   extern int cmasa_get_dimension(int*);
+
+  /**
+   * cmasa_get_name:
+   *
+   * Subroutine will output the currently selected manufactured
+   * solution class' parameter names and values to standard output
+   * 
+   */       
   extern int cmasa_display_param();
+
+  /**
+   * cmasa_sanity_check
+   *
+   * Subroutine that will check that all parameters for
+   * the currently selected masa manufactured class have been
+   * initalized to some value.
+   * 
+   * Subroutine returns an integer 0 on success.
+   */
   extern int cmasa_sanity_check();
 
 #ifdef __cplusplus

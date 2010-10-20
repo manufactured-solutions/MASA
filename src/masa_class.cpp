@@ -102,8 +102,19 @@ void MASA::manufactured_solution<Scalar>::display_var()
   cout << "*-------------------------------------*\n" ;
 
   for(map<string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
-    {      
-      cout << it->first <<" is set to: " << *vararr[it->second] << '\n';
+    {   
+      // adding conditional to avoid confusing our users about uninitalized variables
+      // this is because the default is a bit odd... -12345.7 might appear 'set'
+      if(*vararr[it->second] == MASA_VAR_DEFAULT)
+	{
+	  cout << it->first <<" is set to: Uninitialized\n";
+	}
+      else //value has been set
+	{
+	  cout.precision(16);
+	  cout << it->first <<" is set to: " << *vararr[it->second] << '\n';
+	}
+      
     }    
 
   cout << "*-------------------------------------*\n" ;
