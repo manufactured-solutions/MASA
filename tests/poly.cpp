@@ -33,11 +33,13 @@
 #include <config.h>
 #include <masa.h>
 #include <math.h>
+#include <stdio.h>
 
 using namespace MASA;
 
 int main()
 {
+  freopen("/dev/null","w",stdout);
   masa_init<double>("masa-test","MASA_test_function");
   masa_init_param<double>();
   return masa_test_poly<double>();
