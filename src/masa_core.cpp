@@ -855,5 +855,9 @@ int MASA::masa_get_numeric_version()
   template int masa_get_dimension<Scalar>(int*); \
   template int masa_sanity_check<Scalar>()
 
+namespace MASA {
+
 INSTANTIATE_ALL_FUNCTIONS(double);
 INSTANTIATE_ALL_FUNCTIONS(long double);
+
+}
