@@ -1,6 +1,7 @@
-Version 0.21 (in progress)
+Version 0.30 (in progress)
 
   * code has 99%+ line coverage	
+  * c++ bindings now support arbitrary precision (double, long double, etc.)
   * gradient of source terms is now available
   * adding new conditional (--masa-exceptions) that adds exception handling
   * modifications to Fortran interface (no API changes)
