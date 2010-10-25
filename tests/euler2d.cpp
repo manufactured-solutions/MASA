@@ -184,10 +184,10 @@ Scalar SourceQ_rho ( // 22
   Scalar,
   Scalar);
 
-
-int main()
-
-{  //variables
+template<typename T>
+int run_regression()
+{  
+  //variables
   Scalar u_0;
   Scalar u_x;
   Scalar u_y;
@@ -556,4 +556,16 @@ int main()
 
   // all tests passed
   return 0;
+}
+
+// queue
+int main()
+{
+  // dont lose error codes!
+  int err=0;
+
+  err += run_regression<double>();
+  //run_regression<long double>();
+
+  return err;
 }
