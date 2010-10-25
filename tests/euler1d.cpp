@@ -114,7 +114,8 @@ FP SourceQ_rho ( // 10
   FP,
   FP);
 
-int main()
+template<typename T>
+int run_regression()
 {
   //variables 
   FP u_0;
@@ -329,4 +330,14 @@ int main()
 
   // tests passed
   return 0;
+}
+
+int main()
+{
+  int err=0;
+
+  err += run_regression<double>();
+  err += run_regression<long double>();
+
+  return err;
 }
