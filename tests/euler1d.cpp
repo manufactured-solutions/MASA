@@ -40,12 +40,8 @@
 using namespace MASA;
 using namespace std;
 
-typedef double FP;
-
-const FP pi = acos(-1);
-const FP threshold = 1.0e-15; // should be small enough to catch any obvious problems
-
-FP nancheck(FP x)
+template<typename Scalar>
+Scalar nancheck(Scalar x)
 {
   if(isnan(x))
     {
@@ -55,126 +51,156 @@ FP nancheck(FP x)
   return 1;
 }
 
-FP anQ_p (FP x,FP p_0,FP p_x,FP a_px,FP L)
+template<typename Scalar>
+Scalar anQ_p (Scalar x,Scalar p_0,Scalar p_x,Scalar a_px,Scalar L)
 {
-  FP p_an = p_0 + p_x * cos(a_px * pi * x / L);
+  Scalar pi = acos(-1);
+  Scalar p_an = p_0 + p_x * cos(a_px * pi * x / L);
   return p_an;
 }
   
-FP anQ_u (FP x,FP u_0,FP u_x,FP a_ux,FP L)
+template<typename Scalar>
+Scalar anQ_u (Scalar x,Scalar u_0,Scalar u_x,Scalar a_ux,Scalar L)
 {
-  FP u_an = u_0 + u_x * sin(a_ux * pi * x / L);
+  Scalar pi = acos(-1);
+  Scalar u_an = u_0 + u_x * sin(a_ux * pi * x / L);
   return u_an;
 } 
  
-FP anQ_rho (FP x,FP rho_0,FP rho_x,FP a_rhox,FP L)
+template<typename Scalar>
+Scalar anQ_rho (Scalar x,Scalar rho_0,Scalar rho_x,Scalar a_rhox,Scalar L)
 { 
-  FP rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L);
+  Scalar pi = acos(-1);
+  Scalar rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L);
   return rho_an;
 }
 
-FP SourceQ_e ( // 12
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP);
+template<typename Scalar>
+Scalar SourceQ_e ( // 12
+  Scalar x,
+  Scalar u_0,
+  Scalar u_x,
+  Scalar rho_0,
+  Scalar rho_x,
+  Scalar p_0,
+  Scalar p_x,
+  Scalar a_px,
+  Scalar a_rhox,
+  Scalar a_ux,
+  Scalar Gamma,
+  Scalar mu,
+  Scalar L)
+{
+  Scalar pi = acos(-1);
+  Scalar Q_e;
+  Q_e = cos(a_rhox * pi * x / L) * rho_x * pow(u_0 + u_x * sin(a_ux * pi * x / L), 0.3e1) * a_rhox * pi / L / 0.2e1 + cos(a_ux * pi * x / L) * (p_0 + p_x * cos(a_px * pi * x / L)) * a_ux * pi * u_x * Gamma / L / (Gamma - 0.1e1) - Gamma * p_x * sin(a_px * pi * x / L) * (u_0 + u_x * sin(a_ux * pi * x / L)) * a_px * pi / L / (Gamma - 0.1e1) + 0.3e1 / 0.2e1 * cos(a_ux * pi * x / L) * (rho_0 + rho_x * sin(a_rhox * pi * x / L)) * pow(u_0 + u_x * sin(a_ux * pi * x / L), 0.2e1) * a_ux * pi * u_x / L;
+  return(Q_e);
+}
 
-FP SourceQ_u ( // should be 10
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP);
+template<typename Scalar>
+Scalar SourceQ_u ( // should be 10
+  Scalar x,
+  Scalar u_0,
+  Scalar u_x,
+  Scalar rho_0,
+  Scalar rho_x,
+  Scalar p_0,
+  Scalar p_x,
+  Scalar a_px,
+  Scalar a_rhox,
+  Scalar a_ux,
+  Scalar L)
+{
+  Scalar pi = acos(-1);
+  Scalar Q_u;
+  Q_u = -sin(a_px * pi * x / L) * a_px * pi * p_x / L + rho_x * cos(a_rhox * pi * x / L) * pow(u_0 + u_x * sin(a_ux * pi * x / L), 0.2e1) * a_rhox * pi / L + 0.2e1 * u_x * cos(a_ux * pi * x / L) * (rho_0 + rho_x * sin(a_rhox * pi * x / L)) * (u_0 + u_x * sin(a_ux * pi * x / L)) * a_ux * pi / L;
+  return(Q_u);
+}
 
-FP SourceQ_rho ( // 10
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP,
-  FP);
+template<typename Scalar>
+Scalar SourceQ_rho ( // 10
+  Scalar x,
+  Scalar u_0,
+  Scalar u_x,
+  Scalar rho_0,
+  Scalar rho_x,
+  Scalar p_0,
+  Scalar p_x,
+  Scalar a_px,
+  Scalar a_rhox,
+  Scalar a_ux,
+  Scalar L)
+{
+  Scalar pi = acos(-1);
+  Scalar Q_rho;
+  Q_rho = rho_x * cos(a_rhox * pi * x / L) * (u_0 + u_x * sin(a_ux * pi * x / L)) * a_rhox * pi / L + u_x * cos(a_ux * pi * x / L) * (rho_0 + rho_x * sin(a_rhox * pi * x / L)) * a_ux * pi / L;
+  return(Q_rho);
+}
 
-template<typename T>
+template<typename Scalar>
 int run_regression()
 {
+  
+  Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
+
   //variables 
-  FP u_0;
-  FP u_x;
-  FP rho_0;
-  FP rho_x;
-  FP p_0;
-  FP p_x;
-  FP a_px;
-  FP a_rhox;
-  FP a_ux;
-  FP Gamma;
-  FP mu;
-  FP L;
+  Scalar u_0;
+  Scalar u_x;
+  Scalar rho_0;
+  Scalar rho_x;
+  Scalar p_0;
+  Scalar p_x;
+  Scalar a_px;
+  Scalar a_rhox;
+  Scalar a_ux;
+  Scalar Gamma;
+  Scalar mu;
+  Scalar L;
 
   // parameters
-  FP x;
+  Scalar x;
 
   //problem size
   int nx = 200;  // number of points
   int lx=10;     // length
-  FP dx=FP(lx)/FP(nx);
+  Scalar dx=Scalar(lx)/Scalar(nx);
 
   // solutions
-  FP ufield,ufield2,ufield3;
-  FP efield,efield2,efield3;
-  FP rho,rho2,rho3;
-  FP gradx,grady,gradz,gradp,gradrho;
+  Scalar ufield,ufield2,ufield3;
+  Scalar efield,efield2,efield3;
+  Scalar rho,rho2,rho3;
+  Scalar gradx,grady,gradz,gradp,gradrho;
 
-  FP u_an,u_an2,u_an3;
-  FP p_an,p_an2,p_an3;
-  FP rho_an,rho_an2,rho_an3;
+  Scalar u_an,u_an2,u_an3;
+  Scalar p_an,p_an2,p_an3;
+  Scalar rho_an,rho_an2,rho_an3;
 
   // initalize
-  masa_init<FP>("euler-test","euler_1d");
+  masa_init<Scalar>("euler-test","euler_1d");
 
   // initialize the default parameters
-  masa_init_param<FP>();
+  masa_init_param<Scalar>();
 
   // get defaults for comparison to source terms
   // get vars
-  u_0 = masa_get_param<FP>("u_0");
-  u_x = masa_get_param<FP>("u_x");
-  rho_0 = masa_get_param<FP>("rho_0");
-  rho_x = masa_get_param<FP>("rho_x");
+  u_0 = masa_get_param<Scalar>("u_0");
+  u_x = masa_get_param<Scalar>("u_x");
+  rho_0 = masa_get_param<Scalar>("rho_0");
+  rho_x = masa_get_param<Scalar>("rho_x");
 
-  p_0 = masa_get_param<FP>("p_0");
-  p_x = masa_get_param<FP>("p_x");
+  p_0 = masa_get_param<Scalar>("p_0");
+  p_x = masa_get_param<Scalar>("p_x");
 
-  a_px = masa_get_param<FP>("a_px");
-  a_rhox = masa_get_param<FP>("a_rhox");
-  a_ux = masa_get_param<FP>("a_ux");
+  a_px = masa_get_param<Scalar>("a_px");
+  a_rhox = masa_get_param<Scalar>("a_rhox");
+  a_ux = masa_get_param<Scalar>("a_ux");
 
-  Gamma = masa_get_param<FP>("Gamma");
-  mu    = masa_get_param<FP>("mu");
-  L     = masa_get_param<FP>("L");
+  Gamma = masa_get_param<Scalar>("Gamma");
+  mu    = masa_get_param<Scalar>("mu");
+  L     = masa_get_param<Scalar>("L");
 
   // check that all terms have been initialized
-  masa_sanity_check<FP>();
+  masa_sanity_check<Scalar>();
 
   // evaluate source terms (1D)
   for(int i=0;i<nx;i++)
@@ -182,14 +208,14 @@ int run_regression()
       x=i*dx;
       	
       //evalulate source terms
-      ufield = masa_eval_u_source  <FP>(x);
-      efield = masa_eval_e_source  <FP>(x);
-      rho    = masa_eval_rho_source<FP>(x);
+      ufield = masa_eval_u_source  <Scalar>(x);
+      efield = masa_eval_e_source  <Scalar>(x);
+      rho    = masa_eval_rho_source<Scalar>(x);
       
       //evaluate analytical terms
-      u_an = masa_eval_u_an        <FP>(x);
-      p_an = masa_eval_p_an        <FP>(x);
-      rho_an = masa_eval_rho_an    <FP>(x);
+      u_an = masa_eval_u_an        <Scalar>(x);
+      p_an = masa_eval_p_an        <Scalar>(x);
+      rho_an = masa_eval_rho_an    <Scalar>(x);
 
       // eval gradient terms
       gradx   = masa_eval_1d_grad_u  (x);
@@ -337,7 +363,7 @@ int main()
   int err=0;
 
   err += run_regression<double>();
-  err += run_regression<long double>();
+  //err += run_regression<long double>();
 
   return err;
 }
