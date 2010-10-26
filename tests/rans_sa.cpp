@@ -37,7 +37,7 @@
 #include <config.h>
 #include <masa.h>
 #include <cmath>
-
+#include <limits>
 #include <iostream>
 #include <stdlib.h>
 
@@ -48,7 +48,7 @@ template<typename Scalar>
 int run_regression()
 {
 
-  const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
+  const Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
   const Scalar pi = std::acos(Scalar(-1));
 
   // solutions

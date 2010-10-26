@@ -32,7 +32,7 @@
 
 #include <math.h>
 #include <masa.h>
-
+#include <limits>
 #include <iostream>
 #include <stdlib.h>
 
@@ -41,7 +41,7 @@ using namespace MASA;
 
 typedef double Scalar;
 
-const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
+const Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
 
 Scalar SourceQ_t_1d (
   Scalar x,
