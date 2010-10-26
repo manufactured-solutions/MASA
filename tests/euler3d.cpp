@@ -25,7 +25,7 @@
 // $Author$
 // $Id$
 //
-// euler3d.cpp :program that tests euler3d from masa against known source term
+// euler3d.cpp: program that tests euler3d from masa against known source
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
@@ -36,6 +36,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
+#include <limits>
 
 using namespace MASA;
 using namespace std;
@@ -341,7 +342,7 @@ template<typename Scalar>
 int run_regression()
 {
 
-  Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
+  const Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
 
   //variables
   Scalar u_0;

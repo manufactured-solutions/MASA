@@ -36,6 +36,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
+#include <limits>
 
 using namespace MASA;
 using namespace std;
@@ -220,8 +221,9 @@ int run_regression()
 {  
   
   // need to add variable based on precision
-  Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
-
+  Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
+  //Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
+  
   //variables
   Scalar u_0;
   Scalar u_x;
