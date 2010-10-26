@@ -25,7 +25,7 @@
 // $Author$
 // $Id$
 //
-// rans_sa.cpp :program that tests masa against known source term
+// rans_sa.cpp : program that tests spelart almaras against known source term
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
@@ -44,13 +44,13 @@
 using namespace MASA;
 using namespace std;
 
-typedef double Scalar;
-
-const Scalar pi = std::acos(Scalar(-1));
-const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
-
-int main()
+template<typename Scalar>
+int run_regression()
 {
+
+  const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
+  const Scalar pi = std::acos(Scalar(-1));
+
   // solutions
   Scalar ufield,ufield2,ufield3;
   Scalar vfield,vfield2,vfield3;
@@ -95,3 +95,12 @@ int main()
   return 0;
 }
 
+int main()
+{
+  int err=0;
+
+  err += run_regression<double>();
+  err += run_regression<long double>();
+
+  return err;
+}

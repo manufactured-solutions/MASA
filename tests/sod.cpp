@@ -40,9 +40,8 @@
 using namespace MASA;
 using namespace std;
 
-typedef double Scalar;
-
-int main()
+template<typename Scalar>
+int run_regression()
 {
   int i,j,k;
   Scalar out;
@@ -125,5 +124,16 @@ int main()
 
 #endif 
   
+  return 0;
 
 }// end program
+
+int main()
+{
+  int err=0;
+
+  err += run_regression<double>();
+  err += run_regression<long double>();
+
+  return err;
+}

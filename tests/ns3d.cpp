@@ -40,7 +40,6 @@
 using namespace std;
 using namespace MASA;
 
-
 template<typename Scalar>
 Scalar nancheck(Scalar x)
 {
@@ -636,7 +635,7 @@ int run_regression()
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
 	      cout << "U Field Source Term\n";
-	      cout << "Exceeded Threshold by: " << ufield << endl;
+	      cout << "Exceeded Threshold by: " << ufield3 << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
@@ -645,7 +644,7 @@ int run_regression()
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
 	      cout << "U Field Analytical Term\n";
-	      cout << "Exceeded Threshold by: " << u_an << endl;
+	      cout << "Exceeded Threshold by: " << u_an3 << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }

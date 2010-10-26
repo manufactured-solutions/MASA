@@ -38,16 +38,14 @@
 using namespace std;
 using namespace MASA;
 
-typedef double Scalar;
-
-const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
-
+template<typename Scalar>
 Scalar SourceQ_t_1d(Scalar x, Scalar A_x, Scalar k_0)
 {
   Scalar Q_T = A_x * A_x * k_0 * cos(A_x * x);
   return Q_T;
 }
 
+template<typename Scalar>
 Scalar Source_t_1d_an(Scalar A_x,Scalar x)
 {
   Scalar T_an;
@@ -55,6 +53,7 @@ Scalar Source_t_1d_an(Scalar A_x,Scalar x)
   return T_an;
 }
 
+template<typename Scalar>
 Scalar SourceQ_t_2d (
   Scalar x,
   Scalar y,
@@ -66,6 +65,7 @@ Scalar SourceQ_t_2d (
   return Q_T;
 }
 
+template<typename Scalar>
 Scalar SourceQ_t_3d (
   Scalar x,
   Scalar y,
@@ -79,8 +79,12 @@ Scalar SourceQ_t_3d (
   return Q_T;
 }
 
-int main()
+template<typename Scalar>
+int run_regression()
 {
+  
+  const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
+
   Scalar tfield,tfield2,tfield3;
   Scalar t_an,t_an2,t_an3;
   Scalar param=1.2;
@@ -104,8 +108,7 @@ int main()
       cout << "MASA :: Sanity Check Failed!\n";
       exit(1);
     }
-  
-
+ 
   tfield    = masa_eval_t_source<Scalar>(x);
   t_an      = masa_eval_t_an<Scalar>(x);
 
@@ -192,4 +195,14 @@ int main()
   // presumably, all tests passed
   return 0;
 
+}
+
+int main()
+{
+  int err=0;
+
+  err += run_regression<double>();
+  err += run_regression<long double>();
+
+  return err;
 }

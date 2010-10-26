@@ -39,10 +39,7 @@
 using namespace std;
 using namespace MASA;
 
-typedef double Scalar;
-
-const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
-
+template<typename Scalar>
 Scalar SourceQ_t_1d(
   Scalar x,
   Scalar t,
@@ -57,6 +54,7 @@ Scalar SourceQ_t_1d(
   return Q_T;
 }
 
+template<typename Scalar>
 Scalar SourceQ_t_2d (
   Scalar x,
   Scalar y,
@@ -74,6 +72,7 @@ Scalar SourceQ_t_2d (
   return Q_T;
 }
 
+template<typename Scalar>
 Scalar SourceQ_t_3d (
   Scalar x,
   Scalar y,
@@ -94,8 +93,11 @@ Scalar SourceQ_t_3d (
   return Q_T;
 }
 
-int main()
+template<typename Scalar>
+int run_regression()
 {
+  const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
+
   int err=1;
   Scalar tfield,tfield2;
   Scalar param=1.2;
@@ -269,4 +271,14 @@ int main()
 
   // presumably, all tests passed
   return 0;
+}
+
+int main()
+{
+  int err=0;
+
+  err += run_regression<double>();
+  err += run_regression<long double>();
+
+  return err;
 }
