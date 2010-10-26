@@ -438,7 +438,7 @@ int run_regression()
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
 	    cout << "V Field Source Term\n";
-	    cout << "Exceeded Threshold by: " << vfield << endl;
+	    cout << "Exceeded Threshold of: " << threshold <<  " by: " << vfield3 << endl;
 	    exit(1);
 	  }
 
@@ -446,7 +446,7 @@ int run_regression()
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
 	    cout << "V Field Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << v_an3 << endl;
+	    cout << "Exceeded Threshold of: " << threshold <<  " by: " << v_an3 << endl;
 	    exit(1);
 	  }
 
@@ -466,7 +466,7 @@ int run_regression()
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
 	    cout << "P Field Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << p_an << endl;
+	    cout << "Exceeded Threshold by: " << p_an3 << endl;
 	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
@@ -475,7 +475,7 @@ int run_regression()
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
 	    cout << "RHO Source Term\n";
-	    cout << "Exceeded Threshold by: " << rho << endl;
+	    cout << "Exceeded Threshold by: " << rho3 << endl;
 	    cout << x << " " << y <<  endl;
 	    exit(1);
 	  }
@@ -484,7 +484,7 @@ int run_regression()
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
 	    cout << "RHO Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << rho_an << endl;
+	    cout << "Exceeded Threshold by: " << rho_an3 << endl;
 	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
