@@ -222,7 +222,6 @@ int run_regression()
   
   // need to add variable based on precision
   Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
-  //Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
   
   //variables
   Scalar u_0;

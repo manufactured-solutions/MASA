@@ -34,6 +34,7 @@
 #include <masa.h>
 #include <iostream>
 #include <stdlib.h>
+#include <limits>
 
 using namespace std;
 using namespace MASA;
@@ -83,7 +84,7 @@ template<typename Scalar>
 int run_regression()
 {
   
-  const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
+  const Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
 
   Scalar tfield,tfield2,tfield3;
   Scalar t_an,t_an2,t_an3;

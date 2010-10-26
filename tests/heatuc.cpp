@@ -32,7 +32,7 @@
 
 #include <math.h>
 #include <masa.h>
-
+#include <limits>
 #include <iostream>
 #include <stdlib.h>
 
@@ -96,7 +96,7 @@ Scalar SourceQ_t_3d (
 template<typename Scalar>
 int run_regression()
 {
-  const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
+  const Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
 
   int err=1;
   Scalar tfield,tfield2;

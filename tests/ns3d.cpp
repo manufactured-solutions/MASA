@@ -36,6 +36,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
+#include <limits>
 
 using namespace std;
 using namespace MASA;
@@ -351,7 +352,7 @@ template<typename Scalar>
 int run_regression()
 {
 
-  const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
+  const Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
 
   //variables
   Scalar u_0;
