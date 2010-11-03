@@ -53,11 +53,14 @@ int main()
   Scalar z=0;
   Scalar t=0;
   
-  masa_init<Scalar>("masa-test-uninit","masa_uninit");
+  masa_init<Scalar>("masa-test","euler_1d");
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa.
   freopen("/dev/null","w",stdout);
+  masa_display_param<Scalar>();
+
+  masa_init<Scalar>("masa-test-uninit","masa_uninit");
 
   // start testing uninitialized functions
   derr = masa_init_param<Scalar>();
