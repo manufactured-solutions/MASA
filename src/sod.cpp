@@ -280,7 +280,9 @@ Scalar MASA::sod_1d<Scalar>::eval_q_rho_u(Scalar x,Scalar t)
 }
 
 // return pressure
-// 
+//  do not need this for now: commenting out 
+/*
+
 template <typename Scalar>
 Scalar MASA::sod_1d<Scalar>::eval_q_p(Scalar x,Scalar t)
 {
@@ -338,6 +340,7 @@ Scalar MASA::sod_1d<Scalar>::eval_q_p(Scalar x,Scalar t)
   Scalar out_soln = pressure;
   return out_soln;
 }
+*/
 
 template <typename Scalar>
 Scalar MASA::sod_1d<Scalar>::func(Scalar pm)
