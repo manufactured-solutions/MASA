@@ -32,7 +32,7 @@
 //
 
 #include <masa_internal.h>
-#include <string.h>
+#include <cstring>
 
 using namespace MASA;
 

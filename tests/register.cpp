@@ -32,11 +32,9 @@
 
 #include <config.h>
 #include <masa.h>
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
 #include <iostream>
+#include <string>
 
 using namespace MASA;
 using namespace std;

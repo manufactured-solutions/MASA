@@ -32,10 +32,7 @@
 
 #include <config.h>
 #include <masa.h>
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
 #include <iostream>
 
 using namespace MASA;
@@ -362,7 +359,7 @@ int main()
     {
       cout << "MASA ERROR: Default output for virtual function failing\n";
       cout << err << " functions failing.\n";
-      exit(1);
+      return 1;
     }
 
   return 0; // steady as she goes

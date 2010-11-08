@@ -31,9 +31,9 @@
 //
 
 #include <masa.h>
+#include <cstdio> 
 #include <iostream>
-#include <stdio.h> 
-#include <string.h>
+#include <string>
 
 using namespace std;
 using namespace MASA;
