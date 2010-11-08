@@ -28,7 +28,7 @@ libfmasa_la_SOURCES     = masa.f90
 # Standalone binaries
 
 bin_PROGRAMS            = version
-version_SOURCES         = version.cpp masa.h libmasa.la
+version_SOURCES         = version.cpp masa.h #libmasa.la
 version_LDADD           = -L$(top_builddir)/src -lmasa
 version_DEPENDENCIES    = libmasa.la
 
@@ -41,7 +41,7 @@ standalonedir           = @prefix@/bin
 
 test_SOURCES            = main.f90
 test_LDADD              = -L$(top_builddir)/src -lfmasa -lmasa
-test_DEPENDENCIES       = libmasa.la
+test_DEPENDENCIES       = libmasa.la libfmasa.la
 
 main.f90:
 
