@@ -33,6 +33,7 @@
 
 #include <masa_internal.h>
 #include <cstring>
+#include <locale>
 
 using namespace MASA;
 
@@ -42,35 +43,31 @@ using namespace MASA;
 
 // all this does is convert a string to entirely lower case
 // should simplify our user stuff
-std::string uptolow(std::string str) 
+void uptolow(std::string& str) 
 {
-  for (int i=0;i<strlen(str.c_str());i++) 
-    if (str[i] >= 0x41 && str[i] <= 0x5A) 
-      str[i] = str[i] + 0x20;
-  return str;
+  for (int i=0;i<str.length();i++) 
+    str[i] = std::tolower(str[i]);
 }
 
 // remove dashes from strings
-std::string remove_line(std::string string1)
+void remove_line(std::string& str)
 {
-  int position = string1.find( "-" ); // find first space
+  int position = str.find( "-" ); // find first space
   while ( position != std::string::npos )
     {
-      string1.replace( position, 1, "" );
-      position = string1.find( "-", position + 1 );
+      str.replace( position, 1, "" );
+      position = str.find( "-", position + 1 );
     }
-  return string1;
 }
 
-std::string remove_whitespace(std::string string1)
+void remove_whitespace(std::string& str)
 {
-  int position = string1.find( " " ); // find first space
+  int position = str.find( " " ); // find first space
   while ( position != std::string::npos )
     {
-      string1.replace( position, 1, "" );
-      position = string1.find( " ", position + 1 );
+      str.replace( position, 1, "" );
+      position = str.find( " ", position + 1 );
     }
-  return string1;
 }
 
 // -------------------------------------------------------
@@ -333,9 +330,9 @@ int MASA::masa_map(std::string* input_string)
   // fix up the input given
   std::string temp;
   temp = *input_string;
-  temp = uptolow(temp);
-  temp = remove_line(temp);
-  temp = remove_whitespace(temp);
+  uptolow(temp);
+  remove_line(temp);
+  remove_whitespace(temp);
   *input_string=temp;
   return 0;
 
