@@ -15,42 +15,55 @@ lib_LTLIBRARIES         = libmasa.la libfmasa.la
 library_includedir      = $(includedir)
 library_include_HEADERS = masa.h
 
-# Main C/C++ library
+#-----------------------
+# MASA C/C++ library
+#-----------------------
 
 libmasa_la_LDFLAGS      = $(all_libraries) -release $(GENERIC_RELEASE)
 libmasa_la_SOURCES      = $(cc_sources) $(h_sources)
 
-# Fortran Interface library
+#-----------------------
+# MASA Fortran interface
+#-----------------------
 
 libfmasa_la_LDFLAGS     = $(all_libraries) -release $(GENERIC_RELEASE)
 libfmasa_la_SOURCES     = masa.f90
 
+#-----------------------
 # Standalone binaries
+#-----------------------
 
 bin_PROGRAMS            = version
 version_SOURCES         = version.cpp masa.h #libmasa.la
 version_LDADD           = -L$(top_builddir)/src -lmasa
 version_DEPENDENCIES    = libmasa.la
 
-#-------------------------- 
-# Fortran Module Interface
-# --------------------------
+#-----------------------
+# F90 Module Interface
+#-----------------------
 
-noinst_PROGRAMS         = test
-standalonedir           = @prefix@/bin
-
+noinst_PROGRAMS         = test 
 test_SOURCES            = main.f90
 test_LDADD              = -L$(top_builddir)/src -lfmasa -lmasa
-test_DEPENDENCIES       = libmasa.la libfmasa.la
 
-main.f90:
+main.f90: libmasa.la libfmasa.la
 
-EXTRA_DIST              = lic_utils/update_license.pl
+#-----------------------
+# Licensing updates
+#-----------------------
 
 .license.stamp: $(top_srcdir)/LICENSE
 	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE $(cc_sources) $(h_sources)
 	echo 'updated source license headers' >$@
 
-moduledir   = @libdir@
-module_DATA = masa.mod
+#------------------------
+# install fo'tran modules
+#------------------------
+
+install-data-local: libfmasa.la
+	mkdir -p $(DESTDIR)$(libdir)
+	$(INSTALL_DATA) $(top_srcdir)/src/masa.mod $(DESTDIR)$(libdir)/masa.mod
+
+
+EXTRA_DIST  = lic_utils/update_license.pl
 CLEANFILES  = .license.stamp masa.mod *.gcda *.gcno
