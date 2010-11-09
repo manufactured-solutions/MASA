@@ -1,5 +1,6 @@
 Version 0.30 (in progress)
 
+  * improved parallel build support
   * code has 99%+ line coverage	
   * c++ bindings now support arbitrary precision (double, long double, etc.) w/ regression testing
   * gradient of source terms is now available
