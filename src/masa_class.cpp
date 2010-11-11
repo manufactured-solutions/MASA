@@ -67,31 +67,20 @@ const Scalar MASA::manufactured_solution<Scalar>::MASA_VAR_DEFAULT = -12345.67; 
 template <typename Scalar>
 Scalar MASA::manufactured_solution<Scalar>::get_var(std::string var)
 {
-  int selector=1;
-  int error=1;
+  std::map<std::string,int>::const_iterator selector;
   
-  // lets run though the list to check the variable does exist
-  for(std::map<std::string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
-    {          
-      error=var.rfind(it->first); // one value must be 0, as in equal, to exit with success
-      if (error!=std::string::npos) // found a value
-      {
-	selector=0; // set flag for variable existence 
-      }
-    }    
+  // find variable
+  selector = varmap.find(var);
   
-  if(selector==0) // no error - the variable exists
+  // error handling
+  if(selector == varmap.end())
     {
-      selector = varmap[var];    // find location in pointer array
-      return *vararr[selector];   // set to value 
-      
-    }
-  else 
-    {
-      std::cout << "\nMASA ERROR:: No such variable  (" << var << ") exists\n";
+      std::cout << "\nMASA ERROR!!!:: No such variable  (" << var << ") exists\n";
       return -20;
-    } 
-    
+    }
+  
+  return *vararr[(*selector).second];   // set to value 
+  
 }// done with get_var function
 
 template <typename Scalar>
@@ -124,31 +113,21 @@ void MASA::manufactured_solution<Scalar>::display_var()
 template <typename Scalar>
 int MASA::manufactured_solution<Scalar>::set_var(std::string var, Scalar val)
 {
-  int selector=1;
-  int error=1;
-
-  // lets run though the list to check the variable does exist
-  for(std::map<std::string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
-    {          
-      error=var.rfind(it->first); // one value must be 0, as in equal, to exit with success
-      if (error!=std::string::npos) // found a value
-      {
-	selector=0; // set flag for variable existence 
-      }
-    }    
+  std::map<std::string,int>::const_iterator selector;
   
-  if(selector==0)
-    {      
-      selector = varmap[var];    // find location in pointer array      
-      *vararr[selector] = val;   // set variable to new value    
-    }
-  else 
-    {      
-      std::cout << "\nMASA ERROR:: No such variable (" << var << ") exists to be set\n";
+  // find variable
+  selector = varmap.find(var);
+  
+  // error handling
+  if(selector == varmap.end())
+    {
+      std::cout << "\nMASA ERROR!!!:: No such variable  (" << var << ") exists to be set\n";
       return 1;
-    } 
-
-  return 0;
+    }
+  
+  // set new value
+  *vararr[(*selector).second] = val;
+  return 0; // exit with no error
 
 }// done with set_var function
 
