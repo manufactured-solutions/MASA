@@ -77,8 +77,6 @@ namespace MASA
     Scalar gradT;                        // gradient 
     
   protected:
-    static const Scalar pi;
-    static const Scalar PI;
     static const Scalar MASA_VAR_DEFAULT;   
     Scalar dummy;
     int num_vars;
@@ -89,6 +87,8 @@ namespace MASA
     int dimension;                        // dimension of the solution
 
   public: 
+    static const Scalar pi;
+    static const Scalar PI;
 
     // functions to override
     virtual ~manufactured_solution(){};   // destructor

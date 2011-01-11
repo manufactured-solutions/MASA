@@ -79,7 +79,7 @@ private:
   void verify_pointer_sanity() const;
 
   manufactured_solution<Scalar>*             _master_pointer; // pointer to currently selected manufactured solution
-  std::map<std::string, manufactured_solution<Scalar> *> _master_map;     // global map between unique name and manufactured class
+  std::map<std::string, manufactured_solution<Scalar> *> _master_map; // global map b/t unique name and manuf class
 };
 
 
