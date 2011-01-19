@@ -286,35 +286,35 @@ double eval_2d_rho_source(
 //
 //--------------------------------------------------------------------------
 
-double eval_3d_p_an_(double x,double y,double z,double p_0,double p_x,double p_y,double p_z,double a_px,double a_py,double a_pz,double L)
+double eval_3d_p_an(double x,double y,double z,double p_0,double p_x,double p_y,double p_z,double a_px,double a_py,double a_pz,double L)
 {
   const double pi = acos(-1);
   double p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_z * cos(a_pz * pi * z / L);
   return p_an;
 }
   
-double eval_3d_u_an_(double x,double y,double z,double u_0,double u_x,double u_y,double u_z,double a_ux,double a_uy,double a_uz,double L)
+double eval_3d_u_an(double x,double y,double z,double u_0,double u_x,double u_y,double u_z,double a_ux,double a_uy,double a_uz,double L)
 {
   const double pi = acos(-1);
   double u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_z * cos(a_uz * pi * z / L);  
   return u_an;
 } 
  
-double eval_3d_v_an_(double x,double y,double z,double v_0,double v_x,double v_y,double v_z,double a_vx,double a_vy,double a_vz,double L)
+double eval_3d_v_an(double x,double y,double z,double v_0,double v_x,double v_y,double v_z,double a_vx,double a_vy,double a_vz,double L)
 {
   const double pi = acos(-1);
   double v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_z * sin(a_vz * pi * z / L);
   return v_an;
 }
 
-double eval_3d_w_an_(double x,double y,double z,double w_0,double w_x,double w_y,double w_z,double a_wx,double a_wy,double a_wz,double L)
+double eval_3d_w_an(double x,double y,double z,double w_0,double w_x,double w_y,double w_z,double a_wx,double a_wy,double a_wz,double L)
 {
   const double pi = acos(-1);
   double w_an = w_0 + w_x * sin(a_wx * pi * x / L) + w_y * sin(a_wy * pi * y / L) + w_z * cos(a_wz * pi * z / L);
   return w_an;
 }
 
-double eval_3d_rho_an_(double x,double y,double z,double rho_0,double rho_x,double rho_y,double rho_z,double a_rhox,double a_rhoy,double a_rhoz,double L)
+double eval_3d_rho_an(double x,double y,double z,double rho_0,double rho_x,double rho_y,double rho_z,double a_rhox,double a_rhoy,double a_rhoz,double L)
 { 
   const double pi = acos(-1);
   double rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_z * sin(a_rhoz * pi * z / L);
@@ -322,7 +322,7 @@ double eval_3d_rho_an_(double x,double y,double z,double rho_0,double rho_x,doub
 }
 
 
-double eval_3d_e_source_(  
+double eval_3d_e_source(  
   double x,
   double y,
   double z,
@@ -371,7 +371,7 @@ double eval_3d_e_source_(
   return(Q_e);
 }
 
-double eval_3d_u_source_(
+double eval_3d_u_source(
   double x,
   double y,
   double z,
@@ -418,7 +418,7 @@ double eval_3d_u_source_(
   return(Q_u);
 }
 
-double eval_3d_v_source_(
+double eval_3d_v_source(
   double x,
   double y,
   double z,
@@ -465,7 +465,7 @@ double eval_3d_v_source_(
   return(Q_v);
 }
 
-double eval_3d_w_source_(
+double eval_3d_w_source(
   double x,
   double y,
   double z,
@@ -512,7 +512,7 @@ double eval_3d_w_source_(
   return(Q_w);
 }
 
-double eval_3d_rho_source_(
+double eval_3d_rho_source(
   double x,
   double y,
   double z,

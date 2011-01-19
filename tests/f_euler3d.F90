@@ -29,6 +29,7 @@
 !! -------------------------------------------------------------------------
 
 program main
+  use euler_source_interface
   use masa
 
   implicit none
@@ -107,19 +108,6 @@ program main
   real(8) ::  dx 
   real(8) ::  dy
   real(8) ::  dz
-
-  ! external functions
-  real(8) :: eval_3d_u_source
-  real(8) :: eval_3d_v_source
-  real(8) :: eval_3d_w_source
-  real(8) :: eval_3d_e_source
-  real(8) :: eval_3d_rho_source
-
-  real(8) :: eval_3d_u_an
-  real(8) :: eval_3d_v_an
-  real(8) :: eval_3d_w_an
-  real(8) :: eval_3d_p_an
-  real(8) :: eval_3d_rho_an
 
   ! initialize the problem
   dx = real(lx)/real(nx)
@@ -208,60 +196,60 @@ program main
 
            ! need to hack this out
            ! check against maple
-           ufield2 = eval_3d_u_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),&
-                %val(u_z),%val(v_0),%val(v_x),%val(v_y), &
-                %val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
-                %val(rho_0),%val(rho_x),%val(rho_y),%val(rho_z),%val(p_0),%val(p_x),%val(p_y),%val(p_z), &
-                %val(a_px),%val(a_py),%val(a_pz),%val(a_rhox),%val(a_rhoy),%val(a_rhoz),&
-                %val(a_ux),%val(a_uy),%val(a_uz),%val(a_vx),%val(a_vy),%val(a_vz),%val(a_wx),%val(a_wy), &
-                %val(a_wz),%val(L))
+           ufield2 = eval_3d_u_source(x,y,z,u_0,u_x,u_y,&
+                u_z,v_0,v_x,v_y, &
+                v_z,w_0,w_x,w_y,w_z, &
+                rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z, &
+                a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,&
+                a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy, &
+                a_wz,L)
 
-           vfield2 = eval_3d_v_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),&
-                %val(u_z),%val(v_0),%val(v_x),%val(v_y), &
-                %val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
-                %val(rho_0),%val(rho_x),%val(rho_y),%val(rho_z),%val(p_0),%val(p_x),%val(p_y),%val(p_z), &
-                %val(a_px),%val(a_py),%val(a_pz),%val(a_rhox),%val(a_rhoy),%val(a_rhoz),&
-                %val(a_ux),%val(a_uy),%val(a_uz),%val(a_vx),%val(a_vy),%val(a_vz),%val(a_wx),%val(a_wy),&
-                %val(a_wz),%val(L))
+           vfield2 = eval_3d_v_source(x,y,z,u_0,u_x,u_y,&
+                u_z,v_0,v_x,v_y, &
+                v_z,w_0,w_x,w_y,w_z, &
+                rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z, &
+                a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,&
+                a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,&
+                a_wz,L)
 
-           wfield2 = eval_3d_w_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),&
-                %val(v_0),%val(v_x),%val(v_y), &
-                %val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
-                %val(rho_0),%val(rho_x),%val(rho_y),%val(rho_z),%val(p_0),%val(p_x),%val(p_y),%val(p_z), &
-                %val(a_px),%val(a_py),%val(a_pz),%val(a_rhox),%val(a_rhoy),%val(a_rhoz),&
-                %val(a_ux),%val(a_uy),%val(a_uz),%val(a_vx),%val(a_vy),%val(a_vz),%val(a_wx),%val(a_wy), &
-                %val(a_wz),%val(L))
+           wfield2 = eval_3d_w_source(x,y,z,u_0,u_x,u_y,u_z,&
+                v_0,v_x,v_y, &
+                v_z,w_0,w_x,w_y,w_z, &
+                rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z, &
+                a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,&
+                a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy, &
+                a_wz,L)
 
-           rho2    = eval_3d_rho_source(%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),&
-                %val(v_0),%val(v_x),%val(v_y), &
-                %val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
-                %val(rho_0),%val(rho_x),%val(rho_y),%val(rho_z),%val(p_0),%val(p_x),%val(p_y),%val(p_z), &
-                %val(a_px),%val(a_py),%val(a_pz),%val(a_rhox),%val(a_rhoy),%val(a_rhoz),&
-                %val(a_ux),%val(a_uy),%val(a_uz),%val(a_vx),%val(a_vy),%val(a_vz),%val(a_wx),%val(a_wy),&
-                %val(a_wz),%val(mu),%val(L))
+           rho2    = eval_3d_rho_source(x,y,z,u_0,u_x,u_y,u_z,&
+                v_0,v_x,v_y, &
+                v_z,w_0,w_x,w_y,w_z, &
+                rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z, &
+                a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,&
+                a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,&
+                a_wz,mu,L)
 
-           efield2 = eval_3d_e_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),&
-                %val(v_0),%val(v_x),%val(v_y), &
-                %val(v_z),%val(w_0),%val(w_x),%val(w_y),%val(w_z), &
-                %val(rho_0),%val(rho_x),%val(rho_y),%val(rho_z),%val(p_0),%val(p_x),%val(p_y),%val(p_z), &
-                %val(a_px),%val(a_py),%val(a_pz),%val(a_rhox),%val(a_rhoy),%val(a_rhoz),&
-                %val(a_ux),%val(a_uy),%val(a_uz),%val(a_vx),%val(a_vy),%val(a_vz),%val(a_wx),%val(a_wy),%val(a_wz),&
-                %val(mu),%val(Gamma),%val(L))
+           efield2 = eval_3d_e_source(x,y,z,u_0,u_x,u_y,u_z,&
+                v_0,v_x,v_y, &
+                v_z,w_0,w_x,w_y,w_z, &
+                rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z, &
+                a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,&
+                a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,&
+                mu,Gamma,L)
 
-           u_an2   = eval_3d_u_an  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),%val(u_z),%val(a_ux),&
-                %val(a_uy),%val(a_uz),%val(L))
+           u_an2   = eval_3d_u_an(x,y,z,u_0,u_x,u_y,u_z,a_ux,&
+                a_uy,a_uz,L)
            
-           v_an2   = eval_3d_v_an  (%val(x),%val(y),%val(z),%val(v_0),%val(v_x),%val(v_y),%val(v_z),%val(a_vx),&
-                %val(a_vy),%val(a_vz),%val(L))
+           v_an2   = eval_3d_v_an(x,y,z,v_0,v_x,v_y,v_z,a_vx,&
+                a_vy,a_vz,L)
 
-           w_an2   = eval_3d_w_an  (%val(x),%val(y),%val(z),%val(w_0),%val(w_x),%val(w_y),%val(w_z),%val(a_wx),&
-                %val(a_wy),%val(a_wz),%val(L))
+           w_an2   = eval_3d_w_an(x,y,z,w_0,w_x,w_y,w_z,a_wx,&
+                a_wy,a_wz,L)
 
-           rho_an2 = eval_3d_rho_an(%val(x),%val(y),%val(z),%val(rho_0),%val(rho_x),%val(rho_y),%val(rho_z),&
-                %val(a_rhox),%val(a_rhoy),%val(a_rhoz),%val(L))
+           rho_an2 = eval_3d_rho_an(x,y,z,rho_0,rho_x,rho_y,rho_z,&
+                a_rhox,a_rhoy,a_rhoz,L)
 
-           p_an2   = eval_3d_p_an  (%val(x),%val(y),%val(z),%val(p_0),%val(p_x),%val(p_y),%val(p_z),%val(a_px),&
-                %val(a_py),%val(a_pz),%val(L))
+           p_an2   = eval_3d_p_an(x,y,z,p_0,p_x,p_y,p_z,a_px,&
+                a_py,a_pz,L)
            
 #ifdef MASA_STRICT_REGRESSION
            ufield3 = abs(ufield-ufield2)

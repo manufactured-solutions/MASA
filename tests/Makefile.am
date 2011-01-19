@@ -103,7 +103,7 @@ f_euler1d_LDADD             = -lfmasa
 f_euler2d_SOURCES           = f_euler_source.F90 f_euler2d.F90  euler_source.c 
 f_euler2d_LDADD             = -lfmasa
 
-f_euler3d_SOURCES           = f_euler3d.F90 euler_source.c
+f_euler3d_SOURCES           = f_euler_source.F90 f_euler3d.F90 euler_source.c
 f_euler3d_LDADD             = -lfmasa
 
 f_cns2d_SOURCES             = f_cns2d.F90 cns_source.c
