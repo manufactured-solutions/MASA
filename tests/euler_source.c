@@ -29,14 +29,14 @@
 
 #include <math.h>
 
-double eval_1d_p_an_(double x,double p_0,double p_x,double a_px,double L)
+double eval_1d_p_an(double x,double p_0,double p_x,double a_px,double L)
 {
   const double pi = acos(-1);
   double p_an = p_0 + p_x * cos(a_px * pi * x / L);
   return p_an;
 }
   
-double eval_1d_u_an_(double x,double u_0,double u_x,double a_ux,double L)
+double eval_1d_u_an(double x,double u_0,double u_x,double a_ux,double L)
 {
   const double pi = acos(-1);
  
@@ -44,7 +44,7 @@ double eval_1d_u_an_(double x,double u_0,double u_x,double a_ux,double L)
   return u_an;
 } 
  
-double eval_1d_rho_an_(double x,double rho_0,double rho_x,double a_rhox,double L)
+double eval_1d_rho_an(double x,double rho_0,double rho_x,double a_rhox,double L)
 { 
   const double pi = acos(-1);
 
@@ -52,7 +52,7 @@ double eval_1d_rho_an_(double x,double rho_0,double rho_x,double a_rhox,double L
   return rho_an;
 }
 
-double eval_1d_e_source_(
+double eval_1d_e_source(
   double x,
   double u_0,
   double u_x,
@@ -74,7 +74,7 @@ double eval_1d_e_source_(
   return(Q_e);
 }
 
-double eval_1d_u_source_(
+double eval_1d_u_source(
   double x,
   double u_0,
   double u_x,
@@ -94,7 +94,7 @@ double eval_1d_u_source_(
   return(Q_u);
 }
 
-double eval_1d_rho_source_(  
+double eval_1d_rho_source(  
 			   double x,
 			   double u_0,
 			   double u_x,

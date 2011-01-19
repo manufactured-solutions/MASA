@@ -226,7 +226,7 @@ module euler_source_interface
 
      end function eval_1d_rho_source
 
-     real (c_double) function eval_1d_e_source(x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L) bind (C) 
+     real (c_double) function eval_1d_e_source(x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,Gamma,mu,L) bind (C) 
        use iso_c_binding
        implicit none
 
@@ -240,6 +240,8 @@ module euler_source_interface
        real (c_double), value :: a_px
        real (c_double), value :: a_rhox
        real (c_double), value :: a_ux
+       real (c_double), value :: mu
+       real (c_double), value :: Gamma
        real (c_double), value :: L
 
      end function eval_1d_e_source

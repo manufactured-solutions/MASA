@@ -29,6 +29,7 @@
 !! -------------------------------------------------------------------------
 
 program main
+  use euler_source_interface
   use masa
 
   implicit none
@@ -86,16 +87,6 @@ program main
   real(8) ::  dx 
   real(8) ::  dy
 
-  ! external functions
-  real(8) :: eval_1d_u_source
-  real(8) :: eval_1d_v_source
-  real(8) :: eval_1d_e_source
-  real(8) :: eval_1d_rho_source
-
-  real(8) :: eval_1d_u_an
-  real(8) :: eval_1d_v_an
-  real(8) :: eval_1d_p_an
-  real(8) :: eval_1d_rho_an
 
   ! initialize the problem
   dx = real(lx)/real(nx)
@@ -146,21 +137,13 @@ program main
 
      ! hacking at this source
      ! check against maple
-     ufield2 = eval_1d_u_source  (%val(x),%val(u_0),%val(u_x), &
-          %val(rho_0),%val(rho_x),%val(p_0),%val(p_x),%val(a_px), &
-          %val(a_rhox),%val(a_ux),%val(L))
+     ufield2 = eval_1d_u_source  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L)
+     rho2    = eval_1d_rho_source(x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L)
+     efield2 = eval_1d_e_source  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,mu,Gamma,L)
 
-     rho2    = eval_1d_rho_source(%val(x),%val(u_0),%val(u_x), &
-          %val(rho_0),%val(rho_x),%val(p_0),%val(p_x),%val(a_px), &
-          %val(a_rhox),%val(a_ux),%val(L))
-
-     efield2 = eval_1d_e_source  (%val(x),%val(u_0),%val(u_x), &
-          %val(rho_0),%val(rho_x),%val(p_0),%val(p_x),%val(a_px), &
-          %val(a_rhox),%val(a_ux),%val(Gamma),%val(mu),%val(L))
-
-     u_an2   = eval_1d_u_an  (%val(x),%val(u_0),%val(u_x),%val(a_ux),%val(L))
-     rho_an2 = eval_1d_rho_an(%val(x),%val(rho_0),%val(rho_x),%val(a_rhox),%val(L))
-     p_an2   = eval_1d_p_an  (%val(x),%val(p_0),%val(p_x),%val(a_px),%val(L))
+     u_an2   = eval_1d_u_an  (x,u_0,u_x,a_ux,L)
+     rho_an2 = eval_1d_rho_an(x,rho_0,rho_x,a_rhox,L)
+     p_an2   = eval_1d_p_an  (x,p_0,p_x,a_px,L)
 
 #ifdef MASA_STRICT_REGRESSION
      ufield3 = abs(ufield-ufield2)

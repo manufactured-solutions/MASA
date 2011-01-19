@@ -35,11 +35,9 @@ program main
   implicit none
 
   ! threshold calculation
-
   real(8) :: thresh = 1d-15
 
   ! solutions
-
   real(8) ::ufield,ufield2,ufield3
   real(8) ::vfield,vfield2,vfield3
   real(8) ::efield,efield2,efield3
@@ -49,8 +47,8 @@ program main
   real(8) ::v_an,v_an2,v_an3
   real(8) ::p_an,p_an2,p_an3
   real(8) ::rho_an,rho_an2,rho_an3
-  ! variables 
 
+  ! variables 
   real(8) :: u_0
   real(8) :: u_x
   real(8) :: u_y
