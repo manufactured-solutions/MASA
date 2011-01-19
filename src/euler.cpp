@@ -103,11 +103,11 @@ int MASA::euler_1d<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::euler_1d<Scalar>::eval_q_u(Scalar x)
 {
-  using manufactured_solution<Scalar>::pi;
-  using manufactured_solution<Scalar>::PI;
+  //using manufactured_solution<Scalar>::pi;
+  //using manufactured_solution<Scalar>::PI;
 
   Scalar Q_u;
-  Q_u = -sin(a_px * PI * x / L) * a_px * this->PI * p_x / L + rho_x * cos(a_rhox * this->PI * x / L) * pow(u_0 + u_x * sin(a_ux * this->PI * x / L), Scalar(2)) * a_rhox * this->PI / L + Scalar(2) * u_x * cos(a_ux * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L)) * a_ux * this->PI / L;
+  Q_u = -sin(a_px * this->PI * x / L) * a_px * this->PI * p_x / L + rho_x * cos(a_rhox * this->PI * x / L) * pow(u_0 + u_x * sin(a_ux * this->PI * x / L), Scalar(2)) * a_rhox * this->PI / L + Scalar(2) * u_x * cos(a_ux * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L)) * a_ux * this->PI / L;
   return Q_u;
 }
 
