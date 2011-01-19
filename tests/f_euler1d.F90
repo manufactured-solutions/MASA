@@ -139,7 +139,7 @@ program main
      ! check against maple
      ufield2 = eval_1d_u_source  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L)
      rho2    = eval_1d_rho_source(x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L)
-     efield2 = eval_1d_e_source  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,mu,Gamma,L)
+     efield2 = eval_1d_e_source  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,Gamma,mu,L)
 
      u_an2   = eval_1d_u_an  (x,u_0,u_x,a_ux,L)
      rho_an2 = eval_1d_rho_an(x,rho_0,rho_x,a_rhox,L)
