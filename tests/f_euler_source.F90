@@ -184,8 +184,97 @@ module euler_source_interface
        real (c_double), value :: x,y,rho_0,rho_x,rho_y,a_rhox,a_rhoy,L
      end function eval_2d_rho_an
 
+     !********************************************************
+     !*
+     !* 1D
+     !*
+     !********************************************************
+
+     real (c_double) function eval_1d_u_source(x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L) bind (C) 
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: u_0
+       real (c_double), value :: u_x
+       real (c_double), value :: rho_0
+       real (c_double), value :: rho_x
+       real (c_double), value :: p_0
+       real (c_double), value :: p_x
+       real (c_double), value :: a_px
+       real (c_double), value :: a_rhox
+       real (c_double), value :: a_ux
+       real (c_double), value :: L
+       
+     end function eval_1d_u_source
+
+     real (c_double) function eval_1d_rho_source(x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L) bind (C) 
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: u_0
+       real (c_double), value :: u_x
+       real (c_double), value :: rho_0
+       real (c_double), value :: rho_x
+       real (c_double), value :: p_0
+       real (c_double), value :: p_x
+       real (c_double), value :: a_px
+       real (c_double), value :: a_rhox
+       real (c_double), value :: a_ux
+       real (c_double), value :: L
+
+     end function eval_1d_rho_source
+
+     real (c_double) function eval_1d_e_source(x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L) bind (C) 
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: u_0
+       real (c_double), value :: u_x
+       real (c_double), value :: rho_0
+       real (c_double), value :: rho_x
+       real (c_double), value :: p_0
+       real (c_double), value :: p_x
+       real (c_double), value :: a_px
+       real (c_double), value :: a_rhox
+       real (c_double), value :: a_ux
+       real (c_double), value :: L
+
+     end function eval_1d_e_source
+
+     real (c_double) function eval_1d_p_an(x,p_0,p_x,a_px,L) bind (C)
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x,p_0,p_x,a_px,L
+
+     end function eval_1d_p_an
+
+     real (c_double) function eval_1d_u_an(x,p_0,p_x,a_px,L) bind (C)
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x,p_0,p_x,a_px,L
+
+     end function eval_1d_u_an
+     
+     real (c_double) function eval_1d_v_an(x,p_0,p_x,a_px,L) bind (C)
+       use iso_c_binding
+       implicit none
+       
+       real (c_double), value :: x,p_0,p_x,a_px,L
+     end function eval_1d_v_an
+
+     real (c_double) function eval_1d_rho_an(x,p_0,p_x,a_px,L) bind (C)
+       use iso_c_binding
+       implicit none
+       
+       real (c_double), value :: x,p_0,p_x,a_px,L
+     end function eval_1d_rho_an
+
   end interface
        
-
 end module euler_source_interface
 

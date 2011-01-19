@@ -206,6 +206,7 @@ program main
            p_an = masa_eval_3d_p_an        (x,y,z)
            rho_an = masa_eval_3d_rho_an    (x,y,z)
 
+           ! need to hack this out
            ! check against maple
            ufield2 = eval_3d_u_source  (%val(x),%val(y),%val(z),%val(u_0),%val(u_x),%val(u_y),&
                 %val(u_z),%val(v_0),%val(v_x),%val(v_y), &

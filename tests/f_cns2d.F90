@@ -168,7 +168,8 @@ program main
 	v_an = masa_eval_2d_v_an        (x,y)
 	p_an = masa_eval_2d_p_an        (x,y)
 	rho_an = masa_eval_2d_rho_an    (x,y)
-		  
+
+        ! hack at this		  
         ! check against maple
         ufield2 = eval_2d_u_source  (%val(x),%val(y),%val(u_0),%val(u_x),%val(u_y),%val(v_0),%val(v_x),%val(v_y), &
              %val(rho_0),%val(rho_x),%val(rho_y),%val(p_0),%val(p_x),%val(p_y),%val(a_px),%val(a_py), &

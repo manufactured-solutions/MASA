@@ -144,6 +144,7 @@ program main
      p_an = masa_eval_1d_p_an        (x)
      rho_an = masa_eval_1d_rho_an    (x)
 
+     ! hacking at this source
      ! check against maple
      ufield2 = eval_1d_u_source  (%val(x),%val(u_0),%val(u_x), &
           %val(rho_0),%val(rho_x),%val(p_0),%val(p_x),%val(a_px), &
