@@ -29,6 +29,7 @@
 !! -------------------------------------------------------------------------
 
 program main
+  use euler_source_interface
   use masa
 
   implicit none
