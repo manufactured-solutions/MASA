@@ -37,15 +37,15 @@ program main
   real(8) :: thresh = 1e-15
 
   ! solutions
-  real(8) ::ufield,ufield2,ufield3
-  real(8) ::vfield,vfield2,vfield3
-  real(8) ::efield,efield2,efield3
-  real(8) ::rho,rho2,rho3
+  real(8) :: ufield,ufield2,ufield3
+  real(8) :: vfield,vfield2,vfield3
+  real(8) :: efield,efield2,efield3
+  real(8) :: rho,rho2,rho3
 
-  real(8) ::u_an,u_an2,u_an3
-  real(8) ::v_an,v_an2,v_an3
-  real(8) ::p_an,p_an2,p_an3
-  real(8) ::rho_an,rho_an2,rho_an3
+  real(8) :: u_an,u_an2,u_an3
+  real(8) :: v_an,v_an2,v_an3
+  real(8) :: p_an,p_an2,p_an3
+  real(8) :: rho_an,rho_an2,rho_an3
 
   ! variables 
   real(8) :: u_0
@@ -88,17 +88,6 @@ program main
   integer ::  ly=1 
   real(8) ::  dx 
   real(8) ::  dy
-
-  ! external functions
-  real(8) :: eval_2d_u_source
-  real(8) :: eval_2d_v_source
-  real(8) :: eval_2d_e_source
-  real(8) :: eval_2d_rho_source
-
-  real(8) :: eval_2d_u_an
-  real(8) :: eval_2d_v_an
-  real(8) :: eval_2d_p_an
-  real(8) :: eval_2d_rho_an
 
   ! initialize the problem
   dx = real(lx)/real(nx)
@@ -169,28 +158,27 @@ program main
 	p_an = masa_eval_2d_p_an        (x,y)
 	rho_an = masa_eval_2d_rho_an    (x,y)
 
-        ! hack at this		  
         ! check against maple
-        ufield2 = eval_2d_u_source  (%val(x),%val(y),%val(u_0),%val(u_x),%val(u_y),%val(v_0),%val(v_x),%val(v_y), &
-             %val(rho_0),%val(rho_x),%val(rho_y),%val(p_0),%val(p_x),%val(p_y),%val(a_px),%val(a_py), &
-             %val(a_rhox),%val(a_rhoy),%val(a_ux),%val(a_uy),%val(a_vx),%val(a_vy),%val(mu),%val(L),%val(R),%val(K))
+        ufield2 = eval_2d_u_source  (x,y,u_0,u_x,u_y,v_0,v_x,v_y, &
+             rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py, &
+             a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,K)
 
-	vfield2 = eval_2d_v_source  (%val(x),%val(y),%val(u_0),%val(u_x),%val(u_y),%val(v_0),%val(v_x),%val(v_y), &
-             %val(rho_0),%val(rho_x),%val(rho_y),%val(p_0),%val(p_x),%val(p_y),%val(a_px),%val(a_py), &
-             %val(a_rhox),%val(a_rhoy),%val(a_ux),%val(a_uy),%val(a_vx),%val(a_vy),%val(mu),%val(L),%val(R),%val(K))
+	vfield2 = eval_2d_v_source  (x,y,u_0,u_x,u_y,v_0,v_x,v_y, &
+             rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py, &
+             a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,K)
 
-        rho2    = eval_2d_rho_source(%val(x),%val(y),%val(u_0),%val(u_x),%val(u_y),%val(v_0),%val(v_x),%val(v_y), &
-             %val(rho_0),%val(rho_x),%val(rho_y),%val(p_0),%val(p_x),%val(p_y),%val(a_px),%val(a_py), &
-             %val(a_rhox),%val(a_rhoy),%val(a_ux),%val(a_uy),%val(a_vx),%val(a_vy),%val(mu),%val(L),%val(R),%val(K))
+        rho2    = eval_2d_rho_source(x,y,u_0,u_x,u_y,v_0,v_x,v_y, &
+             rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py, &
+             a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,K)
  
-        efield2 = eval_2d_e_source  (%val(x),%val(y),%val(u_0),%val(u_x),%val(u_y),%val(v_0),%val(v_x),%val(v_y), &
-             %val(rho_0),%val(rho_x),%val(rho_y),%val(p_0),%val(p_x),%val(p_y),%val(a_px),%val(a_py), &
-             %val(a_rhox),%val(a_rhoy),%val(a_ux),%val(a_uy),%val(a_vx),%val(a_vy),%val(Gamma),%val(mu),%val(L),%val(R),%val(K))
+        efield2 = eval_2d_e_source  (x,y,u_0,u_x,u_y,v_0,v_x,v_y, &
+             rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py, &
+             a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L,R,K)
 
-        u_an2   = eval_2d_u_an  (%val(x),%val(y),%val(u_0),%val(u_x),%val(u_y),%val(a_ux),%val(a_uy),%val(L))
-        v_an2   = eval_2d_v_an  (%val(x),%val(y),%val(v_0),%val(v_x),%val(v_y),%val(a_vx),%val(a_vy),%val(L))
-        rho_an2 = eval_2d_rho_an(%val(x),%val(y),%val(rho_0),%val(rho_x),%val(rho_y),%val(a_rhox),%val(a_rhoy),%val(L))
-        p_an2   = eval_2d_p_an  (%val(x),%val(y),%val(p_0),%val(p_x),%val(p_y),%val(a_px),%val(a_py),%val(L))
+        u_an2   = eval_2d_u_an  (x,y,u_0,u_x,u_y,a_ux,a_uy,L)
+        v_an2   = eval_2d_v_an  (x,y,v_0,v_x,v_y,a_vx,a_vy,L)
+        rho_an2 = eval_2d_rho_an(x,y,rho_0,rho_x,rho_y,a_rhox,a_rhoy,L)
+        p_an2   = eval_2d_p_an  (x,y,p_0,p_x,p_y,a_px,a_py,L)
 
 #ifdef MASA_STRICT_REGRESSION
         ufield3 = abs(ufield-ufield2)
