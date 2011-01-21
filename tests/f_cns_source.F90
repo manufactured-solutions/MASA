@@ -27,7 +27,8 @@
 !!--------------------------------------------------------------------------
 
 module cns_source_interface
-
+  use iso_c_binding
+       
   interface
      real (c_double) function eval_3d_u_source(x,y,z,&
           u_0,u_x,u_y,u_z,&
