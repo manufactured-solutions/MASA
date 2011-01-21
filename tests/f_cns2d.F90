@@ -29,7 +29,7 @@
 !! -------------------------------------------------------------------------
 
 program main
-  use euler_source_interface
+  use cns_source_interface
   use masa
 
   implicit none
@@ -173,7 +173,8 @@ program main
              rho_0,rho_x,rho_y, &
              p_0,p_x,p_y,a_px,a_py, &
              a_rhox,a_rhoy, &
-             a_ux,a_uy,a_vx,a_vy,mu,L)
+             a_ux,a_uy,a_vx,a_vy,&
+             mu,L,R,K)
  
         rho2 = eval_2d_rho_source(x,y,&
              u_0,u_x,u_y,v_0,v_x,v_y, &

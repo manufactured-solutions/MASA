@@ -452,7 +452,7 @@ module cns_source_interface
           p_0,p_x,p_y,&
           a_px,a_py,a_rhox,a_rhoy,&
           a_ux,a_uy,a_vx,a_vy,&
-          mu,L) bind (C)
+          mu,L,R,k) bind (C)
        use iso_c_binding
        implicit none
 
@@ -480,6 +480,8 @@ module cns_source_interface
        real (c_double), value :: a_vy
        real (c_double), value :: mu
        real (c_double), value :: L
+       real (c_double), value :: R
+       real (c_double), value :: k
 
      end function eval_2d_rho_source
 
