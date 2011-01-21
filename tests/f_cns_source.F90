@@ -378,13 +378,7 @@ module cns_source_interface
      !*
      !********************************************************
 
-     real (c_double) function eval_2d_u_source(x,y,&
-          u_0,u_x,u_y,v_0,v_x,v_y,&
-          rho_0,rho_x,rho_y,&
-          p_0,p_x,p_y,a_px,a_py,&
-          a_rhox,a_rhoy,&
-          a_ux,a_uy,a_vx,a_vy,&
-          mu,L,R,k) bind (C) 
+     real (c_double) function eval_2d_u_source(x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k) bind (C) 
        use iso_c_binding
        implicit none
 
@@ -452,8 +446,13 @@ module cns_source_interface
 
      end function eval_2d_v_source
 
-     real (c_double) function eval_2d_rho_source(x,y,u_0,u_x,u_y,v_0,v_x,v_y, &
-          rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k) bind (C)
+     real (c_double) function eval_2d_rho_source(x,y,&
+          u_0,u_x,u_y,v_0,v_x,v_y, &
+          rho_0,rho_x,rho_y,&
+          p_0,p_x,p_y,&
+          a_px,a_py,a_rhox,a_rhoy,&
+          a_ux,a_uy,a_vx,a_vy,&
+          mu,L) bind (C)
        use iso_c_binding
        implicit none
 
@@ -481,14 +480,12 @@ module cns_source_interface
        real (c_double), value :: a_vy
        real (c_double), value :: mu
        real (c_double), value :: L
-       real (c_double), value :: R
-       real (c_double), value :: k
 
      end function eval_2d_rho_source
 
      real (c_double) function eval_2d_e_source(x,y,u_0,u_x,u_y,v_0,v_x,v_y, &
           rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy, &
-          a_ux,a_uy,a_vx,a_vy,mu,L,R,k) bind (C)
+          a_ux,a_uy,a_vx,a_vy,Gamma,mu,L,R,k) bind (C)
        use iso_c_binding
        implicit none
 
@@ -514,6 +511,7 @@ module cns_source_interface
        real (c_double), value :: a_uy
        real (c_double), value :: a_vx
        real (c_double), value :: a_vy
+       real (c_double), value :: Gamma
        real (c_double), value :: mu
        real (c_double), value :: L
        real (c_double), value :: R

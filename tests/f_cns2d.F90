@@ -158,27 +158,30 @@ program main
 	v_an = masa_eval_2d_v_an        (x,y)
 	p_an = masa_eval_2d_p_an        (x,y)
 	rho_an = masa_eval_2d_rho_an    (x,y)
-
-        ! check against maple
-        ufield2 = eval_2d_u_source(x,y,&
-             u_0,u_x,u_y,v_0,v_x,v_y, &
-             rho_0,rho_x,rho_y,&
-             p_0,p_x,p_y,a_px,a_py, &
-             a_rhox,a_rhoy,&
-             a_ux,a_uy,a_vx,a_vy,&
-             mu,L,R,K)
-
-	vfield2 = eval_2d_v_source  (x,y,u_0,u_x,u_y,v_0,v_x,v_y, &
-             rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py, &
-             a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,K)
-
-        rho2    = eval_2d_rho_source(x,y,u_0,u_x,u_y,v_0,v_x,v_y, &
-             rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py, &
-             a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,K)
  
-        efield2 = eval_2d_e_source  (x,y,u_0,u_x,u_y,v_0,v_x,v_y, &
-             rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py, &
-             a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L,R,K)
+        ! check against maple
+        ufield2 = eval_2d_u_source(x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,K)
+        
+	vfield2 = eval_2d_v_source(x,y, &
+             u_0,u_x,u_y,v_0,v_x,v_y, &
+             rho_0,rho_x,rho_y, &
+             p_0,p_x,p_y,a_px,a_py, &
+             a_rhox,a_rhoy, &
+             a_ux,a_uy,a_vx,a_vy,mu,L)
+ 
+        rho2 = eval_2d_rho_source(x,y,&
+             u_0,u_x,u_y,v_0,v_x,v_y, &
+             rho_0,rho_x,rho_y, &
+             p_0,p_x,p_y,a_px,a_py, &
+             a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy, &
+             mu,L,R,K)
+ 
+        efield2 = eval_2d_e_source  (x,y, &
+             u_0,u_x,u_y,v_0,v_x,v_y, &
+             rho_0,rho_x,rho_y, &
+             p_0,p_x,p_y,a_px,a_py, &
+             a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma, &
+             mu,L,R,K)
 
         u_an2   = eval_2d_u_an  (x,y,u_0,u_x,u_y,a_ux,a_uy,L)
         v_an2   = eval_2d_v_an  (x,y,v_0,v_x,v_y,a_vx,a_vy,L)

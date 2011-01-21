@@ -157,9 +157,7 @@ double eval_2d_v_source(
 			 double a_vx,
 			 double a_vy,
 			 double mu,
-			 double L,
-			 double R,
-			 double k)
+			 double L)
 {
   const double pi = acos(-1);
 
