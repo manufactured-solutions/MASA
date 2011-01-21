@@ -1,9 +1,15 @@
-Version 0.30 (in progress)
+Version 0.40 (In Progress)
+
+  * Further documentation edits
+  * SMASA (stochastic masa) available 
+  * gradient of source terms is now available for Fortran90 and C
+
+Version 0.30 (January 21st 2011)
 
   * improved parallel build support
   * code has 99%+ line coverage	
   * c++ bindings now support arbitrary precision (double, long double, etc.) w/ regression testing
-  * gradient of source terms is now available
+  * gradient of source terms is now available for c++
   * adding new conditional (--masa-exceptions) that adds exception handling
   * modifications to Fortran interface (no API changes)
   * added doxygen documentation for all c/cpp/fortran functions
