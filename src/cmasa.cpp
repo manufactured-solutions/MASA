@@ -38,18 +38,11 @@ using namespace MASA;
 
 extern "C" int cmasa_init(const char* specificname,const char* functionname)
 {
-
-  //  printf("sizeofname = %i\n",sizeof(specificname));
-  //  printf("functionname = %i\n",sizeof(functionname));
-  //  printf(" -> %c%c%c\n",specificname[5],specificname[6],specificname[7]);
   
   std::string sn(specificname);
   std::string fn(functionname);
 
-  //  printf("masa_init, received %s %s\n\n",specificname,functionname);
-
   masa_init<double>(sn,fn);
-
   return 0;
 }
 
@@ -101,21 +94,25 @@ extern "C" double cmasa_get_param(const char* param)
 // --------------------------------
 
 // --------------------------------
-// source term(s) -- 1D
+// source, analytical and gradient term(s) -- 1D
 // --------------------------------
 
-extern "C" double cmasa_eval_1d_t_source  (double x){return(masa_eval_t_source<double>(x));};
-extern "C" double cmasa_eval_1d_u_source  (double x){return(masa_eval_u_source<double>(x));};
-extern "C" double cmasa_eval_1d_e_source  (double x){return(masa_eval_e_source<double>(x));};
+extern "C" double cmasa_eval_1d_t_source  (double x){return(masa_eval_t_source<double>  (x));};
+extern "C" double cmasa_eval_1d_u_source  (double x){return(masa_eval_u_source<double>  (x));};
+extern "C" double cmasa_eval_1d_e_source  (double x){return(masa_eval_e_source<double>  (x));};
 extern "C" double cmasa_eval_1d_rho_source(double x){return(masa_eval_rho_source<double>(x));};
 
-extern "C" double cmasa_eval_1d_t_an      (double x){return(masa_eval_t_an<double>(x));};
-extern "C" double cmasa_eval_1d_u_an      (double x){return(masa_eval_u_an<double>(x));};
-extern "C" double cmasa_eval_1d_p_an      (double x){return(masa_eval_p_an<double>(x));};
+extern "C" double cmasa_eval_1d_t_an      (double x){return(masa_eval_t_an<double>  (x));};
+extern "C" double cmasa_eval_1d_u_an      (double x){return(masa_eval_u_an<double>  (x));};
+extern "C" double cmasa_eval_1d_p_an      (double x){return(masa_eval_p_an<double>  (x));};
 extern "C" double cmasa_eval_1d_rho_an    (double x){return(masa_eval_rho_an<double>(x));};
 
+extern "C" double cmasa_eval_1d_grad_u    (double x){return(masa_eval_1d_grad_u<double>  (x));};
+extern "C" double cmasa_eval_1d_grad_p    (double x){return(masa_eval_1d_grad_p<double>  (x));};
+extern "C" double cmasa_eval_1d_grad_rho  (double x){return(masa_eval_1d_grad_rho<double>(x));};
+
 // --------------------------------
-// source term(s) -- 2D
+// source, analytical and gradient term(s) -- 2D
 // --------------------------------
 
 extern "C" double cmasa_eval_2d_t_source  (double x,double y){return masa_eval_t_source<double>  (x,y);};
@@ -124,14 +121,20 @@ extern "C" double cmasa_eval_2d_v_source  (double x,double y){return(masa_eval_v
 extern "C" double cmasa_eval_2d_e_source  (double x,double y){return(masa_eval_e_source<double>  (x,y));};
 extern "C" double cmasa_eval_2d_rho_source(double x,double y){return(masa_eval_rho_source<double>(x,y));};
 
-extern "C" double cmasa_eval_2d_t_an      (double x,double y){return(masa_eval_t_an<double>  (x,y));};
-extern "C" double cmasa_eval_2d_u_an      (double x,double y){return(masa_eval_u_an<double>  (x,y));};
-extern "C" double cmasa_eval_2d_v_an      (double x,double y){return(masa_eval_v_an<double>  (x,y));};
-extern "C" double cmasa_eval_2d_p_an      (double x,double y){return(masa_eval_p_an<double>  (x,y));};
-extern "C" double cmasa_eval_2d_rho_an    (double x,double y){return(masa_eval_rho_an<double>(x,y));};
+extern "C" double cmasa_eval_2d_t_an     (double x,double y){return(masa_eval_t_an<double>  (x,y));};
+extern "C" double cmasa_eval_2d_u_an     (double x,double y){return(masa_eval_u_an<double>  (x,y));};
+extern "C" double cmasa_eval_2d_v_an     (double x,double y){return(masa_eval_v_an<double>  (x,y));};
+extern "C" double cmasa_eval_2d_p_an     (double x,double y){return(masa_eval_p_an<double>  (x,y));};
+extern "C" double cmasa_eval_2d_rho_an   (double x,double y){return(masa_eval_rho_an<double>(x,y));};
+
+extern "C" double cmasa_eval_2d_grad_u   (double x,double y,int i){return(masa_eval_2d_grad_u<double>  (x,y,i));};
+extern "C" double cmasa_eval_2d_grad_v   (double x,double y,int i){return(masa_eval_2d_grad_v<double>  (x,y,i));};
+extern "C" double cmasa_eval_2d_grad_w   (double x,double y,int i){return(masa_eval_2d_grad_w<double>  (x,y,i));};
+extern "C" double cmasa_eval_2d_grad_p   (double x,double y,int i){return(masa_eval_2d_grad_p<double>  (x,y,i));};
+extern "C" double cmasa_eval_2d_grad_rho (double x,double y,int i){return(masa_eval_2d_grad_rho<double>(x,y,i));};
 
 // --------------------------------
-// source term(s) -- 3D
+// source, analytical and gradient term(s) -- 3D
 // --------------------------------
 
 extern "C" double cmasa_eval_3d_t_source  (double x,double y,double z){return masa_eval_t_source<double>  (x,y,z); };
@@ -141,9 +144,15 @@ extern "C" double cmasa_eval_3d_w_source  (double x,double y,double z){return(ma
 extern "C" double cmasa_eval_3d_e_source  (double x,double y,double z){return(masa_eval_e_source<double>  (x,y,z));};
 extern "C" double cmasa_eval_3d_rho_source(double x,double y,double z){return(masa_eval_rho_source<double>(x,y,z));};
 
-extern "C" double cmasa_eval_3d_t_an      (double x,double y,double z){return(masa_eval_t_an<double>  (x,y,z));};
-extern "C" double cmasa_eval_3d_u_an      (double x,double y,double z){return(masa_eval_u_an<double>  (x,y,z));};
-extern "C" double cmasa_eval_3d_v_an      (double x,double y,double z){return(masa_eval_v_an<double>  (x,y,z));};
-extern "C" double cmasa_eval_3d_w_an      (double x,double y,double z){return(masa_eval_w_an<double>  (x,y,z));};
-extern "C" double cmasa_eval_3d_p_an      (double x,double y,double z){return(masa_eval_p_an<double>  (x,y,z));};
-extern "C" double cmasa_eval_3d_rho_an    (double x,double y,double z){return(masa_eval_rho_an<double>(x,y,z));};
+extern "C" double cmasa_eval_3d_t_an     (double x,double y,double z){return(masa_eval_t_an<double>  (x,y,z));};
+extern "C" double cmasa_eval_3d_u_an     (double x,double y,double z){return(masa_eval_u_an<double>  (x,y,z));};
+extern "C" double cmasa_eval_3d_v_an     (double x,double y,double z){return(masa_eval_v_an<double>  (x,y,z));};
+extern "C" double cmasa_eval_3d_w_an     (double x,double y,double z){return(masa_eval_w_an<double>  (x,y,z));};
+extern "C" double cmasa_eval_3d_p_an     (double x,double y,double z){return(masa_eval_p_an<double>  (x,y,z));};
+extern "C" double cmasa_eval_3d_rho_an   (double x,double y,double z){return(masa_eval_rho_an<double>(x,y,z));};
+
+extern "C" double cmasa_eval_3d_grad_u   (double x,double y,double z,int i){return(masa_eval_3d_grad_u  <double>(x,y,z,i));};
+extern "C" double cmasa_eval_3d_grad_v   (double x,double y,double z,int i){return(masa_eval_3d_grad_v  <double>(x,y,z,i));};
+extern "C" double cmasa_eval_3d_grad_w   (double x,double y,double z,int i){return(masa_eval_3d_grad_w  <double>(x,y,z,i));};
+extern "C" double cmasa_eval_3d_grad_p   (double x,double y,double z,int i){return(masa_eval_3d_grad_p  <double>(x,y,z,i));};
+extern "C" double cmasa_eval_3d_grad_rho (double x,double y,double z,int i){return(masa_eval_3d_grad_rho<double>(x,y,z,i));};

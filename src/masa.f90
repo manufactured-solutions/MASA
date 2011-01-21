@@ -468,6 +468,173 @@ module masa
        
      end function masa_eval_3d_rho_an
   end interface
+
+  ! ---------------------------------
+  ! MMS gradient term interfaces -- 1d
+  ! ---------------------------------
+
+  interface 
+     real (c_double) function masa_eval_1d_grad_u(value) bind (C,name='cmasa_eval_1d_grad_u')
+       use iso_c_binding
+       implicit none
+       
+       real (c_double), value :: value
+       
+     end function masa_eval_1d_grad_u
+  end interface
+
+  interface 
+     real (c_double) function masa_eval_1d_grad_p(value) bind (C,name='cmasa_eval_1d_grad_p')
+       use iso_c_binding
+       implicit none
+       
+       real (c_double), value :: value
+       
+     end function masa_eval_1d_grad_p
+  end interface
+
+  interface 
+     real (c_double) function masa_eval_1d_grad_rho(value) bind (C,name='cmasa_eval_1d_grad_rho')
+       use iso_c_binding
+       implicit none
+       
+       real (c_double), value :: value
+       
+     end function masa_eval_1d_grad_rho
+  end interface
+
+  ! ---------------------------------
+  ! MMS gradient term interfaces -- 2d
+  ! ---------------------------------
+
+  interface 
+     real (c_double) function masa_eval_2d_grad_u(value,value2,it) bind (C,name='cmasa_eval_2d_grad_u')
+       use iso_c_binding
+       implicit none
+       
+       real    (c_double), value :: value
+       real    (c_double), value :: value2
+       integer (c_int),    value :: it
+       
+     end function masa_eval_2d_grad_u
+  end interface
+
+  interface 
+     real (c_double) function masa_eval_2d_grad_v(value,value2,it) bind (C,name='cmasa_eval_2d_grad_v')
+       use iso_c_binding
+       implicit none
+       
+       real    (c_double), value :: value
+       real    (c_double), value :: value2
+       integer (c_int),    value :: it
+       
+     end function masa_eval_2d_grad_v
+  end interface
+
+  interface 
+     real (c_double) function masa_eval_2d_grad_w(value,value2,it) bind (C,name='cmasa_eval_2d_grad_w')
+       use iso_c_binding
+       implicit none
+       
+       real    (c_double), value :: value
+       real    (c_double), value :: value2
+       integer (c_int),    value :: it
+       
+     end function masa_eval_2d_grad_w
+  end interface
+
+  interface 
+     real (c_double) function masa_eval_2d_grad_p(value,value2,it) bind (C,name='cmasa_eval_2d_grad_p')
+       use iso_c_binding
+       implicit none
+       
+       real    (c_double), value :: value
+       real    (c_double), value :: value2
+       integer (c_int),    value :: it
+       
+     end function masa_eval_2d_grad_p
+  end interface
+
+  interface 
+     real (c_double) function masa_eval_2d_grad_rho(value,value2,it) bind (C,name='cmasa_eval_2d_grad_rho')
+       use iso_c_binding
+       implicit none
+       
+       real    (c_double), value :: value
+       real    (c_double), value :: value2
+       integer (c_int),    value :: it
+       
+     end function masa_eval_2d_grad_rho
+  end interface
+
+  ! ---------------------------------
+  ! MMS gradient term interfaces -- 3d
+  ! ---------------------------------
+
+  interface 
+     real (c_double) function masa_eval_3d_grad_u(value,value2,value3,it) bind (C,name='cmasa_eval_3d_grad_u')
+       use iso_c_binding
+       implicit none
+       
+       real    (c_double), value :: value
+       real    (c_double), value :: value2
+       real    (c_double), value :: value3
+       integer (c_int),    value :: it
+       
+     end function masa_eval_3d_grad_u
+  end interface
+
+  interface 
+     real (c_double) function masa_eval_3d_grad_v(value,value2,value3,it) bind (C,name='cmasa_eval_3d_grad_v')
+       use iso_c_binding
+       implicit none
+       
+       real    (c_double), value :: value
+       real    (c_double), value :: value2
+       real    (c_double), value :: value3
+       integer (c_int),    value :: it
+       
+     end function masa_eval_3d_grad_v
+  end interface
+
+  interface 
+     real (c_double) function masa_eval_3d_grad_w(value,value2,value3,it) bind (C,name='cmasa_eval_3d_grad_w')
+       use iso_c_binding
+       implicit none
+       
+       real    (c_double), value :: value
+       real    (c_double), value :: value2
+       real    (c_double), value :: value3
+       integer (c_int),    value :: it
+       
+     end function masa_eval_3d_grad_w
+  end interface
+
+  interface 
+     real (c_double) function masa_eval_3d_grad_p(value,value2,value3,it) bind (C,name='cmasa_eval_3d_grad_p')
+       use iso_c_binding
+       implicit none
+       
+       real    (c_double), value :: value
+       real    (c_double), value :: value2
+       real    (c_double), value :: value3
+       integer (c_int),    value :: it
+       
+     end function masa_eval_3d_grad_p
+  end interface
+
+  interface 
+     real (c_double) function masa_eval_3d_grad_rho(value,value2,value3,it) bind (C,name='cmasa_eval_3d_grad_rho')
+       use iso_c_binding
+       implicit none
+       
+       real    (c_double), value :: value
+       real    (c_double), value :: value2
+       real    (c_double), value :: value3
+       integer (c_int),    value :: it
+       
+     end function masa_eval_3d_grad_rho
+  end interface
   
 contains 
   
