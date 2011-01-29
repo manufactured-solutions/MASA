@@ -36,6 +36,21 @@
 
 using namespace MASA;
 
+// This header file contains the public functions designed to be exposed in CMASA
+// What follows is the masa.h doxygen documentation headers
+
+/*! \file masa.h
+\brief CMASA header file containing all public C/C++ API
+
+CMASA.h is a header file that contains all the public objects and member functions for the C interfaces. 
+To use, be sure to #include <masa.h> in any C programs calling MASA routines.
+
+Several simple examples for using these functions are provided in the examples section. 
+Functions which have an integer return value return "0" upon success.
+
+*/
+
+
 extern "C" int cmasa_init(const char* specificname,const char* functionname)
 {
   
