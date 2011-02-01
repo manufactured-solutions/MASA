@@ -103,11 +103,11 @@ int MASA::euler_1d<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::euler_1d<Scalar>::eval_q_u(Scalar x)
 {
-  //using manufactured_solution<Scalar>::pi;
-  //using manufactured_solution<Scalar>::PI;
+  using manufactured_solution<Scalar>::pi;
+  using manufactured_solution<Scalar>::PI;
 
   Scalar Q_u;
-  Q_u = -sin(a_px * this->PI * x / L) * a_px * this->PI * p_x / L + rho_x * cos(a_rhox * this->PI * x / L) * pow(u_0 + u_x * sin(a_ux * this->PI * x / L), Scalar(2)) * a_rhox * this->PI / L + Scalar(2) * u_x * cos(a_ux * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L)) * a_ux * this->PI / L;
+  Q_u = -sin(a_px * PI * x / L) * a_px * this->PI * p_x / L + rho_x * cos(a_rhox * this->PI * x / L) * pow(u_0 + u_x * sin(a_ux * this->PI * x / L), Scalar(2)) * a_rhox * this->PI / L + Scalar(2) * u_x * cos(a_ux * this->PI * x / L) * (rho_0 + rho_x * sin(a_rhox * this->PI * x / L)) * (u_0 + u_x * sin(a_ux * this->PI * x / L)) * a_ux * this->PI / L;
   return Q_u;
 }
 
@@ -242,16 +242,16 @@ int MASA::euler_2d<Scalar>::init_var()
   err += this->set_var("R",1.01);
   err += this->set_var("k",1.38);
 
-  err += this->set_var("u_0",11.23);
+  err += this->set_var("u_0",110.23);
   err += this->set_var("u_x",1.1);
   err += this->set_var("u_y",.08);
-  err += this->set_var("v_0",12);
+  err += this->set_var("v_0",120.2);
   err += this->set_var("v_x",1.6);
-  err += this->set_var("v_y",.67);
-  err += this->set_var("rho_0",10.02);
+  err += this->set_var("v_y",.47);
+  err += this->set_var("rho_0",100.02);
   err += this->set_var("rho_x",7.2);
   err += this->set_var("rho_y",9.8);
-  err += this->set_var("p_0",15.2);
+  err += this->set_var("p_0",150.2);
   err += this->set_var("p_x",.91);
   err += this->set_var("p_y",.623);
   err += this->set_var("a_px",.165);
@@ -557,9 +557,9 @@ int MASA::euler_3d<Scalar>::init_var()
   err += this->set_var("w_y",5.68);
   err += this->set_var("w_z",6.51);
   err += this->set_var("rho_0",10.63);
-  err += this->set_var("rho_x",4.7);
-  err += this->set_var("rho_y",20.85);
-  err += this->set_var("rho_z",12.15);
+  err += this->set_var("rho_x",0.3);
+  err += this->set_var("rho_y",0.15);
+  err += this->set_var("rho_z",1.15);
   err += this->set_var("p_0",50.135);
   err += this->set_var("p_x",.73);
   err += this->set_var("p_y",49);
