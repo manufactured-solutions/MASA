@@ -560,6 +560,8 @@ namespace MASA
   template <typename Scalar>
   class euler_2d : public manufactured_solution<Scalar>
   {
+    using manufactured_solution<Scalar>::pi;
+    using manufactured_solution<Scalar>::PI;
 
     Scalar R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
     Scalar k;     // Boltzmanns constant
@@ -613,6 +615,9 @@ namespace MASA
   template <typename Scalar>
   class euler_3d : public manufactured_solution<Scalar>
   {
+    using manufactured_solution<Scalar>::pi;
+    using manufactured_solution<Scalar>::PI;
+
     Scalar R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
     Scalar k;     // Boltzmanns constant
 
@@ -687,6 +692,8 @@ namespace MASA
   template <typename Scalar>
   class axi_euler : public manufactured_solution<Scalar>
   {
+    using manufactured_solution<Scalar>::pi;
+    using manufactured_solution<Scalar>::PI;
 
     Scalar R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
 
@@ -731,6 +738,8 @@ namespace MASA
   template <typename Scalar>
   class axi_cns : public manufactured_solution<Scalar>
   {
+    using manufactured_solution<Scalar>::pi;
+    using manufactured_solution<Scalar>::PI;
 
     Scalar R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
     Scalar k;                             // Boltzmanns constant
@@ -861,6 +870,9 @@ namespace MASA
   template <typename Scalar>
   class navierstokes_2d_compressible : public manufactured_solution<Scalar>
   {    
+    using manufactured_solution<Scalar>::pi;
+    using manufactured_solution<Scalar>::PI;
+
     Scalar R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
     Scalar k;     // Boltzmanns constant
 
@@ -914,6 +926,9 @@ namespace MASA
   template <typename Scalar>
   class navierstokes_3d_compressible : public manufactured_solution<Scalar>
   {
+    using manufactured_solution<Scalar>::pi;
+    using manufactured_solution<Scalar>::PI;
+
     Scalar R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
     Scalar k;     // Boltzmanns constant
 

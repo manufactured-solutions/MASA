@@ -488,13 +488,15 @@ int run_regression()
 	    exit(1);
 	  }
 
-	/*
 	// adding a new error check: ensure physical results are coming out!
+	/*
 	if(0 > rho)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "Initial Variables are returning non-physical results!\n";
 	    cout << "RHO\n";
+	    cout << rho << endl;
+	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
 
@@ -519,10 +521,11 @@ int run_regression()
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
 	    cout << "Initial Variables are returning non-physical results!\n";
 	    cout << "Energy is negative!\n";
+	    cout << efield << endl;
+	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
 	*/
-	
       } // done iterating
   
   // reroute stdout for regressions: TODO remove when logger mechanism
