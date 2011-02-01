@@ -78,11 +78,11 @@ int MASA::euler_1d<Scalar>::init_var()
   err += this->set_var("R",1.01);
   err += this->set_var("k",1.38);
 
-  err += this->set_var("u_0",.191);
+  err += this->set_var("u_0",14.191);
   err += this->set_var("u_x",1.63);
   err += this->set_var("rho_0",91.5);
-  err += this->set_var("rho_x",5.13);
-  err += this->set_var("p_0",.1984);
+  err += this->set_var("rho_x",.13);
+  err += this->set_var("p_0",12.1984);
   err += this->set_var("p_x",3.151);
   err += this->set_var("a_px",6.151);
   err += this->set_var("a_rhox",1.2);
@@ -242,16 +242,16 @@ int MASA::euler_2d<Scalar>::init_var()
   err += this->set_var("R",1.01);
   err += this->set_var("k",1.38);
 
-  err += this->set_var("u_0",1.23);
+  err += this->set_var("u_0",11.23);
   err += this->set_var("u_x",1.1);
   err += this->set_var("u_y",.08);
   err += this->set_var("v_0",12);
   err += this->set_var("v_x",1.6);
   err += this->set_var("v_y",.67);
-  err += this->set_var("rho_0",1.02);
+  err += this->set_var("rho_0",10.02);
   err += this->set_var("rho_x",7.2);
   err += this->set_var("rho_y",9.8);
-  err += this->set_var("p_0",1.2);
+  err += this->set_var("p_0",15.2);
   err += this->set_var("p_x",.91);
   err += this->set_var("p_y",.623);
   err += this->set_var("a_px",.165);
@@ -544,19 +544,19 @@ int MASA::euler_3d<Scalar>::init_var()
   err += this->set_var("R",1.01);
   err += this->set_var("k",1.38);
 
-  err += this->set_var("u_0",2.27);
+  err += this->set_var("u_0",20.27);
   err += this->set_var("u_x",6.00);
   err += this->set_var("u_y",5.35);
   err += this->set_var("u_z",5.34);
-  err += this->set_var("v_0",3.46);
+  err += this->set_var("v_0",30.46);
   err += this->set_var("v_x",6.13);
   err += this->set_var("v_y",.54);
   err += this->set_var("v_z",.30);
-  err += this->set_var("w_0",.411);
+  err += this->set_var("w_0",20.411);
   err += this->set_var("w_x",3.14);
   err += this->set_var("w_y",5.68);
   err += this->set_var("w_z",6.51);
-  err += this->set_var("rho_0",1.63);
+  err += this->set_var("rho_0",10.63);
   err += this->set_var("rho_x",4.7);
   err += this->set_var("rho_y",20.85);
   err += this->set_var("rho_z",12.15);

@@ -319,12 +319,12 @@ int run_regression()
 	}
 
       // adding a new error check: ensure physical results are coming out!
-      /*
 	if(0 > rho)
 	{
 	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
    	  cout << "Initial Variables are returning non-physical results!\n";
 	  cout << "RHO\n";
+	  cout << rho << endl;
 	  exit(1);
 	}
 
@@ -351,7 +351,6 @@ int run_regression()
 	  cout << "Energy is negative!\n";
 	  exit(1);
 	}
-      */
     } // done interating 
 
   // tests passed
