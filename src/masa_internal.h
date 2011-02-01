@@ -519,6 +519,8 @@ namespace MASA
   template <typename Scalar>
   class euler_1d : public manufactured_solution<Scalar>
   {
+    using manufactured_solution<Scalar>::pi;
+    using manufactured_solution<Scalar>::PI;
 
     Scalar R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
     Scalar k;                             // Boltzmanns constant
