@@ -1,10 +1,10 @@
 Version 0.40 (In Progress)
 
   * Further documentation edits
-  * SMASA (stochastic masa) available 
+  * initial SMASA (stochastic masa) available 
   * gradient of source terms is now available for Fortran90 and C
 
-Version 0.30 (January 21st 2011)
+Version 0.30 (2nd February, 2011) -- first public release
 
   * improved parallel build support
   * code has 99%+ line coverage	
@@ -14,6 +14,7 @@ Version 0.30 (January 21st 2011)
   * modifications to Fortran interface (no API changes)
   * added doxygen documentation for all c/cpp/fortran functions
   * edited navier stokes default parameters, added realizability regression test
+  * updated steady euler equations with hierarchic model, added realizability regression test
   * ported to 32 bit mac, ubuntu environments
   * added reynolds averaged navier stokes solution
   * added check for presence of 'nan's within regression tests
@@ -21,7 +22,7 @@ Version 0.30 (January 21st 2011)
   * added support for PGI compilers (tested on version 10.8)
   * documentation heavily updated (make doc) and now slightly useful
 
-Version 0.20 (23 September 2010)
+Version 0.20 (23 September 2010) -- PECOS site visit 2010
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.20
   
   * API change for numerous functions -- source terms now return double
@@ -49,11 +50,11 @@ https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.10
   * added library versioning routines
   * C/C++ bindings available
 
-Version 0.01 (18 May 2010) - first internal code review
+Version 0.01 (18 May 2010) -- first internal code review
    * first mms functions tested 
    * API changes
    * C/fortran bindings detailed
 
-Version 0.00 (01 January 2010) - initial import 
+Version 0.00 (01 January 2010) -- initial import 
    * Basic API detailed
    * initial MMS structure imported
