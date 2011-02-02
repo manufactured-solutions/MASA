@@ -526,7 +526,6 @@ int run_regression()
 	  }
 
 	// adding a new error check: ensure physical results are coming out!
-	/*
 	if(0 > rho)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
@@ -553,6 +552,7 @@ int run_regression()
 	    exit(1);
 	  }
 
+	/*
 	if(0 > efield)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
