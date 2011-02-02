@@ -225,6 +225,10 @@ program main
            write(6,*) "FortMASA FATAL ERROR: euler-2d"
            write(6,*) "V Field"
            write(6,*) "exceeded by: ", vfield3
+           write(6,*) "masa:        ", vfield
+           write(6,*) "maple:       ", vfield2
+           write(6,*) "@ x,y:       ",x,y
+
            call exit(1)
         endif
         
