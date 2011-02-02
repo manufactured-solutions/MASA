@@ -614,7 +614,7 @@ int MASA::euler_3d<Scalar>::init_var()
   err += this->set_var("rho_x",0.3);
   err += this->set_var("rho_y",0.15);
   err += this->set_var("rho_z",1.15);
-  err += this->set_var("p_0",50.135);
+  err += this->set_var("p_0",500.135);
   err += this->set_var("p_x",.73);
   err += this->set_var("p_y",49);
   err += this->set_var("p_z",60.8);
