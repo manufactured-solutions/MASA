@@ -488,6 +488,7 @@ int run_regression()
 	    cout << "Energy Source Term\n";
 	    cout.precision(16);
 	    cout << "Exceeded Threshold by: " << efield3 << endl;
+	    cout << "Threshold was: " << threshold << endl;
 	    cout << "Source term is:        " << efield2 << endl;
 	    cout << "MASA term is:          " << efield << endl;
 	    cout << x << " " << y << endl;
