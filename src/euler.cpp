@@ -123,6 +123,7 @@ Scalar MASA::euler_1d<Scalar>::eval_q_e(Scalar x)
   Scalar RHO;
   Scalar U;
   Scalar P;
+
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L);
   P = p_0 + p_x * cos(a_px * pi * x / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L);
