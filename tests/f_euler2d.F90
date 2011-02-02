@@ -34,7 +34,7 @@ program main
   implicit none
 
   ! threshold calculation
-  real(8) :: thresh = 1d-15
+  real(8) :: thresh = 1.1d-15
 
   ! solutions
   real(8) ::ufield,ufield2,ufield3
