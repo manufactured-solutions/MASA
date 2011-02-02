@@ -145,9 +145,9 @@ int main()
   int i;
 
   //problem size
-  int nx = 200;  // number of points
-  int lx=10;     // length
-  double dx=(double)(lx)/(double)(nx);
+  int nx    = 200;  // number of points
+  int lx    = 10;     // length
+  double dx = (double)(lx)/(double)(nx);
 
   // solutions
   double ufield,ufield2,ufield3;

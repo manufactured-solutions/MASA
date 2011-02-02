@@ -67,7 +67,7 @@ int main()
   double C_z;  
 
   //problem size
-  int nx = 200;  // number of points
+  int nx = 100;  // number of points
   int lx=10;     // length
   double dx = (double)lx/(double)nx;
 
@@ -75,7 +75,7 @@ int main()
   int ly=10;     // length
   double dy = (double)ly/(double)ny;
 
-  int nz = 200;  // number of points
+  int nz = 100;  // number of points
   int lz=10;     // length
   double dz = (double)lz/(double)nz;
 

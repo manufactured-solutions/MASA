@@ -114,7 +114,18 @@ Scalar SourceQ_e (
 {
   Scalar pi = acos(-1);
   Scalar Q_e;
-  Q_e = -Gamma * (u_x * sin(x * a_ux * pi / L) + u_y * cos(a_uy * pi * y / L) + u_0) * a_px * p_x * pi * sin(a_px * pi * x / L) / (Gamma - 0.1e1) / L + Gamma * (v_x * cos(a_vx * pi * x / L) + v_y * sin(y * a_vy * pi / L) + v_0) * a_py * p_y * pi * cos(a_py * pi * y / L) / (Gamma - 0.1e1) / L + a_rhox * pi * rho_x * cos(a_rhox * pi * x / L) * (u_x * sin(x * a_ux * pi / L) + u_y * cos(a_uy * pi * y / L) + u_0) * (pow(v_x * cos(a_vx * pi * x / L) + v_y * sin(y * a_vy * pi / L) + v_0, 0.2e1) + pow(u_x * sin(x * a_ux * pi / L) + u_y * cos(a_uy * pi * y / L) + u_0, 0.2e1)) / L / 0.2e1 - a_rhoy * pi * rho_y * sin(a_rhoy * pi * y / L) * (v_x * cos(a_vx * pi * x / L) + v_y * sin(y * a_vy * pi / L) + v_0) * (pow(v_x * cos(a_vx * pi * x / L) + v_y * sin(y * a_vy * pi / L) + v_0, 0.2e1) + pow(u_x * sin(x * a_ux * pi / L) + u_y * cos(a_uy * pi * y / L) + u_0, 0.2e1)) / L / 0.2e1 + (p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_0) * a_ux * pi * u_x * cos(x * a_ux * pi / L) * Gamma / (Gamma - 0.1e1) / L + (pow(v_x * cos(a_vx * pi * x / L) + v_y * sin(y * a_vy * pi / L) + v_0, 0.2e1) + 0.3e1 * pow(u_x * sin(x * a_ux * pi / L) + u_y * cos(a_uy * pi * y / L) + u_0, 0.2e1)) * (rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_0) * a_ux * pi * u_x * cos(x * a_ux * pi / L) / L / 0.2e1 + (p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_0) * a_vy * pi * v_y * cos(y * a_vy * pi / L) * Gamma / (Gamma - 0.1e1) / L + (0.3e1 * pow(v_x * cos(a_vx * pi * x / L) + v_y * sin(y * a_vy * pi / L) + v_0, 0.2e1) + pow(u_x * sin(x * a_ux * pi / L) + u_y * cos(a_uy * pi * y / L) + u_0, 0.2e1)) * (rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_0) * a_vy * pi * v_y * cos(y * a_vy * pi / L) / L / 0.2e1 - (v_x * cos(a_vx * pi * x / L) + v_y * sin(y * a_vy * pi / L) + v_0) * (rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_0) * (u_x * sin(x * a_ux * pi / L) + u_y * cos(a_uy * pi * y / L) + u_0) * pi * a_uy * u_y * sin(a_uy * pi * y / L) / L - (v_x * cos(a_vx * pi * x / L) + v_y * sin(y * a_vy * pi / L) + v_0) * (rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_0) * (u_x * sin(x * a_ux * pi / L) + u_y * cos(a_uy * pi * y / L) + u_0) * pi * a_vx * v_x * sin(a_vx * pi * x / L) / L;
+  Scalar RHO;
+  Scalar U;
+  Scalar V;
+  Scalar P;
+
+  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  V = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  P = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
+
+  Q_e = -a_px * pi * p_x * Gamma * U * sin(a_px * pi * x / L) / (Gamma - 0.1e1) / L + a_py * pi * p_y * Gamma * V * cos(a_py * pi * y / L) / (Gamma - 0.1e1) / L + (U * U + V * V) * a_rhox * pi * rho_x * U * cos(a_rhox * pi * x / L) / L / 0.2e1 - (U * U + V * V) * a_rhoy * pi * rho_y * V * sin(a_rhoy * pi * y / L) / L / 0.2e1 + (0.3e1 * a_ux * u_x * cos(a_ux * pi * x / L) + a_vy * v_y * cos(a_vy * pi * y / L)) * pi * RHO * U * U / L / 0.2e1 - (a_uy * u_y * sin(a_uy * pi * y / L) + a_vx * v_x * sin(a_vx * pi * x / L)) * pi * RHO * U * V / L + (a_ux * u_x * cos(a_ux * pi * x / L) + 0.3e1 * a_vy * v_y * cos(a_vy * pi * y / L)) * pi * RHO * V * V / L / 0.2e1 + (a_ux * u_x * cos(a_ux * pi * x / L) + a_vy * v_y * cos(a_vy * pi * y / L)) * pi * Gamma * P / (Gamma - 0.1e1) / L;
+
   return(Q_e);
 }
 
@@ -146,7 +157,16 @@ Scalar SourceQ_u ( // 23 variables
 {
   Scalar pi = acos(-1);
   Scalar Q_u;
-  Q_u = -p_x * sin(a_px * pi * x / L) * a_px * pi / L + rho_x * cos(a_rhox * pi * x / L) * pow(u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L), 0.2e1) * a_rhox * pi / L - rho_y * sin(a_rhoy * pi * y / L) * (v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L)) * (u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L)) * a_rhoy * pi / L + 0.2e1 * u_x * cos(a_ux * pi * x / L) * (rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L)) * (u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L)) * a_ux * pi / L - u_y * sin(a_uy * pi * y / L) * (rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L)) * (v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L)) * a_uy * pi / L + v_y * cos(a_vy * pi * y / L) * (rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L)) * (u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L)) * a_vy * pi / L;
+  Scalar RHO;
+  Scalar U;
+  Scalar V;
+
+  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  V = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+
+  Q_u = a_rhox * pi * rho_x * U * U * cos(a_rhox * pi * x / L) / L - a_rhoy * pi * rho_y * U * V * sin(a_rhoy * pi * y / L) / L - a_uy * pi * u_y * RHO * V * sin(a_uy * pi * y / L) / L - a_px * pi * p_x * sin(a_px * pi * x / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * pi * x / L) + a_vy * v_y * cos(a_vy * pi * y / L)) * pi * RHO * U / L;
+
   return(Q_u);
 }
 
@@ -179,8 +199,15 @@ Scalar SourceQ_v (
 
   Scalar pi = acos(-1);
   Scalar Q_v;
-  //  fpu_control_t cw;
-  Q_v = p_y * cos(a_py * pi * y / L) * a_py * pi / L + rho_x * cos(a_rhox * pi * x / L) * (v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L)) * (u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L)) * a_rhox * pi / L - sin(a_rhoy * pi * y / L) * rho_y * pow(v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L), 0.2e1) * a_rhoy * pi / L + cos(a_ux * pi * x / L) * u_x * (rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L)) * (v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L)) * a_ux * pi / L - sin(a_vx * pi * x / L) * v_x * (rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L)) * (u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L)) * a_vx * pi / L + 0.2e1 * cos(a_vy * pi * y / L) * v_y * (rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L)) * (v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L)) * a_vy * pi / L;
+  Scalar RHO;
+  Scalar U;
+  Scalar V;
+  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  V = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+
+  Q_v = a_rhox * pi * rho_x * U * V * cos(a_rhox * pi * x / L) / L - a_rhoy * pi * rho_y * V * V * sin(a_rhoy * pi * y / L) / L - a_vx * pi * v_x * RHO * U * sin(a_vx * pi * x / L) / L + a_py * pi * p_y * cos(a_py * pi * y / L) / L + (a_ux * u_x * cos(a_ux * pi * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * pi * y / L)) * pi * RHO * V / L;
+
   return(Q_v);
 }
 
@@ -212,7 +239,16 @@ Scalar SourceQ_rho(
 {
   Scalar pi = acos(-1);
   Scalar Q_rho;
-  Q_rho = rho_x * cos(a_rhox * pi * x / L) * (u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L)) * a_rhox * pi / L - rho_y * sin(a_rhoy * pi * y / L) * (v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L)) * a_rhoy * pi / L + u_x * cos(a_ux * pi * x / L) * (rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L)) * a_ux * pi / L + v_y * cos(a_vy * pi * y / L) * (rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L)) * a_vy * pi / L;
+  Scalar RHO;
+  Scalar U;
+  Scalar V;
+
+  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  V = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+
+  Q_rho = a_rhox * pi * rho_x * U * cos(a_rhox * pi * x / L) / L - a_rhoy * pi * rho_y * V * sin(a_rhoy * pi * y / L) / L + (a_ux * u_x * cos(a_ux * pi * x / L) + a_vy * v_y * cos(a_vy * pi * y / L)) * pi * RHO / L;
+
   return(Q_rho);
 }
 
