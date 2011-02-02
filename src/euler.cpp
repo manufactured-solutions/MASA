@@ -262,15 +262,15 @@ int MASA::euler_2d<Scalar>::init_var()
   err += this->set_var("R",1.01);
   err += this->set_var("k",1.38);
 
-  err += this->set_var("u_0",100.23);
+  err += this->set_var("u_0",200.23);
   err += this->set_var("u_x",1.1);
-  err += this->set_var("u_y",.08);
-  err += this->set_var("v_0",120.2);
+  err += this->set_var("u_y",1.08);
+  err += this->set_var("v_0",1.2);
   err += this->set_var("v_x",1.6);
   err += this->set_var("v_y",.47);
   err += this->set_var("rho_0",100.02);
   err += this->set_var("rho_x",2.22);
-  err += this->set_var("rho_y",1.8);
+  err += this->set_var("rho_y",0.8);
   err += this->set_var("p_0",150.2);
   err += this->set_var("p_x",.91);
   err += this->set_var("p_y",.623);
