@@ -76,6 +76,7 @@ double eval_1d_e_source(
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L);
   P = p_0 + p_x * cos(a_px * pi * x / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L);
+
   Q_e = cos(a_rhox * pi * x / L) * pow(U, 0.3e1) * a_rhox * pi * rho_x / L / 0.2e1 + cos(a_ux * pi * x / L) * P * a_ux * pi * u_x * Gamma / L / (Gamma - 0.1e1) + 0.3e1 / 0.2e1 * cos(a_ux * pi * x / L) * RHO * U * U * a_ux * pi * u_x / L - sin(a_px * pi * x / L) * U * a_px * pi * p_x * Gamma / L / (Gamma - 0.1e1);
 
   return(Q_e);
