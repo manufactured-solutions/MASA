@@ -309,6 +309,10 @@ program main
            if(efield3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: euler-3d"
               write(6,*) "E Field"
+              write(6,*) "exceeded by: ", efield3
+              write(6,*) "masa:        ", efield
+              write(6,*) "maple:       ", efield2
+              write(6,*) "@ x,y,z:     ",x,y,z
               call exit(1)
            endif
 
