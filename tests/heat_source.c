@@ -30,11 +30,11 @@
 #include <math.h>
 #include <stdio.h>
 
-double eval_1d_t_an_(double x,double A_x)
+double eval_1d_t_exact_(double x,double A_x)
 {  
-  double T_an;
-  T_an = cos(A_x * x);
-  return T_an;
+  double T_exact;
+  T_exact = cos(A_x * x);
+  return T_exact;
 }
  
 double eval_1d_t_source_(double x, double A_x, double k_0)
@@ -52,11 +52,11 @@ double eval_1d_t_source_(double x, double A_x, double k_0)
 //--------------------------------------------------------------------------
 
   
-double eval_2d_t_an_(double x,double y,double A_x,double B_y)
+double eval_2d_t_exact_(double x,double y,double A_x,double B_y)
 {
-  double T_an;
-  T_an = cos(A_x * x) * cos(B_y * y);
-  return T_an;
+  double T_exact;
+  T_exact = cos(A_x * x) * cos(B_y * y);
+  return T_exact;
 }
 
 double eval_2d_t_source_(
@@ -78,11 +78,11 @@ double eval_2d_t_source_(
 //
 //--------------------------------------------------------------------------
   
-double eval_3d_t_an_(double x,double y,double z,double A_x,double B_y,double C_z)
+double eval_3d_t_exact_(double x,double y,double z,double A_x,double B_y,double C_z)
 {
-  double T_an;
-  T_an = cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
-  return T_an;
+  double T_exact;
+  T_exact = cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
+  return T_exact;
 }
 
 double eval_3d_t_source_(

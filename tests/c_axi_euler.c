@@ -38,26 +38,26 @@ const double threshold = 1.0e-15; // should be small enough to catch any obvious
 
 double anQ_p(double r,double z,double p_0,double p_1,double rho_0,double rho_1,double u_1,double w_0,double w_1,double a_pr,double a_pz,double a_rhor,double a_rhoz,double a_ur,double a_uz,double a_wr,double a_wz,double PI,double L,double Gamma)
 {
-  double p_an = p_0 + p_1 * sin(a_pr * PI * r / L) * cos(a_pz * PI * z / L);
-  return p_an;
+  double p_exact = p_0 + p_1 * sin(a_pr * PI * r / L) * cos(a_pz * PI * z / L);
+  return p_exact;
 }
   
 double anQ_u (double r,double z,double p_0,double p_1,double rho_0,double rho_1,double u_1,double w_0,double w_1,double a_pr,double a_pz,double a_rhor,double a_rhoz,double a_ur,double a_uz,double a_wr,double a_wz,double PI,double L,double Gamma)
 {
-  double u_an = u_1 * (cos(a_ur * PI * r / L) - 0.1e1) * sin(a_uz * PI * z / L);
-  return u_an;
+  double u_exact = u_1 * (cos(a_ur * PI * r / L) - 0.1e1) * sin(a_uz * PI * z / L);
+  return u_exact;
 } 
  
 double anQ_w (double r,double z,double p_0,double p_1,double rho_0,double rho_1,double u_1,double w_0,double w_1,double a_pr,double a_pz,double a_rhor,double a_rhoz,double a_ur,double a_uz,double a_wr,double a_wz,double PI,double L,double Gamma)
 {
-  double w_an = w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L);
-  return w_an;
+  double w_exact = w_0 + w_1 * cos(a_wr * PI * r / L) * sin(a_wz * PI * z / L);
+  return w_exact;
 }
 
 double anQ_rho (double r,double z,double p_0,double p_1,double rho_0,double rho_1,double u_1,double w_0,double w_1,double a_pr,double a_pz,double a_rhor,double a_rhoz,double a_ur,double a_uz,double a_wr,double a_wz,double PI,double L,double Gamma)
 { 
-  double rho_an = rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L);
-  return rho_an;
+  double rho_exact = rho_0 + rho_1 * cos(a_rhor * PI * r / L) * sin(a_rhoz * PI * z / L);
+  return rho_exact;
 }
 
 // ----------------------------------------
@@ -121,10 +121,10 @@ int main()
   double efield,efield2,efield3;
   double rho,rho2;
 
-  double u_an,u_an2;
-  double w_an,w_an2,w_an3;
-  double p_an,p_an2;
-  double rho_an,rho_an2;
+  double u_exact,u_exact2;
+  double w_exact,w_exact2,w_exact3;
+  double p_exact,p_exact2;
+  double rho_exact,rho_exact2;
 
   // initalize
   int nx = 115;  // number of points
@@ -178,10 +178,10 @@ int main()
 	cmasa_eval_rho_source(r,z,&rho);
 
 	//evaluate analytical terms
-	cmasa_eval_u_an        (r,z,&u_an);
-	cmasa_eval_w_an        (r,z,&w_an);
-	cmasa_eval_p_an        (r,z,&p_an);
-	cmasa_eval_rho_an      (r,z,&rho_an);
+	cmasa_eval_u_exact        (r,z,&u_exact);
+	cmasa_eval_w_exact        (r,z,&w_exact);
+	cmasa_eval_p_exact        (r,z,&p_exact);
+	cmasa_eval_rho_exact      (r,z,&rho_exact);
 	  
 	// check against maple
 	ufield2 = SourceQ_u   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, PI, L, Gamma);
@@ -189,10 +189,10 @@ int main()
 	rho2    = SourceQ_rho (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, PI, L, Gamma);
 	efield2 = SourceQ_e   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, PI, L, Gamma);
 	
-	u_an2   = anQ_u   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, PI, L, Gamma);
-	w_an2   = anQ_w   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, PI, L, Gamma);
-	rho_an2 = anQ_rho (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, PI, L, Gamma);
-	p_an2   = anQ_p   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, PI, L, Gamma);
+	u_exact2   = anQ_u   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, PI, L, Gamma);
+	w_exact2   = anQ_w   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, PI, L, Gamma);
+	rho_exact2 = anQ_rho (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, PI, L, Gamma);
+	p_exact2   = anQ_p   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, PI, L, Gamma);
 	
 	// test the result is roughly zero
 	ufield3 = fabs(ufield-ufield2);
@@ -200,10 +200,10 @@ int main()
 	efield3 = fabs(efield-efield2);
 	rho     = fabs(rho-rho2);
 	
-	u_an   = fabs(u_an-u_an2);
-	w_an3  = fabs(w_an-w_an2);
-	rho_an = fabs(rho_an-rho_an2);
-	p_an   = fabs(p_an-p_an2);
+	u_exact   = fabs(u_exact-u_exact2);
+	w_exact3  = fabs(w_exact-w_exact2);
+	rho_exact = fabs(rho_exact-rho_exact2);
+	p_exact   = fabs(p_exact-p_exact2);
 
 	if(ufield3 > threshold)
 	  {
@@ -216,13 +216,13 @@ int main()
 	    exit(1);
 	  }
 
-	if(u_an3 > threshold)
+	if(u_exact3 > threshold)
 	  {
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Axisymmetric Euler\n");
 	    printf("U Field Analytical Term\n");
-	    printf("Threshold Exceeded: %g\n",u_an3);
-	    printf("CMASA:              %5.16f\n",u_an);
-	    printf("Maple:              %5.16f\n",u_an2);
+	    printf("Threshold Exceeded: %g\n",u_exact3);
+	    printf("CMASA:              %5.16f\n",u_exact);
+	    printf("Maple:              %5.16f\n",u_exact2);
 	    printf("r,z:                %g %g\n",r,z);	   
 	    exit(1);
 	  }
@@ -238,7 +238,7 @@ int main()
 	    exit(1);
 	  }
 
-	if(w_an3 > threshold)
+	if(w_exact3 > threshold)
 	  {
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Axisymmetric Euler\n");
 	    printf("W Field Analytical Term\n");
@@ -256,7 +256,7 @@ int main()
 	    exit(1);
 	  }
 
-	if(p_an > threshold)
+	if(p_exact > threshold)
 	  {
 	    
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Axisymmetric Euler\n");
@@ -272,7 +272,7 @@ int main()
 	    exit(1);
 	  }
 
-	if(rho_an > threshold)
+	if(rho_exact > threshold)
 	  {	    
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Axisymmetric Euler\n");
 	    printf("RHO Analytical Term\n");

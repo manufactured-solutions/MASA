@@ -44,11 +44,11 @@ program main
   real(8) ::efield,efield2,efield3
   real(8) ::rho,rho2,rho3
 
-  real(8) ::u_an,u_an2,u_an3
-  real(8) ::v_an,v_an2,v_an3
-  real(8) ::w_an,w_an2,w_an3
-  real(8) ::p_an,p_an2,p_an3
-  real(8) ::rho_an,rho_an2,rho_an3
+  real(8) ::u_exact,u_exact2,u_exact3
+  real(8) ::v_exact,v_exact2,v_exact3
+  real(8) ::w_exact,w_exact2,w_exact3
+  real(8) ::p_exact,p_exact2,p_exact3
+  real(8) ::rho_exact,rho_exact2,rho_exact3
 
   real(8) ::u_gradx,u_gradx2,u_gradx3
   real(8) ::u_grady,u_grady2,u_grady3
@@ -212,11 +212,11 @@ program main
            rho    = masa_eval_3d_rho_source(x,y,z)
 
            !evaluate analytical terms
-           u_an = masa_eval_3d_u_an        (x,y,z)
-           v_an = masa_eval_3d_v_an        (x,y,z)
-           w_an = masa_eval_3d_w_an        (x,y,z)
-           p_an = masa_eval_3d_p_an        (x,y,z)
-           rho_an = masa_eval_3d_rho_an    (x,y,z)
+           u_exact = masa_eval_3d_u_exact        (x,y,z)
+           v_exact = masa_eval_3d_v_exact        (x,y,z)
+           w_exact = masa_eval_3d_w_exact        (x,y,z)
+           p_exact = masa_eval_3d_p_exact        (x,y,z)
+           rho_exact = masa_eval_3d_rho_exact    (x,y,z)
 
            ! check gradient bindings here
            u_gradx = masa_eval_3d_grad_u(x,y,z,1)
@@ -279,11 +279,11 @@ program main
            ! gradients
 
            ! analytical terms
-           u_an2   = eval_3d_u_an  (x,y,z,u_0,u_x,u_y,u_z,a_ux,a_uy,a_uz,L)
-           v_an2   = eval_3d_v_an  (x,y,z,v_0,v_x,v_y,v_z,a_vx,a_vy,a_vz,L)
-           w_an2   = eval_3d_w_an  (x,y,z,w_0,w_x,w_y,w_z,a_wx,a_wy,a_wz,L)
-           rho_an2 = eval_3d_rho_an(x,y,z,rho_0,rho_x,rho_y,rho_z,a_rhox,a_rhoy,a_rhoz,L)
-           p_an2   = eval_3d_p_an  (x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L)
+           u_exact2   = eval_3d_u_exact  (x,y,z,u_0,u_x,u_y,u_z,a_ux,a_uy,a_uz,L)
+           v_exact2   = eval_3d_v_exact  (x,y,z,v_0,v_x,v_y,v_z,a_vx,a_vy,a_vz,L)
+           w_exact2   = eval_3d_w_exact  (x,y,z,w_0,w_x,w_y,w_z,a_wx,a_wy,a_wz,L)
+           rho_exact2 = eval_3d_rho_exact(x,y,z,rho_0,rho_x,rho_y,rho_z,a_rhox,a_rhoy,a_rhoz,L)
+           p_exact2   = eval_3d_p_exact  (x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L)
 
 
 #ifdef MASA_STRICT_REGRESSION
@@ -316,11 +316,11 @@ program main
            rho_gradz3 = abs(rho_gradz-rho_gradz2)
 
            ! analytical 
-           u_an3   = abs(u_an-u_an2)
-           v_an3   = abs(v_an-v_an2)
-           w_an3   = abs(w_an-w_an2)
-           rho_an3 = abs(rho_an-rho_an2)
-           p_an3   = abs(p_an-p_an2)
+           u_exact3   = abs(u_exact-u_exact2)
+           v_exact3   = abs(v_exact-v_exact2)
+           w_exact3   = abs(w_exact-w_exact2)
+           rho_exact3 = abs(rho_exact-rho_exact2)
+           p_exact3   = abs(p_exact-p_exact2)
 
 #else
            ! source terms
@@ -352,11 +352,11 @@ program main
            !rho_gradz3 = abs(rho_gradz-rho_gradz2)/abs(rho_gradz2)
 
            ! analytical 
-           u_an3   = abs(u_an-u_an2)/abs(u_an2)
-           v_an3   = abs(v_an-v_an2)/abs(v_an2)
-           w_an3   = abs(w_an-w_an2)/abs(w_an2)
-           rho_an3 = abs(rho_an-rho_an2)/abs(rho_an2)
-           p_an3   = abs(p_an-p_an2)/abs(p_an2)
+           u_exact3   = abs(u_exact-u_exact2)/abs(u_exact2)
+           v_exact3   = abs(v_exact-v_exact2)/abs(v_exact2)
+           w_exact3   = abs(w_exact-w_exact2)/abs(w_exact2)
+           rho_exact3 = abs(rho_exact-rho_exact2)/abs(rho_exact2)
+           p_exact3   = abs(p_exact-p_exact2)/abs(p_exact2)
         
 #endif 
            ! -----------------------------------------------
@@ -499,31 +499,31 @@ program main
            ! analytical terms now
            ! -----------------------------------------------
 
-           if(u_an3 .gt. thresh) then
+           if(u_exact3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "U an"
               call exit(1)
            endif
 
-           if(v_an3 .gt. thresh) then
+           if(v_exact3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "V an"
               call exit(1)
            endif
 
-           if(w_an3 .gt. thresh) then
+           if(w_exact3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "W an"
               call exit(1)
            endif
 
-           if(p_an3 .gt. thresh) then
+           if(p_exact3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "P an"
               call exit(1)
            endif
 
-           if(rho_an3 .gt. thresh) then
+           if(rho_exact3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "Rho an"
               call exit(1)

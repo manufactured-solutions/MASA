@@ -46,22 +46,22 @@ double fsol_(double x)
 double anQ_p (double x,double p_0,double p_x,double a_px,double L)
 {
   const double pi = acos(-1);
-  double p_an = p_0 + p_x * cos(a_px * pi * x / L);
-  return p_an;
+  double p_exact = p_0 + p_x * cos(a_px * pi * x / L);
+  return p_exact;
 }
   
 double anQ_u (double x,double u_0,double u_x,double a_ux,double L)
 {
   const double pi = acos(-1); 
-  double u_an = u_0 + u_x * sin(a_ux * pi * x / L);
-  return u_an;
+  double u_exact = u_0 + u_x * sin(a_ux * pi * x / L);
+  return u_exact;
 } 
  
 double anQ_rho (double x,double rho_0,double rho_x,double a_rhox,double L)
 { 
   const double pi = acos(-1);  
-  double rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L);
-  return rho_an;
+  double rho_exact = rho_0 + rho_x * sin(a_rhox * pi * x / L);
+  return rho_exact;
 }
 
 double SourceQ_rho (
@@ -176,10 +176,10 @@ int main()
   double efield,efield2,efield3;
   double rho,rho2,rho3;
 
-  double u_an,u_an2,u_an3;
-  double v_an,v_an2,v_an3;
-  double p_an,p_an2,p_an3;
-  double rho_an,rho_an2,rho_an3;
+  double u_exact,u_exact2,u_exact3;
+  double v_exact,v_exact2,v_exact3;
+  double p_exact,p_exact2,p_exact3;
+  double rho_exact,rho_exact2,rho_exact3;
 
   // initalize
   cmasa_init("euler-test","euler_1d");
@@ -222,18 +222,18 @@ int main()
       rho    = cmasa_eval_1d_rho_source(x);
 	
       //evaluate analytical terms
-      u_an   = cmasa_eval_1d_u_an      (x);
-      p_an   = cmasa_eval_1d_p_an      (x);
-      rho_an = cmasa_eval_1d_rho_an     (x);
+      u_exact   = cmasa_eval_1d_u_exact      (x);
+      p_exact   = cmasa_eval_1d_p_exact      (x);
+      rho_exact = cmasa_eval_1d_rho_exact     (x);
 	
       // get fundamental source term solution
       ufield2   = SourceQ_u  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
       rho2      = SourceQ_rho(x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
       efield2   = SourceQ_e  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,Gamma,mu,L);
   
-      u_an2   = anQ_u   (x,u_0,u_x,a_ux,L);
-      rho_an2 = anQ_rho (x,rho_0,rho_x,a_rhox,L);
-      p_an2   = anQ_p   (x,p_0,p_x,a_px,L);
+      u_exact2   = anQ_u   (x,u_0,u_x,a_ux,L);
+      rho_exact2 = anQ_rho (x,rho_0,rho_x,a_rhox,L);
+      p_exact2   = anQ_p   (x,p_0,p_x,a_px,L);
 
       // test the result is roughly zero
       // choose between abs and rel error
@@ -243,9 +243,9 @@ int main()
       efield3 = fabs(efield-efield2);
       rho3    = fabs(rho-rho2);
       
-      u_an3   = fabs(u_an-u_an2);
-      rho_an3 = fabs(rho_an-rho_an2);
-      p_an3   = fabs(p_an-p_an2);
+      u_exact3   = fabs(u_exact-u_exact2);
+      rho_exact3 = fabs(rho_exact-rho_exact2);
+      p_exact3   = fabs(p_exact-p_exact2);
 
 #else
 
@@ -253,9 +253,9 @@ int main()
       efield3 = fabs(efield-efield2)/fabs(efield2);
       rho3    = fabs(rho-rho2)/fabs(rho2);
       
-      u_an3   = fabs(u_an-u_an2)/fabs(u_an2);
-      rho_an3 = fabs(rho_an-rho_an2)/fabs(rho_an2);
-      p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
+      u_exact3   = fabs(u_exact-u_exact2)/fabs(u_exact2);
+      rho_exact3 = fabs(rho_exact-rho_exact2)/fabs(rho_exact2);
+      p_exact3   = fabs(p_exact-p_exact2)/fabs(p_exact2);
 
 #endif
 
@@ -269,13 +269,13 @@ int main()
 	    exit(1);
 	  }
 
-	if(u_an3 > threshold)
+	if(u_exact3 > threshold)
 	  {
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	    printf("U Field Analytical Term\n");
-	    printf("Threshold Exceeded: %g\n",u_an3);
-	    printf("CMASA:              %5.16f\n",u_an);
-	    printf("Maple:              %5.16f\n",u_an2);
+	    printf("Threshold Exceeded: %g\n",u_exact3);
+	    printf("CMASA:              %5.16f\n",u_exact);
+	    printf("Maple:              %5.16f\n",u_exact2);
 	    exit(1);
 	  }
 
@@ -290,7 +290,7 @@ int main()
 	    exit(1);
 	  }
 
-	if(p_an3 > threshold)
+	if(p_exact3 > threshold)
 	  {
 	    
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
@@ -306,7 +306,7 @@ int main()
 	    exit(1);
 	  }
 
-	if(rho_an3 > threshold)
+	if(rho_exact3 > threshold)
 	  {	    
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	    printf("RHO Analytical Term\n");

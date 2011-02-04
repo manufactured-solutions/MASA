@@ -44,10 +44,10 @@ double SourceQ_t(double x,double y,double z,double A_x,double B_y,double C_z,dou
   return Q_T;
 }
 
-double Source_t_an(double x,double y,double z,double A_x,double B_y,double C_z)
+double Source_t_exact(double x,double y,double z,double A_x,double B_y,double C_z)
 {
-  double T_an = cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
-  return T_an;
+  double T_exact = cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
+  return T_exact;
 }
 
 int main()
@@ -55,7 +55,7 @@ int main()
   int i,j,k;
 
   double tfield,tfield2,tfield3;
-  double t_an,t_an2,t_an3;
+  double t_exact,t_exact2,t_exact3;
   double x;
   double y;
   double z;
@@ -103,20 +103,20 @@ int main()
 	  tfield = cmasa_eval_3d_t_source(x,y,z);
       
 	  //evaluate analytical terms
-	  t_an   = cmasa_eval_3d_t_an(x,y,z);
+	  t_exact   = cmasa_eval_3d_t_exact(x,y,z);
 	
 	  // get fundamental source term solution
 	  tfield2   = SourceQ_t  (x,y,z,A_x,B_y,C_z,k_0);
-	  t_an2     = Source_t_an(x,y,z,A_x,B_y,C_z);
+	  t_exact2     = Source_t_exact(x,y,z,A_x,B_y,C_z);
 
 	  // test the result is roughly zero
 	  // choose between abs and rel error
 #ifdef MASA_STRICT_REGRESSION
 	  tfield3 = fabs(tfield-tfield2);
-	  t_an3   = fabs(t_an-t_an2);
+	  t_exact3   = fabs(t_exact-t_exact2);
 #else
 	  tfield3 = fabs(tfield-tfield2)/fabs(tfield2);
-	  t_an3   = fabs(t_an-t_an2)/fabs(t_an2);
+	  t_exact3   = fabs(t_exact-t_exact2)/fabs(t_exact2);
 #endif
 
 	  if(tfield3 > threshold)
@@ -130,13 +130,13 @@ int main()
 	      exit(1);
 	    }
 
-	  if(t_an3 > threshold)
+	  if(t_exact3 > threshold)
 	    {
 	      printf("\nMASA REGRESSION TEST FAILED: C-binding Heat Equation Steady-3d\n");
 	      printf("U Field Analytical Term\n");
-	      printf("Threshold Exceeded: %g\n",t_an3);
-	      printf("CMASA:              %5.16f\n",t_an);
-	      printf("Maple:              %5.16f\n",t_an2);
+	      printf("Threshold Exceeded: %g\n",t_exact3);
+	      printf("CMASA:              %5.16f\n",t_exact);
+	      printf("Maple:              %5.16f\n",t_exact2);
 	      printf("@ x,y,z:            %5.16f %5.16f %5.16f\n",x,y,z);
 	      exit(1);
 	    }

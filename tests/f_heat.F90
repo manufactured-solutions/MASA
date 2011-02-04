@@ -37,7 +37,7 @@ program main
 
   ! solutions
   real(8) :: tfield,tfield2,tfield3
-  real(8) :: t_an,t_an2,t_an3
+  real(8) :: t_exact,t_exact2,t_exact3
   ! variables 
   real(8) :: A_x
   real(8) :: B_y
@@ -63,11 +63,11 @@ program main
 
   ! external functions
   real(8) :: eval_1d_t_source
-  real(8) :: eval_1d_t_an
+  real(8) :: eval_1d_t_exact
   real(8) :: eval_2d_t_source
-  real(8) :: eval_2d_t_an
+  real(8) :: eval_2d_t_exact
   real(8) :: eval_3d_t_source
-  real(8) :: eval_3d_t_an
+  real(8) :: eval_3d_t_exact
 
   ! initialize the problem
   dx = real(lx)/real(nx)
@@ -96,13 +96,13 @@ program main
      x = i * dx
 
      tfield = masa_eval_1d_t_source  (x)
-     t_an   = masa_eval_1d_t_an      (x)
+     t_exact   = masa_eval_1d_t_exact      (x)
 
      tfield2 = eval_1d_t_source(%val(x),%val(A_x),%val(k_0)) 
-     t_an2   = eval_1d_t_an    (%val(x),%val(A_x))
+     t_exact2   = eval_1d_t_exact    (%val(x),%val(A_x))
 
      tfield3 = abs(tfield-tfield2)
-     t_an3 = abs(t_an-t_an2)
+     t_exact3 = abs(t_exact-t_exact2)
 
      ! just need error checker
      if(tfield3 .gt. thresh) then
@@ -116,7 +116,7 @@ program main
      endif
 
      ! analytical terms now
-     if(t_an3 .gt. thresh) then
+     if(t_exact3 .gt. thresh) then
         write(6,*) "FortMASA FATAL ERROR: heat-1d"
         write(6,*) "T an"
         call exit(1)
@@ -141,13 +141,13 @@ program main
         y = j * dy
 
         tfield = masa_eval_2d_t_source  (x,y)
-        t_an   = masa_eval_2d_t_an      (x,y)
+        t_exact   = masa_eval_2d_t_exact      (x,y)
         
         tfield2 = eval_2d_t_source(%val(x),%val(y),%val(A_x),%val(B_y),%val(k_0)) 
-        t_an2   = eval_2d_t_an    (%val(x),%val(y),%val(A_x),%val(B_y))
+        t_exact2   = eval_2d_t_exact    (%val(x),%val(y),%val(A_x),%val(B_y))
         
         tfield3 = abs(tfield-tfield2)
-        t_an3 = abs(t_an-t_an2)
+        t_exact3 = abs(t_exact-t_exact2)
  
         if(tfield3 .gt. thresh) then
            write(6,*) "FortMASA FATAL ERROR: heat-2d"
@@ -160,7 +160,7 @@ program main
         endif
 
         ! analytical terms now
-        if(t_an3 .gt. thresh) then
+        if(t_exact3 .gt. thresh) then
            write(6,*) "FortMASA FATAL ERROR: heat-2d"
            write(6,*) "T an"
            write(6,*) "@ x,y:       ",x,y
@@ -190,13 +190,13 @@ program main
            z = k * dz
 
            tfield = masa_eval_3d_t_source  (x,y,z)
-           t_an   = masa_eval_3d_t_an      (x,y,z)
+           t_exact   = masa_eval_3d_t_exact      (x,y,z)
 
            tfield2 = eval_3d_t_source(%val(x),%val(y),%val(z),%val(A_x),%val(B_y),%val(C_z),%val(k_0)) 
-           t_an2   = eval_3d_t_an    (%val(x),%val(y),%val(z),%val(A_x),%val(B_y),%val(C_z))
+           t_exact2   = eval_3d_t_exact    (%val(x),%val(y),%val(z),%val(A_x),%val(B_y),%val(C_z))
 
            tfield3 = abs(tfield-tfield2)
-           t_an3 = abs(t_an-t_an2)
+           t_exact3 = abs(t_exact-t_exact2)
 
            if(tfield3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: heat-3d"
@@ -209,7 +209,7 @@ program main
            endif
 
            ! analytical terms now
-           if(t_an3 .gt. thresh) then
+           if(t_exact3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: heat-3d"
               write(6,*) "T an"
               write(6,*) "@ x,y,z:     ",x,y,z

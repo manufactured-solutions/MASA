@@ -333,45 +333,45 @@ module cns_source_interface
 
      end function eval_3d_e_source
 
-     real (c_double) function eval_3d_p_an(x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L) bind (C)
+     real (c_double) function eval_3d_p_exact(x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L) bind (C)
        use iso_c_binding
        implicit none
 
        real (c_double), value :: x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L
 
-     end function eval_3d_p_an
+     end function eval_3d_p_exact
      
-     real (c_double) function eval_3d_u_an(x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L) bind (C)
+     real (c_double) function eval_3d_u_exact(x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L) bind (C)
        use iso_c_binding
        implicit none
        
        real (c_double), value :: x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L
        
-     end function eval_3d_u_an
+     end function eval_3d_u_exact
 
-     real (c_double) function eval_3d_v_an(x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L) bind (C)
+     real (c_double) function eval_3d_v_exact(x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L) bind (C)
        use iso_c_binding
        implicit none
        
        real (c_double), value :: x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L
 
-     end function eval_3d_v_an
+     end function eval_3d_v_exact
 
-     real (c_double) function eval_3d_w_an(x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L) bind (C)
+     real (c_double) function eval_3d_w_exact(x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L) bind (C)
        use iso_c_binding
        implicit none
 
        real (c_double), value :: x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L
        
-     end function eval_3d_w_an
+     end function eval_3d_w_exact
 
-     real (c_double) function eval_3d_rho_an(x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L) bind (C)
+     real (c_double) function eval_3d_rho_exact(x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L) bind (C)
        use iso_c_binding
        implicit none
 
        real (c_double), value :: x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L
        
-     end function eval_3d_rho_an
+     end function eval_3d_rho_exact
 
      !********************************************************
      !*
@@ -528,35 +528,35 @@ module cns_source_interface
 
      end function eval_2d_e_source
 
-     real (c_double) function eval_2d_p_an(x,y,p_0,p_x,p_y,a_px,a_py,L) bind (C)
+     real (c_double) function eval_2d_p_exact(x,y,p_0,p_x,p_y,a_px,a_py,L) bind (C)
        use iso_c_binding
        implicit none
 
        real (c_double), value :: x,y,p_0,p_x,p_y,a_px,a_py,L
 
-     end function eval_2d_p_an
+     end function eval_2d_p_exact
 
-     real (c_double) function eval_2d_u_an(x,y,u_0,u_x,u_y,a_ux,a_uy,L) bind (C)
+     real (c_double) function eval_2d_u_exact(x,y,u_0,u_x,u_y,a_ux,a_uy,L) bind (C)
        use iso_c_binding
        implicit none
 
        real (c_double), value :: x,y,u_0,u_x,u_y,a_ux,a_uy,L
 
-     end function eval_2d_u_an
+     end function eval_2d_u_exact
 
-     real (c_double) function eval_2d_v_an(x,y,v_0,v_x,v_y,a_vx,a_vy,L) bind (C)
+     real (c_double) function eval_2d_v_exact(x,y,v_0,v_x,v_y,a_vx,a_vy,L) bind (C)
        use iso_c_binding
        implicit none
        
        real (c_double), value :: x,y,v_0,v_x,v_y,a_vx,a_vy,L
-     end function eval_2d_v_an
+     end function eval_2d_v_exact
 
-     real (c_double) function eval_2d_rho_an(x,y,rho_0,rho_x,rho_y,a_rhox,a_rhoy,L) bind (C)
+     real (c_double) function eval_2d_rho_exact(x,y,rho_0,rho_x,rho_y,a_rhox,a_rhoy,L) bind (C)
        use iso_c_binding
        implicit none
        
        real (c_double), value :: x,y,rho_0,rho_x,rho_y,a_rhox,a_rhoy,L
-     end function eval_2d_rho_an
+     end function eval_2d_rho_exact
 
      !********************************************************
      !*
@@ -620,35 +620,35 @@ module cns_source_interface
 
      end function eval_1d_e_source
 
-     real (c_double) function eval_1d_p_an(x,p_0,p_x,a_px,L) bind (C)
+     real (c_double) function eval_1d_p_exact(x,p_0,p_x,a_px,L) bind (C)
        use iso_c_binding
        implicit none
 
        real (c_double), value :: x,p_0,p_x,a_px,L
 
-     end function eval_1d_p_an
+     end function eval_1d_p_exact
 
-     real (c_double) function eval_1d_u_an(x,p_0,p_x,a_px,L) bind (C)
+     real (c_double) function eval_1d_u_exact(x,p_0,p_x,a_px,L) bind (C)
        use iso_c_binding
        implicit none
 
        real (c_double), value :: x,p_0,p_x,a_px,L
 
-     end function eval_1d_u_an
+     end function eval_1d_u_exact
      
-     real (c_double) function eval_1d_v_an(x,p_0,p_x,a_px,L) bind (C)
+     real (c_double) function eval_1d_v_exact(x,p_0,p_x,a_px,L) bind (C)
        use iso_c_binding
        implicit none
        
        real (c_double), value :: x,p_0,p_x,a_px,L
-     end function eval_1d_v_an
+     end function eval_1d_v_exact
 
-     real (c_double) function eval_1d_rho_an(x,p_0,p_x,a_px,L) bind (C)
+     real (c_double) function eval_1d_rho_exact(x,p_0,p_x,a_px,L) bind (C)
        use iso_c_binding
        implicit none
        
        real (c_double), value :: x,p_0,p_x,a_px,L
-     end function eval_1d_rho_an
+     end function eval_1d_rho_exact
 
   end interface
        

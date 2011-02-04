@@ -45,32 +45,32 @@ const double threshold = 2.0e-15; // should be small enough to catch any obvious
 double anQ_p (double x,double y,double p_0,double p_x,double p_y,double a_px,double a_py,double L)
 {
   const double pi = acos(-1);
-  double p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
-  return p_an;
+  double p_exact = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
+  return p_exact;
 }
   
 double anQ_u (double x,double y,double u_0,double u_x,double u_y,double a_ux,double a_uy,double L)
 {
   const double pi = acos(-1);
  
-  double u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
-  return u_an;
+  double u_exact = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  return u_exact;
 } 
  
 double anQ_v (double x,double y,double v_0,double v_x,double v_y,double a_vx,double a_vy,double L)
 {
   const double pi = acos(-1);
 
-  double v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
-  return v_an;
+  double v_exact = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  return v_exact;
 }
 
 double anQ_rho (double x,double y,double rho_0,double rho_x,double rho_y,double a_rhox,double a_rhoy,double L)
 { 
   const double pi = acos(-1);
  
-  double rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
-  return rho_an;
+  double rho_exact = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
+  return rho_exact;
 }
 
 
@@ -255,11 +255,11 @@ int main()
   double efield,efield2,efield3;
   double rho,rho2,rho3;
 
-  double u_an,u_an2,u_an3;
-  double v_an,v_an2,v_an3;
-  double w_an,w_an2,w_an3;
-  double p_an,p_an2,p_an3;
-  double rho_an,rho_an2,rho_an3;
+  double u_exact,u_exact2,u_exact3;
+  double v_exact,v_exact2,v_exact3;
+  double w_exact,w_exact2,w_exact3;
+  double p_exact,p_exact2,p_exact3;
+  double rho_exact,rho_exact2,rho_exact3;
 
   // initalize
   int nx = 10;  // number of points
@@ -328,10 +328,10 @@ int main()
 	rho    = cmasa_eval_2d_rho_source(x,y);
 	
 	//evaluate analytical terms
-	u_an   = cmasa_eval_2d_u_an      (x,y);
-	v_an   = cmasa_eval_2d_v_an      (x,y);
-	p_an   = cmasa_eval_2d_p_an      (x,y);
-	rho_an = cmasa_eval_2d_rho_an    (x,y);
+	u_exact   = cmasa_eval_2d_u_exact      (x,y);
+	v_exact   = cmasa_eval_2d_v_exact      (x,y);
+	p_exact   = cmasa_eval_2d_p_exact      (x,y);
+	rho_exact = cmasa_eval_2d_rho_exact    (x,y);
 
 	// check against maple
 	ufield2   = SourceQ_u  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);
@@ -339,10 +339,10 @@ int main()
 	rho2      = SourceQ_rho(x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);
 	efield2   = SourceQ_e  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L,R,k);
 	
-	u_an2   = anQ_u   (x,y,u_0,u_x,u_y,a_ux,a_uy,L);
-	v_an2   = anQ_v   (x,y,v_0,v_x,v_y,a_vx,a_vy,L);
-	rho_an2 = anQ_rho (x,y,rho_0,rho_x,rho_y,a_rhox,a_rhoy,L);
-	p_an2   = anQ_p   (x,y,p_0,p_x,p_y,a_px,a_py,L);
+	u_exact2   = anQ_u   (x,y,u_0,u_x,u_y,a_ux,a_uy,L);
+	v_exact2   = anQ_v   (x,y,v_0,v_x,v_y,a_vx,a_vy,L);
+	rho_exact2 = anQ_rho (x,y,rho_0,rho_x,rho_y,a_rhox,a_rhoy,L);
+	p_exact2   = anQ_p   (x,y,p_0,p_x,p_y,a_px,a_py,L);
 
 	// test the result is roughly zero
 	// choose between abs and rel error
@@ -352,20 +352,20 @@ int main()
 	efield3 = fabs(efield-efield2);
 	rho3    = fabs(rho-rho2);
 
-	u_an3   = fabs(u_an-u_an2);
-	v_an3   = fabs(v_an-v_an2);
-	rho_an3 = fabs(rho_an-rho_an2);
-	p_an3   = fabs(p_an-p_an2);
+	u_exact3   = fabs(u_exact-u_exact2);
+	v_exact3   = fabs(v_exact-v_exact2);
+	rho_exact3 = fabs(rho_exact-rho_exact2);
+	p_exact3   = fabs(p_exact-p_exact2);
 #else
 	ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
 	vfield3 = fabs(vfield-vfield2)/fabs(vfield2);
 	efield3 = fabs(efield-efield2)/fabs(efield2);
 	rho3    = fabs(rho-rho2)/fabs(rho2);
 
-	u_an3   = fabs(u_an-u_an2)/fabs(u_an2);
-	v_an3   = fabs(v_an-v_an2)/fabs(v_an2);
-	rho_an3 = fabs(rho_an-rho_an2)/fabs(rho_an2);
-	p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
+	u_exact3   = fabs(u_exact-u_exact2)/fabs(u_exact2);
+	v_exact3   = fabs(v_exact-v_exact2)/fabs(v_exact2);
+	rho_exact3 = fabs(rho_exact-rho_exact2)/fabs(rho_exact2);
+	p_exact3   = fabs(p_exact-p_exact2)/fabs(p_exact2);
 #endif
 
 	if(ufield3 > threshold)
@@ -375,7 +375,7 @@ int main()
 	    exit(1);
 	  }
 
-	if(u_an3 > threshold)
+	if(u_exact3 > threshold)
 	  {
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 2d\n");
 	    printf("U Field Analytical Term\n");
@@ -394,7 +394,7 @@ int main()
 	    exit(1);
 	  }
 
-	if(v_an3 > threshold)
+	if(v_exact3 > threshold)
 	  {
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 2d\n");
 	    printf("V Field Analytical Term\n");
@@ -412,7 +412,7 @@ int main()
 	    exit(1);
 	  }
 
-	if(p_an3 > threshold)
+	if(p_exact3 > threshold)
 	  {
 	    
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 2d\n");
@@ -427,7 +427,7 @@ int main()
 	    exit(1);
 	  }
 
-	if(rho_an3 > threshold)
+	if(rho_exact3 > threshold)
 	  {	    
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 2d\n");
 	    printf("RHO Analytical Term\n");
