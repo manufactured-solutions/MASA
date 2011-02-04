@@ -100,31 +100,31 @@ int main()
   if(derr != -1.33) 
     err += 1;
   
-  derr = masa_eval_t_an<Scalar>(x); 
+  derr = masa_eval_t_exact<Scalar>(x); 
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_t_an<Scalar>(x,y);
+  derr = masa_eval_t_exact<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_u_an<Scalar>(x);
+  derr = masa_eval_u_exact<Scalar>(x);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_v_an<Scalar>(x);
+  derr = masa_eval_v_exact<Scalar>(x);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_w_an<Scalar>(x);
+  derr = masa_eval_w_exact<Scalar>(x);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_p_an<Scalar>(x);
+  derr = masa_eval_p_exact<Scalar>(x);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_rho_an<Scalar>(x);
+  derr = masa_eval_rho_exact<Scalar>(x);
   if(derr != -1.33) 
     err += 1;  
 
@@ -175,27 +175,27 @@ int main()
   if(derr != -1.33) 
     err += 1;
   
-  derr = masa_eval_t_an<Scalar>(x,y,z);
+  derr = masa_eval_t_exact<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_u_an<Scalar>(x,y);
+  derr = masa_eval_u_exact<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_v_an<Scalar>(x,y);
+  derr = masa_eval_v_exact<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_w_an<Scalar>(x,y);
+  derr = masa_eval_w_exact<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_p_an<Scalar>(x,y);
+  derr = masa_eval_p_exact<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_rho_an<Scalar>(x,y);
+  derr = masa_eval_rho_exact<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
   
@@ -331,27 +331,27 @@ int main()
     err += 1;
 
   // done with gradient
-  derr = masa_eval_t_an<Scalar>(x,y,z,t);
+  derr = masa_eval_t_exact<Scalar>(x,y,z,t);
   if(derr != -1.33) 
   err += 1;
 
-  derr = masa_eval_u_an<Scalar>(x,y,z);
+  derr = masa_eval_u_exact<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_v_an<Scalar>(x,y,z);
+  derr = masa_eval_v_exact<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_w_an<Scalar>(x,y,z);
+  derr = masa_eval_w_exact<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_p_an<Scalar>(x,y,z);
+  derr = masa_eval_p_exact<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_rho_an<Scalar>(x,y,z);
+  derr = masa_eval_rho_exact<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 

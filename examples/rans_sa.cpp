@@ -53,10 +53,10 @@ int main()
   Scalar efield;
   Scalar rho;
 
-  Scalar u_an;
-  Scalar v_an;
-  Scalar p_an;
-  Scalar rho_an;
+  Scalar u_exact;
+  Scalar v_exact;
+  Scalar p_exact;
+  Scalar rho_exact;
 
   //problem size
   Scalar lx,ly;
@@ -91,9 +91,9 @@ int main()
 	//masa_eval_rho_source<Scalar>(tempx,tempy,&rho);
 	
 	//evaluate analytical solution
-	//masa_eval_u_an<Scalar>        (tempx,tempy,&u_an);
-	//masa_eval_p_an<Scalar>        (tempx,tempy,&p_an);
-	//masa_eval_rho_an<Scalar>      (tempx,tempy,&rho_an);
+	//masa_eval_u_exact<Scalar>        (tempx,tempy,&u_exact);
+	//masa_eval_p_exact<Scalar>        (tempx,tempy,&p_exact);
+	//masa_eval_rho_exact<Scalar>      (tempx,tempy,&rho_exact);
 
       }
 

@@ -56,32 +56,32 @@ template<typename Scalar>
 Scalar anQ_p (Scalar x,Scalar y,Scalar p_0,Scalar p_x,Scalar p_y,Scalar a_px,Scalar a_py,Scalar L)
 {
   Scalar pi = acos(-1);
-  Scalar p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
-  return p_an;
+  Scalar p_exact = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
+  return p_exact;
 }
   
 template<typename Scalar>
 Scalar anQ_u (Scalar x,Scalar y,Scalar u_0,Scalar u_x,Scalar u_y,Scalar a_ux,Scalar a_uy,Scalar L)
 {
   Scalar pi = acos(-1);
-  Scalar u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
-  return u_an;
+  Scalar u_exact = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  return u_exact;
 } 
  
 template<typename Scalar>
 Scalar anQ_v (Scalar x,Scalar y,Scalar v_0,Scalar v_x,Scalar v_y,Scalar a_vx,Scalar a_vy,Scalar L)
 {
   Scalar pi = acos(-1);
-  Scalar v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
-  return v_an;
+  Scalar v_exact = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  return v_exact;
 }
 
 template<typename Scalar>
 Scalar anQ_rho (Scalar x,Scalar y,Scalar rho_0,Scalar rho_x,Scalar rho_y,Scalar a_rhox,Scalar a_rhoy,Scalar L)
 { 
   Scalar pi = acos(-1);
-  Scalar rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
-  return rho_an;
+  Scalar rho_exact = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
+  return rho_exact;
 }
 
 template<typename Scalar>
@@ -265,11 +265,11 @@ int run_regression()
   Scalar z;
 
   // solutions
-  Scalar u_an,u_an2,u_an3;
-  Scalar v_an,v_an2,v_an3;
-  Scalar w_an,w_an2,w_an3;
-  Scalar p_an,p_an2,p_an3;
-  Scalar rho_an,rho_an2,rho_an3;
+  Scalar u_exact,u_exact2,u_exact3;
+  Scalar v_exact,v_exact2,v_exact3;
+  Scalar w_exact,w_exact2,w_exact3;
+  Scalar p_exact,p_exact2,p_exact3;
+  Scalar rho_exact,rho_exact2,rho_exact3;
   Scalar gradx,grady,gradz,gradp,gradrho;
 
   Scalar ufield,ufield2,ufield3;
@@ -350,10 +350,10 @@ int run_regression()
 	rho    = masa_eval_rho_source<Scalar>(x,y);
 	
 	//evaluate analytical terms
-	u_an = masa_eval_u_an        <Scalar>(x,y);
-	v_an = masa_eval_v_an        <Scalar>(x,y);
-	p_an = masa_eval_p_an        <Scalar>(x,y);
-	rho_an = masa_eval_rho_an    <Scalar>(x,y);
+	u_exact = masa_eval_u_exact        <Scalar>(x,y);
+	v_exact = masa_eval_v_exact        <Scalar>(x,y);
+	p_exact = masa_eval_p_exact        <Scalar>(x,y);
+	rho_exact = masa_eval_rho_exact    <Scalar>(x,y);
 	
 	// eval gradient terms
 	gradx = masa_eval_2d_grad_u<Scalar>(x,y,1);
@@ -374,10 +374,10 @@ int run_regression()
 	rho2    = SourceQ_rho (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);  
 	efield2 = SourceQ_e   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L,R,k);
 	
-	u_an2   = anQ_u   (x,y,u_0,u_x,u_y,a_ux,a_uy,L);
-	v_an2   = anQ_v   (x,y,v_0,v_x,v_y,a_vx,a_vy,L);
-	rho_an2 = anQ_rho (x,y,rho_0,rho_x,rho_y,a_rhox,a_rhoy,L);
-	p_an2   = anQ_p   (x,y,p_0,p_x,p_y,a_px,a_py,L);
+	u_exact2   = anQ_u   (x,y,u_0,u_x,u_y,a_ux,a_uy,L);
+	v_exact2   = anQ_v   (x,y,v_0,v_x,v_y,a_vx,a_vy,L);
+	rho_exact2 = anQ_rho (x,y,rho_0,rho_x,rho_y,a_rhox,a_rhoy,L);
+	p_exact2   = anQ_p   (x,y,p_0,p_x,p_y,a_px,a_py,L);
 
 	// test the result is roughly zero
 	// choose between abs and rel error
@@ -388,10 +388,10 @@ int run_regression()
 	efield3 = fabs(efield-efield2);
 	rho3    = fabs(rho-rho2);
 
-	u_an3   = fabs(u_an-u_an2);
-	v_an3   = fabs(v_an-v_an2);
-	rho_an3 = fabs(rho_an-rho_an2);
-	p_an3   = fabs(p_an-p_an2);
+	u_exact3   = fabs(u_exact-u_exact2);
+	v_exact3   = fabs(v_exact-v_exact2);
+	rho_exact3 = fabs(rho_exact-rho_exact2);
+	p_exact3   = fabs(p_exact-p_exact2);
 
 #else
 
@@ -400,10 +400,10 @@ int run_regression()
 	efield3 = fabs(efield-efield2)/fabs(efield2);
 	rho3    = fabs(rho-rho2)/fabs(rho2);
 
-	u_an3   = fabs(u_an-u_an2)/fabs(u_an2);
-	v_an3   = fabs(v_an-v_an2)/fabs(v_an2);
-	rho_an3 = fabs(rho_an-rho_an2)/fabs(rho_an2);
-	p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
+	u_exact3   = fabs(u_exact-u_exact2)/fabs(u_exact2);
+	v_exact3   = fabs(v_exact-v_exact2)/fabs(v_exact2);
+	rho_exact3 = fabs(rho_exact-rho_exact2)/fabs(rho_exact2);
+	p_exact3   = fabs(p_exact-p_exact2)/fabs(p_exact2);
 
 #endif
 	
@@ -412,10 +412,10 @@ int run_regression()
 	nancheck(efield3);
 	nancheck(rho3);
 	
-	nancheck(u_an3);
-	nancheck(v_an3);
-	nancheck(rho_an3);
-	nancheck(p_an3);
+	nancheck(u_exact3);
+	nancheck(v_exact3);
+	nancheck(rho_exact3);
+	nancheck(p_exact3);
 
 
 	if(ufield3 > threshold)
@@ -426,11 +426,11 @@ int run_regression()
 	    exit(1);
 	  }
 
-	if(u_an3 > threshold)
+	if(u_exact3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
 	    cout << "U Field Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << u_an3 << endl;
+	    cout << "Exceeded Threshold by: " << u_exact3 << endl;
 	    exit(1);
 	  }
 
@@ -442,11 +442,11 @@ int run_regression()
 	    exit(1);
 	  }
 
-	if(v_an3 > threshold)
+	if(v_exact3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
 	    cout << "V Field Analytical Term\n";
-	    cout << "Exceeded Threshold of: " << threshold <<  " by: " << v_an3 << endl;
+	    cout << "Exceeded Threshold of: " << threshold <<  " by: " << v_exact3 << endl;
 	    exit(1);
 	  }
 
@@ -462,11 +462,11 @@ int run_regression()
 	    exit(1);
 	  }
 
-	if(p_an3 > threshold)
+	if(p_exact3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
 	    cout << "P Field Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << p_an3 << endl;
+	    cout << "Exceeded Threshold by: " << p_exact3 << endl;
 	    cout << x << " " << y << endl;
 	    exit(1);
 	  }
@@ -480,11 +480,11 @@ int run_regression()
 	    exit(1);
 	  }
 
-	if(rho_an3 > threshold)
+	if(rho_exact3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
 	    cout << "RHO Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << rho_an3 << endl;
+	    cout << "Exceeded Threshold by: " << rho_exact3 << endl;
 	    cout << x << " " << y << endl;
 	    exit(1);
 	  }

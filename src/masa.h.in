@@ -155,25 +155,25 @@ namespace MASA
 
 
   template <typename Scalar>
-  Scalar masa_eval_t_an      (Scalar);        // x
+  Scalar masa_eval_t_exact      (Scalar);        // x
 
   template <typename Scalar>
-  Scalar masa_eval_t_an      (Scalar,Scalar); // x,t
+  Scalar masa_eval_t_exact      (Scalar,Scalar); // x,t
 
   template <typename Scalar>
-  Scalar masa_eval_u_an      (Scalar);
+  Scalar masa_eval_u_exact      (Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_v_an      (Scalar);        // for SA model
+  Scalar masa_eval_v_exact      (Scalar);        // for SA model
 
   template <typename Scalar>
-  Scalar masa_eval_w_an      (Scalar);
+  Scalar masa_eval_w_exact      (Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_p_an      (Scalar);
+  Scalar masa_eval_p_exact      (Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_rho_an    (Scalar);
+  Scalar masa_eval_rho_exact    (Scalar);
 
   // --------------------------------
   // source term(s) -- 2D
@@ -199,22 +199,22 @@ namespace MASA
 
 
   template <typename Scalar>
-  Scalar masa_eval_t_an      (Scalar,Scalar,Scalar); //x,y,t
+  Scalar masa_eval_t_exact      (Scalar,Scalar,Scalar); //x,y,t
 
   template <typename Scalar>
-  Scalar masa_eval_u_an      (Scalar,Scalar);
+  Scalar masa_eval_u_exact      (Scalar,Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_v_an      (Scalar,Scalar);
+  Scalar masa_eval_v_exact      (Scalar,Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_w_an      (Scalar,Scalar); // for axisymmetric
+  Scalar masa_eval_w_exact      (Scalar,Scalar); // for axisymmetric
 
   template <typename Scalar>
-  Scalar masa_eval_p_an      (Scalar,Scalar);
+  Scalar masa_eval_p_exact      (Scalar,Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_rho_an    (Scalar,Scalar);
+  Scalar masa_eval_rho_exact    (Scalar,Scalar);
 
   // --------------------------------
   // source term(s) -- 3D
@@ -240,22 +240,22 @@ namespace MASA
   
 
   template <typename Scalar>
-  Scalar masa_eval_t_an      (Scalar,Scalar,Scalar,Scalar); // x,y,z,t
+  Scalar masa_eval_t_exact      (Scalar,Scalar,Scalar,Scalar); // x,y,z,t
 
   template <typename Scalar>
-  Scalar masa_eval_u_an      (Scalar,Scalar,Scalar);
+  Scalar masa_eval_u_exact      (Scalar,Scalar,Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_v_an      (Scalar,Scalar,Scalar);
+  Scalar masa_eval_v_exact      (Scalar,Scalar,Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_w_an      (Scalar,Scalar,Scalar);
+  Scalar masa_eval_w_exact      (Scalar,Scalar,Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_p_an      (Scalar,Scalar,Scalar);
+  Scalar masa_eval_p_exact      (Scalar,Scalar,Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_rho_an    (Scalar,Scalar,Scalar);
+  Scalar masa_eval_rho_exact    (Scalar,Scalar,Scalar);
 
   // --------------------------------
   // gradient of analytical solutions
@@ -536,9 +536,9 @@ extern "C" {
   extern double cmasa_eval_1d_rho_source(double);
 
   /**
-   * cmasa_eval_1d_t_an: cmasa equivalent to masa_eval_1d_t_an
+   * cmasa_eval_1d_t_exact: cmasa equivalent to masa_eval_1d_t_exact
    *
-   * cmasa_eval_1d_t_an is a subroutine that will return
+   * cmasa_eval_1d_t_exact is a subroutine that will return
    * the value of the analytical term for the temperature
    * of the currently selected one dimensional cmasa function.
    *
@@ -548,12 +548,12 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_1d_t_an      (double);
+  extern double cmasa_eval_1d_t_exact      (double);
 
   /**
-   * cmasa_eval_1d_u_an: cmasa equivalent to masa_eval_1d_u_an
+   * cmasa_eval_1d_u_exact: cmasa equivalent to masa_eval_1d_u_exact
    *
-   * cmasa_eval_1d_u_an is a subroutine that will return
+   * cmasa_eval_1d_u_exact is a subroutine that will return
    * the value of the analytical term for the u component of velocity
    * of the currently selected one dimensional cmasa function.
    *
@@ -563,12 +563,12 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_1d_u_an      (double);
+  extern double cmasa_eval_1d_u_exact      (double);
 
   /**
-   * cmasa_eval_1d_p_an: cmasa equivalent to masa_eval_1d_p_an
+   * cmasa_eval_1d_p_exact: cmasa equivalent to masa_eval_1d_p_exact
    *
-   * cmasa_eval_1d_p_an is a subroutine that will return
+   * cmasa_eval_1d_p_exact is a subroutine that will return
    * the value of the analytical term for the pressure
    * of the currently selected one dimensional cmasa function.
    *
@@ -578,12 +578,12 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_1d_p_an      (double);
+  extern double cmasa_eval_1d_p_exact      (double);
 
   /**
-   * cmasa_eval_1d_rho_an: cmasa equivalent to masa_eval_1d_rho_an
+   * cmasa_eval_1d_rho_exact: cmasa equivalent to masa_eval_1d_rho_exact
    *
-   * cmasa_eval_1d_rho_an is a subroutine that will return
+   * cmasa_eval_1d_rho_exact is a subroutine that will return
    * the value of the analytical term for the u component of velocity
    * of the currently selected one dimensional cmasa function.
    *
@@ -593,7 +593,7 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_1d_rho_an    (double);
+  extern double cmasa_eval_1d_rho_exact    (double);
 
   // --------------------------------
   // source term(s) -- 2D
@@ -675,9 +675,9 @@ extern "C" {
   extern double cmasa_eval_2d_rho_source(double,double);
 
   /**
-   * cmasa_eval_2d_t_an: cmasa equivalent to masa_eval_2d_t_an
+   * cmasa_eval_2d_t_exact: cmasa equivalent to masa_eval_2d_t_exact
    *
-   * cmasa_eval_2d_t_an is a subroutine that will return
+   * cmasa_eval_2d_t_exact is a subroutine that will return
    * the value of the analytical term for the temperature
    * of the currently selected two dimensional cmasa function.
    *
@@ -687,12 +687,12 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_2d_t_an      (double,double);
+  extern double cmasa_eval_2d_t_exact      (double,double);
 
   /**
-   * cmasa_eval_2d_u_an: cmasa equivalent to masa_eval_2d_u_an
+   * cmasa_eval_2d_u_exact: cmasa equivalent to masa_eval_2d_u_exact
    *
-   * cmasa_eval_2d_u_an is a subroutine that will return
+   * cmasa_eval_2d_u_exact is a subroutine that will return
    * the value of the analytical term for the u component of velocity
    * of the currently selected two dimensional cmasa function.
    *
@@ -702,12 +702,12 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_2d_u_an      (double,double);
+  extern double cmasa_eval_2d_u_exact      (double,double);
 
   /**
-   * cmasa_eval_2d_v_an: cmasa equivalent to masa_eval_2d_v_an
+   * cmasa_eval_2d_v_exact: cmasa equivalent to masa_eval_2d_v_exact
    *
-   * cmasa_eval_2d_v_an is a subroutine that will return
+   * cmasa_eval_2d_v_exact is a subroutine that will return
    * the value of the analytical term for the v component of velocity
    * of the currently selected two dimensional cmasa function.
    *
@@ -717,12 +717,12 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_2d_v_an      (double,double);
+  extern double cmasa_eval_2d_v_exact      (double,double);
 
   /**
-   * cmasa_eval_2d_p_an: cmasa equivalent to masa_eval_2d_p_an
+   * cmasa_eval_2d_p_exact: cmasa equivalent to masa_eval_2d_p_exact
    *
-   * cmasa_eval_2d_p_an is a subroutine that will return
+   * cmasa_eval_2d_p_exact is a subroutine that will return
    * the value of the analytical term for the pressure
    * of the currently selected two dimensional cmasa function.
    *
@@ -732,12 +732,12 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_2d_p_an      (double,double);
+  extern double cmasa_eval_2d_p_exact      (double,double);
 
   /**
-   * cmasa_eval_2d_rho_an: cmasa equivalent to masa_eval_2d_rho_an
+   * cmasa_eval_2d_rho_exact: cmasa equivalent to masa_eval_2d_rho_exact
    *
-   * cmasa_eval_2d_rho_an is a subroutine that will return
+   * cmasa_eval_2d_rho_exact is a subroutine that will return
    * the value of the analytical term for the density
    * of the currently selected two dimensional cmasa function.
    *
@@ -747,7 +747,7 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_2d_rho_an    (double,double);
+  extern double cmasa_eval_2d_rho_exact    (double,double);
 
   // --------------------------------
   // source term(s) -- 3D
@@ -844,9 +844,9 @@ extern "C" {
   extern double cmasa_eval_3d_rho_source(double,double,double);
 
   /**
-   * cmasa_eval_3d_t_an: cmasa equivalent to masa_eval_3d_t_an
+   * cmasa_eval_3d_t_exact: cmasa equivalent to masa_eval_3d_t_exact
    *
-   * cmasa_eval_3d_t_an is a subroutine that will return
+   * cmasa_eval_3d_t_exact is a subroutine that will return
    * the value of the analytical term for the temperature of the 
    * currently selected three dimensional cmasa function.
    *
@@ -856,12 +856,12 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_3d_t_an      (double,double,double);
+  extern double cmasa_eval_3d_t_exact      (double,double,double);
 
   /**
-   * cmasa_eval_3d_u_an: cmasa equivalent to masa_eval_3d_u_an
+   * cmasa_eval_3d_u_exact: cmasa equivalent to masa_eval_3d_u_exact
    *
-   * cmasa_eval_3d_u_an is a subroutine that will return
+   * cmasa_eval_3d_u_exact is a subroutine that will return
    * the value of the analytical term for the u component of velocity
    * of the currently selected three dimensional cmasa function.
    *
@@ -871,12 +871,12 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_3d_u_an      (double,double,double);
+  extern double cmasa_eval_3d_u_exact      (double,double,double);
 
   /**
-   * cmasa_eval_3d_v_an: cmasa equivalent to masa_eval_3d_v_an
+   * cmasa_eval_3d_v_exact: cmasa equivalent to masa_eval_3d_v_exact
    *
-   * cmasa_eval_3d_v_an is a subroutine that will return
+   * cmasa_eval_3d_v_exact is a subroutine that will return
    * the value of the analytical term for the v component of velocity
    * of the currently selected three dimensional cmasa function.
    *
@@ -886,12 +886,12 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_3d_v_an      (double,double,double);
+  extern double cmasa_eval_3d_v_exact      (double,double,double);
 
   /**
-   * cmasa_eval_3d_w_an: cmasa equivalent to masa_eval_3d_w_an
+   * cmasa_eval_3d_w_exact: cmasa equivalent to masa_eval_3d_w_exact
    *
-   * cmasa_eval_3d_w_an is a subroutine that will return
+   * cmasa_eval_3d_w_exact is a subroutine that will return
    * the value of the analytical term for the w component of velocity
    * of the currently selected three dimensional cmasa function.
    *
@@ -901,12 +901,12 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_3d_w_an      (double,double,double);
+  extern double cmasa_eval_3d_w_exact      (double,double,double);
 
   /**
-   * cmasa_eval_3d_p_an: cmasa equivalent to masa_eval_3d_p_an
+   * cmasa_eval_3d_p_exact: cmasa equivalent to masa_eval_3d_p_exact
    *
-   * cmasa_eval_3d_p_an is a subroutine that will return
+   * cmasa_eval_3d_p_exact is a subroutine that will return
    * the value of the analytical term for the pressure
    * of the currently selected three dimensional cmasa function.
    *
@@ -916,12 +916,12 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_3d_p_an      (double,double,double);
+  extern double cmasa_eval_3d_p_exact      (double,double,double);
 
   /**
-   * cmasa_eval_3d_rho_an: cmasa equivalent to masa_eval_3d_rho_an
+   * cmasa_eval_3d_rho_exact: cmasa equivalent to masa_eval_3d_rho_exact
    *
-   * cmasa_eval_3d_p_an is a subroutine that will return
+   * cmasa_eval_3d_p_exact is a subroutine that will return
    * the value of the analytical term for the density
    * of the currently selected three dimensional cmasa function.
    *
@@ -931,7 +931,7 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_3d_rho_an    (double,double,double);
+  extern double cmasa_eval_3d_rho_exact    (double,double,double);
 
   // --------------------------------
   // gradient of analytical solution

@@ -290,35 +290,35 @@ Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_rho(Scalar x,Scalar
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_an_u(Scalar x,Scalar y)
+Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_exact_u(Scalar x,Scalar y)
 {
-  Scalar u_an;
-  u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
-  return u_an;
+  Scalar u_exact;
+  u_exact = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  return u_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_an_v(Scalar x,Scalar y)
+Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_exact_v(Scalar x,Scalar y)
 {
-  Scalar v_an;
-  v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
-  return v_an;
+  Scalar v_exact;
+  v_exact = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  return v_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_an_p(Scalar x,Scalar y)
+Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_exact_p(Scalar x,Scalar y)
 {
-  Scalar p_an;
-  p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
-  return p_an;
+  Scalar p_exact;
+  p_exact = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
+  return p_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_an_rho(Scalar x,Scalar y)
+Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_exact_rho(Scalar x,Scalar y)
 {
-  Scalar rho_an;
-  rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
-  return rho_an;
+  Scalar rho_exact;
+  rho_exact = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
+  return rho_exact;
 }
 
 /* ------------------------------------------------
@@ -660,15 +660,15 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_rho(Scalar x,Scalar
   Scalar grad = -1;
 
   /*
-    grad_p_an[0] = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
-    grad_p_an[1] = p_y * cos(a_py * pi * y / L) * a_py * pi / L;
-    grad_p_an[2] = -p_z * sin(a_pz * pi * z / L) * a_pz * pi / L;
-    grad_v_an[0] = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
-    grad_v_an[1] = v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
-    grad_v_an[2] = v_z * cos(a_vz * pi * z / L) * a_vz * pi / L;
-    grad_w_an[0] = w_x * cos(a_wx * pi * x / L) * a_wx * pi / L;
-    grad_w_an[1] = w_y * cos(a_wy * pi * y / L) * a_wy * pi / L;
-    grad_w_an[2] = -w_z * sin(a_wz * pi * z / L) * a_wz * pi / L;
+    grad_p_exact[0] = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
+    grad_p_exact[1] = p_y * cos(a_py * pi * y / L) * a_py * pi / L;
+    grad_p_exact[2] = -p_z * sin(a_pz * pi * z / L) * a_pz * pi / L;
+    grad_v_exact[0] = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
+    grad_v_exact[1] = v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
+    grad_v_exact[2] = v_z * cos(a_vz * pi * z / L) * a_vz * pi / L;
+    grad_w_exact[0] = w_x * cos(a_wx * pi * x / L) * a_wx * pi / L;
+    grad_w_exact[1] = w_y * cos(a_wy * pi * y / L) * a_wy * pi / L;
+    grad_w_exact[2] = -w_z * sin(a_wz * pi * z / L) * a_wz * pi / L;
   */
 
   switch(i)
@@ -750,43 +750,43 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_q_e(Scalar x,Scalar y,Sc
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_an_u(Scalar x,Scalar y,Scalar z)
+Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_exact_u(Scalar x,Scalar y,Scalar z)
 {
-  Scalar u_an;
-  u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_z * cos(a_uz * pi * z / L);  
-  return u_an;
+  Scalar u_exact;
+  u_exact = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_z * cos(a_uz * pi * z / L);  
+  return u_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_an_v(Scalar x,Scalar y,Scalar z)
+Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_exact_v(Scalar x,Scalar y,Scalar z)
 {
-  Scalar v_an;
-  v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_z * sin(a_vz * pi * z / L);
-  return v_an;
+  Scalar v_exact;
+  v_exact = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_z * sin(a_vz * pi * z / L);
+  return v_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_an_w(Scalar x,Scalar y,Scalar z)
+Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_exact_w(Scalar x,Scalar y,Scalar z)
 {
-  Scalar w_an;
-  w_an = w_0 + w_x * sin(a_wx * pi * x / L) + w_y * sin(a_wy * pi * y / L) + w_z * cos(a_wz * pi * z / L);
-  return w_an;
+  Scalar w_exact;
+  w_exact = w_0 + w_x * sin(a_wx * pi * x / L) + w_y * sin(a_wy * pi * y / L) + w_z * cos(a_wz * pi * z / L);
+  return w_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_an_p(Scalar x,Scalar y,Scalar z)
+Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_exact_p(Scalar x,Scalar y,Scalar z)
 {
-  Scalar p_an;
-  p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_z * cos(a_pz * pi * z / L);
-  return p_an;
+  Scalar p_exact;
+  p_exact = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_z * cos(a_pz * pi * z / L);
+  return p_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_an_rho(Scalar x,Scalar y,Scalar z)
+Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_exact_rho(Scalar x,Scalar y,Scalar z)
 {
-  Scalar rho_an;
-  rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_z * sin(a_rhoz * pi * z / L);
-  return rho_an;
+  Scalar rho_exact;
+  rho_exact = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_z * sin(a_rhoz * pi * z / L);
+  return rho_exact;
 }
 
 // ----------------------------------------

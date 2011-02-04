@@ -47,11 +47,11 @@ Scalar SourceQ_t_1d(Scalar x, Scalar A_x, Scalar k_0)
 }
 
 template<typename Scalar>
-Scalar Source_t_1d_an(Scalar A_x,Scalar x)
+Scalar Source_t_1d_exact(Scalar A_x,Scalar x)
 {
-  Scalar T_an;
-  T_an = cos(A_x * x);
-  return T_an;
+  Scalar T_exact;
+  T_exact = cos(A_x * x);
+  return T_exact;
 }
 
 template<typename Scalar>
@@ -87,7 +87,7 @@ int run_regression()
   const Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
 
   Scalar tfield,tfield2,tfield3;
-  Scalar t_an,t_an2,t_an3;
+  Scalar t_exact,t_exact2,t_exact3;
   Scalar param=1.2;
   Scalar x=.5;
   Scalar y=.4;
@@ -111,13 +111,13 @@ int run_regression()
     }
  
   tfield    = masa_eval_t_source<Scalar>(x);
-  t_an      = masa_eval_t_an<Scalar>(x);
+  t_exact      = masa_eval_t_exact<Scalar>(x);
 
   tfield2   = SourceQ_t_1d(x,A_x,k_0);
-  t_an2     = Source_t_1d_an(A_x,x);
+  t_exact2     = Source_t_1d_exact(A_x,x);
 
   tfield3 = fabs(tfield-tfield2);
-  t_an3   = fabs(t_an-t_an2);
+  t_exact3   = fabs(t_exact-t_exact2);
 
   if(tfield3 > threshold)
     {
@@ -127,11 +127,11 @@ int run_regression()
       exit(1);
     }
 
-  if(t_an3 > threshold)
+  if(t_exact3 > threshold)
     {
       cout << "\nMASA REGRESSION TEST FAILED: Heat Equation 1d Steady Constant\n";
       cout << "T Analytical Term\n";
-      cout << "Exceeded Threshold by: " << t_an3 << endl;
+      cout << "Exceeded Threshold by: " << t_exact3 << endl;
       exit(1);
     }
 

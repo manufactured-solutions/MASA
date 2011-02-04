@@ -182,27 +182,27 @@ Scalar MASA::euler_1d<Scalar>::eval_1d_g_rho(Scalar x)
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::euler_1d<Scalar>::eval_an_u(Scalar x)
+Scalar MASA::euler_1d<Scalar>::eval_exact_u(Scalar x)
 {
-  Scalar u_an;
-  u_an = u_0 + u_x * sin(a_ux * pi * x / L);
-  return u_an;
+  Scalar u_exact;
+  u_exact = u_0 + u_x * sin(a_ux * pi * x / L);
+  return u_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::euler_1d<Scalar>::eval_an_p(Scalar x)
+Scalar MASA::euler_1d<Scalar>::eval_exact_p(Scalar x)
 {
-  Scalar p_an;
-  p_an = p_0 + p_x * cos(a_px * pi * x / L);
-  return p_an;
+  Scalar p_exact;
+  p_exact = p_0 + p_x * cos(a_px * pi * x / L);
+  return p_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::euler_1d<Scalar>::eval_an_rho(Scalar x)
+Scalar MASA::euler_1d<Scalar>::eval_exact_rho(Scalar x)
 {
-  Scalar rho_an;
-  rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L);
-  return rho_an;
+  Scalar rho_exact;
+  rho_exact = rho_0 + rho_x * sin(a_rhox * pi * x / L);
+  return rho_exact;
 }
 
 
@@ -498,35 +498,35 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_rho(Scalar x,Scalar y, int i)
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::euler_2d<Scalar>::eval_an_u(Scalar x,Scalar y)
+Scalar MASA::euler_2d<Scalar>::eval_exact_u(Scalar x,Scalar y)
 {
-  Scalar u_an;
-  u_an = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L); 
-  return u_an;
+  Scalar u_exact;
+  u_exact = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L); 
+  return u_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::euler_2d<Scalar>::eval_an_v(Scalar x,Scalar y)
+Scalar MASA::euler_2d<Scalar>::eval_exact_v(Scalar x,Scalar y)
 {
-  Scalar v_an;
-  v_an = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
-  return v_an;
+  Scalar v_exact;
+  v_exact = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
+  return v_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::euler_2d<Scalar>::eval_an_p(Scalar x,Scalar y)
+Scalar MASA::euler_2d<Scalar>::eval_exact_p(Scalar x,Scalar y)
 {
-  Scalar p_an;
-  p_an = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L);
-  return p_an;
+  Scalar p_exact;
+  p_exact = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L);
+  return p_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::euler_2d<Scalar>::eval_an_rho(Scalar x,Scalar y)
+Scalar MASA::euler_2d<Scalar>::eval_exact_rho(Scalar x,Scalar y)
 {
-  Scalar rho_an;
-  rho_an = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L); 
-  return rho_an;
+  Scalar rho_exact;
+  rho_exact = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L); 
+  return rho_exact;
 }
 
 /* ------------------------------------------------
@@ -932,43 +932,43 @@ Scalar MASA::euler_3d<Scalar>::eval_q_rho(Scalar x,Scalar y,Scalar z)
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::euler_3d<Scalar>::eval_an_u(Scalar x,Scalar y,Scalar z)
+Scalar MASA::euler_3d<Scalar>::eval_exact_u(Scalar x,Scalar y,Scalar z)
 {
-  Scalar u_an;
-  u_an = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);
-  return u_an;
+  Scalar u_exact;
+  u_exact = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);
+  return u_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::euler_3d<Scalar>::eval_an_v(Scalar x,Scalar y,Scalar z)
+Scalar MASA::euler_3d<Scalar>::eval_exact_v(Scalar x,Scalar y,Scalar z)
 {
-  Scalar v_an;
-  v_an = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
-  return v_an;
+  Scalar v_exact;
+  v_exact = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
+  return v_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::euler_3d<Scalar>::eval_an_w(Scalar x,Scalar y,Scalar z)
+Scalar MASA::euler_3d<Scalar>::eval_exact_w(Scalar x,Scalar y,Scalar z)
 {
-  Scalar w_an;
-  w_an = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);  
-  return w_an;
+  Scalar w_exact;
+  w_exact = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);  
+  return w_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::euler_3d<Scalar>::eval_an_p(Scalar x,Scalar y,Scalar z)
+Scalar MASA::euler_3d<Scalar>::eval_exact_p(Scalar x,Scalar y,Scalar z)
 {
-  Scalar p_an;
-  p_an = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_z * cos(a_pz * PI * z / L);
-  return p_an;
+  Scalar p_exact;
+  p_exact = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_z * cos(a_pz * PI * z / L);
+  return p_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::euler_3d<Scalar>::eval_an_rho(Scalar x,Scalar y,Scalar z)
+Scalar MASA::euler_3d<Scalar>::eval_exact_rho(Scalar x,Scalar y,Scalar z)
 {
-  Scalar rho_an;
-  rho_an = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L);
-  return rho_an;
+  Scalar rho_exact;
+  rho_exact = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L);
+  return rho_exact;
 }
 
 // ----------------------------------------

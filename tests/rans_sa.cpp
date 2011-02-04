@@ -57,10 +57,10 @@ int run_regression()
   Scalar efield,efield2,efield3;
   Scalar rho,rho2,rho3;
 
-  Scalar u_an,u_an2,u_an3;
-  Scalar v_an,v_an2,v_an3;
-  Scalar p_an,p_an2,p_an3;
-  Scalar rho_an,rho_an2,rho_an3;
+  Scalar u_exact,u_exact2,u_exact3;
+  Scalar v_exact,v_exact2,v_exact3;
+  Scalar p_exact,p_exact2,p_exact3;
+  Scalar rho_exact,rho_exact2,rho_exact3;
   
   // parameters
   int nx = 200;  // number of points
@@ -83,8 +83,8 @@ int run_regression()
       x=i*dx;
 
       // analytical
-      u_an = masa_eval_u_an<Scalar>(x);
-      v_an = masa_eval_v_an<Scalar>(x);
+      u_exact = masa_eval_u_exact<Scalar>(x);
+      v_exact = masa_eval_v_exact<Scalar>(x);
 
       // simple source term check
       ufield = masa_eval_u_source<Scalar>(x);

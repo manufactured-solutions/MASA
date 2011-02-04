@@ -151,35 +151,35 @@ Scalar MASA::axi_euler<Scalar>::eval_q_e(Scalar r,Scalar z)
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::axi_euler<Scalar>::eval_an_u(Scalar r,Scalar z)
+Scalar MASA::axi_euler<Scalar>::eval_exact_u(Scalar r,Scalar z)
 {
-  Scalar u_an;
-  u_an = u_1 * (cos(a_ur * pi * r / L) - Scalar(1)) * sin(a_uz * pi * z / L);
-  return u_an;
+  Scalar u_exact;
+  u_exact = u_1 * (cos(a_ur * pi * r / L) - Scalar(1)) * sin(a_uz * pi * z / L);
+  return u_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::axi_euler<Scalar>::eval_an_w(Scalar r,Scalar z)
+Scalar MASA::axi_euler<Scalar>::eval_exact_w(Scalar r,Scalar z)
 {
-  Scalar w_an;
-  w_an = w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L);
-  return w_an;
+  Scalar w_exact;
+  w_exact = w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L);
+  return w_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::axi_euler<Scalar>::eval_an_p(Scalar r,Scalar z)
+Scalar MASA::axi_euler<Scalar>::eval_exact_p(Scalar r,Scalar z)
 {
-  Scalar p_an;
-  p_an = p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L);
-  return p_an;
+  Scalar p_exact;
+  p_exact = p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L);
+  return p_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::axi_euler<Scalar>::eval_an_rho(Scalar r,Scalar z)
+Scalar MASA::axi_euler<Scalar>::eval_exact_rho(Scalar r,Scalar z)
 {
-  Scalar rho_an;
-  rho_an = rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L);
-  return rho_an;
+  Scalar rho_exact;
+  rho_exact = rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L);
+  return rho_exact;
 }
 
 // ----------------------------------------

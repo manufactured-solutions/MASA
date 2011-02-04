@@ -56,26 +56,26 @@ Real nancheck(Real x)
 
 Real anQ_p(Real r,Real z,Real p_0,Real p_1,Real rho_0,Real rho_1,Real u_1,Real w_0,Real w_1,Real a_pr,Real a_pz,Real a_rhor,Real a_rhoz,Real a_ur,Real a_uz,Real a_wr,Real a_wz,Real pi,Real L,Real Gamma)
 {
-  Real p_an = p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L);
-  return p_an;
+  Real p_exact = p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L);
+  return p_exact;
 }
   
 Real anQ_u (Real r,Real z,Real p_0,Real p_1,Real rho_0,Real rho_1,Real u_1,Real w_0,Real w_1,Real a_pr,Real a_pz,Real a_rhor,Real a_rhoz,Real a_ur,Real a_uz,Real a_wr,Real a_wz,Real pi,Real L,Real Gamma)
 {
-  Real u_an = u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_uz * pi * z / L);
-  return u_an;
+  Real u_exact = u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_uz * pi * z / L);
+  return u_exact;
 } 
  
 Real anQ_w (Real r,Real z,Real w_0,Real w_1,Real a_wr,Real a_wz,Real pi,Real L)
 {
-  Real w_an = w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L);
-  return w_an;
+  Real w_exact = w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L);
+  return w_exact;
 }
 
 Real anQ_rho (Real r,Real z,Real p_0,Real p_1,Real rho_0,Real rho_1,Real u_1,Real w_0,Real w_1,Real a_pr,Real a_pz,Real a_rhor,Real a_rhoz,Real a_ur,Real a_uz,Real a_wr,Real a_wz,Real pi,Real L,Real Gamma)
 { 
-  Real rho_an = rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L);
-  return rho_an;
+  Real rho_exact = rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L);
+  return rho_exact;
 }
 
 // ----------------------------------------
@@ -140,11 +140,11 @@ int main()
   Real efield,efield2,efield3;
   Real rho,rho2,rho3;
 
-  Real u_an,u_an2,u_an3;
-  Real v_an,v_an2,v_an3;
-  Real w_an,w_an2,w_an3;
-  Real p_an,p_an2,p_an3;
-  Real rho_an,rho_an2,rho_an3;
+  Real u_exact,u_exact2,u_exact3;
+  Real v_exact,v_exact2,v_exact3;
+  Real w_exact,w_exact2,w_exact3;
+  Real p_exact,p_exact2,p_exact3;
+  Real rho_exact,rho_exact2,rho_exact3;
 
   // initalize
   int nx = 115;  // number of points
@@ -203,10 +203,10 @@ int main()
 	rho    = masa_eval_rho_source<Real>(r,z);
 
 	//evaluate analytical terms
-	u_an = masa_eval_u_an<Real>        (r,z);
-	w_an = masa_eval_w_an<Real>        (r,z);
-	p_an = masa_eval_p_an<Real>        (r,z);
-	rho_an = masa_eval_rho_an<Real>    (r,z);
+	u_exact = masa_eval_u_exact<Real>        (r,z);
+	w_exact = masa_eval_w_exact<Real>        (r,z);
+	p_exact = masa_eval_p_exact<Real>        (r,z);
+	rho_exact = masa_eval_rho_exact<Real>    (r,z);
 	  	  
 	// check against maple
 	ufield2 = SourceQ_u   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
@@ -214,10 +214,10 @@ int main()
 	rho2    = SourceQ_rho (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
 	efield2 = SourceQ_e   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
 	
-	u_an2   = anQ_u   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
-	rho_an2 = anQ_rho (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
-	p_an2   = anQ_p   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
-	w_an2   = anQ_w   (r, z, w_0, w_1, a_wr, a_wz, pi, L);
+	u_exact2   = anQ_u   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
+	rho_exact2 = anQ_rho (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
+	p_exact2   = anQ_p   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
+	w_exact2   = anQ_w   (r, z, w_0, w_1, a_wr, a_wz, pi, L);
 
 	// test the result is roughly zero
 	// choose between abs and rel error
@@ -228,10 +228,10 @@ int main()
 	efield3 = fabs(efield-efield2);
 	rho3    = fabs(rho-rho2);
 	
-	u_an3   = fabs(u_an-u_an2);
-	w_an3   = fabs(w_an-w_an2);
-	rho_an3 = fabs(rho_an-rho_an2);
-	p_an3   = fabs(p_an-p_an2);
+	u_exact3   = fabs(u_exact-u_exact2);
+	w_exact3   = fabs(w_exact-w_exact2);
+	rho_exact3 = fabs(rho_exact-rho_exact2);
+	p_exact3   = fabs(p_exact-p_exact2);
 
 #else
 
@@ -240,10 +240,10 @@ int main()
 	efield3 = fabs(efield-efield2)/fabs(efield2);
 	rho3    = fabs(rho-rho2)/fabs(rho2);
 	
-	u_an3   = fabs(u_an-u_an2)/fabs(u_an2);
-	w_an3   = fabs(w_an-w_an2)/fabs(w_an2);
-	rho_an3 = fabs(rho_an-rho_an2)/fabs(rho_an2);
-	p_an3   = fabs(p_an-p_an2)/fabs(p_an2);
+	u_exact3   = fabs(u_exact-u_exact2)/fabs(u_exact2);
+	w_exact3   = fabs(w_exact-w_exact2)/fabs(w_exact2);
+	rho_exact3 = fabs(rho_exact-rho_exact2)/fabs(rho_exact2);
+	p_exact3   = fabs(p_exact-p_exact2)/fabs(p_exact2);
 
 #endif
 
@@ -252,10 +252,10 @@ int main()
 	nancheck(efield3);
 	nancheck(rho3);
 
-	nancheck(u_an3);
-	nancheck(w_an3);
-	nancheck(rho_an3);
-	nancheck(p_an3);
+	nancheck(u_exact3);
+	nancheck(w_exact3);
+	nancheck(rho_exact3);
+	nancheck(p_exact3);
 
 	if(ufield3 > threshold)
 	  {
@@ -269,11 +269,11 @@ int main()
 	    exit(1);
 	  }
 
-	if(u_an3 > threshold)
+	if(u_exact3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
 	    cout << "U Field Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << u_an << endl;
+	    cout << "Exceeded Threshold by: " << u_exact << endl;
 	    cout.precision(16);
 	    cout << r << " " << z << endl;
 	    exit(1);
@@ -292,14 +292,14 @@ int main()
 	  }
 
 	// this is the 'bad' term: rho_0 is corrupting somehow
-	if(w_an3 > threshold)
+	if(w_exact3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
 	    cout << "W Field Analytical Term\n";
 	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << w_an3 << endl;
-	    cout << "Source term is:        " << w_an2 << endl;
-	    cout << "MASA term is:          " << w_an << endl;
+	    cout << "Exceeded Threshold by: " << w_exact3 << endl;
+	    cout << "Source term is:        " << w_exact2 << endl;
+	    cout << "MASA term is:          " << w_exact << endl;
 	    cout << r << " " << z << endl;
 	    exit(1);
 	  }
@@ -316,12 +316,12 @@ int main()
 	    exit(1);
 	  }
 
-	if(p_an3 > threshold)
+	if(p_exact3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
 	    cout << "P Field Analytical Term\n";
 	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << p_an << endl;
+	    cout << "Exceeded Threshold by: " << p_exact << endl;
 	    cout << r << " " << z << endl;
 	    exit(1);
 	  }
@@ -336,12 +336,12 @@ int main()
 	    exit(1);
 	  }
 
-	if(rho_an3 > threshold)
+	if(rho_exact3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
 	    cout.precision(16);
 	    cout << "RHO Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << rho_an << endl;
+	    cout << "Exceeded Threshold by: " << rho_exact << endl;
 	    cout << r << " " << z << endl;
 	    exit(1);
 	  }

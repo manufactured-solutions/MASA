@@ -132,19 +132,19 @@ Scalar MASA::rans_sa<Scalar>::eval_q_v(Scalar eta)
 }
 
 template <typename Scalar>
-Scalar MASA::rans_sa<Scalar>::eval_an_u(Scalar eta)
+Scalar MASA::rans_sa<Scalar>::eval_exact_u(Scalar eta)
 {
-  Scalar u_an;
-  u_an = u(eta);
-  return u_an;
+  Scalar u_exact;
+  u_exact = u(eta);
+  return u_exact;
 }
 
 template <typename Scalar>
-Scalar MASA::rans_sa<Scalar>::eval_an_v(Scalar eta)
+Scalar MASA::rans_sa<Scalar>::eval_exact_v(Scalar eta)
 {
-  Scalar v_an;
-  v_an = nu(eta);
-  return v_an;
+  Scalar v_exact;
+  v_exact = nu(eta);
+  return v_exact;
 
 }
 

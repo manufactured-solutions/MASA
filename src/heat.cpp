@@ -77,11 +77,11 @@ Scalar MASA::heateq_1d_steady_const<Scalar>::eval_q_t(Scalar x)
 }
 
 template <typename Scalar>
-Scalar MASA::heateq_1d_steady_const<Scalar>::eval_an_t(Scalar x)
+Scalar MASA::heateq_1d_steady_const<Scalar>::eval_exact_t(Scalar x)
 {
-  Scalar T_an;
-  T_an = cos(A_x * x);
-  return T_an;
+  Scalar T_exact;
+  T_exact = cos(A_x * x);
+  return T_exact;
 }
 
 template <typename Scalar>
@@ -120,11 +120,11 @@ Scalar MASA::heateq_2d_steady_const<Scalar>::eval_q_t(Scalar x,Scalar y)
 }
 
 template <typename Scalar>
-Scalar MASA::heateq_2d_steady_const<Scalar>::eval_an_t(Scalar x,Scalar y)
+Scalar MASA::heateq_2d_steady_const<Scalar>::eval_exact_t(Scalar x,Scalar y)
 {
-  Scalar T_an;
-  T_an = cos(A_x * x) * cos(B_y * y);
-  return T_an;
+  Scalar T_exact;
+  T_exact = cos(A_x * x) * cos(B_y * y);
+  return T_exact;
 }
 
 template <typename Scalar>
@@ -166,11 +166,11 @@ Scalar MASA::heateq_3d_steady_const<Scalar>::eval_q_t(Scalar x,Scalar y,Scalar z
 }
 
 template <typename Scalar>
-Scalar MASA::heateq_3d_steady_const<Scalar>::eval_an_t(Scalar x,Scalar y,Scalar z)
+Scalar MASA::heateq_3d_steady_const<Scalar>::eval_exact_t(Scalar x,Scalar y,Scalar z)
 {
-  Scalar T_an;
-  T_an = cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
-  return T_an;
+  Scalar T_exact;
+  T_exact = cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
+  return T_exact;
 }
 
 
