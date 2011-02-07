@@ -49,9 +49,9 @@ Scalar SourceQ_t_1d(Scalar x, Scalar A_x, Scalar k_0)
 template<typename Scalar>
 Scalar Source_t_1d_exact(Scalar A_x,Scalar x)
 {
-  Scalar T_exact;
-  T_exact = cos(A_x * x);
-  return T_exact;
+  Scalar exact_t;
+  exact_t = cos(A_x * x);
+  return exact_t;
 }
 
 template<typename Scalar>
@@ -87,7 +87,7 @@ int run_regression()
   const Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
 
   Scalar tfield,tfield2,tfield3;
-  Scalar t_exact,t_exact2,t_exact3;
+  Scalar exact_t,exact_t2,exact_t3;
   Scalar param=1.2;
   Scalar x=.5;
   Scalar y=.4;
@@ -110,14 +110,14 @@ int run_regression()
       exit(1);
     }
  
-  tfield    = masa_eval_t_source<Scalar>(x);
-  t_exact      = masa_eval_t_exact<Scalar>(x);
+  tfield    = masa_eval_source_t<Scalar>(x);
+  exact_t      = masa_eval_exact_t<Scalar>(x);
 
   tfield2   = SourceQ_t_1d(x,A_x,k_0);
-  t_exact2     = Source_t_1d_exact(A_x,x);
+  exact_t2     = Source_t_1d_exact(A_x,x);
 
   tfield3 = fabs(tfield-tfield2);
-  t_exact3   = fabs(t_exact-t_exact2);
+  exact_t3   = fabs(exact_t-exact_t2);
 
   if(tfield3 > threshold)
     {
@@ -127,11 +127,11 @@ int run_regression()
       exit(1);
     }
 
-  if(t_exact3 > threshold)
+  if(exact_t3 > threshold)
     {
       cout << "\nMASA REGRESSION TEST FAILED: Heat Equation 1d Steady Constant\n";
       cout << "T Analytical Term\n";
-      cout << "Exceeded Threshold by: " << t_exact3 << endl;
+      cout << "Exceeded Threshold by: " << exact_t3 << endl;
       exit(1);
     }
 
@@ -149,7 +149,7 @@ int run_regression()
 
   // evaluate source terms (1D)
   masa_sanity_check<Scalar>();
-  tfield    = masa_eval_t_source<Scalar>(x,y);
+  tfield    = masa_eval_source_t<Scalar>(x,y);
   tfield2   = SourceQ_t_2d(x,y,A_x,B_y,k_0);
 
   tfield=fabs(tfield-tfield2);
@@ -180,7 +180,7 @@ int run_regression()
   // evaluate source terms (1D)
   masa_sanity_check<Scalar>();
 
-  tfield  = masa_eval_t_source<Scalar>(x,y,z);
+  tfield  = masa_eval_source_t<Scalar>(x,y,z);
   tfield2 = SourceQ_t_3d(x,y,z,A_x,B_y,C_z,k_0);
   tfield=fabs(tfield-tfield2);
 

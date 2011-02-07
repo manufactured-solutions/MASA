@@ -69,11 +69,11 @@ int main()
 
   //check all initialized properly
   cmasa_sanity_check();
-  sol = cmasa_eval_t_source(1.2);
+  sol = cmasa_eval_source_t(1.2);
   printf("\nt source: %g\n",sol);
 
   cmasa_select_mms("bob");
   cmasa_display_param();
-  sol = cmasa_eval_t_source(1,1);
+  sol = cmasa_eval_source_t(1,1);
   printf("\nt source: %g\n",sol);
 }

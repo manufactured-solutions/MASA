@@ -151,33 +151,33 @@ Scalar MASA::axi_cns<Scalar>::eval_q_e(Scalar r,Scalar z)
 template <typename Scalar>
 Scalar MASA::axi_cns<Scalar>::eval_exact_u(Scalar r,Scalar z)
 {
-  Scalar u_exact;
-  u_exact = u_1 * (cos(a_ur * pi * r / L) - Scalar(1)) * sin(a_uz * pi * z / L);
-  return u_exact;
+  Scalar exact_u;
+  exact_u = u_1 * (cos(a_ur * pi * r / L) - Scalar(1)) * sin(a_uz * pi * z / L);
+  return exact_u;
 }
 
 template <typename Scalar>
 Scalar MASA::axi_cns<Scalar>::eval_exact_w(Scalar r,Scalar z)
 {
-  Scalar w_exact;
-  w_exact = w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L);
-  return w_exact;
+  Scalar exact_w;
+  exact_w = w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L);
+  return exact_w;
 }
 
 template <typename Scalar>
 Scalar MASA::axi_cns<Scalar>::eval_exact_p(Scalar r,Scalar z)
 {
-  Scalar p_exact;
-  p_exact = p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L);
-  return p_exact;
+  Scalar exact_p;
+  exact_p = p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L);
+  return exact_p;
 }
 
 template <typename Scalar>
 Scalar MASA::axi_cns<Scalar>::eval_exact_rho(Scalar r,Scalar z)
 {
-  Scalar rho_exact;
-  rho_exact = rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L);
-  return rho_exact;
+  Scalar exact_rho;
+  exact_rho = rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L);
+  return exact_rho;
 }
 
 // ----------------------------------------

@@ -46,9 +46,9 @@ double SourceQ_t_1d(double x, double A_x, double k_0)
 
 double Source_t_1d_exact(double A_x,double x)
 {
-  double T_exact;
-  T_exact = cos(A_x * x);
-  return T_exact;
+  double exact_t;
+  exact_t = cos(A_x * x);
+  return exact_t;
 }
 
 double SourceQ_t_2d (
@@ -81,7 +81,7 @@ int main()
   int i;
 
   double tfield,tfield2,tfield3;
-  double t_exact,t_exact2,t_exact3;
+  double exact_t,exact_t2,exact_t3;
   double x;
   double y;
   double z;
@@ -111,26 +111,26 @@ int main()
       x=i*dx;
       
       //evalulate source terms
-      tfield = cmasa_eval_1d_t_source(x);
+      tfield = cmasa_eval_1d_source_t(x);
       
       //evaluate analytical terms
-      t_exact   = cmasa_eval_1d_t_exact(x);
+      exact_t   = cmasa_eval_1d_exact_t(x);
 	
       // get fundamental source term solution
       tfield2   = SourceQ_t_1d  (x,A_x,k_0);
-      t_exact2     = Source_t_1d_exact(x,A_x);
+      exact_t2     = Source_t_1d_exact(x,A_x);
 
       // test the result is roughly zero
       // choose between abs and rel error
 #ifdef MASA_STRICT_REGRESSION
 
       tfield3 = fabs(tfield-tfield2);
-      t_exact3   = fabs(t_exact-t_exact2);
+      exact_t3   = fabs(exact_t-exact_t2);
 
 #else
 
       tfield3 = fabs(tfield-tfield2)/fabs(tfield2);
-      t_exact3   = fabs(t_exact-t_exact2)/fabs(tfield2);
+      exact_t3   = fabs(exact_t-exact_t2)/fabs(tfield2);
 
 #endif
 
@@ -144,13 +144,13 @@ int main()
 	    exit(1);
 	  }
 
-	if(t_exact3 > threshold)
+	if(exact_t3 > threshold)
 	  {
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Heat Equation Steady-2d\n");
 	    printf("U Field Analytical Term\n");
-	    printf("Threshold Exceeded: %g\n",t_exact3);
-	    printf("CMASA:              %5.16f\n",t_exact);
-	    printf("Maple:              %5.16f\n",t_exact2);
+	    printf("Threshold Exceeded: %g\n",exact_t3);
+	    printf("CMASA:              %5.16f\n",exact_t);
+	    printf("Maple:              %5.16f\n",exact_t2);
 	    exit(1);
 	  }
     } // done iterating

@@ -116,43 +116,43 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_1d_t_source(value) bind (C,name='cmasa_eval_1d_t_source')
+     real (c_double) function masa_eval_1d_source_t(value) bind (C,name='cmasa_eval_1d_source_t')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_t_source
+     end function masa_eval_1d_source_t
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_u_source(value) bind (C,name='cmasa_eval_1d_u_source')
+     real (c_double) function masa_eval_1d_source_u(value) bind (C,name='cmasa_eval_1d_source_u')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_u_source
+     end function masa_eval_1d_source_u
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_e_source(value) bind (C,name='cmasa_eval_1d_e_source')
+     real (c_double) function masa_eval_1d_source_e(value) bind (C,name='cmasa_eval_1d_source_e')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_e_source
+     end function masa_eval_1d_source_e
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_rho_source(value) bind (C,name='cmasa_eval_1d_rho_source')
+     real (c_double) function masa_eval_1d_source_rho(value) bind (C,name='cmasa_eval_1d_source_rho')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_rho_source
+     end function masa_eval_1d_source_rho
   end interface  
 
   ! ---------------------------------
@@ -160,58 +160,58 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_2d_t_source(value,value2) bind (C,name='cmasa_eval_2d_t_source')
+     real (c_double) function masa_eval_2d_source_t(value,value2) bind (C,name='cmasa_eval_2d_source_t')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_t_source
+     end function masa_eval_2d_source_t
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_u_source(value,value2) bind (C,name='cmasa_eval_2d_u_source')
+     real (c_double) function masa_eval_2d_source_u(value,value2) bind (C,name='cmasa_eval_2d_source_u')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
 
-     end function masa_eval_2d_u_source
+     end function masa_eval_2d_source_u
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_v_source(value,value2) bind (C,name='cmasa_eval_2d_v_source')
+     real (c_double) function masa_eval_2d_source_v(value,value2) bind (C,name='cmasa_eval_2d_source_v')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_v_source
+     end function masa_eval_2d_source_v
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_e_source(value,value2) bind (C,name='cmasa_eval_2d_e_source')
+     real (c_double) function masa_eval_2d_source_e(value,value2) bind (C,name='cmasa_eval_2d_source_e')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_e_source
+     end function masa_eval_2d_source_e
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_rho_source(value,value2) bind (C,name='cmasa_eval_2d_rho_source')
+     real (c_double) function masa_eval_2d_source_rho(value,value2) bind (C,name='cmasa_eval_2d_source_rho')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_rho_source
+     end function masa_eval_2d_source_rho
   end interface  
 
   ! ---------------------------------
@@ -219,7 +219,7 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_3d_t_source(value,value2,value3) bind (C,name='cmasa_eval_3d_t_source')
+     real (c_double) function masa_eval_3d_source_t(value,value2,value3) bind (C,name='cmasa_eval_3d_source_t')
        use iso_c_binding
        implicit none
        
@@ -227,11 +227,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3
        
-     end function masa_eval_3d_t_source
+     end function masa_eval_3d_source_t
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_u_source(value,value2,value3) bind (C,name='cmasa_eval_3d_u_source')
+     real (c_double) function masa_eval_3d_source_u(value,value2,value3) bind (C,name='cmasa_eval_3d_source_u')
        use iso_c_binding
        implicit none
        
@@ -239,11 +239,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3
        
-     end function masa_eval_3d_u_source
+     end function masa_eval_3d_source_u
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_v_source(value,value2,value3) bind (C,name='cmasa_eval_3d_v_source')
+     real (c_double) function masa_eval_3d_source_v(value,value2,value3) bind (C,name='cmasa_eval_3d_source_v')
        use iso_c_binding
        implicit none
        
@@ -251,11 +251,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
 
-     end function masa_eval_3d_v_source
+     end function masa_eval_3d_source_v
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_w_source(value,value2,value3) bind (C,name='cmasa_eval_3d_w_source')
+     real (c_double) function masa_eval_3d_source_w(value,value2,value3) bind (C,name='cmasa_eval_3d_source_w')
        use iso_c_binding
        implicit none
        
@@ -263,11 +263,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
 
-     end function masa_eval_3d_w_source
+     end function masa_eval_3d_source_w
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_e_source(value,value2,value3) bind (C,name='cmasa_eval_3d_e_source')
+     real (c_double) function masa_eval_3d_source_e(value,value2,value3) bind (C,name='cmasa_eval_3d_source_e')
        use iso_c_binding
        implicit none
        
@@ -275,11 +275,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3
        
-     end function masa_eval_3d_e_source
+     end function masa_eval_3d_source_e
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_rho_source(value,value2,value3) bind (C,name='cmasa_eval_3d_rho_source')
+     real (c_double) function masa_eval_3d_source_rho(value,value2,value3) bind (C,name='cmasa_eval_3d_source_rho')
        use iso_c_binding
        implicit none
        
@@ -287,7 +287,7 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
 
-     end function masa_eval_3d_rho_source
+     end function masa_eval_3d_source_rho
   end interface  
 
   ! ---------------------------------
@@ -295,43 +295,43 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_1d_t_exact(value) bind (C,name='cmasa_eval_1d_t_exact')
+     real (c_double) function masa_eval_1d_exact_t(value) bind (C,name='cmasa_eval_1d_exact_t')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_t_exact
+     end function masa_eval_1d_exact_t
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_u_exact(value) bind (C,name='cmasa_eval_1d_u_exact')
+     real (c_double) function masa_eval_1d_exact_u(value) bind (C,name='cmasa_eval_1d_exact_u')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_u_exact
+     end function masa_eval_1d_exact_u
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_p_exact(value) bind (C,name='cmasa_eval_1d_p_exact')
+     real (c_double) function masa_eval_1d_exact_p(value) bind (C,name='cmasa_eval_1d_exact_p')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_p_exact
+     end function masa_eval_1d_exact_p
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_rho_exact(value) bind (C,name='cmasa_eval_1d_rho_exact')
+     real (c_double) function masa_eval_1d_exact_rho(value) bind (C,name='cmasa_eval_1d_exact_rho')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_rho_exact
+     end function masa_eval_1d_exact_rho
   end interface
 
   ! ---------------------------------
@@ -339,58 +339,58 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_2d_t_exact(value,value2) bind (C,name='cmasa_eval_2d_t_exact')
+     real (c_double) function masa_eval_2d_exact_t(value,value2) bind (C,name='cmasa_eval_2d_exact_t')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_t_exact
+     end function masa_eval_2d_exact_t
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_u_exact(value,value2) bind (C,name='cmasa_eval_2d_u_exact')
+     real (c_double) function masa_eval_2d_exact_u(value,value2) bind (C,name='cmasa_eval_2d_exact_u')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_u_exact
+     end function masa_eval_2d_exact_u
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_v_exact(value,value2) bind (C,name='cmasa_eval_2d_v_exact')
+     real (c_double) function masa_eval_2d_exact_v(value,value2) bind (C,name='cmasa_eval_2d_exact_v')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_v_exact
+     end function masa_eval_2d_exact_v
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_p_exact(value,value2) bind (C,name='cmasa_eval_2d_p_exact')
+     real (c_double) function masa_eval_2d_exact_p(value,value2) bind (C,name='cmasa_eval_2d_exact_p')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_p_exact
+     end function masa_eval_2d_exact_p
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_rho_exact(value,value2) bind (C,name='cmasa_eval_2d_rho_exact')
+     real (c_double) function masa_eval_2d_exact_rho(value,value2) bind (C,name='cmasa_eval_2d_exact_rho')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        real (c_double), value :: value2
        
-     end function masa_eval_2d_rho_exact
+     end function masa_eval_2d_exact_rho
   end interface
 
   ! ---------------------------------
@@ -398,7 +398,7 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_3d_t_exact(value,value2,value3) bind (C,name='cmasa_eval_3d_t_exact')
+     real (c_double) function masa_eval_3d_exact_t(value,value2,value3) bind (C,name='cmasa_eval_3d_exact_t')
        use iso_c_binding
        implicit none
        
@@ -406,11 +406,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
 
-     end function masa_eval_3d_t_exact
+     end function masa_eval_3d_exact_t
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_u_exact(value,value2,value3) bind (C,name='cmasa_eval_3d_u_exact')
+     real (c_double) function masa_eval_3d_exact_u(value,value2,value3) bind (C,name='cmasa_eval_3d_exact_u')
        use iso_c_binding
        implicit none
        
@@ -418,11 +418,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
        
-     end function masa_eval_3d_u_exact
+     end function masa_eval_3d_exact_u
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_v_exact(value,value2,value3) bind (C,name='cmasa_eval_3d_v_exact')
+     real (c_double) function masa_eval_3d_exact_v(value,value2,value3) bind (C,name='cmasa_eval_3d_exact_v')
        use iso_c_binding
        implicit none
        
@@ -430,11 +430,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
        
-     end function masa_eval_3d_v_exact
+     end function masa_eval_3d_exact_v
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_w_exact(value,value2,value3) bind (C,name='cmasa_eval_3d_w_exact')
+     real (c_double) function masa_eval_3d_exact_w(value,value2,value3) bind (C,name='cmasa_eval_3d_exact_w')
        use iso_c_binding
        implicit none
        
@@ -442,11 +442,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
        
-     end function masa_eval_3d_w_exact
+     end function masa_eval_3d_exact_w
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_p_exact(value,value2,value3) bind (C,name='cmasa_eval_3d_p_exact')
+     real (c_double) function masa_eval_3d_exact_p(value,value2,value3) bind (C,name='cmasa_eval_3d_exact_p')
        use iso_c_binding
        implicit none
        
@@ -454,11 +454,11 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
        
-     end function masa_eval_3d_p_exact
+     end function masa_eval_3d_exact_p
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_rho_exact(value,value2,value3) bind (C,name='cmasa_eval_3d_rho_exact')
+     real (c_double) function masa_eval_3d_exact_rho(value,value2,value3) bind (C,name='cmasa_eval_3d_exact_rho')
        use iso_c_binding
        implicit none
        
@@ -466,7 +466,7 @@ module masa
        real (c_double), value :: value2
        real (c_double), value :: value3       
        
-     end function masa_eval_3d_rho_exact
+     end function masa_eval_3d_exact_rho
   end interface
 
   ! ---------------------------------
@@ -474,33 +474,33 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_1d_grad_u(value) bind (C,name='cmasa_eval_1d_grad_u')
+     real (c_double) function masa_eval_grad_1d_u(value) bind (C,name='cmasa_eval_grad_1d_u')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_grad_u
+     end function masa_eval_grad_1d_u
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_grad_p(value) bind (C,name='cmasa_eval_1d_grad_p')
+     real (c_double) function masa_eval_grad_1d_p(value) bind (C,name='cmasa_eval_grad_1d_p')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_grad_p
+     end function masa_eval_grad_1d_p
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_grad_rho(value) bind (C,name='cmasa_eval_1d_grad_rho')
+     real (c_double) function masa_eval_grad_1d_rho(value) bind (C,name='cmasa_eval_grad_1d_rho')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_grad_rho
+     end function masa_eval_grad_1d_rho
   end interface
 
   ! ---------------------------------
@@ -508,7 +508,7 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_2d_grad_u(value,value2,it) bind (C,name='cmasa_eval_2d_grad_u')
+     real (c_double) function masa_eval_grad_2d_u(value,value2,it) bind (C,name='cmasa_eval_grad_2d_u')
        use iso_c_binding
        implicit none
        
@@ -516,11 +516,11 @@ module masa
        real    (c_double), value :: value2
        integer (c_int),    value :: it
        
-     end function masa_eval_2d_grad_u
+     end function masa_eval_grad_2d_u
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_grad_v(value,value2,it) bind (C,name='cmasa_eval_2d_grad_v')
+     real (c_double) function masa_eval_grad_2d_v(value,value2,it) bind (C,name='cmasa_eval_grad_2d_v')
        use iso_c_binding
        implicit none
        
@@ -528,11 +528,11 @@ module masa
        real    (c_double), value :: value2
        integer (c_int),    value :: it
        
-     end function masa_eval_2d_grad_v
+     end function masa_eval_grad_2d_v
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_grad_w(value,value2,it) bind (C,name='cmasa_eval_2d_grad_w')
+     real (c_double) function masa_eval_grad_2d_w(value,value2,it) bind (C,name='cmasa_eval_grad_2d_w')
        use iso_c_binding
        implicit none
        
@@ -540,11 +540,11 @@ module masa
        real    (c_double), value :: value2
        integer (c_int),    value :: it
        
-     end function masa_eval_2d_grad_w
+     end function masa_eval_grad_2d_w
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_grad_p(value,value2,it) bind (C,name='cmasa_eval_2d_grad_p')
+     real (c_double) function masa_eval_grad_2d_p(value,value2,it) bind (C,name='cmasa_eval_grad_2d_p')
        use iso_c_binding
        implicit none
        
@@ -552,11 +552,11 @@ module masa
        real    (c_double), value :: value2
        integer (c_int),    value :: it
        
-     end function masa_eval_2d_grad_p
+     end function masa_eval_grad_2d_p
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_grad_rho(value,value2,it) bind (C,name='cmasa_eval_2d_grad_rho')
+     real (c_double) function masa_eval_grad_2d_rho(value,value2,it) bind (C,name='cmasa_eval_grad_2d_rho')
        use iso_c_binding
        implicit none
        
@@ -564,7 +564,7 @@ module masa
        real    (c_double), value :: value2
        integer (c_int),    value :: it
        
-     end function masa_eval_2d_grad_rho
+     end function masa_eval_grad_2d_rho
   end interface
 
   ! ---------------------------------
@@ -572,7 +572,7 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_3d_grad_u(value,value2,value3,it) bind (C,name='cmasa_eval_3d_grad_u')
+     real (c_double) function masa_eval_grad_3d_u(value,value2,value3,it) bind (C,name='cmasa_eval_grad_3d_u')
        use iso_c_binding
        implicit none
        
@@ -581,11 +581,11 @@ module masa
        real    (c_double), value :: value3
        integer (c_int),    value :: it
        
-     end function masa_eval_3d_grad_u
+     end function masa_eval_grad_3d_u
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_grad_v(value,value2,value3,it) bind (C,name='cmasa_eval_3d_grad_v')
+     real (c_double) function masa_eval_grad_3d_v(value,value2,value3,it) bind (C,name='cmasa_eval_grad_3d_v')
        use iso_c_binding
        implicit none
        
@@ -594,11 +594,11 @@ module masa
        real    (c_double), value :: value3
        integer (c_int),    value :: it
        
-     end function masa_eval_3d_grad_v
+     end function masa_eval_grad_3d_v
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_grad_w(value,value2,value3,it) bind (C,name='cmasa_eval_3d_grad_w')
+     real (c_double) function masa_eval_grad_3d_w(value,value2,value3,it) bind (C,name='cmasa_eval_grad_3d_w')
        use iso_c_binding
        implicit none
        
@@ -607,11 +607,11 @@ module masa
        real    (c_double), value :: value3
        integer (c_int),    value :: it
        
-     end function masa_eval_3d_grad_w
+     end function masa_eval_grad_3d_w
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_grad_p(value,value2,value3,it) bind (C,name='cmasa_eval_3d_grad_p')
+     real (c_double) function masa_eval_grad_3d_p(value,value2,value3,it) bind (C,name='cmasa_eval_grad_3d_p')
        use iso_c_binding
        implicit none
        
@@ -620,11 +620,11 @@ module masa
        real    (c_double), value :: value3
        integer (c_int),    value :: it
        
-     end function masa_eval_3d_grad_p
+     end function masa_eval_grad_3d_p
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_grad_rho(value,value2,value3,it) bind (C,name='cmasa_eval_3d_grad_rho')
+     real (c_double) function masa_eval_grad_3d_rho(value,value2,value3,it) bind (C,name='cmasa_eval_grad_3d_rho')
        use iso_c_binding
        implicit none
        
@@ -633,7 +633,7 @@ module masa
        real    (c_double), value :: value3
        integer (c_int),    value :: it
        
-     end function masa_eval_3d_grad_rho
+     end function masa_eval_grad_3d_rho
   end interface
   
 contains 

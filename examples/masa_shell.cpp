@@ -118,7 +118,7 @@ void masa_shell_choose_solution()
 	      cout << "\nplease input x location: \n";
 	      cin >> x;
 	      
-	      field = masa_eval_t_source<Scalar>(x);
+	      field = masa_eval_source_t<Scalar>(x);
 	      cout << "source term is:" << field;
 	      break;
 
@@ -129,7 +129,7 @@ void masa_shell_choose_solution()
 	      cout << "\nplease input y location: \n";
 	      cin >> y;
 
-	      field = masa_eval_u_source<Scalar>(x,y);
+	      field = masa_eval_source_u<Scalar>(x,y);
 	      cout << "source term is:" << field;
 	      break;
 
@@ -143,7 +143,7 @@ void masa_shell_choose_solution()
 	      cout << "\nplease input z location: \n";
 	      cin >> z;
 
-	      field = masa_eval_u_source<Scalar>(x,y,z);
+	      field = masa_eval_source_u<Scalar>(x,y,z);
 	      cout << "source term is:" << field << endl << endl;
 	      break;
 	      

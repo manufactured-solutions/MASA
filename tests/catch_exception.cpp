@@ -52,7 +52,7 @@ int main()
   // verify_pointer_sanity
   try
     {
-      masa_eval_t_source<double>(1.0);
+      masa_eval_source_t<double>(1.0);
     }
   catch(int err) // return one on fatal error
     {

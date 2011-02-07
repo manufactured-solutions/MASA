@@ -134,17 +134,17 @@ Scalar MASA::rans_sa<Scalar>::eval_q_v(Scalar eta)
 template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::eval_exact_u(Scalar eta)
 {
-  Scalar u_exact;
-  u_exact = u(eta);
-  return u_exact;
+  Scalar exact_u;
+  exact_u = u(eta);
+  return exact_u;
 }
 
 template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::eval_exact_v(Scalar eta)
 {
-  Scalar v_exact;
-  v_exact = nu(eta);
-  return v_exact;
+  Scalar exact_v;
+  exact_v = nu(eta);
+  return exact_v;
 
 }
 

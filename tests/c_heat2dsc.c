@@ -44,11 +44,11 @@ double SourceQ_t(double x,double y,double A_x,double B_y,double k_0)
   return Q_T;
 }
 
-double Source_t_exact(double x,double y,double A_x,double B_y)
+double Source_exact_t(double x,double y,double A_x,double B_y)
 {
-  double T_exact;
-  T_exact = cos(A_x * x) * cos(B_y * y);
-  return T_exact;
+  double exact_t;
+  exact_t = cos(A_x * x) * cos(B_y * y);
+  return exact_t;
 }
 
 int main()
@@ -57,7 +57,7 @@ int main()
   int j;
 
   double tfield,tfield2,tfield3;
-  double t_exact,t_exact2,t_exact3;
+  double exact_t,exact_t2,exact_t3;
   double x;
   double y;
   double z;
@@ -94,26 +94,26 @@ int main()
       y=j*dy;
       
       //evalulate source terms
-      tfield = cmasa_eval_2d_t_source(x,y);
+      tfield = cmasa_eval_2d_source_t(x,y);
       
       //evaluate analytical terms
-      t_exact   = cmasa_eval_2d_t_exact(x,y);
+      exact_t   = cmasa_eval_2d_exact_t(x,y);
 	
       // get fundamental source term solution
       tfield2   = SourceQ_t(x,y,A_x,B_y,k_0);
-      t_exact2     = Source_t_exact(x,y,A_x,B_y);
+      exact_t2     = Source_exact_t(x,y,A_x,B_y);
 
       // test the result is roughly zero
       // choose between abs and rel error
 #ifdef MASA_STRICT_REGRESSION
 
       tfield3 = fabs(tfield-tfield2);
-      t_exact3   = fabs(t_exact-t_exact2);
+      exact_t3   = fabs(exact_t-exact_t2);
 
 #else
 
       tfield3 = fabs(tfield-tfield2)/fabs(tfield2);
-      t_exact3   = fabs(t_exact-t_exact2)/fabs(tfield2);
+      exact_t3   = fabs(exact_t-exact_t2)/fabs(tfield2);
 
 #endif
 
@@ -128,13 +128,13 @@ int main()
 	    exit(1);
 	  }
 
-	if(t_exact3 > threshold)
+	if(exact_t3 > threshold)
 	  {
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Heat Equation Steady-2d\n");
 	    printf("U Field Analytical Term\n");
-	    printf("Threshold Exceeded: %g\n",t_exact3);
-	    printf("CMASA:              %5.16f\n",t_exact);
-	    printf("Maple:              %5.16f\n",t_exact2);
+	    printf("Threshold Exceeded: %g\n",exact_t3);
+	    printf("CMASA:              %5.16f\n",exact_t);
+	    printf("Maple:              %5.16f\n",exact_t2);
 	    printf("@ x,y:              %5.16f %5.16f\n",x,y);
 	    exit(1);
 	  }

@@ -57,26 +57,26 @@ Real nancheck(Real x)
 
 Real anQ_p(Real r,Real z,Real p_0,Real p_1,Real rho_0,Real rho_1,Real u_1,Real w_0,Real w_1,Real a_pr,Real a_pz,Real a_rhor,Real a_rhoz,Real a_ur,Real a_uz,Real a_wr,Real a_wz,Real pi,Real L,Real Gamma,Real mu)
 {
-  Real p_exact = p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L);
-  return p_exact;
+  Real exact_p = p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L);
+  return exact_p;
 }
   
 Real anQ_u (Real r,Real z,Real p_0,Real p_1,Real rho_0,Real rho_1,Real u_1,Real w_0,Real w_1,Real a_pr,Real a_pz,Real a_rhor,Real a_rhoz,Real a_ur,Real a_uz,Real a_wr,Real a_wz,Real pi,Real L,Real Gamma,Real mu)
 {
-  Real u_exact = u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_uz * pi * z / L);
-  return u_exact;
+  Real exact_u = u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_uz * pi * z / L);
+  return exact_u;
 } 
  
 Real anQ_w (Real r,Real z,Real w_0,Real w_1,Real a_wr,Real a_wz,Real pi,Real L)
 {
-  Real w_exact = w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L);
-  return w_exact;
+  Real exact_w = w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L);
+  return exact_w;
 }
 
 Real anQ_rho (Real r,Real z,Real p_0,Real p_1,Real rho_0,Real rho_1,Real u_1,Real w_0,Real w_1,Real a_pr,Real a_pz,Real a_rhor,Real a_rhoz,Real a_ur,Real a_uz,Real a_wr,Real a_wz,Real pi,Real L,Real Gamma,Real mu)
 { 
-  Real rho_exact = rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L);
-  return rho_exact;
+  Real exact_rho = rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L);
+  return exact_rho;
 }
 
 // ----------------------------------------
@@ -142,11 +142,11 @@ int main()
   Real efield,efield2,efield3;
   Real rho,rho2,rho3;
 
-  Real u_exact,u_exact2,u_exact3;
-  Real v_exact,v_exact2,v_exact3;
-  Real w_exact,w_exact2,w_exact3;
-  Real p_exact,p_exact2,p_exact3;
-  Real rho_exact,rho_exact2,rho_exact3;
+  Real exact_u,exact_u2,exact_u3;
+  Real exact_v,exact_v2,exact_v3;
+  Real exact_w,exact_w2,exact_w3;
+  Real exact_p,exact_p2,exact_p3;
+  Real exact_rho,exact_rho2,exact_rho3;
 
   // initalize
   int nx = 115;  // number of points
@@ -200,16 +200,16 @@ int main()
 	z=j*dy;
 	
 	//evalulate source terms
-	ufield = masa_eval_u_source<Real>  (r,z);
-	wfield = masa_eval_w_source<Real>  (r,z);
-	efield = masa_eval_e_source<Real>  (r,z);
-	rho     = masa_eval_rho_source<Real>(r,z);
+	ufield = masa_eval_source_u<Real>  (r,z);
+	wfield = masa_eval_source_w<Real>  (r,z);
+	efield = masa_eval_source_e<Real>  (r,z);
+	rho     = masa_eval_source_rho<Real>(r,z);
 
 	//evaluate analytical terms
-	u_exact = masa_eval_u_exact<Real>        (r,z);
-	w_exact = masa_eval_w_exact<Real>        (r,z);
-	p_exact = masa_eval_p_exact<Real>        (r,z);
-	rho_exact = masa_eval_rho_exact<Real>    (r,z);
+	exact_u = masa_eval_exact_u<Real>        (r,z);
+	exact_w = masa_eval_exact_w<Real>        (r,z);
+	exact_p = masa_eval_exact_p<Real>        (r,z);
+	exact_rho = masa_eval_exact_rho<Real>    (r,z);
 	  
 	// check against maple
 	ufield2 = SourceQ_u   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma, mu);
@@ -217,10 +217,10 @@ int main()
 	rho2    = SourceQ_rho (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma, mu);
 	efield2 = SourceQ_e   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma, mu,k,R);
 	
-	u_exact2   = anQ_u   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma, mu);
-	w_exact2   = anQ_w   (r, z, w_0, w_1, a_wr, a_wz, pi, L);
-	rho_exact2 = anQ_rho (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma, mu);
-	p_exact2   = anQ_p   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma, mu);
+	exact_u2   = anQ_u   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma, mu);
+	exact_w2   = anQ_w   (r, z, w_0, w_1, a_wr, a_wz, pi, L);
+	exact_rho2 = anQ_rho (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma, mu);
+	exact_p2   = anQ_p   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma, mu);
 
 	// test the result is roughly zero
 	// choose between abs and rel error
@@ -231,10 +231,10 @@ int main()
 	efield3 = fabs(efield-efield2);
 	rho3    = fabs(rho-rho2);
 	
-	u_exact3   = fabs(u_exact-u_exact2);
-	w_exact3  = fabs(w_exact-w_exact2);
-	rho_exact3 = fabs(rho_exact-rho_exact2);
-	p_exact3   = fabs(p_exact-p_exact2);
+	exact_u3   = fabs(exact_u-exact_u2);
+	exact_w3  = fabs(exact_w-exact_w2);
+	exact_rho3 = fabs(exact_rho-exact_rho2);
+	exact_p3   = fabs(exact_p-exact_p2);
 
 #else
 	ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
@@ -242,10 +242,10 @@ int main()
 	efield3 = fabs(efield-efield2)/fabs(efield2);
 	rho3    = fabs(rho-rho2)/fabs(rho2);
 	
-	u_exact3   = fabs(u_exact-u_exact2)/fabs(u_exact2);
-	w_exact3   = fabs(w_exact-w_exact2)/fabs(w_exact2);
-	rho_exact3 = fabs(rho_exact-rho_exact2)/fabs(rho_exact2);
-	p_exact3   = fabs(p_exact-p_exact2)/fabs(p_exact2);
+	exact_u3   = fabs(exact_u-exact_u2)/fabs(exact_u2);
+	exact_w3   = fabs(exact_w-exact_w2)/fabs(exact_w2);
+	exact_rho3 = fabs(exact_rho-exact_rho2)/fabs(exact_rho2);
+	exact_p3   = fabs(exact_p-exact_p2)/fabs(exact_p2);
 #endif
 
 	nancheck(ufield3);
@@ -253,10 +253,10 @@ int main()
 	nancheck(efield3);
 	nancheck(rho3);
 
-	nancheck(u_exact3);
-	nancheck(w_exact3);
-	nancheck(rho_exact3);
-	nancheck(p_exact3);
+	nancheck(exact_u3);
+	nancheck(exact_w3);
+	nancheck(exact_rho3);
+	nancheck(exact_p3);
 
 	if(ufield3 > threshold)
 	  {
@@ -270,11 +270,11 @@ int main()
 	    exit(1);
 	  }
 
-	if(u_exact3 > threshold)
+	if(exact_u3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Navier-Stokes\n";
 	    cout << "U Field Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << u_exact << endl;
+	    cout << "Exceeded Threshold by: " << exact_u << endl;
 	    cout.precision(16);
 	    cout << r << " " << z << endl;
 	    exit(1);
@@ -293,14 +293,14 @@ int main()
 	  }
 
 	// this guy is broken
-	if(w_exact3 > threshold)
+	if(exact_w3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Navier-Stokes\n";
 	    cout << "W Field Analytical Term\n";
 	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << w_exact3 << endl;
-	    cout << "Source term is:        " << w_exact2 << endl;
-	    cout << "MASA term is:          " << w_exact << endl;
+	    cout << "Exceeded Threshold by: " << exact_w3 << endl;
+	    cout << "Source term is:        " << exact_w2 << endl;
+	    cout << "MASA term is:          " << exact_w << endl;
 	    cout << r << " " << z << endl;
 	    exit(1);
 	  }
@@ -317,12 +317,12 @@ int main()
 	    exit(1);
 	  }
 
-	if(p_exact3 > threshold)
+	if(exact_p3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Navier-Stokes\n";
 	    cout << "P Field Analytical Term\n";
 	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << p_exact << endl;
+	    cout << "Exceeded Threshold by: " << exact_p << endl;
 	    cout << r << " " << z << endl;
 	    exit(1);
 	  }
@@ -337,12 +337,12 @@ int main()
 	    exit(1);
 	  }
 
-	if(rho_exact3 > threshold)
+	if(exact_rho3 > threshold)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Navier-Stokes\n";
 	    cout.precision(16);
 	    cout << "RHO Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << rho_exact << endl;
+	    cout << "Exceeded Threshold by: " << exact_rho << endl;
 	    cout << r << " " << z << endl;
 	    exit(1);
 	  }

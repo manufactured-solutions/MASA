@@ -55,24 +55,24 @@ template<typename Scalar>
 Scalar anQ_p (Scalar x,Scalar p_0,Scalar p_x,Scalar a_px,Scalar L)
 {
   Scalar pi = acos(-1);
-  Scalar p_exact = p_0 + p_x * cos(a_px * pi * x / L);
-  return p_exact;
+  Scalar exact_p = p_0 + p_x * cos(a_px * pi * x / L);
+  return exact_p;
 }
   
 template<typename Scalar>
 Scalar anQ_u (Scalar x,Scalar u_0,Scalar u_x,Scalar a_ux,Scalar L)
 {
   Scalar pi = acos(-1);
-  Scalar u_exact = u_0 + u_x * sin(a_ux * pi * x / L);
-  return u_exact;
+  Scalar exact_u = u_0 + u_x * sin(a_ux * pi * x / L);
+  return exact_u;
 } 
  
 template<typename Scalar>
 Scalar anQ_rho (Scalar x,Scalar rho_0,Scalar rho_x,Scalar a_rhox,Scalar L)
 { 
   Scalar pi = acos(-1);
-  Scalar rho_exact = rho_0 + rho_x * sin(a_rhox * pi * x / L);
-  return rho_exact;
+  Scalar exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L);
+  return exact_rho;
 }
 
 template<typename Scalar>
@@ -193,9 +193,9 @@ int run_regression()
   Scalar rho,rho2,rho3;
   Scalar gradx,grady,gradz,gradp,gradrho;
 
-  Scalar u_exact,u_exact2,u_exact3;
-  Scalar p_exact,p_exact2,p_exact3;
-  Scalar rho_exact,rho_exact2,rho_exact3;
+  Scalar exact_u,exact_u2,exact_u3;
+  Scalar exact_p,exact_p2,exact_p3;
+  Scalar exact_rho,exact_rho2,exact_rho3;
 
   // initalize
   masa_init<Scalar>("euler-test","euler_1d");
@@ -230,28 +230,28 @@ int run_regression()
       x=i*dx;
       	
       //evalulate source terms
-      ufield = masa_eval_u_source  <Scalar>(x);
-      efield = masa_eval_e_source  <Scalar>(x);
-      rho    = masa_eval_rho_source<Scalar>(x);
+      ufield = masa_eval_source_u  <Scalar>(x);
+      efield = masa_eval_source_e  <Scalar>(x);
+      rho    = masa_eval_source_rho<Scalar>(x);
       
       //evaluate analytical terms
-      u_exact = masa_eval_u_exact        <Scalar>(x);
-      p_exact = masa_eval_p_exact        <Scalar>(x);
-      rho_exact = masa_eval_rho_exact    <Scalar>(x);
+      exact_u = masa_eval_exact_u        <Scalar>(x);
+      exact_p = masa_eval_exact_p        <Scalar>(x);
+      exact_rho = masa_eval_exact_rho    <Scalar>(x);
 
       // eval gradient terms
-      gradx   = masa_eval_1d_grad_u  (x);
-      gradp   = masa_eval_1d_grad_p  (x);
-      gradrho = masa_eval_1d_grad_rho(x);
+      gradx   = masa_eval_grad_1d_u  (x);
+      gradp   = masa_eval_grad_1d_p  (x);
+      gradrho = masa_eval_grad_1d_rho(x);
 
       // get fundamental source term solution
       ufield2   = SourceQ_u  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
       rho2      = SourceQ_rho(x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
       efield2   = SourceQ_e  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,Gamma,mu,L);
   
-      u_exact2   = anQ_u   (x,u_0,u_x,a_ux,L);
-      rho_exact2 = anQ_rho (x,rho_0,rho_x,a_rhox,L);
-      p_exact2   = anQ_p   (x,p_0,p_x,a_px,L);
+      exact_u2   = anQ_u   (x,u_0,u_x,a_ux,L);
+      exact_rho2 = anQ_rho (x,rho_0,rho_x,a_rhox,L);
+      exact_p2   = anQ_p   (x,p_0,p_x,a_px,L);
 
       // test the result is roughly zero
       // choose between abs and rel error
@@ -261,9 +261,9 @@ int run_regression()
       efield3 = fabs(efield-efield2);
       rho3    = fabs(rho-rho2);
 
-      u_exact3   = fabs(u_exact-u_exact2);
-      rho_exact3 = fabs(rho_exact-rho_exact2);
-      p_exact3   = fabs(p_exact-p_exact2);
+      exact_u3   = fabs(exact_u-exact_u2);
+      exact_rho3 = fabs(exact_rho-exact_rho2);
+      exact_p3   = fabs(exact_p-exact_p2);
 
 #else
 
@@ -271,9 +271,9 @@ int run_regression()
       efield3 = fabs(efield-efield2)/fabs(efield2);
       rho3    = fabs(rho-rho2)/fabs(rho2);
 
-      u_exact3   = fabs(u_exact-u_exact2)/fabs(u_exact2);
-      rho_exact3 = fabs(rho_exact-rho_exact2)/fabs(rho_exact2);
-      p_exact3   = fabs(p_exact-p_exact2)/fabs(p_exact2);
+      exact_u3   = fabs(exact_u-exact_u2)/fabs(exact_u2);
+      exact_rho3 = fabs(exact_rho-exact_rho2)/fabs(exact_rho2);
+      exact_p3   = fabs(exact_p-exact_p2)/fabs(exact_p2);
 
 #endif
 
@@ -281,9 +281,9 @@ int run_regression()
       nancheck(efield3);
       nancheck(rho3);
       
-      nancheck(u_exact3);
-      nancheck(rho_exact3);
-      nancheck(p_exact3);
+      nancheck(exact_u3);
+      nancheck(exact_rho3);
+      nancheck(exact_p3);
       
       if(ufield3 > threshold)
 	{
@@ -294,11 +294,11 @@ int run_regression()
 	  exit(1);
 	}
 
-      if(u_exact3 > threshold)
+      if(exact_u3 > threshold)
 	{
 	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
 	  cout << "U Field Analytical Term\n";
-	  cout << "Exceeded Threshold by: " << u_exact << endl;
+	  cout << "Exceeded Threshold by: " << exact_u << endl;
 	  cout << x << " " << endl;
 	  exit(1);
 	}
@@ -313,11 +313,11 @@ int run_regression()
 	  exit(1);
 	}
 
-      if(p_exact3 > threshold)
+      if(exact_p3 > threshold)
 	{
 	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
 	  cout << "P Field Analytical Term\n";
-	  cout << "Exceeded Threshold by: " << p_exact << endl;
+	  cout << "Exceeded Threshold by: " << exact_p << endl;
 	  cout << x << endl;
 	  exit(1);
 	}
@@ -331,11 +331,11 @@ int run_regression()
 	  exit(1);
 	}
       
-      if(rho_exact3 > threshold)
+      if(exact_rho3 > threshold)
 	{
 	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
 	  cout << "RHO Analytical Term\n";
-	  cout << "Exceeded Threshold by: " << rho_exact << endl;
+	  cout << "Exceeded Threshold by: " << exact_rho << endl;
 	  cout << x << endl;
 	  exit(1);
 	}
@@ -350,7 +350,7 @@ int run_regression()
 	  exit(1);
 	}
 
-      if(0 > rho_exact)
+      if(0 > exact_rho)
 	{
 	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
    	  cout << "Initial Variables are returning non-physical results!\n";
@@ -358,7 +358,7 @@ int run_regression()
 	  exit(1);
 	}
 
-      if(0 > p_exact)
+      if(0 > exact_p)
 	{
 	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
    	  cout << "Initial Variables are returning non-physical results!\n";

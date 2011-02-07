@@ -42,7 +42,7 @@ program main
   print*,'Updated L = ',value
 
   ! evaluate at a particular point
-  out = masa_eval_2d_u_source(value,value)
+  out = masa_eval_2d_source_u(value,value)
   write(6,*) "value is: ", out 
 
   stop

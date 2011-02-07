@@ -64,13 +64,13 @@ int main()
   // lets manipulate the alice set
   masa_select_mms<Scalar>("alice");
   masa_display_param<Scalar>();
-  solution = masa_eval_t_source<Scalar>(1.2);
+  solution = masa_eval_source_t<Scalar>(1.2);
   cout << solution << endl;
 
   // now switch to and edit bob
   masa_select_mms<Scalar>("bob");
   masa_display_param<Scalar>();
-  solution = masa_eval_u_source<Scalar>(1,1);
+  solution = masa_eval_source_u<Scalar>(1,1);
   cout << solution << endl;
 
 }

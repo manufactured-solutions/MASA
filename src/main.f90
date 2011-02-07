@@ -27,7 +27,7 @@ program main
 
   print*,'Updated L = ',value
 
-  out = masa_eval_1d_u_source(value)
+  out = masa_eval_1d_source_u(value)
   write(6,*) "value is: ", out 
 
   stop

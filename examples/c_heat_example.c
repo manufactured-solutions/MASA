@@ -70,12 +70,12 @@ int main()
 
   //check all initialized properly
   cmasa_sanity_check();
-  sol = cmasa_eval_1d_t_source(x);
+  sol = cmasa_eval_1d_source_t(x);
   printf("\nt source: %g\n",sol);
   
   cmasa_select_mms("bob");
   cmasa_display_param();
-  sol = cmasa_eval_1d_t_source(x2);
+  sol = cmasa_eval_1d_source_t(x2);
   printf("\nt source: %g\n",sol);
   return 0; // done
 }

@@ -44,11 +44,11 @@ program main
   real(8) ::efield,efield2,efield3
   real(8) ::rho,rho2,rho3
 
-  real(8) ::u_exact,u_exact2,u_exact3
-  real(8) ::v_exact,v_exact2,v_exact3
-  real(8) ::w_exact,w_exact2,w_exact3
-  real(8) ::p_exact,p_exact2,p_exact3
-  real(8) ::rho_exact,rho_exact2,rho_exact3
+  real(8) ::exact_u,exact_u2,exact_u3
+  real(8) ::exact_v,exact_v2,exact_v3
+  real(8) ::exact_w,exact_w2,exact_w3
+  real(8) ::exact_p,exact_p2,exact_p3
+  real(8) ::exact_rho,exact_rho2,exact_rho3
 
   real(8) ::u_gradx,u_gradx2,u_gradx3
   real(8) ::u_grady,u_grady2,u_grady3
@@ -205,70 +205,70 @@ program main
            z = k * dz    
            
            ! evalulate source terms
-           ufield = masa_eval_3d_u_source  (x,y,z)
-           vfield = masa_eval_3d_v_source  (x,y,z)
-           wfield = masa_eval_3d_w_source  (x,y,z)
-           efield = masa_eval_3d_e_source  (x,y,z)
-           rho    = masa_eval_3d_rho_source(x,y,z)
+           ufield = masa_eval_3d_source_u  (x,y,z)
+           vfield = masa_eval_3d_source_v  (x,y,z)
+           wfield = masa_eval_3d_source_w  (x,y,z)
+           efield = masa_eval_3d_source_e  (x,y,z)
+           rho    = masa_eval_3d_source_rho(x,y,z)
 
            !evaluate analytical terms
-           u_exact = masa_eval_3d_u_exact        (x,y,z)
-           v_exact = masa_eval_3d_v_exact        (x,y,z)
-           w_exact = masa_eval_3d_w_exact        (x,y,z)
-           p_exact = masa_eval_3d_p_exact        (x,y,z)
-           rho_exact = masa_eval_3d_rho_exact    (x,y,z)
+           exact_u = masa_eval_3d_exact_u        (x,y,z)
+           exact_v = masa_eval_3d_exact_v        (x,y,z)
+           exact_w = masa_eval_3d_exact_w        (x,y,z)
+           exact_p = masa_eval_3d_exact_p        (x,y,z)
+           exact_rho = masa_eval_3d_exact_rho    (x,y,z)
 
            ! check gradient bindings here
-           u_gradx = masa_eval_3d_grad_u(x,y,z,1)
-           u_grady = masa_eval_3d_grad_u(x,y,z,2)
-           u_gradz = masa_eval_3d_grad_u(x,y,z,3)
+           u_gradx = masa_eval_grad_3d_u(x,y,z,1)
+           u_grady = masa_eval_grad_3d_u(x,y,z,2)
+           u_gradz = masa_eval_grad_3d_u(x,y,z,3)
 
-           v_gradx = masa_eval_3d_grad_v(x,y,z,1)
-           v_grady = masa_eval_3d_grad_v(x,y,z,2)
-           v_gradz = masa_eval_3d_grad_v(x,y,z,3)
+           v_gradx = masa_eval_grad_3d_v(x,y,z,1)
+           v_grady = masa_eval_grad_3d_v(x,y,z,2)
+           v_gradz = masa_eval_grad_3d_v(x,y,z,3)
 
-           w_gradx = masa_eval_3d_grad_w(x,y,z,1)
-           w_grady = masa_eval_3d_grad_w(x,y,z,2)
-           w_gradz = masa_eval_3d_grad_w(x,y,z,3)
+           w_gradx = masa_eval_grad_3d_w(x,y,z,1)
+           w_grady = masa_eval_grad_3d_w(x,y,z,2)
+           w_gradz = masa_eval_grad_3d_w(x,y,z,3)
  
-           p_gradx = masa_eval_3d_grad_p(x,y,z,1)
-           p_grady = masa_eval_3d_grad_p(x,y,z,2)
-           p_gradz = masa_eval_3d_grad_p(x,y,z,3)
+           p_gradx = masa_eval_grad_3d_p(x,y,z,1)
+           p_grady = masa_eval_grad_3d_p(x,y,z,2)
+           p_gradz = masa_eval_grad_3d_p(x,y,z,3)
  
-           rho_gradx = masa_eval_3d_grad_rho(x,y,z,1)
-           rho_grady = masa_eval_3d_grad_rho(x,y,z,2)
-           rho_gradz = masa_eval_3d_grad_rho(x,y,z,3) 
+           rho_gradx = masa_eval_grad_3d_rho(x,y,z,1)
+           rho_grady = masa_eval_grad_3d_rho(x,y,z,2)
+           rho_gradz = masa_eval_grad_3d_rho(x,y,z,3) 
 
            ! check against maple
-           ufield2 = eval_3d_u_source  (x,y,z,u_0,u_x,u_y,u_z,v_0,&
+           ufield2 = eval_3d_source_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,&
                 v_x,v_y,v_z,w_0,w_x,w_y,w_z, &
                 rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z, &
                 a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,&
                 a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,&
                 mu,L,R,k2)
 
-           vfield2 = eval_3d_v_source  (x,y,z,u_0,u_x,u_y,u_z,v_0,&
+           vfield2 = eval_3d_source_v  (x,y,z,u_0,u_x,u_y,u_z,v_0,&
                 v_x,v_y,v_z,w_0,w_x,w_y,w_z, &
                 rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z, &
                 a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,&
                 a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,&
                 mu,L,R,k2)
 
-           wfield2 = eval_3d_w_source  (x,y,z,u_0,u_x,u_y,u_z,v_0,&
+           wfield2 = eval_3d_source_w  (x,y,z,u_0,u_x,u_y,u_z,v_0,&
                 v_x,v_y,v_z,w_0,w_x,w_y,w_z, &
                 rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z, &
                 a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,&
                 a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,&
                 mu,L,R,k2)
 
-           rho2    = eval_3d_rho_source(x,y,z,u_0,u_x,u_y,u_z,v_0,&
+           rho2    = eval_3d_source_rho(x,y,z,u_0,u_x,u_y,u_z,v_0,&
                 v_x,v_y,v_z,w_0,w_x,w_y,w_z, &
                 rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z, &
                 a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,&
                 a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,&
                 a_wz,mu,L,R,k2)
 
-           efield2 = eval_3d_e_source  (x,y,z,u_0,u_x,u_y,u_z,v_0,&
+           efield2 = eval_3d_source_e  (x,y,z,u_0,u_x,u_y,u_z,v_0,&
                 v_x,v_y, &
                 v_z,w_0,w_x,w_y,w_z, &
                 rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z, &
@@ -279,11 +279,11 @@ program main
            ! gradients
 
            ! analytical terms
-           u_exact2   = eval_3d_u_exact  (x,y,z,u_0,u_x,u_y,u_z,a_ux,a_uy,a_uz,L)
-           v_exact2   = eval_3d_v_exact  (x,y,z,v_0,v_x,v_y,v_z,a_vx,a_vy,a_vz,L)
-           w_exact2   = eval_3d_w_exact  (x,y,z,w_0,w_x,w_y,w_z,a_wx,a_wy,a_wz,L)
-           rho_exact2 = eval_3d_rho_exact(x,y,z,rho_0,rho_x,rho_y,rho_z,a_rhox,a_rhoy,a_rhoz,L)
-           p_exact2   = eval_3d_p_exact  (x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L)
+           exact_u2   = eval_3d_exact_u  (x,y,z,u_0,u_x,u_y,u_z,a_ux,a_uy,a_uz,L)
+           exact_v2   = eval_3d_exact_v  (x,y,z,v_0,v_x,v_y,v_z,a_vx,a_vy,a_vz,L)
+           exact_w2   = eval_3d_exact_w  (x,y,z,w_0,w_x,w_y,w_z,a_wx,a_wy,a_wz,L)
+           exact_rho2 = eval_3d_exact_rho(x,y,z,rho_0,rho_x,rho_y,rho_z,a_rhox,a_rhoy,a_rhoz,L)
+           exact_p2   = eval_3d_exact_p  (x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L)
 
 
 #ifdef MASA_STRICT_REGRESSION
@@ -316,11 +316,11 @@ program main
            rho_gradz3 = abs(rho_gradz-rho_gradz2)
 
            ! analytical 
-           u_exact3   = abs(u_exact-u_exact2)
-           v_exact3   = abs(v_exact-v_exact2)
-           w_exact3   = abs(w_exact-w_exact2)
-           rho_exact3 = abs(rho_exact-rho_exact2)
-           p_exact3   = abs(p_exact-p_exact2)
+           exact_u3   = abs(exact_u-exact_u2)
+           exact_v3   = abs(exact_v-exact_v2)
+           exact_w3   = abs(exact_w-exact_w2)
+           exact_rho3 = abs(exact_rho-exact_rho2)
+           exact_p3   = abs(exact_p-exact_p2)
 
 #else
            ! source terms
@@ -352,11 +352,11 @@ program main
            !rho_gradz3 = abs(rho_gradz-rho_gradz2)/abs(rho_gradz2)
 
            ! analytical 
-           u_exact3   = abs(u_exact-u_exact2)/abs(u_exact2)
-           v_exact3   = abs(v_exact-v_exact2)/abs(v_exact2)
-           w_exact3   = abs(w_exact-w_exact2)/abs(w_exact2)
-           rho_exact3 = abs(rho_exact-rho_exact2)/abs(rho_exact2)
-           p_exact3   = abs(p_exact-p_exact2)/abs(p_exact2)
+           exact_u3   = abs(exact_u-exact_u2)/abs(exact_u2)
+           exact_v3   = abs(exact_v-exact_v2)/abs(exact_v2)
+           exact_w3   = abs(exact_w-exact_w2)/abs(exact_w2)
+           exact_rho3 = abs(exact_rho-exact_rho2)/abs(exact_rho2)
+           exact_p3   = abs(exact_p-exact_p2)/abs(exact_p2)
         
 #endif 
            ! -----------------------------------------------
@@ -499,31 +499,31 @@ program main
            ! analytical terms now
            ! -----------------------------------------------
 
-           if(u_exact3 .gt. thresh) then
+           if(exact_u3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "U an"
               call exit(1)
            endif
 
-           if(v_exact3 .gt. thresh) then
+           if(exact_v3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "V an"
               call exit(1)
            endif
 
-           if(w_exact3 .gt. thresh) then
+           if(exact_w3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "W an"
               call exit(1)
            endif
 
-           if(p_exact3 .gt. thresh) then
+           if(exact_p3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "P an"
               call exit(1)
            endif
 
-           if(rho_exact3 .gt. thresh) then
+           if(exact_rho3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: compressible navier stokes-3d"
               write(6,*) "Rho an"
               call exit(1)

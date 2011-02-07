@@ -43,10 +43,10 @@ program main
   real(8) :: efield,efield2,efield3
   real(8) :: rho,rho2,rho3
 
-  real(8) :: u_exact,u_exact2,u_exact3
-  real(8) :: v_exact,v_exact2,v_exact3
-  real(8) :: p_exact,p_exact2,p_exact3
-  real(8) :: rho_exact,rho_exact2,rho_exact3
+  real(8) :: exact_u,exact_u2,exact_u3
+  real(8) :: exact_v,exact_v2,exact_v3
+  real(8) :: exact_p,exact_p2,exact_p3
+  real(8) :: exact_rho,exact_rho2,exact_rho3
 
   ! variables 
   real(8) :: u_0
@@ -148,19 +148,19 @@ program main
         y = j * dy
                
         ! evalulate source terms
-        ufield = masa_eval_2d_u_source  (x,y)
-	vfield = masa_eval_2d_v_source  (x,y)
-        efield = masa_eval_2d_e_source  (x,y)
-        rho    = masa_eval_2d_rho_source(x,y)
+        ufield = masa_eval_2d_source_u  (x,y)
+	vfield = masa_eval_2d_source_v  (x,y)
+        efield = masa_eval_2d_source_e  (x,y)
+        rho    = masa_eval_2d_source_rho(x,y)
 	
 	!evaluate analytical terms
-	u_exact = masa_eval_2d_u_exact        (x,y)
-	v_exact = masa_eval_2d_v_exact        (x,y)
-	p_exact = masa_eval_2d_p_exact        (x,y)
-	rho_exact = masa_eval_2d_rho_exact    (x,y)
+	exact_u = masa_eval_2d_exact_u        (x,y)
+	exact_v = masa_eval_2d_exact_v        (x,y)
+	exact_p = masa_eval_2d_exact_p        (x,y)
+	exact_rho = masa_eval_2d_exact_rho    (x,y)
  
         ! check against maple
-        ufield2 = eval_2d_u_source(x,y,&
+        ufield2 = eval_2d_source_u(x,y,&
              u_0,u_x,u_y,v_0,v_x,v_y,&
              rho_0,rho_x,rho_y,&
              p_0,p_x,p_y,a_px,a_py,&
@@ -168,7 +168,7 @@ program main
              a_ux,a_uy,a_vx,a_vy,&
              mu,L,R,K)
         
-	vfield2 = eval_2d_v_source(x,y, &
+	vfield2 = eval_2d_source_v(x,y, &
              u_0,u_x,u_y,v_0,v_x,v_y, &
              rho_0,rho_x,rho_y, &
              p_0,p_x,p_y,a_px,a_py, &
@@ -176,24 +176,24 @@ program main
              a_ux,a_uy,a_vx,a_vy,&
              mu,L,R,K)
  
-        rho2 = eval_2d_rho_source(x,y,&
+        rho2 = eval_2d_source_rho(x,y,&
              u_0,u_x,u_y,v_0,v_x,v_y, &
              rho_0,rho_x,rho_y, &
              p_0,p_x,p_y,a_px,a_py, &
              a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy, &
              mu,L,R,K)
  
-        efield2 = eval_2d_e_source  (x,y, &
+        efield2 = eval_2d_source_e  (x,y, &
              u_0,u_x,u_y,v_0,v_x,v_y, &
              rho_0,rho_x,rho_y, &
              p_0,p_x,p_y,a_px,a_py, &
              a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma, &
              mu,L,R,K)
 
-        u_exact2   = eval_2d_u_exact  (x,y,u_0,u_x,u_y,a_ux,a_uy,L)
-        v_exact2   = eval_2d_v_exact  (x,y,v_0,v_x,v_y,a_vx,a_vy,L)
-        rho_exact2 = eval_2d_rho_exact(x,y,rho_0,rho_x,rho_y,a_rhox,a_rhoy,L)
-        p_exact2   = eval_2d_p_exact  (x,y,p_0,p_x,p_y,a_px,a_py,L)
+        exact_u2   = eval_2d_exact_u  (x,y,u_0,u_x,u_y,a_ux,a_uy,L)
+        exact_v2   = eval_2d_exact_v  (x,y,v_0,v_x,v_y,a_vx,a_vy,L)
+        exact_rho2 = eval_2d_exact_rho(x,y,rho_0,rho_x,rho_y,a_rhox,a_rhoy,L)
+        exact_p2   = eval_2d_exact_p  (x,y,p_0,p_x,p_y,a_px,a_py,L)
 
 #ifdef MASA_STRICT_REGRESSION
         ufield3 = abs(ufield-ufield2)
@@ -201,10 +201,10 @@ program main
         efield3 = abs(efield-efield2)
         rho3    = abs(rho-rho2)
         
-        u_exact3   = abs(u_exact-u_exact2)
-	v_exact3   = abs(v_exact-v_exact2)
-        rho_exact3 = abs(rho_exact-rho_exact2)
-        p_exact3   = abs(p_exact-p_exact2)
+        exact_u3   = abs(exact_u-exact_u2)
+	exact_v3   = abs(exact_v-exact_v2)
+        exact_rho3 = abs(exact_rho-exact_rho2)
+        exact_p3   = abs(exact_p-exact_p2)
         
 #else
 
@@ -213,10 +213,10 @@ program main
         efield3 = abs(efield-efield2)/abs(efield2)
         rho3    = abs(rho-rho2)/abs(rho2)
         
-        u_exact3   = abs(u_exact-u_exact2)/abs(u_exact2)
-        v_exact3   = abs(v_exact-v_exact2)/abs(v_exact2)
-        rho_exact3 = abs(rho_exact-rho_exact2)/abs(rho_exact2)
-        p_exact3   = abs(p_exact-p_exact2)/abs(p_exact2)
+        exact_u3   = abs(exact_u-exact_u2)/abs(exact_u2)
+        exact_v3   = abs(exact_v-exact_v2)/abs(exact_v2)
+        exact_rho3 = abs(exact_rho-exact_rho2)/abs(exact_rho2)
+        exact_p3   = abs(exact_p-exact_p2)/abs(exact_p2)
         
 #endif 
  
@@ -254,25 +254,25 @@ program main
         endif
 
         ! analytical terms now
-        if(u_exact3 .gt. thresh) then
+        if(exact_u3 .gt. thresh) then
            write(6,*) "FortMASA FATAL ERROR: Navier-Stokes-2d"
            write(6,*) "U an"
            call exit(1)
         endif
 
-        if(v_exact3 .gt. thresh) then
+        if(exact_v3 .gt. thresh) then
            write(6,*) "FortMASA FATAL ERROR: Navier-Stokes-2d"
            write(6,*) "V an"
            call exit(1)
         endif
 
-        if(p_exact3 .gt. thresh) then
+        if(exact_p3 .gt. thresh) then
            write(6,*) "FortMASA FATAL ERROR: Navier-Stokes-2d"
            write(6,*) "P an"
            call exit(1)
         endif
 
-        if(rho_exact3 .gt. thresh) then
+        if(exact_rho3 .gt. thresh) then
            write(6,*) "FortMASA FATAL ERROR: Navier-Stokes-2d"
            write(6,*) "Rho an"
            call exit(1)

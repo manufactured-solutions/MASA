@@ -48,7 +48,7 @@ int main()
 
   //check all initialized properly
   cmasa_sanity_check();
-  sol=cmasa_eval_1d_u_source(1.2);
+  sol=cmasa_eval_1d_source_u(1.2);
   printf("\nt source: %g\n",sol);
 
   return 0; // done

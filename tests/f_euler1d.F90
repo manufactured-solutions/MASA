@@ -42,10 +42,10 @@ program main
   real(8) ::efield,efield2,efield3
   real(8) ::rho,rho2,rho3
 
-  real(8) ::u_exact,u_exact2,u_exact3
-  real(8) ::v_exact,v_exact2,v_exact3
-  real(8) ::p_exact,p_exact2,p_exact3
-  real(8) ::rho_exact,rho_exact2,rho_exact3
+  real(8) ::exact_u,exact_u2,exact_u3
+  real(8) ::exact_v,exact_v2,exact_v3
+  real(8) ::exact_p,exact_p2,exact_p3
+  real(8) ::exact_rho,exact_rho2,exact_rho3
 
   ! variables 
   real(8) :: u_0
@@ -126,33 +126,33 @@ program main
      x = i * dx
 
      ! evalulate source terms
-     ufield = masa_eval_1d_u_source  (x)
-     efield = masa_eval_1d_e_source  (x)
-     rho    = masa_eval_1d_rho_source(x)
+     ufield = masa_eval_1d_source_u  (x)
+     efield = masa_eval_1d_source_e  (x)
+     rho    = masa_eval_1d_source_rho(x)
 
      !evaluate analytical terms
-     u_exact = masa_eval_1d_u_exact        (x)
-     p_exact = masa_eval_1d_p_exact        (x)
-     rho_exact = masa_eval_1d_rho_exact    (x)
+     exact_u = masa_eval_1d_exact_u        (x)
+     exact_p = masa_eval_1d_exact_p        (x)
+     exact_rho = masa_eval_1d_exact_rho    (x)
 
      ! hacking at this source
      ! check against maple
-     ufield2 = eval_1d_u_source  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L)
-     rho2    = eval_1d_rho_source(x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L)
-     efield2 = eval_1d_e_source  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,Gamma,mu,L)
+     ufield2 = eval_1d_source_u  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L)
+     rho2    = eval_1d_source_rho(x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L)
+     efield2 = eval_1d_source_e  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,Gamma,mu,L)
 
-     u_exact2   = eval_1d_u_exact  (x,u_0,u_x,a_ux,L)
-     rho_exact2 = eval_1d_rho_exact(x,rho_0,rho_x,a_rhox,L)
-     p_exact2   = eval_1d_p_exact  (x,p_0,p_x,a_px,L)
+     exact_u2   = eval_1d_exact_u  (x,u_0,u_x,a_ux,L)
+     exact_rho2 = eval_1d_exact_rho(x,rho_0,rho_x,a_rhox,L)
+     exact_p2   = eval_1d_exact_p  (x,p_0,p_x,a_px,L)
 
 #ifdef MASA_STRICT_REGRESSION
      ufield3 = abs(ufield-ufield2)
      efield3 = abs(efield-efield2)
      rho3    = abs(rho-rho2)
 
-     u_exact3   = abs(u_exact-u_exact2)
-     rho_exact3 = abs(rho_exact-rho_exact2)
-     p_exact3   = abs(p_exact-p_exact2)
+     exact_u3   = abs(exact_u-exact_u2)
+     exact_rho3 = abs(exact_rho-exact_rho2)
+     exact_p3   = abs(exact_p-exact_p2)
 
 #else
 
@@ -160,9 +160,9 @@ program main
      efield3 = abs(efield-efield2)/abs(efield2)
      rho3    = abs(rho-rho2)/abs(rho2)
 
-     u_exact3   = abs(u_exact-u_exact2)/abs(u_exact2)
-     rho_exact3 = abs(rho_exact-rho_exact2)/abs(rho_exact2)
-     p_exact3   = abs(p_exact-p_exact2)/abs(p_exact2)
+     exact_u3   = abs(exact_u-exact_u2)/abs(exact_u2)
+     exact_rho3 = abs(exact_rho-exact_rho2)/abs(exact_rho2)
+     exact_p3   = abs(exact_p-exact_p2)/abs(exact_p2)
 
 #endif
 
@@ -194,19 +194,19 @@ program main
      endif
 
      ! analytical terms now
-     if(u_exact3 .gt. thresh) then
+     if(exact_u3 .gt. thresh) then
         write(6,*) "FortMASA FATAL ERROR: euler-1d"
         write(6,*) "U an"
         call exit(1)
      endif
 
-     if(p_exact3 .gt. thresh) then
+     if(exact_p3 .gt. thresh) then
         write(6,*) "FortMASA FATAL ERROR: euler-1d"
         write(6,*) "P an"
         call exit(1)
      endif
 
-     if(rho_exact3 .gt. thresh) then
+     if(exact_rho3 .gt. thresh) then
         write(6,*) "FortMASA FATAL ERROR: euler-1d"
         write(6,*) "Rho an"
         call exit(1)

@@ -44,40 +44,40 @@ template<typename Scalar>
 Scalar anQ_p (Scalar x,Scalar y,Scalar z,Scalar p_0,Scalar p_x,Scalar p_y,Scalar p_z,Scalar a_px,Scalar a_py,Scalar a_pz,Scalar L)
 {
   const Scalar pi = acos(-1);
-  Scalar p_exact = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_z * cos(a_pz * pi * z / L);
-  return p_exact;
+  Scalar exact_p = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_z * cos(a_pz * pi * z / L);
+  return exact_p;
 }
  
 template<typename Scalar>
 Scalar anQ_u (Scalar x,Scalar y,Scalar z,Scalar u_0,Scalar u_x,Scalar u_y,Scalar u_z,Scalar a_ux,Scalar a_uy,Scalar a_uz,Scalar L)
 {
   const Scalar pi = acos(-1);
-  Scalar u_exact = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_z * cos(a_uz * pi * z / L);  
-  return u_exact;
+  Scalar exact_u = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_z * cos(a_uz * pi * z / L);  
+  return exact_u;
 } 
  
 template<typename Scalar>
 Scalar anQ_v (Scalar x,Scalar y,Scalar z,Scalar v_0,Scalar v_x,Scalar v_y,Scalar v_z,Scalar a_vx,Scalar a_vy,Scalar a_vz,Scalar L)
 {
   const Scalar pi = acos(-1);
-  Scalar v_exact = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_z * sin(a_vz * pi * z / L);
-  return v_exact;
+  Scalar exact_v = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_z * sin(a_vz * pi * z / L);
+  return exact_v;
 }
 
 template<typename Scalar>
 Scalar anQ_w (Scalar x,Scalar y,Scalar z,Scalar w_0,Scalar w_x,Scalar w_y,Scalar w_z,Scalar a_wx,Scalar a_wy,Scalar a_wz,Scalar L)
 {
   const Scalar pi = acos(-1);
-  Scalar w_exact = w_0 + w_x * sin(a_wx * pi * x / L) + w_y * sin(a_wy * pi * y / L) + w_z * cos(a_wz * pi * z / L);
-  return w_exact;
+  Scalar exact_w = w_0 + w_x * sin(a_wx * pi * x / L) + w_y * sin(a_wy * pi * y / L) + w_z * cos(a_wz * pi * z / L);
+  return exact_w;
 }
 
 template<typename Scalar>
 Scalar anQ_rho (Scalar x,Scalar y,Scalar z,Scalar rho_0,Scalar rho_x,Scalar rho_y,Scalar rho_z,Scalar a_rhox,Scalar a_rhoy,Scalar a_rhoz,Scalar L)
 { 
   const Scalar pi = acos(-1);
-  Scalar rho_exact = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_z * sin(a_rhoz * pi * z / L);
-  return rho_exact;
+  Scalar exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_z * sin(a_rhoz * pi * z / L);
+  return exact_rho;
 }
 
 template<typename Scalar>
@@ -397,11 +397,11 @@ int run_regression()
   Scalar efield,efield2,efield3;
   Scalar rho,rho2,rho3;
 
-  Scalar u_exact,u_exact2,u_exact3;
-  Scalar v_exact,v_exact2,v_exact3;
-  Scalar w_exact,w_exact2,w_exact3;
-  Scalar p_exact,p_exact2,p_exact3;
-  Scalar rho_exact,rho_exact2,rho_exact3;
+  Scalar exact_u,exact_u2,exact_u3;
+  Scalar exact_v,exact_v2,exact_v3;
+  Scalar exact_w,exact_w2,exact_w3;
+  Scalar exact_p,exact_p2,exact_p3;
+  Scalar exact_rho,exact_rho2,exact_rho3;
 
   // initalize
   int nx = 20;             // number of points
@@ -489,18 +489,18 @@ int run_regression()
 	  z=k*dz;
 
 	  // evalulate source terms
-	  ufield = masa_eval_u_source  <Scalar>(x,y,z);
-	  vfield = masa_eval_v_source  <Scalar>(x,y,z);
-	  wfield = masa_eval_w_source  <Scalar>(x,y,z);
-	  efield = masa_eval_e_source  <Scalar>(x,y,z);
-	  rho    = masa_eval_rho_source<Scalar>(x,y,z);
+	  ufield = masa_eval_source_u  <Scalar>(x,y,z);
+	  vfield = masa_eval_source_v  <Scalar>(x,y,z);
+	  wfield = masa_eval_source_w  <Scalar>(x,y,z);
+	  efield = masa_eval_source_e  <Scalar>(x,y,z);
+	  rho    = masa_eval_source_rho<Scalar>(x,y,z);
 	  
 	  // evaluate analytical terms
-	  u_exact = masa_eval_u_exact        <Scalar>(x,y,z);
-	  v_exact = masa_eval_v_exact        <Scalar>(x,y,z);
-	  w_exact = masa_eval_w_exact        <Scalar>(x,y,z);
-	  p_exact = masa_eval_p_exact        <Scalar>(x,y,z);
-	  rho_exact = masa_eval_rho_exact    <Scalar>(x,y,z);
+	  exact_u = masa_eval_exact_u        <Scalar>(x,y,z);
+	  exact_v = masa_eval_exact_v        <Scalar>(x,y,z);
+	  exact_w = masa_eval_exact_w        <Scalar>(x,y,z);
+	  exact_p = masa_eval_exact_p        <Scalar>(x,y,z);
+	  exact_rho = masa_eval_exact_rho    <Scalar>(x,y,z);
 
 	  // check against maple output
 	  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
@@ -509,11 +509,11 @@ int run_regression()
 	  rho2      = SourceQ_rho(x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
 	  efield2   = SourceQ_e  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,Gamma,L,R,K);
 
-	  u_exact2     = anQ_u   (x,y,z,u_0,u_x,u_y,u_z,a_ux,a_uy,a_uz,L);
-	  v_exact2     = anQ_v   (x,y,z,v_0,v_x,v_y,v_z,a_vx,a_vy,a_vz,L);
-	  w_exact2     = anQ_w   (x,y,z,w_0,w_x,w_y,w_z,a_wx,a_wy,a_wz,L);
-	  rho_exact2   = anQ_rho (x,y,z,rho_0,rho_x,rho_y,rho_z,a_rhox,a_rhoy,a_rhoz,L);
-	  p_exact2     = anQ_p   (x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L);
+	  exact_u2     = anQ_u   (x,y,z,u_0,u_x,u_y,u_z,a_ux,a_uy,a_uz,L);
+	  exact_v2     = anQ_v   (x,y,z,v_0,v_x,v_y,v_z,a_vx,a_vy,a_vz,L);
+	  exact_w2     = anQ_w   (x,y,z,w_0,w_x,w_y,w_z,a_wx,a_wy,a_wz,L);
+	  exact_rho2   = anQ_rho (x,y,z,rho_0,rho_x,rho_y,rho_z,a_rhox,a_rhoy,a_rhoz,L);
+	  exact_p2     = anQ_p   (x,y,z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,L);
 
 	  // test the result is roughly zero
 	  // choose between abs and rel error
@@ -525,11 +525,11 @@ int run_regression()
 	  efield3 = fabs(efield-efield2);
 	  rho3    = fabs(rho-rho2);
 
-	  u_exact3   = fabs(u_exact-u_exact2);
-	  v_exact3   = fabs(v_exact-v_exact2);
-	  w_exact3   = fabs(w_exact-w_exact2);
-	  rho_exact3 = fabs(rho_exact-rho_exact2);
-	  p_exact3   = fabs(p_exact-p_exact2);
+	  exact_u3   = fabs(exact_u-exact_u2);
+	  exact_v3   = fabs(exact_v-exact_v2);
+	  exact_w3   = fabs(exact_w-exact_w2);
+	  exact_rho3 = fabs(exact_rho-exact_rho2);
+	  exact_p3   = fabs(exact_p-exact_p2);
 
 #else
 	  ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
@@ -537,11 +537,11 @@ int run_regression()
 	  wfield3 = fabs(wfield-wfield2)/fabs(wfield2);
 	  efield3 = fabs(efield-efield2)/fabs(efield2);
 	  rho3    = fabs(rho-rho2)/fabs(rho2);
-	  u_exact3   = fabs(u_exact-u_exact2)/fabs(u_exact2);
-	  v_exact3   = fabs(v_exact-v_exact2)/fabs(v_exact2);
-	  w_exact3   = fabs(w_exact-w_exact2)/fabs(w_exact2);
-	  rho_exact3 = fabs(rho_exact-rho_exact2)/fabs(rho_exact2);
-	  p_exact3   = fabs(p_exact-p_exact2)/fabs(p_exact2);
+	  exact_u3   = fabs(exact_u-exact_u2)/fabs(exact_u2);
+	  exact_v3   = fabs(exact_v-exact_v2)/fabs(exact_v2);
+	  exact_w3   = fabs(exact_w-exact_w2)/fabs(exact_w2);
+	  exact_rho3 = fabs(exact_rho-exact_rho2)/fabs(exact_rho2);
+	  exact_p3   = fabs(exact_p-exact_p2)/fabs(exact_p2);
 #endif
 
 	  if(ufield3 > threshold)
@@ -553,11 +553,11 @@ int run_regression()
 	      exit(1);
 	    }
 
-	  if(u_exact3 > threshold)
+	  if(exact_u3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "U Field Analytical Term\n";
-	      cout << "Exceeded Threshold by: " << u_exact3 << endl;
+	      cout << "Exceeded Threshold by: " << exact_u3 << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
@@ -571,11 +571,11 @@ int run_regression()
 	      exit(1);
 	    }
 	  
-	  if(v_exact3 > threshold)
+	  if(exact_v3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "V Field Analytical Term\n";
-	      cout << "Exceeded Threshold by: " << v_exact3 << endl;
+	      cout << "Exceeded Threshold by: " << exact_v3 << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
@@ -589,11 +589,11 @@ int run_regression()
 	      exit(1);
 	    }
 	  
-	  if(w_exact3 > threshold)
+	  if(exact_w3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "W Field Analytical Term\n";
-	      cout << "Exceeded Threshold by: " << w_exact3 << endl;
+	      cout << "Exceeded Threshold by: " << exact_w3 << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
@@ -610,11 +610,11 @@ int run_regression()
 	      exit(1);
 	    }
 
-	  if(p_exact3 > threshold)
+	  if(exact_p3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "P Field Analytical Term\n";
-	      cout << "Exceeded Threshold by: " << p_exact3 << endl;
+	      cout << "Exceeded Threshold by: " << exact_p3 << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
@@ -628,11 +628,11 @@ int run_regression()
 	      exit(1);
 	    }
 
-	  if(rho_exact3 > threshold)
+	  if(exact_rho3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "RHO Analytical Term\n";
-	      cout << "Exceeded Threshold by: " << rho_exact3 << endl;
+	      cout << "Exceeded Threshold by: " << exact_rho3 << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
@@ -657,7 +657,7 @@ int run_regression()
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes (Physical) 3d\n";
 	      cout << "Realizability constrait violated for: Pressure\n";
-	      cout << "Pressure is: " << p_exact << endl;
+	      cout << "Pressure is: " << exact_p << endl;
 	    }*/
 	  
 	} // done iterating

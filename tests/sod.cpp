@@ -65,8 +65,8 @@ int run_regression()
 	x=i*dx;
 	t=j*dt;
 	
-	out = masa_eval_rho_source  <Scalar>(x,t);
-	out = masa_eval_rho_u_source<Scalar>(x,t);
+	out = masa_eval_source_rho  <Scalar>(x,t);
+	out = masa_eval_source_rho_u<Scalar>(x,t);
 	//out = masa_eval_p_source    <Scalar>(x,t);
       } //done iterating
 
@@ -76,8 +76,8 @@ int run_regression()
   // test rarefaction wave before origin
   x = -1;
   t =  1;
-  out = masa_eval_rho_source<Scalar>(x,t);
-  out = masa_eval_rho_u_source<Scalar>(x,t);
+  out = masa_eval_source_rho<Scalar>(x,t);
+  out = masa_eval_source_rho_u<Scalar>(x,t);
 
   // touching sod error condition if root not bracketed in rtbis
   x = 1;
@@ -85,7 +85,7 @@ int run_regression()
 
   // nonphysical gamma, but useful to test coverage in rtbis
   masa_set_param<Scalar>("Gamma",-1.0);
-  out = masa_eval_rho_source<Scalar>(x,t);
+  out = masa_eval_source_rho<Scalar>(x,t);
 
 #ifdef MASA_EXCEPTIONS
   
@@ -98,7 +98,7 @@ int run_regression()
 
   try
     {
-      out = masa_eval_t_source<Scalar>(x);
+      out = masa_eval_source_t<Scalar>(x);
     }
   catch(int err) // return one on fatal error
     {
@@ -111,7 +111,7 @@ int run_regression()
 
   try
     {
-      out = masa_eval_t_source<Scalar>(x,t);
+      out = masa_eval_source_t<Scalar>(x,t);
     }
   catch(int err) // return one on fatal error
     {

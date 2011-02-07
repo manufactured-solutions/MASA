@@ -105,11 +105,11 @@ int main()
   Real efield,efield2,efield3;
   Real rho,rho2,rho3;
 
-  Real u_exact,u_exact2,u_exact3;
-  Real v_exact,v_exact2,v_exact3;
-  Real w_exact,w_exact2,w_exact3;
-  Real p_exact,p_exact2,p_exact3;
-  Real rho_exact,rho_exact2,rho_exact3;
+  Real exact_u,exact_u2,exact_u3;
+  Real exact_v,exact_v2,exact_v3;
+  Real exact_w,exact_w2,exact_w3;
+  Real exact_p,exact_p2,exact_p3;
+  Real exact_rho,exact_rho2,exact_rho3;
 
   // initalize
   int nx = 20;             // number of points
@@ -240,31 +240,31 @@ int main()
 	  masa_select_mms<Real>("ns3d");
 
 	  // evalulate source terms
-	  ufield = masa_eval_u_source  <Real>(x,y,z);
-	  vfield = masa_eval_v_source  <Real>(x,y,z);
-	  efield = masa_eval_e_source  <Real>(x,y,z);
-	  rho    = masa_eval_rho_source<Real>(x,y,z);
+	  ufield = masa_eval_source_u  <Real>(x,y,z);
+	  vfield = masa_eval_source_v  <Real>(x,y,z);
+	  efield = masa_eval_source_e  <Real>(x,y,z);
+	  rho    = masa_eval_source_rho<Real>(x,y,z);
 	  
 	  // evaluate analytical terms
-	  u_exact = masa_eval_u_exact        <Real>(x,y,z);
-	  v_exact = masa_eval_v_exact        <Real>(x,y,z);
-	  p_exact = masa_eval_p_exact        <Real>(x,y,z);
-	  rho_exact = masa_eval_rho_exact    <Real>(x,y,z);
+	  exact_u = masa_eval_exact_u        <Real>(x,y,z);
+	  exact_v = masa_eval_exact_v        <Real>(x,y,z);
+	  exact_p = masa_eval_exact_p        <Real>(x,y,z);
+	  exact_rho = masa_eval_exact_rho    <Real>(x,y,z);
 
 	  // now switch to 2D and do the same
 	  masa_select_mms<Real>("ns2d");
 
 	  // evalulate source terms
-	  ufield2 = masa_eval_u_source  <Real>(x,y);
-	  vfield2 = masa_eval_v_source  <Real>(x,y);
-	  efield2 = masa_eval_e_source  <Real>(x,y);
-	  rho2    = masa_eval_rho_source<Real>(x,y);
+	  ufield2 = masa_eval_source_u  <Real>(x,y);
+	  vfield2 = masa_eval_source_v  <Real>(x,y);
+	  efield2 = masa_eval_source_e  <Real>(x,y);
+	  rho2    = masa_eval_source_rho<Real>(x,y);
 
 	  // evaluate analytical terms
-	  u_exact2   = masa_eval_u_exact      <Real>(x,y);
-	  v_exact2   = masa_eval_v_exact      <Real>(x,y);
-	  p_exact2   = masa_eval_p_exact      <Real>(x,y);
-	  rho_exact2 = masa_eval_rho_exact    <Real>(x,y);
+	  exact_u2   = masa_eval_exact_u      <Real>(x,y);
+	  exact_v2   = masa_eval_exact_v      <Real>(x,y);
+	  exact_p2   = masa_eval_exact_p      <Real>(x,y);
+	  exact_rho2 = masa_eval_exact_rho    <Real>(x,y);
 
 #ifdef MASA_STRICT_REGRESSION
 
@@ -273,10 +273,10 @@ int main()
 	  efield3 = std::abs(efield-efield2);
 	  rho3    = std::abs(rho-rho2);
 
-	  u_exact3   = std::abs(u_exact-u_exact2);
-	  v_exact3   = std::abs(v_exact-v_exact2);
-	  rho_exact3 = std::abs(rho_exact-rho_exact2);
-	  p_exact3   = std::abs(p_exact-p_exact2);
+	  exact_u3   = std::abs(exact_u-exact_u2);
+	  exact_v3   = std::abs(exact_v-exact_v2);
+	  exact_rho3 = std::abs(exact_rho-exact_rho2);
+	  exact_p3   = std::abs(exact_p-exact_p2);
 
 #else
 	  ufield3 = std::abs(ufield-ufield2)/std::abs(ufield2);
@@ -284,10 +284,10 @@ int main()
 	  efield3 = std::abs(efield-efield2)/std::abs(efield2);
 	  rho3    = std::abs(rho-rho2)/std::abs(rho2);
 
-	  u_exact3   = std::abs(u_exact-u_exact2)/std::abs(u_exact2);
-	  v_exact3   = std::abs(v_exact-v_exact2)/std::abs(v_exact2);
-	  rho_exact3 = std::abs(rho_exact-rho_exact2)/std::abs(rho_exact2);
-	  p_exact3   = std::abs(p_exact-p_exact2)/std::abs(p_exact2);
+	  exact_u3   = std::abs(exact_u-exact_u2)/std::abs(exact_u2);
+	  exact_v3   = std::abs(exact_v-exact_v2)/std::abs(exact_v2);
+	  exact_rho3 = std::abs(exact_rho-exact_rho2)/std::abs(exact_rho2);
+	  exact_p3   = std::abs(exact_p-exact_p2)/std::abs(exact_p2);
 #endif
 
 	  if(ufield3 > threshold)
@@ -299,11 +299,11 @@ int main()
 	      exit(1);
 	    }
 
-	  if(u_exact3 > threshold)
+	  if(exact_u3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
 	      cout << "U Field Analytical Term\n";
-	      cout << "Exceeded Threshold by: " << u_exact << endl;
+	      cout << "Exceeded Threshold by: " << exact_u << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
@@ -317,11 +317,11 @@ int main()
 	      exit(1);
 	    }
 	  
-	  if(v_exact3 > threshold)
+	  if(exact_v3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
 	      cout << "V Field Analytical Term\n";
-	      cout << "Exceeded Threshold by: " << v_exact << endl;
+	      cout << "Exceeded Threshold by: " << exact_v << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
@@ -338,11 +338,11 @@ int main()
 	      exit(1);
 	    }
 
-	  if(p_exact3 > threshold)
+	  if(exact_p3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
 	      cout << "P Field Analytical Term\n";
-	      cout << "Exceeded Threshold by: " << p_exact << endl;
+	      cout << "Exceeded Threshold by: " << exact_p << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }
@@ -356,11 +356,11 @@ int main()
 	      exit(1);
 	    }
 
-	  if(rho_exact3 > threshold)
+	  if(exact_rho3 > threshold)
 	    {
 	      cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 3d\n";
 	      cout << "RHO Analytical Term\n";
-	      cout << "Exceeded Threshold by: " << rho_exact << endl;
+	      cout << "Exceeded Threshold by: " << exact_rho << endl;
 	      cout << x << " " << y << " " << z << endl;
 	      exit(1);
 	    }

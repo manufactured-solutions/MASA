@@ -196,7 +196,7 @@ int main()
   masa_sanity_check<double>();
 
   finite_diff(10,2);
-  masa_eval_t_source<double>  (tempx,&tfield);
+  masa_eval_source_t<double>  (tempx,&tfield);
   
   finite_diff(20,2);
 

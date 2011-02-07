@@ -30,14 +30,14 @@
 #include <math.h>
 #include <stdio.h>
 
-double eval_1d_t_exact_(double x,double A_x)
+double eval_1d_exact_t_(double x,double A_x)
 {  
-  double T_exact;
-  T_exact = cos(A_x * x);
-  return T_exact;
+  double exact_t;
+  exact_t = cos(A_x * x);
+  return exact_t;
 }
  
-double eval_1d_t_source_(double x, double A_x, double k_0)
+double eval_1d_source_t_(double x, double A_x, double k_0)
 {
   double Q_T = A_x * A_x * k_0 * cos(A_x * x);
   return Q_T;
@@ -52,14 +52,14 @@ double eval_1d_t_source_(double x, double A_x, double k_0)
 //--------------------------------------------------------------------------
 
   
-double eval_2d_t_exact_(double x,double y,double A_x,double B_y)
+double eval_2d_exact_t_(double x,double y,double A_x,double B_y)
 {
-  double T_exact;
-  T_exact = cos(A_x * x) * cos(B_y * y);
-  return T_exact;
+  double exact_t;
+  exact_t = cos(A_x * x) * cos(B_y * y);
+  return exact_t;
 }
 
-double eval_2d_t_source_(
+double eval_2d_source_t_(
   double x,
   double y,
   double A_x,
@@ -78,14 +78,14 @@ double eval_2d_t_source_(
 //
 //--------------------------------------------------------------------------
   
-double eval_3d_t_exact_(double x,double y,double z,double A_x,double B_y,double C_z)
+double eval_3d_exact_t_(double x,double y,double z,double A_x,double B_y,double C_z)
 {
-  double T_exact;
-  T_exact = cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
-  return T_exact;
+  double exact_t;
+  exact_t = cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
+  return exact_t;
 }
 
-double eval_3d_t_source_(
+double eval_3d_source_t_(
   double x,
   double y,
   double z,

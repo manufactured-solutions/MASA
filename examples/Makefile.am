@@ -46,10 +46,12 @@ example_DATA                += c_heat_example.c c_euler_example.c
 #    Fortran
 # ----------------- 
 
-f_euler_SOURCES              = f_euler.f90 masa.f90
+f_euler_SOURCES              = f_euler.f90
+f_euler_LDADD                = -lfmasa
 f_euler_LIBTOOLFLAGS         = --tag=FC
 
-f_cns_SOURCES                = f_cns.f90 masa.f90
+f_cns_SOURCES                = f_cns.f90
+f_cns_LDADD                  = -lfmasa
 f_cns_LIBTOOLFLAGS           = --tag=FC
 
 example_DATA                += f_euler.f90

@@ -68,176 +68,176 @@ int main()
   // source term(s) -- 1D
   // --------------------------------
   
-  derr = masa_eval_t_source<Scalar>(x); 
+  derr = masa_eval_source_t<Scalar>(x); 
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_t_source<Scalar>(x,y);
+  derr = masa_eval_source_t<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_u_source<Scalar>(x);
+  derr = masa_eval_source_u<Scalar>(x);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_v_source<Scalar>(x);  
+  derr = masa_eval_source_v<Scalar>(x);  
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_w_source<Scalar>(x);  
+  derr = masa_eval_source_w<Scalar>(x);  
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_e_source<Scalar>(x);
+  derr = masa_eval_source_e<Scalar>(x);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_rho_source<Scalar>(x);
+  derr = masa_eval_source_rho<Scalar>(x);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_rho_u_source<Scalar>(x,y);
+  derr = masa_eval_source_rho_u<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
   
-  derr = masa_eval_t_exact<Scalar>(x); 
+  derr = masa_eval_exact_t<Scalar>(x); 
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_t_exact<Scalar>(x,y);
+  derr = masa_eval_exact_t<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_u_exact<Scalar>(x);
+  derr = masa_eval_exact_u<Scalar>(x);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_v_exact<Scalar>(x);
+  derr = masa_eval_exact_v<Scalar>(x);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_w_exact<Scalar>(x);
+  derr = masa_eval_exact_w<Scalar>(x);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_p_exact<Scalar>(x);
+  derr = masa_eval_exact_p<Scalar>(x);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_rho_exact<Scalar>(x);
+  derr = masa_eval_exact_rho<Scalar>(x);
   if(derr != -1.33) 
     err += 1;  
 
-  derr = masa_eval_1d_grad_u<Scalar>(x);
+  derr = masa_eval_grad_1d_u<Scalar>(x);
   if(derr != -1.33) 
     err += 1;  
 
-  derr = masa_eval_1d_grad_v<Scalar>(x);
+  derr = masa_eval_grad_1d_v<Scalar>(x);
   if(derr != -1.33) 
     err += 1;  
 
-  derr = masa_eval_1d_grad_w<Scalar>(x);
+  derr = masa_eval_grad_1d_w<Scalar>(x);
   if(derr != -1.33) 
     err += 1;  
 
-  derr = masa_eval_1d_grad_p<Scalar>(x);
+  derr = masa_eval_grad_1d_p<Scalar>(x);
   if(derr != -1.33) 
     err += 1;  
 
-  derr = masa_eval_1d_grad_rho<Scalar>(x);
+  derr = masa_eval_grad_1d_rho<Scalar>(x);
   if(derr != -1.33) 
     err += 1;  
   
   // --------------------------------
   // source term(s) -- 2D
   // --------------------------------
-  derr = masa_eval_t_source<Scalar>(x,y,z); 
+  derr = masa_eval_source_t<Scalar>(x,y,z); 
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_u_source<Scalar>(x,y);
+  derr = masa_eval_source_u<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_v_source<Scalar>(x,y);
+  derr = masa_eval_source_v<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_w_source<Scalar>(x,y);
+  derr = masa_eval_source_w<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_e_source<Scalar>(x,y);
+  derr = masa_eval_source_e<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_rho_source<Scalar>(x,y);
+  derr = masa_eval_source_rho<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
   
-  derr = masa_eval_t_exact<Scalar>(x,y,z);
+  derr = masa_eval_exact_t<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_u_exact<Scalar>(x,y);
+  derr = masa_eval_exact_u<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_v_exact<Scalar>(x,y);
+  derr = masa_eval_exact_v<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_w_exact<Scalar>(x,y);
+  derr = masa_eval_exact_w<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_p_exact<Scalar>(x,y);
+  derr = masa_eval_exact_p<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_rho_exact<Scalar>(x,y);
+  derr = masa_eval_exact_rho<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
   
   // gradient terms
 
-  derr = masa_eval_2d_grad_u<Scalar>(x,y,1);
+  derr = masa_eval_grad_2d_u<Scalar>(x,y,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_2d_grad_u<Scalar>(x,y,2);
+  derr = masa_eval_grad_2d_u<Scalar>(x,y,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_2d_grad_v<Scalar>(x,y,1);
+  derr = masa_eval_grad_2d_v<Scalar>(x,y,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_2d_grad_v<Scalar>(x,y,2);
+  derr = masa_eval_grad_2d_v<Scalar>(x,y,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_2d_grad_w<Scalar>(x,y,1);
+  derr = masa_eval_grad_2d_w<Scalar>(x,y,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_2d_grad_w<Scalar>(x,y,2);
+  derr = masa_eval_grad_2d_w<Scalar>(x,y,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_2d_grad_p<Scalar>(x,y,1);
+  derr = masa_eval_grad_2d_p<Scalar>(x,y,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_2d_grad_p<Scalar>(x,y,2);
+  derr = masa_eval_grad_2d_p<Scalar>(x,y,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_2d_grad_rho<Scalar>(x,y,1);
+  derr = masa_eval_grad_2d_rho<Scalar>(x,y,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_2d_grad_rho<Scalar>(x,y,2);
+  derr = masa_eval_grad_2d_rho<Scalar>(x,y,2);
   if(derr != -1.33) 
     err += 1;
 
@@ -245,113 +245,113 @@ int main()
   // source term(s) -- 3D
   // --------------------------------
 
-  derr = masa_eval_t_source<Scalar>(x,y,z,t);
+  derr = masa_eval_source_t<Scalar>(x,y,z,t);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_u_source<Scalar>(x,y,z);
+  derr = masa_eval_source_u<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_v_source<Scalar>(x,y,z);
+  derr = masa_eval_source_v<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_w_source<Scalar>(x,y,z);
+  derr = masa_eval_source_w<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_e_source<Scalar>(x,y,z);
+  derr = masa_eval_source_e<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_rho_source<Scalar>(x,y,z);
+  derr = masa_eval_source_rho<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
   // gradient terms
-  derr = masa_eval_3d_grad_u<Scalar>(x,y,z,1);
+  derr = masa_eval_grad_3d_u<Scalar>(x,y,z,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_3d_grad_u<Scalar>(x,y,z,2);
+  derr = masa_eval_grad_3d_u<Scalar>(x,y,z,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_3d_grad_u<Scalar>(x,y,z,3);
+  derr = masa_eval_grad_3d_u<Scalar>(x,y,z,3);
   if(derr != -1.33) 
     err += 1;
   
-  derr = masa_eval_3d_grad_v<Scalar>(x,y,z,1);
+  derr = masa_eval_grad_3d_v<Scalar>(x,y,z,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_3d_grad_v<Scalar>(x,y,z,2);
+  derr = masa_eval_grad_3d_v<Scalar>(x,y,z,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_3d_grad_v<Scalar>(x,y,z,3);
+  derr = masa_eval_grad_3d_v<Scalar>(x,y,z,3);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_3d_grad_w<Scalar>(x,y,z,1);
+  derr = masa_eval_grad_3d_w<Scalar>(x,y,z,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_3d_grad_w<Scalar>(x,y,z,2);
+  derr = masa_eval_grad_3d_w<Scalar>(x,y,z,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_3d_grad_w<Scalar>(x,y,z,3);
+  derr = masa_eval_grad_3d_w<Scalar>(x,y,z,3);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_3d_grad_p<Scalar>(x,y,z,1);
+  derr = masa_eval_grad_3d_p<Scalar>(x,y,z,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_3d_grad_p<Scalar>(x,y,z,2);
+  derr = masa_eval_grad_3d_p<Scalar>(x,y,z,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_3d_grad_p<Scalar>(x,y,z,3);
+  derr = masa_eval_grad_3d_p<Scalar>(x,y,z,3);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_3d_grad_rho<Scalar>(x,y,z,1);
+  derr = masa_eval_grad_3d_rho<Scalar>(x,y,z,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_3d_grad_rho<Scalar>(x,y,z,2);
+  derr = masa_eval_grad_3d_rho<Scalar>(x,y,z,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_3d_grad_rho<Scalar>(x,y,z,3);
+  derr = masa_eval_grad_3d_rho<Scalar>(x,y,z,3);
   if(derr != -1.33) 
     err += 1;
 
   // done with gradient
-  derr = masa_eval_t_exact<Scalar>(x,y,z,t);
+  derr = masa_eval_exact_t<Scalar>(x,y,z,t);
   if(derr != -1.33) 
   err += 1;
 
-  derr = masa_eval_u_exact<Scalar>(x,y,z);
+  derr = masa_eval_exact_u<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_v_exact<Scalar>(x,y,z);
+  derr = masa_eval_exact_v<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_w_exact<Scalar>(x,y,z);
+  derr = masa_eval_exact_w<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_p_exact<Scalar>(x,y,z);
+  derr = masa_eval_exact_p<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_rho_exact<Scalar>(x,y,z);
+  derr = masa_eval_exact_rho<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 

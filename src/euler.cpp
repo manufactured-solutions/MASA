@@ -184,25 +184,25 @@ Scalar MASA::euler_1d<Scalar>::eval_1d_g_rho(Scalar x)
 template <typename Scalar>
 Scalar MASA::euler_1d<Scalar>::eval_exact_u(Scalar x)
 {
-  Scalar u_exact;
-  u_exact = u_0 + u_x * sin(a_ux * pi * x / L);
-  return u_exact;
+  Scalar exact_u;
+  exact_u = u_0 + u_x * sin(a_ux * pi * x / L);
+  return exact_u;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_1d<Scalar>::eval_exact_p(Scalar x)
 {
-  Scalar p_exact;
-  p_exact = p_0 + p_x * cos(a_px * pi * x / L);
-  return p_exact;
+  Scalar exact_p;
+  exact_p = p_0 + p_x * cos(a_px * pi * x / L);
+  return exact_p;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_1d<Scalar>::eval_exact_rho(Scalar x)
 {
-  Scalar rho_exact;
-  rho_exact = rho_0 + rho_x * sin(a_rhox * pi * x / L);
-  return rho_exact;
+  Scalar exact_rho;
+  exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L);
+  return exact_rho;
 }
 
 
@@ -500,33 +500,33 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_rho(Scalar x,Scalar y, int i)
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_exact_u(Scalar x,Scalar y)
 {
-  Scalar u_exact;
-  u_exact = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L); 
-  return u_exact;
+  Scalar exact_u;
+  exact_u = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L); 
+  return exact_u;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_exact_v(Scalar x,Scalar y)
 {
-  Scalar v_exact;
-  v_exact = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
-  return v_exact;
+  Scalar exact_v;
+  exact_v = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
+  return exact_v;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_exact_p(Scalar x,Scalar y)
 {
-  Scalar p_exact;
-  p_exact = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L);
-  return p_exact;
+  Scalar exact_p;
+  exact_p = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L);
+  return exact_p;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_exact_rho(Scalar x,Scalar y)
 {
-  Scalar rho_exact;
-  rho_exact = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L); 
-  return rho_exact;
+  Scalar exact_rho;
+  exact_rho = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L); 
+  return exact_rho;
 }
 
 /* ------------------------------------------------
@@ -654,7 +654,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_u(Scalar x,Scalar y,Scalar z,int i)
   switch(i)
     {
     case 0:
-      std::cout << "MASA error:: masa_eval_3d_grad_u has no 0th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_u has no 0th component\n";
       std::cout << "Try 1,2 or 3\n";
       break;
       
@@ -671,7 +671,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_u(Scalar x,Scalar y,Scalar z,int i)
       break;
 
     default:
-      std::cout << "MASA error:: masa_eval_3d_grad_u has no " << i << "th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_u has no " << i << "th component\n";
       std::cout << "Try 1 or 2\n";
       break;
 
@@ -691,7 +691,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_v(Scalar x,Scalar y,Scalar z,int i)
   switch(i)
     {
     case 0:
-      std::cout << "MASA error:: masa_eval_3d_grad_v has no 0th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_v has no 0th component\n";
       std::cout << "Try 1,2 or 3\n";
       break;
       
@@ -708,7 +708,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_v(Scalar x,Scalar y,Scalar z,int i)
       break;
 
     default:
-      std::cout << "MASA error:: masa_eval_3d_grad_v has no " << i << "th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_v has no " << i << "th component\n";
       std::cout << "Try 1 or 2\n";
       break;
 
@@ -727,7 +727,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_w(Scalar x,Scalar y,Scalar z,int i)
   switch(i)
     {
     case 0:
-      std::cout << "MASA error:: masa_eval_3d_grad_w has no 0th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_w has no 0th component\n";
       std::cout << "Try 1,2 or 3\n";
       break;
       
@@ -744,7 +744,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_w(Scalar x,Scalar y,Scalar z,int i)
       break;
 
     default:
-      std::cout << "MASA error:: masa_eval_3d_grad_w has no " << i << "th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_w has no " << i << "th component\n";
       std::cout << "Try 1 or 2\n";
       break;
 
@@ -763,7 +763,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_p(Scalar x,Scalar y,Scalar z,int i)
   switch(i)
     {
     case 0:
-      std::cout << "MASA error:: masa_eval_3d_grad_p has no 0th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_p has no 0th component\n";
       std::cout << "Try 1,2 or 3\n";
       break;
       
@@ -780,7 +780,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_p(Scalar x,Scalar y,Scalar z,int i)
       break;
 
     default:
-      std::cout << "MASA error:: masa_eval_3d_grad_p has no " << i << "th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_p has no " << i << "th component\n";
       std::cout << "Try 1 or 2\n";
       break;
 
@@ -799,7 +799,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_rho(Scalar x,Scalar y,Scalar z,int i)
   switch(i)
     {
     case 0:
-      std::cout << "MASA error:: masa_eval_3d_grad_rho has no 0th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_rho has no 0th component\n";
       std::cout << "Try 1,2 or 3\n";
       break;
       
@@ -816,7 +816,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_rho(Scalar x,Scalar y,Scalar z,int i)
       break;
 
     default:
-      std::cout << "MASA error:: masa_eval_3d_grad_rho has no " << i << "th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_rho has no " << i << "th component\n";
       std::cout << "Try 1 or 2\n";
       break;
 
@@ -934,41 +934,41 @@ Scalar MASA::euler_3d<Scalar>::eval_q_rho(Scalar x,Scalar y,Scalar z)
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_exact_u(Scalar x,Scalar y,Scalar z)
 {
-  Scalar u_exact;
-  u_exact = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);
-  return u_exact;
+  Scalar exact_u;
+  exact_u = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);
+  return exact_u;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_exact_v(Scalar x,Scalar y,Scalar z)
 {
-  Scalar v_exact;
-  v_exact = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
-  return v_exact;
+  Scalar exact_v;
+  exact_v = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
+  return exact_v;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_exact_w(Scalar x,Scalar y,Scalar z)
 {
-  Scalar w_exact;
-  w_exact = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);  
-  return w_exact;
+  Scalar exact_w;
+  exact_w = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);  
+  return exact_w;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_exact_p(Scalar x,Scalar y,Scalar z)
 {
-  Scalar p_exact;
-  p_exact = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_z * cos(a_pz * PI * z / L);
-  return p_exact;
+  Scalar exact_p;
+  exact_p = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_z * cos(a_pz * PI * z / L);
+  return exact_p;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_exact_rho(Scalar x,Scalar y,Scalar z)
 {
-  Scalar rho_exact;
-  rho_exact = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L);
-  return rho_exact;
+  Scalar exact_rho;
+  exact_rho = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L);
+  return exact_rho;
 }
 
 // ----------------------------------------

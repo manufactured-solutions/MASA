@@ -37,7 +37,7 @@ program main
 
   ! solutions
   real(8) :: tfield,tfield2,tfield3
-  real(8) :: t_exact,t_exact2,t_exact3
+  real(8) :: exact_t,exact_t2,exact_t3
   ! variables 
   real(8) :: A_x
   real(8) :: B_y
@@ -62,12 +62,12 @@ program main
   real(8) ::  dz
 
   ! external functions
-  real(8) :: eval_1d_t_source
-  real(8) :: eval_1d_t_exact
-  real(8) :: eval_2d_t_source
-  real(8) :: eval_2d_t_exact
-  real(8) :: eval_3d_t_source
-  real(8) :: eval_3d_t_exact
+  real(8) :: eval_1d_source_t
+  real(8) :: eval_1d_exact_t
+  real(8) :: eval_2d_source_t
+  real(8) :: eval_2d_exact_t
+  real(8) :: eval_3d_source_t
+  real(8) :: eval_3d_exact_t
 
   ! initialize the problem
   dx = real(lx)/real(nx)
@@ -95,14 +95,14 @@ program main
 	
      x = i * dx
 
-     tfield = masa_eval_1d_t_source  (x)
-     t_exact   = masa_eval_1d_t_exact      (x)
+     tfield = masa_eval_1d_source_t  (x)
+     exact_t   = masa_eval_1d_exact_t      (x)
 
-     tfield2 = eval_1d_t_source(%val(x),%val(A_x),%val(k_0)) 
-     t_exact2   = eval_1d_t_exact    (%val(x),%val(A_x))
+     tfield2 = eval_1d_source_t(%val(x),%val(A_x),%val(k_0)) 
+     exact_t2   = eval_1d_exact_t    (%val(x),%val(A_x))
 
      tfield3 = abs(tfield-tfield2)
-     t_exact3 = abs(t_exact-t_exact2)
+     exact_t3 = abs(exact_t-exact_t2)
 
      ! just need error checker
      if(tfield3 .gt. thresh) then
@@ -116,7 +116,7 @@ program main
      endif
 
      ! analytical terms now
-     if(t_exact3 .gt. thresh) then
+     if(exact_t3 .gt. thresh) then
         write(6,*) "FortMASA FATAL ERROR: heat-1d"
         write(6,*) "T an"
         call exit(1)
@@ -140,14 +140,14 @@ program main
 	x = i * dx
         y = j * dy
 
-        tfield = masa_eval_2d_t_source  (x,y)
-        t_exact   = masa_eval_2d_t_exact      (x,y)
+        tfield = masa_eval_2d_source_t  (x,y)
+        exact_t   = masa_eval_2d_exact_t      (x,y)
         
-        tfield2 = eval_2d_t_source(%val(x),%val(y),%val(A_x),%val(B_y),%val(k_0)) 
-        t_exact2   = eval_2d_t_exact    (%val(x),%val(y),%val(A_x),%val(B_y))
+        tfield2 = eval_2d_source_t(%val(x),%val(y),%val(A_x),%val(B_y),%val(k_0)) 
+        exact_t2   = eval_2d_exact_t    (%val(x),%val(y),%val(A_x),%val(B_y))
         
         tfield3 = abs(tfield-tfield2)
-        t_exact3 = abs(t_exact-t_exact2)
+        exact_t3 = abs(exact_t-exact_t2)
  
         if(tfield3 .gt. thresh) then
            write(6,*) "FortMASA FATAL ERROR: heat-2d"
@@ -160,7 +160,7 @@ program main
         endif
 
         ! analytical terms now
-        if(t_exact3 .gt. thresh) then
+        if(exact_t3 .gt. thresh) then
            write(6,*) "FortMASA FATAL ERROR: heat-2d"
            write(6,*) "T an"
            write(6,*) "@ x,y:       ",x,y
@@ -189,14 +189,14 @@ program main
            y = j * dy
            z = k * dz
 
-           tfield = masa_eval_3d_t_source  (x,y,z)
-           t_exact   = masa_eval_3d_t_exact      (x,y,z)
+           tfield = masa_eval_3d_source_t  (x,y,z)
+           exact_t   = masa_eval_3d_exact_t      (x,y,z)
 
-           tfield2 = eval_3d_t_source(%val(x),%val(y),%val(z),%val(A_x),%val(B_y),%val(C_z),%val(k_0)) 
-           t_exact2   = eval_3d_t_exact    (%val(x),%val(y),%val(z),%val(A_x),%val(B_y),%val(C_z))
+           tfield2 = eval_3d_source_t(%val(x),%val(y),%val(z),%val(A_x),%val(B_y),%val(C_z),%val(k_0)) 
+           exact_t2   = eval_3d_exact_t    (%val(x),%val(y),%val(z),%val(A_x),%val(B_y),%val(C_z))
 
            tfield3 = abs(tfield-tfield2)
-           t_exact3 = abs(t_exact-t_exact2)
+           exact_t3 = abs(exact_t-exact_t2)
 
            if(tfield3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: heat-3d"
@@ -209,7 +209,7 @@ program main
            endif
 
            ! analytical terms now
-           if(t_exact3 .gt. thresh) then
+           if(exact_t3 .gt. thresh) then
               write(6,*) "FortMASA FATAL ERROR: heat-3d"
               write(6,*) "T an"
               write(6,*) "@ x,y,z:     ",x,y,z

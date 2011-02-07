@@ -292,33 +292,33 @@ Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_rho(Scalar x,Scalar
 template <typename Scalar>
 Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_exact_u(Scalar x,Scalar y)
 {
-  Scalar u_exact;
-  u_exact = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
-  return u_exact;
+  Scalar exact_u;
+  exact_u = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  return exact_u;
 }
 
 template <typename Scalar>
 Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_exact_v(Scalar x,Scalar y)
 {
-  Scalar v_exact;
-  v_exact = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
-  return v_exact;
+  Scalar exact_v;
+  exact_v = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  return exact_v;
 }
 
 template <typename Scalar>
 Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_exact_p(Scalar x,Scalar y)
 {
-  Scalar p_exact;
-  p_exact = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
-  return p_exact;
+  Scalar exact_p;
+  exact_p = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
+  return exact_p;
 }
 
 template <typename Scalar>
 Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_exact_rho(Scalar x,Scalar y)
 {
-  Scalar rho_exact;
-  rho_exact = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
-  return rho_exact;
+  Scalar exact_rho;
+  exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
+  return exact_rho;
 }
 
 /* ------------------------------------------------
@@ -517,7 +517,7 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_u(Scalar x,Scalar y
   switch(i)
     {
     case 0:
-      std::cout << "MASA error:: masa_eval_3d_grad_u has no 0th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_u has no 0th component\n";
       std::cout << "Try 1,2 or 3\n";
       break;
       
@@ -535,7 +535,7 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_u(Scalar x,Scalar y
       break;
 
     default:
-      std::cout << "MASA error:: masa_eval_3d_grad_u has no " << i << "th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_u has no " << i << "th component\n";
       std::cout << "Try 1 or 2\n";
       break;
 
@@ -554,7 +554,7 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_v(Scalar x,Scalar y
   switch(i)
     {
     case 0:
-      std::cout << "MASA error:: masa_eval_3d_grad_v has no 0th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_v has no 0th component\n";
       std::cout << "Try 1,2 or 3\n";
       break;
       
@@ -571,7 +571,7 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_v(Scalar x,Scalar y
       break;
 
     default:
-      std::cout << "MASA error:: masa_eval_3d_grad_v has no " << i << "th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_v has no " << i << "th component\n";
       std::cout << "Try 1 or 2\n";
       break;
 
@@ -590,7 +590,7 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_w(Scalar x,Scalar y
   switch(i)
     {
     case 0:
-      std::cout << "MASA error:: masa_eval_3d_grad_w has no 0th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_w has no 0th component\n";
       std::cout << "Try 1,2 or 3\n";
       break;
       
@@ -607,7 +607,7 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_w(Scalar x,Scalar y
       break;
 
     default:
-      std::cout << "MASA error:: masa_eval_3d_grad_w has no " << i << "th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_w has no " << i << "th component\n";
       std::cout << "Try 1 or 2\n";
       break;
 
@@ -626,7 +626,7 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_p(Scalar x,Scalar y
   switch(i)
     {
     case 0:
-      std::cout << "MASA error:: masa_eval_3d_grad_p has no 0th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_p has no 0th component\n";
       std::cout << "Try 1,2 or 3\n";
       break;
       
@@ -643,7 +643,7 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_p(Scalar x,Scalar y
       break;
 
     default:
-      std::cout << "MASA error:: masa_eval_3d_grad_p has no " << i << "th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_p has no " << i << "th component\n";
       std::cout << "Try 1 or 2\n";
       break;
 
@@ -660,21 +660,21 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_rho(Scalar x,Scalar
   Scalar grad = -1;
 
   /*
-    grad_p_exact[0] = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
-    grad_p_exact[1] = p_y * cos(a_py * pi * y / L) * a_py * pi / L;
-    grad_p_exact[2] = -p_z * sin(a_pz * pi * z / L) * a_pz * pi / L;
-    grad_v_exact[0] = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
-    grad_v_exact[1] = v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
-    grad_v_exact[2] = v_z * cos(a_vz * pi * z / L) * a_vz * pi / L;
-    grad_w_exact[0] = w_x * cos(a_wx * pi * x / L) * a_wx * pi / L;
-    grad_w_exact[1] = w_y * cos(a_wy * pi * y / L) * a_wy * pi / L;
-    grad_w_exact[2] = -w_z * sin(a_wz * pi * z / L) * a_wz * pi / L;
+    grad_exact_p[0] = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
+    grad_exact_p[1] = p_y * cos(a_py * pi * y / L) * a_py * pi / L;
+    grad_exact_p[2] = -p_z * sin(a_pz * pi * z / L) * a_pz * pi / L;
+    grad_exact_v[0] = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
+    grad_exact_v[1] = v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
+    grad_exact_v[2] = v_z * cos(a_vz * pi * z / L) * a_vz * pi / L;
+    grad_exact_w[0] = w_x * cos(a_wx * pi * x / L) * a_wx * pi / L;
+    grad_exact_w[1] = w_y * cos(a_wy * pi * y / L) * a_wy * pi / L;
+    grad_exact_w[2] = -w_z * sin(a_wz * pi * z / L) * a_wz * pi / L;
   */
 
   switch(i)
     {
     case 0:
-      std::cout << "MASA error:: masa_eval_3d_grad_rho has no 0th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_rho has no 0th component\n";
       std::cout << "Try 1,2 or 3\n";
       break;
       
@@ -691,7 +691,7 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_rho(Scalar x,Scalar
       break;
 
     default:
-      std::cout << "MASA error:: masa_eval_3d_grad_rho has no " << i << "th component\n";
+      std::cout << "MASA error:: masa_eval_grad_3d_rho has no " << i << "th component\n";
       std::cout << "Try 1 or 2\n";
       break;
 
@@ -752,41 +752,41 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_q_e(Scalar x,Scalar y,Sc
 template <typename Scalar>
 Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_exact_u(Scalar x,Scalar y,Scalar z)
 {
-  Scalar u_exact;
-  u_exact = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_z * cos(a_uz * pi * z / L);  
-  return u_exact;
+  Scalar exact_u;
+  exact_u = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_z * cos(a_uz * pi * z / L);  
+  return exact_u;
 }
 
 template <typename Scalar>
 Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_exact_v(Scalar x,Scalar y,Scalar z)
 {
-  Scalar v_exact;
-  v_exact = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_z * sin(a_vz * pi * z / L);
-  return v_exact;
+  Scalar exact_v;
+  exact_v = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_z * sin(a_vz * pi * z / L);
+  return exact_v;
 }
 
 template <typename Scalar>
 Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_exact_w(Scalar x,Scalar y,Scalar z)
 {
-  Scalar w_exact;
-  w_exact = w_0 + w_x * sin(a_wx * pi * x / L) + w_y * sin(a_wy * pi * y / L) + w_z * cos(a_wz * pi * z / L);
-  return w_exact;
+  Scalar exact_w;
+  exact_w = w_0 + w_x * sin(a_wx * pi * x / L) + w_y * sin(a_wy * pi * y / L) + w_z * cos(a_wz * pi * z / L);
+  return exact_w;
 }
 
 template <typename Scalar>
 Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_exact_p(Scalar x,Scalar y,Scalar z)
 {
-  Scalar p_exact;
-  p_exact = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_z * cos(a_pz * pi * z / L);
-  return p_exact;
+  Scalar exact_p;
+  exact_p = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_z * cos(a_pz * pi * z / L);
+  return exact_p;
 }
 
 template <typename Scalar>
 Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_exact_rho(Scalar x,Scalar y,Scalar z)
 {
-  Scalar rho_exact;
-  rho_exact = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_z * sin(a_rhoz * pi * z / L);
-  return rho_exact;
+  Scalar exact_rho;
+  exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_z * sin(a_rhoz * pi * z / L);
+  return exact_rho;
 }
 
 // ----------------------------------------

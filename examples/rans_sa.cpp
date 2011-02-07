@@ -53,10 +53,10 @@ int main()
   Scalar efield;
   Scalar rho;
 
-  Scalar u_exact;
-  Scalar v_exact;
-  Scalar p_exact;
-  Scalar rho_exact;
+  Scalar exact_u;
+  Scalar exact_v;
+  Scalar exact_p;
+  Scalar exact_rho;
 
   //problem size
   Scalar lx,ly;
@@ -86,14 +86,14 @@ int main()
 	tempx=i*dx;
 
 	// evaluate source terms
-	//masa_eval_u_source<Scalar>  (tempx,tempy,&ufield);
-	//masa_eval_e_source<Scalar>  (tempx,tempy,&efield);
-	//masa_eval_rho_source<Scalar>(tempx,tempy,&rho);
+	//masa_eval_source_u<Scalar>  (tempx,tempy,&ufield);
+	//masa_eval_source_e<Scalar>  (tempx,tempy,&efield);
+	//masa_eval_source_rho<Scalar>(tempx,tempy,&rho);
 	
 	//evaluate analytical solution
-	//masa_eval_u_exact<Scalar>        (tempx,tempy,&u_exact);
-	//masa_eval_p_exact<Scalar>        (tempx,tempy,&p_exact);
-	//masa_eval_rho_exact<Scalar>      (tempx,tempy,&rho_exact);
+	//masa_eval_exact_u<Scalar>        (tempx,tempy,&exact_u);
+	//masa_eval_exact_p<Scalar>        (tempx,tempy,&exact_p);
+	//masa_eval_exact_rho<Scalar>      (tempx,tempy,&exact_rho);
 
       }
 
