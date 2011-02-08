@@ -561,6 +561,7 @@ extern "C" {
    * of the specified variable. 
    */
   extern double cmasa_eval_1d_source_rho(double);
+  extern double cmasa_eval_1d_source_rho_u(double);
 
   /**
    * cmasa_eval_1d_exact_t: cmasa equivalent to masa_eval_1d_exact_t
@@ -700,7 +701,9 @@ extern "C" {
    * of the specified variable. 
    */
   extern double cmasa_eval_2d_source_rho(double,double);
-
+  extern double cmasa_eval_2d_source_rho_u(double,double);
+  extern double cmasa_eval_2d_source_rho_v(double,double);
+  extern double cmasa_eval_2d_source_rho_w(double,double);
   /**
    * cmasa_eval_2d_exact_t: cmasa equivalent to masa_eval_2d_exact_t
    *
@@ -869,6 +872,9 @@ extern "C" {
    * of the specified variable. 
    */
   extern double cmasa_eval_3d_source_rho(double,double,double);
+  extern double cmasa_eval_3d_source_rho_u(double,double,double);
+  extern double cmasa_eval_3d_source_rho_v(double,double,double);
+  extern double cmasa_eval_3d_source_rho_w(double,double,double);
 
   /**
    * cmasa_eval_3d_exact_t: cmasa equivalent to masa_eval_3d_exact_t
