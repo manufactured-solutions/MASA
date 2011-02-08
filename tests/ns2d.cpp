@@ -344,8 +344,8 @@ int run_regression()
 	y=j*dy;
 	
 	//evalulate source terms
-	ufield = masa_eval_source_u  <Scalar>(x,y);
-	vfield = masa_eval_source_v  <Scalar>(x,y);
+	ufield = masa_eval_source_rho_u  <Scalar>(x,y);
+	vfield = masa_eval_source_rho_v  <Scalar>(x,y);
 	efield = masa_eval_source_e  <Scalar>(x,y);
 	rho    = masa_eval_source_rho<Scalar>(x,y);
 	

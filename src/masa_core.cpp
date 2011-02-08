@@ -838,7 +838,7 @@ int MASA::masa_get_numeric_version()
   template Scalar masa_eval_source_w  <Scalar>(Scalar); \
   template Scalar masa_eval_source_e  <Scalar>(Scalar); \
   template Scalar masa_eval_source_rho<Scalar>(Scalar); \
-  template Scalar masa_eval_source_rho_u<Scalar>(Scalar,Scalar);  \
+  template Scalar masa_eval_source_rho_u<Scalar>(Scalar);  \
   template Scalar masa_eval_exact_t      <Scalar>(Scalar);         \
   template Scalar masa_eval_exact_t      <Scalar>(Scalar,Scalar);  \
   template Scalar masa_eval_exact_u      <Scalar>(Scalar); \
@@ -851,6 +851,9 @@ int MASA::masa_get_numeric_version()
   template Scalar masa_eval_source_v  <Scalar>(Scalar,Scalar); \
   template Scalar masa_eval_source_w  <Scalar>(Scalar,Scalar);  \
   template Scalar masa_eval_source_e  <Scalar>(Scalar,Scalar); \
+  template Scalar masa_eval_source_rho_u<Scalar>(Scalar,Scalar);  \
+  template Scalar masa_eval_source_rho_v<Scalar>(Scalar,Scalar);   \
+  template Scalar masa_eval_source_rho_w<Scalar>(Scalar,Scalar);  \
   template Scalar masa_eval_source_rho<Scalar>(Scalar,Scalar); \
   template Scalar masa_eval_exact_t      <Scalar>(Scalar,Scalar,Scalar);  \
   template Scalar masa_eval_exact_u      <Scalar>(Scalar,Scalar); \
@@ -863,6 +866,9 @@ int MASA::masa_get_numeric_version()
   template Scalar masa_eval_source_v  <Scalar>(Scalar,Scalar,Scalar); \
   template Scalar masa_eval_source_w  <Scalar>(Scalar,Scalar,Scalar); \
   template Scalar masa_eval_source_e  <Scalar>(Scalar,Scalar,Scalar); \
+  template Scalar masa_eval_source_rho_u<Scalar>(Scalar,Scalar,Scalar);     \
+  template Scalar masa_eval_source_rho_v<Scalar>(Scalar,Scalar,Scalar);     \
+  template Scalar masa_eval_source_rho_w<Scalar>(Scalar,Scalar,Scalar);     \
   template Scalar masa_eval_source_rho<Scalar>(Scalar,Scalar,Scalar); \
   template Scalar masa_eval_exact_t      <Scalar>(Scalar,Scalar,Scalar,Scalar);  \
   template Scalar masa_eval_exact_u      <Scalar>(Scalar,Scalar,Scalar); \
