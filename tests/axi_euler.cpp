@@ -197,8 +197,8 @@ int main()
 	z=j*dy;
 
 	//evalulate source terms
-	ufield = masa_eval_source_u<Real>  (r,z);
-	wfield = masa_eval_source_w<Real>  (r,z);
+	ufield = masa_eval_source_rho_u<Real>  (r,z);
+	wfield = masa_eval_source_rho_w<Real>  (r,z);
 	efield = masa_eval_source_e<Real>  (r,z);
 	rho    = masa_eval_source_rho<Real>(r,z);
 
