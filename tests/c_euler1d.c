@@ -217,7 +217,7 @@ int main()
       x=i*dx;
 
       //evalulate source terms
-      ufield = cmasa_eval_1d_source_u  (x);
+      ufield = cmasa_eval_1d_source_rho_u  (x);
       efield = cmasa_eval_1d_source_e  (x);
       rho    = cmasa_eval_1d_source_rho(x);
 	
