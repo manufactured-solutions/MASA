@@ -230,7 +230,7 @@ int run_regression()
       x=i*dx;
       	
       //evalulate source terms
-      ufield = masa_eval_source_u  <Scalar>(x);
+      ufield = masa_eval_source_rho_u  <Scalar>(x);
       efield = masa_eval_source_e  <Scalar>(x);
       rho    = masa_eval_source_rho<Scalar>(x);
       
