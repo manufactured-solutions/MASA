@@ -126,7 +126,7 @@ program main
      x = i * dx
 
      ! evalulate source terms
-     ufield = masa_eval_1d_source_u  (x)
+     ufield = masa_eval_1d_source_rho_u  (x)
      efield = masa_eval_1d_source_e  (x)
      rho    = masa_eval_1d_source_rho(x)
 
