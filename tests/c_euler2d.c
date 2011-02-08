@@ -339,16 +339,16 @@ int main()
 	y=j*dy;
 	
 	//evalulate source terms
-	ufield = cmasa_eval_2d_source_u  (x,y);
-	vfield = cmasa_eval_2d_source_v  (x,y);
-	efield = cmasa_eval_2d_source_e  (x,y);
-	rho    = cmasa_eval_2d_source_rho(x,y);
+	ufield = cmasa_eval_2d_source_rho_u(x,y);
+	vfield = cmasa_eval_2d_source_rho_v(x,y);
+	efield = cmasa_eval_2d_source_e    (x,y);
+	rho    = cmasa_eval_2d_source_rho  (x,y);
 	
 	//evaluate analytical terms
-	exact_u   = cmasa_eval_2d_exact_u      (x,y);
-	exact_v   = cmasa_eval_2d_exact_v      (x,y);
-	exact_p   = cmasa_eval_2d_exact_p      (x,y);
-	exact_rho = cmasa_eval_2d_exact_rho     (x,y);
+	exact_u   = cmasa_eval_2d_exact_u  (x,y);
+	exact_v   = cmasa_eval_2d_exact_v  (x,y);
+	exact_p   = cmasa_eval_2d_exact_p  (x,y);
+	exact_rho = cmasa_eval_2d_exact_rho(x,y);
 	
 	// check against maple
 	ufield2 = SourceQ_u   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);

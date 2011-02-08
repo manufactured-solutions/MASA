@@ -518,11 +518,11 @@ int main()
 	  z=k*dz;
 
 	  //evalulate source terms
-	  ufield = cmasa_eval_3d_source_u  (x,y,z);
-	  vfield = cmasa_eval_3d_source_v  (x,y,z);
-	  wfield = cmasa_eval_3d_source_w  (x,y,z);
-	  efield = cmasa_eval_3d_source_e  (x,y,z);
-	  rho    = cmasa_eval_3d_source_rho(x,y,z);
+	  ufield = cmasa_eval_3d_source_rho_u (x,y,z);
+	  vfield = cmasa_eval_3d_source_rho_v (x,y,z);
+	  wfield = cmasa_eval_3d_source_rho_w (x,y,z);
+	  efield = cmasa_eval_3d_source_e     (x,y,z);
+	  rho    = cmasa_eval_3d_source_rho   (x,y,z);
 	  
 	  //evaluate analytical terms
 	  exact_u   = cmasa_eval_3d_exact_u      (x,y,z);
