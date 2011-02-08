@@ -373,9 +373,9 @@ Scalar MASA::masa_eval_source_rho(Scalar x)
 }
 
 template <typename Scalar>
-Scalar MASA::masa_eval_source_rho_u(Scalar x,Scalar t)
+Scalar MASA::masa_eval_source_rho_u(Scalar x)
 {
-  return masa_master<Scalar>().get_ms().eval_q_rho_u(x,t);
+  return masa_master<Scalar>().get_ms().eval_q_rho_u(x);
 }
 
 template <typename Scalar>
@@ -502,6 +502,24 @@ Scalar MASA::masa_eval_source_e(Scalar x,Scalar y)
   return masa_master<Scalar>().get_ms().eval_q_e(x,y);
 }
 
+template <typename Scalar>
+Scalar MASA::masa_eval_source_rho_u(Scalar x,Scalar y)
+{
+  return masa_master<Scalar>().get_ms().eval_q_rho_u(x,y);
+}
+
+template <typename Scalar>
+Scalar MASA::masa_eval_source_rho_v(Scalar x,Scalar y)
+{
+  return masa_master<Scalar>().get_ms().eval_q_rho_v(x,y);
+}
+
+template <typename Scalar>
+Scalar MASA::masa_eval_source_rho_w(Scalar x,Scalar y)
+{
+  return masa_master<Scalar>().get_ms().eval_q_rho_w(x,y);
+}
+
   // --------------------------------
   // analytical terms
   // --------------------------------
@@ -617,6 +635,24 @@ template <typename Scalar>
 Scalar MASA::masa_eval_source_e(Scalar x,Scalar y,Scalar z)
 {
   return masa_master<Scalar>().get_ms().eval_q_e(x,y,z);
+}
+
+template <typename Scalar>
+Scalar MASA::masa_eval_source_rho_u(Scalar x,Scalar y,Scalar z)
+{
+  return masa_master<Scalar>().get_ms().eval_q_rho_u(x,y,z);
+}
+
+template <typename Scalar>
+Scalar MASA::masa_eval_source_rho_v(Scalar x,Scalar y,Scalar z)
+{
+  return masa_master<Scalar>().get_ms().eval_q_rho_v(x,y,z);
+}
+
+template <typename Scalar>
+Scalar MASA::masa_eval_source_rho_w(Scalar x,Scalar y,Scalar z)
+{
+  return masa_master<Scalar>().get_ms().eval_q_rho_w(x,y,z);
 }
 
   // --------------------------------

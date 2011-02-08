@@ -151,8 +151,11 @@ namespace MASA
   Scalar masa_eval_source_rho(Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_source_rho_u(Scalar,Scalar); // 1d sod: x,t
+  Scalar masa_eval_source_rho_u(Scalar);
 
+  // --------------------------------
+  // manufactured analytical solution  -- 1D
+  // --------------------------------
 
   template <typename Scalar>
   Scalar masa_eval_exact_t      (Scalar);        // x
@@ -197,6 +200,18 @@ namespace MASA
   template <typename Scalar>
   Scalar masa_eval_source_rho(Scalar,Scalar);
 
+  template <typename Scalar>
+  Scalar masa_eval_source_rho_u(Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_source_rho_v(Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_source_rho_w(Scalar,Scalar);
+
+  // --------------------------------
+  // manufactured analytical solution  -- 2D
+  // --------------------------------
 
   template <typename Scalar>
   Scalar masa_eval_exact_t      (Scalar,Scalar,Scalar); //x,y,t
@@ -236,8 +251,20 @@ namespace MASA
   Scalar masa_eval_source_e  (Scalar,Scalar,Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_source_rho(Scalar,Scalar,Scalar);
-  
+  Scalar masa_eval_source_rho(Scalar,Scalar,Scalar); 
+
+  template <typename Scalar>
+  Scalar masa_eval_source_rho_u(Scalar,Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_source_rho_v(Scalar,Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_source_rho_w(Scalar,Scalar,Scalar);
+
+  // --------------------------------
+  // manufactured analytical solution  -- 3D
+  // --------------------------------
 
   template <typename Scalar>
   Scalar masa_eval_exact_t      (Scalar,Scalar,Scalar,Scalar); // x,y,z,t

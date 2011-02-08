@@ -101,7 +101,7 @@ int MASA::euler_1d<Scalar>::init_var()
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::euler_1d<Scalar>::eval_q_u(Scalar x)
+Scalar MASA::euler_1d<Scalar>::eval_q_rho_u(Scalar x)
 {
   Scalar Q_u;
   Scalar RHO;
@@ -292,7 +292,7 @@ int MASA::euler_2d<Scalar>::init_var()
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::euler_2d<Scalar>::eval_q_u(Scalar x,Scalar y)
+Scalar MASA::euler_2d<Scalar>::eval_q_rho_u(Scalar x,Scalar y)
 {
   Scalar Q_u;
   Scalar RHO;
@@ -309,7 +309,7 @@ Scalar MASA::euler_2d<Scalar>::eval_q_u(Scalar x,Scalar y)
 }
 
 template <typename Scalar>
-Scalar MASA::euler_2d<Scalar>::eval_q_v(Scalar x,Scalar y)
+Scalar MASA::euler_2d<Scalar>::eval_q_rho_v(Scalar x,Scalar y)
 {
   Scalar Q_v;
   Scalar RHO;
@@ -831,7 +831,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_rho(Scalar x,Scalar y,Scalar z,int i)
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::euler_3d<Scalar>::eval_q_u(Scalar x,Scalar y,Scalar z)
+Scalar MASA::euler_3d<Scalar>::eval_q_rho_u(Scalar x,Scalar y,Scalar z)
 {
   Scalar Q_u;
   Scalar RHO;
@@ -850,7 +850,7 @@ Scalar MASA::euler_3d<Scalar>::eval_q_u(Scalar x,Scalar y,Scalar z)
 }
 
 template <typename Scalar>
-Scalar MASA::euler_3d<Scalar>::eval_q_v(Scalar x,Scalar y,Scalar z)
+Scalar MASA::euler_3d<Scalar>::eval_q_rho_v(Scalar x,Scalar y,Scalar z)
 {
   Scalar Q_v;
   Scalar RHO;
@@ -869,7 +869,7 @@ Scalar MASA::euler_3d<Scalar>::eval_q_v(Scalar x,Scalar y,Scalar z)
 }
 
 template <typename Scalar>
-Scalar MASA::euler_3d<Scalar>::eval_q_w(Scalar x,Scalar y,Scalar z)
+Scalar MASA::euler_3d<Scalar>::eval_q_rho_w(Scalar x,Scalar y,Scalar z)
 {
   Scalar Q_w;
   Scalar RHO;

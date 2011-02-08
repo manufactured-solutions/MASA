@@ -159,8 +159,19 @@ namespace MASA
 
     virtual Scalar eval_q_rho(Scalar)              {std::cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
     virtual Scalar eval_q_rho(Scalar,Scalar)       {std::cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
-    virtual Scalar eval_q_rho_u(Scalar,Scalar)     {std::cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density) -- 1d Sod
     virtual Scalar eval_q_rho(Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
+
+    virtual Scalar eval_q_rho_u(Scalar)              {std::cout << "MASA ERROR:: Source Term (rho*u) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*u)
+    virtual Scalar eval_q_rho_u(Scalar,Scalar)       {std::cout << "MASA ERROR:: Source Term (rho*u) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*u)
+    virtual Scalar eval_q_rho_u(Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Source Term (rho*u) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*u)
+
+    virtual Scalar eval_q_rho_v(Scalar)              {std::cout << "MASA ERROR:: Source Term (rho*v) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*v)
+    virtual Scalar eval_q_rho_v(Scalar,Scalar)       {std::cout << "MASA ERROR:: Source Term (rho*v) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*v)
+    virtual Scalar eval_q_rho_v(Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Source Term (rho*v) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*v)
+
+    virtual Scalar eval_q_rho_w(Scalar)              {std::cout << "MASA ERROR:: Source Term (rho*w) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*w)
+    virtual Scalar eval_q_rho_w(Scalar,Scalar)       {std::cout << "MASA ERROR:: Source Term (rho*w) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*w)
+    virtual Scalar eval_q_rho_w(Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Source Term (rho*w) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*w)
 
   /* 
    * -------------------------------------------------------------------------------------------   
@@ -543,9 +554,9 @@ namespace MASA
     euler_1d(); // constructor    
     int init_var();          // default problem values
 
-    Scalar eval_q_u   (Scalar); // source terms
-    Scalar eval_q_e   (Scalar);
-    Scalar eval_q_rho (Scalar);
+    Scalar eval_q_rho_u (Scalar); // source terms
+    Scalar eval_q_e     (Scalar);
+    Scalar eval_q_rho   (Scalar);
     
     Scalar eval_exact_u  (Scalar); // analytical
     Scalar eval_exact_p  (Scalar);
@@ -594,10 +605,10 @@ namespace MASA
     euler_2d(); // constructor    
     int init_var();        // default problem values
 
-    Scalar eval_q_u  (Scalar,Scalar);
-    Scalar eval_q_v  (Scalar,Scalar);
-    Scalar eval_q_e  (Scalar,Scalar);
-    Scalar eval_q_rho(Scalar,Scalar);
+    Scalar eval_q_rho_u (Scalar,Scalar);
+    Scalar eval_q_rho_v (Scalar,Scalar);
+    Scalar eval_q_e     (Scalar,Scalar);
+    Scalar eval_q_rho   (Scalar,Scalar);
 
     Scalar eval_exact_u  (Scalar,Scalar); // analytical
     Scalar eval_exact_v  (Scalar,Scalar);
@@ -664,11 +675,11 @@ namespace MASA
     euler_3d(); // constructor
     int init_var();        // default problem values
 
-    Scalar eval_q_u  (Scalar,Scalar,Scalar); // source terms
-    Scalar eval_q_v  (Scalar,Scalar,Scalar);
-    Scalar eval_q_w  (Scalar,Scalar,Scalar);
-    Scalar eval_q_e  (Scalar,Scalar,Scalar);
-    Scalar eval_q_rho(Scalar,Scalar,Scalar);
+    Scalar eval_q_rho_u  (Scalar,Scalar,Scalar); // source terms
+    Scalar eval_q_rho_v  (Scalar,Scalar,Scalar);
+    Scalar eval_q_rho_w  (Scalar,Scalar,Scalar);
+    Scalar eval_q_e      (Scalar,Scalar,Scalar);
+    Scalar eval_q_rho    (Scalar,Scalar,Scalar);
 
     Scalar eval_exact_u  (Scalar,Scalar,Scalar); // analytical
     Scalar eval_exact_v  (Scalar,Scalar,Scalar);
@@ -720,10 +731,10 @@ namespace MASA
     axi_euler(); // constructor    
     int init_var();          // default problem values
 
-    Scalar eval_q_u   (Scalar,Scalar); // radial velocity 
-    Scalar eval_q_w   (Scalar,Scalar); // axial 
-    Scalar eval_q_e   (Scalar,Scalar);
-    Scalar eval_q_rho (Scalar,Scalar);
+    Scalar eval_q_rho_u (Scalar,Scalar); // radial velocity 
+    Scalar eval_q_rho_w (Scalar,Scalar); // axial 
+    Scalar eval_q_e     (Scalar,Scalar);
+    Scalar eval_q_rho   (Scalar,Scalar);
     
     Scalar eval_exact_u  (Scalar,Scalar); // analytical
     Scalar eval_exact_w  (Scalar,Scalar);
@@ -767,10 +778,10 @@ namespace MASA
     axi_cns(); // constructor    
     int init_var();          // default problem values
 
-    Scalar eval_q_u   (Scalar,Scalar); // radial velocity 
-    Scalar eval_q_w   (Scalar,Scalar); // axial 
-    Scalar eval_q_e   (Scalar,Scalar);
-    Scalar eval_q_rho (Scalar,Scalar);
+    Scalar eval_q_rho_u (Scalar,Scalar); // radial velocity 
+    Scalar eval_q_rho_w (Scalar,Scalar); // axial 
+    Scalar eval_q_e     (Scalar,Scalar);
+    Scalar eval_q_rho   (Scalar,Scalar);
     
     Scalar eval_exact_u  (Scalar,Scalar); // analytical
     Scalar eval_exact_w  (Scalar,Scalar);
@@ -904,10 +915,10 @@ namespace MASA
     navierstokes_2d_compressible(); // constructor
     int init_var();        // default problem values
 
-    Scalar eval_q_u  (Scalar,Scalar);
-    Scalar eval_q_v  (Scalar,Scalar);
-    Scalar eval_q_e  (Scalar,Scalar);
-    Scalar eval_q_rho(Scalar,Scalar);
+    Scalar eval_q_rho_u (Scalar,Scalar);
+    Scalar eval_q_rho_v (Scalar,Scalar);
+    Scalar eval_q_e     (Scalar,Scalar);
+    Scalar eval_q_rho   (Scalar,Scalar);
 
     Scalar eval_exact_u  (Scalar,Scalar); // analytical
     Scalar eval_exact_v  (Scalar,Scalar);
@@ -975,11 +986,11 @@ namespace MASA
     navierstokes_3d_compressible(); //constructor
     int init_var();        // default problem values
 
-    Scalar eval_q_u  (Scalar,Scalar,Scalar); // source terms
-    Scalar eval_q_v  (Scalar,Scalar,Scalar);
-    Scalar eval_q_w  (Scalar,Scalar,Scalar);
-    Scalar eval_q_e  (Scalar,Scalar,Scalar);
-    Scalar eval_q_rho(Scalar,Scalar,Scalar);
+    Scalar eval_q_rho_u  (Scalar,Scalar,Scalar); // source terms
+    Scalar eval_q_rho_v  (Scalar,Scalar,Scalar);
+    Scalar eval_q_rho_w  (Scalar,Scalar,Scalar);
+    Scalar eval_q_e      (Scalar,Scalar,Scalar);
+    Scalar eval_q_rho    (Scalar,Scalar,Scalar);
 
     Scalar eval_exact_u  (Scalar,Scalar,Scalar); // analytical
     Scalar eval_exact_v  (Scalar,Scalar,Scalar);
