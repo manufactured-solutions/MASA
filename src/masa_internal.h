@@ -704,11 +704,39 @@ namespace MASA
   template <typename Scalar>
   class euler_chem_1d : public manufactured_solution<Scalar>
   {
+    using manufactured_solution<Scalar>::pi;
+    using manufactured_solution<Scalar>::PI;
+
     Scalar R;
+    Scalar Cf1_N;
+    Scalar Cf1_N2;
+    Scalar etaf1_N;
+    Scalar etaf1_N2;
+    Scalar Ea_N;
+    Scalar Ea_N2;
+    Scalar Function_to_Calculate_K;
+    Scalar R_N;
+    Scalar R_N2;
+    Scalar theta_v_N2;
+    Scalar M_N;
+    Scalar h0_N;
+    Scalar h0_N2;
+    Scalar K;
 
   public:
     euler_chem_1d(); // constructor    
     int init_var();          // default problem values
+
+    Scalar eval_q_rho_u  (Scalar);
+    Scalar eval_q_rho_e  (Scalar);
+    Scalar eval_q_rho_N  (Scalar);
+    Scalar eval_q_rho_N2 (Scalar);
+
+    Scalar eval_exact_t      (Scalar);
+    Scalar eval_exact_u      (Scalar);
+    Scalar eval_exact_rho_u  (Scalar);
+    Scalar eval_exact_rho_N  (Scalar);    
+    Scalar eval_exact_rho_N2 (Scalar);
 
   };
 

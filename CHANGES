@@ -4,14 +4,15 @@ Version 0.40 (In Progress)
   * initial SMASA (stochastic masa) available 
   * gradient of source terms is now available for Fortran90 and C
 
-Version 0.30 (2nd February, 2011) -- first public release
+Version 0.30 (8th February, 2011) -- first public release
 
+  * API changes-- flipped terms, e.g. masa_eval_rho_u_source -> masa_eval_source_rho_u
   * improved parallel build support
   * code has 99%+ line coverage	
   * c++ bindings now support arbitrary precision (double, long double, etc.) w/ regression testing
   * gradient of source terms is now available for c++
   * adding new conditional (--masa-exceptions) that adds exception handling
-  * modifications to Fortran interface (no API changes)
+  * modifications to Fortran interface
   * added doxygen documentation for all c/cpp/fortran functions
   * edited navier stokes default parameters, added realizability regression test
   * updated steady euler equations with hierarchic model, added realizability regression test
