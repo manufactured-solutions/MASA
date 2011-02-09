@@ -40,6 +40,12 @@ int run_regression()
   // initalize
   masa_init<Scalar>("euler-test","euler_chem_1d");
 
+  // initialize the default parameters
+  masa_init_param<Scalar>();
+
+  // check that all terms have been initialized
+  masa_sanity_check<Scalar>();
+
   return 0;
 
 } // done with tests
