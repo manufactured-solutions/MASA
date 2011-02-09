@@ -59,8 +59,10 @@ MASA::euler_chem_1d<Scalar>::euler_chem_1d()
   this->register_var("a_ux",&a_ux);
 
   this->register_var("rho_N_0",&rho_N_0);
+  this->register_var("rho_N_x",&rho_N_x);
   this->register_var("a_rho_N_x",&a_rho_N_x);
 
+  this->register_var("rho_N2_0",&rho_N2_0);
   this->register_var("rho_N2_x",&rho_N2_x);
   this->register_var("a_rho_N2_x",&a_rho_N2_x);
 
@@ -96,10 +98,23 @@ int MASA::euler_chem_1d<Scalar>::init_var()
   err += this->set_var("h0_N",1.01);
   err += this->set_var("h0_N2",1.01);
   err += this->set_var("K",1.01);
-
   err += this->set_var("L",1.01);
 
+  err += this->set_var("u_0",1.01);
+  err += this->set_var("u_x",1.01);
+  err += this->set_var("a_ux",1.01);
 
+  err += this->set_var("rho_N_0",1.01);
+  err += this->set_var("rho_N_x",1.01);
+  err += this->set_var("a_rho_N_x",1.01);
+
+  err += this->set_var("rho_N2_0",1.01);
+  err += this->set_var("rho_N2_x",1.01);
+  err += this->set_var("a_rho_N2_x",1.01);
+
+  err += this->set_var("T_0",1.01);
+  err += this->set_var("T_x",1.01);
+  err += this->set_var("a_T_x",1.01);
 
   return err;
 }
