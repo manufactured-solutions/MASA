@@ -698,6 +698,21 @@ namespace MASA
   };
 
   // ------------------------------------------------------
+  // ----------------   euler + chem     ------------------
+  // ------------------------------------------------------
+
+  template <typename Scalar>
+  class euler_chem_1d : public manufactured_solution<Scalar>
+  {
+    Scalar R;
+
+  public:
+    euler_chem_1d(); // constructor    
+    int init_var();          // default problem values
+
+  };
+
+  // ------------------------------------------------------
   // ---------------- axisymmetric euler ------------------
   // ------------------------------------------------------
   template <typename Scalar>

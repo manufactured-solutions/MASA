@@ -111,6 +111,8 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
   anim.push_back(new euler_2d<Scalar>());
   anim.push_back(new euler_3d<Scalar>());
 
+  anim.push_back(new euler_chem_1d<Scalar>());
+
   anim.push_back(new sod_1d<Scalar>());
 
   anim.push_back(new navierstokes_2d_compressible<Scalar>());
