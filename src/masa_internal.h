@@ -723,6 +723,23 @@ namespace MASA
     Scalar h0_N2;
     Scalar K;
 
+    Scalar L;
+    Scalar u_x;
+    Scalar u_0;
+    Scalar a_ux;
+
+    Scalar rho_N_0;
+    Scalar rho_N_x;
+    Scalar a_rho_N_x;
+
+    Scalar rho_N2_0;
+    Scalar rho_N2_x;
+    Scalar a_rho_N2_x;
+
+    Scalar T_0;
+    Scalar T_x;
+    Scalar a_Tx;
+
   public:
     euler_chem_1d(); // constructor    
     int init_var();          // default problem values
@@ -734,7 +751,7 @@ namespace MASA
 
     Scalar eval_exact_t      (Scalar);
     Scalar eval_exact_u      (Scalar);
-    Scalar eval_exact_rho_u  (Scalar);
+    Scalar eval_exact_rho    (Scalar);
     Scalar eval_exact_rho_N  (Scalar);    
     Scalar eval_exact_rho_N2 (Scalar);
 
