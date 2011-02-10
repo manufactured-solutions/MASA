@@ -270,8 +270,33 @@ int run_regression()
   // initialize the default parameters
   masa_init_param<Scalar>();
 
+  // get defaults for comparison to source terms
+  // get vars
+  u_0 = masa_get_param<Scalar>("u_0");
+  u_x = masa_get_param<Scalar>("u_x");
+  L   = masa_get_param<Scalar>("L");
+
+  /*
+  rho_0 = masa_get_param<Scalar>("rho_0");
+  rho_x = masa_get_param<Scalar>("rho_x");
+  p_0 = masa_get_param<Scalar>("p_0");
+  p_x = masa_get_param<Scalar>("p_x");
+  a_px = masa_get_param<Scalar>("a_px");
+  a_rhox = masa_get_param<Scalar>("a_rhox");
+  a_ux = masa_get_param<Scalar>("a_ux");
+  Gamma = masa_get_param<Scalar>("Gamma");
+  mu    = masa_get_param<Scalar>("mu");
+  */
+
   // check that all terms have been initialized
   masa_sanity_check<Scalar>();
+
+  // evaluate source terms (1D)
+  for(int i=0;i<nx;i++)
+    {
+      x=i*dx;
+
+    }
 
   return 0;
 
