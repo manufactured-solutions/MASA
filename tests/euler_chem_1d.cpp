@@ -235,16 +235,37 @@ int run_regression()
   //variables 
   Scalar u_0;
   Scalar u_x;
-  Scalar rho_0;
-  Scalar rho_x;
-  Scalar p_0;
-  Scalar p_x;
-  Scalar a_px;
-  Scalar a_rhox;
   Scalar a_ux;
-  Scalar Gamma;
-  Scalar mu;
   Scalar L;
+
+  Scalar R;
+  Scalar Cf1_N;
+  Scalar Cf1_N2;
+  Scalar etaf1_N;
+  Scalar etaf1_N2;
+  Scalar Ea_N;
+  Scalar Ea_N2;
+  Scalar Function_to_Calculate_K;
+  Scalar R_N;
+  Scalar R_N2;
+  Scalar theta_v_N2;
+  Scalar M_N;
+  Scalar h0_N;
+  Scalar h0_N2;
+  Scalar K;
+
+
+  Scalar rho_N_0;
+  Scalar rho_N_x;
+  Scalar a_rho_N_x;
+
+  Scalar rho_N2_0;
+  Scalar rho_N2_x;
+  Scalar a_rho_N2_x;
+
+  Scalar T_0;
+  Scalar T_x;
+  Scalar a_Tx;
 
   // parameters
   Scalar x;
@@ -272,9 +293,40 @@ int run_regression()
 
   // get defaults for comparison to source terms
   // get vars
-  u_0 = masa_get_param<Scalar>("u_0");
-  u_x = masa_get_param<Scalar>("u_x");
-  L   = masa_get_param<Scalar>("L");
+  u_0  = masa_get_param<Scalar>("u_0");
+  u_x  = masa_get_param<Scalar>("u_x");
+  a_ux = masa_get_param<Scalar>("a_ux");
+  L    = masa_get_param<Scalar>("L");
+  R    = masa_get_param<Scalar>("R");
+
+  Cf1_N   = masa_get_param<Scalar>("Cf1_N");
+  Cf1_N2  = masa_get_param<Scalar>("Cf1_N2");
+  etaf1_N  = masa_get_param<Scalar>("etaf1_N");
+  etaf1_N2 = masa_get_param<Scalar>("etaf1_N2");
+
+  Ea_N  = masa_get_param<Scalar>("Ea_N");
+  Ea_N2 = masa_get_param<Scalar>("Ea_N2");
+
+  R_N   = masa_get_param<Scalar>("R_N");
+  R_N2  = masa_get_param<Scalar>("R_N2");
+
+  theta_v_N2 = masa_get_param<Scalar>("theta_v_N2");
+  M_N   = masa_get_param<Scalar>("M_N");
+  h0_N  = masa_get_param<Scalar>("h0_N");
+  h0_N2 = masa_get_param<Scalar>("h0_N2");
+  K     = masa_get_param<Scalar>("K");
+
+  rho_N_0   = masa_get_param<Scalar>("rho_N_0");
+  rho_N_x   = masa_get_param<Scalar>("rho_N_x");
+  a_rho_N_x = masa_get_param<Scalar>("a_rho_N_x");
+
+  rho_N2_0   = masa_get_param<Scalar>("rho_N2_0");  
+  rho_N2_x   = masa_get_param<Scalar>("rho_N2_x");
+  a_rho_N2_x = masa_get_param<Scalar>("a_rho_N2_x");
+
+  T_0  = masa_get_param<Scalar>("T_0");
+  T_x  = masa_get_param<Scalar>("T_x");
+  a_Tx = masa_get_param<Scalar>("a_Tx");
 
   /*
   rho_0 = masa_get_param<Scalar>("rho_0");
