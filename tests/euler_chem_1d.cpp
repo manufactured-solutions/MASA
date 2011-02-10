@@ -232,6 +232,38 @@ int run_regression()
 
   Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
 
+  //variables 
+  Scalar u_0;
+  Scalar u_x;
+  Scalar rho_0;
+  Scalar rho_x;
+  Scalar p_0;
+  Scalar p_x;
+  Scalar a_px;
+  Scalar a_rhox;
+  Scalar a_ux;
+  Scalar Gamma;
+  Scalar mu;
+  Scalar L;
+
+  // parameters
+  Scalar x;
+
+  //problem size
+  int nx = 200;  // number of points
+  int lx=10;     // length
+  Scalar dx=Scalar(lx)/Scalar(nx);
+
+  // solutions
+  Scalar ufield,ufield2,ufield3;
+  Scalar efield,efield2,efield3;
+  Scalar rho,rho2,rho3;
+  Scalar gradx,grady,gradz,gradp,gradrho;
+
+  Scalar exact_u,exact_u2,exact_u3;
+  Scalar exact_p,exact_p2,exact_p3;
+  Scalar exact_rho,exact_rho2,exact_rho3;
+
   // initalize
   masa_init<Scalar>("euler-test","euler_chem_1d");
 
