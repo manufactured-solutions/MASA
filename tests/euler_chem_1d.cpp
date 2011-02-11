@@ -254,7 +254,6 @@ int run_regression()
   Scalar h0_N2;
   Scalar K;
 
-
   Scalar rho_N_0;
   Scalar rho_N_x;
   Scalar a_rho_N_x;
@@ -292,7 +291,6 @@ int run_regression()
   masa_init_param<Scalar>();
 
   // get defaults for comparison to source terms
-  // get vars
   u_0  = masa_get_param<Scalar>("u_0");
   u_x  = masa_get_param<Scalar>("u_x");
   a_ux = masa_get_param<Scalar>("a_ux");
@@ -328,27 +326,78 @@ int run_regression()
   T_x  = masa_get_param<Scalar>("T_x");
   a_Tx = masa_get_param<Scalar>("a_Tx");
 
-  /*
-  rho_0 = masa_get_param<Scalar>("rho_0");
-  rho_x = masa_get_param<Scalar>("rho_x");
-  p_0 = masa_get_param<Scalar>("p_0");
-  p_x = masa_get_param<Scalar>("p_x");
-  a_px = masa_get_param<Scalar>("a_px");
-  a_rhox = masa_get_param<Scalar>("a_rhox");
-  a_ux = masa_get_param<Scalar>("a_ux");
-  Gamma = masa_get_param<Scalar>("Gamma");
-  mu    = masa_get_param<Scalar>("mu");
-  */
-
   // check that all terms have been initialized
   masa_sanity_check<Scalar>();
 
-  // evaluate source terms (1D)
+  // evaluate MMS (1D)
   for(int i=0;i<nx;i++)
     {
       x=i*dx;
 
-    }
+      // evalulate source terms
+      ufield = masa_eval_source_rho_u  <Scalar>(x);
+      efield = masa_eval_source_rho_e  <Scalar>(x);
+      N      = masa_eval_source_rho_N  <Scalar>(x);
+      Ntwo   = masa_eval_source_rho_N2 <Scalar>(x);
+
+      // evaluate analytical solution terms
+      exact_t    = masa_eval_exact_t     <Scalar>(x);
+      exact_u    = masa_eval_exact_u     <Scalar>(x);
+      exact_rho  = masa_eval_exact_rho   <Scalar>(x);
+      exact_N    = masa_eval_exact_rho_N <Scalar>(x);
+      exact_Ntwo = masa_eval_exact_rho_N2<Scalar>(x);
+
+      // get comparison solution
+      ufield2   = SourceQ_rho_u  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
+      efield2   = SourceQ_rho_e  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
+      N2        = SourceQ_rho_N  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
+      Ntwo2     = SourceQ_rho_N2 (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
+
+      exact_t2    = anQ_t      (x,u_0,u_x,a_ux,L);
+      exact_u2    = anQ_u      (x,rho_0,rho_x,a_rhox,L);
+      exact_rho2  = anQ_rho    (x,p_0,p_x,a_px,L);
+      exact_N2    = anQ_rho_N  (x,p_0,p_x,a_px,L);
+      exact_Ntwo2 = anQ_rho_N2 (x,p_0,p_x,a_px,L);
+
+      // test the result is roughly zero
+      // choose between abs and rel error
+#ifdef MASA_STRICT_REGRESSION
+
+      ufield3 = fabs(ufield-ufield2);
+      efield3 = fabs(efield-efield2);
+      rho3    = fabs(rho-rho2);
+
+      exact_u3   = fabs(exact_u-exact_u2);
+      exact_rho3 = fabs(exact_rho-exact_rho2);
+      exact_p3   = fabs(exact_p-exact_p2);
+
+#else
+
+      ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
+      efield3 = fabs(efield-efield2)/fabs(efield2);
+      rho3    = fabs(rho-rho2)/fabs(rho2);
+
+      exact_u3   = fabs(exact_u-exact_u2)/fabs(exact_u2);
+      exact_rho3 = fabs(exact_rho-exact_rho2)/fabs(exact_rho2);
+      exact_p3   = fabs(exact_p-exact_p2)/fabs(exact_p2);
+
+#endif
+
+      nancheck(ufield3);
+      nancheck(efield3);
+      nancheck(rho3);
+
+      if(ufield3 > threshold)
+	{
+	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
+	  cout << "U Field Source Term\n";
+	  cout << "Exceeded Threshold by: " << ufield << endl;
+	  cout << x << " " << endl;
+	  exit(1);
+	}
+      
+
+    } // done w/ spatial interations
 
   return 0;
 
@@ -365,3 +414,15 @@ int main()
 
   return err;
 }
+
+/*
+  rho_0 = masa_get_param<Scalar>("rho_0");
+  rho_x = masa_get_param<Scalar>("rho_x");
+  p_0 = masa_get_param<Scalar>("p_0");
+  p_x = masa_get_param<Scalar>("p_x");
+  a_px = masa_get_param<Scalar>("a_px");
+  a_rhox = masa_get_param<Scalar>("a_rhox");
+  a_ux = masa_get_param<Scalar>("a_ux");
+  Gamma = masa_get_param<Scalar>("Gamma");
+  mu    = masa_get_param<Scalar>("mu");
+*/

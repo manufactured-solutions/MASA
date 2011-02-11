@@ -224,7 +224,7 @@ int run_regression()
   // check that all terms have been initialized
   masa_sanity_check<Scalar>();
 
-  // evaluate source terms (1D)
+  // evaluate MMS (1D)
   for(int i=0;i<nx;i++)
     {
       x=i*dx;
@@ -234,7 +234,7 @@ int run_regression()
       efield = masa_eval_source_e  <Scalar>(x);
       rho    = masa_eval_source_rho<Scalar>(x);
       
-      //evaluate analytical terms
+      //evaluate manufactured analytical solution terms
       exact_u = masa_eval_exact_u        <Scalar>(x);
       exact_p = masa_eval_exact_p        <Scalar>(x);
       exact_rho = masa_eval_exact_rho    <Scalar>(x);
