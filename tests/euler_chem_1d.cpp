@@ -496,7 +496,14 @@ int run_regression()
 
 #endif
 
-      cout << ufield3 << endl;
+      // watch out
+      //cout << N3 << endl;
+      //cout << Ntwo3 << endl;
+      //cout << exact_t3 << endl;
+      //cout << exact_u3 << endl;
+      //cout << exact_N3 << endl;
+      //cout << exact_Ntwo3 << endl;
+
 
       // check for nans
       nancheck(ufield3);
