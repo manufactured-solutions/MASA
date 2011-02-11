@@ -381,6 +381,12 @@ Scalar MASA::masa_eval_source_rho_u(Scalar x)
 }
 
 template <typename Scalar>
+Scalar MASA::masa_eval_source_rho_e(Scalar x)
+{
+  return masa_master<Scalar>().get_ms().eval_q_rho_e(x);
+}
+
+template <typename Scalar>
 Scalar MASA::masa_eval_source_e(Scalar x)
 {
   return masa_master<Scalar>().get_ms().eval_q_e(x);
