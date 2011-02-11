@@ -421,7 +421,6 @@ int run_regression()
   
   //cout << Ea_N << endl;
   //cout << T_0 << endl;
-  
 
   // check that all terms have been initialized
   masa_sanity_check<Scalar>();
