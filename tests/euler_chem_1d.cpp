@@ -418,6 +418,11 @@ int run_regression()
   T_x  = masa_get_param<Scalar>("T_x");
   a_Tx = masa_get_param<Scalar>("a_Tx");
 
+  
+  cout << Ea_N << endl;
+  cout << T_0 << endl;
+  
+
   // check that all terms have been initialized
   masa_sanity_check<Scalar>();
 
