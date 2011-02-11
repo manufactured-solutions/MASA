@@ -127,6 +127,8 @@ namespace MASA
     virtual Scalar eval_exact_rho(Scalar,Scalar)       {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
     virtual Scalar eval_exact_rho(Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
    
+    virtual Scalar eval_exact_rho_N(Scalar)            {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;};
+    virtual Scalar eval_exact_rho_N2(Scalar)           {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;};
 
   /* 
    * -------------------------------------------------------------------------------------------   
@@ -172,6 +174,11 @@ namespace MASA
     virtual Scalar eval_q_rho_w(Scalar)              {std::cout << "MASA ERROR:: Source Term (rho*w) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*w)
     virtual Scalar eval_q_rho_w(Scalar,Scalar)       {std::cout << "MASA ERROR:: Source Term (rho*w) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*w)
     virtual Scalar eval_q_rho_w(Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Source Term (rho*w) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*w)
+
+    virtual Scalar eval_q_rho_e (Scalar)              {std::cout << "MASA ERROR:: Source Term (rho*e) is unavailable or not properly loaded.\n"; return -1.33;}; 
+    virtual Scalar eval_q_rho_N (Scalar)              {std::cout << "MASA ERROR:: Source Term (N )    is unavailable or not properly loaded.\n"; return -1.33;}; 
+    virtual Scalar eval_q_rho_N2(Scalar)              {std::cout << "MASA ERROR:: Source Term (N2)    is unavailable or not properly loaded.\n"; return -1.33;}; 
+
 
   /* 
    * -------------------------------------------------------------------------------------------   
