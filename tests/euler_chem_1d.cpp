@@ -53,7 +53,21 @@ Scalar nancheck(Scalar x)
 
 
 template <typename Scalar>
-Scalar SourceQ_rho_u(Scalar x, Scalar R_N)
+Scalar SourceQ_rho_u(Scalar x, 
+		     Scalar R_N, 
+		     Scalar rho_N_0, 
+		     Scalar rho_N_x,
+		     Scalar a_rho_N_x, 
+		     Scalar rho_N2_0, 
+		     Scalar rho_N2_x,
+		     Scalar a_rho_N2_x,
+		     Scalar L,
+		     Scalar u_0,
+		     Scalar u_x,
+		     Scalar a_ux,
+		     Scalar T_0,
+		     Scalar T_x,
+		     Scalar a_Tx)
 {
   Scalar Q_u;
   Scalar RHO;
@@ -62,23 +76,38 @@ Scalar SourceQ_rho_u(Scalar x, Scalar R_N)
   Scalar U;
   Scalar T;
 
-  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * PI * x / L);
-  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * PI * x / L);
-  RHO = RHO_N + RHO_N2;
-  U = u_0 + u_x * sin(a_ux * PI * x / L);
-  T = T_0 + T_x * cos(a_Tx * PI * x / L);
+  Scalar pi = acos(-1);
 
-  Q_u = a_rho_N_x * PI * rho_N_x * U * U * cos(a_rho_N_x * PI * x / L) / L - a_rho_N2_x * PI * rho_N2_x * U * U * sin(a_rho_N2_x * PI * x / L) / L - a_Tx * PI * T_x * R_N * RHO_N * sin(a_Tx * PI * x / L) / L - a_Tx * PI * T_x * R_N * RHO_N2 * sin(a_Tx * PI * x / L) / L / 0.2e1 + 0.2e1 * a_ux * PI * u_x * RHO * U * cos(a_ux * PI * x / L) / L - (-0.2e1 * a_rho_N_x * rho_N_x * cos(a_rho_N_x * PI * x / L) + a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * PI * x / L)) * PI * R_N * T / L / 0.2e1;
+  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
+  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
+  RHO = RHO_N + RHO_N2;
+  U = u_0 + u_x * sin(a_ux * pi * x / L);
+  T = T_0 + T_x * cos(a_Tx * pi * x / L);
+
+  Q_u = a_rho_N_x * pi * rho_N_x * U * U * cos(a_rho_N_x * pi * x / L) / L - a_rho_N2_x * pi * rho_N2_x * U * U * sin(a_rho_N2_x * pi * x / L) / L - a_Tx * pi * T_x * R_N * RHO_N * sin(a_Tx * pi * x / L) / L - a_Tx * pi * T_x * R_N * RHO_N2 * sin(a_Tx * pi * x / L) / L / 0.2e1 + 0.2e1 * a_ux * pi * u_x * RHO * U * cos(a_ux * pi * x / L) / L - (-0.2e1 * a_rho_N_x * rho_N_x * cos(a_rho_N_x * pi * x / L) + a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * pi * x / L)) * pi * R_N * T / L / 0.2e1;
   return(Q_u);
 }
 
 template <typename Scalar>
 Scalar SourceQ_rho_e(Scalar x,
-		    Scalar R_N,
-		    Scalar R_N2,
-		    Scalar h0_N,
-		    Scalar h0_N2,
-		    Scalar theta_v_N2)
+		     Scalar R_N,
+		     Scalar R_N2,
+		     Scalar h0_N,
+		     Scalar h0_N2,
+		     Scalar theta_v_N2,
+		     Scalar rho_N_0, 
+		     Scalar rho_N_x,
+		     Scalar a_rho_N_x, 
+		     Scalar rho_N2_0, 
+		     Scalar rho_N2_x,
+		     Scalar a_rho_N2_x,
+		     Scalar L,
+		     Scalar u_0,
+		     Scalar u_x,
+		     Scalar a_ux,
+		     Scalar T_0,
+		     Scalar T_x,
+		     Scalar a_Tx)
 {
   Scalar Q_e;
   Scalar RHO;
@@ -89,31 +118,51 @@ Scalar SourceQ_rho_e(Scalar x,
   Scalar alpha;
   Scalar E_vib_N2;
 
-  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * PI * x / L);
-  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * PI * x / L);
+  Scalar pi = acos(-1);
+
+  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
+  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
   RHO = RHO_N + RHO_N2;
-  U = u_0 + u_x * sin(a_ux * PI * x / L);
-  T = T_0 + T_x * cos(a_Tx * PI * x / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L);
+  T = T_0 + T_x * cos(a_Tx * pi * x / L);
   alpha = exp(theta_v_N2 / T);
   E_vib_N2 = R_N2 * theta_v_N2 / (alpha - 0.1e1);
 
-  Q_e = -a_Tx * PI * T_x * alpha * theta_v_N2 * E_vib_N2 * RHO_N2 * U * sin(a_Tx * PI * x / L) / L / (alpha - 0.1e1) * pow(T, -0.2e1) - 0.5e1 / 0.2e1 * a_Tx * PI * T_x * R_N * RHO_N * U * sin(a_Tx * PI * x / L) / L - 0.7e1 / 0.4e1 * a_Tx * PI * T_x * R_N * RHO_N2 * U * sin(a_Tx * PI * x / L) / L + 0.5e1 / 0.2e1 * a_ux * PI * u_x * R_N * RHO_N * T * cos(a_ux * PI * x / L) / L + 0.7e1 / 0.4e1 * a_ux * PI * u_x * R_N * RHO_N2 * T * cos(a_ux * PI * x / L) / L + 0.3e1 / 0.2e1 * a_ux * PI * u_x * RHO * U * U * cos(a_ux * PI * x / L) / L - a_rho_N2_x * PI * rho_N2_x * E_vib_N2 * U * sin(a_rho_N2_x * PI * x / L) / L + a_ux * PI * u_x * E_vib_N2 * RHO_N2 * cos(a_ux * PI * x / L) / L + (h0_N * RHO_N + h0_N2 * RHO_N2) * a_ux * PI * u_x * cos(a_ux * PI * x / L) / L - (-0.10e2 * a_rho_N_x * rho_N_x * cos(a_rho_N_x * PI * x / L) + 0.7e1 * a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * PI * x / L)) * PI * R_N * U * T / L / 0.4e1 - (-a_rho_N_x * rho_N_x * cos(a_rho_N_x * PI * x / L) + a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * PI * x / L)) * PI * pow(U, 0.3e1) / L / 0.2e1 - (-a_rho_N_x * rho_N_x * h0_N * cos(a_rho_N_x * PI * x / L) + a_rho_N2_x * rho_N2_x * h0_N2 * sin(a_rho_N2_x * PI * x / L)) * PI * U / L;
+  Q_e = -a_Tx * pi * T_x * alpha * theta_v_N2 * E_vib_N2 * RHO_N2 * U * sin(a_Tx * pi * x / L) / L / (alpha - 0.1e1) * pow(T, -0.2e1) - 0.5e1 / 0.2e1 * a_Tx * pi * T_x * R_N * RHO_N * U * sin(a_Tx * pi * x / L) / L - 0.7e1 / 0.4e1 * a_Tx * pi * T_x * R_N * RHO_N2 * U * sin(a_Tx * pi * x / L) / L + 0.5e1 / 0.2e1 * a_ux * pi * u_x * R_N * RHO_N * T * cos(a_ux * pi * x / L) / L + 0.7e1 / 0.4e1 * a_ux * pi * u_x * R_N * RHO_N2 * T * cos(a_ux * pi * x / L) / L + 0.3e1 / 0.2e1 * a_ux * pi * u_x * RHO * U * U * cos(a_ux * pi * x / L) / L - a_rho_N2_x * pi * rho_N2_x * E_vib_N2 * U * sin(a_rho_N2_x * pi * x / L) / L + a_ux * pi * u_x * E_vib_N2 * RHO_N2 * cos(a_ux * pi * x / L) / L + (h0_N * RHO_N + h0_N2 * RHO_N2) * a_ux * pi * u_x * cos(a_ux * pi * x / L) / L - (-0.10e2 * a_rho_N_x * rho_N_x * cos(a_rho_N_x * pi * x / L) + 0.7e1 * a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * pi * x / L)) * pi * R_N * U * T / L / 0.4e1 - (-a_rho_N_x * rho_N_x * cos(a_rho_N_x * pi * x / L) + a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * pi * x / L)) * pi * pow(U, 0.3e1) / L / 0.2e1 - (-a_rho_N_x * rho_N_x * h0_N * cos(a_rho_N_x * pi * x / L) + a_rho_N2_x * rho_N2_x * h0_N2 * sin(a_rho_N2_x * pi * x / L)) * pi * U / L;
 
   return(Q_e);
 }
 
 template <typename Scalar>
 Scalar SourceQ_rho_N(Scalar x,
-		    Scalar M_N,
-		    Scalar h0_N,
-		    Scalar h0_N2,
-		    Scalar Cf1_N,
-		    Scalar Cf1_N2,
-		    Scalar etaf1_N,
-		    Scalar etaf1_N2,
-		    Scalar Ea_N,
-		    Scalar Ea_N2,
-		    Scalar Function_to_Calculate_K)
+		     Scalar M_N,
+		     Scalar h0_N,
+		     Scalar h0_N2,
+		     Scalar Cf1_N,
+		     Scalar Cf1_N2,
+		     Scalar etaf1_N,
+		     Scalar etaf1_N2,
+		     Scalar Ea_N,
+		     Scalar Ea_N2,
+		     Scalar Function_to_Calculate_K,
+		     Scalar R_N,
+		     Scalar R_N2,
+		     Scalar theta_v_N2,
+		     Scalar rho_N_0, 
+		     Scalar rho_N_x,
+		     Scalar a_rho_N_x, 
+		     Scalar rho_N2_0, 
+		     Scalar rho_N2_x,
+		     Scalar a_rho_N2_x,
+		     Scalar L,
+		     Scalar u_0,
+		     Scalar u_x,
+		     Scalar a_ux,
+		     Scalar T_0,
+		     Scalar T_x,
+		     Scalar a_Tx,
+		     Scalar R)
+
 {
   Scalar Q_rho_N;
   Scalar RHO_N;
@@ -124,32 +173,51 @@ Scalar SourceQ_rho_N(Scalar x,
   Scalar kf1_N2;
   Scalar K_eq;
 
+  Scalar pi = acos(-1);
+
   K_eq = Function_to_Calculate_K;
-  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * PI * x / L);
-  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * PI * x / L);
-  U = u_0 + u_x * sin(a_ux * PI * x / L);
-  T = T_0 + T_x * cos(a_Tx * PI * x / L);
+  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
+  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L);
+  T = T_0 + T_x * cos(a_Tx * pi * x / L);
   kf1_N = Cf1_N * pow(T, etaf1_N) * exp(-Ea_N / R / T);
   kf1_N2 = Cf1_N2 * pow(T, etaf1_N2) * exp(-Ea_N2 / R / T);
 
-  Q_rho_N = a_rho_N_x * PI * rho_N_x * U * cos(a_rho_N_x * PI * x / L) / L + a_ux * PI * u_x * RHO_N * cos(a_ux * PI * x / L) / L + (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * pow(M_N, -0.2e1) / K_eq - (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / 0.2e1;
+  Q_rho_N = a_rho_N_x * pi * rho_N_x * U * cos(a_rho_N_x * pi * x / L) / L + a_ux * pi * u_x * RHO_N * cos(a_ux * pi * x / L) / L + (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * pow(M_N, -0.2e1) / K_eq - (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / 0.2e1;
 
   return(Q_rho_N);
 }
 
 template <typename Scalar>
 Scalar SourceQ_rho_N2(Scalar x,
-		     Scalar M_N,
-		     Scalar h0_N,
-		     Scalar h0_N2,
-		     Scalar K,
-		     Scalar Cf1_N,
-		     Scalar Cf1_N2,
-		     Scalar etaf1_N,
-		     Scalar etaf1_N2,
-		     Scalar Ea_N,
-		     Scalar Ea_N2,
-		     Scalar Function_to_Calculate_K)
+		      Scalar M_N,
+		      Scalar h0_N,
+		      Scalar h0_N2,
+		      Scalar Cf1_N,
+		      Scalar Cf1_N2,
+		      Scalar etaf1_N,
+		      Scalar etaf1_N2,
+		      Scalar Ea_N,
+		      Scalar Ea_N2,
+		      Scalar Function_to_Calculate_K,
+		      Scalar K,
+		      Scalar R_N,
+		      Scalar R_N2,
+		      Scalar theta_v_N2,
+		      Scalar rho_N_0, 
+		      Scalar rho_N_x,
+		      Scalar a_rho_N_x, 
+		      Scalar rho_N2_0, 
+		      Scalar rho_N2_x,
+		      Scalar a_rho_N2_x,
+		      Scalar L,
+		      Scalar u_0,
+		      Scalar u_x,
+		      Scalar a_ux,
+		      Scalar T_0,
+		      Scalar T_x,
+		      Scalar a_Tx,
+		      Scalar R)
 {
   
   Scalar Q_rho_N2;
@@ -161,15 +229,17 @@ Scalar SourceQ_rho_N2(Scalar x,
   Scalar kf1_N2;
   Scalar K_eq;
 
+  Scalar pi = acos(-1);
+
   K_eq = Function_to_Calculate_K;
-  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * PI * x / L);
-  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * PI * x / L);
-  U = u_0 + u_x * sin(a_ux * PI * x / L);
-  T = T_0 + T_x * cos(a_Tx * PI * x / L);
+  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
+  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L);
+  T = T_0 + T_x * cos(a_Tx * pi * x / L);
   kf1_N = Cf1_N * pow(T, etaf1_N) * exp(-Ea_N / R / T);
   kf1_N2 = Cf1_N2 * pow(T, etaf1_N2) * exp(-Ea_N2 / R / T);
 
-  Q_rho_N2 = -a_rho_N2_x * PI * rho_N2_x * U * sin(a_rho_N2_x * PI * x / L) / L + a_ux * PI * u_x * RHO_N2 * cos(a_ux * PI * x / L) / L - (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * pow(M_N, -0.2e1) / K_eq + (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / 0.2e1;
+  Q_rho_N2 = -a_rho_N2_x * pi * rho_N2_x * U * sin(a_rho_N2_x * pi * x / L) / L + a_ux * pi * u_x * RHO_N2 * cos(a_ux * pi * x / L) / L - (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * pow(M_N, -0.2e1) / K_eq + (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / 0.2e1;
   return(Q_rho_N2);
 }
 
@@ -178,36 +248,42 @@ Scalar SourceQ_rho_N2(Scalar x,
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar anQ_t(Scalar x)
+Scalar anQ_t(Scalar x,Scalar T_0,Scalar T_x,Scalar a_Tx,Scalar L)
 {
+  Scalar pi = acos(-1);
   Scalar T_an = T_0 + T_x * cos(a_Tx * pi * x / L);
   return T_an;
 }
 
 template <typename Scalar>
-Scalar anQ_u(Scalar x)
+Scalar anQ_u(Scalar x,Scalar u_0,Scalar u_x,Scalar a_ux,Scalar L)
 {
+  Scalar pi = acos(-1);
   Scalar u_an = u_0 + u_x * sin(a_ux * pi * x / L);
   return u_an;
 }
 
 template <typename Scalar>
-Scalar anQ_rho(Scalar x)
-{
+Scalar anQ_rho(Scalar x,Scalar rho_N_0,Scalar rho_N_x,Scalar a_rho_N_x,
+	       Scalar L,Scalar rho_N2_0,Scalar rho_N2_x,Scalar a_rho_N2_x)
+{  
+  Scalar pi = acos(-1);
   Scalar rho_an = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L) + rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
   return rho_an;
 }
 
 template <typename Scalar>
-Scalar anQ_rho_N(Scalar x)
+Scalar anQ_rho_N(Scalar x,Scalar rho_N_0,Scalar rho_N_x,Scalar a_rho_N_x,Scalar L)
 {
+  Scalar pi = acos(-1);
   Scalar rho_an_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
   return rho_an_N;
 }
 
 template <typename Scalar>
-Scalar anQ_rho_N2(Scalar x)
+Scalar anQ_rho_N2(Scalar x,Scalar rho_N2_0,Scalar rho_N2_x,Scalar a_rho_N2_x,Scalar L)
 {
+  Scalar pi = acos(-1);
   Scalar rho_an_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
   return rho_an_N2;
 }
@@ -351,44 +427,45 @@ int run_regression()
       exact_Ntwo = masa_eval_exact_rho_N2<Scalar>(x);
 
       // get comparison solution
-      ufield2   = SourceQ_rho_u  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
-      efield2   = SourceQ_rho_e  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
-      N2        = SourceQ_rho_N  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
-      Ntwo2     = SourceQ_rho_N2 (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
+      ufield2   = SourceQ_rho_u  (x,R_N,rho_N_0,rho_N_x,a_rho_N_x,rho_N2_0,rho_N2_x,
+				  a_rho_N2_x,L,u_0,u_x,a_ux,T_0,T_x,a_Tx);
 
-      exact_t2    = anQ_t      (x,u_0,u_x,a_ux,L);
-      exact_u2    = anQ_u      (x,rho_0,rho_x,a_rhox,L);
-      exact_rho2  = anQ_rho    (x,p_0,p_x,a_px,L);
-      exact_N2    = anQ_rho_N  (x,p_0,p_x,a_px,L);
-      exact_Ntwo2 = anQ_rho_N2 (x,p_0,p_x,a_px,L);
+      efield2   = SourceQ_rho_e  (x,R_N,R_N2,h0_N,h0_N2,theta_v_N2,
+				  rho_N_0,rho_N_x,a_rho_N_x,rho_N2_0,
+				  rho_N2_x,a_rho_N2_x,L,u_0,u_x,a_ux,T_0,T_x,a_Tx);
+
+      N2        = SourceQ_rho_N  (x,M_N,h0_N,h0_N2,Cf1_N,Cf1_N2,
+				  etaf1_N,etaf1_N2,Ea_N,Ea_N2,Function_to_Calculate_K,
+				  R_N,R_N2,theta_v_N2,
+				  rho_N_0,rho_N_x,a_rho_N_x,rho_N2_0,
+				  rho_N2_x,a_rho_N2_x,L,u_0,u_x,a_ux,T_0,T_x,a_Tx,R);
+
+
+      Ntwo2     = SourceQ_rho_N2 (x,M_N,h0_N,h0_N2,Cf1_N,Cf1_N2,
+				  etaf1_N,etaf1_N2,Ea_N,Ea_N2,Function_to_Calculate_K,K,
+				  R_N,R_N2,theta_v_N2,
+				  rho_N_0,rho_N_x,a_rho_N_x,rho_N2_0,
+				  rho_N2_x,a_rho_N2_x,L,u_0,u_x,a_ux,T_0,T_x,a_Tx,R);
+
+      exact_t2    = anQ_t      (x,T_0,T_x,a_Tx,L);
+      exact_u2    = anQ_u      (x,u_0,u_x,a_ux,L);
+      exact_rho2  = anQ_rho    (x,rho_N_0,rho_N_x,a_rho_N_x,L,rho_N2_0,rho_N2_x,a_rho_N2_x);
+      exact_N2    = anQ_rho_N  (x,rho_N_0,rho_N_x,a_rho_N_x,L);
+      exact_Ntwo2 = anQ_rho_N2 (x,rho_N2_0,rho_N2_x,a_rho_N2_x,L);
 
       // test the result is roughly zero
       // choose between abs and rel error
 #ifdef MASA_STRICT_REGRESSION
 
       ufield3 = fabs(ufield-ufield2);
-      efield3 = fabs(efield-efield2);
-      rho3    = fabs(rho-rho2);
-
-      exact_u3   = fabs(exact_u-exact_u2);
-      exact_rho3 = fabs(exact_rho-exact_rho2);
-      exact_p3   = fabs(exact_p-exact_p2);
 
 #else
 
       ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
-      efield3 = fabs(efield-efield2)/fabs(efield2);
-      rho3    = fabs(rho-rho2)/fabs(rho2);
-
-      exact_u3   = fabs(exact_u-exact_u2)/fabs(exact_u2);
-      exact_rho3 = fabs(exact_rho-exact_rho2)/fabs(exact_rho2);
-      exact_p3   = fabs(exact_p-exact_p2)/fabs(exact_p2);
 
 #endif
 
       nancheck(ufield3);
-      nancheck(efield3);
-      nancheck(rho3);
 
       if(ufield3 > threshold)
 	{
