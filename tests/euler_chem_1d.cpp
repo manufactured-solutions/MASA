@@ -277,15 +277,18 @@ int run_regression()
   // solutions
   Scalar ufield,ufield2,ufield3;
   Scalar efield,efield2,efield3;
-  Scalar rho,rho2,rho3;
+  Scalar N,N2,N3;
+  Scalar Ntwo,Ntwo2,Ntwo3;
   Scalar gradx,grady,gradz,gradp,gradrho;
 
+  Scalar exact_t,exact_t2,exact_t3;
   Scalar exact_u,exact_u2,exact_u3;
-  Scalar exact_p,exact_p2,exact_p3;
   Scalar exact_rho,exact_rho2,exact_rho3;
+  Scalar exact_N,exact_N2,exact_N3;
+  Scalar exact_Ntwo,exact_Ntwo2,exact_Ntwo3;
 
   // initalize
-  masa_init<Scalar>("euler-test","euler_chem_1d");
+  masa_init<Scalar>("euler-chemistry-test","euler_chem_1d");
 
   // initialize the default parameters
   masa_init_param<Scalar>();
