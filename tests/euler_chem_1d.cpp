@@ -458,14 +458,41 @@ int run_regression()
 #ifdef MASA_STRICT_REGRESSION
 
       ufield3 = fabs(ufield-ufield2);
+      efield3 = fabs(efield-efield2);
+      N3      = fabs(N-N2);
+      Ntwo3   = fabs(Ntwo-Ntwo2);
+
+      exact_t3    = fabs(exact_t2-exact_t);
+      exact_u3    = fabs(exact_u2-exact_u);
+      exact_rho3  = fabs(exact_rho2-exact_rho);
+      exact_N3    = fabs(exact_N2-exact_N);
+      exact_Ntwo3 = fabs(exact_Ntwo2-exact_Ntwo);
 
 #else
 
       ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
+      efield3 = fabs(efield-efield2)/fabs(efield2);
+      N3      = fabs(N-N2)/fabs(N2);
+      Ntwo3   = fabs(Ntwo-Ntwo2)/fabs(Ntwo2);
+
+      exact_t3    = fabs(exact_t2-exact_t)/fabs(exact_t3);
+      exact_u3    = fabs(exact_u2-exact_u)/fabs(exact_u3);
+      exact_rho3  = fabs(exact_rho2-exact_rho)/fabs(exact_rho3);
+      exact_N3    = fabs(exact_N2-exact_N)/fabs(exact_N3);
+      exact_Ntwo3 = fabs(exact_Ntwo2-exact_Ntwo)/fabs(exact_Ntwo3);
 
 #endif
 
       nancheck(ufield3);
+      nancheck(efield3);
+      nancheck(N3);
+      nancheck(Ntwo3);
+
+      nancheck(exact_t3);
+      nancheck(exact_u3);
+      nancheck(exact_rho3);
+      nancheck(exact_N3);
+      nancheck(exact_Ntwo3);
 
       if(ufield3 > threshold)
 	{
@@ -494,15 +521,3 @@ int main()
 
   return err;
 }
-
-/*
-  rho_0 = masa_get_param<Scalar>("rho_0");
-  rho_x = masa_get_param<Scalar>("rho_x");
-  p_0 = masa_get_param<Scalar>("p_0");
-  p_x = masa_get_param<Scalar>("p_x");
-  a_px = masa_get_param<Scalar>("a_px");
-  a_rhox = masa_get_param<Scalar>("a_rhox");
-  a_ux = masa_get_param<Scalar>("a_ux");
-  Gamma = masa_get_param<Scalar>("Gamma");
-  mu    = masa_get_param<Scalar>("mu");
-*/
