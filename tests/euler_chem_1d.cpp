@@ -496,10 +496,10 @@ int run_regression()
 
 #endif
 
+      cout << ufield3 << endl;
 
       // check for nans
-      /*
-	nancheck(ufield3);
+      nancheck(ufield3);
       nancheck(efield3);
       nancheck(N3);
       nancheck(Ntwo3);
@@ -509,7 +509,6 @@ int run_regression()
       nancheck(exact_rho3);
       nancheck(exact_N3);
       nancheck(exact_Ntwo3);
-      */
 
       // check threshold has not been exceeded
       threshcheck(ufield3,threshold);
