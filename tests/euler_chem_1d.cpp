@@ -472,7 +472,7 @@ int run_regression()
 
       // test the result is roughly zero
       // choose between abs and rel error
-
+      
       //#ifdef MASA_STRICT_REGRESSION
 
       ufield3 = fabs(ufield-ufield2);
@@ -486,7 +486,7 @@ int run_regression()
       exact_N3    = fabs(exact_N2-exact_N);
       exact_Ntwo3 = fabs(exact_Ntwo2-exact_Ntwo);
 
-      /*#else
+      /* #else
 
       ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
       efield3 = fabs(efield-efield2)/fabs(efield2);
@@ -501,18 +501,9 @@ int run_regression()
 
       #endif */
 
-      // watch out
-      //cout << N3 << endl;
-      //cout << Ntwo3 << endl;
-      //cout << exact_t3 << endl;
-      //cout << exact_u3 << endl;
-      //cout << exact_N3 << endl;
-      //cout << exact_Ntwo3 << endl;
-
       // check for nans
       nancheck(ufield3);      
       nancheck(efield3);
-      /*
       nancheck(N3);
       nancheck(exact_rho3);
       nancheck(exact_t3);
@@ -520,7 +511,6 @@ int run_regression()
       nancheck(exact_N3);
       nancheck(exact_u3);
       nancheck(Ntwo3);
-      */
 
       // check threshold has not been exceeded
       threshcheck(ufield3,threshold);
@@ -531,11 +521,11 @@ int run_regression()
       threshcheck(exact_Ntwo3,threshold);
       threshcheck(exact_t3   ,threshold);
 
+
       /*
       threshcheck(     N3,threshold);
       threshcheck(  Ntwo3,threshold);
       */
-
     } // done w/ spatial interations
 
   return 0;
