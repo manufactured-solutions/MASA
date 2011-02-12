@@ -400,6 +400,7 @@ int run_regression()
   R_N   = masa_get_param<Scalar>("R_N");
   R_N2  = masa_get_param<Scalar>("R_N2");
 
+  Function_to_Calculate_K = masa_get_param<Scalar>("Function_to_Calculate_K");
   theta_v_N2 = masa_get_param<Scalar>("theta_v_N2");
   M_N   = masa_get_param<Scalar>("M_N");
   h0_N  = masa_get_param<Scalar>("h0_N");
@@ -417,10 +418,6 @@ int run_regression()
   T_0  = masa_get_param<Scalar>("T_0");
   T_x  = masa_get_param<Scalar>("T_x");
   a_Tx = masa_get_param<Scalar>("a_Tx");
-
-  
-  //cout << Ea_N << endl;
-  //cout << T_0 << endl;
 
   // check that all terms have been initialized
   masa_sanity_check<Scalar>();
@@ -444,36 +441,66 @@ int run_regression()
       exact_Ntwo = masa_eval_exact_rho_N2<Scalar>(x);
 
       // get comparison solution
-      ufield2   = SourceQ_rho_u  (x,R_N,rho_N_0,rho_N_x,a_rho_N_x,rho_N2_0,rho_N2_x,
-				  a_rho_N2_x,L,u_0,u_x,a_ux,T_0,T_x,a_Tx);
+      ufield2   = SourceQ_rho_u  (x,R_N,rho_N_0,rho_N_x,a_rho_N_x,
+				  rho_N2_0,rho_N2_x,a_rho_N2_x,L,
+				  u_0,u_x,a_ux,T_0,T_x,a_Tx);
 
       efield2   = SourceQ_rho_e  (x,R_N,R_N2,h0_N,h0_N2,theta_v_N2,
 				  rho_N_0,rho_N_x,a_rho_N_x,rho_N2_0,
-				  rho_N2_x,a_rho_N2_x,L,u_0,u_x,a_ux,T_0,T_x,a_Tx);
+				  rho_N2_x,a_rho_N2_x,L,u_0,u_x,a_ux,
+				  T_0,T_x,a_Tx);
 
       N2        = SourceQ_rho_N  (x,M_N,h0_N,h0_N2,Cf1_N,Cf1_N2,
-				  etaf1_N,etaf1_N2,Ea_N,Ea_N2,Function_to_Calculate_K,
+				  etaf1_N,etaf1_N2,Ea_N,Ea_N2,
+				  Function_to_Calculate_K,
 				  R_N,R_N2,theta_v_N2,
 				  rho_N_0,rho_N_x,a_rho_N_x,rho_N2_0,
-				  rho_N2_x,a_rho_N2_x,L,u_0,u_x,a_ux,T_0,T_x,a_Tx,R);
+				  rho_N2_x,a_rho_N2_x,L,u_0,u_x,a_ux,
+				  T_0,T_x,a_Tx,R);
 
 
-      Ntwo2     = SourceQ_rho_N2 (x,M_N,h0_N,h0_N2,Cf1_N,Cf1_N2,
-				  etaf1_N,etaf1_N2,Ea_N,Ea_N2,Function_to_Calculate_K,K,
-				  R_N,R_N2,theta_v_N2,
-				  rho_N_0,rho_N_x,a_rho_N_x,rho_N2_0,
-				  rho_N2_x,a_rho_N2_x,L,u_0,u_x,a_ux,T_0,T_x,a_Tx,R);
+      Ntwo2     = SourceQ_rho_N2 (x,
+				  M_N,
+				  h0_N,
+				  h0_N2,
+				  Cf1_N,
+				  Cf1_N2,
+				  etaf1_N,
+				  etaf1_N2,
+				  Ea_N,
+				  Ea_N2,
+				  Function_to_Calculate_K,
+				  K,
+				  R_N,
+				  R_N2,
+				  theta_v_N2,
+				  rho_N_0,
+				  rho_N_x,
+				  a_rho_N_x,
+				  rho_N2_0,
+				  rho_N2_x,
+				  a_rho_N2_x,
+				  L,
+				  u_0,
+				  u_x,
+				  a_ux,
+				  T_0,
+				  T_x,
+				  a_Tx,
+				  R);
 
       exact_t2    = anQ_t      (x,T_0,T_x,a_Tx,L);
       exact_u2    = anQ_u      (x,u_0,u_x,a_ux,L);
-      exact_rho2  = anQ_rho    (x,rho_N_0,rho_N_x,a_rho_N_x,L,rho_N2_0,rho_N2_x,a_rho_N2_x);
+      exact_rho2  = anQ_rho    (x,rho_N_0,rho_N_x,a_rho_N_x,L,
+				rho_N2_0,rho_N2_x,a_rho_N2_x);
+
       exact_N2    = anQ_rho_N  (x,rho_N_0,rho_N_x,a_rho_N_x,L);
       exact_Ntwo2 = anQ_rho_N2 (x,rho_N2_0,rho_N2_x,a_rho_N2_x,L);
 
       // test the result is roughly zero
       // choose between abs and rel error
       
-      //#ifdef MASA_STRICT_REGRESSION
+      // #ifdef MASA_STRICT_REGRESSION
 
       ufield3 = fabs(ufield-ufield2);
       efield3 = fabs(efield-efield2);
@@ -520,12 +547,9 @@ int run_regression()
       threshcheck(exact_N3   ,threshold);
       threshcheck(exact_Ntwo3,threshold);
       threshcheck(exact_t3   ,threshold);
-
-
-      /*
-      threshcheck(     N3,threshold);
       threshcheck(  Ntwo3,threshold);
-      */
+      threshcheck(     N3,threshold);
+
     } // done w/ spatial interations
 
   return 0;
