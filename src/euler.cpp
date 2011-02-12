@@ -51,7 +51,6 @@ MASA::euler_1d<Scalar>::euler_1d()
   this->mmsname = "euler_1d";
   this->dimension=1;
 
-  this->register_var("R",&R);
   this->register_var("k",&k);
 
   this->register_var("u_0",&u_0);
@@ -75,7 +74,6 @@ int MASA::euler_1d<Scalar>::init_var()
   int err = 0;
 
   // randomly generated
-  err += this->set_var("R",1.01);
   err += this->set_var("k",1.38);
 
   err += this->set_var("u_0",14.191);
@@ -221,7 +219,6 @@ MASA::euler_2d<Scalar>::euler_2d()
   this->mmsname = "euler_2d";
   this->dimension=2;
 
-  this->register_var("R",&R);
   this->register_var("k",&k);
 
   this->register_var("u_0",&u_0);
@@ -256,7 +253,6 @@ int MASA::euler_2d<Scalar>::init_var()
   int err = 0;
 
   // currently randomly generated
-  err += this->set_var("R",1.01);
   err += this->set_var("k",1.38);
 
   err += this->set_var("u_0",200.23);
@@ -545,7 +541,6 @@ MASA::euler_3d<Scalar>::euler_3d()
   this->mmsname = "euler_3d";
   this->dimension=3;
 
-  this->register_var("R",&R);
   this->register_var("k",&k);
 
   this->register_var("u_0",&u_0);
@@ -595,7 +590,6 @@ int MASA::euler_3d<Scalar>::init_var()
   int err = 0;
 
   // set params (random currenly)
-  err += this->set_var("R",1.01);
   err += this->set_var("k",1.38);
 
   err += this->set_var("u_0",20.27);

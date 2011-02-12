@@ -540,7 +540,6 @@ namespace MASA
     using manufactured_solution<Scalar>::pi;
     using manufactured_solution<Scalar>::PI;
 
-    Scalar R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
     Scalar k;                             // Boltzmanns constant
 
     Scalar u_0;
@@ -581,7 +580,6 @@ namespace MASA
     using manufactured_solution<Scalar>::pi;
     using manufactured_solution<Scalar>::PI;
 
-    Scalar R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
     Scalar k;     // Boltzmanns constant
 
     Scalar u_0;
@@ -636,7 +634,6 @@ namespace MASA
     using manufactured_solution<Scalar>::pi;
     using manufactured_solution<Scalar>::PI;
 
-    Scalar R;     // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
     Scalar k;     // Boltzmanns constant
 
     Scalar u_0;
