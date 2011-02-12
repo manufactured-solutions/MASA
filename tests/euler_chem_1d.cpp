@@ -514,15 +514,14 @@ int run_regression()
       nancheck(efield3);
       nancheck(N3);
 
-      /*
       nancheck(exact_rho3);
       nancheck(exact_t3);
       nancheck(exact_Ntwo3);
       nancheck(exact_N3);
+      /*
 
       nancheck(exact_u3);
       nancheck(Ntwo3);
-
       */
 
       // check threshold has not been exceeded
