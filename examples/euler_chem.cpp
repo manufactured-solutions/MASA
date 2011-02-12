@@ -37,15 +37,18 @@
 #include <fstream>
 
 using namespace MASA;
+using namespace std;
 
 typedef double Scalar;
 
 int main()
 {
-
-  int    nx = 10;  // number of points
-  int    lx = 1;     // length
-  Scalar dx=lx/nx;
+  Scalar efield;
+  
+  Scalar tempx,tempy;
+  int    nx = 200;  // number of points
+  int    lx = 10;     // length
+  Scalar dx=double(lx)/double(nx);
 
   // initialize the problem
   masa_init<Scalar>("euler-chemistry-example","euler_chem_1d");
@@ -61,7 +64,10 @@ int main()
   // evaluate source terms over the domain (0<x<1, 0<y<1) 
   for(int i=0;i<nx;i++)
     {
-      
+      tempx=i*dx;
+
+      efield = masa_eval_source_rho_e<Scalar>(tempx);
+      cout << tempx << " " << efield << endl;
 
     } // done with loop
 

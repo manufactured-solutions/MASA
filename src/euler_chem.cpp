@@ -118,7 +118,7 @@ int MASA::euler_chem_1d<Scalar>::init_var()
   err += this->set_var("h0_N",10.01);
   err += this->set_var("h0_N2",12.01);
   err += this->set_var("K",0.0256833);
-  err += this->set_var("L",1.00);
+  err += this->set_var("L",10.00);
 
   err += this->set_var("u_0",70);
   err += this->set_var("u_x", 4);
