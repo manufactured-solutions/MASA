@@ -510,31 +510,34 @@ int run_regression()
 
 
       // check for nans
-      nancheck(ufield3);
-      
-      //nancheck(exact_u3);
-      /*
+      nancheck(ufield3);      
       nancheck(efield3);
       nancheck(N3);
+
+      /*
+      nancheck(exact_rho3);
+      nancheck(exact_t3);
+      nancheck(exact_Ntwo3);
+      nancheck(exact_N3);
+
+      nancheck(exact_u3);
       nancheck(Ntwo3);
 
-      nancheck(exact_t3);
-      nancheck(exact_rho3);
-      nancheck(exact_N3);
-      nancheck(exact_Ntwo3);
+      */
 
       // check threshold has not been exceeded
+      threshcheck(ufield3,threshold);
+      threshcheck(exact_u3   ,threshold);
       threshcheck(efield3,threshold);
-      threshcheck(     N3,threshold);
-      threshcheck(  Ntwo3,threshold);
-      threshcheck(exact_t3   ,threshold);
       threshcheck(exact_rho3 ,threshold);
       threshcheck(exact_N3   ,threshold);
       threshcheck(exact_Ntwo3,threshold);
-      */
+      threshcheck(exact_t3   ,threshold);
 
-      threshcheck(ufield3,threshold);
-      threshcheck(exact_u3   ,threshold);
+      /*
+      threshcheck(     N3,threshold);
+      threshcheck(  Ntwo3,threshold);
+      */
 
     } // done w/ spatial interations
 
