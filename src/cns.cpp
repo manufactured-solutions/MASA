@@ -441,65 +441,6 @@ int MASA::navierstokes_3d_compressible<Scalar>::init_var()
   err += this->set_var("a_wz",0.0);
   err += this->set_var("p_z",0);
 
-  /*
-  // FIN-S defaults
-  err += this->set_var("Gamma",1.4);
-  err += this->set_var("L",1.0);
-  err += this->set_var("R",286.9);
-
-  //Scalar k1 = R*gamma/(gamma-1)*mu/Pr
-  Scalar k1 = 286.9*1.4/(1.4-1)*(1.8e-5/0.71);
-  
-  err += this->set_var("k",k1);
-
-  err += this->set_var("a_px",2);
-  err += this->set_var("a_py",-1.5);
-
-  err += this->set_var("a_rhox",2);
-  err += this->set_var("a_rhoy",-1.5);
-
-  err += this->set_var("a_ux",2);
-  err += this->set_var("a_uy",-1.5);
-
-  err += this->set_var("a_vx",2);
-  err += this->set_var("a_vy",-1.5);
-
-  err += this->set_var("a_wx",1);
-  err += this->set_var("a_wy",-1);
-
-  err += this->set_var("mu",1.8e-5);
-
-  err += this->set_var("p_0",10000);
-  err += this->set_var("p_x",1000);
-  err += this->set_var("p_y",1000);
-
-  err += this->set_var("rho_0",1);
-  err += this->set_var("rho_x",0.1);
-  err += this->set_var("rho_y",0.1);
-
-  err += this->set_var("u_0",100);
-  err += this->set_var("u_x",20);
-  err += this->set_var("u_y",10);
-
-  err += this->set_var("v_0",0);
-  err += this->set_var("v_x",10);
-  err += this->set_var("v_y",10);
-
-  err += this->set_var("w_0",0);
-  err += this->set_var("w_x",2);
-  err += this->set_var("w_y",-2);
-
-  err += this->set_var("w_z",4);
-  err += this->set_var("v_z",5);
-  err += this->set_var("u_z",5);
-  err += this->set_var("rho_z",.05);
-  err += this->set_var("a_vz",2);
-  err += this->set_var("a_uz",-2.5);
-  err += this->set_var("a_rhoz",-2);  
-  err += this->set_var("a_pz",-2.5);
-  err += this->set_var("a_wz",2);
-  err += this->set_var("p_z",500);*/
-
   return err;
 
 } // done with variable initializer
