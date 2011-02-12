@@ -66,7 +66,7 @@ int main()
     {
       tempx=i*dx;
 
-      efield = masa_eval_source_rho_e<Scalar>(tempx);
+      efield = masa_eval_source_rho_N2<Scalar>(tempx);
       cout << tempx << " " << efield << endl;
 
     } // done with loop

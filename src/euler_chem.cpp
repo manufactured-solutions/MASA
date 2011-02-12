@@ -100,7 +100,7 @@ int MASA::euler_chem_1d<Scalar>::init_var()
   err += this->set_var("Cf1_N",1.01);
   err += this->set_var("Cf1_N2",1.01);
 
-  err += this->set_var("etaf1_N",17.01);
+  err += this->set_var("etaf1_N",7.01);
   err += this->set_var("etaf1_N2",1.01);
 
   err += this->set_var("Ea_N",1.01);
@@ -109,10 +109,10 @@ int MASA::euler_chem_1d<Scalar>::init_var()
   // achtung: need to make into function pointer!
   err += this->set_var("Function_to_Calculate_K",1.00);
 
-  err += this->set_var("R_N",10.00);
+  err += this->set_var("R_N",1.00);
   err += this->set_var("R_N2",8.00);
 
-  err += this->set_var("theta_v_N2",10.01);
+  err += this->set_var("theta_v_N2",1.01);
   err += this->set_var("M_N",5.01);
 
   err += this->set_var("h0_N",10.01);
@@ -124,7 +124,7 @@ int MASA::euler_chem_1d<Scalar>::init_var()
   err += this->set_var("u_x", 4);
   err += this->set_var("a_ux",5/3);
 
-  err += this->set_var("rho_N_0",100.01);
+  err += this->set_var("rho_N_0",10.01);
   err += this->set_var("rho_N_x",6.01);
   err += this->set_var("a_rho_N_x",8.01);
 
