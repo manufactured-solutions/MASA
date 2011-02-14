@@ -201,7 +201,7 @@ int run_regression()
   masa_init<Scalar>("euler-test","euler_1d");
 
   // initialize the default parameters
-  //masa_init_param<Scalar>();
+  masa_init_param<Scalar>();
 
   // get defaults for comparison to source terms
   // get vars
