@@ -176,9 +176,11 @@ namespace MASA
     virtual Scalar eval_q_rho_w(Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Source Term (rho*w) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*w)
 
     virtual Scalar eval_q_rho_e (Scalar)              {std::cout << "MASA ERROR:: Source Term (rho*e) is unavailable or not properly loaded.\n"; return -1.33;}; 
+    virtual Scalar eval_q_rho_e (Scalar,Scalar)       {std::cout << "MASA ERROR:: Source Term (rho*e) is unavailable or not properly loaded.\n"; return -1.33;}; 
+    virtual Scalar eval_q_rho_e (Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Source Term (rho*e) is unavailable or not properly loaded.\n"; return -1.33;}; 
+
     virtual Scalar eval_q_rho_N (Scalar)              {std::cout << "MASA ERROR:: Source Term (N )    is unavailable or not properly loaded.\n"; return -1.33;}; 
     virtual Scalar eval_q_rho_N2(Scalar)              {std::cout << "MASA ERROR:: Source Term (N2)    is unavailable or not properly loaded.\n"; return -1.33;}; 
-
 
   /* 
    * -------------------------------------------------------------------------------------------   
@@ -561,7 +563,7 @@ namespace MASA
     int init_var();          // default problem values
 
     Scalar eval_q_rho_u (Scalar); // source terms
-    Scalar eval_q_e     (Scalar);
+    Scalar eval_q_rho_e (Scalar);
     Scalar eval_q_rho   (Scalar);
     
     Scalar eval_exact_u  (Scalar); // analytical
@@ -612,7 +614,7 @@ namespace MASA
 
     Scalar eval_q_rho_u (Scalar,Scalar);
     Scalar eval_q_rho_v (Scalar,Scalar);
-    Scalar eval_q_e     (Scalar,Scalar);
+    Scalar eval_q_rho_e (Scalar,Scalar);
     Scalar eval_q_rho   (Scalar,Scalar);
 
     Scalar eval_exact_u  (Scalar,Scalar); // analytical
@@ -682,7 +684,7 @@ namespace MASA
     Scalar eval_q_rho_u  (Scalar,Scalar,Scalar); // source terms
     Scalar eval_q_rho_v  (Scalar,Scalar,Scalar);
     Scalar eval_q_rho_w  (Scalar,Scalar,Scalar);
-    Scalar eval_q_e      (Scalar,Scalar,Scalar);
+    Scalar eval_q_rho_e  (Scalar,Scalar,Scalar);
     Scalar eval_q_rho    (Scalar,Scalar,Scalar);
 
     Scalar eval_exact_u  (Scalar,Scalar,Scalar); // analytical
@@ -797,7 +799,7 @@ namespace MASA
 
     Scalar eval_q_rho_u (Scalar,Scalar); // radial velocity 
     Scalar eval_q_rho_w (Scalar,Scalar); // axial 
-    Scalar eval_q_e     (Scalar,Scalar);
+    Scalar eval_q_rho_e (Scalar,Scalar);
     Scalar eval_q_rho   (Scalar,Scalar);
     
     Scalar eval_exact_u  (Scalar,Scalar); // analytical
@@ -844,7 +846,7 @@ namespace MASA
 
     Scalar eval_q_rho_u (Scalar,Scalar); // radial velocity 
     Scalar eval_q_rho_w (Scalar,Scalar); // axial 
-    Scalar eval_q_e     (Scalar,Scalar);
+    Scalar eval_q_rho_e (Scalar,Scalar);
     Scalar eval_q_rho   (Scalar,Scalar);
     
     Scalar eval_exact_u  (Scalar,Scalar); // analytical
@@ -981,7 +983,7 @@ namespace MASA
 
     Scalar eval_q_rho_u (Scalar,Scalar);
     Scalar eval_q_rho_v (Scalar,Scalar);
-    Scalar eval_q_e     (Scalar,Scalar);
+    Scalar eval_q_rho_e (Scalar,Scalar);
     Scalar eval_q_rho   (Scalar,Scalar);
 
     Scalar eval_exact_u  (Scalar,Scalar); // analytical
@@ -1053,7 +1055,7 @@ namespace MASA
     Scalar eval_q_rho_u  (Scalar,Scalar,Scalar); // source terms
     Scalar eval_q_rho_v  (Scalar,Scalar,Scalar);
     Scalar eval_q_rho_w  (Scalar,Scalar,Scalar);
-    Scalar eval_q_e      (Scalar,Scalar,Scalar);
+    Scalar eval_q_rho_e  (Scalar,Scalar,Scalar);
     Scalar eval_q_rho    (Scalar,Scalar,Scalar);
 
     Scalar eval_exact_u  (Scalar,Scalar,Scalar); // analytical

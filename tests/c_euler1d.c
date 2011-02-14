@@ -218,7 +218,7 @@ int main()
 
       //evalulate source terms
       ufield = cmasa_eval_1d_source_rho_u(x);
-      efield = cmasa_eval_1d_source_e    (x);
+      efield = cmasa_eval_1d_source_rho_e    (x);
       rho    = cmasa_eval_1d_source_rho  (x);
 	
       //evaluate analytical terms

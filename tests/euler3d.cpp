@@ -547,7 +547,7 @@ int run_regression()
 	  ufield = masa_eval_source_rho_u  <Scalar>(x,y,z);
 	  vfield = masa_eval_source_rho_v  <Scalar>(x,y,z);
 	  wfield = masa_eval_source_rho_w  <Scalar>(x,y,z);
-	  efield = masa_eval_source_e      <Scalar>(x,y,z);
+	  efield = masa_eval_source_rho_e      <Scalar>(x,y,z);
 	  rho    = masa_eval_source_rho    <Scalar>(x,y,z);
 	  
 	  //evaluate analytical terms

@@ -117,6 +117,7 @@ extern "C" double cmasa_eval_1d_source_u    (double x){return(masa_eval_source_u
 extern "C" double cmasa_eval_1d_source_e    (double x){return(masa_eval_source_e<double>  (x));};
 extern "C" double cmasa_eval_1d_source_rho  (double x){return(masa_eval_source_rho<double>(x));};
 extern "C" double cmasa_eval_1d_source_rho_u(double x){return(masa_eval_source_rho_u<double>(x));};
+extern "C" double cmasa_eval_1d_source_rho_e(double x){return(masa_eval_source_rho_e<double>(x));};
 
 extern "C" double cmasa_eval_1d_exact_t      (double x){return(masa_eval_exact_t<double>  (x));};
 extern "C" double cmasa_eval_1d_exact_u      (double x){return(masa_eval_exact_u<double>  (x));};
@@ -139,6 +140,7 @@ extern "C" double cmasa_eval_2d_source_rho  (double x,double y){return(masa_eval
 extern "C" double cmasa_eval_2d_source_rho_u(double x,double y){return(masa_eval_source_rho_u<double>(x,y));};
 extern "C" double cmasa_eval_2d_source_rho_v(double x,double y){return(masa_eval_source_rho_v<double>(x,y));};
 extern "C" double cmasa_eval_2d_source_rho_w(double x,double y){return(masa_eval_source_rho_w<double>(x,y));};
+extern "C" double cmasa_eval_2d_source_rho_e(double x,double y){return(masa_eval_source_rho_e<double>(x,y));};
 
 extern "C" double cmasa_eval_2d_exact_t     (double x,double y){return(masa_eval_exact_t<double>  (x,y));};
 extern "C" double cmasa_eval_2d_exact_u     (double x,double y){return(masa_eval_exact_u<double>  (x,y));};
@@ -165,6 +167,7 @@ extern "C" double cmasa_eval_3d_source_rho  (double x,double y,double z){return(
 extern "C" double cmasa_eval_3d_source_rho_u(double x,double y,double z){return(masa_eval_source_rho_u<double>(x,y,z));};
 extern "C" double cmasa_eval_3d_source_rho_v(double x,double y,double z){return(masa_eval_source_rho_v<double>(x,y,z));};
 extern "C" double cmasa_eval_3d_source_rho_w(double x,double y,double z){return(masa_eval_source_rho_w<double>(x,y,z));};
+extern "C" double cmasa_eval_3d_source_rho_e(double x,double y,double z){return(masa_eval_source_rho_e<double>(x,y,z));};
 
 extern "C" double cmasa_eval_3d_exact_t     (double x,double y,double z){return(masa_eval_exact_t<double>  (x,y,z));};
 extern "C" double cmasa_eval_3d_exact_u     (double x,double y,double z){return(masa_eval_exact_u<double>  (x,y,z));};

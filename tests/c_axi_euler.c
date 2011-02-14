@@ -174,7 +174,7 @@ int main()
 	//evalulate source terms
 	cmasa_eval_source_u  (r,z,&ufield);
 	cmasa_eval_source_w  (r,z,&wfield);
-	cmasa_eval_source_e  (r,z,&efield);
+	cmasa_eval_source_rho_e  (r,z,&efield);
 	cmasa_eval_source_rho(r,z,&rho);
 
 	//evaluate analytical terms

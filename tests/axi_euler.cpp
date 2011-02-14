@@ -199,7 +199,7 @@ int main()
 	//evalulate source terms
 	ufield = masa_eval_source_rho_u<Scalar>  (r,z);
 	wfield = masa_eval_source_rho_w<Scalar>  (r,z);
-	efield = masa_eval_source_e<Scalar>  (r,z);
+	efield = masa_eval_source_rho_e<Scalar>  (r,z);
 	rho    = masa_eval_source_rho<Scalar>(r,z);
 
 	//evaluate analytical terms

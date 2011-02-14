@@ -231,7 +231,7 @@ int run_regression()
       	
       //evalulate source terms
       ufield = masa_eval_source_rho_u  <Scalar>(x);
-      efield = masa_eval_source_e  <Scalar>(x);
+      efield = masa_eval_source_rho_e  <Scalar>(x);
       rho    = masa_eval_source_rho<Scalar>(x);
       
       //evaluate manufactured analytical solution terms
