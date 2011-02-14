@@ -68,6 +68,8 @@ int main()
 	}      
     }  
 #endif
-  
+
+  // steady as she goes
+  return 0;
 
 }
