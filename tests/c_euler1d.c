@@ -224,7 +224,7 @@ int main()
       //evaluate analytical terms
       exact_u   = cmasa_eval_1d_exact_u      (x);
       exact_p   = cmasa_eval_1d_exact_p      (x);
-      exact_rho = cmasa_eval_1d_exact_rho     (x);
+      exact_rho = cmasa_eval_1d_exact_rho    (x);
 	
       // get fundamental source term solution
       ufield2   = SourceQ_u  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);

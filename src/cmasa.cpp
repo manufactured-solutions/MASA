@@ -131,6 +131,8 @@ extern "C" double cmasa_eval_1d_exact_t      (double x){return(masa_eval_exact_t
 extern "C" double cmasa_eval_1d_exact_u      (double x){return(masa_eval_exact_u<double>  (x));};
 extern "C" double cmasa_eval_1d_exact_p      (double x){return(masa_eval_exact_p<double>  (x));};
 extern "C" double cmasa_eval_1d_exact_rho    (double x){return(masa_eval_exact_rho<double>(x));};
+extern "C" double cmasa_eval_1d_exact_rho_N  (double x){return(masa_eval_exact_rho_N<double>(x));};
+extern "C" double cmasa_eval_1d_exact_rho_N2 (double x){return(masa_eval_exact_rho_N2<double>(x));};
 
 extern "C" double cmasa_eval_grad_1d_u    (double x){return(masa_eval_grad_1d_u<double>  (x));};
 extern "C" double cmasa_eval_grad_1d_p    (double x){return(masa_eval_grad_1d_p<double>  (x));};

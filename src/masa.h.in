@@ -657,7 +657,9 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double cmasa_eval_1d_exact_rho    (double);
+  extern double cmasa_eval_1d_exact_rho      (double);
+  extern double cmasa_eval_1d_exact_rho_N    (double);
+  extern double cmasa_eval_1d_exact_rho_N2   (double);
 
   // --------------------------------
   // source term(s) -- 2D
