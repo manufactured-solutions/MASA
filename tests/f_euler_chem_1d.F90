@@ -29,6 +29,7 @@
 !! -------------------------------------------------------------------------
 
 program main
+  use euler_source_interface
   use masa
   implicit none
 
@@ -95,7 +96,7 @@ program main
   ! initialize the problem
   dx = real(lx)/real(nx)
 
-  call masa_init('mytest','euler_1d')
+  call masa_init("mytest","euler_chem_1d")
 
   ! initialize the default parameters
   call masa_init_param()
