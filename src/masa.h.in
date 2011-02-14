@@ -442,6 +442,15 @@ extern "C" {
   extern int cmasa_init      (const char*, const char*);
 
   /**
+   *  cmasa_init: 
+   * cmasa equivalent to masa_purge_default_param. 
+   * 
+   * This function sets all masa parameters to uninitalized
+   *
+   */
+  extern int cmasa_purge_default_param();
+
+  /**
    * cmasa_select_mms: cmasa equivalent to masa_select_mms
    *
    * cmasa_select_mms selects an already initalized 

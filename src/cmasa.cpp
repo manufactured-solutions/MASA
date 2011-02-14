@@ -74,7 +74,7 @@ extern "C" int cmasa_list_mms()
   return 0;
 }
 
-extern "C" int cmasa_purge_deault_param()
+extern "C" int cmasa_purge_default_param()
 {
   masa_purge_default_param<double>();
   return 0;
