@@ -174,13 +174,24 @@ module masa
   end interface  
 
   interface 
-     real (c_double) function masa_eval_1d_source_rho_e(value) bind (C,name='cmasa_eval_1d_source_rho_e')
+     real (c_double) function masa_eval_1d_source_rho_N(value) bind (C,name='cmasa_eval_1d_source_rho_N')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        
-     end function masa_eval_1d_source_rho_e
+     end function masa_eval_1d_source_rho_N
+  end interface  
+
+
+  interface 
+     real (c_double) function masa_eval_1d_source_rho_N2(value) bind (C,name='cmasa_eval_1d_source_rho_N2')
+       use iso_c_binding
+       implicit none
+       
+       real (c_double), value :: value
+       
+     end function masa_eval_1d_source_rho_N2
   end interface  
 
   ! ---------------------------------

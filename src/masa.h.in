@@ -594,8 +594,10 @@ extern "C" {
    * of the specified variable. 
    */
   extern double cmasa_eval_1d_source_rho(double);
-  extern double cmasa_eval_1d_source_rho_u(double);
-  extern double cmasa_eval_1d_source_rho_e(double);
+  extern double cmasa_eval_1d_source_rho_u (double);
+  extern double cmasa_eval_1d_source_rho_e (double);
+  extern double cmasa_eval_1d_source_rho_N (double);
+  extern double cmasa_eval_1d_source_rho_N2(double);
 
   /**
    * cmasa_eval_1d_exact_t: cmasa equivalent to masa_eval_1d_exact_t
@@ -739,6 +741,7 @@ extern "C" {
   extern double cmasa_eval_2d_source_rho_v(double,double);
   extern double cmasa_eval_2d_source_rho_w(double,double);
   extern double cmasa_eval_2d_source_rho_e(double,double);
+
   /**
    * cmasa_eval_2d_exact_t: cmasa equivalent to masa_eval_2d_exact_t
    *

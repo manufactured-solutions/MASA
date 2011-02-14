@@ -118,12 +118,14 @@ extern "C" double cmasa_get_param(const char* param)
 // source, analytical and gradient term(s) -- 1D
 // --------------------------------
 
-extern "C" double cmasa_eval_1d_source_t    (double x){return(masa_eval_source_t<double>  (x));};
-extern "C" double cmasa_eval_1d_source_u    (double x){return(masa_eval_source_u<double>  (x));};
-extern "C" double cmasa_eval_1d_source_e    (double x){return(masa_eval_source_e<double>  (x));};
-extern "C" double cmasa_eval_1d_source_rho  (double x){return(masa_eval_source_rho<double>(x));};
-extern "C" double cmasa_eval_1d_source_rho_u(double x){return(masa_eval_source_rho_u<double>(x));};
-extern "C" double cmasa_eval_1d_source_rho_e(double x){return(masa_eval_source_rho_e<double>(x));};
+extern "C" double cmasa_eval_1d_source_t     (double x){return(masa_eval_source_t     <double>  (x));};
+extern "C" double cmasa_eval_1d_source_u     (double x){return(masa_eval_source_u     <double>  (x));};
+extern "C" double cmasa_eval_1d_source_e     (double x){return(masa_eval_source_e     <double>  (x));};
+extern "C" double cmasa_eval_1d_source_rho   (double x){return(masa_eval_source_rho   <double>(x));};
+extern "C" double cmasa_eval_1d_source_rho_u (double x){return(masa_eval_source_rho_u <double>(x));};
+extern "C" double cmasa_eval_1d_source_rho_e (double x){return(masa_eval_source_rho_e <double>(x));};
+extern "C" double cmasa_eval_1d_source_rho_N (double x){return(masa_eval_source_rho_N <double>(x));};
+extern "C" double cmasa_eval_1d_source_rho_N2(double x){return(masa_eval_source_rho_N2<double>(x));};
 
 extern "C" double cmasa_eval_1d_exact_t      (double x){return(masa_eval_exact_t<double>  (x));};
 extern "C" double cmasa_eval_1d_exact_u      (double x){return(masa_eval_exact_u<double>  (x));};
