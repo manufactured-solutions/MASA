@@ -208,7 +208,7 @@ program main
            ufield = masa_eval_3d_source_rho_u  (x,y,z)
            vfield = masa_eval_3d_source_rho_v  (x,y,z)
            wfield = masa_eval_3d_source_rho_w  (x,y,z)
-           efield = masa_eval_3d_source_e  (x,y,z)
+           efield = masa_eval_3d_source_rho_e  (x,y,z)
            rho    = masa_eval_3d_source_rho(x,y,z)
 
            !evaluate analytical terms

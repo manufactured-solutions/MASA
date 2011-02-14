@@ -165,6 +165,16 @@ module masa
      end function masa_eval_1d_source_rho_u
   end interface  
 
+  interface 
+     real (c_double) function masa_eval_1d_source_rho_e(value) bind (C,name='cmasa_eval_1d_source_rho_e')
+       use iso_c_binding
+       implicit none
+       
+       real (c_double), value :: value
+       
+     end function masa_eval_1d_source_rho_e
+  end interface  
+
   ! ---------------------------------
   ! MMS source term interfaces -- 2d
   ! ---------------------------------
@@ -255,6 +265,17 @@ module masa
        real (c_double), value :: value2
        
      end function masa_eval_2d_source_rho_w
+  end interface  
+
+  interface 
+     real (c_double) function masa_eval_2d_source_rho_e(value,value2) bind (C,name='cmasa_eval_2d_source_rho_e')
+       use iso_c_binding
+       implicit none
+       
+       real (c_double), value :: value
+       real (c_double), value :: value2
+       
+     end function masa_eval_2d_source_rho_e
   end interface  
 
   ! ---------------------------------
@@ -367,6 +388,18 @@ module masa
        real (c_double), value :: value3       
 
      end function masa_eval_3d_source_rho_w
+  end interface  
+
+  interface 
+     real (c_double) function masa_eval_3d_source_rho_e(value,value2,value3) bind (C,name='cmasa_eval_3d_source_rho_e')
+       use iso_c_binding
+       implicit none
+       
+       real (c_double), value :: value
+       real (c_double), value :: value2
+       real (c_double), value :: value3       
+       
+     end function masa_eval_3d_source_rho_e
   end interface  
 
   ! ---------------------------------

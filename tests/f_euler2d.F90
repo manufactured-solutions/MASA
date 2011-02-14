@@ -151,7 +151,7 @@ program main
 
         ufield = masa_eval_2d_source_rho_u  (x,y)
 	vfield = masa_eval_2d_source_rho_v  (x,y)
-        efield = masa_eval_2d_source_e  (x,y)
+        efield = masa_eval_2d_source_rho_e  (x,y)
         rho    = masa_eval_2d_source_rho(x,y)
 	
 	!evaluate analytical terms

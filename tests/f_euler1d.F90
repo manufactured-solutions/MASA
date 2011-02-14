@@ -127,7 +127,7 @@ program main
 
      ! evalulate source terms
      ufield = masa_eval_1d_source_rho_u  (x)
-     efield = masa_eval_1d_source_e  (x)
+     efield = masa_eval_1d_source_rho_e  (x)
      rho    = masa_eval_1d_source_rho(x)
 
      !evaluate analytical terms
