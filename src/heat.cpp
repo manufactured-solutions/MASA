@@ -54,6 +54,8 @@ MASA::heateq_1d_steady_const<Scalar>::heateq_1d_steady_const()
     this->register_var("A_x",&A_x);   
     this->register_var("k_0",&k_0);
 
+    this->init_var();
+  
 }//done with constructor
 
 template <typename Scalar>
@@ -63,7 +65,7 @@ int MASA::heateq_1d_steady_const<Scalar>::init_var()
 
   err += this->set_var("A_x",1.4);
   err += this->set_var("k_0",.82);
-  
+
   return err;
 
 }
@@ -93,6 +95,8 @@ MASA::heateq_2d_steady_const<Scalar>::heateq_2d_steady_const()
     this->register_var("A_x",&A_x);   
     this->register_var("k_0",&k_0);
     this->register_var("B_y",&B_y);
+
+    this->init_var();  
     
 }//done with constructor
 
@@ -137,6 +141,8 @@ MASA::heateq_3d_steady_const<Scalar>::heateq_3d_steady_const()
     this->register_var("k_0",&k_0);
     this->register_var("B_y",&B_y);
     this->register_var("C_z",&C_z);
+
+    this->init_var();  
 
 }//done with constructor
 
@@ -197,6 +203,8 @@ MASA::heateq_1d_unsteady_const<Scalar>::heateq_1d_unsteady_const()
   this->register_var("A_t",&A_t);
   this->register_var("rho",&rho);
 
+  this->init_var();  
+
 }//done with constructor
 
 template <typename Scalar>
@@ -237,6 +245,8 @@ MASA::heateq_2d_unsteady_const<Scalar>::heateq_2d_unsteady_const()
   this->register_var("rho",&rho);
   this->register_var("B_y",&B_y);
   this->register_var("B_t",&B_t);
+
+  this->init_var();  
 
 }//done with constructor
 
@@ -281,6 +291,8 @@ MASA::heateq_3d_unsteady_const<Scalar>::heateq_3d_unsteady_const()
   this->register_var("B_t",&B_t);
   this->register_var("C_z",&C_z);
   this->register_var("C_t",&C_t);
+
+  this->init_var();  
 
 }//done with constructor
 
@@ -337,6 +349,8 @@ MASA::heateq_1d_unsteady_var<Scalar>::heateq_1d_unsteady_var()
   this->register_var("k_1",&k_1);
   this->register_var("k_2",&k_2);
 
+  this->init_var();  
+
 }//done with constructor
 
 template <typename Scalar>
@@ -387,6 +401,8 @@ MASA::heateq_2d_unsteady_var<Scalar>::heateq_2d_unsteady_var()
   this->register_var("B_y",&B_y);
   this->register_var("B_t",&B_t);
 
+  this->init_var();
+  
 }//done with constructor
 
 template <typename Scalar>
@@ -440,6 +456,8 @@ MASA::heateq_3d_unsteady_var<Scalar>::heateq_3d_unsteady_var()
   this->register_var("C_z",&C_z);
   this->register_var("C_t",&C_t);
 
+  this->init_var();
+  
 }//done with constructor
 
 template <typename Scalar>
@@ -498,6 +516,8 @@ MASA::heateq_1d_steady_var<Scalar>::heateq_1d_steady_var()
   this->register_var("k_1",&k_1);
   this->register_var("k_2",&k_2);
 
+  this->init_var();
+  
 }//done with constructor
 
 template <typename Scalar>
@@ -533,6 +553,8 @@ MASA::heateq_2d_steady_var<Scalar>::heateq_2d_steady_var()
   this->register_var("k_2",&k_2);
   this->register_var("B_y",&B_y);
 
+  this->init_var();
+  
 }//done with constructor
 
 template <typename Scalar>
@@ -571,6 +593,8 @@ MASA::heateq_3d_steady_var<Scalar>::heateq_3d_steady_var()
   this->register_var("B_y",&B_y);
   this->register_var("C_z",&C_z);
 
+  this->init_var();
+  
 }//done with constructor
 
 template <typename Scalar>

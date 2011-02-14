@@ -72,6 +72,8 @@ MASA::axi_cns<Scalar>::axi_cns()
   this->register_var("Gamma",&Gamma);
   this->register_var("mu",&mu);
 
+  this->init_var();
+
 }//done with constructor
 
 template <typename Scalar>

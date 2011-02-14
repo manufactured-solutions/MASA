@@ -78,6 +78,8 @@ MASA::navierstokes_2d_compressible<Scalar>::navierstokes_2d_compressible()
   this->register_var("Gamma",&Gamma);
   this->register_var("mu",&mu);
 
+  this->init_var();
+
 }//done with constructor
 
 template <typename Scalar>
@@ -377,6 +379,8 @@ MASA::navierstokes_3d_compressible<Scalar>::navierstokes_3d_compressible()
   this->register_var("w_x",&w_x);
   this->register_var("w_y",&w_y);
   this->register_var("w_z",&w_z);
+
+  this->init_var();
 
 }//done with constructor
 
