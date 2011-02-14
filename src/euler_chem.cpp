@@ -89,6 +89,8 @@ MASA::euler_chem_1d<Scalar>::euler_chem_1d()
   this->register_var("T_0",&T_0);
   this->register_var("T_x",&T_x);
   this->register_var("a_Tx",&a_Tx);
+
+  this->init_var();
 }
 
 template <typename Scalar>

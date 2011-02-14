@@ -73,6 +73,8 @@ MASA::rans_sa<Scalar>::rans_sa()
   this->register_var("cv2",&cv2);
   this->register_var("cv3",&cv3);
 
+  this->init_var();
+
 }// done with constructor
 
 template <typename Scalar>
