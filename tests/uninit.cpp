@@ -96,6 +96,14 @@ int main()
   if(derr != -1.33) 
     err += 1;
 
+  derr = masa_eval_source_rho_u<Scalar>(x);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_source_rho_e<Scalar>(x);
+  if(derr != -1.33) 
+    err += 1;
+
   derr = masa_eval_source_rho_u<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
@@ -174,7 +182,23 @@ int main()
   derr = masa_eval_source_rho<Scalar>(x,y);
   if(derr != -1.33) 
     err += 1;
-  
+
+  derr = masa_eval_source_rho_u<Scalar>(x,y);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_source_rho_v<Scalar>(x,y);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_source_rho_w<Scalar>(x,y);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_source_rho_e<Scalar>(x,y);
+  if(derr != -1.33) 
+    err += 1;
+
   derr = masa_eval_exact_t<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
@@ -266,6 +290,22 @@ int main()
     err += 1;
 
   derr = masa_eval_source_rho<Scalar>(x,y,z);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_source_rho_u<Scalar>(x,y,z);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_source_rho_v<Scalar>(x,y,z);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_source_rho_w<Scalar>(x,y,z);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_source_rho_e<Scalar>(x,y,z);
   if(derr != -1.33) 
     err += 1;
 
