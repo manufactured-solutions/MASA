@@ -15,6 +15,7 @@ check_PROGRAMS   = misc                \
 	           catch_exception     \
 	           register            \
 	           uninit              \
+		   purge               \
 	           heat_const_steady   \
 		   heat_var_steady     \
 	           heat_const_unsteady \
@@ -58,6 +59,7 @@ fail_cond_SOURCES           = fail_cond.cpp
 catch_exception_SOURCES     = catch_exception.cpp
 register_SOURCES            = register.cpp
 uninit_SOURCES              = uninit.cpp
+purge_SOURCES               = purge.cpp
 heat_const_steady_SOURCES   = heatsc.cpp
 heat_var_steady_SOURCES     = heatsv.cpp
 heat_const_unsteady_SOURCES = heatuc.cpp
@@ -126,6 +128,7 @@ TESTS                      = init.sh              \
 			     register             \
 			     poly                 \
 			     uninit               \
+			     purge                \
 			     heat_const_steady    \
 			     heat_var_steady      \
 	                     heat_const_unsteady  \
