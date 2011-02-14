@@ -341,7 +341,7 @@ int main()
 	//evalulate source terms
 	ufield = cmasa_eval_2d_source_rho_u(x,y);
 	vfield = cmasa_eval_2d_source_rho_v(x,y);
-	efield = cmasa_eval_2d_source_rho_e    (x,y);
+	efield = cmasa_eval_2d_source_rho_e(x,y);
 	rho    = cmasa_eval_2d_source_rho  (x,y);
 	
 	//evaluate analytical terms
