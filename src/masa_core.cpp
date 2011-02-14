@@ -167,6 +167,11 @@ void MASA::masa_exit(int ex)
   
 }
 
+template <typename Scalar>
+int MASA::masa_purge_default_param()
+{
+  return masa_master<Scalar>().get_ms().purge_var();
+}
 
 //
 //  this function selects an already initialized manufactured class
@@ -872,6 +877,7 @@ int MASA::masa_get_numeric_version()
   template int masa_init      <Scalar>(std::string, std::string); \
   template int masa_select_mms<Scalar>(std::string); \
   template int masa_list_mms  <Scalar>(); \
+  template int masa_purge_default_param <Scalar>(); \
   template int    masa_init_param<Scalar>(); \
   template void   masa_set_param<Scalar>(std::string,Scalar); \
   template Scalar masa_get_param<Scalar>(std::string); \

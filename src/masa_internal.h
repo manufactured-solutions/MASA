@@ -217,12 +217,13 @@ namespace MASA
    * 
    * -------------------------------------------------------------------------------------------
    */
-    manufactured_solution();                                     // constructor
-    int set_var(std::string,Scalar);                                  // sets variable value    
-    int register_var(std::string, Scalar*);                           // this registers a variable
+    manufactured_solution();                                      // constructor
+    int purge_var();                                             // dump defaults
+    int set_var(std::string,Scalar);                             // sets variable value    
+    int register_var(std::string, Scalar*);                      // this registers a variable
     int sanity_check();                                          // checks that all variables to the class have been initalized
     int poly_test();                                             // regression method for poly class (see below)
-    Scalar get_var(std::string);                                      // returns variable value
+    Scalar get_var(std::string);                                 // returns variable value
     void display_var();                                          // print all variable names and values
     void return_name(std::string* inname){inname->assign(mmsname);};  // method: returns name
     void return_dim (int* indim)    {*indim=dimension;};         // method: returns dimension of solution

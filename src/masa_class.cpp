@@ -132,6 +132,17 @@ int MASA::manufactured_solution<Scalar>::set_var(std::string var, Scalar val)
 }// done with set_var function
 
 template <typename Scalar>
+int MASA::manufactured_solution<Scalar>::purge_var()
+{
+  // MASA_VAR_DEFAULT
+  for(std::map<std::string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
+    {      
+      *vararr[it->second]=MASA_VAR_DEFAULT;      
+    }
+  return 0;
+}// done with set_var function
+
+template <typename Scalar>
 int MASA::manufactured_solution<Scalar>::sanity_check()
 {
   int flag=0;

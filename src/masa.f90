@@ -53,6 +53,14 @@ module masa
   end interface
 
   interface
+     subroutine masa_purge_default_param() bind (C,name='cmasa_purge_default_param')
+       use iso_c_binding
+       implicit none
+       
+     end subroutine masa_purge_default_param
+  end interface
+
+  interface
      subroutine masa_select_mms_passthrough(desired_mms_function) bind (C,name='cmasa_select_mms')
        use iso_c_binding
        implicit none

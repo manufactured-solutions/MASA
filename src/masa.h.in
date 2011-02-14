@@ -112,6 +112,9 @@ namespace MASA
   template <typename Scalar>
   int masa_list_mms  ();
 
+  template <typename Scalar>
+  int masa_purge_default_param();
+
   // --------------------------------
   // interact with mms variables
   // --------------------------------
