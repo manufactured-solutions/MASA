@@ -44,16 +44,16 @@ int main()
 {
   int test;
 
-  masa_init<Scalar>("temp-test-1d","heateq_1d_steady_const");
+  masa_init<Scalar>("test","masa_test_function");
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa; these tests currently just verify functions
   // run successfully.
   freopen("/dev/null","w",stdout);
 
-  masa_set_param<Scalar>("A_x",0);
+  masa_set_param<Scalar>("demo_var_2",0);
   masa_set_param<Scalar>("A_1",0); // does not exist
-  // we are intentionally not setting k_0
+  // we are intentionally not setting demo_var_3
 
   // test error on sanity check when user has not initialized variables
   int err = masa_sanity_check<Scalar>();
