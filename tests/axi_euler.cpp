@@ -39,12 +39,12 @@
 using namespace MASA;
 using namespace std;
 
-typedef double Real;
+typedef double Scalar;
 
-const Real pi = acos(-1);
-const Real threshold = 1.0e-15; // should be small enough to catch any obvious problems
+const Scalar pi = acos(-1);
+const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
 
-Real nancheck(Real x)
+Scalar nancheck(Scalar x)
 {
   if(isnan(x))
     {
@@ -54,27 +54,27 @@ Real nancheck(Real x)
   return 1;
 }
 
-Real anQ_p(Real r,Real z,Real p_0,Real p_1,Real rho_0,Real rho_1,Real u_1,Real w_0,Real w_1,Real a_pr,Real a_pz,Real a_rhor,Real a_rhoz,Real a_ur,Real a_uz,Real a_wr,Real a_wz,Real pi,Real L,Real Gamma)
+Scalar anQ_p(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
-  Real exact_p = p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L);
+  Scalar exact_p = p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L);
   return exact_p;
 }
   
-Real anQ_u (Real r,Real z,Real p_0,Real p_1,Real rho_0,Real rho_1,Real u_1,Real w_0,Real w_1,Real a_pr,Real a_pz,Real a_rhor,Real a_rhoz,Real a_ur,Real a_uz,Real a_wr,Real a_wz,Real pi,Real L,Real Gamma)
+Scalar anQ_u (Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
-  Real exact_u = u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_uz * pi * z / L);
+  Scalar exact_u = u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_uz * pi * z / L);
   return exact_u;
 } 
  
-Real anQ_w (Real r,Real z,Real w_0,Real w_1,Real a_wr,Real a_wz,Real pi,Real L)
+Scalar anQ_w (Scalar r,Scalar z,Scalar w_0,Scalar w_1,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L)
 {
-  Real exact_w = w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L);
+  Scalar exact_w = w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L);
   return exact_w;
 }
 
-Real anQ_rho (Real r,Real z,Real p_0,Real p_1,Real rho_0,Real rho_1,Real u_1,Real w_0,Real w_1,Real a_pr,Real a_pz,Real a_rhor,Real a_rhoz,Real a_ur,Real a_uz,Real a_wr,Real a_wz,Real pi,Real L,Real Gamma)
+Scalar anQ_rho (Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 { 
-  Real exact_rho = rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L);
+  Scalar exact_rho = rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L);
   return exact_rho;
 }
 
@@ -82,69 +82,69 @@ Real anQ_rho (Real r,Real z,Real p_0,Real p_1,Real rho_0,Real rho_1,Real u_1,Rea
 //   Source Terms
 // ----------------------------------------
 
-Real SourceQ_e(Real r,Real z,Real p_0,Real p_1,Real rho_0,Real rho_1,Real u_1,Real w_0,Real w_1,Real a_pr,Real a_pz,Real a_rhor,Real a_rhoz,Real a_ur,Real a_uz,Real a_wr,Real a_wz,Real pi,Real L,Real Gamma)
+Scalar SourceQ_e(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
-  Real Q_e = Gamma * cos(a_pz * pi * z / L) * cos(a_pr * pi * r / L) * p_1 * u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_uz * pi * z / L) * a_pr * pi / L / (Gamma - 0.1e1) - Gamma * sin(a_pz * pi * z / L) * sin(a_pr * pi * r / L) * p_1 * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_pz * pi / L / (Gamma - 0.1e1) - sin(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) * sin(a_uz * pi * z / L) * u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * (pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_rhor * pi * rho_1 / L / 0.2e1 + cos(a_rhor * pi * r / L) * cos(a_rhoz * pi * z / L) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * (pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_rhoz * pi * rho_1 / L / 0.2e1 - sin(a_uz * pi * z / L) * sin(a_ur * pi * r / L) * (p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L)) * a_ur * pi * u_1 * Gamma / L / (Gamma - 0.1e1) - sin(a_uz * pi * z / L) * sin(a_ur * pi * r / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + 0.3e1 * pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_ur * pi * u_1 / L / 0.2e1 + (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * u_1 * u_1 * cos(a_uz * pi * z / L) * sin(a_uz * pi * z / L) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * a_uz * pi / L - sin(a_uz * pi * z / L) * (cos(a_ur * pi * r / L) - 0.1e1) * u_1 * w_1 * sin(a_wr * pi * r / L) * sin(a_wz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_wr * pi / L + cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) * (p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L)) * a_wz * pi * w_1 * Gamma / L / (Gamma - 0.1e1) + cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (0.3e1 * pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_wz * pi * w_1 / L / 0.2e1 + sin(a_uz * pi * z / L) * (cos(a_ur * pi * r / L) - 0.1e1) * u_1 * (p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L)) * Gamma / (Gamma - 0.1e1) / r + sin(a_uz * pi * z / L) * (cos(a_ur * pi * r / L) - 0.1e1) * u_1 * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) / r / 0.2e1;
+  Scalar Q_e = Gamma * cos(a_pz * pi * z / L) * cos(a_pr * pi * r / L) * p_1 * u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_uz * pi * z / L) * a_pr * pi / L / (Gamma - 0.1e1) - Gamma * sin(a_pz * pi * z / L) * sin(a_pr * pi * r / L) * p_1 * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_pz * pi / L / (Gamma - 0.1e1) - sin(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) * sin(a_uz * pi * z / L) * u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * (pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_rhor * pi * rho_1 / L / 0.2e1 + cos(a_rhor * pi * r / L) * cos(a_rhoz * pi * z / L) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * (pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_rhoz * pi * rho_1 / L / 0.2e1 - sin(a_uz * pi * z / L) * sin(a_ur * pi * r / L) * (p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L)) * a_ur * pi * u_1 * Gamma / L / (Gamma - 0.1e1) - sin(a_uz * pi * z / L) * sin(a_ur * pi * r / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + 0.3e1 * pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_ur * pi * u_1 / L / 0.2e1 + (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * u_1 * u_1 * cos(a_uz * pi * z / L) * sin(a_uz * pi * z / L) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * a_uz * pi / L - sin(a_uz * pi * z / L) * (cos(a_ur * pi * r / L) - 0.1e1) * u_1 * w_1 * sin(a_wr * pi * r / L) * sin(a_wz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_wr * pi / L + cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) * (p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L)) * a_wz * pi * w_1 * Gamma / L / (Gamma - 0.1e1) + cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (0.3e1 * pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_wz * pi * w_1 / L / 0.2e1 + sin(a_uz * pi * z / L) * (cos(a_ur * pi * r / L) - 0.1e1) * u_1 * (p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L)) * Gamma / (Gamma - 0.1e1) / r + sin(a_uz * pi * z / L) * (cos(a_ur * pi * r / L) - 0.1e1) * u_1 * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) / r / 0.2e1;
   return(Q_e);
 }
 
-Real SourceQ_u(Real r,Real z,Real p_0,Real p_1,Real rho_0,Real rho_1,Real u_1,Real w_0,Real w_1,Real a_pr,Real a_pz,Real a_rhor,Real a_rhoz,Real a_ur,Real a_uz,Real a_wr,Real a_wz,Real pi,Real L,Real Gamma)
+Scalar SourceQ_u(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
-  Real Q_u = p_1 * cos(a_pr * pi * r / L) * cos(a_pz * pi * z / L) * a_pr * pi / L - u_1 * u_1 * pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * rho_1 * sin(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) * a_rhor * pi / L + u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * rho_1 * cos(a_rhor * pi * r / L) * cos(a_rhoz * pi * z / L) * sin(a_uz * pi * z / L) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_rhoz * pi / L - 0.2e1 * u_1 * u_1 * pow(sin(a_uz * pi * z / L), 0.2e1) * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_ur * pi * r / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * a_ur * pi / L + u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * cos(a_uz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_uz * pi / L + u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * w_1 * cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) * sin(a_uz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * a_wz * pi / L + u_1 * u_1 * pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) / r;
+  Scalar Q_u = p_1 * cos(a_pr * pi * r / L) * cos(a_pz * pi * z / L) * a_pr * pi / L - u_1 * u_1 * pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * rho_1 * sin(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) * a_rhor * pi / L + u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * rho_1 * cos(a_rhor * pi * r / L) * cos(a_rhoz * pi * z / L) * sin(a_uz * pi * z / L) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_rhoz * pi / L - 0.2e1 * u_1 * u_1 * pow(sin(a_uz * pi * z / L), 0.2e1) * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_ur * pi * r / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * a_ur * pi / L + u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * cos(a_uz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_uz * pi / L + u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * w_1 * cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) * sin(a_uz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * a_wz * pi / L + u_1 * u_1 * pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) / r;
   return(Q_u);  
 }
 
-Real SourceQ_w(Real r,Real z,Real p_0,Real p_1,Real rho_0,Real rho_1,Real u_1,Real w_0,Real w_1,Real a_pr,Real a_pz,Real a_rhor,Real a_rhoz,Real a_ur,Real a_uz,Real a_wr,Real a_wz,Real pi,Real L,Real Gamma)
+Scalar SourceQ_w(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
-  Real Q_w = -p_1 * sin(a_pr * pi * r / L) * sin(a_pz * pi * z / L) * a_pz * pi / L - u_1 * sin(a_uz * pi * z / L) * rho_1 * sin(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * (cos(a_ur * pi * r / L) - 0.1e1) * a_rhor * pi / L + pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) * rho_1 * cos(a_rhor * pi * r / L) * cos(a_rhoz * pi * z / L) * a_rhoz * pi / L - u_1 * sin(a_uz * pi * z / L) * sin(a_ur * pi * r / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_ur * pi / L - u_1 * sin(a_uz * pi * z / L) * w_1 * sin(a_wr * pi * r / L) * sin(a_wz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (cos(a_ur * pi * r / L) - 0.1e1) * a_wr * pi / L + (0.2e1 * w_0 + 0.2e1 * w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * w_1 * cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * a_wz * pi / L + u_1 * sin(a_uz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * (cos(a_ur * pi * r / L) - 0.1e1) / r;
+  Scalar Q_w = -p_1 * sin(a_pr * pi * r / L) * sin(a_pz * pi * z / L) * a_pz * pi / L - u_1 * sin(a_uz * pi * z / L) * rho_1 * sin(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * (cos(a_ur * pi * r / L) - 0.1e1) * a_rhor * pi / L + pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) * rho_1 * cos(a_rhor * pi * r / L) * cos(a_rhoz * pi * z / L) * a_rhoz * pi / L - u_1 * sin(a_uz * pi * z / L) * sin(a_ur * pi * r / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_ur * pi / L - u_1 * sin(a_uz * pi * z / L) * w_1 * sin(a_wr * pi * r / L) * sin(a_wz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (cos(a_ur * pi * r / L) - 0.1e1) * a_wr * pi / L + (0.2e1 * w_0 + 0.2e1 * w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * w_1 * cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * a_wz * pi / L + u_1 * sin(a_uz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * (cos(a_ur * pi * r / L) - 0.1e1) / r;
   return(Q_w);
 }
 
-Real SourceQ_rho(Real r,Real z,Real p_0,Real p_1,Real rho_0,Real rho_1,Real u_1,Real w_0,Real w_1,Real a_pr,Real a_pz,Real a_rhor,Real a_rhoz,Real a_ur,Real a_uz,Real a_wr,Real a_wz,Real pi,Real L,Real Gamma)
+Scalar SourceQ_rho(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
-  Real Q_rho = -(cos(a_ur * pi * r / L) - 0.1e1) * a_rhor * pi * rho_1 * u_1 * sin(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) * sin(a_uz * pi * z / L) / L + (w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L) + w_0) * a_rhoz * pi * rho_1 * cos(a_rhor * pi * r / L) * cos(a_rhoz * pi * z / L) / L - (rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) + rho_0) * a_ur * pi * u_1 * sin(a_ur * pi * r / L) * sin(a_uz * pi * z / L) / L + (rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) + rho_0) * a_wz * pi * w_1 * cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) / L + (rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) + rho_0) * (cos(a_ur * pi * r / L) - 0.1e1) * u_1 * sin(a_uz * pi * z / L) / r;
+  Scalar Q_rho = -(cos(a_ur * pi * r / L) - 0.1e1) * a_rhor * pi * rho_1 * u_1 * sin(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) * sin(a_uz * pi * z / L) / L + (w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L) + w_0) * a_rhoz * pi * rho_1 * cos(a_rhor * pi * r / L) * cos(a_rhoz * pi * z / L) / L - (rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) + rho_0) * a_ur * pi * u_1 * sin(a_ur * pi * r / L) * sin(a_uz * pi * z / L) / L + (rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) + rho_0) * a_wz * pi * w_1 * cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) / L + (rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) + rho_0) * (cos(a_ur * pi * r / L) - 0.1e1) * u_1 * sin(a_uz * pi * z / L) / r;
   return(Q_rho);
 }
 
 int main()
 {  
   //variables
-  Real R;  
-  Real p_0;
-  Real p_1;
-  Real rho_0;
-  Real rho_1;
-  Real u_1;
-  Real w_0;
-  Real w_1;
-  Real a_pr;
-  Real a_pz;
-  Real a_rhor;
-  Real a_rhoz;
-  Real a_ur;
-  Real a_uz;
-  Real a_wr;
-  Real a_wz;
-  Real L;
-  Real mu;
-  Real Gamma;    
+  Scalar R;  
+  Scalar p_0;
+  Scalar p_1;
+  Scalar rho_0;
+  Scalar rho_1;
+  Scalar u_1;
+  Scalar w_0;
+  Scalar w_1;
+  Scalar a_pr;
+  Scalar a_pz;
+  Scalar a_rhor;
+  Scalar a_rhoz;
+  Scalar a_ur;
+  Scalar a_uz;
+  Scalar a_wr;
+  Scalar a_wz;
+  Scalar L;
+  Scalar mu;
+  Scalar Gamma;    
   
   // parameters
-  Real r;
-  Real z;
+  Scalar r;
+  Scalar z;
 
   // solutions
-  Real ufield,ufield2,ufield3;
-  Real vfield,vfield2,vfield3;
-  Real wfield,wfield2,wfield3;
-  Real efield,efield2,efield3;
-  Real rho,rho2,rho3;
+  Scalar ufield,ufield2,ufield3;
+  Scalar vfield,vfield2,vfield3;
+  Scalar wfield,wfield2,wfield3;
+  Scalar efield,efield2,efield3;
+  Scalar rho,rho2,rho3;
 
-  Real exact_u,exact_u2,exact_u3;
-  Real exact_v,exact_v2,exact_v3;
-  Real exact_w,exact_w2,exact_w3;
-  Real exact_p,exact_p2,exact_p3;
-  Real exact_rho,exact_rho2,exact_rho3;
+  Scalar exact_u,exact_u2,exact_u3;
+  Scalar exact_v,exact_v2,exact_v3;
+  Scalar exact_w,exact_w2,exact_w3;
+  Scalar exact_p,exact_p2,exact_p3;
+  Scalar exact_rho,exact_rho2,exact_rho3;
 
   // initalize
   int nx = 115;  // number of points
@@ -152,37 +152,37 @@ int main()
   int lx=3;     // length
   int ly=1; 
   
-  Real dx=Real(lx)/Real(nx);
-  Real dy=Real(ly)/Real(ny);
+  Scalar dx=Scalar(lx)/Scalar(nx);
+  Scalar dy=Scalar(ly)/Scalar(ny);
 
-  masa_init<Real>("axisymmetric_euler","axisymmetric_euler");
+  masa_init<Scalar>("axisymmetric_euler","axisymmetric_euler");
 
   // set params
-  masa_init_param<Real>();
+  masa_init_param<Scalar>();
   
   // get vars
-  R      = masa_get_param<Real>("R");
-  p_0    = masa_get_param<Real>("p_0");
-  p_1    = masa_get_param<Real>("p_1");
-  rho_0  = masa_get_param<Real>("rho_0");
-  rho_1  = masa_get_param<Real>("rho_1");
-  u_1    = masa_get_param<Real>("u_1");
-  w_0    = masa_get_param<Real>("w_0");
-  w_1    = masa_get_param<Real>("w_1");
-  a_pr   = masa_get_param<Real>("a_pr");
-  a_pz   = masa_get_param<Real>("a_pz");
-  a_rhor = masa_get_param<Real>("a_rhor");
-  a_rhoz = masa_get_param<Real>("a_rhoz");
-  a_ur   = masa_get_param<Real>("a_ur");
-  a_uz   = masa_get_param<Real>("a_uz");
-  a_wr   = masa_get_param<Real>("a_wr");
-  a_wz   = masa_get_param<Real>("a_wz");
-  L      = masa_get_param<Real>("L");
-  Gamma  = masa_get_param<Real>("Gamma");
-  mu     = masa_get_param<Real>("mu");
+  R      = masa_get_param<Scalar>("R");
+  p_0    = masa_get_param<Scalar>("p_0");
+  p_1    = masa_get_param<Scalar>("p_1");
+  rho_0  = masa_get_param<Scalar>("rho_0");
+  rho_1  = masa_get_param<Scalar>("rho_1");
+  u_1    = masa_get_param<Scalar>("u_1");
+  w_0    = masa_get_param<Scalar>("w_0");
+  w_1    = masa_get_param<Scalar>("w_1");
+  a_pr   = masa_get_param<Scalar>("a_pr");
+  a_pz   = masa_get_param<Scalar>("a_pz");
+  a_rhor = masa_get_param<Scalar>("a_rhor");
+  a_rhoz = masa_get_param<Scalar>("a_rhoz");
+  a_ur   = masa_get_param<Scalar>("a_ur");
+  a_uz   = masa_get_param<Scalar>("a_uz");
+  a_wr   = masa_get_param<Scalar>("a_wr");
+  a_wz   = masa_get_param<Scalar>("a_wz");
+  L      = masa_get_param<Scalar>("L");
+  Gamma  = masa_get_param<Scalar>("Gamma");
+  mu     = masa_get_param<Scalar>("mu");
 
   // check that all terms have been initialized
-  int err = masa_sanity_check<Real>();
+  int err = masa_sanity_check<Scalar>();
   if(err != 0)
     {
       cout << "MASA :: Sanity Check Failed!\n";
@@ -197,16 +197,16 @@ int main()
 	z=j*dy;
 
 	//evalulate source terms
-	ufield = masa_eval_source_rho_u<Real>  (r,z);
-	wfield = masa_eval_source_rho_w<Real>  (r,z);
-	efield = masa_eval_source_e<Real>  (r,z);
-	rho    = masa_eval_source_rho<Real>(r,z);
+	ufield = masa_eval_source_rho_u<Scalar>  (r,z);
+	wfield = masa_eval_source_rho_w<Scalar>  (r,z);
+	efield = masa_eval_source_e<Scalar>  (r,z);
+	rho    = masa_eval_source_rho<Scalar>(r,z);
 
 	//evaluate analytical terms
-	exact_u = masa_eval_exact_u<Real>        (r,z);
-	exact_w = masa_eval_exact_w<Real>        (r,z);
-	exact_p = masa_eval_exact_p<Real>        (r,z);
-	exact_rho = masa_eval_exact_rho<Real>    (r,z);
+	exact_u = masa_eval_exact_u<Scalar>        (r,z);
+	exact_w = masa_eval_exact_w<Scalar>        (r,z);
+	exact_p = masa_eval_exact_p<Scalar>        (r,z);
+	exact_rho = masa_eval_exact_rho<Scalar>    (r,z);
 	  	  
 	// check against maple
 	ufield2 = SourceQ_u   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);

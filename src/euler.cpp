@@ -66,6 +66,8 @@ MASA::euler_1d<Scalar>::euler_1d()
   this->register_var("Gamma",&Gamma);
   this->register_var("mu",&mu);
 
+  this->init_var();
+
 }//done with constructor
 
 template <typename Scalar>
@@ -244,6 +246,8 @@ MASA::euler_2d<Scalar>::euler_2d()
   this->register_var("L",&L);
   this->register_var("Gamma",&Gamma);
   this->register_var("mu",&mu);
+
+  this->init_var();
 
 }//done with constructor
 
@@ -581,6 +585,8 @@ MASA::euler_3d<Scalar>::euler_3d()
   this->register_var("w_x",&w_x);
   this->register_var("w_y",&w_y);
   this->register_var("w_z",&w_z);
+
+  this->init_var();
 
 }//done with constructor
 

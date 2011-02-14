@@ -474,7 +474,7 @@ int run_regression()
   masa_init<Scalar>("euler-test","euler_3d");
 
   // set params
-  masa_init_param<Scalar>();
+  //masa_init_param<Scalar>();
 
   // get vars for comparison
   u_0 = masa_get_param<Scalar>("u_0");
