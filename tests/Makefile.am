@@ -43,6 +43,7 @@ check_PROGRAMS   = misc                \
 	           c_navierstokes2d    \
 	           c_navierstokes3d    \
                    f_misc              \
+                   f_purge             \
                    f_heat              \
                    f_euler1d           \
                    f_euler2d           \
@@ -99,6 +100,9 @@ c_navierstokes3d_SOURCES    = c_ns3d.c
 
 f_misc_SOURCES              = f_misc.F90
 f_misc_LDADD                = -lfmasa
+
+f_purge_SOURCES              = f_purge.F90
+f_purge_LDADD                = -lfmasa
 
 f_heat_SOURCES              = f_heat.F90 heat_source.c 
 f_heat_LDADD                = -lfmasa
@@ -160,6 +164,7 @@ TESTS                      = init.sh              \
                              c_navierstokes3d     \
 			     f_init.sh            \
 		             f_misc               \
+		             f_purge              \
 		             f_heat               \
 		             f_euler1d            \
 		             f_euler2d            \
