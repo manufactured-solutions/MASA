@@ -25,7 +25,7 @@
 // $Author: nick $
 // $Id: misc.cpp 13998 2010-09-23 18:31:43Z nick $
 //
-// purge.cpp : program that tests masa purge function
+// pass_func.cpp: passes a function into the masa realm
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
@@ -38,7 +38,8 @@
 using namespace MASA;
 using namespace std;
 
-typedef long double Scalar;
+//typedef long double Scalar;
+typedef double Scalar;
 
 double tester()
 {
