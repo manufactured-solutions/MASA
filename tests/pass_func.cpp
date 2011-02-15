@@ -41,11 +41,11 @@ using namespace std;
 //typedef long double Scalar;
 typedef double Scalar;
 
-Scalar tester()
+Scalar tester(Scalar a)
 {
   
-  double a = 4.4;
-  return a;
+  double b = 4.4;
+  return b;
 
 }
 
@@ -53,17 +53,19 @@ Scalar tester()
 int main()
 {
   Scalar u_0;
-  Scalar q = 0;
 
   // start problem
   masa_init<Scalar>("masa-test","euler_chem_1d");
 
   u_0 = 1.234567890123456789;
-  pass_func<Scalar>(&tester,u_0);
-
-  q = tester();
-
-  cout << "q is: " << q << endl;
+  Scalar out = pass_func<Scalar>(&tester,u_0);
+  Scalar q = tester(u_0);
+  
+  if(out != q) 
+    {
+      cout << "\nMASA ERROR::function passing not functioning properly in MASA!\n";
+      return 1;
+    }
 
   // steady as she goes
   return 0;

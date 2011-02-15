@@ -174,7 +174,7 @@ int MASA::masa_purge_default_param()
 }
 
 template <typename Scalar>
-int MASA::pass_func(Scalar (*in_func)(Scalar),Scalar a)
+Scalar MASA::pass_func(Scalar (*in_func)(Scalar),Scalar a)
 {
   return masa_master<Scalar>().get_ms().pass_function(in_func,a);
 }
@@ -884,7 +884,7 @@ int MASA::masa_get_numeric_version()
   template int masa_select_mms<Scalar>(std::string); \
   template int masa_list_mms  <Scalar>(); \
   template int masa_purge_default_param <Scalar>(); \
-  template int pass_func                <Scalar>(Scalar (*)(Scalar),Scalar); \
+  template Scalar pass_func             <Scalar>(Scalar (*)(Scalar),Scalar); \
   template int    masa_init_param<Scalar>(); \
   template void   masa_set_param<Scalar>(std::string,Scalar); \
   template Scalar masa_get_param<Scalar>(std::string); \
