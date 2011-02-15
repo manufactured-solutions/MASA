@@ -146,8 +146,8 @@ int MASA::manufactured_solution<Scalar>::purge_var()
 template <typename Scalar>
 int MASA::manufactured_solution<Scalar>::pass_function()
 {
-
-
+  
+  cout << "here";
   return 0;
 }
 
