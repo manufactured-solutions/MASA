@@ -144,10 +144,14 @@ int MASA::manufactured_solution<Scalar>::purge_var()
 
 
 template <typename Scalar>
-int MASA::manufactured_solution<Scalar>::pass_function()
+int MASA::manufactured_solution<Scalar>::pass_function(Scalar a)
+//Scalar (*in_func)(Scalar), 
 {
-  
-  cout << "here";
+
+  //Scalar (*input)(Scalar,
+  // just want to evaluate function here
+  std::cout << "a is: " << a << std::endl;
+  //std::cout << "\nhere\n";
   return 0;
 }
 

@@ -219,7 +219,7 @@ namespace MASA
    */
     manufactured_solution();                                      // constructor
     int purge_var();                                             // dump defaults
-    int pass_function();
+    int pass_function(Scalar);
     int set_var(std::string,Scalar);                             // sets variable value    
     int register_var(std::string, Scalar*);                      // this registers a variable
 

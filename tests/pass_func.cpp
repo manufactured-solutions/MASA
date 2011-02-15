@@ -38,16 +38,31 @@
 using namespace MASA;
 using namespace std;
 
-typedef double Scalar;
+typedef long double Scalar;
+
+double tester()
+{
+  
+  double a = 4.4;
+  return a;
+
+}
+
 
 int main()
 {
   Scalar u_0;
+  Scalar q = 0;
 
   // start problem
   masa_init<Scalar>("masa-test","euler_chem_1d");
 
-  pass_func<Scalar>();
+  //pass_func<Scalar>(&tester,1.234567890123456789);
+  pass_func<Scalar>(1.234567890123456789);
+
+  q = tester();
+
+  cout << "q is: " << q << endl;
 
   // steady as she goes
   return 0;

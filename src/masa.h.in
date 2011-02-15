@@ -115,7 +115,7 @@ namespace MASA
   int masa_purge_default_param();
 
   template <typename Scalar>
-  int pass_func      ();
+  int pass_func      (Scalar);
 
   // --------------------------------
   // interact with mms variables
