@@ -140,7 +140,8 @@ double SourceQ_rho_N(double x,
 		     double etaf1_N2,
 		     double Ea_N,
 		     double Ea_N2,
-		     double Function_to_Calculate_K,
+		     //double Function_to_Calculate_K,
+		     double (*in_func)(double),
 		     double R_N,
 		     double R_N2,
 		     double theta_v_N2,
@@ -171,11 +172,13 @@ double SourceQ_rho_N(double x,
 
   double pi = acos(-1);
 
-  K_eq = Function_to_Calculate_K;
+  // Equilibrium Konstant
+  T = T_0 + T_x * cos(a_Tx * pi * x / L);
+  K_eq = in_func(T);
+
   RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
   RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L);
-  T = T_0 + T_x * cos(a_Tx * pi * x / L);
   kf1_N = Cf1_N * pow(T, etaf1_N) * exp(-Ea_N / R / T);
   kf1_N2 = Cf1_N2 * pow(T, etaf1_N2) * exp(-Ea_N2 / R / T);
 
@@ -194,7 +197,8 @@ double SourceQ_rho_N2(double x,
 		      double etaf1_N2,
 		      double Ea_N,
 		      double Ea_N2,
-		      double Function_to_Calculate_K,
+		      //double Function_to_Calculate_K,
+		      double (*in_func)(double),
 		      double K,
 		      double R_N,
 		      double R_N2,
@@ -226,11 +230,13 @@ double SourceQ_rho_N2(double x,
 
   double pi = acos(-1);
 
-  K_eq = Function_to_Calculate_K;
+  // Equilibrium Konstant
+  T = T_0 + T_x * cos(a_Tx * pi * x / L);
+  K_eq = in_func(T);
+
   RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
   RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L);
-  T = T_0 + T_x * cos(a_Tx * pi * x / L);
   kf1_N = Cf1_N * pow(T, etaf1_N) * exp(-Ea_N / R / T);
   kf1_N2 = Cf1_N2 * pow(T, etaf1_N2) * exp(-Ea_N2 / R / T);
 
@@ -282,6 +288,16 @@ double anQ_rho_N2(double x,double rho_N2_0,double rho_N2_x,double a_rho_N2_x,dou
 //   Regresssion
 // ----------------------------------------
 
+double temp_function(double T)
+{
+  // hackish functional here
+  // This is an eyeballed fit (focusing on the 5000K-6000K range) 
+  // for the equilibrium constant for N2->N+N dissociation
+  double K = exp(4+(T-6000)/500);
+  return K;
+}
+
+
 int main()
 {
 
@@ -298,7 +314,6 @@ int main()
   double etaf1_N2;
   double Ea_N;
   double Ea_N2;
-  double Function_to_Calculate_K;
   double R_N;
   double R_N2;
   double theta_v_N2;
@@ -365,7 +380,6 @@ int main()
   R_N   = cmasa_get_param("R_N");
   R_N2  = cmasa_get_param("R_N2");
 
-  Function_to_Calculate_K = cmasa_get_param("Function_to_Calculate_K");
   theta_v_N2 = cmasa_get_param("theta_v_N2");
   M_N   = cmasa_get_param("M_N");
   h0_N  = cmasa_get_param("h0_N");
@@ -395,8 +409,8 @@ int main()
       // evalulate source terms
       ufield = cmasa_eval_1d_source_rho_u  (x);
       efield = cmasa_eval_1d_source_rho_e  (x);
-      N      = cmasa_eval_1d_source_rho_N  (x);
-      Ntwo   = cmasa_eval_1d_source_rho_N2 (x);
+      N      = cmasa_eval_1d_source_rho_N  (x,&temp_function);
+      Ntwo   = cmasa_eval_1d_source_rho_N2 (x,&temp_function);
 
       // evaluate analytical solution terms
       exact_t    = cmasa_eval_1d_exact_t     (x);
@@ -417,7 +431,8 @@ int main()
 
       N2        = SourceQ_rho_N  (x,M_N,h0_N,h0_N2,Cf1_N,Cf1_N2,
 				  etaf1_N,etaf1_N2,Ea_N,Ea_N2,
-				  Function_to_Calculate_K,
+				  //Function_to_Calculate_K,
+				  &temp_function,
 				  R_N,R_N2,theta_v_N2,
 				  rho_N_0,rho_N_x,a_rho_N_x,rho_N2_0,
 				  rho_N2_x,a_rho_N2_x,L,u_0,u_x,a_ux,
@@ -434,7 +449,8 @@ int main()
 				  etaf1_N2,
 				  Ea_N,
 				  Ea_N2,
-				  Function_to_Calculate_K,
+				  //Function_to_Calculate_K,
+				  &temp_function,
 				  K,
 				  R_N,
 				  R_N2,

@@ -169,6 +169,7 @@ TESTS                      = init.sh              \
 	                     c_euler1d            \
 	                     c_euler2d            \
 	                     c_euler3d            \
+                             c_euler_chem_1d      \
                              c_navierstokes2d     \
                              c_navierstokes3d     \
 			     f_init.sh            \
@@ -178,7 +179,6 @@ TESTS                      = init.sh              \
 		             f_euler1d            \
 		             f_euler2d            \
 		             f_euler3d            \
-                             c_euler_chem_1d      \
 		             f_cns2d              \
 		             f_cns3d              \
                              finalize.sh
