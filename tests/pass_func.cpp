@@ -41,7 +41,7 @@ using namespace std;
 //typedef long double Scalar;
 typedef double Scalar;
 
-double tester()
+Scalar tester()
 {
   
   double a = 4.4;
@@ -58,8 +58,8 @@ int main()
   // start problem
   masa_init<Scalar>("masa-test","euler_chem_1d");
 
-  //pass_func<Scalar>(&tester,1.234567890123456789);
-  pass_func<Scalar>(1.234567890123456789);
+  u_0 = 1.234567890123456789;
+  pass_func<Scalar>(&tester,u_0);
 
   q = tester();
 
