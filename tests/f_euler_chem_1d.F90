@@ -27,6 +27,20 @@
 !! $Id: 
 !! -------------------------------------------------------------------------
 !! -------------------------------------------------------------------------
+function K(T)
+  implicit none
+  
+  real(8),intent(in) :: T
+  real(8)            :: K
+
+  !! hackish functional here
+  !! This is an eyeballed fit (focusing on the 5000K-6000K range) 
+  !! for the equilibrium constant for N2->N+N dissociation
+
+  K = exp(4+(T-6000)/500)
+
+end subroutine temp_function
+
 
 program main
   use euler_source_interface
@@ -47,7 +61,6 @@ program main
   real(8) :: etaf1_N2
   real(8) :: Ea_N
   real(8) :: Ea_N2
-  real(8) :: Function_to_Calculate_K
   real(8) :: R_N
   real(8) :: R_N2
   real(8) :: theta_v_N2
@@ -119,7 +132,6 @@ program main
   R_N   = masa_get_param("R_N");
   R_N2  = masa_get_param("R_N2");
 
-  Function_to_Calculate_K = masa_get_param("Function_to_Calculate_K");
   theta_v_N2 = masa_get_param("theta_v_N2");
   M_N   = masa_get_param("M_N");
   h0_N  = masa_get_param("h0_N");
