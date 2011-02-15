@@ -90,7 +90,6 @@ namespace MASA
 
   /**
    * masa_init: 
-   * masa equivalent to masa_init. 
    * 
    * masa_init initalizes a masa manufactured solution class.
    * 
@@ -114,6 +113,9 @@ namespace MASA
 
   template <typename Scalar>
   int masa_purge_default_param();
+
+  template <typename Scalar>
+  int pass_func      ();
 
   // --------------------------------
   // interact with mms variables

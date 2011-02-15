@@ -15,6 +15,7 @@ check_PROGRAMS   = misc                \
 	           catch_exception     \
 	           register            \
 	           uninit              \
+	           pass_func           \
 		   purge               \
 	           heat_const_steady   \
 		   heat_var_steady     \
@@ -63,6 +64,7 @@ fail_cond_SOURCES           = fail_cond.cpp
 catch_exception_SOURCES     = catch_exception.cpp
 register_SOURCES            = register.cpp
 uninit_SOURCES              = uninit.cpp
+pass_func_SOURCES           = pass_func.cpp
 purge_SOURCES               = purge.cpp
 heat_const_steady_SOURCES   = heatsc.cpp
 heat_var_steady_SOURCES     = heatsv.cpp
@@ -140,6 +142,7 @@ TESTS                      = init.sh              \
 			     register             \
 			     poly                 \
 			     uninit               \
+			     pass_func            \
 			     purge                \
 			     heat_const_steady    \
 			     heat_var_steady      \

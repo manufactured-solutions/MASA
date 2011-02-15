@@ -142,6 +142,15 @@ int MASA::manufactured_solution<Scalar>::purge_var()
   return 0;
 }// done with set_var function
 
+
+template <typename Scalar>
+int MASA::manufactured_solution<Scalar>::pass_function()
+{
+
+
+  return 0;
+}
+
 template <typename Scalar>
 int MASA::manufactured_solution<Scalar>::sanity_check()
 {

@@ -93,7 +93,7 @@ namespace MASA
     // functions to override
     virtual ~manufactured_solution(){};   // destructor
     virtual int init_var() = 0;           // inits all variables to selected values
-
+    
   /* 
    * -------------------------------------------------------------------------------------------   
    *
@@ -219,8 +219,10 @@ namespace MASA
    */
     manufactured_solution();                                      // constructor
     int purge_var();                                             // dump defaults
+    int pass_function();
     int set_var(std::string,Scalar);                             // sets variable value    
     int register_var(std::string, Scalar*);                      // this registers a variable
+
     int sanity_check();                                          // checks that all variables to the class have been initalized
     int poly_test();                                             // regression method for poly class (see below)
     Scalar get_var(std::string);                                 // returns variable value
