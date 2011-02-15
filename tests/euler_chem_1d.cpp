@@ -157,7 +157,8 @@ Scalar SourceQ_rho_N(Scalar x,
 		     Scalar etaf1_N2,
 		     Scalar Ea_N,
 		     Scalar Ea_N2,
-		     Scalar Function_to_Calculate_K,
+		     Scalar (*in_func)(Scalar),
+		     //Scalar Function_to_Calculate_K,
 		     Scalar R_N,
 		     Scalar R_N2,
 		     Scalar theta_v_N2,
@@ -188,11 +189,13 @@ Scalar SourceQ_rho_N(Scalar x,
 
   Scalar pi = acos(-1);
 
-  K_eq = Function_to_Calculate_K;
+  //K_eq = Function_to_Calculate_K;
+  T = T_0 + T_x * cos(a_Tx * pi * x / L);
+  K_eq = in_func(T);
+
   RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
   RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L);
-  T = T_0 + T_x * cos(a_Tx * pi * x / L);
   kf1_N = Cf1_N * pow(T, etaf1_N) * exp(-Ea_N / R / T);
   kf1_N2 = Cf1_N2 * pow(T, etaf1_N2) * exp(-Ea_N2 / R / T);
 
@@ -212,7 +215,8 @@ Scalar SourceQ_rho_N2(Scalar x,
 		      Scalar etaf1_N2,
 		      Scalar Ea_N,
 		      Scalar Ea_N2,
-		      Scalar Function_to_Calculate_K,
+		      //Scalar Function_to_Calculate_K,
+		      Scalar (*in_func)(Scalar),
 		      Scalar K,
 		      Scalar R_N,
 		      Scalar R_N2,
@@ -243,12 +247,13 @@ Scalar SourceQ_rho_N2(Scalar x,
   Scalar K_eq;
 
   Scalar pi = acos(-1);
+  T = T_0 + T_x * cos(a_Tx * pi * x / L);
+  K_eq = in_func(T);
+  //K_eq = Function_to_Calculate_K;
 
-  K_eq = Function_to_Calculate_K;
   RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
   RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L);
-  T = T_0 + T_x * cos(a_Tx * pi * x / L);
   kf1_N = Cf1_N * pow(T, etaf1_N) * exp(-Ea_N / R / T);
   kf1_N2 = Cf1_N2 * pow(T, etaf1_N2) * exp(-Ea_N2 / R / T);
 
@@ -334,7 +339,7 @@ int run_regression()
   Scalar etaf1_N2;
   Scalar Ea_N;
   Scalar Ea_N2;
-  Scalar Function_to_Calculate_K;
+  //Scalar Function_to_Calculate_K;
   Scalar R_N;
   Scalar R_N2;
   Scalar theta_v_N2;
@@ -400,7 +405,7 @@ int run_regression()
   R_N   = masa_get_param<Scalar>("R_N");
   R_N2  = masa_get_param<Scalar>("R_N2");
 
-  Function_to_Calculate_K = masa_get_param<Scalar>("Function_to_Calculate_K");
+  //Function_to_Calculate_K = masa_get_param<Scalar>("Function_to_Calculate_K");
   theta_v_N2 = masa_get_param<Scalar>("theta_v_N2");
   M_N   = masa_get_param<Scalar>("M_N");
   h0_N  = masa_get_param<Scalar>("h0_N");
@@ -430,8 +435,8 @@ int run_regression()
       // evalulate source terms
       ufield = masa_eval_source_rho_u  <Scalar>(x);
       efield = masa_eval_source_rho_e  <Scalar>(x);
-      N      = masa_eval_source_rho_N  <Scalar>(x);
-      Ntwo   = masa_eval_source_rho_N2 <Scalar>(x);
+      N      = masa_eval_source_rho_N  <Scalar>(x,&temp_function);
+      Ntwo   = masa_eval_source_rho_N2 <Scalar>(x,&temp_function);
 
       // evaluate analytical solution terms
       exact_t    = masa_eval_exact_t     <Scalar>(x);
@@ -452,7 +457,8 @@ int run_regression()
 
       N2        = SourceQ_rho_N  (x,M_N,h0_N,h0_N2,Cf1_N,Cf1_N2,
 				  etaf1_N,etaf1_N2,Ea_N,Ea_N2,
-				  Function_to_Calculate_K,
+				  //Function_to_Calculate_K,
+				  &temp_function,
 				  R_N,R_N2,theta_v_N2,
 				  rho_N_0,rho_N_x,a_rho_N_x,rho_N2_0,
 				  rho_N2_x,a_rho_N2_x,L,u_0,u_x,a_ux,
@@ -469,7 +475,8 @@ int run_regression()
 				  etaf1_N2,
 				  Ea_N,
 				  Ea_N2,
-				  Function_to_Calculate_K,
+				  //Function_to_Calculate_K,
+				  &temp_function,
 				  K,
 				  R_N,
 				  R_N2,

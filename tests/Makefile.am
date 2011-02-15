@@ -41,7 +41,6 @@ check_PROGRAMS   = misc                \
 	           c_euler1d           \
 	           c_euler2d           \
                    c_euler3d           \
-                   c_euler_chem_1d     \
 	           c_navierstokes2d    \
 	           c_navierstokes3d    \
                    f_misc              \
@@ -50,9 +49,10 @@ check_PROGRAMS   = misc                \
                    f_euler1d           \
                    f_euler2d           \
                    f_euler3d           \
-                   f_euler_chem_1d     \
                    f_cns2d             \
-                   f_cns3d
+                   f_cns3d             \
+                   c_euler_chem_1d
+#                   f_euler_chem_1d    
 
 #----------------------
 # C++ Test Sources
@@ -121,8 +121,8 @@ f_euler2d_LDADD             = -lfmasa
 f_euler3d_SOURCES           = f_euler_source.F90 f_euler3d.F90 euler_source.c
 f_euler3d_LDADD             = -lfmasa
 
-f_euler_chem_1d_SOURCES     = f_euler_source.F90 f_euler_chem_1d.F90 euler_source.c
-f_euler_chem_1d_LDADD       = -lfmasa
+#f_euler_chem_1d_SOURCES     = f_euler_source.F90 f_euler_chem_1d.F90 euler_source.c
+#f_euler_chem_1d_LDADD       = -lfmasa
 
 f_cns2d_SOURCES             = f_cns_source.F90 f_cns2d.F90 cns_source.c
 f_cns2d_LDADD               = -lfmasa
@@ -169,7 +169,6 @@ TESTS                      = init.sh              \
 	                     c_euler1d            \
 	                     c_euler2d            \
 	                     c_euler3d            \
-                             c_euler_chem_1d      \
                              c_navierstokes2d     \
                              c_navierstokes3d     \
 			     f_init.sh            \
@@ -179,10 +178,12 @@ TESTS                      = init.sh              \
 		             f_euler1d            \
 		             f_euler2d            \
 		             f_euler3d            \
-		             f_euler_chem_1d      \
+                             c_euler_chem_1d      \
 		             f_cns2d              \
 		             f_cns3d              \
                              finalize.sh
+
+#		             f_euler_chem_1d      
 
 EXTRA_DIST                 = init.sh \
 			     c_init.sh \

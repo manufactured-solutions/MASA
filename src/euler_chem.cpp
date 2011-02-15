@@ -61,7 +61,7 @@ MASA::euler_chem_1d<Scalar>::euler_chem_1d()
   this->register_var("Ea_N2",&Ea_N2);
 
   // achtung: need to make into function pointer!
-  this->register_var("Function_to_Calculate_K",&Function_to_Calculate_K);
+  //this->register_var("Function_to_Calculate_K",&Function_to_Calculate_K);
 
   this->register_var("R_N",&R_N);
   this->register_var("R_N2",&R_N2);
@@ -109,7 +109,7 @@ int MASA::euler_chem_1d<Scalar>::init_var()
   err += this->set_var("Ea_N2",2.71);
 
   // achtung: need to make into function pointer!
-  err += this->set_var("Function_to_Calculate_K",1000.00);
+  //err += this->set_var("Function_to_Calculate_K",1000.00);
 
   err += this->set_var("R_N",0.60);
   err += this->set_var("R_N2",0.40);
@@ -204,21 +204,8 @@ Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_e(Scalar x)
 }
 
 template <typename Scalar>
-Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_N(Scalar x)
+Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_N(Scalar x, Scalar (*in_func)(Scalar))
 {
-  /*
-  double x,
-  double M_N,
-  double h0_N,
-  double h0_N2,
-  double Cf1_N,
-  double Cf1_N2,
-  double etaf1_N,
-  double etaf1_N2,
-  double Ea_N,
-  double Ea_N2,
-  double Function_to_Calculate_K)
-  */
 
   Scalar Q_rho_N;
   Scalar RHO_N;
@@ -229,11 +216,13 @@ Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_N(Scalar x)
   Scalar kf1_N2;
   Scalar K_eq;
 
-  K_eq = Function_to_Calculate_K;
+  // Calculate Equilibrium Konstant
+  T = T_0 + T_x * cos(a_Tx * PI * x / L);
+  K_eq = in_func(T);
+
   RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * PI * x / L);
   RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * PI * x / L);
   U = u_0 + u_x * sin(a_ux * PI * x / L);
-  T = T_0 + T_x * cos(a_Tx * PI * x / L);
   kf1_N = Cf1_N * pow(T, etaf1_N) * exp(-Ea_N / R / T);
   kf1_N2 = Cf1_N2 * pow(T, etaf1_N2) * exp(-Ea_N2 / R / T);
 
@@ -243,22 +232,8 @@ Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_N(Scalar x)
 }
 
 template <typename Scalar>
-Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_N2(Scalar x)
+Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_N2(Scalar x, Scalar (*in_func)(Scalar))
 {
-  /*
-  double x,
-  double M_N,
-  double h0_N,
-  double h0_N2,
-  double K,
-  double Cf1_N,
-  double Cf1_N2,
-  double etaf1_N,
-  double etaf1_N2,
-  double Ea_N,
-  double Ea_N2,
-  double Function_to_Calculate_K)
-  */
 
   Scalar Q_rho_N2;
   Scalar RHO_N;
@@ -269,11 +244,13 @@ Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_N2(Scalar x)
   Scalar kf1_N2;
   Scalar K_eq;
 
-  K_eq = Function_to_Calculate_K;
+  // Calculate Equilibrium Konstant
+  T = T_0 + T_x * cos(a_Tx * PI * x / L);
+  K_eq = in_func(T);
+  
   RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * PI * x / L);
   RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * PI * x / L);
   U = u_0 + u_x * sin(a_ux * PI * x / L);
-  T = T_0 + T_x * cos(a_Tx * PI * x / L);
   kf1_N = Cf1_N * pow(T, etaf1_N) * exp(-Ea_N / R / T);
   kf1_N2 = Cf1_N2 * pow(T, etaf1_N2) * exp(-Ea_N2 / R / T);
 

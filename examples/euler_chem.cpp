@@ -35,11 +35,22 @@
 #include <masa.h>
 #include <iostream>
 #include <fstream>
+#include <math.h>
 
 using namespace MASA;
 using namespace std;
 
 typedef double Scalar;
+
+template<typename Scalar>
+Scalar temp_function(Scalar T)
+{
+  // hackish functional here
+  // This is an eyeballed fit (focusing on the 5000K-6000K range) 
+  // for the equilibrium constant for N2->N+N dissociation
+  Scalar K = exp(4+(T-6000)/500);
+  return K;
+}
 
 int main()
 {
@@ -66,7 +77,7 @@ int main()
     {
       tempx=i*dx;
 
-      efield = masa_eval_source_rho_N2<Scalar>(tempx);
+      efield = masa_eval_source_rho_N2<Scalar>(tempx,&temp_function);
       cout << tempx << " " << efield << endl;
 
     } // done with loop
