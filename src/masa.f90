@@ -855,6 +855,8 @@ contains
     
     real(8), intent(in) :: value
     real(8), external :: funct
+
+    print *, "here !!"
     
     masa_eval_1d_source_rho_N = masa_eval_1d_source_rho_N_passthrough(value,c_funloc(funct))
 
