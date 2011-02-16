@@ -184,26 +184,26 @@ module masa
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_source_rho_N(value,funct) bind (C,name='cmasa_eval_1d_source_rho_N')
+     real (c_double) function masa_eval_1d_source_rho_N_passthrough(value,funct) bind (C,name='cmasa_eval_1d_source_rho_N')
        use iso_c_binding
        implicit none
        
        real (c_double), value      :: value
        type (c_funptr), intent(in) :: funct
-              
-     end function masa_eval_1d_source_rho_N
+       
+     end function masa_eval_1d_source_rho_N_passthrough
   end interface  
 
 
   interface 
-     real (c_double) function masa_eval_1d_source_rho_N2(value,funct) bind (C,name='cmasa_eval_1d_source_rho_N2')
+     real (c_double) function masa_eval_1d_source_rho_N2_passthrough(value,funct) bind (C,name='cmasa_eval_1d_source_rho_N2')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        type (c_funptr), intent(in) :: funct
 
-     end function masa_eval_1d_source_rho_N2
+     end function masa_eval_1d_source_rho_N2_passthrough
   end interface  
 
   ! ---------------------------------
@@ -848,5 +848,27 @@ contains
     call masa_set_param_passthrough(param_name//C_NULL_CHAR,value)
 
   end subroutine masa_set_param
+
+  real (c_double) function masa_eval_1d_source_rho_N(value,funct)
+    use iso_c_binding
+    implicit none
+    
+    real(8), intent(in) :: value
+    real(8), external :: funct
+    
+    masa_eval_1d_source_rho_N = masa_eval_1d_source_rho_N_passthrough(value,c_funloc(funct))
+
+  end function masa_eval_1d_source_rho_N
+  
+  real (c_double) function masa_eval_1d_source_rho_N2(value,funct)
+    use iso_c_binding
+    implicit none
+    
+    real(8), intent(in) :: value
+    real(8), external :: funct
+
+    masa_eval_1d_source_rho_N2 = masa_eval_1d_source_rho_N2_passthrough(value,c_funloc(funct))
+  
+  end function masa_eval_1d_source_rho_N2
 
 end module masa

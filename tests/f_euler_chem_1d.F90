@@ -27,11 +27,10 @@
 !! $Id: 
 !! -------------------------------------------------------------------------
 !! -------------------------------------------------------------------------
-function k_func(T)
+real(8) function k_func(T)
   implicit none
   
   real(8),intent(in) :: T
-  real(8)            :: k_func
 
   !! hackish functional here
   !! This is an eyeballed fit (focusing on the 5000K-6000K range) 
@@ -48,8 +47,7 @@ program main
   use masa
   implicit none
 
-  real(8)            :: K_FUNC
-
+  real(8), external :: k_func
   real(8) :: MASA_DEFAULT = -12345.67d0;
 
   real(8) :: u_0
@@ -165,9 +163,10 @@ program main
      ! evalulate source terms
      ufield = masa_eval_1d_source_rho_u (x);
      efield = masa_eval_1d_source_rho_e (x);
-     N      = masa_eval_1d_source_rho_N (x,c_funloc(K_FUNC));
-     Ntwo   = masa_eval_1d_source_rho_N2(x,c_funloc(K_FUNC));
-     
+     print *, 'here we go!'
+     N      = masa_eval_1d_source_rho_N (x,k_func);
+     Ntwo   = masa_eval_1d_source_rho_N2(x,k_func);
+
      ! evaluate analytical solution terms
      exact_t    = masa_eval_1d_exact_t     (x);
      exact_u    = masa_eval_1d_exact_u     (x);
