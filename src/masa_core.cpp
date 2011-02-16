@@ -150,7 +150,6 @@ void MasterMS<Scalar>::verify_pointer_sanity() const
     }  
 }
 
-
 //
 //  limited masa exception handling
 //

@@ -27,25 +27,28 @@
 !! $Id: 
 !! -------------------------------------------------------------------------
 !! -------------------------------------------------------------------------
-function K(T)
+function k_func(T)
   implicit none
   
   real(8),intent(in) :: T
-  real(8)            :: K
+  real(8)            :: k_func
 
   !! hackish functional here
   !! This is an eyeballed fit (focusing on the 5000K-6000K range) 
   !! for the equilibrium constant for N2->N+N dissociation
 
-  K = exp(4+(T-6000)/500)
+  k_func = exp(4+(T-6000)/500)
 
-end subroutine temp_function
+end function k_func
 
 
 program main
   use euler_source_interface
+  use iso_c_binding
   use masa
   implicit none
+
+  real(8)            :: K_FUNC
 
   real(8) :: MASA_DEFAULT = -12345.67d0;
 
@@ -162,8 +165,8 @@ program main
      ! evalulate source terms
      ufield = masa_eval_1d_source_rho_u (x);
      efield = masa_eval_1d_source_rho_e (x);
-     N      = masa_eval_1d_source_rho_N (x);
-     Ntwo   = masa_eval_1d_source_rho_N2(x);
+     N      = masa_eval_1d_source_rho_N (x,c_funloc(K_FUNC));
+     Ntwo   = masa_eval_1d_source_rho_N2(x,c_funloc(K_FUNC));
      
      ! evaluate analytical solution terms
      exact_t    = masa_eval_1d_exact_t     (x);
