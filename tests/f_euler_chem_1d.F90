@@ -163,7 +163,6 @@ program main
      ! evalulate source terms
      ufield = masa_eval_1d_source_rho_u (x);
      efield = masa_eval_1d_source_rho_e (x);
-     print *, 'here we go!'
      N      = masa_eval_1d_source_rho_N (x,k_func);
      Ntwo   = masa_eval_1d_source_rho_N2(x,k_func);
 
