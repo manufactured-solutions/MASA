@@ -48,7 +48,7 @@ using namespace MASA;
 template <typename Scalar>
 MASA::euler_transient_1d<Scalar>::euler_transient_1d()
 {
-  this->mmsname = "euler_1d";
+  this->mmsname = "euler_transient_1d";
   this->dimension=1;
 
 }
@@ -56,6 +56,10 @@ MASA::euler_transient_1d<Scalar>::euler_transient_1d()
 template <typename Scalar>
 int MASA::euler_transient_1d<Scalar>::init_var()
 {
+  int err = 0;
+
+  // randomly generated
+  err += this->set_var("k",1.38);
 
 
   return 0;
