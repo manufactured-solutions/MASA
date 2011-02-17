@@ -24,6 +24,7 @@ check_PROGRAMS   = misc                \
 	           euler1d             \
 	           euler2d             \
                    euler3d             \
+                   euler_transient_1d  \
                    euler_chem_1d       \
 	           ns2d                \
 	           ns3d                \
@@ -75,6 +76,7 @@ axi_cns_SOURCES             = axi_cns.cpp
 euler1d_SOURCES             = euler1d.cpp
 euler2d_SOURCES             = euler2d.cpp
 euler3d_SOURCES             = euler3d.cpp
+euler_transient_1d_SOURCES  = euler_transient_1d.cpp
 euler_chem_1d_SOURCES       = euler_chem_1d.cpp
 ns2d_SOURCES                = ns2d.cpp
 ns3d_SOURCES                = ns3d.cpp
@@ -151,6 +153,7 @@ TESTS                      = init.sh              \
 	                     euler1d              \
 	                     euler2d              \
 	                     euler3d              \
+                             euler_transient_1d   \
                              euler_chem_1d        \
                              ns2d                 \
                              ns3d                 \
