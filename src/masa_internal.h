@@ -705,6 +705,40 @@ namespace MASA
     Scalar eval_3d_g_rho(Scalar,Scalar,Scalar,int);
 
   };
+  // ------------------------------------------------------
+  // ------------------------- euler - transient ----------
+  // ------------------------------------------------------
+
+  template <typename Scalar>
+  class euler_transient_1d : public manufactured_solution<Scalar>
+  {
+    using manufactured_solution<Scalar>::pi;
+    using manufactured_solution<Scalar>::PI;
+
+    Scalar k;                             // Boltzmanns constant
+
+    Scalar u_0;
+    Scalar u_x;
+    Scalar rho_0;
+    Scalar rho_x;
+    Scalar p_0;
+    Scalar p_x;
+    Scalar a_px;
+    Scalar a_rhox;
+    Scalar a_ux;
+    Scalar Gamma;
+    Scalar mu;
+    Scalar L;    
+
+  public:
+    euler_transient_1d(); // constructor    
+    int init_var();          // default problem values
+
+    Scalar eval_q_rho_u (Scalar); // source terms
+
+  };
+
+
 
   // ------------------------------------------------------
   // ----------------   euler + chem     ------------------
