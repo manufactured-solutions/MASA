@@ -127,25 +127,28 @@ Scalar eval_q_rho(Scalar x,Scalar t)
  * -----------------------------------------------
  */ 
 
-template <typename Scalar>
-Scalar eval_exact_u(Scalar x,Scalar t)
+template<typename Scalar>
+Scalar anQ_p (Scalar x,Scalar t,Scalar p_0,Scalar p_x,Scalar p_t,Scalar a_px,Scalar a_pt,Scalar L)
 {
-  Scalar exact_u;
-  exact_u = u_0 + u_x * sin(a_ux * pi * x / L) + u_t * cos(a_ut * pi * t / L);
-  return exact_u;
-}
-
-template <typename Scalar>
-Scalar eval_exact_p(Scalar x,Scalar t)
-{
+  Scalar pi = acos(-1);
   Scalar exact_p;
   exact_p = p_0 + p_x * cos(a_px * pi * x / L) + p_t * cos(a_pt * pi * t / L);
   return exact_p;
 }
-
-template <typename Scalar>
-Scalar eval_exact_rho(Scalar x,Scalar t)
+  
+template<typename Scalar>
+Scalar anQ_u (Scalar x,Scalar t,Scalar u_0,Scalar u_x,Scalar a_ux,Scalar u_t,Scalar a_ut,Scalar L)
 {
+  Scalar pi = acos(-1);
+  Scalar exact_u;
+  exact_u = u_0 + u_x * sin(a_ux * pi * x / L) + u_t * cos(a_ut * pi * t / L);
+  return exact_u;
+} 
+ 
+template<typename Scalar>
+Scalar anQ_rho (Scalar x,Scalar t,Scalar rho_0,Scalar rho_x,Scalar a_rhox,Scalar rho_t,Scalar a_rhot,Scalar L)
+{ 
+  Scalar pi = acos(-1);
   Scalar exact_rho;
   exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_t * sin(a_rhot * pi * t / L);
   return exact_rho;
