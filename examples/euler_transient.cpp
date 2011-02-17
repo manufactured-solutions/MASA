@@ -56,6 +56,10 @@ int main()
   int lx=10;     // length
   Scalar dx=Scalar(lx)/Scalar(nx);
 
+  int nt = 100;  // number of points
+  int lt = 10;     // length 
+  Scalar dt = Scalar(lt)/Scalar(nt);
+
   // initalize
   masa_init<Scalar>("euler-chemistry-test","euler_transient_1d");
 
@@ -65,19 +69,20 @@ int main()
   // check that all terms have been initialized
   masa_sanity_check<Scalar>();
 
-  t = 0;
-
   // evaluate MMS (1D)
   for(int i=0;i<nx;i++)
-    {
-      x=i*dx;
+    for(int j=0;j<nt;j++)
+      {
 
-      // evalulate source terms
-      ufield = masa_eval_source_rho_u  <Scalar>(x,t);
-      efield = masa_eval_source_rho_e  <Scalar>(x,t);
-      rhofield = masa_eval_source_rho  <Scalar>(x,t);
-
-    }
+	x=i*dx;
+	t=j*dt;
+	
+	// evalulate source terms
+	ufield = masa_eval_source_rho_u  <Scalar>(x,t);
+	efield = masa_eval_source_rho_e  <Scalar>(x,t);
+	rhofield = masa_eval_source_rho  <Scalar>(x,t);
+	
+      }
   
   return 0;
 

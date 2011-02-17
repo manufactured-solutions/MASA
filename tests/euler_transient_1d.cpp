@@ -133,6 +133,10 @@ int run_regression()
   Scalar ufield,ufield2,ufield3;
   Scalar efield,efield2,efield3;
   Scalar rhofield,rhofield2,rhofield3;
+  
+  Scalar exact_u;
+  Scalar exact_p;
+  Scalar exact_rho;
 
   // parameters
   Scalar x;
@@ -145,7 +149,7 @@ int run_regression()
 
   int nt = 100;  // number of points
   int lt = 10;     // length
-  Scalar dt=Scalar(lt)/Scalar(nt);
+  Scalar dt = Scalar(lt)/Scalar(nt);
 
   // initalize
   masa_init<Scalar>("euler-chemistry-test","euler_transient_1d");
@@ -167,6 +171,10 @@ int run_regression()
 	ufield = masa_eval_source_rho_u  <Scalar>(x,t);
 	efield = masa_eval_source_rho_e  <Scalar>(x,t);
 	rhofield = masa_eval_source_rho  <Scalar>(x,t);
+
+	exact_u = masa_eval_exact_u      <Scalar>(x,t);
+	exact_p = masa_eval_exact_p      <Scalar>(x,t);
+	exact_rho = masa_eval_exact_rho  <Scalar>(x,t);
 
       }
   
