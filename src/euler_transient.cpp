@@ -67,12 +67,61 @@ int MASA::euler_transient_1d<Scalar>::init_var()
 
 
 template <typename Scalar>
-Scalar MASA::euler_transient_1d<Scalar>::eval_q_rho_u(Scalar x)
+Scalar MASA::euler_transient_1d<Scalar>::eval_q_rho_u(Scalar x,Scalar t)
 {
 
   return 0;
 
 }
+
+template <typename Scalar>
+Scalar MASA::euler_transient_1d<Scalar>::eval_q_rho_e(Scalar x,Scalar t)
+{
+
+  return 0;
+
+}
+
+template <typename Scalar>
+Scalar MASA::euler_transient_1d<Scalar>::eval_q_rho(Scalar x,Scalar t)
+{
+
+  return 0;
+
+}
+
+/* ------------------------------------------------
+ *
+ *
+ *   Analytical terms
+ *
+ * -----------------------------------------------
+ */ 
+
+template <typename Scalar>
+Scalar MASA::euler_transient_1d<Scalar>::eval_exact_u(Scalar x,Scalar t)
+{
+  Scalar exact_u;
+  exact_u = u_0 + u_x * sin(a_ux * pi * x / L) + u_t * cos(a_ut * pi * t / L);
+  return exact_u;
+}
+
+template <typename Scalar>
+Scalar MASA::euler_transient_1d<Scalar>::eval_exact_p(Scalar x,Scalar t)
+{
+  Scalar exact_p;
+  exact_p = p_0 + p_x * cos(a_px * pi * x / L) + p_t * cos(a_pt * pi * t / L);
+  return exact_p;
+}
+
+template <typename Scalar>
+Scalar MASA::euler_transient_1d<Scalar>::eval_exact_rho(Scalar x,Scalar t)
+{
+  Scalar exact_rho;
+  exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_t * sin(a_rhot * pi * t / L);
+  return exact_rho;
+}
+
 
 // ----------------------------------------
 //   Template Instantiation(s)

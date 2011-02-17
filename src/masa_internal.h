@@ -719,13 +719,22 @@ namespace MASA
 
     Scalar u_0;
     Scalar u_x;
+    Scalar u_t;    
+    Scalar a_ux;
+    Scalar a_ut;
+
     Scalar rho_0;
     Scalar rho_x;
+    Scalar rho_t;
+    Scalar a_rhox;
+    Scalar a_rhot;
+
     Scalar p_0;
     Scalar p_x;
+    Scalar p_t;
     Scalar a_px;
-    Scalar a_rhox;
-    Scalar a_ux;
+    Scalar a_pt;
+
     Scalar Gamma;
     Scalar mu;
     Scalar L;    
@@ -734,7 +743,13 @@ namespace MASA
     euler_transient_1d(); // constructor    
     int init_var();          // default problem values
 
-    Scalar eval_q_rho_u (Scalar); // source terms
+    Scalar eval_q_rho_u (Scalar,Scalar);
+    Scalar eval_q_rho_e (Scalar,Scalar);
+    Scalar eval_q_rho   (Scalar,Scalar);
+
+    Scalar eval_exact_u    (Scalar,Scalar);
+    Scalar eval_exact_p    (Scalar,Scalar);
+    Scalar eval_exact_rho  (Scalar,Scalar);
 
   };
 
