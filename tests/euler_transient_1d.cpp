@@ -40,55 +40,57 @@
 using namespace MASA;
 using namespace std;
 
-
 template<typename Scalar>
-Scalar nancheck(Scalar x)
+Scalar nancheck(Scalar x,Scalar thresh)
 {
   if(isnan(x))
     {
       cout << "MASA REGRESSION FAILURE:: nan found!\n";
       exit(1);
     }
-  return 1;
-}
-
-template<typename Scalar>
-Scalar threshcheck(Scalar x, Scalar thresh)
-{
   
   if(x > thresh)
     {
-      cout << "\nMASA REGRESSION TEST FAILED: Euler-1d + chemistry\n";
+      cout << "\nMASA REGRESSION TEST FAILED: Transient Euler-1d\n";
       cout << "Exceeded Threshold by: " << x << endl;
       exit(1);
     }
-  return 1;  
-}
 
-
-
-// source terms
-
-template <typename Scalar>
-Scalar eval_q_rho_u(Scalar x,Scalar t)
-{
-  double Q_u_t;
-  double RHO;
-  double U;
-
-  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_t * sin(a_rhot * pi * t / L);
-  U = u_0 + u_x * sin(a_ux * pi * x / L) + u_t * cos(a_ut * pi * t / L);
-
-  Q_u_t = cos(a_rhox * PI * x / L) * a_rhox * PI * rho_x * U * U / L + 0.2e1 * cos(a_ux * PI * x / L) * RHO * a_ux * PI * u_x * U / L + cos(a_rhot * PI * t / L) * a_rhot * PI * rho_t * U / L - sin(a_ut * PI * t / L) * a_ut * PI * u_t * RHO / L - sin(a_px * PI * x / L) * a_px * PI * p_x / L;
-  return(Q_u_t);
-
+  return 0;  
 
 }
 
+/* ------------------------------------------------
+ *
+ *
+ *   Source Terms
+ *
+ * -----------------------------------------------
+ */ 
 
-template <typename Scalar>
-Scalar eval_q_rho_e(Scalar x,Scalar t)
+template<typename Scalar>
+Scalar SourceQ_e (
+  Scalar x,
+  Scalar t,
+  Scalar u_0,
+  Scalar u_x,
+  Scalar u_t,
+  Scalar rho_0,
+  Scalar rho_x,
+  Scalar rho_t,
+  Scalar p_0,
+  Scalar p_x,
+  Scalar p_t,
+  Scalar a_px,
+  Scalar a_pt,
+  Scalar a_rhox,
+  Scalar a_rhot,
+  Scalar a_ux,
+  Scalar a_ut,
+  Scalar L,
+  Scalar Gamma)
 {
+  Scalar pi = acos(-1);
   double Q_e_t;
   double RHO;
   double U;
@@ -98,15 +100,67 @@ Scalar eval_q_rho_e(Scalar x,Scalar t)
   P = p_0 + p_x * cos(a_px * pi * x / L) + p_t * cos(a_pt * pi * t / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L) + u_t * cos(a_ut * pi * t / L);
 
-  Q_e_t = cos(a_rhot * PI * t / L) * a_rhot * PI * rho_t * U * U / L / 0.2e1 - sin(a_ut * PI * t / L) * a_ut * PI * u_t * RHO * U / L - sin(a_pt * PI * t / L) * a_pt * PI * p_t / (Gamma - 0.1e1) / L + cos(a_rhox * PI * x / L) * pow(U, 0.3e1) * a_rhox * PI * rho_x / L / 0.2e1 + cos(a_ux * PI * x / L) * P * a_ux * PI * u_x * Gamma / (Gamma - 0.1e1) / L + 0.3e1 / 0.2e1 * cos(a_ux * PI * x / L) * RHO * U * U * a_ux * PI * u_x / L - sin(a_px * PI * x / L) * U * a_px * PI * p_x * Gamma / (Gamma - 0.1e1) / L;
+  Q_e_t = cos(a_rhot * pi * t / L) * a_rhot * pi * rho_t * U * U / L / 0.2e1 - sin(a_ut * pi * t / L) * a_ut * pi * u_t * RHO * U / L - sin(a_pt * pi * t / L) * a_pt * pi * p_t / (Gamma - 0.1e1) / L + cos(a_rhox * pi * x / L) * pow(U, 0.3e1) * a_rhox * pi * rho_x / L / 0.2e1 + cos(a_ux * pi * x / L) * P * a_ux * pi * u_x * Gamma / (Gamma - 0.1e1) / L + 0.3e1 / 0.2e1 * cos(a_ux * pi * x / L) * RHO * U * U * a_ux * pi * u_x / L - sin(a_px * pi * x / L) * U * a_px * pi * p_x * Gamma / (Gamma - 0.1e1) / L;
   return(Q_e_t);
 
 }
 
-template <typename Scalar>
-Scalar eval_q_rho(Scalar x,Scalar t)
+template<typename Scalar>
+Scalar SourceQ_u (
+  Scalar x,
+  Scalar t,
+  Scalar u_0,
+  Scalar u_x,
+  Scalar u_t,
+  Scalar rho_0,
+  Scalar rho_x,
+  Scalar rho_t,
+  Scalar p_0,
+  Scalar p_x,
+  Scalar p_t,
+  Scalar a_px,
+  Scalar a_pt,
+  Scalar a_rhox,
+  Scalar a_rhot,
+  Scalar a_ux,
+  Scalar a_ut,
+  Scalar L)
 {
+  Scalar pi = acos(-1);
+  double Q_u_t;
+  double RHO;
+  double U;
 
+  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_t * sin(a_rhot * pi * t / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L) + u_t * cos(a_ut * pi * t / L);
+
+  Q_u_t = cos(a_rhox * pi * x / L) * a_rhox * pi * rho_x * U * U / L + 0.2e1 * cos(a_ux * pi * x / L) * RHO * a_ux * pi * u_x * U / L + cos(a_rhot * pi * t / L) * a_rhot * pi * rho_t * U / L - sin(a_ut * pi * t / L) * a_ut * pi * u_t * RHO / L - sin(a_px * pi * x / L) * a_px * pi * p_x / L;
+  return(Q_u_t);
+
+}
+
+template<typename Scalar>
+Scalar SourceQ_rho (
+  Scalar x,
+  Scalar t,
+  Scalar u_0,
+  Scalar u_x,
+  Scalar u_t,
+  Scalar rho_0,
+  Scalar rho_x,
+  Scalar rho_t,
+  Scalar p_0,
+  Scalar p_x,
+  Scalar p_t,
+  Scalar a_px,
+  Scalar a_pt,
+  Scalar a_rhox,
+  Scalar a_rhot,
+  Scalar a_ux,
+  Scalar a_ut,
+  Scalar L)
+{
+  Scalar pi = acos(-1);
   double Q_rho_t;
   double RHO;
   double U;
@@ -114,7 +168,7 @@ Scalar eval_q_rho(Scalar x,Scalar t)
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_t * sin(a_rhot * pi * t / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L) + u_t * cos(a_ut * pi * t / L);
 
-  Q_rho_t = cos(a_rhot * PI * t / L) * a_rhot * PI * rho_t / L + cos(a_ux * PI * x / L) * RHO * a_ux * PI * u_x / L + cos(a_rhox * PI * x / L) * U * a_rhox * PI * rho_x / L;
+  Q_rho_t = cos(a_rhot * pi * t / L) * a_rhot * pi * rho_t / L + cos(a_ux * pi * x / L) * RHO * a_ux * pi * u_x / L + cos(a_rhox * pi * x / L) * U * a_rhox * pi * rho_x / L;
   return(Q_rho_t);
 
 }
@@ -181,14 +235,16 @@ int run_regression()
   Scalar Gamma;
   Scalar mu;
   Scalar L;    
-
+  
+  // solutions
   Scalar ufield,ufield2,ufield3;
   Scalar efield,efield2,efield3;
-  Scalar rhofield,rhofield2,rhofield3;
-  
-  Scalar exact_u;
-  Scalar exact_p;
-  Scalar exact_rho;
+  Scalar rho,rho2,rho3;
+  Scalar gradx,grady,gradz,gradp,gradrho;
+
+  Scalar exact_u,exact_u2,exact_u3;
+  Scalar exact_p,exact_p2,exact_p3;
+  Scalar exact_rho,exact_rho2,exact_rho3;
 
   // parameters
   Scalar x;
@@ -248,13 +304,108 @@ int run_regression()
 	// evalulate source terms
 	ufield = masa_eval_source_rho_u  <Scalar>(x,t);
 	efield = masa_eval_source_rho_e  <Scalar>(x,t);
-	rhofield = masa_eval_source_rho  <Scalar>(x,t);
+	rho    = masa_eval_source_rho    <Scalar>(x,t);
 
 	exact_u = masa_eval_exact_u      <Scalar>(x,t);
 	exact_p = masa_eval_exact_p      <Scalar>(x,t);
 	exact_rho = masa_eval_exact_rho  <Scalar>(x,t);
 
-      }
+	efield2 = SourceQ_e (x,
+			     t,
+			     u_0,
+			     u_x,
+			     u_t,
+			     rho_0,
+			     rho_x,
+			     rho_t,
+			     p_0,
+			     p_x,
+			     p_t,
+			     a_px,
+			     a_pt,
+			     a_rhox,
+			     a_rhot,
+			     a_ux,
+			     a_ut,
+			     L,
+			     Gamma);
+
+	ufield2 = SourceQ_u (x,
+			     t,
+			     u_0,
+			     u_x,
+			     u_t,
+			     rho_0,
+			     rho_x,
+			     rho_t,
+			     p_0,
+			     p_x,
+			     p_t,
+			     a_px,
+			     a_pt,
+			     a_rhox,
+			     a_rhot,
+			     a_ux,
+			     a_ut,
+			     L);
+
+	rho2 = SourceQ_rho (x,
+			    t,
+			    u_0,
+			    u_x,
+			    u_t,
+			    rho_0,
+			    rho_x,
+			    rho_t,
+			    p_0,
+			    p_x,
+			    p_t,
+			    a_px,
+			    a_pt,
+			    a_rhox,
+			    a_rhot,
+			    a_ux,
+			    a_ut,
+			    L);
+
+
+	exact_u2   = anQ_p ( x, t, p_0, p_x, p_t, a_px, a_pt, L);
+	exact_rho2 = anQ_u ( x, t, u_0, u_x, a_ux, u_t, a_ut, L);
+	exact_p2   = anQ_rho ( x, t, rho_0, rho_x, a_rhox, rho_t, a_rhot, L);
+
+	// test the result is roughly zero
+	// choose between abs and rel error
+#ifdef MASA_STRICT_REGRESSION
+
+	ufield3 = fabs(ufield-ufield2);
+	efield3 = fabs(efield-efield2);
+	rho3    = fabs(rho-rho2);
+
+	exact_u3   = fabs(exact_u-exact_u2);
+	exact_rho3 = fabs(exact_rho-exact_rho2);
+	exact_p3   = fabs(exact_p-exact_p2);
+
+#else
+
+	ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
+	efield3 = fabs(efield-efield2)/fabs(efield2);
+	rho3    = fabs(rho-rho2)/fabs(rho2);
+
+	exact_u3   = fabs(exact_u-exact_u2)/fabs(exact_u2);
+	exact_rho3 = fabs(exact_rho-exact_rho2)/fabs(exact_rho2);
+	exact_p3   = fabs(exact_p-exact_p2)/fabs(exact_p2);
+
+#endif
+
+	nancheck(ufield3,threshold);
+	nancheck(efield3,threshold);
+	nancheck(rho3,threshold);
+	
+	nancheck(exact_u3,threshold);
+	nancheck(exact_rho3,threshold);
+	nancheck(exact_p3,threshold);
+
+      }// done with time and space loop
   
   return 0;
 
