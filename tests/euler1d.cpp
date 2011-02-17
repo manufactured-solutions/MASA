@@ -204,7 +204,6 @@ int run_regression()
   masa_init_param<Scalar>();
 
   // get defaults for comparison to source terms
-  // get vars
   u_0 = masa_get_param<Scalar>("u_0");
   u_x = masa_get_param<Scalar>("u_x");
   rho_0 = masa_get_param<Scalar>("rho_0");
