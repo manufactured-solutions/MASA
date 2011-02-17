@@ -40,6 +40,33 @@
 using namespace MASA;
 using namespace std;
 
+
+template<typename Scalar>
+Scalar nancheck(Scalar x)
+{
+  if(isnan(x))
+    {
+      cout << "MASA REGRESSION FAILURE:: nan found!\n";
+      exit(1);
+    }
+  return 1;
+}
+
+template<typename Scalar>
+Scalar threshcheck(Scalar x, Scalar thresh)
+{
+  
+  if(x > thresh)
+    {
+      cout << "\nMASA REGRESSION TEST FAILED: Euler-1d + chemistry\n";
+      cout << "Exceeded Threshold by: " << x << endl;
+      exit(1);
+    }
+  return 1;  
+}
+
+
+
 // source terms
 
 template <typename Scalar>
@@ -130,6 +157,28 @@ int run_regression()
 
   Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
 
+  Scalar u_0;
+  Scalar u_x;
+  Scalar u_t;    
+  Scalar a_ux;
+  Scalar a_ut;
+
+  Scalar rho_0;
+  Scalar rho_x;
+  Scalar rho_t;
+  Scalar a_rhox;
+  Scalar a_rhot;
+
+  Scalar p_0;
+  Scalar p_x;
+  Scalar p_t;
+  Scalar a_px;
+  Scalar a_pt;
+
+  Scalar Gamma;
+  Scalar mu;
+  Scalar L;    
+
   Scalar ufield,ufield2,ufield3;
   Scalar efield,efield2,efield3;
   Scalar rhofield,rhofield2,rhofield3;
@@ -156,6 +205,32 @@ int run_regression()
 
   // initialize the default parameters
   masa_init_param<Scalar>();
+
+  // get defaults for comparison to source terms
+  u_0 = masa_get_param<Scalar>("u_0");
+  u_x = masa_get_param<Scalar>("u_x");
+  u_t = masa_get_param<Scalar>("u_t");
+
+  rho_0 = masa_get_param<Scalar>("rho_0");
+  rho_x = masa_get_param<Scalar>("rho_x");
+  rho_t = masa_get_param<Scalar>("rho_t");
+
+  p_0 = masa_get_param<Scalar>("p_0");
+  p_x = masa_get_param<Scalar>("p_x");
+  p_t = masa_get_param<Scalar>("p_t");
+
+  a_px = masa_get_param<Scalar>("a_px");
+  a_pt = masa_get_param<Scalar>("a_pt");
+
+  a_rhox = masa_get_param<Scalar>("a_rhox");
+  a_rhot = masa_get_param<Scalar>("a_rhot");
+
+  a_ux = masa_get_param<Scalar>("a_ux");
+  a_ut = masa_get_param<Scalar>("a_ut");
+
+  Gamma = masa_get_param<Scalar>("Gamma");
+  mu    = masa_get_param<Scalar>("mu");
+  L     = masa_get_param<Scalar>("L");
 
   // check that all terms have been initialized
   masa_sanity_check<Scalar>();
