@@ -50,6 +50,35 @@ MASA::euler_transient_1d<Scalar>::euler_transient_1d()
 {
   this->mmsname = "euler_transient_1d";
   this->dimension=1;
+  this->register_var("k",&k);
+
+  this->register_var("u_0",&u_0);
+  this->register_var("u_x",&u_x);
+  this->register_var("u_t",&u_t);
+
+  this->register_var("rho_0",&rho_0);
+  this->register_var("rho_x",&rho_x);
+  this->register_var("rho_t",&rho_t);
+
+  this->register_var("p_0",&p_0);
+  this->register_var("p_x",&p_x);
+  this->register_var("p_t",&p_t);
+
+  this->register_var("a_px",&a_px);
+  this->register_var("a_pt",&a_pt);
+
+  this->register_var("a_rhox",&a_rhox);
+  this->register_var("a_rhot",&a_rhot);
+
+  this->register_var("a_ux",&a_ux);
+  this->register_var("a_ut",&a_ut);
+
+  this->register_var("L",&L);
+  this->register_var("Gamma",&Gamma);
+  this->register_var("mu",&mu);
+
+  // init defaults
+  this->init_var();
 
 }
 
@@ -61,8 +90,32 @@ int MASA::euler_transient_1d<Scalar>::init_var()
   // randomly generated
   err += this->set_var("k",1.38);
 
+  err += this->set_var("u_0",14.191);
+  err += this->set_var("u_x",1.63);
+  err += this->set_var("u_t",1.63);
 
-  return 0;
+  err += this->set_var("rho_0",91.5);
+  err += this->set_var("rho_x",.13);
+  err += this->set_var("rho_t",.13);
+
+  err += this->set_var("p_0",12.1984);
+  err += this->set_var("p_x",3.151);
+  err += this->set_var("p_t",3.151);
+
+  err += this->set_var("a_px",6.151);
+  err += this->set_var("a_pt",6.151);
+
+  err += this->set_var("a_rhox",1.2);
+  err += this->set_var("a_rhot",1.2);
+
+  err += this->set_var("a_ux",.03);
+  err += this->set_var("a_ut",.03);
+
+  err += this->set_var("L",3.02);
+  err += this->set_var("Gamma",16.1);
+  err += this->set_var("mu",.091);
+
+  return err;
 }
 
 
