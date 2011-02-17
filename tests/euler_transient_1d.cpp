@@ -91,10 +91,10 @@ Scalar SourceQ_e (
   Scalar Gamma)
 {
   Scalar pi = acos(-1);
-  double Q_e_t;
-  double RHO;
-  double U;
-  double P;
+  Scalar Q_e_t;
+  Scalar RHO;
+  Scalar U;
+  Scalar P;
 
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_t * sin(a_rhot * pi * t / L);
   P = p_0 + p_x * cos(a_px * pi * x / L) + p_t * cos(a_pt * pi * t / L);
@@ -127,9 +127,9 @@ Scalar SourceQ_u (
   Scalar L)
 {
   Scalar pi = acos(-1);
-  double Q_u_t;
-  double RHO;
-  double U;
+  Scalar Q_u_t;
+  Scalar RHO;
+  Scalar U;
 
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_t * sin(a_rhot * pi * t / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L) + u_t * cos(a_ut * pi * t / L);
@@ -161,9 +161,9 @@ Scalar SourceQ_rho (
   Scalar L)
 {
   Scalar pi = acos(-1);
-  double Q_rho_t;
-  double RHO;
-  double U;
+  Scalar Q_rho_t;
+  Scalar RHO;
+  Scalar U;
 
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_t * sin(a_rhot * pi * t / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L) + u_t * cos(a_ut * pi * t / L);
@@ -310,9 +310,7 @@ int run_regression()
 	exact_p = masa_eval_exact_p      <Scalar>(x,t);
 	exact_rho = masa_eval_exact_rho  <Scalar>(x,t);
 
-	efield2 = SourceQ_e (x,
-			     t,
-			     u_0,
+	efield2 = SourceQ_e (x,t,u_0,
 			     u_x,
 			     u_t,
 			     rho_0,
@@ -369,9 +367,9 @@ int run_regression()
 			    L);
 
 
-	exact_u2   = anQ_p ( x, t, p_0, p_x, p_t, a_px, a_pt, L);
-	exact_rho2 = anQ_u ( x, t, u_0, u_x, a_ux, u_t, a_ut, L);
-	exact_p2   = anQ_rho ( x, t, rho_0, rho_x, a_rhox, rho_t, a_rhot, L);
+	exact_u2   = anQ_p (x,t,p_0,p_x,p_t,a_px,a_pt,L);
+	exact_rho2 = anQ_u (x,t,u_0,u_x,a_ux,u_t,a_ut, L);
+	exact_p2   = anQ_rho(x,t,rho_0,rho_x,a_rhox,rho_t,a_rhot,L);
 
 	// test the result is roughly zero
 	// choose between abs and rel error
