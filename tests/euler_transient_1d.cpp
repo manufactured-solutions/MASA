@@ -251,16 +251,16 @@ int run_regression()
   Scalar t;
 
   //problem size
-  int nx = 200;  // number of points
-  int lx=10;     // length
-  Scalar dx=Scalar(lx)/Scalar(nx);
+  int nx    = 200;  // number of points
+  int lx    = 10;     // length
+  Scalar dx = Scalar(lx)/Scalar(nx);
 
-  int nt = 100;  // number of points
-  int lt = 10;     // length
+  int nt    = 100;  // number of points
+  int lt    = 10;     // length
   Scalar dt = Scalar(lt)/Scalar(nt);
 
   // initalize
-  masa_init<Scalar>("euler-chemistry-test","euler_transient_1d");
+  masa_init<Scalar>("euler-transient-test","euler_transient_1d");
 
   // initialize the default parameters
   masa_init_param<Scalar>();
@@ -367,9 +367,9 @@ int run_regression()
 			    L);
 
 
-	exact_u2   = anQ_p (x,t,p_0,p_x,p_t,a_px,a_pt,L);
-	exact_rho2 = anQ_u (x,t,u_0,u_x,a_ux,u_t,a_ut, L);
-	exact_p2   = anQ_rho(x,t,rho_0,rho_x,a_rhox,rho_t,a_rhot,L);
+	exact_p2   = anQ_p (x,t,p_0,p_x,p_t,a_px,a_pt,L);
+	exact_u2   = anQ_u (x,t,u_0,u_x,a_ux,u_t,a_ut, L);
+	exact_rho2 = anQ_rho(x,t,rho_0,rho_x,a_rhox,rho_t,a_rhot,L);
 
 	// test the result is roughly zero
 	// choose between abs and rel error
