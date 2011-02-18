@@ -30,6 +30,7 @@
 module masa
   use iso_c_binding
   implicit none
+
   type (c_funptr),bind(c)          :: funp
     
   ! ---------------------------------
@@ -852,15 +853,16 @@ contains
 
   end subroutine masa_set_param
 
-  real (c_double) function masa_eval_1d_source_rho_N(value,funct)
+  real (c_double) function masa_eval_1d_source_rho_N(value,functer)
     use iso_c_binding
     implicit none
     
     real(c_double), intent(in)       :: value
-    real(c_double), external,bind(c) :: funct
+    real(c_double), external,bind(c) :: functer
+
     print *, "here !!"
     
-    funp = c_funloc(funct)
+    funp = c_funloc(functer)
     masa_eval_1d_source_rho_N = masa_eval_1d_source_rho_N_passthrough(value,funp)
 
   end function masa_eval_1d_source_rho_N
@@ -871,6 +873,7 @@ contains
     
     real(c_double), intent(in)       :: value
     real(c_double), external,bind(c) :: functionguy
+  
     funp = c_funloc(functionguy)
     masa_eval_1d_source_rho_N2 = masa_eval_1d_source_rho_N2_passthrough(value,funp)
   
