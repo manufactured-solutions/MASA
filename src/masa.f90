@@ -28,7 +28,10 @@
 ! --------------------------------------------------------------------------
 
 module masa
-
+  use iso_c_binding
+  implicit none
+  type (c_funptr),bind(c)          :: funp
+    
   ! ---------------------------------
   ! MMS Init/Selection Routines
   ! ---------------------------------
@@ -184,24 +187,24 @@ module masa
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_source_rho_N_passthrough(value,funct) bind (C,name='cmasa_eval_1d_source_rho_N')
+     real (c_double) function masa_eval_1d_source_rho_N_passthrough(value,fun) bind (C,name='cmasa_eval_1d_source_rho_N')
        use iso_c_binding
        implicit none
        
        real (c_double), value      :: value
-       type (c_funptr), intent(in) :: funct
+       type (c_funptr), intent(in) :: fun
        
      end function masa_eval_1d_source_rho_N_passthrough
   end interface  
 
 
   interface 
-     real (c_double) function masa_eval_1d_source_rho_N2_passthrough(value,funct) bind (C,name='cmasa_eval_1d_source_rho_N2')
+     real (c_double) function masa_eval_1d_source_rho_N2_passthrough(value,fun) bind (C,name='cmasa_eval_1d_source_rho_N2')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
-       type (c_funptr), intent(in) :: funct
+       type (c_funptr), intent(in) :: fun
 
      end function masa_eval_1d_source_rho_N2_passthrough
   end interface  
@@ -853,23 +856,23 @@ contains
     use iso_c_binding
     implicit none
     
-    real(8), intent(in) :: value
-    real(8), external :: funct
-
+    real(c_double), intent(in)       :: value
+    real(c_double), external,bind(c) :: funct
     print *, "here !!"
     
-    masa_eval_1d_source_rho_N = masa_eval_1d_source_rho_N_passthrough(value,c_funloc(funct))
+    funp = c_funloc(funct)
+    masa_eval_1d_source_rho_N = masa_eval_1d_source_rho_N_passthrough(value,funp)
 
   end function masa_eval_1d_source_rho_N
   
-  real (c_double) function masa_eval_1d_source_rho_N2(value,funct)
+  real (c_double) function masa_eval_1d_source_rho_N2(value,functionguy)
     use iso_c_binding
     implicit none
     
-    real(8), intent(in) :: value
-    real(8), external :: funct
-
-    masa_eval_1d_source_rho_N2 = masa_eval_1d_source_rho_N2_passthrough(value,c_funloc(funct))
+    real(c_double), intent(in)       :: value
+    real(c_double), external,bind(c) :: functionguy
+    funp = c_funloc(functionguy)
+    masa_eval_1d_source_rho_N2 = masa_eval_1d_source_rho_N2_passthrough(value,funp)
   
   end function masa_eval_1d_source_rho_N2
 
