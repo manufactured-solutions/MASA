@@ -36,11 +36,29 @@
 #include <iostream>
 #include <fstream>
 #include <math.h>
+#include <stdlib.h>
 
 using namespace MASA;
 using namespace std;
 
 typedef double Scalar;
+
+Scalar MASA_VAR_DEFAULT = -12345.67;
+Scalar uninit = -1.33;
+
+void test(Scalar input)
+{
+  if(input == MASA_VAR_DEFAULT)
+    {
+      exit(1);
+    }
+
+  if(input == uninit)
+    {
+      exit(1);
+    }
+
+}
 
 template<typename Scalar>
 Scalar temp_function(Scalar T)
@@ -55,31 +73,64 @@ Scalar temp_function(Scalar T)
 int main()
 {
   Scalar efield;
+  Scalar ufield;
+  Scalar N;
+  Scalar Ntwo;
+
+  Scalar exact_u;
+  Scalar exact_t;
+  Scalar exact_rho;
+  Scalar exact_N;
+  Scalar exact_Ntwo;
+
+  // error handling
+  int err=0;
   
-  Scalar tempx,tempy;
+  Scalar x,y;
   int    nx = 200;  // number of points
   int    lx = 10;     // length
   Scalar dx=double(lx)/double(nx);
 
   // initialize the problem
-  masa_init<Scalar>("euler-chemistry-example","euler_chem_1d");
+  err += masa_init<Scalar>("euler-chemistry-example","euler_chem_1d");
 
   // initialize the default parameters
-  masa_init_param<Scalar>();
+  err += masa_init_param<Scalar>();
 
   // intialize the various parameters required for Euler 2D
   // call the sanity check routine 
   // (tests that all variables have been initialized)
-  masa_sanity_check<Scalar>();
+  err += masa_sanity_check<Scalar>();
 
   // evaluate source terms over the domain (0<x<1, 0<y<1) 
   for(int i=0;i<nx;i++)
     {
-      tempx=i*dx;
+      x=i*dx;
 
-      efield = masa_eval_source_rho_N2<Scalar>(tempx,&temp_function);
-      cout << tempx << " " << efield << endl;
+      // evalulate source terms
+      ufield = masa_eval_source_rho_u  <Scalar>(x);
+      efield = masa_eval_source_rho_e  <Scalar>(x);
+      //N      = masa_eval_source_rho_N  <Scalar>(x,&temp_function);
+      //Ntwo   = masa_eval_source_rho_N2 <Scalar>(x,&temp_function);
 
+      // evaluate analytical solution terms
+      exact_t    = masa_eval_exact_t     <Scalar>(x);
+      exact_u    = masa_eval_exact_u     <Scalar>(x);
+      exact_rho  = masa_eval_exact_rho   <Scalar>(x);
+      exact_N    = masa_eval_exact_rho_N <Scalar>(x);
+      exact_Ntwo = masa_eval_exact_rho_N2<Scalar>(x);
+
+      test(ufield);
+      test(efield);
+      test(N);
+      test(Ntwo);
+
+      test(exact_t);
+      test(exact_u);
+      test(exact_rho);
+      //test(exact_N);
+      //test(exact_Ntwo);
+      
     } // done with loop
 
 }// done 
