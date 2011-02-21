@@ -34,8 +34,8 @@ cd ../examples
  ./navierstokes_example
  err=$(($err+$?))
 
-# ./rans_sa_example
-# err=$(($err+$?))
+ ./rans_sa_example
+ err=$(($err+$?))
 
 # # c
 # ./c_heat_example
