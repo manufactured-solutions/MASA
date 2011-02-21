@@ -50,6 +50,9 @@ int main()
   Scalar dx,dy;
   int nx,ny;
 
+  // error condition
+  int err = 0;
+
   // initialize
   nx = 10;  // number of points
   ny = 10;  
@@ -60,15 +63,15 @@ int main()
   dy=ly/ny;
 
   // initialize the problem
-  masa_init<Scalar>("heat equation example","heateq_2d_steady_const");
+  err += masa_init<Scalar>("heat equation example","heateq_2d_steady_const");
 
   // initialize the default parameters
-  masa_init_param<Scalar>();
+  err += masa_init_param<Scalar>();
 
   // intialize the various parameters required for Euler 2D
   // call the sanity check routine 
   // (tests that all variables have been initialized)
-  masa_sanity_check<Scalar>();
+  err += masa_sanity_check<Scalar>();
 
   // evaluate source terms over the domain (0<x<1, 0<y<1) 
   for(int i=0;i<nx;i++)
@@ -80,5 +83,7 @@ int main()
 	tfield = masa_eval_source_t<Scalar>  (tempx,tempy);
 	
       }
+
+  return err;
 
 }// end program

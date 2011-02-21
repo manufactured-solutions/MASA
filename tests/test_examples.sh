@@ -15,6 +15,13 @@ echo "-------------------------------------------------------"
 echo "Initializing MASA Examples Tests"
 echo "-------------------------------------------------------"
 
+# move to example directory
+cd ../examples
+
+# start tests
+./heat_example
+err=$(($err+$?))
+
 exit $err
 
 #
