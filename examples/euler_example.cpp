@@ -85,6 +85,7 @@ int main()
   lx=1;     // length
   ly=1; 
 
+  // error handling
   int err=0;
 
   dx=lx/nx;

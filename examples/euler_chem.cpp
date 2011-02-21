@@ -133,4 +133,6 @@ int main()
       
     } // done with loop
 
+  return err;
+
 }// done 
