@@ -18,10 +18,40 @@ echo "-------------------------------------------------------"
 # move to example directory
 cd ../examples
 
-# start tests
-./heat_example
-err=$(($err+$?))
+# cpp
+ ./heat_example
+ err=$(($err+$?))
 
+ ./euler_example
+ err=$(($err+$?))
+
+# ./euler_transient
+# err=$(($err+$?))
+
+# ./euler_chem
+# err=$(($err+$?))
+
+# ./navierstokes_example
+# err=$(($err+$?))
+
+# ./rans_sa_example
+# err=$(($err+$?))
+
+# # c
+# ./c_heat_example
+# err=$(($err+$?))
+
+# ./c_euler_example
+# err=$(($err+$?))
+
+# # f90
+# ./f_euler
+# err=$(($err+$?))
+
+# ./f_cns
+# err=$(($err+$?))
+
+# return error code 
 exit $err
 
 #

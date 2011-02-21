@@ -70,7 +70,7 @@ int main()
   // now switch to and edit bob
   masa_select_mms<Scalar>("bob");
   masa_display_param<Scalar>();
-  solution = masa_eval_source_u<Scalar>(1,1);
+  solution = masa_eval_source_rho_u<Scalar>(1,1);
   cout << solution << endl;
 
 }

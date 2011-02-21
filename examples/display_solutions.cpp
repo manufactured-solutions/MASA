@@ -41,6 +41,6 @@ using namespace std;
 int main()
 {
   // show available solutions
-  masa_printid<double>();
+  return masa_printid<double>();
 
 }
