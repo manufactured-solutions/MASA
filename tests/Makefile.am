@@ -184,6 +184,7 @@ TESTS                      = init.sh              \
 		             f_euler3d            \
 		             f_cns2d              \
 		             f_cns3d              \
+                             test_examples.sh     \
                              finalize.sh
 
 #		             f_euler_chem_1d      
@@ -192,6 +193,7 @@ TESTS                      = init.sh              \
 EXTRA_DIST                 = init.sh \
 			     c_init.sh \
 	                     f_init.sh \
+	                     test_example.sh \
                              finalize.sh
 
 # License Information
