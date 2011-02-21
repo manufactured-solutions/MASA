@@ -25,8 +25,8 @@ cd ../examples
  ./euler_example
  err=$(($err+$?))
 
-# ./euler_transient
-# err=$(($err+$?))
+ ./euler_transient
+ err=$(($err+$?))
 
 # ./euler_chem
 # err=$(($err+$?))

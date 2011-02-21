@@ -35,10 +35,28 @@
 #include <masa.h>
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
 
 using namespace MASA;
 
 typedef double Scalar;
+
+Scalar MASA_VAR_DEFAULT = -12345.67;
+Scalar uninit = -1.33;
+
+void test(Scalar input)
+{
+  if(input == MASA_VAR_DEFAULT)
+    {
+      exit(1);
+    }
+
+  if(input == uninit)
+    {
+      exit(1);
+    }
+
+}
 
 int main()
 {
@@ -51,6 +69,9 @@ int main()
   Scalar x;
   Scalar t;
 
+  // error handling
+  int err = 0;
+
   //problem size
   int nx = 200;  // number of points
   int lx=10;     // length
@@ -61,13 +82,13 @@ int main()
   Scalar dt = Scalar(lt)/Scalar(nt);
 
   // initalize
-  masa_init<Scalar>("euler-chemistry-test","euler_transient_1d");
+  err += masa_init<Scalar>("euler-chemistry-test","euler_transient_1d");
 
   // initialize the default parameters
-  masa_init_param<Scalar>();
+  err += masa_init_param<Scalar>();
 
   // check that all terms have been initialized
-  masa_sanity_check<Scalar>();
+  err += masa_sanity_check<Scalar>();
 
   // evaluate MMS (1D)
   for(int i=0;i<nx;i++)
@@ -81,9 +102,13 @@ int main()
 	ufield = masa_eval_source_rho_u  <Scalar>(x,t);
 	efield = masa_eval_source_rho_e  <Scalar>(x,t);
 	rhofield = masa_eval_source_rho  <Scalar>(x,t);
+
+	test(ufield);
+	test(efield);
+	test(rhofield);
 	
       }
   
-  return 0;
+  return err;
 
 }

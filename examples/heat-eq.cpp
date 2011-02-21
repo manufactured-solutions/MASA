@@ -33,10 +33,28 @@
 #include <masa.h>
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
 
 using namespace MASA;
 
 typedef double Scalar;
+
+Scalar MASA_VAR_DEFAULT = -12345.67;
+Scalar uninit = -1.33;
+
+void test(Scalar input)
+{
+  if(input == MASA_VAR_DEFAULT)
+    {
+      exit(1);
+    }
+
+  if(input == uninit)
+    {
+      exit(1);
+    }
+
+}
 
 int main()
 {
@@ -81,6 +99,8 @@ int main()
 	tempy=j*dy;
 
 	tfield = masa_eval_source_t<Scalar>  (tempx,tempy);
+
+	test(tfield);
 	
       }
 
