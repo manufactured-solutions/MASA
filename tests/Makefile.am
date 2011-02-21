@@ -182,11 +182,11 @@ TESTS                      = init.sh              \
 		             f_euler1d            \
 		             f_euler2d            \
 		             f_euler3d            \
+		             f_euler_chem_1d      \
 		             f_cns2d              \
 		             f_cns3d              \
                              finalize.sh
 
-#		             f_euler_chem_1d      
 
 EXTRA_DIST                 = init.sh \
 			     c_init.sh \

@@ -27,27 +27,33 @@
 !! $Id: 
 !! -------------------------------------------------------------------------
 !! -------------------------------------------------------------------------
-real(8) function k_func(T)
+module func
+  use iso_c_binding
   implicit none
-  
-  real(8),intent(in) :: T
 
-  !! hackish functional here
-  !! This is an eyeballed fit (focusing on the 5000K-6000K range) 
-  !! for the equilibrium constant for N2->N+N dissociation
+  contains
 
-  k_func = exp(4+(T-6000)/500)
+  real (c_double) function k_func(T)    
+    real(c_double),intent(in) :: T
+    
+    !! hackish functional here
+    !! This is an eyeballed fit (focusing on the 5000K-6000K range) 
+    !! for the equilibrium constant for N2->N+N dissociation
+    
+    k_func = exp(4+(T-6000)/500)
+    
+  end function k_func
 
-end function k_func
-
+end module func
 
 program main
+  use func
   use euler_source_interface
   use iso_c_binding
   use masa
   implicit none
 
-  real(8), external :: k_func
+  !real(c_double), external :: k_func
   real(8) :: MASA_DEFAULT = -12345.67d0;
 
   real(8) :: u_0

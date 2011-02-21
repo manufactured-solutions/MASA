@@ -861,7 +861,8 @@ contains
     real(c_double), external,bind(c) :: functer
 
     print *, "here !!"
-    
+    print *, functer(0)
+      
     funp = c_funloc(functer)
     masa_eval_1d_source_rho_N = masa_eval_1d_source_rho_N_passthrough(value,funp)
 
@@ -873,7 +874,7 @@ contains
     
     real(c_double), intent(in)       :: value
     real(c_double), external,bind(c) :: functionguy
-  
+
     funp = c_funloc(functionguy)
     masa_eval_1d_source_rho_N2 = masa_eval_1d_source_rho_N2_passthrough(value,funp)
   
