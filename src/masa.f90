@@ -858,7 +858,7 @@ contains
     implicit none
     
     real(c_double), intent(in)       :: value
-    real(c_double), external,bind(c) :: functer
+    real(c_double), external :: functer
 
     print *, "here !!"
     print *, functer(0)
@@ -873,7 +873,7 @@ contains
     implicit none
     
     real(c_double), intent(in)       :: value
-    real(c_double), external,bind(c) :: functionguy
+    real(c_double), external         :: functionguy
 
     funp = c_funloc(functionguy)
     masa_eval_1d_source_rho_N2 = masa_eval_1d_source_rho_N2_passthrough(value,funp)
