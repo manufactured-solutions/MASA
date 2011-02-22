@@ -60,9 +60,6 @@ MASA::euler_chem_1d<Scalar>::euler_chem_1d()
   this->register_var("Ea_N",&Ea_N);
   this->register_var("Ea_N2",&Ea_N2);
 
-  // achtung: need to make into function pointer!
-  //this->register_var("Function_to_Calculate_K",&Function_to_Calculate_K);
-
   this->register_var("R_N",&R_N);
   this->register_var("R_N2",&R_N2);
 
@@ -107,9 +104,6 @@ int MASA::euler_chem_1d<Scalar>::init_var()
 
   err += this->set_var("Ea_N",0.21);
   err += this->set_var("Ea_N2",2.71);
-
-  // achtung: need to make into function pointer!
-  //err += this->set_var("Function_to_Calculate_K",1000.00);
 
   err += this->set_var("R_N",0.60);
   err += this->set_var("R_N2",0.40);
