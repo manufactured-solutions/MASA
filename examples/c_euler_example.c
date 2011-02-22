@@ -33,23 +33,84 @@
 
 #include <masa.h>
 #include <stdio.h>
+#include <stdlib.h>
+
+double MASA_VAR_DEFAULT = -12345.67;
+double uninit = -1.33;
+
+void test(double input)
+{
+  if(input == MASA_VAR_DEFAULT)
+    {
+      exit(1);
+    }
+
+  if(input == uninit)
+    {
+      exit(1);
+    }
+
+}
 
 int main()
 {
-  double sol;
+  double ufield;
+  double efield;
+  double rhofield;
+
+  double exact_u;
+  double exact_v;
+  double exact_p;
+  double exact_rho;
+
+  //problem size
+  double lx,ly;
+  double dx,dy;
+  int nx,ny;
+
+  // initialize
+  nx = 10;  // number of points
+  ny = 10;  
+  lx=1;     // length
+  ly=1; 
+
+  // error handling
+  int err=0;
+  int i;
+  double tempx;
+
+  dx=(double)lx/(double)nx;
+  dy=(double)ly/(double)ny;
   
   // init
-  cmasa_init("nick","euler_1d");
-  cmasa_init_param();
-
-  // list
-  cmasa_list_mms();
-  cmasa_display_param();
+  err += cmasa_init("nick","euler_1d");
+  err += cmasa_init_param();
 
   //check all initialized properly
-  cmasa_sanity_check();
-  sol=cmasa_eval_1d_source_u(1.2);
-  printf("\nt source: %g\n",sol);
+  err += cmasa_sanity_check();
 
-  return 0; // done
+  for(i=0;i<nx;i++)
+    {
+      tempx=i*dx;
+
+      ufield   = cmasa_eval_1d_source_rho_u(tempx);
+      efield   = cmasa_eval_1d_source_rho_e(tempx);
+      rhofield = cmasa_eval_1d_source_rho(tempx);
+
+      //evaluate analytical terms
+      exact_u   = cmasa_eval_1d_exact_u      (tempx);
+      exact_p   = cmasa_eval_1d_exact_p      (tempx);
+      exact_rho = cmasa_eval_1d_exact_rho    (tempx);
+
+      test(ufield);
+      test(efield);
+      test(rhofield);
+
+      test(exact_u);
+      test(exact_p);
+      test(exact_rho);
+
+    }
+
+  return err; // done
 }

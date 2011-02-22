@@ -32,6 +32,25 @@
 
 #include <masa.h>
 #include <stdio.h>
+#include <stdlib.h>
+
+
+double MASA_VAR_DEFAULT = -12345.67;
+double uninit = -1.33;
+
+void test(double input)
+{
+  if(input == MASA_VAR_DEFAULT)
+    {
+      exit(1);
+    }
+
+  if(input == uninit)
+    {
+      exit(1);
+    }
+
+}
 
 int main()
 {

@@ -88,8 +88,8 @@ int main()
   // error handling
   int err=0;
 
-  dx=lx/nx;
-  dy=ly/ny;
+  dx=(Scalar)lx/(Scalar)nx;
+  dy=(Scalar)ly/(Scalar)ny;
 
   // initialize the problem
   err += masa_init<Scalar>("euler-example","euler_2d");

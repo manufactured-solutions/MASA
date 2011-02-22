@@ -38,11 +38,8 @@ cd ../examples
  err=$(($err+$?))
 
 # # c
-# ./c_heat_example
-# err=$(($err+$?))
-
-# ./c_euler_example
-# err=$(($err+$?))
+ ./c_euler_example
+ err=$(($err+$?))
 
 # # f90
 # ./f_euler
