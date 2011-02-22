@@ -15,7 +15,7 @@ bin_PROGRAMS  = MASAshell
 
 noinst_PROGRAMS  = verify MASAshell display_solutions euler_example navierstokes_example heat_example switch rans_sa_example euler_chem euler_transient
 noinst_PROGRAMS += c_heat_example c_euler_example 
-noinst_PROGRAMS += f_euler f_cns
+noinst_PROGRAMS += f_cns f_euler 
 
 # ----------------- 
 #    CPP
@@ -42,7 +42,6 @@ c_heat_example_SOURCES       = c_heat_example.c
 c_euler_example_SOURCES      = c_euler_example.c
 
 example_DATA                += c_heat_example.c c_euler_example.c
-
 
 # ----------------- 
 #    Fortran
