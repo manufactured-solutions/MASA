@@ -42,11 +42,8 @@ cd ../examples
  err=$(($err+$?))
 
 # # f90
-# ./f_euler
-# err=$(($err+$?))
-
-# ./f_cns
-# err=$(($err+$?))
+ ./f_cns
+ err=$(($err+$?))
 
 # return error code 
 exit $err
