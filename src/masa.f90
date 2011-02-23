@@ -188,26 +188,25 @@ module masa
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_source_rho_N_pass(value,fun) bind (C,name='cmasa_eval_1d_source_rho_N')
+     real (c_double) function masa_eval_1d_source_rho_N_passthrough(value,fun) bind (C,name='cmasa_eval_1d_source_rho_N')
        use iso_c_binding
        implicit none
        
        real (c_double), value      :: value
        type (c_funptr), intent(in) :: fun
        
-     end function masa_eval_1d_source_rho_N_pass
+     end function masa_eval_1d_source_rho_N_passthrough
   end interface  
 
-
   interface 
-     real (c_double) function masa_eval_1d_source_rho_N2_pass(value,fun) bind (C,name='cmasa_eval_1d_source_rho_N2')
+     real (c_double) function masa_eval_1d_source_rho_N2_passthrough(value,fun) bind (C,name='cmasa_eval_1d_source_rho_N2')
        use iso_c_binding
        implicit none
        
        real (c_double), value :: value
        type (c_funptr), intent(in) :: fun
        
-     end function masa_eval_1d_source_rho_N2_pass
+     end function masa_eval_1d_source_rho_N2_passthrough
   end interface  
 
   ! ---------------------------------
@@ -864,7 +863,7 @@ contains
     print *, functer(0)
       
     funp = c_funloc(functer)
-    masa_eval_1d_source_rho_N = masa_eval_1d_source_rho_N_pass(value,funp)
+    masa_eval_1d_source_rho_N = masa_eval_1d_source_rho_N_passthrough(value,funp)
 
   end function masa_eval_1d_source_rho_N
   
@@ -876,7 +875,7 @@ contains
     real(c_double), external   :: functionguy
 
     funp = c_funloc(functionguy)
-    masa_eval_1d_source_rho_N2 = masa_eval_1d_source_rho_N2_pass(value,funp)
+    masa_eval_1d_source_rho_N2 = masa_eval_1d_source_rho_N2_passthrough(value,funp)
   
   end function masa_eval_1d_source_rho_N2
 
