@@ -83,24 +83,24 @@ int main()
   dy=(double)ly/(double)ny;
   
   // init
-  err += cmasa_init("nick","euler_1d");
-  err += cmasa_init_param();
+  err += masa_init("nick","euler_1d");
+  err += masa_init_param();
 
   //check all initialized properly
-  err += cmasa_sanity_check();
+  err += masa_sanity_check();
 
   for(i=0;i<nx;i++)
     {
       tempx=i*dx;
 
-      ufield   = cmasa_eval_1d_source_rho_u(tempx);
-      efield   = cmasa_eval_1d_source_rho_e(tempx);
-      rhofield = cmasa_eval_1d_source_rho(tempx);
+      ufield   = masa_eval_1d_source_rho_u(tempx);
+      efield   = masa_eval_1d_source_rho_e(tempx);
+      rhofield = masa_eval_1d_source_rho(tempx);
 
       //evaluate analytical terms
-      exact_u   = cmasa_eval_1d_exact_u      (tempx);
-      exact_p   = cmasa_eval_1d_exact_p      (tempx);
-      exact_rho = cmasa_eval_1d_exact_rho    (tempx);
+      exact_u   = masa_eval_1d_exact_u      (tempx);
+      exact_p   = masa_eval_1d_exact_p      (tempx);
+      exact_rho = masa_eval_1d_exact_rho    (tempx);
 
       test(ufield);
       test(efield);

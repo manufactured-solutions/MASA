@@ -135,34 +135,34 @@ int main()
   double dx=double(lx)/double(nx);
   double dy=double(ly)/double(ny);
 
-  cmasa_init("axisymmetric_euler","axisymmetric_euler");
+  masa_init("axisymmetric_euler","axisymmetric_euler");
 
   // set params
-  cmasa_init_param();
+  masa_init_param();
   
   // get vars
-  cmasa_get_param("R",&R);
-  cmasa_get_param("p_0",&p_0);
-  cmasa_get_param("p_1",&p_1);
-  cmasa_get_param("rho_0",&rho_0);
-  cmasa_get_param("rho_1",&rho_1);
-  cmasa_get_param("u_1",&u_1);
-  cmasa_get_param("w_0",&w_0);
-  cmasa_get_param("w_1",&w_1);
-  cmasa_get_param("a_pr",&a_pr);
-  cmasa_get_param("a_pz",&a_pz);
-  cmasa_get_param("a_rhor",&a_rhor);
-  cmasa_get_param("a_rhoz",&a_rhoz);
-  cmasa_get_param("a_ur",&a_ur);
-  cmasa_get_param("a_uz",&a_uz);
-  cmasa_get_param("a_wr",&a_wr);
-  cmasa_get_param("a_wz",&a_wz);
-  cmasa_get_param("L",&L);
-  cmasa_get_param("Gamma",&Gamma);
-  cmasa_get_param("mu",&mu);
+  masa_get_param("R",&R);
+  masa_get_param("p_0",&p_0);
+  masa_get_param("p_1",&p_1);
+  masa_get_param("rho_0",&rho_0);
+  masa_get_param("rho_1",&rho_1);
+  masa_get_param("u_1",&u_1);
+  masa_get_param("w_0",&w_0);
+  masa_get_param("w_1",&w_1);
+  masa_get_param("a_pr",&a_pr);
+  masa_get_param("a_pz",&a_pz);
+  masa_get_param("a_rhor",&a_rhor);
+  masa_get_param("a_rhoz",&a_rhoz);
+  masa_get_param("a_ur",&a_ur);
+  masa_get_param("a_uz",&a_uz);
+  masa_get_param("a_wr",&a_wr);
+  masa_get_param("a_wz",&a_wz);
+  masa_get_param("L",&L);
+  masa_get_param("Gamma",&Gamma);
+  masa_get_param("mu",&mu);
 
   // check that all terms have been initialized
-  cmasa_sanity_check();
+  masa_sanity_check();
 
   // evaluate source terms (2D)
   for(int i=0;i<nx;i++)
@@ -172,16 +172,16 @@ int main()
 	z=j*dy;
 	
 	//evalulate source terms
-	cmasa_eval_source_u  (r,z,&ufield);
-	cmasa_eval_source_w  (r,z,&wfield);
-	cmasa_eval_source_rho_e  (r,z,&efield);
-	cmasa_eval_source_rho(r,z,&rho);
+	masa_eval_source_u  (r,z,&ufield);
+	masa_eval_source_w  (r,z,&wfield);
+	masa_eval_source_rho_e  (r,z,&efield);
+	masa_eval_source_rho(r,z,&rho);
 
 	//evaluate analytical terms
-	cmasa_eval_exact_u        (r,z,&exact_u);
-	cmasa_eval_exact_w        (r,z,&exact_w);
-	cmasa_eval_exact_p        (r,z,&exact_p);
-	cmasa_eval_exact_rho      (r,z,&exact_rho);
+	masa_eval_exact_u        (r,z,&exact_u);
+	masa_eval_exact_w        (r,z,&exact_w);
+	masa_eval_exact_p        (r,z,&exact_p);
+	masa_eval_exact_rho      (r,z,&exact_rho);
 	  
 	// check against maple
 	ufield2 = SourceQ_u   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, PI, L, Gamma);
@@ -210,7 +210,7 @@ int main()
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Axisymmetric Euler\n");
 	    printf("U Field Source Term\n");
 	    printf("Threshold Exceeded: %g\n",ufield3);
-	    printf("CMASA:              %5.16f\n",ufield);
+	    printf("MASA:              %5.16f\n",ufield);
 	    printf("Maple:              %5.16f\n",ufield2);
 	    printf("r,z:                %g %g\n",r,z);	   
 	    exit(1);
@@ -221,7 +221,7 @@ int main()
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Axisymmetric Euler\n");
 	    printf("U Field Analytical Term\n");
 	    printf("Threshold Exceeded: %g\n",exact_u3);
-	    printf("CMASA:              %5.16f\n",exact_u);
+	    printf("MASA:              %5.16f\n",exact_u);
 	    printf("Maple:              %5.16f\n",exact_u2);
 	    printf("r,z:                %g %g\n",r,z);	   
 	    exit(1);
@@ -232,7 +232,7 @@ int main()
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Axisymmetric Euler\n");
 	    printf("W Field Source Term\n");
 	    printf("Threshold Exceeded: %g\n",wfield3);
-	    printf("CMASA:              %5.16f\n",vfield);
+	    printf("MASA:              %5.16f\n",vfield);
 	    printf("Maple:              %5.16f\n",vfield2);
 	    printf("r,z:                %g %g\n",r,z);	   
 	    exit(1);
@@ -250,7 +250,7 @@ int main()
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Axisymmetric Euler\n");
 	    printf("Energy Source Term\n");
 	    printf("Threshold Exceeded: %g\n",efield3);
-	    printf("CMASA:              %5.16f\n",efield);
+	    printf("MASA:              %5.16f\n",efield);
 	    printf("Maple:              %5.16f\n",efield2);
 	    printf("r,z:                %g %g\n",r,z);	   
 	    exit(1);

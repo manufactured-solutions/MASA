@@ -44,7 +44,7 @@ double threshcheck(double x,double thresh)
   
   if(x > thresh)
     {
-      printf("\nCMASA REGRESSION TEST FAILED: Euler-1d + chemistry\n");
+      printf("\nMASA REGRESSION TEST FAILED: Euler-1d + chemistry\n");
       printf("Exceeded Threshold by: %g \n",x);
       exit(1);
     }
@@ -357,49 +357,49 @@ int main()
   double exact_Ntwo,exact_Ntwo2,exact_Ntwo3;
 
   // initalize
-  cmasa_init("euler-chemistry-test","euler_chem_1d");
+  masa_init("euler-chemistry-test","euler_chem_1d");
 
   // initialize the default parameters
-  cmasa_init_param();
+  masa_init_param();
 
   // get defaults for comparison to source terms
-  u_0  = cmasa_get_param("u_0");
-  u_x  = cmasa_get_param("u_x");
-  a_ux = cmasa_get_param("a_ux");
-  L    = cmasa_get_param("L");
-  R    = cmasa_get_param("R");
+  u_0  = masa_get_param("u_0");
+  u_x  = masa_get_param("u_x");
+  a_ux = masa_get_param("a_ux");
+  L    = masa_get_param("L");
+  R    = masa_get_param("R");
 
-  Cf1_N   = cmasa_get_param("Cf1_N");
-  Cf1_N2  = cmasa_get_param("Cf1_N2");
-  etaf1_N  = cmasa_get_param("etaf1_N");
-  etaf1_N2 = cmasa_get_param("etaf1_N2");
+  Cf1_N   = masa_get_param("Cf1_N");
+  Cf1_N2  = masa_get_param("Cf1_N2");
+  etaf1_N  = masa_get_param("etaf1_N");
+  etaf1_N2 = masa_get_param("etaf1_N2");
 
-  Ea_N  = cmasa_get_param("Ea_N");
-  Ea_N2 = cmasa_get_param("Ea_N2");
+  Ea_N  = masa_get_param("Ea_N");
+  Ea_N2 = masa_get_param("Ea_N2");
 
-  R_N   = cmasa_get_param("R_N");
-  R_N2  = cmasa_get_param("R_N2");
+  R_N   = masa_get_param("R_N");
+  R_N2  = masa_get_param("R_N2");
 
-  theta_v_N2 = cmasa_get_param("theta_v_N2");
-  M_N   = cmasa_get_param("M_N");
-  h0_N  = cmasa_get_param("h0_N");
-  h0_N2 = cmasa_get_param("h0_N2");
-  K     = cmasa_get_param("K");
+  theta_v_N2 = masa_get_param("theta_v_N2");
+  M_N   = masa_get_param("M_N");
+  h0_N  = masa_get_param("h0_N");
+  h0_N2 = masa_get_param("h0_N2");
+  K     = masa_get_param("K");
 
-  rho_N_0   = cmasa_get_param("rho_N_0");
-  rho_N_x   = cmasa_get_param("rho_N_x");
-  a_rho_N_x = cmasa_get_param("a_rho_N_x");
+  rho_N_0   = masa_get_param("rho_N_0");
+  rho_N_x   = masa_get_param("rho_N_x");
+  a_rho_N_x = masa_get_param("a_rho_N_x");
 
-  rho_N2_0   = cmasa_get_param("rho_N2_0");  
-  rho_N2_x   = cmasa_get_param("rho_N2_x");
-  a_rho_N2_x = cmasa_get_param("a_rho_N2_x");
+  rho_N2_0   = masa_get_param("rho_N2_0");  
+  rho_N2_x   = masa_get_param("rho_N2_x");
+  a_rho_N2_x = masa_get_param("a_rho_N2_x");
 
-  T_0  = cmasa_get_param("T_0");
-  T_x  = cmasa_get_param("T_x");
-  a_Tx = cmasa_get_param("a_Tx");
+  T_0  = masa_get_param("T_0");
+  T_x  = masa_get_param("T_x");
+  a_Tx = masa_get_param("a_Tx");
 
   // check that all terms have been initialized
-  cmasa_sanity_check();
+  masa_sanity_check();
 
   // evaluate MMS (1D)
   for(i=0;i<nx;i++)
@@ -407,17 +407,17 @@ int main()
       x=i*dx;
 
       // evalulate source terms
-      ufield = cmasa_eval_1d_source_rho_u  (x);
-      efield = cmasa_eval_1d_source_rho_e  (x);
-      N      = cmasa_eval_1d_source_rho_N  (x,&temp_function);
-      Ntwo   = cmasa_eval_1d_source_rho_N2 (x,&temp_function);
+      ufield = masa_eval_1d_source_rho_u  (x);
+      efield = masa_eval_1d_source_rho_e  (x);
+      N      = masa_eval_1d_source_rho_N  (x,&temp_function);
+      Ntwo   = masa_eval_1d_source_rho_N2 (x,&temp_function);
 
       // evaluate analytical solution terms
-      exact_t    = cmasa_eval_1d_exact_t     (x);
-      exact_u    = cmasa_eval_1d_exact_u     (x);
-      exact_rho  = cmasa_eval_1d_exact_rho   (x);
-      exact_N    = cmasa_eval_1d_exact_rho_N (x);
-      exact_Ntwo = cmasa_eval_1d_exact_rho_N2(x);
+      exact_t    = masa_eval_1d_exact_t     (x);
+      exact_u    = masa_eval_1d_exact_u     (x);
+      exact_rho  = masa_eval_1d_exact_rho   (x);
+      exact_N    = masa_eval_1d_exact_rho_N (x);
+      exact_Ntwo = masa_eval_1d_exact_rho_N2(x);
 
       // get comparison solution
       ufield2   = SourceQ_rho_u  (x,R_N,rho_N_0,rho_N_x,a_rho_N_x,

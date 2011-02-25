@@ -182,34 +182,34 @@ int main()
   double exact_rho,exact_rho2,exact_rho3;
 
   // initalize
-  cmasa_init("euler-test","euler_1d");
+  masa_init("euler-test","euler_1d");
 
   // initialize the default parameters
-  cmasa_init_param();
+  masa_init_param();
 
   // get defaults for comparison to source terms
   // get vars
-  u_0 = cmasa_get_param("u_0");
-  u_x = cmasa_get_param("u_x");
+  u_0 = masa_get_param("u_0");
+  u_x = masa_get_param("u_x");
 
-  rho_0 = cmasa_get_param("rho_0");
-  rho_x = cmasa_get_param("rho_x");
+  rho_0 = masa_get_param("rho_0");
+  rho_x = masa_get_param("rho_x");
 
-  p_0 = cmasa_get_param("p_0");
-  p_x = cmasa_get_param("p_x");
+  p_0 = masa_get_param("p_0");
+  p_x = masa_get_param("p_x");
 
-  a_px = cmasa_get_param("a_px");
+  a_px = masa_get_param("a_px");
 
-  a_rhox = cmasa_get_param("a_rhox");
+  a_rhox = masa_get_param("a_rhox");
 
-  a_ux = cmasa_get_param("a_ux");
+  a_ux = masa_get_param("a_ux");
 
-  Gamma = cmasa_get_param("Gamma");
-  mu    = cmasa_get_param("mu");
-  L     = cmasa_get_param("L");
+  Gamma = masa_get_param("Gamma");
+  mu    = masa_get_param("mu");
+  L     = masa_get_param("L");
 
   // check that all terms have been initialized
-  cmasa_sanity_check();
+  masa_sanity_check();
 
   // evaluate source terms (1D)
   for(i=0;i<nx;i++)
@@ -217,14 +217,14 @@ int main()
       x=i*dx;
 
       //evalulate source terms
-      ufield = cmasa_eval_1d_source_rho_u(x);
-      efield = cmasa_eval_1d_source_rho_e    (x);
-      rho    = cmasa_eval_1d_source_rho  (x);
+      ufield = masa_eval_1d_source_rho_u(x);
+      efield = masa_eval_1d_source_rho_e    (x);
+      rho    = masa_eval_1d_source_rho  (x);
 	
       //evaluate analytical terms
-      exact_u   = cmasa_eval_1d_exact_u      (x);
-      exact_p   = cmasa_eval_1d_exact_p      (x);
-      exact_rho = cmasa_eval_1d_exact_rho    (x);
+      exact_u   = masa_eval_1d_exact_u      (x);
+      exact_p   = masa_eval_1d_exact_p      (x);
+      exact_rho = masa_eval_1d_exact_rho    (x);
 	
       // get fundamental source term solution
       ufield2   = SourceQ_u  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
@@ -264,7 +264,7 @@ int main()
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	    printf("U Field Source Term\n");
 	    printf("Threshold Exceeded: %g\n",ufield3);
-	    printf("CMASA:              %5.16f\n",ufield);
+	    printf("MASA:              %5.16f\n",ufield);
 	    printf("Maple:              %5.16f\n",ufield2);
 	    exit(1);
 	  }
@@ -274,7 +274,7 @@ int main()
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	    printf("U Field Analytical Term\n");
 	    printf("Threshold Exceeded: %g\n",exact_u3);
-	    printf("CMASA:              %5.16f\n",exact_u);
+	    printf("MASA:              %5.16f\n",exact_u);
 	    printf("Maple:              %5.16f\n",exact_u2);
 	    exit(1);
 	  }
@@ -285,7 +285,7 @@ int main()
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Euler-1d\n");
 	    printf("Energy Source Term\n");
 	    printf("Threshold Exceeded: %g\n",efield3);
-	    printf("CMASA:              %5.16f\n",efield);
+	    printf("MASA:              %5.16f\n",efield);
 	    printf("Maple:              %5.16f\n",efield2);
 	    exit(1);
 	  }

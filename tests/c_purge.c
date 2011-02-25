@@ -43,9 +43,9 @@ int main()
   double u_0;
 
   // start problem
-  cmasa_init("euler-test","euler_1d");
+  masa_init("euler-test","euler_1d");
 
-  u_0 = cmasa_get_param("u_0");
+  u_0 = masa_get_param("u_0");
   if(u_0 == MASA_DEFAULT)
     {
       printf("\nMASA ERROR:: Variables not being auto initalized!\n");
@@ -53,9 +53,9 @@ int main()
     }
   
   // now purge default values
-  cmasa_purge_default_param();
+  masa_purge_default_param();
   // values should be set to default: checking
-  u_0 = cmasa_get_param("u_0");
+  u_0 = masa_get_param("u_0");
   if(u_0 != MASA_DEFAULT)
     {
       printf("\nMASA ERROR:: Variables not being purged properly!\n");

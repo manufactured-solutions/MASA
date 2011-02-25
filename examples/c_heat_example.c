@@ -65,36 +65,36 @@ int main()
   sol = 0;
 
   // init
-  cmasa_init("nick","heateq_1d_steady_const");
-  cmasa_init_param();
+  masa_init("nick","heateq_1d_steady_const");
+  masa_init_param();
 
-  cmasa_init("bob","heateq_1d_steady_const");
-  cmasa_init_param();
+  masa_init("bob","heateq_1d_steady_const");
+  masa_init_param();
   
   // list
-  cmasa_list_mms();
+  masa_list_mms();
 
   // switch
-  cmasa_select_mms("nick");
-  cmasa_display_param();
+  masa_select_mms("nick");
+  masa_display_param();
 
   // lets examine a particular parameter 
-  q=cmasa_get_param(a);
+  q=masa_get_param(a);
   printf("A_x is set to: %g\n", q);
 
   // now lets change that parameters value to something else.
-  cmasa_set_param(a,1.984);
-  q=cmasa_get_param(a);
+  masa_set_param(a,1.984);
+  q=masa_get_param(a);
   printf("A_x is set to: %g\n", q);
 
   //check all initialized properly
-  cmasa_sanity_check();
-  sol = cmasa_eval_1d_source_t(x);
+  masa_sanity_check();
+  sol = masa_eval_1d_source_t(x);
   printf("\nt source: %g\n",sol);
   
-  cmasa_select_mms("bob");
-  cmasa_display_param();
-  sol = cmasa_eval_1d_source_t(x2);
+  masa_select_mms("bob");
+  masa_display_param();
+  sol = masa_eval_1d_source_t(x2);
   printf("\nt source: %g\n",sol);
   return 0; // done
 }

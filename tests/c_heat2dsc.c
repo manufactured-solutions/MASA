@@ -78,13 +78,13 @@ int main()
   double dy = (double)ly/(double)ny;
 
   // initalize everyone
-  cmasa_init("temp-test-1d","heateq_2d_steady_const");
-  cmasa_init_param();
-  cmasa_sanity_check();
+  masa_init("temp-test-1d","heateq_2d_steady_const");
+  masa_init_param();
+  masa_sanity_check();
 
-  A_x = cmasa_get_param("A_x");
-  k_0 = cmasa_get_param("k_0"); 
-  B_y = cmasa_get_param("B_y"); 
+  A_x = masa_get_param("A_x");
+  k_0 = masa_get_param("k_0"); 
+  B_y = masa_get_param("B_y"); 
 
   // evaluate source terms (1D)
   for(i=0;i<nx;i++)
@@ -94,10 +94,10 @@ int main()
       y=j*dy;
       
       //evalulate source terms
-      tfield = cmasa_eval_2d_source_t(x,y);
+      tfield = masa_eval_2d_source_t(x,y);
       
       //evaluate analytical terms
-      exact_t   = cmasa_eval_2d_exact_t(x,y);
+      exact_t   = masa_eval_2d_exact_t(x,y);
 	
       // get fundamental source term solution
       tfield2   = SourceQ_t(x,y,A_x,B_y,k_0);
@@ -122,7 +122,7 @@ int main()
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Heat Equation Steady-2d\n");
 	    printf("U Field Source Term\n");
 	    printf("Threshold Exceeded: %g\n",tfield3);
-	    printf("CMASA:              %5.16f\n",tfield);
+	    printf("MASA:              %5.16f\n",tfield);
 	    printf("Maple:              %5.16f\n",tfield2);
 	    printf("@ x,y:              %5.16f %5.16f\n",x,y);
 	    exit(1);
@@ -133,7 +133,7 @@ int main()
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Heat Equation Steady-2d\n");
 	    printf("U Field Analytical Term\n");
 	    printf("Threshold Exceeded: %g\n",exact_t3);
-	    printf("CMASA:              %5.16f\n",exact_t);
+	    printf("MASA:              %5.16f\n",exact_t);
 	    printf("Maple:              %5.16f\n",exact_t2);
 	    printf("@ x,y:              %5.16f %5.16f\n",x,y);
 	    exit(1);

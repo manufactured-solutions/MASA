@@ -47,28 +47,28 @@ int main()
   freopen("/dev/null","w",stdout);
 
   // list all currently initialized mms
-  cmasa_list_mms();
+  masa_list_mms();
 
   // initalize two different functions
-  cmasa_init("euler-test","euler_1d");
-  cmasa_init_param();
-  cmasa_init("euler-test2","euler_2d");
-  cmasa_init_param();
+  masa_init("euler-test","euler_1d");
+  masa_init_param();
+  masa_init("euler-test2","euler_2d");
+  masa_init_param();
 
-  cmasa_list_mms();
+  masa_list_mms();
 
   // display parameters @ default values
-  cmasa_display_param();
+  masa_display_param();
   
   //change parameter
-  cmasa_set_param("u_0",2.3);
+  masa_set_param("u_0",2.3);
 
   // display again
-  cmasa_display_param();
+  masa_display_param();
 
   //switch to original function
-  cmasa_select_mms("euler-test");
-  cmasa_display_param();
+  masa_select_mms("euler-test");
+  masa_display_param();
 
   //tests passed
   return 0;

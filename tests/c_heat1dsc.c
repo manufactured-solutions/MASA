@@ -98,12 +98,12 @@ int main()
   double dx = (double)lx/(double)nx;
 
   // initalize everyone
-  cmasa_init("temp-test-1d","heateq_1d_steady_const");
-  cmasa_init_param();
-  cmasa_sanity_check();
+  masa_init("temp-test-1d","heateq_1d_steady_const");
+  masa_init_param();
+  masa_sanity_check();
 
-  A_x = cmasa_get_param("A_x");
-  k_0 = cmasa_get_param("k_0"); 
+  A_x = masa_get_param("A_x");
+  k_0 = masa_get_param("k_0"); 
 
   // evaluate source terms (1D)
   for(i=0;i<nx;i++)
@@ -111,10 +111,10 @@ int main()
       x=i*dx;
       
       //evalulate source terms
-      tfield = cmasa_eval_1d_source_t(x);
+      tfield = masa_eval_1d_source_t(x);
       
       //evaluate analytical terms
-      exact_t   = cmasa_eval_1d_exact_t(x);
+      exact_t   = masa_eval_1d_exact_t(x);
 	
       // get fundamental source term solution
       tfield2   = SourceQ_t_1d  (x,A_x,k_0);
@@ -139,7 +139,7 @@ int main()
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Heat Equation Steady-2d\n");
 	    printf("U Field Source Term\n");
 	    printf("Threshold Exceeded: %g\n",tfield3);
-	    printf("CMASA:              %5.16f\n",tfield);
+	    printf("MASA:              %5.16f\n",tfield);
 	    printf("Maple:              %5.16f\n",tfield2);
 	    exit(1);
 	  }
@@ -149,20 +149,20 @@ int main()
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Heat Equation Steady-2d\n");
 	    printf("U Field Analytical Term\n");
 	    printf("Threshold Exceeded: %g\n",exact_t3);
-	    printf("CMASA:              %5.16f\n",exact_t);
+	    printf("MASA:              %5.16f\n",exact_t);
 	    printf("Maple:              %5.16f\n",exact_t2);
 	    exit(1);
 	  }
     } // done iterating
 
 
-  cmasa_init("temp-test-2d","heateq_2d_steady_const");
-  cmasa_init_param();
-  cmasa_sanity_check();  
+  masa_init("temp-test-2d","heateq_2d_steady_const");
+  masa_init_param();
+  masa_sanity_check();  
 
-  cmasa_init("temp-test-3d","heateq_3d_steady_const");
-  cmasa_init_param();
-  cmasa_sanity_check();
+  masa_init("temp-test-3d","heateq_3d_steady_const");
+  masa_init_param();
+  masa_sanity_check();
 
   return 0; // steady as she goes
 

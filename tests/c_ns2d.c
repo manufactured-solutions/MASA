@@ -273,49 +273,49 @@ int main()
   double dx=(double)(lx)/(double)(nx);
   double dy=(double)(ly)/(double)(ny);
 
-  cmasa_init("navier-stokes-test","navierstokes_2d_compressible");
+  masa_init("navier-stokes-test","navierstokes_2d_compressible");
 
   // set params
-  cmasa_init_param();
+  masa_init_param();
   
   // get vars for comparison
-  u_0 = cmasa_get_param("u_0");
-  u_x = cmasa_get_param("u_x");
-  u_y = cmasa_get_param("u_y");
+  u_0 = masa_get_param("u_0");
+  u_x = masa_get_param("u_x");
+  u_y = masa_get_param("u_y");
 
-  v_0 = cmasa_get_param("v_0");
-  v_x = cmasa_get_param("v_x");
-  v_y = cmasa_get_param("v_y");
+  v_0 = masa_get_param("v_0");
+  v_x = masa_get_param("v_x");
+  v_y = masa_get_param("v_y");
 
-  rho_0 = cmasa_get_param("rho_0");
-  rho_x = cmasa_get_param("rho_x");
-  rho_y = cmasa_get_param("rho_y");
+  rho_0 = masa_get_param("rho_0");
+  rho_x = masa_get_param("rho_x");
+  rho_y = masa_get_param("rho_y");
 
-  p_0 = cmasa_get_param("p_0");
-  p_x = cmasa_get_param("p_x");
-  p_y = cmasa_get_param("p_y");
+  p_0 = masa_get_param("p_0");
+  p_x = masa_get_param("p_x");
+  p_y = masa_get_param("p_y");
 
-  a_px = cmasa_get_param("a_px");
-  a_py = cmasa_get_param("a_py");
+  a_px = masa_get_param("a_px");
+  a_py = masa_get_param("a_py");
 
-  a_rhox = cmasa_get_param("a_rhox");
-  a_rhoy = cmasa_get_param("a_rhoy");
+  a_rhox = masa_get_param("a_rhox");
+  a_rhoy = masa_get_param("a_rhoy");
 
-  a_ux = cmasa_get_param("a_ux");
-  a_uy = cmasa_get_param("a_uy");
+  a_ux = masa_get_param("a_ux");
+  a_uy = masa_get_param("a_uy");
 
-  a_vx = cmasa_get_param("a_vx");
-  a_vy = cmasa_get_param("a_vy");
+  a_vx = masa_get_param("a_vx");
+  a_vy = masa_get_param("a_vy");
 
-  Gamma = cmasa_get_param("Gamma");
-  mu    = cmasa_get_param("mu");
-  L     = cmasa_get_param("L");
+  Gamma = masa_get_param("Gamma");
+  mu    = masa_get_param("mu");
+  L     = masa_get_param("L");
 
-  R = cmasa_get_param("R");
-  k = cmasa_get_param("k");
+  R = masa_get_param("R");
+  k = masa_get_param("k");
 
   // check that all terms have been initialized
-  cmasa_sanity_check();
+  masa_sanity_check();
 
   // evaluate source terms (2D)
   for(i=0;i<nx;i++)
@@ -325,16 +325,16 @@ int main()
 	y=j*dy;
 
 	//evalulate source terms
-	ufield = cmasa_eval_2d_source_rho_u  (x,y);
-	vfield = cmasa_eval_2d_source_rho_v  (x,y);
-	efield = cmasa_eval_2d_source_rho_e  (x,y);
-	rho    = cmasa_eval_2d_source_rho(x,y);
+	ufield = masa_eval_2d_source_rho_u  (x,y);
+	vfield = masa_eval_2d_source_rho_v  (x,y);
+	efield = masa_eval_2d_source_rho_e  (x,y);
+	rho    = masa_eval_2d_source_rho(x,y);
 	
 	//evaluate analytical terms
-	exact_u   = cmasa_eval_2d_exact_u      (x,y);
-	exact_v   = cmasa_eval_2d_exact_v      (x,y);
-	exact_p   = cmasa_eval_2d_exact_p      (x,y);
-	exact_rho = cmasa_eval_2d_exact_rho    (x,y);
+	exact_u   = masa_eval_2d_exact_u      (x,y);
+	exact_v   = masa_eval_2d_exact_v      (x,y);
+	exact_p   = masa_eval_2d_exact_p      (x,y);
+	exact_rho = masa_eval_2d_exact_rho    (x,y);
 
 	// check against maple
 	ufield2   = SourceQ_u  (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);
@@ -390,7 +390,7 @@ int main()
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 2d\n");
 	    printf("V Field Source Term\n");
 	    printf("(Relative) Threshold Exceeded: %g\n",vfield3);
-	    printf("CMASA:              %5.16f\n",vfield);
+	    printf("MASA:              %5.16f\n",vfield);
 	    printf("Maple:              %5.16f\n",vfield2);
 	    printf("x,y:                %g %g\n",x,y);
 
@@ -409,7 +409,7 @@ int main()
 	    printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 2d\n");
 	    printf("E Field Source Term\n");
 	    printf("(Relative) Threshold Exceeded: %g\n",efield3);
-	    printf("CMASA:              %5.16f\n",efield);
+	    printf("MASA:              %5.16f\n",efield);
 	    printf("Maple:              %5.16f\n",efield2);
 	    printf("x,y:                %g %g\n",x,y);
 	    exit(1);

@@ -54,26 +54,26 @@ int main()
   double sol;
   
   // init
-  cmasa_init("nick","heateq_1d_steady_const");
-  cmasa_init_param();
+  masa_init("nick","heateq_1d_steady_const");
+  masa_init_param();
 
-  cmasa_init( "bob","heateq_2d_steady_const");
-  cmasa_init_param();
+  masa_init( "bob","heateq_2d_steady_const");
+  masa_init_param();
 
   // list
-  cmasa_list_mms();
+  masa_list_mms();
 
   // switch
-  cmasa_select_mms("nick");
-  cmasa_display_param();
+  masa_select_mms("nick");
+  masa_display_param();
 
   //check all initialized properly
-  cmasa_sanity_check();
-  sol = cmasa_eval_source_t(1.2);
+  masa_sanity_check();
+  sol = masa_eval_source_t(1.2);
   printf("\nt source: %g\n",sol);
 
-  cmasa_select_mms("bob");
-  cmasa_display_param();
-  sol = cmasa_eval_source_t(1,1);
+  masa_select_mms("bob");
+  masa_display_param();
+  sol = masa_eval_source_t(1,1);
   printf("\nt source: %g\n",sol);
 }

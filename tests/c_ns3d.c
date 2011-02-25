@@ -401,66 +401,66 @@ int main()
   double dy=(double)(ly)/(double)(ny);
   double dz=(double)(lz)/(double)(nz);
 
-  cmasa_init("navier-stokes-test","navierstokes_3d_compressible");
+  masa_init("navier-stokes-test","navierstokes_3d_compressible");
 
   // set params
-  cmasa_init_param();
+  masa_init_param();
 
   // get vars for comparison
-  u_0 = cmasa_get_param("u_0");
-  u_x = cmasa_get_param("u_x");
-  u_y = cmasa_get_param("u_y");
-  u_z = cmasa_get_param("u_z");
+  u_0 = masa_get_param("u_0");
+  u_x = masa_get_param("u_x");
+  u_y = masa_get_param("u_y");
+  u_z = masa_get_param("u_z");
 
-  v_0 = cmasa_get_param("v_0");
-  v_x = cmasa_get_param("v_x");
-  v_y = cmasa_get_param("v_y");
-  v_z = cmasa_get_param("v_z");
+  v_0 = masa_get_param("v_0");
+  v_x = masa_get_param("v_x");
+  v_y = masa_get_param("v_y");
+  v_z = masa_get_param("v_z");
 
-  w_0 = cmasa_get_param("w_0");
-  w_x = cmasa_get_param("w_x");
-  w_y = cmasa_get_param("w_y");
-  w_z = cmasa_get_param("w_z");
+  w_0 = masa_get_param("w_0");
+  w_x = masa_get_param("w_x");
+  w_y = masa_get_param("w_y");
+  w_z = masa_get_param("w_z");
 
-  rho_0 = cmasa_get_param("rho_0");
-  rho_x = cmasa_get_param("rho_x");
-  rho_y = cmasa_get_param("rho_y");
-  rho_z = cmasa_get_param("rho_z");
+  rho_0 = masa_get_param("rho_0");
+  rho_x = masa_get_param("rho_x");
+  rho_y = masa_get_param("rho_y");
+  rho_z = masa_get_param("rho_z");
 
-  p_0 = cmasa_get_param("p_0");
-  p_x = cmasa_get_param("p_x");
-  p_y = cmasa_get_param("p_y");
-  p_z = cmasa_get_param("p_z");
+  p_0 = masa_get_param("p_0");
+  p_x = masa_get_param("p_x");
+  p_y = masa_get_param("p_y");
+  p_z = masa_get_param("p_z");
 
-  a_px = cmasa_get_param("a_px");
-  a_py = cmasa_get_param("a_py");
-  a_pz = cmasa_get_param("a_pz");
+  a_px = masa_get_param("a_px");
+  a_py = masa_get_param("a_py");
+  a_pz = masa_get_param("a_pz");
 
-  a_rhox = cmasa_get_param("a_rhox");
-  a_rhoy = cmasa_get_param("a_rhoy");
-  a_rhoz = cmasa_get_param("a_rhoz");
+  a_rhox = masa_get_param("a_rhox");
+  a_rhoy = masa_get_param("a_rhoy");
+  a_rhoz = masa_get_param("a_rhoz");
 
-  a_ux = cmasa_get_param("a_ux");
-  a_uy = cmasa_get_param("a_uy");
-  a_uz = cmasa_get_param("a_uz");
+  a_ux = masa_get_param("a_ux");
+  a_uy = masa_get_param("a_uy");
+  a_uz = masa_get_param("a_uz");
 
-  a_vx = cmasa_get_param("a_vx");
-  a_vy = cmasa_get_param("a_vy");
-  a_vz = cmasa_get_param("a_vz");
+  a_vx = masa_get_param("a_vx");
+  a_vy = masa_get_param("a_vy");
+  a_vz = masa_get_param("a_vz");
 
-  a_wx = cmasa_get_param("a_wx");
-  a_wy = cmasa_get_param("a_wy");
-  a_wz = cmasa_get_param("a_wz");
+  a_wx = masa_get_param("a_wx");
+  a_wy = masa_get_param("a_wy");
+  a_wz = masa_get_param("a_wz");
 
-  Gamma = cmasa_get_param("Gamma");
-  mu    = cmasa_get_param("mu");
-  L     = cmasa_get_param("L");
+  Gamma = masa_get_param("Gamma");
+  mu    = masa_get_param("mu");
+  L     = masa_get_param("L");
 
-  R = cmasa_get_param("R");
-  K = cmasa_get_param("k");
+  R = masa_get_param("R");
+  K = masa_get_param("k");
 
   // check all vars are initialized
-  cmasa_sanity_check();
+  masa_sanity_check();
 
   // evaluate source terms (3D)
   for(i=0;i<nx;i++)
@@ -472,18 +472,18 @@ int main()
 	  z=k*dz;
 
 	  //evalulate source terms
-	  ufield = cmasa_eval_3d_source_rho_u  (x,y,z);
-	  vfield = cmasa_eval_3d_source_rho_v  (x,y,z);
-	  wfield = cmasa_eval_3d_source_rho_w  (x,y,z);
-	  efield = cmasa_eval_3d_source_rho_e  (x,y,z);
-	  rho    = cmasa_eval_3d_source_rho(x,y,z);
+	  ufield = masa_eval_3d_source_rho_u  (x,y,z);
+	  vfield = masa_eval_3d_source_rho_v  (x,y,z);
+	  wfield = masa_eval_3d_source_rho_w  (x,y,z);
+	  efield = masa_eval_3d_source_rho_e  (x,y,z);
+	  rho    = masa_eval_3d_source_rho(x,y,z);
 	  
 	  //evaluate analytical terms
-	  exact_u   = cmasa_eval_3d_exact_u      (x,y,z);
-	  exact_v   = cmasa_eval_3d_exact_v      (x,y,z);
-	  exact_w   = cmasa_eval_3d_exact_w      (x,y,z);
-	  exact_p   = cmasa_eval_3d_exact_p      (x,y,z);
-	  exact_rho = cmasa_eval_3d_exact_rho    (x,y,z);
+	  exact_u   = masa_eval_3d_exact_u      (x,y,z);
+	  exact_v   = masa_eval_3d_exact_v      (x,y,z);
+	  exact_w   = masa_eval_3d_exact_w      (x,y,z);
+	  exact_p   = masa_eval_3d_exact_p      (x,y,z);
+	  exact_rho = masa_eval_3d_exact_rho    (x,y,z);
 
 	  // check against maple output
 	  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
@@ -559,7 +559,7 @@ int main()
 	      printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 3d\n");
 	      printf("W Field Source Term\n");
 	      printf("(Relative) Threshold Exceeded: %g\n",wfield3);
-	      printf("CMASA:              %5.16f\n",wfield);
+	      printf("MASA:              %5.16f\n",wfield);
 	      printf("Maple:              %5.16f\n",wfield2);
 	      printf("x,y,z:              %g %g %g\n",x,y,z);	      
 	      exit(1);
@@ -570,7 +570,7 @@ int main()
 	      printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 3d\n");
 	      printf("W Field Analytical Term\n");
 	      printf("Threshold Exceeded: %g\n",exact_w3);
-	      printf("CMASA:              %5.16f\n",exact_w);
+	      printf("MASA:              %5.16f\n",exact_w);
 	      printf("Maple:              %5.16f\n",exact_w2);
 	      printf("x,y,z:              %g %g %g\n",x,y,z);	      
 	      exit(1);
@@ -581,7 +581,7 @@ int main()
 	      printf("\nMASA REGRESSION TEST FAILED: C-binding Navier-Stokes 3d\n");
 	      printf("E Field Source Term\n");
 	      printf("Threshold Exceeded: %g\n",efield3);
-	      printf("CMASA:              %5.16f\n",efield);
+	      printf("MASA:              %5.16f\n",efield);
 	      printf("Maple:              %5.16f\n",efield2);
 	      printf("x,y,z:              %g %g %g\n",x,y,z);	      
 	      exit(1);
