@@ -309,6 +309,18 @@ compatibility.
 
 1d,2d,3d steady and transient manufactured solutions to the heat equation are available in MASA.
 
+The conservation of mass, momentum, and total energy for a compressible steady inviscid fluid may be written as:
+\n
+\f[
+\nabla \cdot \left(\rho u \right) = 0,
+\f]
+\f[
+\nabla \cdot\left(\rho u u \right) = -\nabla p,
+\f]
+\f[
+\nabla \cdot\left(\rho u H\right) = 0
+\f]
+
 */
 
 /*! \page euler Euler Equations
