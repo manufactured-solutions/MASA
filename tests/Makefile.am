@@ -35,6 +35,7 @@ check_PROGRAMS   = misc                \
                    rans_sa             \
                    sod                 \
 	           c_misc              \
+	           c_source            \
 	           c_purge             \
 	           c_heat1dsc          \
 	           c_heat2dsc          \
@@ -90,6 +91,7 @@ sod_SOURCES                 = sod.cpp
 #----------------------
 
 c_misc_SOURCES              = c_misc.c
+c_misc_SOURCES              = c_source.c
 c_purge_SOURCES             = c_purge.c
 c_heat1dsc_SOURCES          = c_heat1dsc.c
 c_heat2dsc_SOURCES          = c_heat2dsc.c
@@ -165,6 +167,7 @@ TESTS                      = init.sh              \
                              sod                  \
 			     c_init.sh            \
 	                     c_misc               \
+	                     c_source             \
 	                     c_purge              \
 	                     c_heat1dsc           \
 	                     c_heat2dsc           \
