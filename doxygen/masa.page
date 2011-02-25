@@ -176,9 +176,12 @@ Initializing MASA Tests
 PASS: init.sh
 PASS: misc
 PASS: fail_cond
+PASS: catch_exception
 PASS: register
 PASS: poly
-FAIL: uninit
+PASS: uninit
+PASS: pass_func
+PASS: purge
 PASS: heat_const_steady
 PASS: heat_var_steady
 PASS: heat_const_unsteady
@@ -186,6 +189,8 @@ PASS: heat_var_unsteady
 PASS: euler1d
 PASS: euler2d
 PASS: euler3d
+PASS: euler_transient_1d
+PASS: euler_chem_1d
 PASS: ns2d
 PASS: ns3d
 PASS: ns3d_phys
@@ -200,36 +205,44 @@ Initializing CMASA Tests
 -------------------------------------------------------
 PASS: c_init.sh
 PASS: c_misc
+PASS: c_purge
 PASS: c_heat1dsc
 PASS: c_heat2dsc
 PASS: c_heat3dsc
 PASS: c_euler1d
 PASS: c_euler2d
 PASS: c_euler3d
+PASS: c_euler_chem_1d
 PASS: c_navierstokes2d
 PASS: c_navierstokes3d
  
 -------------------------------------------------------
 Initializing FortMASA Tests
 -------------------------------------------------------
- 
 PASS: f_init.sh
 MASA :: selected mytest
 PASS: f_misc
+PASS: f_purge
 PASS: f_heat
 PASS: f_euler1d
 PASS: f_euler2d
 PASS: f_euler3d
+PASS: f_euler_chem_1d
 PASS: f_cns2d
 PASS: f_cns3d
+ 
+-------------------------------------------------------
+Initializing MASA Examples Tests
+-------------------------------------------------------
+PASS: example_test.sh
+
 -------------------------------------------------------
 Finalizing MASA Tests, have a well verified day
 -------------------------------------------------------
-
 PASS: finalize.sh
-=====================================
-All 40 tests failed
-=====================================
+===================
+All 50 tests passed
+===================
 
 \endcode
 
