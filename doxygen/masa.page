@@ -72,18 +72,6 @@ predictions, verification processes are integral to all activities in scientific
 MASA is designed to simplify the verification process by providing a common repository of manufactured solutions 
 for common problems in scientific computation. 
 
-<h2>Available Solutions</h2>
-
-Heat Equation
-
-Euler Equations
-
-Compressible Navier-Stokes 
-
-Sod Shock Tube 
-
-Various RANS models
-
 <h2>Manufactured Solution Generation</h2>
 
 The analytical solutions used in this library were generated using symbolic manipulation software, such as Maple.
@@ -306,6 +294,49 @@ compatibility.
 /*! \page mms_avail Available Manufactured Solutions
 
     This is a list of all available manufactured solutions in MASA
+
+<ul>
+<li> \subpage heat
+<li> \subpage euler
+<li> \subpage cns
+<li> \subpage sod
+<li> \subpage rans
+</ul>
+
+*/
+
+/*! \page heat Heat Equation
+
+1d,2d,3d steady and transient manufactured solutions to the heat equation are available in MASA.
+
+*/
+
+/*! \page euler Euler Equations
+
+1d,2d,3d steady and transient manufactured solutions to the heat equation are available in MASA, 
+for both cartesian and axisymmetric cases. 
+
+
+*/
+
+
+/*! \page cns Compressible Navier-Stokes
+
+1d,2d,3d steady and transient manufactured solutions to the heat equation are available in MASA,
+for both cartesian and axisymmetric cases. 
+
+*/ 
+
+
+/*! \page sod Sod Shock Tube
+
+1d manufactured solutions to the Sod shock tube equations are available in MASA.
+
+*/
+
+/*! \page rans RANS Models
+
+1d steady manufactured solutions to the Spalart-Allmaras RANS turbulence model are available in MASA.
 
 */
 
