@@ -557,25 +557,25 @@ int run_regression()
 	  exact_rho = masa_eval_exact_rho    <Scalar>(x,y,z);
 
 	  // eval gradient terms
-	  gradx = masa_eval_grad_3d_u<Scalar>(x,y,z,1);
-	  grady = masa_eval_grad_3d_u<Scalar>(x,y,z,2);
-	  gradz = masa_eval_grad_3d_u<Scalar>(x,y,z,3);
+	  gradx = masa_eval_grad_u<Scalar>(x,y,z,1);
+	  grady = masa_eval_grad_u<Scalar>(x,y,z,2);
+	  gradz = masa_eval_grad_u<Scalar>(x,y,z,3);
 
-	  gradx = masa_eval_grad_3d_v<Scalar>(x,y,z,1);
-	  grady = masa_eval_grad_3d_v<Scalar>(x,y,z,2);
-	  gradz = masa_eval_grad_3d_v<Scalar>(x,y,z,3);
+	  gradx = masa_eval_grad_v<Scalar>(x,y,z,1);
+	  grady = masa_eval_grad_v<Scalar>(x,y,z,2);
+	  gradz = masa_eval_grad_v<Scalar>(x,y,z,3);
 	  
-	  gradx = masa_eval_grad_3d_w<Scalar>(x,y,z,1);
-	  grady = masa_eval_grad_3d_w<Scalar>(x,y,z,2);
-	  gradz = masa_eval_grad_3d_w<Scalar>(x,y,z,3);
+	  gradx = masa_eval_grad_w<Scalar>(x,y,z,1);
+	  grady = masa_eval_grad_w<Scalar>(x,y,z,2);
+	  gradz = masa_eval_grad_w<Scalar>(x,y,z,3);
 
-	  gradx = masa_eval_grad_3d_p<Scalar>(x,y,z,1);
-	  grady = masa_eval_grad_3d_p<Scalar>(x,y,z,2);
-	  gradz = masa_eval_grad_3d_p<Scalar>(x,y,z,3);
+	  gradx = masa_eval_grad_p<Scalar>(x,y,z,1);
+	  grady = masa_eval_grad_p<Scalar>(x,y,z,2);
+	  gradz = masa_eval_grad_p<Scalar>(x,y,z,3);
 
-	  gradx = masa_eval_grad_3d_rho<Scalar>(x,y,z,1);
-	  grady = masa_eval_grad_3d_rho<Scalar>(x,y,z,2);
-	  gradz = masa_eval_grad_3d_rho<Scalar>(x,y,z,3);
+	  gradx = masa_eval_grad_rho<Scalar>(x,y,z,1);
+	  grady = masa_eval_grad_rho<Scalar>(x,y,z,2);
+	  gradz = masa_eval_grad_rho<Scalar>(x,y,z,3);
 
 	  // check against maple output
 	  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L,R,K);
@@ -733,14 +733,14 @@ int run_regression()
   freopen("/dev/null","w",stdout);
 
   // test gradient error terms
-  Scalar derr = masa_eval_grad_3d_u<Scalar>(0,0,0,0);
+  Scalar derr = masa_eval_grad_u<Scalar>(0,0,0,0);
   if(derr != -1)
     {
       cout << "MASA :: gradient (0) error condition failed!\n";
       exit(1);
     }
   
-  derr = masa_eval_grad_3d_u<Scalar>(0,0,0,4);
+  derr = masa_eval_grad_u<Scalar>(0,0,0,4);
   if(derr != -1)
     {
       cout << "MASA :: gradient (4) error condition failed!\n";
@@ -748,14 +748,14 @@ int run_regression()
     }
 
   // v
-  derr = masa_eval_grad_3d_v<Scalar>(0,0,0,0);
+  derr = masa_eval_grad_v<Scalar>(0,0,0,0);
   if(derr != -1)
     {
       cout << "MASA :: v gradient (0) error condition failed!\n";
       exit(1);
     }
   
-  derr = masa_eval_grad_3d_v<Scalar>(0,0,0,4);
+  derr = masa_eval_grad_v<Scalar>(0,0,0,4);
   if(derr != -1)
     {
       cout << "MASA :: v gradient (4) error condition failed!\n";
@@ -763,14 +763,14 @@ int run_regression()
     }
 
   // w
-  derr = masa_eval_grad_3d_w<Scalar>(0,0,0,0);
+  derr = masa_eval_grad_w<Scalar>(0,0,0,0);
   if(derr != -1)
     {
       cout << "MASA :: w gradient (0) error condition failed!\n";
       exit(1);
     }
   
-  derr = masa_eval_grad_3d_w<Scalar>(0,0,0,4);
+  derr = masa_eval_grad_w<Scalar>(0,0,0,4);
   if(derr != -1)
     {
       cout << "MASA :: w gradient (4) error condition failed!\n";
@@ -778,14 +778,14 @@ int run_regression()
     }
 
   // p
-  derr = masa_eval_grad_3d_p<Scalar>(0,0,0,0);
+  derr = masa_eval_grad_p<Scalar>(0,0,0,0);
   if(derr != -1)
     {
       cout << "MASA :: p gradient (0) error condition failed!\n";
       exit(1);
     }
   
-  derr = masa_eval_grad_3d_p<Scalar>(0,0,0,4);
+  derr = masa_eval_grad_p<Scalar>(0,0,0,4);
   if(derr != -1)
     {
       cout << "MASA :: p gradient (4) error condition failed!\n";
@@ -793,14 +793,14 @@ int run_regression()
     }
 
   // rho
-  derr = masa_eval_grad_3d_rho<Scalar>(0,0,0,0);
+  derr = masa_eval_grad_rho<Scalar>(0,0,0,0);
   if(derr != -1)
     {
       cout << "MASA :: rho gradient (0) error condition failed!\n";
       exit(1);
     }
   
-  derr = masa_eval_grad_3d_rho<Scalar>(0,0,0,4);
+  derr = masa_eval_grad_rho<Scalar>(0,0,0,4);
   if(derr != -1)
     {
       cout << "MASA :: rho gradient (4) error condition failed!\n";

@@ -315,53 +315,53 @@ namespace MASA
   // --------------------------------
 
   template <typename Scalar>
-  Scalar masa_eval_grad_1d_u  (Scalar);
+  Scalar masa_eval_grad_u  (Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_grad_2d_u  (Scalar,Scalar,int);
+  Scalar masa_eval_grad_u  (Scalar,Scalar,int);
 
   template <typename Scalar>
-  Scalar masa_eval_grad_3d_u  (Scalar,Scalar,Scalar,int);
-
-
-  template <typename Scalar>
-  Scalar masa_eval_grad_1d_v  (Scalar);
-
-  template <typename Scalar>
-  Scalar masa_eval_grad_2d_v  (Scalar,Scalar,int);
-
-  template <typename Scalar>
-  Scalar masa_eval_grad_3d_v  (Scalar,Scalar,Scalar,int);
+  Scalar masa_eval_grad_u  (Scalar,Scalar,Scalar,int);
 
 
   template <typename Scalar>
-  Scalar masa_eval_grad_1d_w  (Scalar);
+  Scalar masa_eval_grad_v  (Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_grad_2d_w  (Scalar,Scalar,int);
+  Scalar masa_eval_grad_v  (Scalar,Scalar,int);
 
   template <typename Scalar>
-  Scalar masa_eval_grad_3d_w  (Scalar,Scalar,Scalar,int);
-
-
-  template <typename Scalar>
-  Scalar masa_eval_grad_1d_p  (Scalar);
-
-  template <typename Scalar>
-  Scalar masa_eval_grad_2d_p  (Scalar,Scalar,int);
-
-  template <typename Scalar>
-  Scalar masa_eval_grad_3d_p  (Scalar,Scalar,Scalar,int);
+  Scalar masa_eval_grad_v  (Scalar,Scalar,Scalar,int);
 
 
   template <typename Scalar>
-  Scalar masa_eval_grad_1d_rho(Scalar);
+  Scalar masa_eval_grad_w  (Scalar);
 
   template <typename Scalar>
-  Scalar masa_eval_grad_2d_rho(Scalar,Scalar,int);
+  Scalar masa_eval_grad_w  (Scalar,Scalar,int);
 
   template <typename Scalar>
-  Scalar masa_eval_grad_3d_rho(Scalar,Scalar,Scalar,int);
+  Scalar masa_eval_grad_w  (Scalar,Scalar,Scalar,int);
+
+
+  template <typename Scalar>
+  Scalar masa_eval_grad_p  (Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_grad_p  (Scalar,Scalar,int);
+
+  template <typename Scalar>
+  Scalar masa_eval_grad_p  (Scalar,Scalar,Scalar,int);
+
+
+  template <typename Scalar>
+  Scalar masa_eval_grad_rho(Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_grad_rho(Scalar,Scalar,int);
+
+  template <typename Scalar>
+  Scalar masa_eval_grad_rho(Scalar,Scalar,Scalar,int);
 
   // --------------------------------
   // internal masa functions user might want to call

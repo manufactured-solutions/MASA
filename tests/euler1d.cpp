@@ -239,9 +239,9 @@ int run_regression()
       exact_rho = masa_eval_exact_rho    <Scalar>(x);
 
       // eval gradient terms
-      gradx   = masa_eval_grad_1d_u  (x);
-      gradp   = masa_eval_grad_1d_p  (x);
-      gradrho = masa_eval_grad_1d_rho(x);
+      gradx   = masa_eval_grad_u  (x);
+      gradp   = masa_eval_grad_p  (x);
+      gradrho = masa_eval_grad_rho(x);
 
       // get fundamental source term solution
       ufield2   = SourceQ_u  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);

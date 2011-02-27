@@ -190,25 +190,25 @@ namespace MASA
    * -------------------------------------------------------------------------------------------
    */
 
-    virtual Scalar eval_1d_g_u(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual Scalar eval_2d_g_u(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual Scalar eval_3d_g_u(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_g_u(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_g_u(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_g_u(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
-    virtual Scalar eval_1d_g_v(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual Scalar eval_2d_g_v(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual Scalar eval_3d_g_v(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_g_v(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_g_v(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_g_v(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
-    virtual Scalar eval_1d_g_w(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual Scalar eval_2d_g_w(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual Scalar eval_3d_g_w(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_g_w(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_g_w(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_g_w(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
-    virtual Scalar eval_1d_g_p(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual Scalar eval_2d_g_p(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual Scalar eval_3d_g_p(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_g_p(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_g_p(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_g_p(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
-    virtual Scalar eval_1d_g_rho(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
-    virtual Scalar eval_2d_g_rho(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
-    virtual Scalar eval_3d_g_rho(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
+    virtual Scalar eval_g_rho(Scalar)               {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 1d gradient
+    virtual Scalar eval_g_rho(Scalar,Scalar,int)        {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 2d gradient
+    virtual Scalar eval_g_rho(Scalar,Scalar,Scalar,int) {std::cout << "MASA ERROR:: gradient is unavailable or not properly loaded.\n";   return -1.33;};         // returns value of 3d gradient
 
   /* 
    * -------------------------------------------------------------------------------------------   
@@ -573,9 +573,9 @@ namespace MASA
     Scalar eval_exact_p  (Scalar);
     Scalar eval_exact_rho(Scalar);
 
-    Scalar eval_1d_g_u  (Scalar);   // gradient of source term
-    Scalar eval_1d_g_p  (Scalar);
-    Scalar eval_1d_g_rho(Scalar);
+    Scalar eval_g_u  (Scalar);   // gradient of source term
+    Scalar eval_g_p  (Scalar);
+    Scalar eval_g_rho(Scalar);
 
   };
 
@@ -625,11 +625,11 @@ namespace MASA
     Scalar eval_exact_p  (Scalar,Scalar);
     Scalar eval_exact_rho(Scalar,Scalar);
 
-    Scalar eval_2d_g_u(Scalar,Scalar,int);   // gradient of source term
-    Scalar eval_2d_g_v(Scalar,Scalar,int);
-    Scalar eval_2d_g_p(Scalar,Scalar,int);
+    Scalar eval_g_u(Scalar,Scalar,int);   // gradient of source term
+    Scalar eval_g_v(Scalar,Scalar,int);
+    Scalar eval_g_p(Scalar,Scalar,int);
 
-    Scalar eval_2d_g_rho(Scalar,Scalar,int);
+    Scalar eval_g_rho(Scalar,Scalar,int);
 
   };
 
@@ -697,12 +697,12 @@ namespace MASA
     Scalar eval_exact_p  (Scalar,Scalar,Scalar);
     Scalar eval_exact_rho(Scalar,Scalar,Scalar);
 
-    Scalar eval_3d_g_u(Scalar,Scalar,Scalar,int);   // gradient of source term
-    Scalar eval_3d_g_v(Scalar,Scalar,Scalar,int);
-    Scalar eval_3d_g_w(Scalar,Scalar,Scalar,int);
+    Scalar eval_g_u(Scalar,Scalar,Scalar,int);   // gradient of source term
+    Scalar eval_g_v(Scalar,Scalar,Scalar,int);
+    Scalar eval_g_w(Scalar,Scalar,Scalar,int);
 
-    Scalar eval_3d_g_p  (Scalar,Scalar,Scalar,int);
-    Scalar eval_3d_g_rho(Scalar,Scalar,Scalar,int);
+    Scalar eval_g_p  (Scalar,Scalar,Scalar,int);
+    Scalar eval_g_rho(Scalar,Scalar,Scalar,int);
 
   };
   // ------------------------------------------------------
@@ -1043,11 +1043,11 @@ namespace MASA
     Scalar eval_exact_p  (Scalar,Scalar);
     Scalar eval_exact_rho(Scalar,Scalar);
 
-    Scalar eval_2d_g_u(Scalar,Scalar,int);   // gradient of source term
-    Scalar eval_2d_g_v(Scalar,Scalar,int);
-    Scalar eval_2d_g_p(Scalar,Scalar,int);
+    Scalar eval_g_u(Scalar,Scalar,int);   // gradient of source term
+    Scalar eval_g_v(Scalar,Scalar,int);
+    Scalar eval_g_p(Scalar,Scalar,int);
 
-    Scalar eval_2d_g_rho(Scalar,Scalar,int);
+    Scalar eval_g_rho(Scalar,Scalar,int);
 
 
   };
@@ -1117,12 +1117,12 @@ namespace MASA
     Scalar eval_exact_p  (Scalar,Scalar,Scalar);
     Scalar eval_exact_rho(Scalar,Scalar,Scalar);
 
-    Scalar eval_3d_g_u(Scalar,Scalar,Scalar,int);   // gradient of source term
-    Scalar eval_3d_g_v(Scalar,Scalar,Scalar,int);
-    Scalar eval_3d_g_w(Scalar,Scalar,Scalar,int);
+    Scalar eval_g_u(Scalar,Scalar,Scalar,int);   // gradient of source term
+    Scalar eval_g_v(Scalar,Scalar,Scalar,int);
+    Scalar eval_g_w(Scalar,Scalar,Scalar,int);
 
-    Scalar eval_3d_g_p  (Scalar,Scalar,Scalar,int);
-    Scalar eval_3d_g_rho(Scalar,Scalar,Scalar,int);
+    Scalar eval_g_p  (Scalar,Scalar,Scalar,int);
+    Scalar eval_g_rho(Scalar,Scalar,Scalar,int);
 
   }; // done with navier stokes 3d class
   

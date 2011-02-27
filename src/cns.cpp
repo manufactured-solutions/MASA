@@ -160,7 +160,7 @@ Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_q_rho_e(Scalar x,Scalar 
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_u(Scalar x,Scalar y, int i)
+Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_g_u(Scalar x,Scalar y, int i)
 {
 
   Scalar grad = -1;
@@ -192,7 +192,7 @@ Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_u(Scalar x,Scalar y
 }
 
 template <typename Scalar>
-Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_v(Scalar x,Scalar y, int i)
+Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_g_v(Scalar x,Scalar y, int i)
 {
 
   Scalar grad = -1;
@@ -224,7 +224,7 @@ Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_v(Scalar x,Scalar y
 }
 
 template <typename Scalar>
-Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_p(Scalar x,Scalar y, int i)
+Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_g_p(Scalar x,Scalar y, int i)
 {
 
   Scalar grad = -1;
@@ -256,7 +256,7 @@ Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_p(Scalar x,Scalar y
 }
 
 template <typename Scalar>
-Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_2d_g_rho(Scalar x,Scalar y, int i)
+Scalar MASA::navierstokes_2d_compressible<Scalar>::eval_g_rho(Scalar x,Scalar y, int i)
 {
 
   Scalar grad = -1;
@@ -454,7 +454,7 @@ int MASA::navierstokes_3d_compressible<Scalar>::init_var()
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_u(Scalar x,Scalar y,Scalar z,int i)
+Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_g_u(Scalar x,Scalar y,Scalar z,int i)
 {
 
   Scalar grad = -1;
@@ -491,7 +491,7 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_u(Scalar x,Scalar y
 }
 
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_v(Scalar x,Scalar y,Scalar z,int i)
+Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_g_v(Scalar x,Scalar y,Scalar z,int i)
 {
 
   Scalar grad = -1;
@@ -527,7 +527,7 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_v(Scalar x,Scalar y
 }
 
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_w(Scalar x,Scalar y,Scalar z,int i)
+Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_g_w(Scalar x,Scalar y,Scalar z,int i)
 {
 
   Scalar grad = -1;
@@ -563,7 +563,7 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_w(Scalar x,Scalar y
 }
 
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_p(Scalar x,Scalar y,Scalar z,int i)
+Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_g_p(Scalar x,Scalar y,Scalar z,int i)
 {
 
   Scalar grad = -1;
@@ -599,7 +599,7 @@ Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_p(Scalar x,Scalar y
 }
 
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_3d_g_rho(Scalar x,Scalar y,Scalar z,int i)
+Scalar MASA::navierstokes_3d_compressible<Scalar>::eval_g_rho(Scalar x,Scalar y,Scalar z,int i)
 {
 
   Scalar grad = -1;

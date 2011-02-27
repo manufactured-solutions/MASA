@@ -136,23 +136,23 @@ int main()
   if(derr != -1.33) 
     err += 1;  
 
-  derr = masa_eval_grad_1d_u<Scalar>(x);
+  derr = masa_eval_grad_u<Scalar>(x);
   if(derr != -1.33) 
     err += 1;  
 
-  derr = masa_eval_grad_1d_v<Scalar>(x);
+  derr = masa_eval_grad_v<Scalar>(x);
   if(derr != -1.33) 
     err += 1;  
 
-  derr = masa_eval_grad_1d_w<Scalar>(x);
+  derr = masa_eval_grad_w<Scalar>(x);
   if(derr != -1.33) 
     err += 1;  
 
-  derr = masa_eval_grad_1d_p<Scalar>(x);
+  derr = masa_eval_grad_p<Scalar>(x);
   if(derr != -1.33) 
     err += 1;  
 
-  derr = masa_eval_grad_1d_rho<Scalar>(x);
+  derr = masa_eval_grad_rho<Scalar>(x);
   if(derr != -1.33) 
     err += 1;  
   
@@ -225,43 +225,43 @@ int main()
   
   // gradient terms
 
-  derr = masa_eval_grad_2d_u<Scalar>(x,y,1);
+  derr = masa_eval_grad_u<Scalar>(x,y,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_2d_u<Scalar>(x,y,2);
+  derr = masa_eval_grad_u<Scalar>(x,y,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_2d_v<Scalar>(x,y,1);
+  derr = masa_eval_grad_v<Scalar>(x,y,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_2d_v<Scalar>(x,y,2);
+  derr = masa_eval_grad_v<Scalar>(x,y,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_2d_w<Scalar>(x,y,1);
+  derr = masa_eval_grad_w<Scalar>(x,y,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_2d_w<Scalar>(x,y,2);
+  derr = masa_eval_grad_w<Scalar>(x,y,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_2d_p<Scalar>(x,y,1);
+  derr = masa_eval_grad_p<Scalar>(x,y,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_2d_p<Scalar>(x,y,2);
+  derr = masa_eval_grad_p<Scalar>(x,y,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_2d_rho<Scalar>(x,y,1);
+  derr = masa_eval_grad_rho<Scalar>(x,y,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_2d_rho<Scalar>(x,y,2);
+  derr = masa_eval_grad_rho<Scalar>(x,y,2);
   if(derr != -1.33) 
     err += 1;
 
@@ -310,63 +310,63 @@ int main()
     err += 1;
 
   // gradient terms
-  derr = masa_eval_grad_3d_u<Scalar>(x,y,z,1);
+  derr = masa_eval_grad_u<Scalar>(x,y,z,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_3d_u<Scalar>(x,y,z,2);
+  derr = masa_eval_grad_u<Scalar>(x,y,z,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_3d_u<Scalar>(x,y,z,3);
+  derr = masa_eval_grad_u<Scalar>(x,y,z,3);
   if(derr != -1.33) 
     err += 1;
   
-  derr = masa_eval_grad_3d_v<Scalar>(x,y,z,1);
+  derr = masa_eval_grad_v<Scalar>(x,y,z,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_3d_v<Scalar>(x,y,z,2);
+  derr = masa_eval_grad_v<Scalar>(x,y,z,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_3d_v<Scalar>(x,y,z,3);
+  derr = masa_eval_grad_v<Scalar>(x,y,z,3);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_3d_w<Scalar>(x,y,z,1);
+  derr = masa_eval_grad_w<Scalar>(x,y,z,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_3d_w<Scalar>(x,y,z,2);
+  derr = masa_eval_grad_w<Scalar>(x,y,z,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_3d_w<Scalar>(x,y,z,3);
+  derr = masa_eval_grad_w<Scalar>(x,y,z,3);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_3d_p<Scalar>(x,y,z,1);
+  derr = masa_eval_grad_p<Scalar>(x,y,z,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_3d_p<Scalar>(x,y,z,2);
+  derr = masa_eval_grad_p<Scalar>(x,y,z,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_3d_p<Scalar>(x,y,z,3);
+  derr = masa_eval_grad_p<Scalar>(x,y,z,3);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_3d_rho<Scalar>(x,y,z,1);
+  derr = masa_eval_grad_rho<Scalar>(x,y,z,1);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_3d_rho<Scalar>(x,y,z,2);
+  derr = masa_eval_grad_rho<Scalar>(x,y,z,2);
   if(derr != -1.33) 
     err += 1;
 
-  derr = masa_eval_grad_3d_rho<Scalar>(x,y,z,3);
+  derr = masa_eval_grad_rho<Scalar>(x,y,z,3);
   if(derr != -1.33) 
     err += 1;
 

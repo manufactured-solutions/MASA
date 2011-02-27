@@ -151,7 +151,7 @@ Scalar MASA::euler_1d<Scalar>::eval_q_rho(Scalar x)
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::euler_1d<Scalar>::eval_1d_g_u(Scalar x)
+Scalar MASA::euler_1d<Scalar>::eval_g_u(Scalar x)
 {
 
   Scalar grad_u = u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
@@ -161,7 +161,7 @@ Scalar MASA::euler_1d<Scalar>::eval_1d_g_u(Scalar x)
 }
 
 template <typename Scalar>
-Scalar MASA::euler_1d<Scalar>::eval_1d_g_p(Scalar x)
+Scalar MASA::euler_1d<Scalar>::eval_g_p(Scalar x)
 {
   Scalar grad_p = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
   return grad_p;
@@ -169,7 +169,7 @@ Scalar MASA::euler_1d<Scalar>::eval_1d_g_p(Scalar x)
 }
 
 template <typename Scalar>
-Scalar MASA::euler_1d<Scalar>::eval_1d_g_rho(Scalar x)
+Scalar MASA::euler_1d<Scalar>::eval_g_rho(Scalar x)
 {
   Scalar grad_rho = rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
   return grad_rho;
@@ -365,7 +365,7 @@ Scalar MASA::euler_2d<Scalar>::eval_q_rho(Scalar x,Scalar y)
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::euler_2d<Scalar>::eval_2d_g_u(Scalar x,Scalar y, int i)
+Scalar MASA::euler_2d<Scalar>::eval_g_u(Scalar x,Scalar y, int i)
 {
 
   Scalar grad = -1;
@@ -373,7 +373,7 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_u(Scalar x,Scalar y, int i)
   switch(i)
     {
     case 0:
-      std::cout << "MASA error:: eval_2d_g_u has no 0th component\n";
+      std::cout << "MASA error:: eval_g_u has no 0th component\n";
       std::cout << "Try 1 or 2\n";
       break;
       
@@ -386,7 +386,7 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_u(Scalar x,Scalar y, int i)
       break;
 
     default:
-      std::cout << "MASA error:: eval_2d_g_u has no " << i << "th component\n";
+      std::cout << "MASA error:: eval_g_u has no " << i << "th component\n";
       std::cout << "Try 1 or 2\n";
       break;
 
@@ -398,7 +398,7 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_u(Scalar x,Scalar y, int i)
 
 
 template <typename Scalar>
-Scalar MASA::euler_2d<Scalar>::eval_2d_g_v(Scalar x,Scalar y, int i)
+Scalar MASA::euler_2d<Scalar>::eval_g_v(Scalar x,Scalar y, int i)
 {
 
   Scalar grad = -1;
@@ -406,7 +406,7 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_v(Scalar x,Scalar y, int i)
   switch(i)
     {
     case 0:
-      std::cout << "MASA error:: eval_2d_g_v has no 0th component\n";
+      std::cout << "MASA error:: eval_g_v has no 0th component\n";
       std::cout << "Try 1 or 2\n";
       break;
       
@@ -419,7 +419,7 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_v(Scalar x,Scalar y, int i)
       break;
 
     default:
-      std::cout << "MASA error:: eval_2d_g_v has no " << i << "th component\n";
+      std::cout << "MASA error:: eval_g_v has no " << i << "th component\n";
       std::cout << "Try 1 or 2\n";
       break;
 
@@ -430,7 +430,7 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_v(Scalar x,Scalar y, int i)
 }
 
 template <typename Scalar>
-Scalar MASA::euler_2d<Scalar>::eval_2d_g_p(Scalar x,Scalar y, int i)
+Scalar MASA::euler_2d<Scalar>::eval_g_p(Scalar x,Scalar y, int i)
 {
 
   Scalar grad = -1;
@@ -438,7 +438,7 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_p(Scalar x,Scalar y, int i)
   switch(i)
     {
     case 0:
-      std::cout << "MASA error:: eval_2d_g_p has no 0th component\n";
+      std::cout << "MASA error:: eval_g_p has no 0th component\n";
       std::cout << "Try 1 or 2\n";
       break;
       
@@ -451,7 +451,7 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_p(Scalar x,Scalar y, int i)
       break;
 
     default:
-      std::cout << "MASA error:: eval_2d_g_p has no " << i << "th component\n";
+      std::cout << "MASA error:: eval_g_p has no " << i << "th component\n";
       std::cout << "Try 1 or 2\n";
       break;
 
@@ -462,7 +462,7 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_p(Scalar x,Scalar y, int i)
 }
 
 template <typename Scalar>
-Scalar MASA::euler_2d<Scalar>::eval_2d_g_rho(Scalar x,Scalar y, int i)
+Scalar MASA::euler_2d<Scalar>::eval_g_rho(Scalar x,Scalar y, int i)
 {
 
   Scalar grad = -1;
@@ -470,7 +470,7 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_rho(Scalar x,Scalar y, int i)
   switch(i)
     {
     case 0:
-      std::cout << "MASA error:: eval_2d_g_rho has no 0th component\n";
+      std::cout << "MASA error:: eval_g_rho has no 0th component\n";
       std::cout << "Try 1 or 2\n";
       break;
       
@@ -483,7 +483,7 @@ Scalar MASA::euler_2d<Scalar>::eval_2d_g_rho(Scalar x,Scalar y, int i)
       break;
 
     default:
-      std::cout << "MASA error:: eval_2d_g_rho has no " << i << "th component\n";
+      std::cout << "MASA error:: eval_g_rho has no " << i << "th component\n";
       std::cout << "Try 1 or 2\n";
       break;
 
@@ -646,7 +646,7 @@ int MASA::euler_3d<Scalar>::init_var()
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::euler_3d<Scalar>::eval_3d_g_u(Scalar x,Scalar y,Scalar z,int i)
+Scalar MASA::euler_3d<Scalar>::eval_g_u(Scalar x,Scalar y,Scalar z,int i)
 {
 
   Scalar grad = -1;
@@ -683,7 +683,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_u(Scalar x,Scalar y,Scalar z,int i)
 
 
 template <typename Scalar>
-Scalar MASA::euler_3d<Scalar>::eval_3d_g_v(Scalar x,Scalar y,Scalar z,int i)
+Scalar MASA::euler_3d<Scalar>::eval_g_v(Scalar x,Scalar y,Scalar z,int i)
 {
 
   Scalar grad = -1;
@@ -719,7 +719,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_v(Scalar x,Scalar y,Scalar z,int i)
 }
 
 template <typename Scalar>
-Scalar MASA::euler_3d<Scalar>::eval_3d_g_w(Scalar x,Scalar y,Scalar z,int i)
+Scalar MASA::euler_3d<Scalar>::eval_g_w(Scalar x,Scalar y,Scalar z,int i)
 {
 
   Scalar grad = -1;
@@ -755,7 +755,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_w(Scalar x,Scalar y,Scalar z,int i)
 }
 
 template <typename Scalar>
-Scalar MASA::euler_3d<Scalar>::eval_3d_g_p(Scalar x,Scalar y,Scalar z,int i)
+Scalar MASA::euler_3d<Scalar>::eval_g_p(Scalar x,Scalar y,Scalar z,int i)
 {
 
   Scalar grad = -1;
@@ -791,7 +791,7 @@ Scalar MASA::euler_3d<Scalar>::eval_3d_g_p(Scalar x,Scalar y,Scalar z,int i)
 }
 
 template <typename Scalar>
-Scalar MASA::euler_3d<Scalar>::eval_3d_g_rho(Scalar x,Scalar y,Scalar z,int i)
+Scalar MASA::euler_3d<Scalar>::eval_g_rho(Scalar x,Scalar y,Scalar z,int i)
 {
 
   Scalar grad = -1;
