@@ -91,7 +91,7 @@ sod_SOURCES                 = sod.cpp
 #----------------------
 
 c_misc_SOURCES              = c_misc.c
-c_misc_SOURCES              = c_source.c
+c_source_SOURCES            = c_source.c
 c_purge_SOURCES             = c_purge.c
 c_heat1dsc_SOURCES          = c_heat1dsc.c
 c_heat2dsc_SOURCES          = c_heat2dsc.c
