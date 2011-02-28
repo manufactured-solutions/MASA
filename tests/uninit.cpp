@@ -100,7 +100,23 @@ int main()
   if(derr != -1.33) 
     err += 1;
 
+  derr = masa_eval_source_rho_v<Scalar>(x);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_source_rho_w<Scalar>(x);
+  if(derr != -1.33) 
+    err += 1;
+
   derr = masa_eval_source_rho_e<Scalar>(x);
+  if(derr != -1.33) 
+    err += 1;
+
+  derr = masa_eval_exact_rho_N <Scalar>(x);
+  if(derr != -1.33) 
+    err += 1;
+  
+  derr = masa_eval_exact_rho_N2<Scalar>(x);
   if(derr != -1.33) 
     err += 1;
 

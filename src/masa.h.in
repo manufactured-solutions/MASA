@@ -159,6 +159,12 @@ namespace MASA
   Scalar masa_eval_source_rho_u(Scalar);
 
   template <typename Scalar>
+  Scalar masa_eval_source_rho_v(Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_source_rho_w(Scalar);
+
+  template <typename Scalar>
   Scalar masa_eval_source_rho_N(Scalar,Scalar (*)(Scalar));
 
   template <typename Scalar>

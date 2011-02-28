@@ -393,6 +393,18 @@ Scalar MASA::masa_eval_source_rho_u(Scalar x)
 }
 
 template <typename Scalar>
+Scalar MASA::masa_eval_source_rho_v(Scalar x)
+{
+  return masa_master<Scalar>().get_ms().eval_q_rho_v(x);
+}
+
+template <typename Scalar>
+Scalar MASA::masa_eval_source_rho_w(Scalar x)
+{
+  return masa_master<Scalar>().get_ms().eval_q_rho_w(x);
+}
+
+template <typename Scalar>
 Scalar MASA::masa_eval_source_rho_e(Scalar x)
 {
   return masa_master<Scalar>().get_ms().eval_q_rho_e(x);
@@ -897,6 +909,8 @@ int MASA::masa_get_numeric_version()
   template Scalar masa_eval_source_e  <Scalar>(Scalar); \
   template Scalar masa_eval_source_rho<Scalar>(Scalar); \
   template Scalar masa_eval_source_rho_u<Scalar>(Scalar);  \
+  template Scalar masa_eval_source_rho_v<Scalar>(Scalar);  \
+  template Scalar masa_eval_source_rho_w<Scalar>(Scalar);  \
   template Scalar masa_eval_source_rho_e<Scalar>(Scalar);  \
   template Scalar masa_eval_source_rho_N<Scalar>(Scalar,Scalar (*)(Scalar));  \
   template Scalar masa_eval_source_rho_N2<Scalar>(Scalar,Scalar (*)(Scalar));		\
