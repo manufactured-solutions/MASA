@@ -36,24 +36,24 @@
 // Library version/build info
 //
 
-#define MASA_MAJOR_VERSION  @GENERIC_MAJOR_VERSION@
-#define MASA_MINOR_VERSION  @GENERIC_MINOR_VERSION@
-#define MASA_MICRO_VERSION  @GENERIC_MICRO_VERSION@
+#define MASA_MAJOR_VERSION  0
+#define MASA_MINOR_VERSION  30
+#define MASA_MICRO_VERSION  0
 
-#define MASA_BUILD_USER     "@BUILD_USER@"
-#define MASA_BUILD_ARCH     "@BUILD_ARCH@"
-#define MASA_BUILD_HOST     "@BUILD_HOST@"
-#define MASA_BUILD_DATE     "@BUILD_DATE@"
-#define MASA_BUILD_VERSION  "@BUILD_VERSION@"
+#define MASA_BUILD_USER     "nick"
+#define MASA_BUILD_ARCH     "x86_64-unknown-linux-gnu"
+#define MASA_BUILD_HOST     "magus"
+#define MASA_BUILD_DATE     "2011-02-24 18:47"
+#define MASA_BUILD_VERSION  "18049:18051"
 
-#define MASA_LIB_VERSION    "@VERSION@"
-#define MASA_LIB_RELEASE    "@BUILD_DEVSTATUS@"
+#define MASA_LIB_VERSION    "0.30"
+#define MASA_LIB_RELEASE    "Development Build"
 
-#define MASA_CXX            "@CXX@"
-#define MASA_CXXFLAGS       "@CXXFLAGS@"
+#define MASA_CXX            "g++"
+#define MASA_CXXFLAGS       "-O0 -fno-unsafe-math-optimizations"
 
-#define MASA_FC            "@FC@"
-#define MASA_FCFLAGS       "@FCFLAGS@"
+#define MASA_FC            "gfortran"
+#define MASA_FCFLAGS       "-O0 -fno-unsafe-math-optimizations"
 
 
 // This header file contains the public functions designed to be exposed in MASA
@@ -431,7 +431,6 @@ extern "C" {
 
   /**
    *  masa_init: 
-   * masa equivalent to masa_init. 
    * 
    * masa_init initalizes a masa manufactured solution class.
    * 
@@ -451,7 +450,6 @@ extern "C" {
 
   /**
    *  masa_init: 
-   * masa equivalent to masa_purge_default_param. 
    * 
    * This function sets all masa parameters to uninitalized
    *
@@ -459,8 +457,6 @@ extern "C" {
   extern int masa_purge_default_param();
 
   /**
-   * masa_select_mms: masa equivalent to masa_select_mms
-   *
    * masa_select_mms selects an already initalized 
    * manufactured solution class.
    *
@@ -475,8 +471,6 @@ extern "C" {
   extern int masa_select_mms(const char*);
 
   /**
-   * masa_list_mms: masa equivalent to masa_list_mms
-   * 
    * masa_list_mms will display (to stdout) the number of 
    * user initalized solutions. 
    * 
@@ -492,8 +486,6 @@ extern "C" {
   // --------------------------------
 
   /**
-   * masa_init_param: masa equivalent to masa_init_param
-   *
    * masa_init_param is a subroutine that will initalize
    * all the registered variables to selected defaults
    * for the currently selected manufactured solution class. 
@@ -506,8 +498,6 @@ extern "C" {
   extern int    masa_init_param();
 
   /**
-   * masa_set_param: masa equivalent to masa_set_param
-   *
    * masa_set_param is a subroutine that will set 
    * a particular registered variables inside 
    * the currently selected manufactured solution class. 
@@ -522,8 +512,6 @@ extern "C" {
   extern void   masa_set_param(const char*,double);
 
   /**
-   * masa_get_param: masa equivalent to masa_get_param
-   *
    * masa_get_param is a subroutine that will return
    * a particular registered variables inside 
    * the currently selected manufactured solution class. 
@@ -541,8 +529,6 @@ extern "C" {
   // --------------------------------
 
   /**
-   * masa_eval_1d_source_t: masa equivalent to masa_eval_1d_source_t
-   *
    * masa_eval_1d_source_t is a subroutine that will return
    * the value of the source term for the temperature of the currently selected
    * 1 dimensional masa function 
@@ -556,8 +542,6 @@ extern "C" {
   extern double masa_eval_1d_source_t  (double);
 
   /**
-   * masa_eval_1d_source_u: masa equivalent to masa_eval_1d_source_u
-   *
    * masa_eval_1d_source_u is a subroutine that will return
    * the value of the source term for the u component of velocity
    * of the currently selected
@@ -572,8 +556,6 @@ extern "C" {
   extern double masa_eval_1d_source_u  (double);
 
   /**
-   * masa_eval_1d_source_e: masa equivalent to masa_eval_1d_source_e
-   *
    * masa_eval_1d_source_e is a subroutine that will return
    * the value of the source term for the energy
    * of the currently selected
@@ -588,8 +570,6 @@ extern "C" {
   extern double masa_eval_1d_source_e  (double);
 
   /**
-   * masa_eval_1d_source_rho: masa equivalent to masa_eval_1d_source_rho
-   *
    * masa_eval_1d_source_rho is a subroutine that will return
    * the value of the source term for the density
    * of the currently selected
@@ -608,8 +588,6 @@ extern "C" {
   extern double masa_eval_1d_source_rho_N2(double,double (*)(double));
 
   /**
-   * masa_eval_1d_exact_t: masa equivalent to masa_eval_1d_exact_t
-   *
    * masa_eval_1d_exact_t is a subroutine that will return
    * the value of the analytical term for the temperature
    * of the currently selected one dimensional masa function.
@@ -623,8 +601,6 @@ extern "C" {
   extern double masa_eval_1d_exact_t      (double);
 
   /**
-   * masa_eval_1d_exact_u: masa equivalent to masa_eval_1d_exact_u
-   *
    * masa_eval_1d_exact_u is a subroutine that will return
    * the value of the analytical term for the u component of velocity
    * of the currently selected one dimensional masa function.
@@ -638,8 +614,6 @@ extern "C" {
   extern double masa_eval_1d_exact_u      (double);
 
   /**
-   * masa_eval_1d_exact_p: masa equivalent to masa_eval_1d_exact_p
-   *
    * masa_eval_1d_exact_p is a subroutine that will return
    * the value of the analytical term for the pressure
    * of the currently selected one dimensional masa function.
@@ -653,8 +627,6 @@ extern "C" {
   extern double masa_eval_1d_exact_p      (double);
 
   /**
-   * masa_eval_1d_exact_rho: masa equivalent to masa_eval_1d_exact_rho
-   *
    * masa_eval_1d_exact_rho is a subroutine that will return
    * the value of the analytical term for the u component of velocity
    * of the currently selected one dimensional masa function.
@@ -674,8 +646,6 @@ extern "C" {
   // --------------------------------
 
   /**
-   * masa_eval_2d_source_t: masa equivalent to masa_eval_2d_source_t
-   *
    * masa_eval_2d_source_t is a subroutine that will return
    * the value of the source term for the temperature of the currently selected
    * 2 dimensional masa function 
@@ -689,8 +659,6 @@ extern "C" {
   extern double masa_eval_2d_source_t  (double,double);
 
   /**
-   * masa_eval_2d_source_u: masa equivalent to masa_eval_2d_source_u
-   *
    * masa_eval_2d_source_u is a subroutine that will return
    * the value of the source term for the u component of velocity
    * for the currently selected two dimensional masa function.
@@ -704,8 +672,6 @@ extern "C" {
   extern double masa_eval_2d_source_u  (double,double);
 
   /**
-   * masa_eval_2d_source_v: masa equivalent to masa_eval_2d_source_v
-   *
    * masa_eval_2d_source_v is a subroutine that will return
    * the value of the source term for the v component of velocity
    * for the currently selected two dimensional masa function.
@@ -719,8 +685,6 @@ extern "C" {
   extern double masa_eval_2d_source_v  (double,double);
 
   /**
-   * masa_eval_2d_source_e: masa equivalent to masa_eval_2d_source_e
-   *
    * masa_eval_2d_source_e is a subroutine that will return
    * the value of the source term for the energy
    * of the currently selected two dimensional masa function.
@@ -734,8 +698,6 @@ extern "C" {
   extern double masa_eval_2d_source_e  (double,double);
 
   /**
-   * masa_eval_2d_source_rho: masa equivalent to masa_eval_2d_source_rho
-   *
    * masa_eval_2d_source_rho is a subroutine that will return
    * the value of the source term for the density
    * of the currently selected two dimensional masa function.
@@ -753,8 +715,6 @@ extern "C" {
   extern double masa_eval_2d_source_rho_e(double,double);
 
   /**
-   * masa_eval_2d_exact_t: masa equivalent to masa_eval_2d_exact_t
-   *
    * masa_eval_2d_exact_t is a subroutine that will return
    * the value of the analytical term for the temperature
    * of the currently selected two dimensional masa function.
@@ -768,8 +728,6 @@ extern "C" {
   extern double masa_eval_2d_exact_t      (double,double);
 
   /**
-   * masa_eval_2d_exact_u: masa equivalent to masa_eval_2d_exact_u
-   *
    * masa_eval_2d_exact_u is a subroutine that will return
    * the value of the analytical term for the u component of velocity
    * of the currently selected two dimensional masa function.
@@ -783,8 +741,6 @@ extern "C" {
   extern double masa_eval_2d_exact_u      (double,double);
 
   /**
-   * masa_eval_2d_exact_v: masa equivalent to masa_eval_2d_exact_v
-   *
    * masa_eval_2d_exact_v is a subroutine that will return
    * the value of the analytical term for the v component of velocity
    * of the currently selected two dimensional masa function.
@@ -798,8 +754,6 @@ extern "C" {
   extern double masa_eval_2d_exact_v      (double,double);
 
   /**
-   * masa_eval_2d_exact_p: masa equivalent to masa_eval_2d_exact_p
-   *
    * masa_eval_2d_exact_p is a subroutine that will return
    * the value of the analytical term for the pressure
    * of the currently selected two dimensional masa function.
@@ -813,8 +767,6 @@ extern "C" {
   extern double masa_eval_2d_exact_p      (double,double);
 
   /**
-   * masa_eval_2d_exact_rho: masa equivalent to masa_eval_2d_exact_rho
-   *
    * masa_eval_2d_exact_rho is a subroutine that will return
    * the value of the analytical term for the density
    * of the currently selected two dimensional masa function.
@@ -832,8 +784,6 @@ extern "C" {
   // --------------------------------
 
   /**
-   * masa_eval_3d_source_t: masa equivalent to masa_eval_3d_source_t
-   *
    * masa_eval_3d_source_t is a subroutine that will return
    * the value of the source term for the temperature of the currently selected
    * three dimensional masa function 
@@ -847,8 +797,6 @@ extern "C" {
   extern double masa_eval_3d_source_t  (double,double,double);
 
   /**
-   * masa_eval_3d_source_u: masa equivalent to masa_eval_3d_source_u
-   *
    * masa_eval_3d_source_u is a subroutine that will return
    * the value of the source term for the u component of velocity
    * for the currently selected three dimensional masa function.
@@ -862,8 +810,6 @@ extern "C" {
   extern double masa_eval_3d_source_u  (double,double,double);
 
   /**
-   * masa_eval_3d_source_v: masa equivalent to masa_eval_3d_source_v
-   *
    * masa_eval_3d_source_v is a subroutine that will return
    * the value of the source term for the v component of velocity
    * for the currently selected three dimensional masa function.
@@ -877,8 +823,6 @@ extern "C" {
   extern double masa_eval_3d_source_v  (double,double,double);
 
   /**
-   * masa_eval_3d_source_w: masa equivalent to masa_eval_3d_source_w
-   *
    * masa_eval_3d_source_w is a subroutine that will return
    * the value of the source term for the w component of velocity
    * for the currently selected three dimensional masa function.
@@ -892,8 +836,6 @@ extern "C" {
   extern double masa_eval_3d_source_w  (double,double,double);
 
   /**
-   * masa_eval_3d_source_e: masa equivalent to masa_eval_3d_source_e
-   *
    * masa_eval_3d_source_e is a subroutine that will return
    * the value of the source term for the energy
    * of the currently selected three dimensional masa function.
@@ -907,8 +849,6 @@ extern "C" {
   extern double masa_eval_3d_source_e  (double,double,double);
 
   /**
-   * masa_eval_3d_source_rho: masa equivalent to masa_eval_3d_source_rho
-   *
    * masa_eval_3d_source_rho is a subroutine that will return
    * the value of the source term for the density
    * of the currently selected three dimensional masa function.
@@ -926,8 +866,6 @@ extern "C" {
   extern double masa_eval_3d_source_rho_e(double,double,double);
 
   /**
-   * masa_eval_3d_exact_t: masa equivalent to masa_eval_3d_exact_t
-   *
    * masa_eval_3d_exact_t is a subroutine that will return
    * the value of the analytical term for the temperature of the 
    * currently selected three dimensional masa function.
@@ -941,8 +879,6 @@ extern "C" {
   extern double masa_eval_3d_exact_t      (double,double,double);
 
   /**
-   * masa_eval_3d_exact_u: masa equivalent to masa_eval_3d_exact_u
-   *
    * masa_eval_3d_exact_u is a subroutine that will return
    * the value of the analytical term for the u component of velocity
    * of the currently selected three dimensional masa function.
@@ -956,8 +892,6 @@ extern "C" {
   extern double masa_eval_3d_exact_u      (double,double,double);
 
   /**
-   * masa_eval_3d_exact_v: masa equivalent to masa_eval_3d_exact_v
-   *
    * masa_eval_3d_exact_v is a subroutine that will return
    * the value of the analytical term for the v component of velocity
    * of the currently selected three dimensional masa function.
@@ -971,8 +905,6 @@ extern "C" {
   extern double masa_eval_3d_exact_v      (double,double,double);
 
   /**
-   * masa_eval_3d_exact_w: masa equivalent to masa_eval_3d_exact_w
-   *
    * masa_eval_3d_exact_w is a subroutine that will return
    * the value of the analytical term for the w component of velocity
    * of the currently selected three dimensional masa function.
@@ -986,8 +918,6 @@ extern "C" {
   extern double masa_eval_3d_exact_w      (double,double,double);
 
   /**
-   * masa_eval_3d_exact_p: masa equivalent to masa_eval_3d_exact_p
-   *
    * masa_eval_3d_exact_p is a subroutine that will return
    * the value of the analytical term for the pressure
    * of the currently selected three dimensional masa function.
@@ -1001,8 +931,6 @@ extern "C" {
   extern double masa_eval_3d_exact_p      (double,double,double);
 
   /**
-   * masa_eval_3d_exact_rho: masa equivalent to masa_eval_3d_exact_rho
-   *
    * masa_eval_3d_exact_p is a subroutine that will return
    * the value of the analytical term for the density
    * of the currently selected three dimensional masa function.
