@@ -18,11 +18,11 @@ further divided into the following subsections:
 
 <ul>
 <li> \subpage model "Library Overview"
-<li> \subpage Installation
-<li> \subpage mms_avail
+<li> \subpage Installation "Installation/Linkage"
+<li> \subpage mms_avail "Available Manufactured Solutions"
 <li> \subpage apiC "C/C++ Interface"
 <li> \subpage apiF "Fortran Interface"
-<li> \subpage Tutorial
+<li> \subpage Tutorial "Tutorial"
 <li> <a href="http://buildbot.ices.utexas.edu/docs/buildbot/masa/build/docs/html/lcov/build/src/index.html">Buildbot Coverage</a>
 </ul>
 
@@ -307,7 +307,92 @@ compatibility.
 
 /*! \page heat Heat Equation
 
-1d,2d,3d steady and transient manufactured solutions to the heat equation are available in MASA.
+\section math_model Mathematical Model
+The transient temperature distribution @f$ T({\bf x},t) @f$ in a 
+conducting medium is given by:
+
+\f[
+\rho c_p \frac{D T}{D t} - \nabla \cdot (k \nabla T) = 0,
+\f]
+where @f$ \rho @f$, @f$ c_p @f$ and @f$ k @f$ are the material 
+density, specific heat, and thermal conductivity, respectively,
+@f$ t @f$ denotes time and @f$ {\bf x}=(x,y,z) @f$.
+
+In this paper, the temperature distribution is considered in both steady 
+and unsteady state, with constant and variable material
+properties, and in one, two or three-dimensional space, as 
+described in the following sections.
+
+\section man_sol Manufactured Solution
+
+The general form of the manufactured temperature distribution 
+@f$ T = T ({\bf x}, t) @f$ is chosen as a
+function of cosines:
+\f[
+  T ({\bf x}, t) = \cos(A_x x + A_t t) \cdot \cos(B_y y + B_t t) \cdot \cos(C_z z + C_t t) \cdot \cos(D_t t) .
+\f]
+
+This solution satisfies the requirements of a suitable manufactured 
+solution: it is smooth,
+infinitely differentiable and realizable. Also, it is non-trivial, 
+i.e., it does not vanish even in case of
+some of the unknowns are equal to zero.
+
+In sequence, a hierarchy of solutions which test various features 
+of the governing equation is created. This includes
+one, two and three-dimensional temperature distribution, steady and 
+transient state, and constant and variable
+material properties. For instance, a steady distribution is recovered when
+@f$ A_t = B_t = C_t = D_t = 0 @f$; a one-dimensional distribution results 
+when @f$ B = C = 0 @f$, while a two-dimensional distribution
+results for @f$ C = 0 @f$. Moreover, while density @f$ \rho @f$ 
+is considered constant, thermal capacity @f$ c_p @f$ and 
+conductivity @f$ k @f$ can be modeled either as constant 
+or variable. In the later case, 
+they are approximated as a polynomial in @f$ T @f$.
+
+Although the most general case would be represented by the 
+@f$ 3D @f$ unsteady distribution with both @f$ k @f$ and 
+@f$ c_p @f$ variable,
+this paper is divided in two main sections: steady and 
+transient distribution. Each one of these sections is subdivided
+into other two sections, in case of constant and variable material 
+properties, and source terms obtained for @f$ 1D @f$, @f$ 2D @f$ 
+and @f$ 3D @f$ cases are presented.
+
+Steady Conduction
+
+For the steady case, our governing equation is simplified to the form:
+\f[
+ - \nabla \cdot (k \nabla T) = 0.
+\f]
+
+By considering @f$ A_t = B_t = C_t = D_t = 0 @f$, it yields:
+\f[
+  T ({\bf x}) = \cos(A_x x ) \cdot \cos(B_y y ) \cdot \cos(C_z z ).
+\f]
+
+In sequence, both approximations for @f$ k @f$ (constant or variable) 
+are used in order to obtain source term~ @f$ Q @f$ for the steady 
+temperature distribution from manufactured solution.
+
+<ul>   
+<li> \subpage ctc
+<li> \subpage vtc
+</ul>
+
+
+Transient Condution
+
+
+<ul>
+<li> \subpage cmp
+<li> \subpage vmp
+</ul>
+
+*/
+
+/*! \page ctc Constant Thermal Conductivity
 
 The conservation of mass, momentum, and total energy for a compressible steady inviscid fluid may be written as:
 \n
@@ -322,6 +407,16 @@ The conservation of mass, momentum, and total energy for a compressible steady i
 \f]
 
 */
+
+/*! \page vtc Variable Thermal Conductivity
+*/
+
+/*! \page cmp Constant Material Properties
+*/
+
+/*! \page vmp Variable Material Properties
+*/
+
 
 /*! \page euler Euler Equations
 
