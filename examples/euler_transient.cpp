@@ -61,9 +61,9 @@ void test(Scalar input)
 int main()
 {
 
-  Scalar ufield,ufield2,ufield3;
-  Scalar efield,efield2,efield3;
-  Scalar rhofield,rhofield2,rhofield3;
+  Scalar ufield;
+  Scalar efield;
+  Scalar rhofield;
 
   // parameters
   Scalar x;

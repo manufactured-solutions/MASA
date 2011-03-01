@@ -86,7 +86,7 @@ int main()
   // error handling
   int err=0;
   
-  Scalar x,y;
+  Scalar x;
   int    nx = 200;  // number of points
   int    lx = 10;     // length
   Scalar dx=double(lx)/double(nx);

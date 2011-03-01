@@ -59,20 +59,17 @@ int main()
   double rhofield;
 
   double exact_u;
-  double exact_v;
   double exact_p;
   double exact_rho;
 
   //problem size
-  double lx,ly;
-  double dx,dy;
+  double lx;
+  double dx;
   int nx,ny;
 
   // initialize
   nx = 10;  // number of points
-  ny = 10;  
   lx=1;     // length
-  ly=1; 
 
   // error handling
   int err=0;
@@ -80,7 +77,6 @@ int main()
   double tempx;
 
   dx=(double)lx/(double)nx;
-  dy=(double)ly/(double)ny;
   
   // init
   err += masa_init("nick","euler_1d");

@@ -44,9 +44,6 @@ typedef double Real;
 int main()
 {
   int i,err;
-  Real x=0;
-  Real y=0;
-  Real z=0;
   string str;
 
   // testing masa_init

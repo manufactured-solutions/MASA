@@ -44,8 +44,8 @@ typedef double Scalar;
 Scalar tester(Scalar a)
 {
   
-  double b = 4.4;
-  return b;
+  a = 4.4;
+  return a;
 
 }
 

@@ -42,8 +42,6 @@ using namespace MASA;
 
 typedef double Real;
 
-const Real pi = acos(-1);
-
 // with strict, between 7-8 decimals
 const Real threshold = 1.0e-7; // should be small enough to catch any obvious problems
 
@@ -53,42 +51,27 @@ int main()
   Real u_0;
   Real u_x;
   Real u_y;
-  Real u_z;
   Real v_0;
   Real v_x;
   Real v_y;
-  Real v_z;
-  Real w_0;
-  Real w_x;
-  Real w_y;
-  Real w_z;
   Real rho_0;
   Real rho_x;
   Real rho_y;
-  Real rho_z;
   Real p_0;
   Real p_x;
   Real p_y;
-  Real p_z;
   Real a_px;
   Real a_py;
-  Real a_pz;
   Real a_rhox;
   Real a_rhoy;
-  Real a_rhoz;
   Real a_ux;
   Real a_uy;
-  Real a_uz;
   Real a_vx;
   Real a_vy;
-  Real a_vz;
   Real a_wx;
-  Real a_wy;
-  Real a_wz;
   Real mu;
   Real Gamma;
   Real L;    
-  Real k;
 
   Real R;
   Real K;    
@@ -101,13 +84,11 @@ int main()
   // solutions
   Real ufield,ufield2,ufield3;
   Real vfield,vfield2,vfield3;
-  Real wfield,wfield2,wfield3;
   Real efield,efield2,efield3;
   Real rho,rho2,rho3;
 
   Real exact_u,exact_u2,exact_u3;
   Real exact_v,exact_v2,exact_v3;
-  Real exact_w,exact_w2,exact_w3;
   Real exact_p,exact_p2,exact_p3;
   Real exact_rho,exact_rho2,exact_rho3;
 

@@ -452,7 +452,7 @@ int run_regression()
   Scalar wfield,wfield2,wfield3;
   Scalar efield,efield2,efield3;
   Scalar rho,rho2,rho3;
-  Scalar gradx,grady,gradz,gradp,gradrho;
+  Scalar gradx,grady,gradz,gradp;
 
   Scalar exact_u,exact_u2,exact_u3;
   Scalar exact_v,exact_v2,exact_v3;
@@ -633,9 +633,6 @@ int run_regression()
 	  nancheck(exact_w3);
 	  nancheck(exact_rho3);
 	  nancheck(exact_p3);
-
-	  //masa_display_param<Scalar>();  
-	  //cout << endl << ufield << endl << vfield << endl << efield << rho << endl;
 
 	  if(ufield3 > threshold)
 	    {

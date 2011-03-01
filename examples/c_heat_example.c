@@ -56,11 +56,9 @@ int main()
 {
   double sol=0;
   double q=0;
-  int error;
   double x  = 1.2;
   double x2 = 2.2;
   char* a= "A_x";
-  char* b= "k_0";
   
   sol = 0;
 

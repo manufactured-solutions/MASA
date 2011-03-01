@@ -43,10 +43,7 @@ typedef double Scalar;
 
 int main()
 {
-  int i,err;
-  Scalar x=0;
-  Scalar y=0;
-  Scalar z=0;
+  int err;
   string str;
 
   // testing masa_init

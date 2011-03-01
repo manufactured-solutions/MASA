@@ -88,7 +88,6 @@ int run_regression()
 
   Scalar tfield,tfield2,tfield3;
   Scalar exact_t,exact_t2,exact_t3;
-  Scalar param=1.2;
   Scalar x=.5;
   Scalar y=.4;
   Scalar z=.3;

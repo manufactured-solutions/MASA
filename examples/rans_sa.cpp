@@ -67,11 +67,8 @@ int main()
 
   Scalar ufield;
   Scalar vfield;
-  Scalar efield;
-  Scalar rhofield;
 
   // declarations
-  Scalar x;
   Scalar tempx;
 
   Scalar exact_u;
