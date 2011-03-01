@@ -42,8 +42,7 @@ typedef double Scalar;
 
 void masa_shell_choose_solution()
 {
-  char userstring[100],masterstring[100];
-  void* ptr; // initialize null
+  char userstring[100];
 
   int q = 1;
   int dimension;
@@ -52,8 +51,6 @@ void masa_shell_choose_solution()
   Scalar dbl;
   Scalar dbl2;
   Scalar field;
-  Scalar blah;
-  Scalar tfield;
 
   string str1;
   
