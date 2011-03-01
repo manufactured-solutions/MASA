@@ -34,8 +34,8 @@
 //
 
 #include <masa.h>
-#include <math.h>
 #include <iostream>
+#include <cmath>
 #include <map>
 #include <vector>
 #include <stdlib.h>
