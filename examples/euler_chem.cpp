@@ -110,8 +110,8 @@ int main()
       // evalulate source terms
       ufield = masa_eval_source_rho_u  <Scalar>(x);
       efield = masa_eval_source_rho_e  <Scalar>(x);
-      //N      = masa_eval_source_rho_N  <Scalar>(x,&temp_function);
-      //Ntwo   = masa_eval_source_rho_N2 <Scalar>(x,&temp_function);
+      N      = masa_eval_source_rho_N  <Scalar>(x,&temp_function);
+      Ntwo   = masa_eval_source_rho_N2 <Scalar>(x,&temp_function);
 
       // evaluate analytical solution terms
       exact_t    = masa_eval_exact_t     <Scalar>(x);
@@ -128,8 +128,8 @@ int main()
       test(exact_t);
       test(exact_u);
       test(exact_rho);
-      //test(exact_N);
-      //test(exact_Ntwo);
+      test(exact_N);
+      test(exact_Ntwo);
       
     } // done with loop
 

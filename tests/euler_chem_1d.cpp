@@ -198,7 +198,6 @@ Scalar SourceQ_rho_N(Scalar x,
   Scalar pi = acos(-1);
 
   T = T_0 + T_x * cos(a_Tx * pi * x / L);
-  //K_eq = 1; //in_func(T);
   K_eq = temp_function(T);
 
   RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
@@ -255,7 +254,6 @@ Scalar SourceQ_rho_N2(Scalar x,
 
   Scalar pi = acos(-1);
   T = T_0 + T_x * cos(a_Tx * pi * x / L);
-  //K_eq = 1; //in_func(T);
   K_eq = temp_function(T);
 
   RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);

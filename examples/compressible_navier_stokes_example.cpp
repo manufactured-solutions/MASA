@@ -62,7 +62,6 @@ void test(Scalar input)
 int main()
 {
   // declarations
-  Scalar x,y;
   Scalar tempx,tempy;
 
   Scalar ufield;

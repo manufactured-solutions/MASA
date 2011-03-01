@@ -65,10 +65,10 @@ int main()
 {
 
 
-  Scalar ufield,ufield2,ufield3;
-  Scalar vfield,vfield2,vfield3;
-  Scalar efield,efield2,efield3;
-  Scalar rhofield,rhofield2,rhofield3;
+  Scalar ufield;
+  Scalar vfield;
+  Scalar efield;
+  Scalar rhofield;
 
   // declarations
   Scalar x;
@@ -76,16 +76,14 @@ int main()
 
   Scalar exact_u;
   Scalar exact_v;
-  Scalar exact_p;
-  Scalar exact_rho;
 
   //error handing
   int err = 0;
 
   //problem size
-  Scalar lx,ly;
-  Scalar dx,dy;
-  int nx,ny;
+  Scalar lx;
+  Scalar dx;
+  int nx;
 
   // initialize
   nx = 10;  // number of points
