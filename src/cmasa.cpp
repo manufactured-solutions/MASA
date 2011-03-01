@@ -119,76 +119,76 @@ extern "C" double masa_get_param(const char* param)
 // source, analytical and gradient term(s) -- 1D
 // --------------------------------
 
-extern "C" double masa_eval_1d_source_t     (double x){return(masa_eval_source_t     <double>  (x));};
-extern "C" double masa_eval_1d_source_u     (double x){return(masa_eval_source_u     <double>  (x));};
-extern "C" double masa_eval_1d_source_e     (double x){return(masa_eval_source_e     <double>  (x));};
-extern "C" double masa_eval_1d_source_rho   (double x){return(masa_eval_source_rho   <double>(x));};
-extern "C" double masa_eval_1d_source_rho_u (double x){return(masa_eval_source_rho_u <double>(x));};
-extern "C" double masa_eval_1d_source_rho_e (double x){return(masa_eval_source_rho_e <double>(x));};
-extern "C" double masa_eval_1d_source_rho_N (double x,double (*f)(double)){return(masa_eval_source_rho_N <double>(x,(*f)));};
-extern "C" double masa_eval_1d_source_rho_N2(double x,double (*f)(double)){return(masa_eval_source_rho_N2<double>(x,(*f)));};
+extern "C" double masa_eval_1d_source_t     (double x){return(masa_eval_source_t     <double>  (x));}
+extern "C" double masa_eval_1d_source_u     (double x){return(masa_eval_source_u     <double>  (x));}
+extern "C" double masa_eval_1d_source_e     (double x){return(masa_eval_source_e     <double>  (x));}
+extern "C" double masa_eval_1d_source_rho   (double x){return(masa_eval_source_rho   <double>(x));}
+extern "C" double masa_eval_1d_source_rho_u (double x){return(masa_eval_source_rho_u <double>(x));}
+extern "C" double masa_eval_1d_source_rho_e (double x){return(masa_eval_source_rho_e <double>(x));}
+extern "C" double masa_eval_1d_source_rho_N (double x,double (*f)(double)){return(masa_eval_source_rho_N <double>(x,(*f)));}
+extern "C" double masa_eval_1d_source_rho_N2(double x,double (*f)(double)){return(masa_eval_source_rho_N2<double>(x,(*f)));}
   
-extern "C" double masa_eval_1d_exact_t      (double x){return(masa_eval_exact_t<double>  (x));};
-extern "C" double masa_eval_1d_exact_u      (double x){return(masa_eval_exact_u<double>  (x));};
-extern "C" double masa_eval_1d_exact_p      (double x){return(masa_eval_exact_p<double>  (x));};
-extern "C" double masa_eval_1d_exact_rho    (double x){return(masa_eval_exact_rho<double>(x));};
-extern "C" double masa_eval_1d_exact_rho_N  (double x){return(masa_eval_exact_rho_N<double>(x));};
-extern "C" double masa_eval_1d_exact_rho_N2 (double x){return(masa_eval_exact_rho_N2<double>(x));};
+extern "C" double masa_eval_1d_exact_t      (double x){return(masa_eval_exact_t<double>  (x));}
+extern "C" double masa_eval_1d_exact_u      (double x){return(masa_eval_exact_u<double>  (x));}
+extern "C" double masa_eval_1d_exact_p      (double x){return(masa_eval_exact_p<double>  (x));}
+extern "C" double masa_eval_1d_exact_rho    (double x){return(masa_eval_exact_rho<double>(x));}
+extern "C" double masa_eval_1d_exact_rho_N  (double x){return(masa_eval_exact_rho_N<double>(x));}
+extern "C" double masa_eval_1d_exact_rho_N2 (double x){return(masa_eval_exact_rho_N2<double>(x));}
 
-extern "C" double masa_eval_grad_1d_u    (double x){return(masa_eval_grad_u<double>  (x));};
-extern "C" double masa_eval_grad_1d_p    (double x){return(masa_eval_grad_p<double>  (x));};
-extern "C" double masa_eval_grad_1d_rho  (double x){return(masa_eval_grad_rho<double>(x));};
+extern "C" double masa_eval_grad_1d_u    (double x){return(masa_eval_grad_u<double>  (x));}
+extern "C" double masa_eval_grad_1d_p    (double x){return(masa_eval_grad_p<double>  (x));}
+extern "C" double masa_eval_grad_1d_rho  (double x){return(masa_eval_grad_rho<double>(x));}
 
 // --------------------------------
 // source, analytical and gradient term(s) -- 2D
 // --------------------------------
 
-extern "C" double masa_eval_2d_source_t    (double x,double y){return masa_eval_source_t<double>  (x,y);};
-extern "C" double masa_eval_2d_source_u    (double x,double y){return(masa_eval_source_u<double>  (x,y));};
-extern "C" double masa_eval_2d_source_v    (double x,double y){return(masa_eval_source_v<double>  (x,y));};
-extern "C" double masa_eval_2d_source_e    (double x,double y){return(masa_eval_source_e<double>  (x,y));};
-extern "C" double masa_eval_2d_source_rho  (double x,double y){return(masa_eval_source_rho  <double>(x,y));};
-extern "C" double masa_eval_2d_source_rho_u(double x,double y){return(masa_eval_source_rho_u<double>(x,y));};
-extern "C" double masa_eval_2d_source_rho_v(double x,double y){return(masa_eval_source_rho_v<double>(x,y));};
-extern "C" double masa_eval_2d_source_rho_w(double x,double y){return(masa_eval_source_rho_w<double>(x,y));};
-extern "C" double masa_eval_2d_source_rho_e(double x,double y){return(masa_eval_source_rho_e<double>(x,y));};
+extern "C" double masa_eval_2d_source_t    (double x,double y){return masa_eval_source_t<double>  (x,y);}
+extern "C" double masa_eval_2d_source_u    (double x,double y){return(masa_eval_source_u<double>  (x,y));}
+extern "C" double masa_eval_2d_source_v    (double x,double y){return(masa_eval_source_v<double>  (x,y));}
+extern "C" double masa_eval_2d_source_e    (double x,double y){return(masa_eval_source_e<double>  (x,y));}
+extern "C" double masa_eval_2d_source_rho  (double x,double y){return(masa_eval_source_rho  <double>(x,y));}
+extern "C" double masa_eval_2d_source_rho_u(double x,double y){return(masa_eval_source_rho_u<double>(x,y));}
+extern "C" double masa_eval_2d_source_rho_v(double x,double y){return(masa_eval_source_rho_v<double>(x,y));}
+extern "C" double masa_eval_2d_source_rho_w(double x,double y){return(masa_eval_source_rho_w<double>(x,y));}
+extern "C" double masa_eval_2d_source_rho_e(double x,double y){return(masa_eval_source_rho_e<double>(x,y));}
 
-extern "C" double masa_eval_2d_exact_t     (double x,double y){return(masa_eval_exact_t<double>  (x,y));};
-extern "C" double masa_eval_2d_exact_u     (double x,double y){return(masa_eval_exact_u<double>  (x,y));};
-extern "C" double masa_eval_2d_exact_v     (double x,double y){return(masa_eval_exact_v<double>  (x,y));};
-extern "C" double masa_eval_2d_exact_p     (double x,double y){return(masa_eval_exact_p<double>  (x,y));};
-extern "C" double masa_eval_2d_exact_rho   (double x,double y){return(masa_eval_exact_rho<double>(x,y));};
+extern "C" double masa_eval_2d_exact_t     (double x,double y){return(masa_eval_exact_t<double>  (x,y));}
+extern "C" double masa_eval_2d_exact_u     (double x,double y){return(masa_eval_exact_u<double>  (x,y));}
+extern "C" double masa_eval_2d_exact_v     (double x,double y){return(masa_eval_exact_v<double>  (x,y));}
+extern "C" double masa_eval_2d_exact_p     (double x,double y){return(masa_eval_exact_p<double>  (x,y));}
+extern "C" double masa_eval_2d_exact_rho   (double x,double y){return(masa_eval_exact_rho<double>(x,y));}
 
-extern "C" double masa_eval_grad_2d_u   (double x,double y,int i){return(masa_eval_grad_u<double>  (x,y,i));};
-extern "C" double masa_eval_grad_2d_v   (double x,double y,int i){return(masa_eval_grad_v<double>  (x,y,i));};
-extern "C" double masa_eval_grad_2d_w   (double x,double y,int i){return(masa_eval_grad_w<double>  (x,y,i));};
-extern "C" double masa_eval_grad_2d_p   (double x,double y,int i){return(masa_eval_grad_p<double>  (x,y,i));};
-extern "C" double masa_eval_grad_2d_rho (double x,double y,int i){return(masa_eval_grad_rho<double>(x,y,i));};
+extern "C" double masa_eval_grad_2d_u   (double x,double y,int i){return(masa_eval_grad_u<double>  (x,y,i));}
+extern "C" double masa_eval_grad_2d_v   (double x,double y,int i){return(masa_eval_grad_v<double>  (x,y,i));}
+extern "C" double masa_eval_grad_2d_w   (double x,double y,int i){return(masa_eval_grad_w<double>  (x,y,i));}
+extern "C" double masa_eval_grad_2d_p   (double x,double y,int i){return(masa_eval_grad_p<double>  (x,y,i));}
+extern "C" double masa_eval_grad_2d_rho (double x,double y,int i){return(masa_eval_grad_rho<double>(x,y,i));}
 
 // --------------------------------
 // source, analytical and gradient term(s) -- 3D
 // --------------------------------
 
-extern "C" double masa_eval_3d_source_t    (double x,double y,double z){return masa_eval_source_t<double>  (x,y,z); };
-extern "C" double masa_eval_3d_source_u    (double x,double y,double z){return(masa_eval_source_u<double>  (x,y,z));};
-extern "C" double masa_eval_3d_source_v    (double x,double y,double z){return(masa_eval_source_v<double>  (x,y,z));};
-extern "C" double masa_eval_3d_source_w    (double x,double y,double z){return(masa_eval_source_w<double>  (x,y,z));};
-extern "C" double masa_eval_3d_source_e    (double x,double y,double z){return(masa_eval_source_e<double>  (x,y,z));};
-extern "C" double masa_eval_3d_source_rho  (double x,double y,double z){return(masa_eval_source_rho  <double>(x,y,z));};
-extern "C" double masa_eval_3d_source_rho_u(double x,double y,double z){return(masa_eval_source_rho_u<double>(x,y,z));};
-extern "C" double masa_eval_3d_source_rho_v(double x,double y,double z){return(masa_eval_source_rho_v<double>(x,y,z));};
-extern "C" double masa_eval_3d_source_rho_w(double x,double y,double z){return(masa_eval_source_rho_w<double>(x,y,z));};
-extern "C" double masa_eval_3d_source_rho_e(double x,double y,double z){return(masa_eval_source_rho_e<double>(x,y,z));};
+extern "C" double masa_eval_3d_source_t    (double x,double y,double z){return masa_eval_source_t<double>  (x,y,z); }
+extern "C" double masa_eval_3d_source_u    (double x,double y,double z){return(masa_eval_source_u<double>  (x,y,z));}
+extern "C" double masa_eval_3d_source_v    (double x,double y,double z){return(masa_eval_source_v<double>  (x,y,z));}
+extern "C" double masa_eval_3d_source_w    (double x,double y,double z){return(masa_eval_source_w<double>  (x,y,z));}
+extern "C" double masa_eval_3d_source_e    (double x,double y,double z){return(masa_eval_source_e<double>  (x,y,z));}
+extern "C" double masa_eval_3d_source_rho  (double x,double y,double z){return(masa_eval_source_rho  <double>(x,y,z));}
+extern "C" double masa_eval_3d_source_rho_u(double x,double y,double z){return(masa_eval_source_rho_u<double>(x,y,z));}
+extern "C" double masa_eval_3d_source_rho_v(double x,double y,double z){return(masa_eval_source_rho_v<double>(x,y,z));}
+extern "C" double masa_eval_3d_source_rho_w(double x,double y,double z){return(masa_eval_source_rho_w<double>(x,y,z));}
+extern "C" double masa_eval_3d_source_rho_e(double x,double y,double z){return(masa_eval_source_rho_e<double>(x,y,z));}
 
-extern "C" double masa_eval_3d_exact_t     (double x,double y,double z){return(masa_eval_exact_t<double>  (x,y,z));};
-extern "C" double masa_eval_3d_exact_u     (double x,double y,double z){return(masa_eval_exact_u<double>  (x,y,z));};
-extern "C" double masa_eval_3d_exact_v     (double x,double y,double z){return(masa_eval_exact_v<double>  (x,y,z));};
-extern "C" double masa_eval_3d_exact_w     (double x,double y,double z){return(masa_eval_exact_w<double>  (x,y,z));};
-extern "C" double masa_eval_3d_exact_p     (double x,double y,double z){return(masa_eval_exact_p<double>  (x,y,z));};
-extern "C" double masa_eval_3d_exact_rho   (double x,double y,double z){return(masa_eval_exact_rho<double>(x,y,z));};
+extern "C" double masa_eval_3d_exact_t     (double x,double y,double z){return(masa_eval_exact_t<double>  (x,y,z));}
+extern "C" double masa_eval_3d_exact_u     (double x,double y,double z){return(masa_eval_exact_u<double>  (x,y,z));}
+extern "C" double masa_eval_3d_exact_v     (double x,double y,double z){return(masa_eval_exact_v<double>  (x,y,z));}
+extern "C" double masa_eval_3d_exact_w     (double x,double y,double z){return(masa_eval_exact_w<double>  (x,y,z));}
+extern "C" double masa_eval_3d_exact_p     (double x,double y,double z){return(masa_eval_exact_p<double>  (x,y,z));}
+extern "C" double masa_eval_3d_exact_rho   (double x,double y,double z){return(masa_eval_exact_rho<double>(x,y,z));}
 
-extern "C" double masa_eval_grad_3d_u   (double x,double y,double z,int i){return(masa_eval_grad_u  <double>(x,y,z,i));};
-extern "C" double masa_eval_grad_3d_v   (double x,double y,double z,int i){return(masa_eval_grad_v  <double>(x,y,z,i));};
-extern "C" double masa_eval_grad_3d_w   (double x,double y,double z,int i){return(masa_eval_grad_w  <double>(x,y,z,i));};
-extern "C" double masa_eval_grad_3d_p   (double x,double y,double z,int i){return(masa_eval_grad_p  <double>(x,y,z,i));};
-extern "C" double masa_eval_grad_3d_rho (double x,double y,double z,int i){return(masa_eval_grad_rho<double>(x,y,z,i));};
+extern "C" double masa_eval_grad_3d_u   (double x,double y,double z,int i){return(masa_eval_grad_u  <double>(x,y,z,i));}
+extern "C" double masa_eval_grad_3d_v   (double x,double y,double z,int i){return(masa_eval_grad_v  <double>(x,y,z,i));}
+extern "C" double masa_eval_grad_3d_w   (double x,double y,double z,int i){return(masa_eval_grad_w  <double>(x,y,z,i));}
+extern "C" double masa_eval_grad_3d_p   (double x,double y,double z,int i){return(masa_eval_grad_p  <double>(x,y,z,i));}
+extern "C" double masa_eval_grad_3d_rho (double x,double y,double z,int i){return(masa_eval_grad_rho<double>(x,y,z,i));}
