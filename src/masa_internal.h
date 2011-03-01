@@ -43,6 +43,7 @@
 // Macro for declaring MASA classes with all supported Scalar types
 #define MASA_INSTANTIATE_ALL(my_class) template class my_class<double>; \
                                        template class my_class<long double>
+
 namespace MASA 
 {
   // masa map functions here
@@ -54,6 +55,11 @@ namespace MASA
   int masa_map           (std::string, std::string);
   int masa_map_dimension (std::string, std::string);
 
+  // masa map internal functions
+  void uptolow(std::string&);
+  void remove_line(std::string&);
+  void remove_whitespace(std::string&);
+  
   /* 
    * -------------------------------------------------------------------------------------------   
    *

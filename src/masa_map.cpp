@@ -43,14 +43,14 @@ using namespace MASA;
 
 // all this does is convert a string to entirely lower case
 // should simplify our user stuff
-void uptolow(std::string& str) 
+void MASA::uptolow(std::string& str) 
 {
   for (int i=0;i<str.length();i++) 
     str[i] = std::tolower(str[i]);
 }
 
 // remove dashes from strings
-void remove_line(std::string& str)
+void MASA::remove_line(std::string& str)
 {
   int position = str.find( "-" ); // find first space
   while ( position != std::string::npos )
@@ -60,7 +60,7 @@ void remove_line(std::string& str)
     }
 }
 
-void remove_whitespace(std::string& str)
+void MASA::remove_whitespace(std::string& str)
 {
   int position = str.find( " " ); // find first space
   while ( position != std::string::npos )

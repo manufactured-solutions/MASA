@@ -377,7 +377,7 @@ namespace MASA
   int masa_map2(std::string, std::string);
 
   template <typename Scalar>
-  int masa_test_poly();                            // test poly -- expose for reg test
+  int masa_test_poly();
 
   // --------------------------------
   // old masa core functions (to be called by user)
