@@ -642,7 +642,7 @@ int main()
   int err=0;
 
   err += run_regression<double>();
-  //err += run_regression<long double>();
+  err += run_regression<long double>();
 
   return err;
 }
