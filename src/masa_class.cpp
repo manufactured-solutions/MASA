@@ -35,6 +35,7 @@
 //
 
 #include <masa_internal.h>
+#include <limits>
 #include <assert.h>
 
 using namespace MASA;
@@ -86,6 +87,7 @@ Scalar MASA::manufactured_solution<Scalar>::get_var(std::string var)
 template <typename Scalar>
 void MASA::manufactured_solution<Scalar>::display_var()
 {
+  Scalar threshold = 5 * std::numeric_limits<Scalar>::epsilon();
 
   std::cout << "\nMASA :: Solution has " << varmap.size() << " variables.\n";
   std::cout << "*-------------------------------------*\n" ;
@@ -94,7 +96,8 @@ void MASA::manufactured_solution<Scalar>::display_var()
     {   
       // adding conditional to avoid confusing our users about uninitalized variables
       // this is because the default is a bit odd... -12345.7 might appear 'set'
-      if(*vararr[it->second] == MASA_VAR_DEFAULT)
+
+      if((*vararr[it->second] - MASA_VAR_DEFAULT) <= threshold)
 	{
 	  std::cout << it->first <<" is set to: Uninitialized\n";
 	}
@@ -323,9 +326,8 @@ MASA::masa_test_function<Scalar>::masa_test_function()
 template <typename Scalar>
 int MASA::manufactured_solution<Scalar>::poly_test()
 {
-
-  const Scalar Scalar_tol = 1.0e-15;
-
+  Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
+  
   int return_flag = 0;
   int ierr = -1;
 
@@ -350,10 +352,10 @@ int MASA::manufactured_solution<Scalar>::poly_test()
   poly.set_coeffs( a );
 
   // Check to make sure we get back what we set
-  if( fabs( a0 - poly.get_coeffs( 0 ) ) > Scalar_tol ) return_flag = 1;
-  if( fabs( a1 - poly.get_coeffs( 1 ) ) > Scalar_tol ) return_flag = 1;
-  if( fabs( a2 - poly.get_coeffs( 2 ) ) > Scalar_tol ) return_flag = 1;
-  if( fabs( a3 - poly.get_coeffs( 3 ) ) > Scalar_tol ) return_flag = 1;
+  if( fabs( a0 - poly.get_coeffs( 0 ) ) > thresh ) return_flag = 1;
+  if( fabs( a1 - poly.get_coeffs( 1 ) ) > thresh ) return_flag = 1;
+  if( fabs( a2 - poly.get_coeffs( 2 ) ) > thresh ) return_flag = 1;
+  if( fabs( a3 - poly.get_coeffs( 3 ) ) > thresh ) return_flag = 1;
 
   // Check polynomial evaluation
   const Scalar x = 2.0;
@@ -363,7 +365,7 @@ int MASA::manufactured_solution<Scalar>::poly_test()
   computed_value = poly( x , &ierr);
   if(ierr != 0) return_flag=1;
 
-  if( fabs( exact_value - computed_value ) > Scalar_tol ) return_flag = 1;
+  if( fabs( exact_value - computed_value ) > thresh ) return_flag = 1;
 
   // Check derivatives
   const Scalar dx = 62;
@@ -374,10 +376,10 @@ int MASA::manufactured_solution<Scalar>::poly_test()
 
   poly.eval_derivs( x, 4, derivs );
   
-  if( fabs( exact_value - derivs[0] ) > Scalar_tol ) return_flag = 1;
-  if( fabs( dx - derivs[1] ) > Scalar_tol ) return_flag = 1;
-  if( fabs( d2x - derivs[2] ) > Scalar_tol ) return_flag = 1;
-  if( fabs( d3x - derivs[3] ) > Scalar_tol ) return_flag = 1;
+  if( fabs( exact_value - derivs[0] ) > thresh ) return_flag = 1;
+  if( fabs( dx  - derivs[1] ) > thresh ) return_flag = 1;
+  if( fabs( d2x - derivs[2] ) > thresh ) return_flag = 1;
+  if( fabs( d3x - derivs[3] ) > thresh ) return_flag = 1;
 
   return return_flag;
 }
