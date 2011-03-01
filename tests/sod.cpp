@@ -43,10 +43,10 @@ using namespace std;
 template<typename Scalar>
 int run_regression()
 {
-  int i,j,k;
-  Scalar out;
+  int i,j;
   Scalar x;
   Scalar t;
+  Scalar out;
 
   int nx = 200;  // number of points
   int lx=10;     // length
@@ -67,7 +67,6 @@ int run_regression()
 	
 	out = masa_eval_source_rho  <Scalar>(x,t);
 	out = masa_eval_source_rho_u<Scalar>(x,t);
-	//out = masa_eval_p_source    <Scalar>(x,t);
       } //done iterating
 
   // below are barely a regression test: 

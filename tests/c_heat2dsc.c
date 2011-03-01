@@ -60,13 +60,11 @@ int main()
   double exact_t,exact_t2,exact_t3;
   double x;
   double y;
-  double z;
 
   double A_x;
   double k_0;
 
   double B_y;
-  double C_z;  
 
   //problem size
   int nx = 100;  // number of points

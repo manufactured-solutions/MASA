@@ -48,19 +48,11 @@ template<typename Scalar>
 int run_regression()
 {
 
-  const Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
-  const Scalar pi = std::acos(Scalar(-1));
-
   // solutions
-  Scalar ufield,ufield2,ufield3;
-  Scalar vfield,vfield2,vfield3;
-  Scalar efield,efield2,efield3;
-  Scalar rho,rho2,rho3;
-
-  Scalar exact_u,exact_u2,exact_u3;
-  Scalar exact_v,exact_v2,exact_v3;
-  Scalar exact_p,exact_p2,exact_p3;
-  Scalar exact_rho,exact_rho2,exact_rho3;
+  Scalar exact_u;
+  Scalar exact_v;
+  Scalar ufield;
+  Scalar vfield;
   
   // parameters
   int nx = 200;  // number of points
