@@ -42,7 +42,7 @@ double anQ_p (double x,double y,double p_0,double p_x,double p_y,double a_px,dou
 {
   const double pi = acos(-1);
 
-  double exact_p = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
+  double exact_p = p_0 + p_x * cosl(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
   return exact_p;
 }
   
@@ -50,7 +50,7 @@ double anQ_u (double x,double y,double u_0,double u_x,double u_y,double a_ux,dou
 {
   const double pi = acos(-1);
 
-  double exact_u = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  double exact_u = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cosl(a_uy * pi * y / L);
   return exact_u;
 } 
  
@@ -58,7 +58,7 @@ double anQ_v (double x,double y,double v_0,double v_x,double v_y,double a_vx,dou
 {
   const double pi = acos(-1);
 
-  double exact_v = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  double exact_v = v_0 + v_x * cosl(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
   return exact_v;
 }
 
@@ -66,7 +66,7 @@ double anQ_rho (double x,double y,double rho_0,double rho_x,double rho_y,double 
 { 
   const double pi = acos(-1);
 
-  double exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
+  double exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cosl(a_rhoy * pi * y / L);
   return exact_rho;
 }
 
@@ -104,12 +104,12 @@ double SourceQ_e (
   double V;
   double P;
 
-  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
-  U = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
-  V = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
-  P = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cosl(a_rhoy * pi * y / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cosl(a_uy * pi * y / L);
+  V = v_0 + v_x * cosl(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  P = p_0 + p_x * cosl(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
 
-  Q_e = -a_px * pi * p_x * Gamma * U * sin(a_px * pi * x / L) / (Gamma - 0.1e1) / L + a_py * pi * p_y * Gamma * V * cos(a_py * pi * y / L) / (Gamma - 0.1e1) / L + (U * U + V * V) * a_rhox * pi * rho_x * U * cos(a_rhox * pi * x / L) / L / 0.2e1 - (U * U + V * V) * a_rhoy * pi * rho_y * V * sin(a_rhoy * pi * y / L) / L / 0.2e1 + (0.3e1 * a_ux * u_x * cos(a_ux * pi * x / L) + a_vy * v_y * cos(a_vy * pi * y / L)) * pi * RHO * U * U / L / 0.2e1 - (a_uy * u_y * sin(a_uy * pi * y / L) + a_vx * v_x * sin(a_vx * pi * x / L)) * pi * RHO * U * V / L + (a_ux * u_x * cos(a_ux * pi * x / L) + 0.3e1 * a_vy * v_y * cos(a_vy * pi * y / L)) * pi * RHO * V * V / L / 0.2e1 + (a_ux * u_x * cos(a_ux * pi * x / L) + a_vy * v_y * cos(a_vy * pi * y / L)) * pi * Gamma * P / (Gamma - 0.1e1) / L;
+  Q_e = -a_px * pi * p_x * Gamma * U * sin(a_px * pi * x / L) / (Gamma - 0.1e1) / L + a_py * pi * p_y * Gamma * V * cosl(a_py * pi * y / L) / (Gamma - 0.1e1) / L + (U * U + V * V) * a_rhox * pi * rho_x * U * cosl(a_rhox * pi * x / L) / L / 0.2e1 - (U * U + V * V) * a_rhoy * pi * rho_y * V * sin(a_rhoy * pi * y / L) / L / 0.2e1 + (0.3e1 * a_ux * u_x * cosl(a_ux * pi * x / L) + a_vy * v_y * cosl(a_vy * pi * y / L)) * pi * RHO * U * U / L / 0.2e1 - (a_uy * u_y * sin(a_uy * pi * y / L) + a_vx * v_x * sin(a_vx * pi * x / L)) * pi * RHO * U * V / L + (a_ux * u_x * cosl(a_ux * pi * x / L) + 0.3e1 * a_vy * v_y * cosl(a_vy * pi * y / L)) * pi * RHO * V * V / L / 0.2e1 + (a_ux * u_x * cosl(a_ux * pi * x / L) + a_vy * v_y * cosl(a_vy * pi * y / L)) * pi * Gamma * P / (Gamma - 0.1e1) / L;
 
   return(Q_e);
 }
@@ -145,11 +145,11 @@ double SourceQ_u ( // 23 variables
   double U;
   double V;
 
-  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
-  U = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
-  V = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cosl(a_rhoy * pi * y / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cosl(a_uy * pi * y / L);
+  V = v_0 + v_x * cosl(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
 
-  Q_u = a_rhox * pi * rho_x * U * U * cos(a_rhox * pi * x / L) / L - a_rhoy * pi * rho_y * U * V * sin(a_rhoy * pi * y / L) / L - a_uy * pi * u_y * RHO * V * sin(a_uy * pi * y / L) / L - a_px * pi * p_x * sin(a_px * pi * x / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * pi * x / L) + a_vy * v_y * cos(a_vy * pi * y / L)) * pi * RHO * U / L;
+  Q_u = a_rhox * pi * rho_x * U * U * cosl(a_rhox * pi * x / L) / L - a_rhoy * pi * rho_y * U * V * sin(a_rhoy * pi * y / L) / L - a_uy * pi * u_y * RHO * V * sin(a_uy * pi * y / L) / L - a_px * pi * p_x * sin(a_px * pi * x / L) / L + (0.2e1 * a_ux * u_x * cosl(a_ux * pi * x / L) + a_vy * v_y * cosl(a_vy * pi * y / L)) * pi * RHO * U / L;
 
   return(Q_u);
 }
@@ -185,11 +185,11 @@ double SourceQ_v (
   double RHO;
   double U;
   double V;
-  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
-  U = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
-  V = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cosl(a_rhoy * pi * y / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cosl(a_uy * pi * y / L);
+  V = v_0 + v_x * cosl(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
 
-  Q_v = a_rhox * pi * rho_x * U * V * cos(a_rhox * pi * x / L) / L - a_rhoy * pi * rho_y * V * V * sin(a_rhoy * pi * y / L) / L - a_vx * pi * v_x * RHO * U * sin(a_vx * pi * x / L) / L + a_py * pi * p_y * cos(a_py * pi * y / L) / L + (a_ux * u_x * cos(a_ux * pi * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * pi * y / L)) * pi * RHO * V / L;
+  Q_v = a_rhox * pi * rho_x * U * V * cosl(a_rhox * pi * x / L) / L - a_rhoy * pi * rho_y * V * V * sin(a_rhoy * pi * y / L) / L - a_vx * pi * v_x * RHO * U * sin(a_vx * pi * x / L) / L + a_py * pi * p_y * cosl(a_py * pi * y / L) / L + (a_ux * u_x * cosl(a_ux * pi * x / L) + 0.2e1 * a_vy * v_y * cosl(a_vy * pi * y / L)) * pi * RHO * V / L;
 
   return(Q_v);
 }
@@ -226,11 +226,11 @@ double SourceQ_rho(
   double U;
   double V;
 
-  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
-  U = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
-  V = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cosl(a_rhoy * pi * y / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cosl(a_uy * pi * y / L);
+  V = v_0 + v_x * cosl(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
 
-  Q_rho = a_rhox * pi * rho_x * U * cos(a_rhox * pi * x / L) / L - a_rhoy * pi * rho_y * V * sin(a_rhoy * pi * y / L) / L + (a_ux * u_x * cos(a_ux * pi * x / L) + a_vy * v_y * cos(a_vy * pi * y / L)) * pi * RHO / L;
+  Q_rho = a_rhox * pi * rho_x * U * cosl(a_rhox * pi * x / L) / L - a_rhoy * pi * rho_y * V * sin(a_rhoy * pi * y / L) / L + (a_ux * u_x * cosl(a_ux * pi * x / L) + a_vy * v_y * cosl(a_vy * pi * y / L)) * pi * RHO / L;
 
 
   return(Q_rho);

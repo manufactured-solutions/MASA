@@ -32,23 +32,24 @@ module func
   implicit none
 
   contains
-
-  real (c_double) function k_func(T)    
-    real(c_double),intent(in) :: T
     
-    !! hackish functional here
-    !! This is an eyeballed fit (focusing on the 5000K-6000K range) 
-    !! for the equilibrium constant for N2->N+N dissociation
     
-    k_func = exp(4+(T-6000)/500)
-    
-  end function k_func
-
+    real (c_double) function k_func(T)    
+      real(c_double),intent(in) :: T
+      
+      !! hackish functional here
+      !! This is an eyeballed fit (focusing on the 5000K-6000K range) 
+      !! for the equilibrium constant for N2->N+N dissociation
+      
+      k_func = exp(4+(T-6000)/500)
+          
+    end function k_func
+        
 end module func
-
+ 
 program main
   use func
-  use euler_source_interface
+  !use euler_source_interface
   use iso_c_binding
   use masa
   implicit none
@@ -167,10 +168,10 @@ program main
      x = i * dx
      
      ! evalulate source terms
-     ufield = masa_eval_1d_source_rho_u (x);
-     efield = masa_eval_1d_source_rho_e (x);
-     N      = masa_eval_1d_source_rho_N (x,k_func);
-     Ntwo   = masa_eval_1d_source_rho_N2(x,k_func);
+      ufield = masa_eval_1d_source_rho_u (x);
+      efield = masa_eval_1d_source_rho_e (x);
+      !N      = masa_eval_1d_source_rho_N (x,k_func);
+      !Ntwo   = masa_eval_1d_source_rho_N2(x,k_func);
 
      ! evaluate analytical solution terms
      exact_t    = masa_eval_1d_exact_t     (x);

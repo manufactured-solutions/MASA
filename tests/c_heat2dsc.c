@@ -40,14 +40,14 @@ const double threshold = 1.0e-15; // should be small enough to catch any obvious
 
 double SourceQ_t(double x,double y,double A_x,double B_y,double k_0)
 {
-  double Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * (A_x * A_x + B_y * B_y);
+  double Q_T = k_0 * cosl(A_x * x) * cosl(B_y * y) * (A_x * A_x + B_y * B_y);
   return Q_T;
 }
 
 double Source_exact_t(double x,double y,double A_x,double B_y)
 {
   double exact_t;
-  exact_t = cos(A_x * x) * cos(B_y * y);
+  exact_t = cosl(A_x * x) * cosl(B_y * y);
   return exact_t;
 }
 

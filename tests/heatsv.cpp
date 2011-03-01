@@ -47,7 +47,7 @@ Scalar SourceQ_t_1d(
   Scalar k_1,
   Scalar k_2)
 {
-  Scalar Q_T = 0.3e1 * A_x * A_x * k_2 * pow(cos(A_x * x), 0.3e1) + 0.2e1 * A_x * A_x * k_1 * pow(cos(A_x * x), 0.2e1) - A_x * A_x * k_1 + (k_0 - 0.2e1 * k_2) * A_x * A_x * cos(A_x * x);
+  Scalar Q_T = 0.3e1 * A_x * A_x * k_2 * pow(cosl(A_x * x), 0.3e1) + 0.2e1 * A_x * A_x * k_1 * pow(cosl(A_x * x), 0.2e1) - A_x * A_x * k_1 + (k_0 - 0.2e1 * k_2) * A_x * A_x * cosl(A_x * x);
   return Q_T;
 }
 
@@ -61,7 +61,7 @@ Scalar SourceQ_t_2d (
   Scalar k_1,
   Scalar k_2)
 {
-  Scalar Q_T = (0.3e1 * A_x * A_x + 0.3e1 * B_y * B_y) * k_2 * pow(cos(A_x * x), 0.3e1) * pow(cos(B_y * y), 0.3e1) + (0.2e1 * A_x * A_x + 0.2e1 * B_y * B_y) * k_1 * pow(cos(A_x * x), 0.2e1) * pow(cos(B_y * y), 0.2e1) - (pow(cos(B_y * y), 0.2e1) * A_x * A_x + pow(cos(A_x * x), 0.2e1) * B_y * B_y) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y - 0.2e1 * pow(cos(B_y * y), 0.2e1) * k_2 * A_x * A_x - 0.2e1 * pow(cos(A_x * x), 0.2e1) * k_2 * B_y * B_y) * cos(A_x * x) * cos(B_y * y);
+  Scalar Q_T = (0.3e1 * A_x * A_x + 0.3e1 * B_y * B_y) * k_2 * pow(cosl(A_x * x), 0.3e1) * pow(cosl(B_y * y), 0.3e1) + (0.2e1 * A_x * A_x + 0.2e1 * B_y * B_y) * k_1 * pow(cosl(A_x * x), 0.2e1) * pow(cosl(B_y * y), 0.2e1) - (pow(cosl(B_y * y), 0.2e1) * A_x * A_x + pow(cosl(A_x * x), 0.2e1) * B_y * B_y) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y - 0.2e1 * pow(cosl(B_y * y), 0.2e1) * k_2 * A_x * A_x - 0.2e1 * pow(cosl(A_x * x), 0.2e1) * k_2 * B_y * B_y) * cosl(A_x * x) * cosl(B_y * y);
   return Q_T;
 }
 
@@ -77,7 +77,7 @@ Scalar SourceQ_t_3d (
   Scalar k_1,
   Scalar k_2)
 {
-  Scalar Q_T = (0.3e1 * A_x * A_x + 0.3e1 * B_y * B_y + 0.3e1 * C_z * C_z) * k_2 * pow(cos(A_x * x), 0.3e1) * pow(cos(B_y * y), 0.3e1) * pow(cos(C_z * z), 0.3e1) + (0.2e1 * A_x * A_x + 0.2e1 * B_y * B_y + 0.2e1 * C_z * C_z) * k_1 * pow(cos(A_x * x), 0.2e1) * pow(cos(B_y * y), 0.2e1) * pow(cos(C_z * z), 0.2e1) - (pow(cos(B_y * y), 0.2e1) * pow(cos(C_z * z), 0.2e1) * A_x * A_x + pow(cos(A_x * x), 0.2e1) * pow(cos(C_z * z), 0.2e1) * B_y * B_y + pow(cos(A_x * x), 0.2e1) * pow(cos(B_y * y), 0.2e1) * C_z * C_z) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y + k_0 * C_z * C_z - 0.2e1 * pow(cos(B_y * y), 0.2e1) * pow(cos(C_z * z), 0.2e1) * k_2 * A_x * A_x - 0.2e1 * pow(cos(A_x * x), 0.2e1) * pow(cos(C_z * z), 0.2e1) * k_2 * B_y * B_y - 0.2e1 * pow(cos(A_x * x), 0.2e1) * pow(cos(B_y * y), 0.2e1) * k_2 * C_z * C_z) * cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
+  Scalar Q_T = (0.3e1 * A_x * A_x + 0.3e1 * B_y * B_y + 0.3e1 * C_z * C_z) * k_2 * pow(cosl(A_x * x), 0.3e1) * pow(cosl(B_y * y), 0.3e1) * pow(cosl(C_z * z), 0.3e1) + (0.2e1 * A_x * A_x + 0.2e1 * B_y * B_y + 0.2e1 * C_z * C_z) * k_1 * pow(cosl(A_x * x), 0.2e1) * pow(cosl(B_y * y), 0.2e1) * pow(cosl(C_z * z), 0.2e1) - (pow(cosl(B_y * y), 0.2e1) * pow(cosl(C_z * z), 0.2e1) * A_x * A_x + pow(cosl(A_x * x), 0.2e1) * pow(cosl(C_z * z), 0.2e1) * B_y * B_y + pow(cosl(A_x * x), 0.2e1) * pow(cosl(B_y * y), 0.2e1) * C_z * C_z) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y + k_0 * C_z * C_z - 0.2e1 * pow(cosl(B_y * y), 0.2e1) * pow(cosl(C_z * z), 0.2e1) * k_2 * A_x * A_x - 0.2e1 * pow(cosl(A_x * x), 0.2e1) * pow(cosl(C_z * z), 0.2e1) * k_2 * B_y * B_y - 0.2e1 * pow(cosl(A_x * x), 0.2e1) * pow(cosl(B_y * y), 0.2e1) * k_2 * C_z * C_z) * cosl(A_x * x) * cosl(B_y * y) * cosl(C_z * z);
   return Q_T;
 }
 
