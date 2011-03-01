@@ -46,7 +46,7 @@ double fsol_(double x)
 double anQ_p (double x,double p_0,double p_x,double a_px,double L)
 {
   const double pi = acos(-1);
-  double exact_p = p_0 + p_x * cosl(a_px * pi * x / L);
+  double exact_p = p_0 + p_x * cos(a_px * pi * x / L);
   return exact_p;
 }
   
@@ -85,7 +85,7 @@ double SourceQ_rho (
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L);
 
-  Q_rho = cosl(a_ux * pi * x / L) * RHO * a_ux * pi * u_x / L + cosl(a_rhox * pi * x / L) * U * a_rhox * pi * rho_x / L;
+  Q_rho = cos(a_ux * pi * x / L) * RHO * a_ux * pi * u_x / L + cos(a_rhox * pi * x / L) * U * a_rhox * pi * rho_x / L;
 
   return(Q_rho);
 }
@@ -111,7 +111,7 @@ double SourceQ_u (
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L);
 
-  Q_u = 0.2e1 * cosl(a_ux * pi * x / L) * RHO * U * a_ux * pi * u_x / L + cosl(a_rhox * pi * x / L) * U * U * a_rhox * pi * rho_x / L - sin(a_px * pi * x / L) * a_px * pi * p_x / L;
+  Q_u = 0.2e1 * cos(a_ux * pi * x / L) * RHO * U * a_ux * pi * u_x / L + cos(a_rhox * pi * x / L) * U * U * a_rhox * pi * rho_x / L - sin(a_px * pi * x / L) * a_px * pi * p_x / L;
   
   return(Q_u);
 }
@@ -138,10 +138,10 @@ double SourceQ_e (
   double P;
 
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L);
-  P = p_0 + p_x * cosl(a_px * pi * x / L);
+  P = p_0 + p_x * cos(a_px * pi * x / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L);
 
-  Q_e = cosl(a_rhox * pi * x / L) * pow(U, 0.3e1) * a_rhox * pi * rho_x / L / 0.2e1 + cosl(a_ux * pi * x / L) * P * a_ux * pi * u_x * Gamma / L / (Gamma - 0.1e1) + 0.3e1 / 0.2e1 * cosl(a_ux * pi * x / L) * RHO * U * U * a_ux * pi * u_x / L - sin(a_px * pi * x / L) * U * a_px * pi * p_x * Gamma / L / (Gamma - 0.1e1);
+  Q_e = cos(a_rhox * pi * x / L) * pow(U, 0.3e1) * a_rhox * pi * rho_x / L / 0.2e1 + cos(a_ux * pi * x / L) * P * a_ux * pi * u_x * Gamma / L / (Gamma - 0.1e1) + 0.3e1 / 0.2e1 * cos(a_ux * pi * x / L) * RHO * U * U * a_ux * pi * u_x / L - sin(a_px * pi * x / L) * U * a_px * pi * p_x * Gamma / L / (Gamma - 0.1e1);
   return(Q_e);
 }
 

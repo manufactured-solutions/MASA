@@ -50,7 +50,7 @@ Scalar SourceQ_t_1d(
   Scalar cp_0,
   Scalar rho)
 {
-  Scalar Q_T = cosl(A_x * x + A_t * t) * cosl(D_t * t) * k_0 * A_x * A_x - (sin(A_x * x + A_t * t) * cosl(D_t * t) * A_t + cosl(A_x * x + A_t * t) * sin(D_t * t) * D_t) * rho * cp_0;
+  Scalar Q_T = cos(A_x * x + A_t * t) * cos(D_t * t) * k_0 * A_x * A_x - (sin(A_x * x + A_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(D_t * t) * D_t) * rho * cp_0;
   return Q_T;
 }
 
@@ -68,7 +68,7 @@ Scalar SourceQ_t_2d (
   Scalar k_0,
   Scalar cp_0)
 {
-  Scalar Q_T = -(sin(A_x * x + A_t * t) * cosl(B_y * y + B_t * t) * cosl(D_t * t) * A_t + cosl(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cosl(D_t * t) * B_t + cosl(A_x * x + A_t * t) * cosl(B_y * y + B_t * t) * sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y) * cosl(A_x * x + A_t * t) * cosl(B_y * y + B_t * t) * cosl(D_t * t) * k_0;
+  Scalar Q_T = -(sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * k_0;
   return Q_T;
 }
 
@@ -89,7 +89,7 @@ Scalar SourceQ_t_3d (
   Scalar cp_0,
   Scalar rho)
 {
-  Scalar Q_T = -(sin(A_x * x + A_t * t) * cosl(B_y * y + B_t * t) * cosl(C_z * z + C_t * t) * cosl(D_t * t) * A_t + cosl(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cosl(C_z * z + C_t * t) * cosl(D_t * t) * B_t + cosl(A_x * x + A_t * t) * cosl(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cosl(D_t * t) * C_t + cosl(A_x * x + A_t * t) * cosl(B_y * y + B_t * t) * cosl(C_z * z + C_t * t) * sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y + C_z * C_z) * cosl(A_x * x + A_t * t) * cosl(B_y * y + B_t * t) * cosl(C_z * z + C_t * t) * cosl(D_t * t) * k_0;
+  Scalar Q_T = -(sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * B_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * C_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y + C_z * C_z) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * k_0;
   return Q_T;
 }
 
