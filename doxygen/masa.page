@@ -312,7 +312,7 @@ The transient temperature distribution @f$ T({\bf x},t) @f$ in a
 conducting medium is given by:
 
 \f[
-\rho c_p \frac{D T}{D t} - \nabla \cdot (k \nabla T) = 0,
+\rho c_p \frac{\partial T}{\partial t} - \nabla \cdot (k \nabla T) = 0,
 \f]
 where @f$ \rho @f$, @f$ c_p @f$ and @f$ k @f$ are the material 
 density, specific heat, and thermal conductivity, respectively,
@@ -396,15 +396,11 @@ Transient Condution
 
 The conservation of mass, momentum, and total energy for a compressible steady inviscid fluid may be written as:
 \n
-\f[
-\nabla \cdot \left(\rho u \right) = 0,
-\f]
-\f[
-\nabla \cdot\left(\rho u u \right) = -\nabla p,
-\f]
-\f[
+\f{eqnarray}
+\nabla \cdot \left(\rho u \right) = 0 \\
+\nabla \cdot\left(\rho u u \right) = -\nabla p \\
 \nabla \cdot\left(\rho u H\right) = 0
-\f]
+\f}
 
 */
 
