@@ -54,6 +54,14 @@ Copyright (C) 2010 The PECOS Development Team
 
  */
 
+
+/*! \page model Library Overview
+
+\copydoc LicenseLGPL
+
+*/
+
+
 /*! \page model Library Overview
 
 The MASA (Manufactured Analytical Solutions Abstraction) library is a software interface that provides access 
