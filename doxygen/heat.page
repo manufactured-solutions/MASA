@@ -84,3 +84,26 @@ Transient Condution
 </ul>
 
 */
+
+/*! \page ctc Constant Thermal Conductivity
+
+The conservation of mass, momentum, and total energy for a compressible steady inviscid fluid may be written as:
+\n
+\f{eqnarray}
+\nabla \cdot \left(\rho u \right) = 0 \\
+\nabla \cdot\left(\rho u u \right) = -\nabla p \\
+\nabla \cdot\left(\rho u H\right) = 0
+\f}
+
+*/
+
+/*! \page vtc Variable Thermal Conductivity
+*/
+
+/*! \page cmp Constant Material Properties
+*/
+
+/*! \page vmp Variable Material Properties
+*/
+
+
