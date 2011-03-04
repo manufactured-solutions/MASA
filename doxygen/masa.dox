@@ -570,6 +570,8 @@ WARN_LOGFILE           =
 
 INPUT                  = src/masa.h examples/pecos-input.txt \
 		         doxygen/masa.page \
+		         doxygen/heat.page \
+		         doxygen/euler.page \
 			 doxygen/txt_common
 
 # This tag can be used to specify the character encoding of the source files 

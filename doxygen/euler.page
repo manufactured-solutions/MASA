@@ -1,0 +1,8 @@
+/*! \page euler Euler Equations
+
+1d,2d,3d steady and transient manufactured solutions to the heat equation are available in MASA, 
+for both cartesian and axisymmetric cases. 
+
+
+*/
+
