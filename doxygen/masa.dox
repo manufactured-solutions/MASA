@@ -1021,7 +1021,7 @@ PAPER_TYPE             = $(PAPER_SIZE)
 #PAPER_TYPE             = letter
 
 # The EXTRA_PACKAGES tag can be to specify one or more names of LaTeX 
-# packages that should be included in the LaTeX output.
+# packages that should be included in the LaTeX output. 
 
 EXTRA_PACKAGES         = 
 
@@ -1029,8 +1029,9 @@ EXTRA_PACKAGES         =
 # the generated latex document. The header should contain everything until 
 # the first chapter. If it is left blank doxygen will generate a 
 # standard header. Notice: only use this tag if you know what you are doing!
+# nick: will be masa.sty
 
-LATEX_HEADER           = 
+LATEX_HEADER           = doxygen/masa.sty
 
 # If the PDF_HYPERLINKS tag is set to YES, the LaTeX that is generated 
 # is prepared for conversion to pdf (using ps2pdf). The pdf file will 
