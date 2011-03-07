@@ -571,6 +571,7 @@ WARN_LOGFILE           =
 INPUT                  = src/masa.h examples/pecos-input.txt \
 		         doxygen/masa.page \
 		         doxygen/tutorial.page \
+		         doxygen/install.page \			 
 			 doxygen/txt_common    \
 			 doxygen/solutions
 
