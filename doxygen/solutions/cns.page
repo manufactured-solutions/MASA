@@ -4,7 +4,7 @@
 
 
 
-\section{Mathematical Model}
+\subsection{Mathematical Model}
 The conservation of mass, momentum, and total energy for a compressible steady viscous fluid may be written as:
 \begin{equation}
  \label{eq:ns_01}
@@ -59,7 +59,7 @@ where $\mu$ is the absolute viscosity. The heat flux vector $\mathbf{q}=(q_x,q_y
 where $k$ is the thermal conductivity, which can be determined by choosing the Prandtl number:
 $$k= \dfrac{\gamma R \mu}{ (\gamma-1) \text{Pr}}.$$
 
-\section{Manufactured Solution}
+\subsection{Manufactured Solution}
 
 The Method of Manufactured Solutions (MMS) applied to Navier--Stokes equations consists in modifying Equations~(\ref{eq:ns_01})~--~(\ref{eq:ns_03}) by adding a source term to the right-hand side of each equation, so the modified set of equations conveniently has the analytical solution chosen \textit{a priori}.
 
@@ -78,7 +78,7 @@ Although \citet{Roy2002} provide the constants used in the manufactured solution
 Source terms  for mass conservation ($Q_\rho$), momentum ($Q_u$, $Q_v$ and $Q_w$)  and total energy ($Q_{e_t}$) equations are obtained by symbolic manipulations of compressible steady Navier--Stokes equations above using Maple~13~\citep{Maple} and are presented in the following sections for the one, two and three-dimensional cases.
 
 
-\section{1D Steady Navier--Stokes equations}
+\subsection{1D Steady Navier--Stokes equations}
 
 The manufactured analytical solutions (\ref{eq:manufactured01}) for each one of the variables in one-dimensional case of Navier--Stokes equations~are:
 \begin{equation}
@@ -175,7 +175,7 @@ Q_{e_t} &= \dfrac{a_{\rho x} \pi \rho_x U_1^3 }{2L}\cos\left(\dfrac{a_{\rho x} \
  \end{split}
 \end{equation}
 
- \section{2D Steady Navier--Stokes equations}
+ \subsection{2D Steady Navier--Stokes equations}
 The manufactured analytical solutions (\ref{eq:manufactured01}) for each one of the variables in two-dimensional case of Navier--Stokes equations~are:
 \begin{equation}
 \begin{split}
@@ -303,7 +303,7 @@ Q_{e_t} &=\dfrac{ a_{\rho x} \pi \rho_x  U_2 (U_2^2+\V_2^2)}{2L}\cos\left(\dfrac
 
 
 
-\section{3D Steady Navier--Stokes equations}
+\subsection{3D Steady Navier--Stokes equations}
 
 The manufactured analytical solution for for each one of the variables in the 3D steady Navier--Stokes equations are:
 \begin{equation}
@@ -453,7 +453,7 @@ Q_{e_t} &= \dfrac{a_{\rho x} \pi \rho_x U_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\cos\left(
 
 
 
-\section{Comments}
+\subsection{Comments}
 The complexity, and consequently length, of the source terms increase with both dimension and physics handled by the governing equations. In some cases, such as the 3D energy equation, the final expression for $Q_{e_t}$ may reach 158,000 characters, including parenthesis and mathematical operators, prior to factorization.
 
 Applying commands in order to simplify such extensive expression is challenging even with a very good machine; thus, a suitable alternative to this issue is to simplify the equation by dividing it into a combination of sub-operators handling different physical phenomena. Then, each one of the operators may be applied to the manufactured solutions individually, and the resulting sub-source terms are combined back to represent the source term for the original equation.
