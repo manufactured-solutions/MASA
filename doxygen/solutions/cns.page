@@ -100,11 +100,11 @@ have been included in order to improve readability and computational efficiency:
 
 \f{eqnarray}
 \Rho_1 = \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho x} \pi x}{L}\right)\\
-\U_1   = u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)\\
+U_1   = u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)\\
 \PP_1  = p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right)\\
 \f}
 
-where the subscripts in \f$\Rho_1\f$, \f$\PP_1\f$ and \f$\U_1\f$ refer to the 1D case.
+where the subscripts in \f$\Rho_1\f$, \f$\PP_1\f$ and \f$U_1\f$ refer to the 1D case.
 
 \subsection 1D Mass Conservation
 
@@ -114,7 +114,7 @@ The mass conservation equation written as an operator is:
 \f]
 
 Analytically differentiating: \f[
-Q_\rho = \dfrac{a_{\rho x} \pi \rho_x \U_1}{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) +\\
+Q_\rho = \dfrac{a_{\rho x} \pi \rho_x U_1}{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) +\\
  \dfrac{a_{ux} \pi u_x \Rho_1}{L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right) 
 \f]
 
@@ -128,9 +128,9 @@ For the generation of the analytical source term \f$Q_u\f$ for the \f$x\f$-momen
 which, when operated in this equation:
 
 \f[
-Q_u=\dfrac{a_{\rho x} \pi \rho_x \U_1^2}{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) + \\
+Q_u=\dfrac{a_{\rho x} \pi \rho_x U_1^2}{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) + \\
 -\dfrac{ a_{px} \pi p_x}{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right) + \\
-+  \dfrac{2a_{ux} \pi u_x \Rho_1 \U_1}{L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right)+ \\
++  \dfrac{2a_{ux} \pi u_x \Rho_1 U_1}{L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right)+ \\
 +\dfrac{4a_{ux}^2 \pi^2 u_x \mu }{3L^2}\sin\left(\dfrac{a_{ux} \pi x}{L}\right). 
 \f]
 
@@ -146,16 +146,16 @@ The last component of Navier--Stokes equations is written as an operator:
 
 Source term \f$Q_{e_t}\f$ is obtained by operating \f$\Lo\f$ on Equation  for energy:
   \f[
-Q_{e_t} = \dfrac{a_{\rho x} \pi \rho_x \U_1^3 }{2L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
-- \dfrac{\gamma}{\gamma-1}\dfrac{a_{px} \pi p_x \U_1}{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
+Q_{e_t} = \dfrac{a_{\rho x} \pi \rho_x U_1^3 }{2L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+- \dfrac{\gamma}{\gamma-1}\dfrac{a_{px} \pi p_x U_1}{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
 + \dfrac{\gamma}{\gamma-1}\dfrac{a_{ux} \pi u_x \PP_1}{L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right)  +\\
-+ \dfrac{ 3 a_{ux} \pi u_x \Rho_1 \U_1^2 }{2L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right)+\\
++ \dfrac{ 3 a_{ux} \pi u_x \Rho_1 U_1^2 }{2L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right)+\\
 -\dfrac{2 a_{\rho x}^2 \pi^2 \rho_x^2 k \PP_1}{L^2 R \Rho_1^3}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)^2 +\\
 -\dfrac{2 a_{\rho x} a_{px} \pi^2 \rho_x p_x k }{L^2 R \Rho_1^2}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) \sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
 -\dfrac{a_{\rho x}^2 \pi^2 \rho_x k \PP_1 }{L^2 R \Rho_1^2}\sin\left(\dfrac{a_{\rho x} \pi x}{L}\right) +\\
 +\dfrac{a_{px}^2 \pi^2 p_x k }{L^2 R \Rho_1}\cos\left(\dfrac{a_{px} \pi x}{L}\right) +\\
 -\dfrac{4a_{ux}^2 \pi^2 u_x^2 \mu }{3L^2}\cos\left(\dfrac{a_{ux} \pi x}{L}\right)^2 +\\
-+\dfrac{4a_{ux}^2 \pi^2 u_x \mu \U_1 }{3L^2}\sin\left(\dfrac{a_{ux} \pi x}{L}\right).
++\dfrac{4a_{ux}^2 \pi^2 u_x \mu U_1 }{3L^2}\sin\left(\dfrac{a_{ux} \pi x}{L}\right).
  
 \f]
 
@@ -188,13 +188,13 @@ Source terms \f$Q_\rho\f$, \f$Q_u\f$, \f$Q_v\f$ and \f$Q_{e_t}\f$ are presented 
  
 
 \Rho_2 = \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho x} \pi x}{L}\right)+ \rho_{y} \cos\left(\frac{a_{ \rho y} \pi y}{L}\right),\\
-\U_2 = u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u y} \pi y}{L}\right),\\
+U_2 = u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u y} \pi y}{L}\right),\\
 \V_2 = v_{0}+v_{x} \cos\left(\frac{a_{v x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v y} \pi y}{L}\right),\\
 \PP_2 = p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right)+p_{y} \sin\left(\frac{a_{p y} \pi y}{L}\right),\\
 
 \f]
 
-where the subscripts in \f$\Rho_2\f$, \f$\PP_2\f$, \f$\U_2\f$ and \f$\V_2\f$ refer to the 2D case.
+where the subscripts in \f$\Rho_2\f$, \f$\PP_2\f$, \f$U_2\f$ and \f$\V_2\f$ refer to the 2D case.
 
 \subsection 2D-Mass Conservation
 
@@ -206,7 +206,7 @@ The 2D mass conservation equation written as an operator is:
 Analytically differentiating Equation:
 \f[
  
-Q_\rho = \dfrac{a_{\rho x} \pi \rho_x \U_2 }{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+Q_\rho = \dfrac{a_{\rho x} \pi \rho_x U_2 }{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
 -\dfrac{a_{\rho y} \pi \rho_y \V_2 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
 +\dfrac{\pi \Rho_2}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} 
 \pi}{L}\right)\right].
@@ -223,10 +223,10 @@ which, when operated in Equation:
 
 \f[
  
-Q_u =  \dfrac{a_{\rho x} \pi \rho_x \U_2^2}{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
-- \dfrac{a_{\rho y} \pi \rho_y \U_2 \V_2}{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
+Q_u =  \dfrac{a_{\rho x} \pi \rho_x U_2^2}{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+- \dfrac{a_{\rho y} \pi \rho_y U_2 \V_2}{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
 -\dfrac{a_{px} \pi p_x }{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right)+\\
-+\dfrac{\pi \Rho_2 \U_2}{L}\left[2 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right]+\\
++\dfrac{\pi \Rho_2 U_2}{L}\left[2 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right]+\\
 -\dfrac{a_{uy} \pi u_y \Rho_2 \V_2 }{L}\sin\left(\dfrac{a_{uy} \pi y}{L}\right)+\\
 +\dfrac{4a_{ux}^2 \pi^2 u_x \mu}{3L^2}\sin\left(\dfrac{a_{ux} \pi x}{L}\right) +\\
 +\dfrac{a_{uy}^2 \pi^2 u_y \mu}{L^2}\cos\left(\dfrac{a_{uy} \pi y}{L}\right).
@@ -241,10 +241,10 @@ Analogously, for the generation of the analytical source term \f$Q_v\f$ for the 
 and then applied to Equation. It yields:
 \f[
  
-Q_v =\dfrac{ a_{\rho x} \pi \rho_x \U_2 \V_2 }{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+Q_v =\dfrac{ a_{\rho x} \pi \rho_x U_2 \V_2 }{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
 -\dfrac{a_{\rho y} \pi \rho_y \V_2^2 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
 +\dfrac{a_{py} \pi p_y}{L}\cos\left(\dfrac{a_{py} \pi y}{L}\right) +\\
--\dfrac{ a_{vx} \pi v_x \Rho_2 \U_2}{L}\sin\left(\dfrac{a_{vx} \pi x}{L}\right)+\\
+-\dfrac{ a_{vx} \pi v_x \Rho_2 U_2}{L}\sin\left(\dfrac{a_{vx} \pi x}{L}\right)+\\
 +\dfrac{\pi \Rho_2 \V_2}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+2 v_y a_{vy} \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right]+\\
 +\dfrac{a_{vx}^2 \pi^2 v_x \mu }{L^2}\cos\left(\dfrac{a_{vx} \pi x}{L}\right) +\\
 +\dfrac{4a_{vy}^2 \pi^2 v_y \mu }{3L^2}\sin\left(\dfrac{a_{vy} \pi y}{L}\right)
@@ -266,19 +266,19 @@ Source term \f$Q_{e_t}\f$ is obtained by operating \f$\Lo\f$ on Equation for ene
 
 \f[
  
-Q_{e_t} =\dfrac{ a_{\rho x} \pi \rho_x  \U_2 (\U_2^2+\V_2^2)}{2L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
--\dfrac{ a_{\rho y} \pi \rho_y \V_2 (\U_2^2+\V_2^2) }{2L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right) +\\
--\dfrac{\gamma}{\gamma-1}\dfrac{a_{px} \pi p_x  \U_2}{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
+Q_{e_t} =\dfrac{ a_{\rho x} \pi \rho_x  U_2 (U_2^2+\V_2^2)}{2L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+-\dfrac{ a_{\rho y} \pi \rho_y \V_2 (U_2^2+\V_2^2) }{2L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right) +\\
+-\dfrac{\gamma}{\gamma-1}\dfrac{a_{px} \pi p_x  U_2}{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
 +  \dfrac{\gamma}{\gamma-1}\dfrac{a_{py}\pi p_y  \V_2}{L}\cos\left(\dfrac{a_{py} \pi y}{L}\right)+\\
-+ \dfrac{ \pi \Rho_2 \U_2^2}{2L}\left[3 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right]+\\
--\dfrac{\pi \Rho_2 \U_2 \V_2}{L}\left[a_{uy} u_y \sin\left(\dfrac{a_{uy} \pi y}{L}\right)+a_{vx}  v_x\sin\left(\dfrac{a_{vx} \pi x}{L}\right)\right] +\\
++ \dfrac{ \pi \Rho_2 U_2^2}{2L}\left[3 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right]+\\
+-\dfrac{\pi \Rho_2 U_2 \V_2}{L}\left[a_{uy} u_y \sin\left(\dfrac{a_{uy} \pi y}{L}\right)+a_{vx}  v_x\sin\left(\dfrac{a_{vx} \pi x}{L}\right)\right] +\\
 +\dfrac{\pi \Rho_2 \V_2^2}{2L} \left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+3 a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right] +\\
 + \dfrac{\gamma}{\gamma-1}\dfrac{\pi \PP_2}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right]+\\
 +\dfrac{ \pi^2 k}{L^2 R \Rho_2}\left[a_{px}^2 p_x \cos\left(\dfrac{a_{px} \pi x}{L}\right)+a_{py}^2 p_y \sin\left(\dfrac{a_{py} \pi y}{L}\right)\right] +\\
 -\dfrac{\pi^2 k \PP_2}{L^2 R \Rho_2^2}\left[a_{\rho x}^2 \rho_x \sin\left(\dfrac{a_{\rho x} \pi x}{L}\right)+a_{\rho y}^2 \rho_y \cos\left(\dfrac{a_{\rho y} \pi y}{L}\right)\right] +\\
 -\dfrac{ 2 \pi^2 k }{L^2 R \Rho_2^2}\left[a_{\rho x} a_{px} \rho_x p_x \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) \sin\left(\dfrac{a_{px} \pi x}{L}\right)+a_{\rho y} a_{py} \rho_y p_y \sin\left(\dfrac{a_{\rho y} \pi y}{L}\right) \cos\left(\dfrac{a_{py} \pi y}{L}\right)\right]+\\
 - \dfrac{2\pi^2 k \PP_2 }{L^2 R \Rho_2^3}\left[a_{\rho x}^2 \rho_x^2 \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)^2+a_{\rho y}^2 \rho_y^2 \sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)^2\right] +\\
-+\dfrac{\pi^2 \mu \U_2 }{3L^2} \left[4 a_{ux}^2 u_x \sin\left(\dfrac{a_{ux} \pi x}{L}\right)+3a_{uy}^2 u_y \cos\left(\dfrac{a_{uy} \pi y}{L}\right) \right] +\\
++\dfrac{\pi^2 \mu U_2 }{3L^2} \left[4 a_{ux}^2 u_x \sin\left(\dfrac{a_{ux} \pi x}{L}\right)+3a_{uy}^2 u_y \cos\left(\dfrac{a_{uy} \pi y}{L}\right) \right] +\\
 +\dfrac{\pi^2 \mu \V_2 }{3L^2} \left[3 a_{vx}^2 v_x \cos\left(\dfrac{a_{vx} \pi x}{L}\right)+4a_{vy}^2 v_y \sin\left(\dfrac{a_{vy} \pi y}{L}\right) \right] +\\
 - \dfrac{\pi^2 \mu }{3L^2}\left[4 a_{ux}^2 u_x^2 \cos\left(\dfrac{a_{ux} \pi x}{L}\right)^2+3 a_{uy}^2 u_y^2 \sin\left(\dfrac{a_{uy} \pi y}{L}\right)^2-4 v_y a_{ux} a_{vy} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right) \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right.+\\
     \qquad\left.+6 v_x a_{uy} a_{vx} u_y \sin\left(\dfrac{a_{uy} \pi y}{L}\right) \sin\left(\dfrac{a_{vx} \pi x}{L}\right)+3 v_x^2 a_{vx}^2 \sin\left(\dfrac{a_{vx} \pi x}{L}\right)^2+4 v_y^2 a_{vy}^2 \cos\left(\dfrac{a_{vy} \pi y}{L}\right)^2\right].
@@ -300,5 +300,34 @@ w\left( x ,y ,z\right) = w_{0}+w_{x} \sin\left(\frac{a_{w  x} \pi x}{L}\right)+w
 p\left( x ,y ,z\right) = p_{0}+p_{x} \cos\left(\frac{a_{p  x} \pi x}{L}\right)+p_{y} \sin\left(\frac{a_{p  y} \pi y}{L}\right)+ p_{z} \cos\left(\frac{a_{p  z} \pi z}{L}\right).\\
 
 \f]
+
+The MMS applied to 3D Navier--Stokes equations consists in modifying Equations by adding a 
+source term to the right-hand side of each equation:
+\f[
+
+
+\Diff{\rho u}{x}+\Diff{\rho v}{y} + \Diff{\rho w}{z} = Q_\rho\\
+ \Diff{\rho u^2 }{x}+\Diff{\rho uv}{y} +\Diff{\rho uw}{z} +\Diff{p}{x}-\Diff{\tau_{xx}}{x}-\Diff{\tau_{xy}}{y}-\Diff{\tau_{xz}}{z}= Q_u,\\
+\Diff{\rho uv }{x}+\Diff{\rho v^2}{y} +\Diff{\rho vw}{z}+\Diff{p}{y}-\Diff{\tau_{yx}}{x}-\Diff{\tau_{yy}}{y}-\Diff{\tau_{yz}}{z}= Q_v,\\
+\Diff{\rho uw }{ x}+\Diff{\rho  vw }{ y}+\Diff{\rho w^2 }{ z}+\Diff{p}{z}-\Diff{\tau_{zx}}{x}-\Diff{\tau_{zy}}{y}-\Diff{\tau_{zz}}{z}=Q_w,\\
+\Diff{\rho u e_t}{x}+\Diff{\rho v e_t}{y}+\Diff{\rho we_t}{z}+\Diff{pu}{x}+\Diff{pv}{y}+\Diff{pw}{z} +\Diff{q_x}{x} +\Diff{q_y}{y} +\Diff{q_z}{z}+\\
+    \qquad-\Diff{u\tau_{xx}+v\tau_{xy}+w\tau_{xz}}{x}-\Diff{u\tau_{yx}+v\tau_{yy}+w\tau_{yz}}{y}-\Diff{u\tau_{zx}+v\tau_{zy}+w\tau_{zz}}{y}=Q_{e_t},
+
+\f]
+so this modified set of equations has for analytical solution Equation.
+
+
+Analogously to the 1D and 2D cases, the source terms \f$Q_\rho\f$, \f$Q_u\f$, \f$Q_v\f$, \f$Q_w\f$ and \f$Q_{e_t}\f$ are  presented with the use of the following auxiliary variables:
+\f[
+ 
+
+\Rho_3 = \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho  x} \pi x}{L}\right)+ \rho_{y} \cos\left(\frac{a_{ \rho  y} \pi y}{L}\right) + \rho_{z} \sin\left(\frac{a_{ \rho  z} \pi z}{L}\right),\\
+U_3 =u_{0}+u_{x} \sin\left(\frac{a_{u  x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u  y} \pi y}{L}\right)+u_{z} \cos\left(\frac{a_{u  z} \pi z}{L}\right) ,\\
+\V_3 = v_{0}+v_{x} \cos\left(\frac{a_{v  x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v  y} \pi y}{L}\right)+v_{z} \sin\left(\frac{a_{v  z} \pi z}{L}\right), \\
+\W_3 = w_{0}+w_{x} \sin\left(\frac{a_{w  x} \pi x}{L}\right)+w_{y} \sin\left(\frac{a_{w  y} \pi y}{L}\right)+ w_{z} \cos\left(\frac{a_{w  z} \pi z}{L}\right) ,\\
+\PP_3 = p_{0}+p_{x} \cos\left(\frac{a_{p  x} \pi x}{L}\right)+p_{y} \sin\left(\frac{a_{p  y} \pi y}{L}\right)+ p_{z} \cos\left(\frac{a_{p  z} \pi z}{L}\right).\\
+
+\f]
+where, again, the subscripts in \f$\Rho_3\f$, \f$\PP_3\f$, \f$U_3\f$, \f$\V_3\f$ and \f$\W_3\f$ refer to the 3D case.
 
 */ 
