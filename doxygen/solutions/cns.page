@@ -330,4 +330,54 @@ U_3 =u_{0}+u_{x} \sin\left(\frac{a_{u  x} \pi x}{L}\right)+u_{y} \cos\left(\frac
 \f]
 where, again, the subscripts in \f$\Rho_3\f$, \f$\PP_3\f$, \f$U_3\f$, \f$\V_3\f$ and \f$\W_3\f$ refer to the 3D case.
 
+
+\subsection 3D-Mass Conservation
+
+The source term \f$Q_{\rho}\f$ for the 3D mass conservation equation is:
+\f[
+ 
+Q_\rho =\dfrac{ a_{\rho x} \pi \rho_x \U_3}{L} \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+-\dfrac{a_{\rho y} \pi \rho_y \V_3 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
++\dfrac{a_{\rho z} \pi \rho_z \W_3 }{L}\cos\left(\dfrac{a_{\rho z}\pi z }{L}\right)+\\
++\dfrac{\pi \Rho_3}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz}\pi z }{L}\right)\right].
+ 
+\f]
+
+\subsection 3D-Momentum
+
+The source terms \f$Q_{u}\f$, \f$Q_{v}\f$ and \f$Q_{w}\f$ for the 3D momentum equations the in \f$x\f$, \f$y\f$ and \f$z\f$ directions are, respectively:
+%
+\f[
+ 
+Q_u = \dfrac{a_{\rho x} \pi \rho_x \U_3^2 }{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+-\dfrac{a_{\rho y} \pi \rho_y \U_3 \V_3 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
++\dfrac{a_{\rho z} \pi \rho_z \U_3 \W_3 }{L}\cos\left(\dfrac{a_{\rho z}\pi z }{L}\right)+\\
+-\dfrac{a_{px} \pi p_x }{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right)+\\
++\dfrac{\pi \Rho_3 \U_3}{L}\left[2 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz}\pi z }{L}\right)\right]+\\
+-\dfrac{a_{uy} \pi u_y \Rho_3 \V_3}{L} \sin\left(\dfrac{a_{uy} \pi y}{L}\right)+\\
+-\dfrac{a_{uz} \pi u_z \Rho_3 \W_3 }{L}\sin\left(\dfrac{a_{uz}\pi z }{L}\right)+\\
++ \dfrac{4 a_{ux}^2 \pi^2  u_x \mu}{3L^2}\sin\left(\dfrac{ a_{ux}\pi x}{L}\right) +\\
++ \dfrac{a_{uy}^2 \pi^2 u_y \mu}{L^2}\cos\left(\dfrac{a_{uy} \pi y}{L}\right) +\\
++ \dfrac{a_{uz}^2 \pi^2 u_z \mu}{L^2}\cos\left(\dfrac{a_{uz} \pi z}{L}\right)
+,
+ 
+\f]
+
+\f[
+ 
+Q_v = \dfrac{a_{\rho x} \pi \rho_x \U_3 \V_3 }{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+-\dfrac{a_{\rho y} \pi \rho_y \V_3^2 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
++\dfrac{a_{\rho z} \pi \rho_z \V_3 \W_3 }{L}\cos\left(\dfrac{a_{\rho z}\pi z }{L}\right)+\\
++\dfrac{a_{py} \pi p_y }{L}\cos\left(\dfrac{a_{py} \pi y}{L}\right)+\\
+-\dfrac{a_{vx} \pi v_x \Rho_3 \U_3 }{L}\sin\left(\dfrac{a_{vx} \pi x}{L}\right)+\\
++\dfrac{\pi \Rho_3 \V_3}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+2 a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz}\pi z }{L}\right)\right]+\\
++\dfrac{a_{vz} \pi v_z \Rho_3 \W_3 }{L}\cos\left(\dfrac{a_{vz}\pi z }{L}\right)+\\
++\dfrac{a_{vx}^2 \pi^2 v_x \mu }{L^2}\cos\left(\dfrac{a_{vx} \pi x}{L}\right) +\\
++\dfrac{4a_{vy}^2 \pi^2 v_y \mu  }{3L^2}\sin\left(\dfrac{a_{vy} \pi y}{L}\right) +\\
++\dfrac{a_{vz}^2 \pi^2 v_z \mu }{L^2}\sin\left(\dfrac{a_{vz} \pi z}{L}\right) ,
+ 
+\f]
+and
+
+
 */ 
