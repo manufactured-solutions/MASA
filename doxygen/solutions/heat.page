@@ -1,109 +1,336 @@
 /*! \page heat Heat Equation
 
-\section math_model Mathematical Model
-The transient temperature distribution @f$ T({\bf x},t) @f$ in a 
-conducting medium is given by:
+\latexonly
 
-\f[
-\rho c_p \frac{\partial T}{\partial t} - \nabla \cdot (k \nabla T) = 0,
-\f]
-where @f$ \rho @f$, @f$ c_p @f$ and @f$ k @f$ are the material 
-density, specific heat, and thermal conductivity, respectively,
-@f$ t @f$ denotes time and @f$ {\bf x}=(x,y,z) @f$.
+\section{Mathematical Model}
+The transient temperature distribution $T({\bf x},t)$ in a conducting medium is given by:
+\begin{equation}
+ \label{eq:temp}
+\rho c_p \frac{\D T}{\D t} - \nabla \cdot (k \nabla T) = 0,
+\end{equation}
+where $\rho$, $c_p$ and $k$ are the material density, specific heat, and thermal conductivity, respectively,
+$t$ denotes time and ${\bf x}=(x,y,z)$.
 
-In this paper, the temperature distribution is considered in both steady 
-and unsteady state, with constant and variable material
-properties, and in one, two or three-dimensional space, as 
-described in the following sections.
+In this paper, temperature distribution is considered in both steady and unsteady state, with constant and variable material
+properties, and in one, two or three-dimensional space, as described in the following sections.
 
-\section man_sol Manufactured Solution
+\section{Manufactured Solution}
 
-The general form of the manufactured temperature distribution 
-@f$ T = T ({\bf x}, t) @f$ is chosen as a
-function of cosines:
-\f[
+The general form of the manufactured temperature distribution $T = T ({\bf x}, t)$ is chosen as a
+function of cosines \cite{Kirk2009}:
+\begin{equation}
+ \label{eq:manufactured01}
   T ({\bf x}, t) = \cos(A_x x + A_t t) \cdot \cos(B_y y + B_t t) \cdot \cos(C_z z + C_t t) \cdot \cos(D_t t) .
-\f]
+\end{equation}
 
-This solution satisfies the requirements of a suitable manufactured 
-solution: it is smooth,
-infinitely differentiable and realizable. Also, it is non-trivial, 
-i.e., it does not vanish even in case of
+This solution satisfies the requirements of a suitable manufactured solution: it is smooth,
+infinitely differentiable and realizable. Also, it is non-trivial, i.e., it does not vanish even in case of
 some of the unknowns are equal to zero.
 
-In sequence, a hierarchy of solutions which test various features 
-of the governing equation is created. This includes
-one, two and three-dimensional temperature distribution, steady and 
-transient state, and constant and variable
+
+In sequence, a hierarchy of solutions which test various features of the governing equation is created. This includes
+one, two and three-dimensional temperature distribution, steady and transient state, and constant and variable
 material properties. For instance, a steady distribution is recovered when
-@f$ A_t = B_t = C_t = D_t = 0 @f$; a one-dimensional distribution results 
-when @f$ B = C = 0 @f$, while a two-dimensional distribution
-results for @f$ C = 0 @f$. Moreover, while density @f$ \rho @f$ 
-is considered constant, thermal capacity @f$ c_p @f$ and 
-conductivity @f$ k @f$ can be modeled either as constant 
-or variable. In the later case, 
-they are approximated as a polynomial in @f$ T @f$.
+$A_t = B_t = C_t = D_t = 0$; a one-dimensional distribution results when $B = C = 0$, while a two-dimensional distribution
+results for $C = 0$. Moreover, while density $\rho$ is considered constant, thermal capacity $c_p$ and conductivity $k$
+can be modeled either as constant or variable. In the later case, they are approximated as a polynomial in $T$.
 
-Although the most general case would be represented by the 
-@f$ 3D @f$ unsteady distribution with both @f$ k @f$ and 
-@f$ c_p @f$ variable,
-this paper is divided in two main sections: steady and 
-transient distribution. Each one of these sections is subdivided
-into other two sections, in case of constant and variable material 
-properties, and source terms obtained for @f$ 1D @f$, @f$ 2D @f$ 
-and @f$ 3D @f$ cases are presented.
+Although the most general case would be represented by the $3D$ unsteady distribution with both $k$ and $c_p$ variable,
+this paper is divided in two main sections: steady and transient distribution. Each one of these sections is subdivided
+into other two sections, in case of constant and variable material properties, and source terms obtained for $1D$, $2D$ and $3D$ cases are presented.
 
-Steady Conduction
 
-For the steady case, our governing equation is simplified to the form:
-\f[
+\section{Steady Conduction}
+For the steady case, Equation (\ref{eq:temp}) is simplified to the form:
+\begin{equation}
+ \label{eq:temp_steady}
  - \nabla \cdot (k \nabla T) = 0.
-\f]
+\end{equation}
 
-By considering @f$ A_t = B_t = C_t = D_t = 0 @f$, it yields:
-\f[
+Accordingly, Equation (\ref{eq:manufactured01}) is also simplified by considering $A_t = B_t = C_t = D_t = 0$, it yields:
+\begin{equation}
+ \label{eq:manufactured02}
   T ({\bf x}) = \cos(A_x x ) \cdot \cos(B_y y ) \cdot \cos(C_z z ).
-\f]
-
-In sequence, both approximations for @f$ k @f$ (constant or variable) 
-are used in order to obtain source term~ @f$ Q @f$ for the steady 
-temperature distribution from manufactured solution.
-
-<ul>   
-<li> \subpage ctc
-<li> \subpage vtc
-</ul>
+\end{equation}
 
 
-Transient Condution
+In sequence, both approximations for $k$ (constant or variable) are used in order to obtain source term~ $Q$ for the steady temperature
+distribution (\ref{eq:temp_steady}) from manufactured solution (\ref{eq:manufactured01}).
+ 
+\subsection{Constant Thermal Conductivity}
 
 
-<ul>
-<li> \subpage cmp
-<li> \subpage vmp
-</ul>
+By assuming constant thermal conductivity $k$, Eq. (\ref{eq:temp_steady}) turns:
+\begin{equation}
+\label{eq:temp_steady_k_const}
+ -k \Delta T = 0.
+\end{equation}
+
+In order to obtain source term $Q$,  Eq. (\ref{eq:temp_steady_k_const}) is written as an operator $L(T)$:
+\begin{equation}
+\label{eq:L_steady_k_const}
+  L(T)\equiv -k \Delta T
+\end{equation}
+then we evaluate the $Q$ that produces $T$ by operating on $T$ in Eq. (\ref{eq:manufactured02}) with $L$, i.e.:
+$$Q({\bf x}) = L(T).$$
+
+For the 3D steady formulation, $Q$ is given by:
+\begin{equation}
+\label{eq:Q_steady_k_const}
+\begin{split}
+ Q(x,y,z) &=  -k \Delta \big( \cos(A_x x ) \cdot \cos(B_y y ) \cdot \cos(C_z z ) \big) \\
+	    &=  k (A_x^2+B_y^2+C_z^2) \cos(A_x x)\cdot\cos(B_y y)\cdot\cos(C_z z).
+\end{split}
+\end{equation}
+
+If we now solve the modified equation:
+\begin{equation}
+ -k \Delta T =  Q({\bf x}),
+\end{equation}
+with compatible initial and boundary conditions, the exact solution will be $T({\bf x})$ given in Equation \ref{eq:manufactured02}. This is the simple, but quite effective, idea of the MMS used to verify code accuracy.
+
+\paragraph{1D and 2D formulations}\
+
+
+%{\bf Remark}:
+Corresponding source terms $Q$ for $1D$ and $2D$ formulations for steady temperature distribution $T$ with constant
+conductivity $k$ can be obtained through suitable simplifications in Equation (\ref{eq:Q_steady_k_const}).
+Therefore, for the $2D$ case, $C_z=0$, then:
+\begin{equation*}
+\displaystyle
+Q(x,y) =k(A_{x} ^2+B_{y} ^2) \cos(A_{x} x)\cos(B_{y} y),
+\end{equation*}
+%
+and for the 1$D$ case, both $B_y=C_z=0$, resulting:
+$$Q(x) =k A_{x} ^2  \cos(A_{x} x).$$
+
+
+\subsection{Variable Thermal Conductivity}
+
+For the more general case $k = k (T )$, and Equation (\ref{eq:temp_steady}) needs to be used for determining
+source term~$Q$. A common approximation for $k$ in many engineering analysis is the case in which $k$ is specified as a polynomial in $T$:
+\begin{equation}
+k(T)= k_0 + k_1 T +  k_2 T^2.
+\end{equation}
+
+
+Similarly to the previous case, source term $Q$ is calculated by  writing Equation (\ref{eq:temp_steady}) as an operator~ $L(T)$ and then operating on manufactured solution (\ref{eq:manufactured02}):
+$$Q({\bf x}) = L(T).$$
+
+For the 3D formulation, $Q$ is given by:
+\begin{equation}\label{eq:Q_steady_k_var}
+\begin{split}
+  Q(x,y,z) &= 3 (A_x^2+B_y^2+C_z^2) k_2 \cos^3(A_x x) \cos^3(B_y y) \cos^3(C_z z)+\\
+    &+2 (A_x^2+B_y^2+C_z^2) k_1 \cos^2(A_x x) \cos^2(B_y y) \cos^2(C_z z) +\\
+    &-\left[\cos^2(B_y y) \cos^2(C_z z) A_x^2+\cos^2(A_x x) \cos^2(C_z z) B_y^2+\cos^2(A_x x) \cos^2(B_y y) C_z^2 \right] k_1+\\
+    &+\left[k_0 A_x^2+k_0 B_y^2+k_0 C_z^2 -2 \cos^2(B_y y) \cos^2(C_z z) k_2 A_x^2-2 \cos^2(A_x x) \cos^2(C_z z) k_2 B_y^2+\right.\\
+      &-\left.2 \cos^2(A_x x) \cos^2(B_y y) k_2 C_z^2 \right] \cos(A_x x) \cos(B_y y) \cos(C_z z).
+\end{split}
+\end{equation}
+
+
+\paragraph{1D and 2D formulations}\
+
+Corresponding source terms $Q$ for $1D$ and $2D$ formulations of steady temperature distribution $T$ with polynomial
+$k$ can be obtained through suitable simplifications in Equation~(\ref{eq:Q_steady_k_var}). Therefore, for the $2D$ formulation, it yields:
+\begin{equation*}
+\begin{split}
+Q(x,y)  &= 3 (A_x^2+B_y^2) k_2 \cos^3(A_x x) \cos^3(B_y y)+
+   2 (A_x^2+B_y^2) k_1 \cos^2(A_x x) \cos^2(B_y y) +\\
+  &-[\cos^2(B_y y) A_x^2+\cos^2(A_x x) B_y^2] k_1+\\
+  &+[k_0 A_x^2+k_0 B_y^2-2 \cos^2(B_y y) k_2 A_x^2-2 \cos^2(A_x x) k_2 B_y^2] \cos(A_x x) \cos(B_y y),
+\end{split}
+\end{equation*}
+%
+and for the 1$D$ case:
+$$
+\displaystyle Q ( x ) = \,3 A_x^2 k_2  \cos^3 ( A_{x}  x )   +2 A_x^2 k_1  \cos^2( A_{x}  x )+
+A_x^2 ( k_0-  2 k_2 )  \cos ( A_{x}  x ) -  A_x^2 k_1.
+$$
+
+
+
+\section{Transient Conduction}
+
+In general, density, specific heat, and thermal conductivity could all be variable, and the complete
+form~(\ref{eq:temp}) should be used to determine $Q$ in case of transient temperature distribution. Although one common simplification is to assume all material properties to be constant, a more general case consists in keeping $\rho$ constant and modeling  $k$ and $c_p$  as polynomials in $T$.
+
+In the next two sections, both approximations for $k$ and $c_p$ (constant or polynomial in $T$) are used in order to obtain source term $Q$ for the transient temperature distribution (\ref{eq:temp}) from manufactured solution~(\ref{eq:manufactured01}).
+
+ 
+\subsection{Constant Material Properties}
+In the simplest transient model where  material properties $\rho,\,c_p$ and $k$ are constant, Equation (\ref{eq:temp}) can be written as:
+\begin{equation}
+ \label{eq:temp02}
+\rho c_p \frac{\D T}{\D t} - k \Delta  T = 0.
+\end{equation}
+ 
+In order to obtain source term $Q$, Eq. (\ref{eq:temp02}) is written in terms of an operator $L(T)$,
+\begin{equation}
+\label{eq:L_transient_const}
+  L(T)\equiv \rho c_p \frac{\D T}{\D t} - k \Delta  T
+\end{equation}
+and operated on manufactured solution (\ref{eq:manufactured01}) for $T$. It yields:
+\begin{equation}
+\begin{split}
+Q (x,y,z,t) = &-\left[\sin(A_x x+A_t t) \cos(B_y y+B_t t) \cos(C_z z+C_t t) \cos(D_t t) A_t+\right.\\
+    &+\cos(A_x x+A_t t) \sin(B_y y+B_t t) \cos(C_z z+C_t t) \cos(D_t t) B_t+\\
+    &+\cos(A_x x+A_t t) \cos(B_y y+B_t t) \sin(C_z z+C_t t) \cos(D_t t) C_t+\\
+    &+\left.\cos(A_x x+A_t t) \cos(B_y y+B_t t) \cos(C_z z+C_t t) \sin(D_t t) D_t\right] \rho c_{p,0}+\\
+    &+(A_x^2+B_y^2+C_z^2) \cos(A_x x+A_t t) \cos(B_y y+B_t t) \cos(C_z z+C_t t) \cos(D_t t) k_0.
+\end{split}
+\end{equation}
+
+\paragraph{1D and 2D formulations}\
+
+Again, source term $Q$ can be suitably simplified to lower dimensional cases. For the $2D$ case, $Q$ is reduced to:
+\begin{equation}
+\begin{split}
+  Q(x,y,t)&= -\left[\sin(A_x x+A_t t) \cos(B_y y+B_t t) \cos(D_t t) A_t+\cos(A_x x+A_t t) \sin(B_y y+B_t t) \cos(D_t t) B_t+\right.\\
+    &+\left.\cos(A_x x+A_t t) \cos(B_y y+B_t t) \sin(D_t t) D_t \right] \rho c_{p,0} +\\
+    &+(A_x^2+B_y^2) \cos(A_x x+A_t t) \cos(B_y y+B_t t) \cos(D_t t) k_0
+ \end{split}
+\end{equation}
+and for the $1D$ case, to:
+\begin{equation}
+\begin{split}
+Q(x,t)&= \cos(A_x x+A_t t) \cos(D_t t) k_0 A_x^2+\\
+      &-[\sin(A_x x+A_t t) \cos(D_t t) A_t+\cos(A_x x+A_t t) \sin(D_t t) D_t] \rho c_{p,0}.
+\end{split}
+\end{equation}
+
+
+
+\subsection{Variable Material Properties}
+
+In a yet simpler but more general model for transient temperature distribution, it is usual to approximate the material density as constant and both specific heat and conductivity as polynomials in $T$:
+\begin{equation}\label{eq:k_cp_variable}
+\begin{split}
+\rho &=\quad \mbox{constant}\\
+c_p(T) &= c_{p,0} + c_{p,1} T +  c_{p,2} T^2 \\
+k(T) &= k_0 + k_1 T +  k_2 T^2 \\
+\end{split}
+\end{equation}
+
+This approximation is particularly used in applications to metallic or ceramic materials of engineering interest \cite{Kirk2009}. The same procedure followed before by writing Eq. (\ref{eq:temp}) in form of an operator and then applying 
+it on manufactured solution (\ref{eq:manufactured01}), considering density, thermal conductivity and capacity as 
+in expression (\ref{eq:k_cp_variable}) is here used to obtain $Q$:
+\begin{equation}
+\begin{split}
+  Q(x,y,z,t) = &-\sin(A_x x+A_t t) \cos(B_y y+B_t t) \cos(C_z z+C_t t)  \cos(D_t t) \rho c_{p,0} A_t+\\
+  &-\cos(A_x x+A_t t) \sin(B_y y+B_t t) \cos(C_z z+C_t t)  \cos(D_t t) \rho c_{p,0} B_t+\\
+  &-\cos(A_x x+A_t t) \cos(B_y y+B_t t) \sin(C_z z+C_t t)  \cos(D_t t) \rho c_{p,0} C_t+\\
+  &-\cos(A_x x+A_t t) \cos(B_y y+B_t t) \cos(C_z z+C_t t)  \sin(D_t t) \rho c_{p,0} D_t+\\
+  &-\cos^2(B_y y+B_t t) \cos^2(C_z z+C_t t) \cos^2(D_t t) k_1 A_x^2+\\
+  &-\cos^2(A_x x+A_t t) \cos^2(C_z z+C_t t) \cos^2(D_t t) k_1 B_y^2+\\
+  &-\cos^2(A_x x+A_t t) \cos^2(B_y y+B_t t) \cos^2(D_t t) k_1 C_z^2+\\
+  &+3 \cos^3(A_x x+A_t t)\cos^3(B_y y+B_t t) \cos^3(C_z z+C_t t) \cos^3(D_t t) (A_x^2+B_y^2+C_z^2) k_2+\\
+  &+\left[-\sin(A_x x+A_t t) \cos(B_y y+B_t t) \cos(C_z z+C_t t)  \cos(D_t t) \rho c_{p,1} A_t+\right.\\
+    &-\sin(B_y y+B_t t) \cos(A_x x+A_t t) \cos(C_z z+C_t t)  \cos(D_t t) \rho c_{p,1} B_t+\\
+    &-\sin(C_z z+C_t t)  \cos(A_x x+A_t t) \cos(B_y y+B_t t) \cos(D_t t) \rho c_{p,1} C_t+\\
+    &-\sin(D_t t) \cos(A_x x+A_t t) \cos(B_y y+B_t t) \cos(C_z z+C_t t)  \rho c_{p,1} D_t+\\
+    &-2 \cos^2(B_y y+B_t t) \cos^2(C_z z+C_t t) \cos^2(D_t t) k_2 A_x^2+\\
+    &-2 \cos^2(A_x x+A_t t) \cos^2(C_z z+C_t t) \cos^2(D_t t) k_2 B_y^2 +\\
+    &-2 \cos^2(A_x x+A_t t) \cos^2(B_y y+B_t t) \cos^2(D_t t) k_2 C_z^2 +\\
+    &\left.+k_0( A_x^2+ B_y^2+ C_z^2)\right] \cos(A_x x+A_t t) \cos(B_y y+B_t t) \cos(C_z z+C_t t)  \cos(D_t t)+\\
+  &+\left[-\sin(A_x x+A_t t) \cos(B_y y+B_t t) \cos(C_z z+C_t t)  \cos(D_t t) \rho c_{p,2} A_t+\right.\\
+    &-\sin(B_y y+B_t t) \cos(A_x x+A_t t) \cos(C_z z+C_t t)  \cos(D_t t) \rho c_{p,2} B_t+\\
+    &-\sin(C_z z+C_t t)  \cos(A_x x+A_t t) \cos(B_y y+B_t t) \cos(D_t t) \rho c_{p,2} C_t+\\
+    &-\sin(D_t t) \cos(A_x x+A_t t) \cos(B_y y+B_t t) \cos(C_z z+C_t t)  \rho c_{p,2} D_t+\\
+    &+\left.2 k_1 (A_x^2+ B_y^2+ C_z^2)\right] \cos^2(A_x x+A_t t) \cos^2(B_y y+B_t t) \cos^2(C_z z+C_t t) \cos^2(D_t t).
+\end{split}
+\end{equation}
+
+Analogously to the previous cases, $Q$ for the $2D$ unsteady temperature distribution has the form:
+\begin{equation}
+\begin{split}
+ Q_T = &-\cos^2(B_y y+B_t t) \cos^2(D_t t) A_x^2 k_1-\sin(A_x x+A_t t) \cos(B_y y+B_t t) \cos(D_t t) A_t \rho c_{p,0}+\\
+  &-\cos^2(A_x x+A_t t) \cos^2(D_t t) B_y^2 k_1-\cos(A_x x+A_t t) \sin(B_y y+B_t t) \cos(D_t t) B_t \rho c_{p,0} +\\
+  &-\cos(A_x x+A_t t) \cos(B_y y+B_t t) \sin(D_t t) D_t \rho c_{p,0} +\\
+  &+3 \cos^3(A_x x+A_t t)\cos^3(B_y y+B_t t) \cos^3(D_t t) (A_x^2+B_y^2) k_2+\\
+  &+\left[2 A_x^2 k_1-\sin(A_x x+A_t t) \cos(B_y y+B_t t) \cos(D_t t) A_t \rho c_{p,2}+2 B_y^2 k_1 \right.+\\
+    &- \sin(B_y y+B_t t) \cos(A_x x+A_t t) \cos(D_t t) B_t \rho c_{p,2}+\\
+    &-\left.\sin(D_t t) \cos(A_x x+A_t t) \cos(B_y y+B_t t) D_t \rho c_{p,2}\right] \cos^2(A_x x+A_t t) \cos^2(B_y y+B_t t) \cos^2(D_t t) +\\
+  &+\left[A_x^2 k_0 -2 \cos^2(B_y y+B_t t) \cos^2(D_t t) A_x^2 k_2-\sin(A_x x+A_t t) \cos(B_y y+B_t t) \cos(D_t t) A_t \rho c_{p,1}\right.+\\
+    &+B_y^2 k_0-2 \cos^2(A_x x+A_t t) \cos^2(D_t t) B_y^2 k_2-\sin(B_y y+B_t t) \cos(A_x x+A_t t) \cos(D_t t) B_t \rho c_{p,1}+\\
+    &-\left.\sin(D_t t) \cos(A_x x+A_t t) \cos(B_y y+B_t t) D_t \rho c_{p,1}\right] \cos(A_x x+A_t t) \cos(B_y y+B_t t) \cos(D_t t),
+\end{split}
+\end{equation}
+and for the $1D$ distribution,
+\begin{equation}
+\begin{split}
+ Q_T = &-\cos^2(D_t t) A_x^2 k_1+3 \cos^3(A_x x+A_t t)\cos^3(D_t t) A_x^2 k_2-\sin(A_x x+A_t t) \cos(D_t t) A_t \rho c_{p,0}+\\
+&-\cos(A_x x+A_t t) \sin(D_t t) D_t \rho c_{p,0}+\\
+&+ \left[A_x^2 k_0-\sin(A_x x+A_t t) \cos(D_t t) A_t \rho c_{p,1}\right.+\\
+    &-\left.\sin(D_t t) \cos(A_x x+A_t t) D_t \rho c_{p,1} -2 \cos^2(D_t t) A_x^2 k_2\right] \cos(A_x x+A_t t) \cos(D_t t)+\\
+&+\left[2 A_x^2 k_1-\sin(A_x x+A_t t) \cos(D_t t) A_t \rho c_{p,2} \right. +\\
+    &-\left.\sin(D_t t) \cos(A_x x+A_t t) D_t \rho c_{p,2} \right] \cos^2(A_x x+A_t t) \cos^2(D_t t).
+\end{split}
+\end{equation}
+
+
+\section{Maple and C files}
+
+
+
+Source terms for each one of the cases discussed previously have been generated automatically by replacing the respective analytical expressions into their operators, followed by the usage of Maple commands for collecting, sorting and factorizing the terms. Totally, there have been generated 12 maple files, containing information about the Heat equation, manufactured analytical solution, gradient of the manufactured solution, source term and translated C code for the source term. They are:
+{\tt Temp\_1d\_steady\_k\_constant.mw, \\Temp\_1d\_steady\_k\_variable.mw, \\Temp\_1d\_unsteady\_k\_cp\_constant.mw,\\ Temp\_1d\_unsteady\_k\_cp\_variable.mw, \\Temp\_2d\_steady\_k\_constant.mw, \\Temp\_2d\_steady\_k\_variable.mw,\\ Temp\_2d\_unsteady\_k\_cp\_constant.mw, \\ Temp\_2d\_unsteady\_k\_cp\_variable.mw,\\  Temp\_3d\_steady\_k\_constant.mw, \\ Temp\_3d\_steady\_k\_variable.mw,\\  Temp\_3d\_unsteady\_k\_cp\_constant.mw} and\\ {\tt Temp\_3d\_unsteady\_k\_cp\_variable.mw}
+
+
+Moreover, $C$ codes for the source terms have  been generated and saved into similarly named files. For example, for the 2D unsteady Heat equation with variable properties, the analytical manufactured solution and its gradient are:
+\begin{equation}
+ T(x,y,t) = \cos(A_x x+A_t t) \cos(B_y y+B_t t) \cos(D_t t)
+\quad
+\end{equation}
+and
+\begin{equation}
+\nabla T = \left[
+\begin{array}{c}
+-A_x \cos(D_t t) \cos(B_y y+B_t t) \sin(A_x x+A_t t)\\
+-B_y \cos(D_t t) \cos(A_x x+A_t t) \sin(B_y y+B_t t)
+\end{array}\right]
+\end{equation}
+and the automatically generated $C$ file for the source term, the analytical manufactured solution and its gradient  is:
+\begin{verbatim}
+void SourceQ (double x, double y, double t, double A_x, double A_t, double B_y,
+              double B_t, double D_t, double rho, double k_0, double k_1, double k_2,
+              double cp_0, double cp_1, double cp_2)
+{
+  double Q_T;
+  double T_an;
+  double *gradT_an;
+  Q_T = -pow(cos(B_y * y + B_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) * A_x * A_x * k_1
+  - sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t * rho * cp_0
+  - pow(cos(A_x * x + A_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) * B_y * B_y * k_1
+  - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t * rho * cp_0
+  - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t * rho * cp_0
+  + 0.3e1 * pow(cos(A_x * x + A_t * t), 0.3e1) * pow(cos(B_y * y + B_t * t), 0.3e1)
+  * pow(cos(D_t * t), 0.3e1) * (A_x * A_x + B_y * B_y) * k_2 + (0.2e1 * A_x * A_x * k_1
+  - sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t * rho * cp_2
+  + 0.2e1 * B_y * B_y * k_1 - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t)
+  * cos(D_t * t) * B_t * rho * cp_2 - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t)
+  * sin(D_t * t) * D_t * rho * cp_2) * pow(cos(A_x * x + A_t * t), 0.2e1)
+  * pow(cos(B_y * y + B_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) + (A_x * A_x * k_0
+  - 0.2e1 * pow(cos(B_y * y + B_t * t), 0.2e1) * pow(cos(D_t * t), 0.2e1) * A_x * A_x * k_2
+  - sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t * rho * cp_1
+  + B_y * B_y * k_0 - 0.2e1 * pow(cos(A_x * x + A_t * t), 0.2e1)
+  * pow(cos(D_t * t), 0.2e1) * B_y * B_y * k_2 - cos(A_x * x + A_t * t)
+  * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t * rho * cp_1
+  - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t * rho * cp_1)
+  * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t);
+
+  T_an = cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t);
+
+  gradT_an[0] = -A_x * cos(D_t * t) * cos(B_y * y + B_t * t) * sin(A_x * x + A_t * t);
+  gradT_an[1] = -B_y * cos(D_t * t) * cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t);
+}
+\end{verbatim}
+
+%---------------------------------------------------------------------------------------------------------
+\bibliographystyle{ieeetr} 
+\bibliography{../MMS_bib}
+
+\endlatexonly
 
 */
-
-/*! \page ctc Constant Thermal Conductivity
-
-The conservation of mass, momentum, and total energy for a compressible steady inviscid fluid may be written as:
-\n
-\f{eqnarray}
-\nabla \cdot \left(\rho u \right) = 0 \\
-\nabla \cdot\left(\rho u u \right) = -\nabla p \\
-\nabla \cdot\left(\rho u H\right) = 0
-\f}
-
-*/
-
-/*! \page vtc Variable Thermal Conductivity
-*/
-
-/*! \page cmp Constant Material Properties
-*/
-
-/*! \page vmp Variable Material Properties
-*/
-
 
