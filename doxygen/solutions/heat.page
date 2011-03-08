@@ -14,7 +14,7 @@ $t$ denotes time and ${\bf x}=(x,y,z)$.
 In this paper, temperature distribution is considered in both steady and unsteady state, with constant and variable material
 properties, and in one, two or three-dimensional space, as described in the following sections.
 
-\subsection{Manufactured Solution}
+\subsection{Manufactured Solutions}
 
 The general form of the manufactured temperature distribution $T = T ({\bf x}, t)$ is chosen as a
 function of cosines \cite{Kirk2009}:
@@ -40,7 +40,7 @@ this paper is divided in two main sections: steady and transient distribution. E
 into other two sections, in case of constant and variable material properties, and source terms obtained for $1D$, $2D$ and $3D$ cases are presented.
 
 
-\subsection{Steady Conduction}
+\subsubsection{Steady Conduction}
 For the steady case, Equation (\ref{eq:temp}) is simplified to the form:
 \begin{equation}
  \label{eq:temp_steady}
@@ -57,7 +57,7 @@ Accordingly, Equation (\ref{eq:manufactured01}) is also simplified by considerin
 In sequence, both approximations for $k$ (constant or variable) are used in order to obtain source term~ $Q$ for the steady temperature
 distribution (\ref{eq:temp_steady}) from manufactured solution (\ref{eq:manufactured01}).
  
-\subsection{Constant Thermal Conductivity}
+\subsubsection{Constant Thermal Conductivity}
 
 
 By assuming constant thermal conductivity $k$, Eq. (\ref{eq:temp_steady}) turns:
@@ -105,7 +105,7 @@ and for the 1$D$ case, both $B_y=C_z=0$, resulting:
 $$Q(x) =k A_{x} ^2  \cos(A_{x} x).$$
 
 
-\subsection{Variable Thermal Conductivity}
+\subsubsection{Variable Thermal Conductivity}
 
 For the more general case $k = k (T )$, and Equation (\ref{eq:temp_steady}) needs to be used for determining
 source term~$Q$. A common approximation for $k$ in many engineering analysis is the case in which $k$ is specified as a polynomial in $T$:
@@ -149,7 +149,7 @@ A_x^2 ( k_0-  2 k_2 )  \cos ( A_{x}  x ) -  A_x^2 k_1.
 $$
 
 
-\subsection{Transient Conduction}
+\subsubsection{Transient Conduction}
 
 In general, density, specific heat, and thermal conductivity could all be variable, and the complete
 form~(\ref{eq:temp}) should be used to determine $Q$ in case of transient temperature distribution. Although one common simplification is to assume all material properties to be constant, a more general case consists in keeping $\rho$ constant and modeling  $k$ and $c_p$  as polynomials in $T$.
@@ -157,7 +157,7 @@ form~(\ref{eq:temp}) should be used to determine $Q$ in case of transient temper
 In the next two sections, both approximations for $k$ and $c_p$ (constant or polynomial in $T$) are used in order to obtain source term $Q$ for the transient temperature distribution (\ref{eq:temp}) from manufactured solution~(\ref{eq:manufactured01}).
 
  
-\subsection{Constant Material Properties}
+\subsubsection{Constant Material Properties}
 In the simplest transient model where  material properties $\rho,\,c_p$ and $k$ are constant, Equation (\ref{eq:temp}) can be written as:
 \begin{equation}
  \label{eq:temp02}
@@ -200,7 +200,7 @@ Q(x,t)&= \cos(A_x x+A_t t) \cos(D_t t) k_0 A_x^2+\\
 
 
 
-\subsection{Variable Material Properties}
+\subsubsection{Variable Material Properties}
 
 In a yet simpler but more general model for transient temperature distribution, it is usual to approximate the material density as constant and both specific heat and conductivity as polynomials in $T$:
 \begin{equation}\label{eq:k_cp_variable}

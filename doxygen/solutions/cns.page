@@ -2,8 +2,6 @@
 
 \latexonly
 
-
-
 \subsection{Mathematical Model}
 The conservation of mass, momentum, and total energy for a compressible steady viscous fluid may be written as:
 \begin{equation}
