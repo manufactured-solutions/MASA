@@ -380,4 +380,62 @@ Q_v = \dfrac{a_{\rho x} \pi \rho_x U_3 \V_3 }{L}\cos\left(\dfrac{a_{\rho x} \pi 
 and
 
 
+\f[
+ 
+Q_w = \dfrac{a_{\rho x} \pi \rho_x U_3 \W_3}{L} \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+-\dfrac{a_{\rho y} \pi \rho_y \V_3 \W_3 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
++\dfrac{a_{\rho z} \pi \rho_z \W_3^2 }{L}\cos\left(\dfrac{a_{\rho z}\pi z }{L}\right)+\\
+-\dfrac{a_{pz} \pi p_z }{L}\sin\left(\dfrac{a_{pz}\pi z }{L}\right)+\\
++\dfrac{a_{wx} \pi w_x \Rho_3 U_3 }{L}\cos\left(\dfrac{a_{wx} \pi x}{L}\right)+\\
++\dfrac{a_{wy} \pi w_y \Rho_3 \V_3}{L}\cos\left(\dfrac{a_{wy} \pi y}{L}\right) +\\
++\dfrac{\pi \Rho_3 \W_3}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-2 a_{wz} w_z \sin\left(\dfrac{a_{wz}\pi z }{L}\right)\right]+\\
++\dfrac{a_{wx}^2 \pi^2 w_x \mu }{L^2}\sin\left(\dfrac{a_{wx} \pi x}{L}\right) +\\
++\dfrac{a_{wy}^2 \pi^2 w_y \mu }{L^2}\sin\left(\dfrac{a_{wy} \pi y}{L}\right) +\\
++\dfrac{4 a_{wz}^2 \pi^2 w_z \mu }{3L^2}\cos\left(\dfrac{a_{wz} \pi z}{L}\right) .
+ 
+\f]
+
+\subsection 3D-Total Energy
+
+Finally, the source term \f$Q_{e_t}\f$ for the 3D total energy equation is:
+\f[
+ 
+Q_{e_t} = \dfrac{a_{\rho x} \pi \rho_x U_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+- \dfrac{a_{\rho y} \pi \rho_y \V_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
++  \dfrac{a_{\rho z} \pi \rho_z \W_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\cos\left(\dfrac{a_{\rho z} \pi z}{L}\right)+\\
+-\dfrac{\gamma}{\gamma-1}\dfrac{a_{px} \pi p_x  U_3}{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
++\dfrac{\gamma}{\gamma-1}\dfrac{a_{py} \pi p_y \V_3}{L}\cos\left(\dfrac{a_{py} \pi y}{L}\right) +\\
+-\dfrac{\gamma}{\gamma-1}\dfrac{a_{pz}\pi  p_z  \W_3}{L}\sin\left(\dfrac{a_{pz} \pi z}{L}\right) +\\
++ \dfrac{\gamma}{\gamma-1}\dfrac{\PP_3 \pi}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz} \pi z}{L}\right)\right] +\\
++\dfrac{\pi \Rho_3 U_3^2}{2L}\left[3 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz} \pi z}{L}\right)\right]+\\
+-\dfrac{\pi \Rho_3 U_3 \V_3}{L}\left[a_{uy} u_y \sin\left(\dfrac{a_{uy} \pi y}{L}\right)+a_{vx} v_x \sin\left(\dfrac{a_{vx} \pi x}{L}\right)\right] +\\
+-\dfrac{\pi \Rho_3 U_3 \W_3}{L}\left[a_{uz} u_z \sin\left(\dfrac{a_{uz} \pi z}{L}\right)-a_{wx} w_x \cos\left(\dfrac{a_{wx} \pi x}{L}\right)\right] +\\
++\dfrac{\pi \Rho_3 \V_3^2}{2L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+3 a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz} \pi z}{L}\right)\right] +\\
++ \dfrac{\pi \Rho_3 \V_3 \W_3}{L}\left[a_{vz} v_z \cos\left(\dfrac{a_{vz} \pi z}{L}\right)+a_{wy} w_y \cos\left(\dfrac{a_{wy} \pi y}{L}\right)\right]+\\
++\dfrac{\pi \Rho_3 \W_3^2}{2L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-3 a_{wz} w_z \sin\left(\dfrac{a_{wz} \pi z}{L}\right)\right]+\\
++
+ 
+\f]
+\f[
+ 
++\dfrac{ \pi^2 k}{L^2 R \Rho_3}\left[a_{px}^2 p_x \cos\left(\dfrac{a_{px} \pi x}{L}\right)+a_{py}^2 p_y \sin\left(\dfrac{a_{py} \pi y}{L}\right)+a_{pz}^2 p_z \cos\left(\dfrac{a_{pz} \pi z}{L}\right)\right] +\\
+-\dfrac{ \pi^2 k \PP_3}{L^2 R \Rho_3^2}\left[a_{\rho x}^2 \rho_x \sin\left(\dfrac{a_{\rho x} \pi x}{L}\right)+a_{\rho y}^2 \rho_y \cos\left(\dfrac{a_{\rho y} \pi y}{L}\right)+a_{\rho z}^2 \rho_z \sin\left(\dfrac{a_{\rho z} \pi z}{L}\right)\right] +\\
+- \dfrac{2 \pi^2 k}{L^2 R \Rho_3^2}\left[a_{\rho x} a_{px} \rho_x p_x \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) \sin\left(\dfrac{a_{px} \pi x}{L}\right)+a_{\rho y} a_{py} \rho_y p_y \sin\left(\dfrac{a_{\rho y} \pi y}{L}\right) \cos\left(\dfrac{a_{py} \pi y}{L}\right)\right.+\\
+    \qquad\left.+a_{pz} a_{\rho z} p_z \rho_z \cos\left(\dfrac{a_{\rho z} \pi z}{L}\right) \sin\left(\dfrac{a_{pz} \pi z}{L}\right)\right] +\\
+-  \dfrac{2\pi^2 k \PP_3}{L^2 R \Rho_3^3}\left[a_{\rho x}^2 \rho_x^2 \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)^2+a_{\rho y}^2 \rho_y^2 \sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)^2+a_{\rho z}^2 \rho_z^2 \cos\left(\dfrac{a_{\rho z} \pi z}{L}\right)^2\right] +\\
++ \dfrac{ \pi^2 \mu U_3 }{3L^2}\left[4 a_{ux}^2 u_x \sin\left(\dfrac{a_{ux} \pi x}{L}\right)+3 a_{uy}^2 u_y \cos\left(\dfrac{a_{uy} \pi y}{L}\right)+3 a_{uz}^2 u_z \cos\left(\dfrac{a_{uz} \pi z}{L}\right)\right]+\\
++ \dfrac{\pi^2 \mu \V_3}{3L^2}\left[3 a_{vx}^2 v_x \cos\left(\dfrac{a_{vx} \pi x}{L}\right)+4 a_{vy}^2 v_y \sin\left(\dfrac{a_{vy} \pi y}{L}\right)+3 a_{vz}^2 v_z \sin\left(\dfrac{a_{vz} \pi z}{L}\right)\right]  +\\
++\dfrac{\pi^2 \mu \W_3 }{3L^2}\left[3 a_{wx}^2 w_x \sin\left(\dfrac{a_{wx} \pi x}{L}\right)+3 a_{wy}^2 w_y \sin\left(\dfrac{a_{wy} \pi y}{L}\right)+4 a_{wz}^2 w_z \cos\left(\dfrac{a_{wz} \pi z}{L}\right)\right] +\\
+-\dfrac{\pi^2 \mu}{3L^2} \left[4 a_{ux}^2 u_x^2 \cos\left(\dfrac{a_{ux} \pi x}{L}\right)^2-4 a_{ux} a_{vy} u_x v_y \cos\left(\dfrac{a_{ux} \pi x}{L}\right) \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right.+\\
+    \qquad+4 a_{ux} a_{wz} u_x w_z \cos\left(\dfrac{a_{ux} \pi x}{L}\right) \sin\left(\dfrac{a_{wz} \pi z}{L}\right)+3 a_{uy}^2 u_y^2 \sin\left(\dfrac{a_{uy} \pi y}{L}\right)^2+6 a_{uy} a_{vx} u_y v_x \sin\left(\dfrac{a_{uy} \pi y}{L}\right) \sin\left(\dfrac{a_{vx} \pi x}{L}\right)+\\
+    \qquad+3 a_{uz}^2 u_z^2 \sin\left(\dfrac{a_{uz} \pi z}{L}\right)^2-6 a_{uz} a_{wx} u_z w_x \sin\left(\dfrac{a_{uz} \pi z}{L}\right) \cos\left(\dfrac{a_{wx} \pi x}{L}\right)+3 a_{vx}^2 v_x^2 \sin\left(\dfrac{a_{vx} \pi x}{L}\right)^2+\\
+    \qquad+4 a_{vy}^2 v_y^2 \cos\left(\dfrac{a_{vy} \pi y}{L}\right)^2+4 a_{vy} a_{wz} v_y w_z \cos\left(\dfrac{a_{vy} \pi y}{L}\right) \sin\left(\dfrac{a_{wz} \pi z}{L}\right)+3 a_{vz}^2 v_z^2 \cos\left(\dfrac{a_{vz} \pi z}{L}\right)^2+\\
+    \qquad+6 a_{vz} a_{wy} v_z w_y \cos\left(\dfrac{a_{vz} \pi z}{L}\right) \cos\left(\dfrac{a_{wy} \pi y}{L}\right)+3 a_{wx}^2 w_x^2 \cos\left(\dfrac{a_{wx} \pi x}{L}\right)^2+3 a_{wy}^2 w_y^2 \cos\left(\dfrac{a_{wy} \pi y}{L}\right)^2+\\
+    \qquad\left.+4 a_{wz}^2 w_z^2 \sin\left(\dfrac{a_{wz} \pi z}{L}\right)^2\right]
+
+\f]
+
+
+
+
 */ 
