@@ -103,7 +103,7 @@ U_1   = u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)\\
 \PP_1  = p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right)\\
 \f}
 
-where the subscripts in \f$\Rho_1\f$, \f$\PP_1\f$ and \f$U_1\f$ refer to the 1D case.
+where the subscripts in \f$\Rho_1\f$, \f$\PP_1\f$ refer to the 1D case.
 
 \subsection cns1d2 1D Mass Conservation
 
