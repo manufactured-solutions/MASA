@@ -454,5 +454,28 @@ For instance, instead of writing the three dimensional Navier-Stokes energy equa
 \Lo= \nabla \cdot (\rho\mathbf{u}e_t) +\nabla\cdot \mathbf{q} +  \nabla\cdot(p  \mathbf{u})  - \nabla \cdot (\bv{\tau} \cdot \mathbf{u}),
 \f]
 
+to then be used in the MMS, let Equation be written with four operators, according to their physical meaning:
+\f[
+ 
+  \Lo_1=\nabla \cdot (\rho\mathbf{u}e_t),\\
+  \Lo_2=\nabla\cdot \mathbf{q},\\
+  \Lo_3= \nabla\cdot(p  \mathbf{u}),\\
+  \Lo_4=- \nabla \cdot (\bv{\tau} \cdot \mathbf{u}),
+ 
+\f]
+
+where \f$\Lo_1\f$ is the net rate of internal and kinetic energy increase by convection, 
+\f$\Lo_2\f$ is the net rate of heat addition due to heat conduction, \f$\Lo_3\f$ is 
+the rate of work done on the fluid by external body forces, and \f$\Lo_4\f$ is the rate
+ of work done on the fluid by viscous forces. Naturally:
+\f$\Lo=\Lo_1+\Lo_2+\Lo_3+\Lo_4.\f$
+
+
+After the application of \f$\Lo_i\f$, \f$i=1,\dots,4\f$, the corresponding subsource
+terms are also simplified, factorized and sorted. Then, the final factorized version is 
+checked against the original one, to assure that not human error has been introduced.  
+This strategy allowed the original  158,000 character long  expression for \f$Q_{e_t}\f$ 
+to be reduced to less than 5,800.
+
 
 */ 
