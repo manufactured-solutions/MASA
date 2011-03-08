@@ -435,7 +435,6 @@ Q_{e_t} = \dfrac{a_{\rho x} \pi \rho_x U_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\cos\left(\
 
 \f]
 
-
 \section Comments
 The complexity, and consequently length, of the source terms increase with both dimension 
 and physics handled by the governing equations. In some cases, such as the 3D energy equation, 
@@ -445,7 +444,9 @@ mathematical operators, prior to factorization.
 Applying commands in order to simplify such extensive expression is challenging even with a 
 very good machine; thus, a suitable alternative to this issue is to simplify the equation by 
 dividing it into a combination of sub-operators handling different physical phenomena. Then, each one 
-of the operators may be applied to the manufactured solutions individually, and the resulting sub-source terms
+of the operators may be applied to the manufactured solutions individually, and the resulting sub\-source terms
 are combined back to represent the source term for the original equation.
+
+
 
 */ 
