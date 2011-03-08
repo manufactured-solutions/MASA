@@ -1,474 +1,631 @@
 /*! \page cns Compressible Navier-Stokes
 
-1d,2d,3d steady and transient manufactured solutions to the heat equation are available in MASA,
-for both cartesian and axisymmetric cases. 
+\latexonly
 
-\section math Mathematical Model
+
+
+\section{Mathematical Model}
 The conservation of mass, momentum, and total energy for a compressible steady viscous fluid may be written as:
+\begin{equation}
+ \label{eq:ns_01}
+\nabla \cdot \left(\rho \bv{u}\right) = 0,
+\end{equation}
 
-\f[ 
-\nabla \cdot \left( \rho u \right) = 0 
-\f]
+\begin{equation}
+ \label{eq:ns_02}
+\nabla\cdot\left(\rho\bv{u}\bv{u}\right) = -\nabla p+  \nabla \cdot (\bv{\tau} ),
+\end{equation}
 
-\f[
-\nabla\cdot\left(\rho u u\right) = -\nabla p +  \nabla \cdot (\tau )
-\f]
-
-\f[
+\begin{equation}
+ \label{eq:ns_03}
+%\nabla \cdot (\rho\bv{u}e_t)+  \nabla\cdot(p  \bv{u})=0
 \nabla\cdot\left(\rho \bv{u} H\right) =-   \nabla\cdot(p  \mathbf{u}) -\nabla\cdot \mathbf{q} +  \nabla \cdot (\bv{\tau} \cdot \mathbf{u}).
-\f]
+\end{equation}
 
 
-The velocity in \f$ x \f$, \f$ y \f$ or \f$ z \f$-direction, respectively, and \f$ p \f$ is the pressure. 
-The total enthalpy, \f$ H \f$, may be expressed in terms of the total energy per unit mass 
-\f$ e_t \f$, density, and pressure:
-\f$ H = e_t + \dfrac{p}{\rho} \f$
+Equations (\ref{eq:ns_01})--(\ref{eq:ns_03}) are known as Navier--Stokes equations and, $\rho$ is the density, $\bv{u}=(u,v,w)$ is the velocity in $x$, $y$ or $z$-direction, respectively,    and $p$ is the pressure. The total enthalpy, $H$, may be expressed in terms of the total energy per unit mass $e_t$, density, and pressure:
+$$H = e_t + \dfrac{p}{\rho}.$$
 
-For a calorically perfect gas, the Navier--Stokes equations are closed with two auxiliary relations for energy
-
-\f[
-e_t= e + u\cdot u 2
-\f]
-
+For a calorically perfect gas, the Navier--Stokes equations are closed with two auxiliary relations for energy:
+\begin{equation}
+ \label{eq:ns_04}
+e_t= e+\dfrac{\bv{u}\cdot \bv{u}}{2},\quad\mbox{and}\quad e=\dfrac{1}{\gamma -1}RT ,
+\end{equation}
 and with the ideal gas equation of state:
-\f[
- 
+\begin{equation}
+ \label{eq:ns_05}
 p=\rho RT.
-\f]
+\end{equation}
 
 The shear stress tensor is:
- \f{eqnarray}
-  \tau_{xx}= \dfrac{2}{3}  \mu \left( 2 \diff{u}{x} - \diff{v}{y} -\diff{w}{z} \right) \\
-  \tau_{xy}= \tau_{yx}=\mu \left( \diff{u}{y} + \diff{v}{x}\right) \\
-  \tau_{yy}= \dfrac{2}{3}  \mu \left( 2 \diff{v}{y} - \diff{u}{x} -\diff{w}{z} \right) \\
-  \tau_{yz}= \tau_{zy}=\mu \left( \diff{v}{z} + \diff{w}{y}\right) \\
-  \tau_{zz}= \dfrac{2}{3}  \mu \left( 2 \diff{w}{z} - \diff{u}{x} -\diff{v}{y} \right) \\
-  \tau_{xz}= \tau_{zx}=\mu \left( \diff{u}{z} + \diff{w}{x}\right)
- \f}
-
-where \f$\mu\f$ is the absolute viscosity. The heat flux vector \f$\mathbf{q}=(q_x,q_y,q_z)\f$ is given by:
-\f[
+\begin{equation}
+ \begin{array}{lll}
+  \tau_{xx}= \dfrac{2}{3}  \mu \left( 2 \diff{u}{x} - \diff{v}{y} -\diff{w}{z} \right),
+  &\tau_{xy}= \tau_{yx}=\mu \left( \diff{u}{y} + \diff{v}{x}\right),\\
+  \tau_{yy}= \dfrac{2}{3}  \mu \left( 2 \diff{v}{y} - \diff{u}{x} -\diff{w}{z} \right),
+  &\tau_{yz}= \tau_{zy}=\mu \left( \diff{v}{z} + \diff{w}{y}\right),\\
+  \tau_{zz}= \dfrac{2}{3}  \mu \left( 2 \diff{w}{z} - \diff{u}{x} -\diff{v}{y} \right),
+  &\tau_{xz}= \tau_{zx}=\mu \left( \diff{u}{z} + \diff{w}{x}\right),
+ \end{array}
+\end{equation}
+where $\mu$ is the absolute viscosity. The heat flux vector $\mathbf{q}=(q_x,q_y,q_z)$ is given by:
+\begin{equation}
+ %\begin{split}
+ % q_x &= - k \diff{T}{x}\\
+%q_y &= - k \diff{T}{y}
+% \end{split}
  q_x = - k \diff{T}{x}, \quad q_y = - k \diff{T}{y}, \quad \mbox{and} \quad q_z = - k \diff{T}{z}
- \f]
-where \f$k\f$ is the thermal conductivity, which can be determined by choosing the Prandtl number:
-\f$ k= \dfrac{\gamma R \mu}{ (\gamma-1) \text{Pr}}.\f$
+ \end{equation}
+where $k$ is the thermal conductivity, which can be determined by choosing the Prandtl number:
+$$k= \dfrac{\gamma R \mu}{ (\gamma-1) \text{Pr}}.$$
 
-\section mms Manufactured Solution
+\section{Manufactured Solution}
 
-The Method of Manufactured Solutions (MMS) applied to Navier--Stokes equations consists in modifying the following equations.
+The Method of Manufactured Solutions (MMS) applied to Navier--Stokes equations consists in modifying Equations~(\ref{eq:ns_01})~--~(\ref{eq:ns_03}) by adding a source term to the right-hand side of each equation, so the modified set of equations conveniently has the analytical solution chosen \textit{a priori}.
 
-Roy(2002) proposed the general form of the primitive manufactured solution variables to be 
-a function of sines and cosines:
-\f{eqnarray} 
-  \phi (x,y,z) = \phi_0+ \phi_x\, f_s \left(\frac{a_{\phi x} \pi x}{L} \right) +  \phi_y \\
-  f_s\left(\frac{a_{\phi y} \pi y}{L}\right) + \phi_z \\
-  f_s\left(\frac{a_{\phi z} \pi z}{L}\right)
-\f}
-where \f$\phi=\rho,u,v,w\f$ or \f$p\f$, and \f$f_s(\cdot)\f$ functions denote either sine or cosine function. Note that in this case, \f$\phi_x\f$, \f$\phi_y\f$  and \f$\phi_z\f$ are constants  and the subscripts do not denote differentiation.
+\citet{Roy2002} propose the general form of the primitive manufactured solution variables to be  a function of sines and cosines:
+\begin{equation}
+ \label{eq:manufactured01}
+  \phi (x,y,z) = \phi_0+ \phi_x\, f_s \left(\frac{a_{\phi x} \pi x}{L} \right) +  \phi_y \,f_s\left(\frac{a_{\phi y} \pi y}{L}\right) + \phi_z \,f_s\left(\frac{a_{\phi z} \pi z}{L}\right),
+\end{equation}
+where $\phi=\rho,u,v,w$ or $p$, and $f_s(\cdot)$ functions denote either sine or cosine function. Note that in this case, $\phi_x$, $\phi_y$  and $\phi_z$ are constants  and the subscripts do not denote differentiation.
 
 
-Although \citet{Roy2002} provide the constants used in the manufactured solutions for the 2D supersonic and subsonic cases for Euler and Navier-Stokes equations, 
-only the source term for the 2D mass conservation equation~() is presented.
+
+Although \citet{Roy2002} provide the constants used in the manufactured solutions for the 2D supersonic and subsonic cases for Euler and Navier-Stokes equations, only the source term for the 2D mass conservation equation~(\ref{eq:ns_01}) is presented.
 
 
-Source terms  for mass conservation (\f$Q_\rho\f$), momentum (\f$Q_u\f$, \f$Q_v\f$ and \f$Q_w\f$)  and total energy (\f$Q_{e_t}\f$) equations are 
-obtained by symbolic manipulations of compressible steady Navier--Stokes equations above using Maple~13~\citep{Maple} and are presented in the following sections for the one, two and three-dimensional cases.
+Source terms  for mass conservation ($Q_\rho$), momentum ($Q_u$, $Q_v$ and $Q_w$)  and total energy ($Q_{e_t}$) equations are obtained by symbolic manipulations of compressible steady Navier--Stokes equations above using Maple~13~\citep{Maple} and are presented in the following sections for the one, two and three-dimensional cases.
 
-\section cns1d 1D Steady Navier--Stokes equations
 
-The manufactured analytical solutions () for each one of the variables in one-dimensional case of Navier--Stokes equations are:
-\f{eqnarray}
+\section{1D Steady Navier--Stokes equations}
 
-\rho\left(x\right) =  \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho x} \pi x}{L}\right) \\
-u\left(x\right) = u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right) \\
-p\left(x\right) = p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right) \\
+The manufactured analytical solutions (\ref{eq:manufactured01}) for each one of the variables in one-dimensional case of Navier--Stokes equations~are:
+\begin{equation}
+\begin{split}
+\label{eq:manufactured_1d}
+\rho\left(x\right) &=  \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho x} \pi x}{L}\right),\\
+u\left(x\right) &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right),\\
+p\left(x\right) &= p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right).\\
+\end{split}
+\end{equation}
 
-\f}
 
-The MMS applied to Navier--Stokes equations consists in modifying the 1D Navier--Stokes equations 
-by adding a source term to the right-hand side of each equation:
-\f{eqnarray} 
-\Diff{\rho u}{x} = Q_\rho \\
-\Diff{\rho u^2 }{x}+ \Diff{p}{x} -\Diff{\tau_{xx}}{x}= Q_u \\
-\Diff{\rho ue_t}{x}+ \Diff{pu}{x}+ \Diff{q_x}{x}-\Diff{u\tau_{xx}}{x} = Q_{e_t}
-\f}
+The MMS applied to Navier--Stokes equations consists in modifying the 1D Navier--Stokes equations~(\ref{eq:ns_01}) -- (\ref{eq:ns_03}) by adding a source term to the right-hand side of each equation:
+\begin{equation}
+ \label{eq:ns_mod_2d}
+\begin{split}
+&\Diff{\rho u}{x} = Q_\rho,\\
+&\Diff{\rho u^2 }{x}+ \Diff{p}{x} -\Diff{\tau_{xx}}{x}= Q_u,\\
+&\Diff{\rho ue_t}{x}+ \Diff{pu}{x}+ \Diff{q_x}{x}-\Diff{u\tau_{xx}}{x} = Q_{e_t},
+\end{split}
+\end{equation}
+%
+so the modified set of equations (\ref{eq:ns_mod_2d}) conveniently has the analytical solution given in Equation (\ref{eq:manufactured_1d}).
+%
 
-Source terms \f$Q_\rho\f$, \f$Q_u\f$ and \f$Q_{e_t}\f$ are obtained by symbolic manipulations of 
-equations above using Maple and are presented in the following sections. The following auxiliary variables 
-have been included in order to improve readability and computational efficiency:
+Source terms $Q_\rho$, $Q_u$ and $Q_{e_t}$ are obtained by symbolic manipulations of equations above using Maple and are presented in the following sections. The following auxiliary variables have been included in order to improve readability and computational efficiency:
+\begin{equation*}
+ \begin{split}
+\label{eq:aux_1d}
+\Rho_1 &= \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho x} \pi x}{L}\right),\\
+U_1 &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right),\\
+\PP_1 &= p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right),\\
+\end{split}
+\end{equation*}
+where the subscripts in $\Rho_1$, $\PP_1$ and $ U_1$ refer to the 1D case.
 
-\f{eqnarray}
-\Rho_1 = \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho x} \pi x}{L}\right)\\
-U_1   = u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)\\
-\PP_1  = p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right)\\
-\f}
-
-where the subscripts in \f$\Rho_1\f$, \f$\PP_1\f$ refer to the 1D case.
-
-\subsection cns1d2 1D Mass Conservation
+\subsection{1D Mass Conservation}
 
 The mass conservation equation written as an operator is:
-\f[
- \Lo= \Diff{\rho u}{x}
-\f]
+\begin{equation*}
+ \Lo= \Diff{\rho u}{x}.
+\end{equation*}
 
-Analytically differentiating: \f{eqnarray}
-Q_\rho = \dfrac{a_{\rho x} \pi \rho_x U_1}{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) + dfrac{a_{ux} \pi u_x \Rho_1}{L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right) 
-\f}
+Analytically differentiating Equation (\ref{eq:manufactured_1d}) for $\rho$ and $u$  using operator $\Lo$ defined above gives  the source term $Q_{\rho}$:
+\begin{equation}
+ \begin{split}
+Q_\rho &= \dfrac{a_{\rho x} \pi \rho_x U_1}{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) +\\
+&+\dfrac{a_{ux} \pi u_x \Rho_1}{L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right) .
+ \end{split}
+\end{equation}
 
-\subsection 1dmom 1D Momentum
 
-For the generation of the analytical source term \f$Q_u\f$ for the \f$x\f$-momentum equation, we write the operator \f$\Lo\f$:
-\f[
+\subsection{1D Momentum}
+
+For the generation of the analytical source term $Q_u$ for the $x$-momentum equation, Equation  (\ref{eq:ns_02}) is written as an  operator $\Lo$:
+\begin{equation*}
  \Lo=\Diff{\rho u^2 }{x}+ \Diff{p}{x} -\Diff{\tau_{xx}}{x},
-\f]
-which, when operated in this equation:
+\end{equation*}
+which, when operated in Equation (\ref{eq:manufactured_1d}), provides source term $Q_{u}$:
 
-\f[
-Q_u=\dfrac{a_{\rho x} \pi \rho_x U_1^2}{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) + \\
--\dfrac{ a_{px} \pi p_x}{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right) + \\
-+  \dfrac{2a_{ux} \pi u_x \Rho_1 U_1}{L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right)+ \\
-+\dfrac{4a_{ux}^2 \pi^2 u_x \mu }{3L^2}\sin\left(\dfrac{a_{ux} \pi x}{L}\right). 
-\f]
+\begin{equation}
+ \begin{split}
+Q_u&=\dfrac{a_{\rho x} \pi \rho_x U_1^2}{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) +\\
+&-\dfrac{ a_{px} \pi p_x}{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
+&+  \dfrac{2a_{ux} \pi u_x \Rho_1 U_1}{L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right)+\\
+&+\dfrac{4a_{ux}^2 \pi^2 u_x \mu }{3L^2}\sin\left(\dfrac{a_{ux} \pi x}{L}\right).
+ \end{split}
+\end{equation}
 
 
-\subsection 1den 1D_Total Energy
+
+\subsection{1D Total Energy}
+
 
 The last component of Navier--Stokes equations is written as an operator:
-\f[
+\begin{equation*}
  \Lo=\Diff{\rho ue_t}{x}+ \Diff{pu}{x}+ \Diff{q_x}{x}-\Diff{u\tau_{xx}}{x} .
-\f]
-
-Source term \f$Q_{e_t}\f$ is obtained by operating \f$\Lo\f$ on Equation  for energy:
-  \f{eqnarray}
-Q_{e_t} = \dfrac{a_{\rho x} \pi \rho_x U_1^3 }{2L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
-- \dfrac{\gamma}{\gamma-1}\dfrac{a_{px} \pi p_x U_1}{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
-+ \dfrac{\gamma}{\gamma-1}\dfrac{a_{ux} \pi u_x \PP_1}{L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right)  +\\
-+ \dfrac{ 3 a_{ux} \pi u_x \Rho_1 U_1^2 }{2L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right)+\\
--\dfrac{2 a_{\rho x}^2 \pi^2 \rho_x^2 k \PP_1}{L^2 R \Rho_1^3}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)^2 +\\
--\dfrac{2 a_{\rho x} a_{px} \pi^2 \rho_x p_x k }{L^2 R \Rho_1^2}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) \sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
--\dfrac{a_{\rho x}^2 \pi^2 \rho_x k \PP_1 }{L^2 R \Rho_1^2}\sin\left(\dfrac{a_{\rho x} \pi x}{L}\right) +\\
-+\dfrac{a_{px}^2 \pi^2 p_x k }{L^2 R \Rho_1}\cos\left(\dfrac{a_{px} \pi x}{L}\right) +\\
--\dfrac{4a_{ux}^2 \pi^2 u_x^2 \mu }{3L^2}\cos\left(\dfrac{a_{ux} \pi x}{L}\right)^2 +\\
-+\dfrac{4a_{ux}^2 \pi^2 u_x \mu U_1 }{3L^2}\sin\left(\dfrac{a_{ux} \pi x}{L}\right).
- 
-\f}
-
-\section 2dscns 2D Steady Navier--Stokes equations
-The manufactured analytical solutions for each one of the variables in two-dimensional case of 
-Navier---Stokes equations are:
-\f[
-
-\rho\left(x,y\right) =  \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho x} \pi x}{L}\right)+ \rho_{y} \cos\left(\frac{a_{ \rho y} \pi y}{L}\right),\\
-u\left(x,y\right) = u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u y} \pi y}{L}\right),\\
-v\left(x,y\right) = v_{0}+v_{x} \cos\left(\frac{a_{v x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v y} \pi y}{L}\right),\\
-p\left(x,y\right) = p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right)+p_{y} \sin\left(\frac{a_{p y} \pi y}{L}\right).\\
-
-\f]
-
-Analogously to the 1D case, MMS applied to the 2D steady Navier--Stokes consists in modifying Equations by adding a source term to the right-hand side of each equation:
-\f[
+\end{equation*}
 
 
- \Diff{\rho u}{x}+\Diff{\rho v}{y} = Q_\rho\\
- \Diff{\rho u^2 }{x}+\Diff{\rho uv}{y} +\Diff{p}{x}-\Diff{\tau_{xx}}{x}-\Diff{\tau_{xy}}{y}= Q_u\\
- \Diff{\rho uv}{x}+\Diff{\rho v^2}{y} +\Diff{p}{y}-\Diff{\tau_{yx}}{x}-\Diff{\tau_{yy}}{y}= Q_v\\
- \Diff{\rho ue_t }{x}+\Diff{\rho ve_t}{y}+\Diff{pu}{x} +\Diff{pv}{y}+\Diff{q_x}{x}+\Diff{q_y}{y}-\Diff{u\tau_{xx}+v\tau_{xy}}{x}-\Diff{u\tau_{yx}+v\tau_{yy}}{y}= Q_{e_t}
+Source term $Q_{e_t}$ is obtained by operating $\Lo$ on Equation  (\ref{eq:manufactured_1d}) together with the use of the  auxiliary relations~(\ref{eq:ns_04})~--~(\ref{eq:ns_05}) for energy:
+  \begin{equation}\label{eq:source_e}
+ \begin{split}
+Q_{e_t} &= \dfrac{a_{\rho x} \pi \rho_x U_1^3 }{2L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+&- \dfrac{\gamma}{\gamma-1}\dfrac{a_{px} \pi p_x U_1}{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
+&+ \dfrac{\gamma}{\gamma-1}\dfrac{a_{ux} \pi u_x \PP_1}{L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right)  +\\
+&+ \dfrac{ 3 a_{ux} \pi u_x \Rho_1 U_1^2 }{2L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right)+\\
+&-\dfrac{2 a_{\rho x}^2 \pi^2 \rho_x^2 k \PP_1}{L^2 R \Rho_1^3}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)^2 +\\
+&-\dfrac{2 a_{\rho x} a_{px} \pi^2 \rho_x p_x k }{L^2 R \Rho_1^2}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) \sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
+&-\dfrac{a_{\rho x}^2 \pi^2 \rho_x k \PP_1 }{L^2 R \Rho_1^2}\sin\left(\dfrac{a_{\rho x} \pi x}{L}\right) +\\
+&+\dfrac{a_{px}^2 \pi^2 p_x k }{L^2 R \Rho_1}\cos\left(\dfrac{a_{px} \pi x}{L}\right) +\\
+&-\dfrac{4a_{ux}^2 \pi^2 u_x^2 \mu }{3L^2}\cos\left(\dfrac{a_{ux} \pi x}{L}\right)^2 +\\
+&+\dfrac{4a_{ux}^2 \pi^2 u_x \mu U_1 }{3L^2}\sin\left(\dfrac{a_{ux} \pi x}{L}\right).
+ \end{split}
+\end{equation}
 
-\f]
-so the modified set of Equations () as analytical solution.
+ \section{2D Steady Navier--Stokes equations}
+The manufactured analytical solutions (\ref{eq:manufactured01}) for each one of the variables in two-dimensional case of Navier--Stokes equations~are:
+\begin{equation}
+\begin{split}
+\label{eq:manufactured_2d}
+\rho\left(x,y\right) &=  \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho x} \pi x}{L}\right)+ \rho_{y} \cos\left(\frac{a_{ \rho y} \pi y}{L}\right),\\
+u\left(x,y\right) &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u y} \pi y}{L}\right),\\
+v\left(x,y\right) &= v_{0}+v_{x} \cos\left(\frac{a_{v x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v y} \pi y}{L}\right),\\
+p\left(x,y\right) &= p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right)+p_{y} \sin\left(\frac{a_{p y} \pi y}{L}\right).\\
+\end{split}
+\end{equation}
 
-Source terms \f$Q_\rho\f$, \f$Q_u\f$, \f$Q_v\f$ and \f$Q_{e_t}\f$ are presented in the subsequent sessions with the use of the auxiliary variables:
-\f[
- 
-\Rho_2 = \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho x} \pi x}{L}\right)+ \rho_{y} \cos\left(\frac{a_{ \rho y} \pi y}{L}\right),\\
-U_2 = u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u y} \pi y}{L}\right),\\
-\V_2 = v_{0}+v_{x} \cos\left(\frac{a_{v x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v y} \pi y}{L}\right),\\
-\PP_2 = p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right)+p_{y} \sin\left(\frac{a_{p y} \pi y}{L}\right),\\
 
-\f]
+Analogously to the 1D case, MMS applied to the 2D steady Navier--Stokes consists in modifying Equations~(\ref{eq:ns_01}) -- (\ref{eq:ns_03}) by adding a source term to the right-hand side of each equation:
+\begin{equation}
+\begin{split}
+\label{eq:ns2d_mod}
+& \Diff{\rho u}{x}+\Diff{\rho v}{y} = Q_\rho\\
+& \Diff{\rho u^2 }{x}+\Diff{\rho uv}{y} +\Diff{p}{x}-\Diff{\tau_{xx}}{x}-\Diff{\tau_{xy}}{y}= Q_u\\
+& \Diff{\rho uv}{x}+\Diff{\rho v^2}{y} +\Diff{p}{y}-\Diff{\tau_{yx}}{x}-\Diff{\tau_{yy}}{y}= Q_v\\
+& \Diff{\rho ue_t }{x}+\Diff{\rho ve_t}{y}+\Diff{pu}{x} +\Diff{pv}{y}+\Diff{q_x}{x}+\Diff{q_y}{y}-\Diff{u\tau_{xx}+v\tau_{xy}}{x}-\Diff{u\tau_{yx}+v\tau_{yy}}{y}= Q_{e_t}
+\end{split}
+\end{equation}
+so the modified set of Equations (\ref{eq:ns2d_mod}) has Equation (\ref{eq:manufactured_2d}) as analytical solution.
 
-where the subscripts in \f$\Rho_2\f$, \f$\PP_2\f$, \f$U_2\f$ and \f$\V_2\f$ refer to the 2D case.
+Source terms $Q_\rho$, $Q_u$, $Q_v$ and $Q_{e_t}$ are presented in the subsequent sessions with the use of the auxiliary variables:
+\begin{equation*}
+ \begin{split}
+\label{eq:aux_2d}
+\Rho_2 &= \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho x} \pi x}{L}\right)+ \rho_{y} \cos\left(\frac{a_{ \rho y} \pi y}{L}\right),\\
+U_2 &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u y} \pi y}{L}\right),\\
+\V_2 &= v_{0}+v_{x} \cos\left(\frac{a_{v x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v y} \pi y}{L}\right),\\
+\PP_2 &= p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right)+p_{y} \sin\left(\frac{a_{p y} \pi y}{L}\right),\\
+\end{split}
+\end{equation*}
+%
+where the subscripts in $\Rho_2$, $\PP_2$, $U_2$ and $\V_2$ refer to the 2D case.
 
-\subsection 2dmass 2DMass Conservation
+\subsection{2D Mass Conservation}
 
 The 2D mass conservation equation written as an operator is:
-\f[
+\begin{equation*}
  \Lo=  \Diff{\rho u}{x}+\Diff{\rho v}{y}.
-\f]
+\end{equation*}
 
-Analytically differentiating Equation:
-\f[
- 
-Q_\rho = \dfrac{a_{\rho x} \pi \rho_x U_2 }{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
--\dfrac{a_{\rho y} \pi \rho_y \V_2 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
-+\dfrac{\pi \Rho_2}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} 
-\pi}{L}\right)\right].
- 
-\f]
+Analytically differentiating Equation (\ref{eq:manufactured_2d}) for $\rho$, $u$ and $v$ using operator $\Lo$ defined above gives  the source term~$Q_{\rho}$:
+\begin{equation}
+ \begin{split}
+Q_\rho &= \dfrac{a_{\rho x} \pi \rho_x U_2 }{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+&-\dfrac{a_{\rho y} \pi \rho_y \V_2 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
+&+\dfrac{\pi \Rho_2}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right].
+ \end{split}
+\end{equation}
 
-\subsection 2dmom 2D Momentum
+\subsection{2D Momentum}
 
-For the generation of the analytical source term \f$Q_u\f$ for the \f$x\f$-momentum equation, the first component of equation is written as an  operator \f$\Lo\f$:
-\f[
+For the generation of the analytical source term $Q_u$ for the $x$-momentum equation, the first component of Equation~(\ref{eq:ns_02}) is written as an  operator $\Lo$:
+\begin{equation*}
  \Lo= \Diff{\rho u^2 }{x}+\Diff{\rho uv}{y} +\Diff{p}{x}-\Diff{\tau_{xx}}{x}-\Diff{\tau_{xy}}{y},
-\f]
-which, when operated in Equation:
+\end{equation*}
+which, when operated in Equation (\ref{eq:manufactured_2d}), provides source term $Q_{u}$:
 
-\f[
- 
-Q_u =  \dfrac{a_{\rho x} \pi \rho_x U_2^2}{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
-- \dfrac{a_{\rho y} \pi \rho_y U_2 \V_2}{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
--\dfrac{a_{px} \pi p_x }{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right)+\\
-+\dfrac{\pi \Rho_2 U_2}{L}\left[2 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right]+\\
--\dfrac{a_{uy} \pi u_y \Rho_2 \V_2 }{L}\sin\left(\dfrac{a_{uy} \pi y}{L}\right)+\\
-+\dfrac{4a_{ux}^2 \pi^2 u_x \mu}{3L^2}\sin\left(\dfrac{a_{ux} \pi x}{L}\right) +\\
-+\dfrac{a_{uy}^2 \pi^2 u_y \mu}{L^2}\cos\left(\dfrac{a_{uy} \pi y}{L}\right).
- 
-\f]
+\begin{equation}
+ \begin{split}
+Q_u &=  \dfrac{a_{\rho x} \pi \rho_x U_2^2}{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+&- \dfrac{a_{\rho y} \pi \rho_y U_2 \V_2}{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
+&-\dfrac{a_{px} \pi p_x }{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right)+\\
+&+\dfrac{\pi \Rho_2 U_2}{L}\left[2 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right]+\\
+&-\dfrac{a_{uy} \pi u_y \Rho_2 \V_2 }{L}\sin\left(\dfrac{a_{uy} \pi y}{L}\right)+\\
+&+\dfrac{4a_{ux}^2 \pi^2 u_x \mu}{3L^2}\sin\left(\dfrac{a_{ux} \pi x}{L}\right) +\\
+&+\dfrac{a_{uy}^2 \pi^2 u_y \mu}{L^2}\cos\left(\dfrac{a_{uy} \pi y}{L}\right).
+ \end{split}
+\end{equation}
 
 
-Analogously, for the generation of the analytical source term \f$Q_v\f$ for the \f$y\f$-momentum equation, the second component of Equation is written as an  operator \f$\Lo\f$:
-\f[
+Analogously, for the generation of the analytical source term $Q_v$ for the $y$-momentum equation, the second component of Equation  (\ref{eq:ns_02})  is written as an  operator $\Lo$:
+\begin{equation*}
    \Lo =\Diff{\rho uv}{x}+\Diff{\rho v^2}{y} +\Diff{p}{y}-\Diff{\tau_{yx}}{x}-\Diff{\tau_{yy}}{y},
-\f]
-and then applied to Equation. It yields:
-\f[
- 
-Q_v =\dfrac{ a_{\rho x} \pi \rho_x U_2 \V_2 }{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
--\dfrac{a_{\rho y} \pi \rho_y \V_2^2 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
-+\dfrac{a_{py} \pi p_y}{L}\cos\left(\dfrac{a_{py} \pi y}{L}\right) +\\
--\dfrac{ a_{vx} \pi v_x \Rho_2 U_2}{L}\sin\left(\dfrac{a_{vx} \pi x}{L}\right)+\\
-+\dfrac{\pi \Rho_2 \V_2}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+2 v_y a_{vy} \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right]+\\
-+\dfrac{a_{vx}^2 \pi^2 v_x \mu }{L^2}\cos\left(\dfrac{a_{vx} \pi x}{L}\right) +\\
-+\dfrac{4a_{vy}^2 \pi^2 v_y \mu }{3L^2}\sin\left(\dfrac{a_{vy} \pi y}{L}\right)
+\end{equation*}
+and then applied to Equation  (\ref{eq:manufactured_2d}). It yields:
+\begin{equation}
+ \begin{split}
+Q_v &=\dfrac{ a_{\rho x} \pi \rho_x U_2 \V_2 }{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+&-\dfrac{a_{\rho y} \pi \rho_y \V_2^2 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
+&+\dfrac{a_{py} \pi p_y}{L}\cos\left(\dfrac{a_{py} \pi y}{L}\right) +\\
+&-\dfrac{ a_{vx} \pi v_x \Rho_2 U_2}{L}\sin\left(\dfrac{a_{vx} \pi x}{L}\right)+\\
+&+\dfrac{\pi \Rho_2 \V_2}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+2 v_y a_{vy} \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right]+\\
+&+\dfrac{a_{vx}^2 \pi^2 v_x \mu }{L^2}\cos\left(\dfrac{a_{vx} \pi x}{L}\right) +\\
+&+\dfrac{4a_{vy}^2 \pi^2 v_y \mu }{3L^2}\sin\left(\dfrac{a_{vy} \pi y}{L}\right)
+.
+ \end{split}
+\end{equation}
 
- 
-\f]
 
 
-
-\subsection 2dtoten 2D Total Energy
+\subsection{2D Total Energy}
 
 The operator for the 2D Navier--Stokes total energy is:
-\f[
+\begin{equation*}
  \Lo=  \Diff{\rho ue_t }{x}+\Diff{\rho ve_t}{y}+\Diff{pu}{x} +\Diff{pv}{y}+\Diff{q_x}{x}+\Diff{q_y}{y}-\Diff{u\tau_{xx}+v\tau_{xy}}{x}-\Diff{u\tau_{yx}+v\tau_{yy}}{y}.
-\f]
+\end{equation*}
 
 
-Source term \f$Q_{e_t}\f$ is obtained by operating \f$\Lo\f$ on Equation for energy:
+Source term $Q_{e_t}$ is obtained by operating $\Lo$ on Equation  (\ref{eq:manufactured_2d}) together with the use of the  auxiliary relations~(\ref{eq:ns_04})~--~(\ref{eq:ns_05}) for energy:
 
-\f[
- 
-Q_{e_t} =\dfrac{ a_{\rho x} \pi \rho_x  U_2 (U_2^2+\V_2^2)}{2L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
--\dfrac{ a_{\rho y} \pi \rho_y \V_2 (U_2^2+\V_2^2) }{2L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right) +\\
--\dfrac{\gamma}{\gamma-1}\dfrac{a_{px} \pi p_x  U_2}{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
-+  \dfrac{\gamma}{\gamma-1}\dfrac{a_{py}\pi p_y  \V_2}{L}\cos\left(\dfrac{a_{py} \pi y}{L}\right)+\\
-+ \dfrac{ \pi \Rho_2 U_2^2}{2L}\left[3 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right]+\\
--\dfrac{\pi \Rho_2 U_2 \V_2}{L}\left[a_{uy} u_y \sin\left(\dfrac{a_{uy} \pi y}{L}\right)+a_{vx}  v_x\sin\left(\dfrac{a_{vx} \pi x}{L}\right)\right] +\\
-+\dfrac{\pi \Rho_2 \V_2^2}{2L} \left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+3 a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right] +\\
-+ \dfrac{\gamma}{\gamma-1}\dfrac{\pi \PP_2}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right]+\\
-+\dfrac{ \pi^2 k}{L^2 R \Rho_2}\left[a_{px}^2 p_x \cos\left(\dfrac{a_{px} \pi x}{L}\right)+a_{py}^2 p_y \sin\left(\dfrac{a_{py} \pi y}{L}\right)\right] +\\
--\dfrac{\pi^2 k \PP_2}{L^2 R \Rho_2^2}\left[a_{\rho x}^2 \rho_x \sin\left(\dfrac{a_{\rho x} \pi x}{L}\right)+a_{\rho y}^2 \rho_y \cos\left(\dfrac{a_{\rho y} \pi y}{L}\right)\right] +\\
--\dfrac{ 2 \pi^2 k }{L^2 R \Rho_2^2}\left[a_{\rho x} a_{px} \rho_x p_x \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) \sin\left(\dfrac{a_{px} \pi x}{L}\right)+a_{\rho y} a_{py} \rho_y p_y \sin\left(\dfrac{a_{\rho y} \pi y}{L}\right) \cos\left(\dfrac{a_{py} \pi y}{L}\right)\right]+\\
-- \dfrac{2\pi^2 k \PP_2 }{L^2 R \Rho_2^3}\left[a_{\rho x}^2 \rho_x^2 \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)^2+a_{\rho y}^2 \rho_y^2 \sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)^2\right] +\\
-+\dfrac{\pi^2 \mu U_2 }{3L^2} \left[4 a_{ux}^2 u_x \sin\left(\dfrac{a_{ux} \pi x}{L}\right)+3a_{uy}^2 u_y \cos\left(\dfrac{a_{uy} \pi y}{L}\right) \right] +\\
-+\dfrac{\pi^2 \mu \V_2 }{3L^2} \left[3 a_{vx}^2 v_x \cos\left(\dfrac{a_{vx} \pi x}{L}\right)+4a_{vy}^2 v_y \sin\left(\dfrac{a_{vy} \pi y}{L}\right) \right] +\\
-- \dfrac{\pi^2 \mu }{3L^2}\left[4 a_{ux}^2 u_x^2 \cos\left(\dfrac{a_{ux} \pi x}{L}\right)^2+3 a_{uy}^2 u_y^2 \sin\left(\dfrac{a_{uy} \pi y}{L}\right)^2-4 v_y a_{ux} a_{vy} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right) \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right.+\\
-    \qquad\left.+6 v_x a_{uy} a_{vx} u_y \sin\left(\dfrac{a_{uy} \pi y}{L}\right) \sin\left(\dfrac{a_{vx} \pi x}{L}\right)+3 v_x^2 a_{vx}^2 \sin\left(\dfrac{a_{vx} \pi x}{L}\right)^2+4 v_y^2 a_{vy}^2 \cos\left(\dfrac{a_{vy} \pi y}{L}\right)^2\right].
- 
-\f]
+\begin{equation}
+ \begin{split}\label{eq:source_e_2d}
+Q_{e_t} &=\dfrac{ a_{\rho x} \pi \rho_x  U_2 (U_2^2+\V_2^2)}{2L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+&-\dfrac{ a_{\rho y} \pi \rho_y \V_2 (U_2^2+\V_2^2) }{2L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right) +\\
+&-\dfrac{\gamma}{\gamma-1}\dfrac{a_{px} \pi p_x  U_2}{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
+&+  \dfrac{\gamma}{\gamma-1}\dfrac{a_{py}\pi p_y  \V_2}{L}\cos\left(\dfrac{a_{py} \pi y}{L}\right)+\\
+&+ \dfrac{ \pi \Rho_2 U_2^2}{2L}\left[3 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right]+\\
+&-\dfrac{\pi \Rho_2 U_2 \V_2}{L}\left[a_{uy} u_y \sin\left(\dfrac{a_{uy} \pi y}{L}\right)+a_{vx}  v_x\sin\left(\dfrac{a_{vx} \pi x}{L}\right)\right] +\\
+&+\dfrac{\pi \Rho_2 \V_2^2}{2L} \left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+3 a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right] +\\
+&+ \dfrac{\gamma}{\gamma-1}\dfrac{\pi \PP_2}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right]+\\
+&+\dfrac{ \pi^2 k}{L^2 R \Rho_2}\left[a_{px}^2 p_x \cos\left(\dfrac{a_{px} \pi x}{L}\right)+a_{py}^2 p_y \sin\left(\dfrac{a_{py} \pi y}{L}\right)\right] +\\
+&-\dfrac{\pi^2 k \PP_2}{L^2 R \Rho_2^2}\left[a_{\rho x}^2 \rho_x \sin\left(\dfrac{a_{\rho x} \pi x}{L}\right)+a_{\rho y}^2 \rho_y \cos\left(\dfrac{a_{\rho y} \pi y}{L}\right)\right] +\\
+&-\dfrac{ 2 \pi^2 k }{L^2 R \Rho_2^2}\left[a_{\rho x} a_{px} \rho_x p_x \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) \sin\left(\dfrac{a_{px} \pi x}{L}\right)+a_{\rho y} a_{py} \rho_y p_y \sin\left(\dfrac{a_{\rho y} \pi y}{L}\right) \cos\left(\dfrac{a_{py} \pi y}{L}\right)\right]+\\
+&- \dfrac{2\pi^2 k \PP_2 }{L^2 R \Rho_2^3}\left[a_{\rho x}^2 \rho_x^2 \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)^2+a_{\rho y}^2 \rho_y^2 \sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)^2\right] +\\
+&+\dfrac{\pi^2 \mu U_2 }{3L^2} \left[4 a_{ux}^2 u_x \sin\left(\dfrac{a_{ux} \pi x}{L}\right)+3a_{uy}^2 u_y \cos\left(\dfrac{a_{uy} \pi y}{L}\right) \right] +\\
+&+\dfrac{\pi^2 \mu \V_2 }{3L^2} \left[3 a_{vx}^2 v_x \cos\left(\dfrac{a_{vx} \pi x}{L}\right)+4a_{vy}^2 v_y \sin\left(\dfrac{a_{vy} \pi y}{L}\right) \right] +\\
+&- \dfrac{\pi^2 \mu }{3L^2}\left[4 a_{ux}^2 u_x^2 \cos\left(\dfrac{a_{ux} \pi x}{L}\right)^2+3 a_{uy}^2 u_y^2 \sin\left(\dfrac{a_{uy} \pi y}{L}\right)^2-4 v_y a_{ux} a_{vy} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right) \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right.+\\
+    &\qquad\left.+6 v_x a_{uy} a_{vx} u_y \sin\left(\dfrac{a_{uy} \pi y}{L}\right) \sin\left(\dfrac{a_{vx} \pi x}{L}\right)+3 v_x^2 a_{vx}^2 \sin\left(\dfrac{a_{vx} \pi x}{L}\right)^2+4 v_y^2 a_{vy}^2 \cos\left(\dfrac{a_{vy} \pi y}{L}\right)^2\right].
+ \end{split}
+\end{equation}
 
 
 
-\section 2dcns 3D Steady Navier--Stokes equations
+\section{3D Steady Navier--Stokes equations}
 
 The manufactured analytical solution for for each one of the variables in the 3D steady Navier--Stokes equations are:
-\f[
+\begin{equation}
+\begin{split}
+\label{eq:manufactured_3d}
+\rho\left( x ,y ,z\right) &=  \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho  x} \pi x}{L}\right)+ \rho_{y} \cos\left(\frac{a_{ \rho  y} \pi y}{L}\right) + \rho_{z} \sin\left(\frac{a_{ \rho  z} \pi z}{L}\right) ,\\
+u\left( x ,y ,z\right) &= u_{0}+u_{x} \sin\left(\frac{a_{u  x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u  y} \pi y}{L}\right)+u_{z} \cos\left(\frac{a_{u  z} \pi z}{L}\right) ,\\
+v\left( x ,y ,z\right) &= v_{0}+v_{x} \cos\left(\frac{a_{v  x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v  y} \pi y}{L}\right)+v_{z} \sin\left(\frac{a_{v  z} \pi z}{L}\right), \\
+w\left( x ,y ,z\right) &= w_{0}+w_{x} \sin\left(\frac{a_{w  x} \pi x}{L}\right)+w_{y} \sin\left(\frac{a_{w  y} \pi y}{L}\right)+ w_{z} \cos\left(\frac{a_{w  z} \pi z}{L}\right) ,\\
+p\left( x ,y ,z\right) &= p_{0}+p_{x} \cos\left(\frac{a_{p  x} \pi x}{L}\right)+p_{y} \sin\left(\frac{a_{p  y} \pi y}{L}\right)+ p_{z} \cos\left(\frac{a_{p  z} \pi z}{L}\right).\\
+\end{split}
+\end{equation}
 
 
-\rho\left( x ,y ,z\right) =  \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho  x} \pi x}{L}\right)+ \rho_{y} \cos\left(\frac{a_{ \rho  y} \pi y}{L}\right) + \rho_{z} \sin\left(\frac{a_{ \rho  z} \pi z}{L}\right) ,\\
-u\left( x ,y ,z\right) = u_{0}+u_{x} \sin\left(\frac{a_{u  x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u  y} \pi y}{L}\right)+u_{z} \cos\left(\frac{a_{u  z} \pi z}{L}\right) ,\\
-v\left( x ,y ,z\right) = v_{0}+v_{x} \cos\left(\frac{a_{v  x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v  y} \pi y}{L}\right)+v_{z} \sin\left(\frac{a_{v  z} \pi z}{L}\right), \\
-w\left( x ,y ,z\right) = w_{0}+w_{x} \sin\left(\frac{a_{w  x} \pi x}{L}\right)+w_{y} \sin\left(\frac{a_{w  y} \pi y}{L}\right)+ w_{z} \cos\left(\frac{a_{w  z} \pi z}{L}\right) ,\\
-p\left( x ,y ,z\right) = p_{0}+p_{x} \cos\left(\frac{a_{p  x} \pi x}{L}\right)+p_{y} \sin\left(\frac{a_{p  y} \pi y}{L}\right)+ p_{z} \cos\left(\frac{a_{p  z} \pi z}{L}\right).\\
-
-\f]
-
-The MMS applied to 3D Navier--Stokes equations consists in modifying Equations by adding a 
-source term to the right-hand side of each equation:
-\f[
-
-
-\Diff{\rho u}{x}+\Diff{\rho v}{y} + \Diff{\rho w}{z} = Q_\rho\\
- \Diff{\rho u^2 }{x}+\Diff{\rho uv}{y} +\Diff{\rho uw}{z} +\Diff{p}{x}-\Diff{\tau_{xx}}{x}-\Diff{\tau_{xy}}{y}-\Diff{\tau_{xz}}{z}= Q_u,\\
-\Diff{\rho uv }{x}+\Diff{\rho v^2}{y} +\Diff{\rho vw}{z}+\Diff{p}{y}-\Diff{\tau_{yx}}{x}-\Diff{\tau_{yy}}{y}-\Diff{\tau_{yz}}{z}= Q_v,\\
-\Diff{\rho uw }{ x}+\Diff{\rho  vw }{ y}+\Diff{\rho w^2 }{ z}+\Diff{p}{z}-\Diff{\tau_{zx}}{x}-\Diff{\tau_{zy}}{y}-\Diff{\tau_{zz}}{z}=Q_w,\\
-\Diff{\rho u e_t}{x}+\Diff{\rho v e_t}{y}+\Diff{\rho we_t}{z}+\Diff{pu}{x}+\Diff{pv}{y}+\Diff{pw}{z} +\Diff{q_x}{x} +\Diff{q_y}{y} +\Diff{q_z}{z}+\\
-    \qquad-\Diff{u\tau_{xx}+v\tau_{xy}+w\tau_{xz}}{x}-\Diff{u\tau_{yx}+v\tau_{yy}+w\tau_{yz}}{y}-\Diff{u\tau_{zx}+v\tau_{zy}+w\tau_{zz}}{y}=Q_{e_t},
-
-\f]
-so this modified set of equations has for analytical solution Equation.
-
-
-Analogously to the 1D and 2D cases, the source terms \f$Q_\rho\f$, \f$Q_u\f$, \f$Q_v\f$, \f$Q_w\f$ and \f$Q_{e_t}\f$ are  presented with the use of the following auxiliary variables:
-\f[
- 
-
-\Rho_3 = \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho  x} \pi x}{L}\right)+ \rho_{y} \cos\left(\frac{a_{ \rho  y} \pi y}{L}\right) + \rho_{z} \sin\left(\frac{a_{ \rho  z} \pi z}{L}\right),\\
-U_3 =u_{0}+u_{x} \sin\left(\frac{a_{u  x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u  y} \pi y}{L}\right)+u_{z} \cos\left(\frac{a_{u  z} \pi z}{L}\right) ,\\
-\V_3 = v_{0}+v_{x} \cos\left(\frac{a_{v  x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v  y} \pi y}{L}\right)+v_{z} \sin\left(\frac{a_{v  z} \pi z}{L}\right), \\
-\W_3 = w_{0}+w_{x} \sin\left(\frac{a_{w  x} \pi x}{L}\right)+w_{y} \sin\left(\frac{a_{w  y} \pi y}{L}\right)+ w_{z} \cos\left(\frac{a_{w  z} \pi z}{L}\right) ,\\
-\PP_3 = p_{0}+p_{x} \cos\left(\frac{a_{p  x} \pi x}{L}\right)+p_{y} \sin\left(\frac{a_{p  y} \pi y}{L}\right)+ p_{z} \cos\left(\frac{a_{p  z} \pi z}{L}\right).\\
-
-\f]
-where, again, the subscripts in \f$\Rho_3\f$, \f$\PP_3\f$, \f$U_3\f$, \f$\V_3\f$ and \f$\W_3\f$ refer to the 3D case.
-
-
-\subsection 3dmass 3D Mass Conservation
-
-The source term \f$Q_{\rho}\f$ for the 3D mass conservation equation is:
-\f[
- 
-Q_\rho =\dfrac{ a_{\rho x} \pi \rho_x U_3}{L} \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
--\dfrac{a_{\rho y} \pi \rho_y \V_3 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
-+\dfrac{a_{\rho z} \pi \rho_z \W_3 }{L}\cos\left(\dfrac{a_{\rho z}\pi z }{L}\right)+\\
-+\dfrac{\pi \Rho_3}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz}\pi z }{L}\right)\right].
- 
-\f]
-
-\subsection 3dmom 3D Momentum
-
-The source terms \f$Q_{u}\f$, \f$Q_{v}\f$ and \f$Q_{w}\f$ for the 3D momentum equations the in \f$x\f$, \f$y\f$ and \f$z\f$ directions are, respectively:
+The MMS applied to 3D Navier--Stokes equations consists in modifying Equations~(\ref{eq:ns_01})--(\ref{eq:ns_03}) by adding a source term to the right-hand side of each equation:
+\begin{equation}
+\begin{split}
+\label{eq:ns_3d_mod}
+&\Diff{\rho u}{x}+\Diff{\rho v}{y} + \Diff{\rho w}{z} = Q_\rho\\
 %
-\f[
- 
-Q_u = \dfrac{a_{\rho x} \pi \rho_x U_3^2 }{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
--\dfrac{a_{\rho y} \pi \rho_y U_3 \V_3 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
-+\dfrac{a_{\rho z} \pi \rho_z U_3 \W_3 }{L}\cos\left(\dfrac{a_{\rho z}\pi z }{L}\right)+\\
--\dfrac{a_{px} \pi p_x }{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right)+\\
-+\dfrac{\pi \Rho_3 U_3}{L}\left[2 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz}\pi z }{L}\right)\right]+\\
--\dfrac{a_{uy} \pi u_y \Rho_3 \V_3}{L} \sin\left(\dfrac{a_{uy} \pi y}{L}\right)+\\
--\dfrac{a_{uz} \pi u_z \Rho_3 \W_3 }{L}\sin\left(\dfrac{a_{uz}\pi z }{L}\right)+\\
-+ \dfrac{4 a_{ux}^2 \pi^2  u_x \mu}{3L^2}\sin\left(\dfrac{ a_{ux}\pi x}{L}\right) +\\
-+ \dfrac{a_{uy}^2 \pi^2 u_y \mu}{L^2}\cos\left(\dfrac{a_{uy} \pi y}{L}\right) +\\
-+ \dfrac{a_{uz}^2 \pi^2 u_z \mu}{L^2}\cos\left(\dfrac{a_{uz} \pi z}{L}\right)
+ &\Diff{\rho u^2 }{x}+\Diff{\rho uv}{y} +\Diff{\rho uw}{z} +\Diff{p}{x}-\Diff{\tau_{xx}}{x}-\Diff{\tau_{xy}}{y}-\Diff{\tau_{xz}}{z}= Q_u,\\
+%
+&\Diff{\rho uv }{x}+\Diff{\rho v^2}{y} +\Diff{\rho vw}{z}+\Diff{p}{y}-\Diff{\tau_{yx}}{x}-\Diff{\tau_{yy}}{y}-\Diff{\tau_{yz}}{z}= Q_v,\\
+%
+&\Diff{\rho uw }{ x}+\Diff{\rho  vw }{ y}+\Diff{\rho w^2 }{ z}+\Diff{p}{z}-\Diff{\tau_{zx}}{x}-\Diff{\tau_{zy}}{y}-\Diff{\tau_{zz}}{z}=Q_w,\\
+%
+&\Diff{\rho u e_t}{x}+\Diff{\rho v e_t}{y}+\Diff{\rho we_t}{z}+\Diff{pu}{x}+\Diff{pv}{y}+\Diff{pw}{z} +\Diff{q_x}{x} +\Diff{q_y}{y} +\Diff{q_z}{z}+\\
+    &\qquad-\Diff{u\tau_{xx}+v\tau_{xy}+w\tau_{xz}}{x}-\Diff{u\tau_{yx}+v\tau_{yy}+w\tau_{yz}}{y}-\Diff{u\tau_{zx}+v\tau_{zy}+w\tau_{zz}}{y}=Q_{e_t},
+\end{split}
+\end{equation}
+so this modified set of equations has for analytical solution Equation (\ref{eq:manufactured_3d}).
+
+Analogously to the 1D and 2D cases, the source terms $Q_\rho$, $Q_u$, $Q_v$, $Q_w$ and $Q_{e_t}$ are  presented with the use of the following auxiliary variables:
+\begin{equation*}
+ \begin{split}
+\label{eq:aux}
+\Rho_3 &= \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho  x} \pi x}{L}\right)+ \rho_{y} \cos\left(\frac{a_{ \rho  y} \pi y}{L}\right) + \rho_{z} \sin\left(\frac{a_{ \rho  z} \pi z}{L}\right),\\
+U_3 &=u_{0}+u_{x} \sin\left(\frac{a_{u  x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u  y} \pi y}{L}\right)+u_{z} \cos\left(\frac{a_{u  z} \pi z}{L}\right) ,\\
+\V_3 &= v_{0}+v_{x} \cos\left(\frac{a_{v  x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v  y} \pi y}{L}\right)+v_{z} \sin\left(\frac{a_{v  z} \pi z}{L}\right), \\
+\W_3 &= w_{0}+w_{x} \sin\left(\frac{a_{w  x} \pi x}{L}\right)+w_{y} \sin\left(\frac{a_{w  y} \pi y}{L}\right)+ w_{z} \cos\left(\frac{a_{w  z} \pi z}{L}\right) ,\\
+\PP_3 &= p_{0}+p_{x} \cos\left(\frac{a_{p  x} \pi x}{L}\right)+p_{y} \sin\left(\frac{a_{p  y} \pi y}{L}\right)+ p_{z} \cos\left(\frac{a_{p  z} \pi z}{L}\right).\\
+\end{split}
+\end{equation*}
+where, again, the subscripts in $\Rho_3$, $\PP_3$, $U_3$, $\V_3$ and $\W_3$ refer to the 3D case.
+
+\subsection{3D Mass Conservation}
+
+The source term $Q_{\rho}$ for the 3D mass conservation equation is:
+\begin{equation}
+ \begin{split}
+Q_\rho &=\dfrac{ a_{\rho x} \pi \rho_x U_3}{L} \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+&-\dfrac{a_{\rho y} \pi \rho_y \V_3 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
+&+\dfrac{a_{\rho z} \pi \rho_z \W_3 }{L}\cos\left(\dfrac{a_{\rho z}\pi z }{L}\right)+\\
+&+\dfrac{\pi \Rho_3}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz}\pi z }{L}\right)\right].
+ \end{split}
+\end{equation}
+
+\subsection{3D Momentum}
+
+The source terms $Q_{u}$, $Q_{v}$ and $Q_{w}$ for the 3D momentum equations the in $x$, $y$ and $z$ directions are, respectively:
+%
+\begin{equation}
+ \begin{split}
+Q_u &= \dfrac{a_{\rho x} \pi \rho_x U_3^2 }{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+&-\dfrac{a_{\rho y} \pi \rho_y U_3 \V_3 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
+&+\dfrac{a_{\rho z} \pi \rho_z U_3 \W_3 }{L}\cos\left(\dfrac{a_{\rho z}\pi z }{L}\right)+\\
+&-\dfrac{a_{px} \pi p_x }{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right)+\\
+&+\dfrac{\pi \Rho_3 U_3}{L}\left[2 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz}\pi z }{L}\right)\right]+\\
+&-\dfrac{a_{uy} \pi u_y \Rho_3 \V_3}{L} \sin\left(\dfrac{a_{uy} \pi y}{L}\right)+\\
+&-\dfrac{a_{uz} \pi u_z \Rho_3 \W_3 }{L}\sin\left(\dfrac{a_{uz}\pi z }{L}\right)+\\
+&+ \dfrac{4 a_{ux}^2 \pi^2  u_x \mu}{3L^2}\sin\left(\dfrac{ a_{ux}\pi x}{L}\right) +\\
+&+ \dfrac{a_{uy}^2 \pi^2 u_y \mu}{L^2}\cos\left(\dfrac{a_{uy} \pi y}{L}\right) +\\
+&+ \dfrac{a_{uz}^2 \pi^2 u_z \mu}{L^2}\cos\left(\dfrac{a_{uz} \pi z}{L}\right)
 ,
- 
-\f]
+ \end{split}
+\end{equation}
 
-\f[
- 
-Q_v = \dfrac{a_{\rho x} \pi \rho_x U_3 \V_3 }{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
--\dfrac{a_{\rho y} \pi \rho_y \V_3^2 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
-+\dfrac{a_{\rho z} \pi \rho_z \V_3 \W_3 }{L}\cos\left(\dfrac{a_{\rho z}\pi z }{L}\right)+\\
-+\dfrac{a_{py} \pi p_y }{L}\cos\left(\dfrac{a_{py} \pi y}{L}\right)+\\
--\dfrac{a_{vx} \pi v_x \Rho_3 U_3 }{L}\sin\left(\dfrac{a_{vx} \pi x}{L}\right)+\\
-+\dfrac{\pi \Rho_3 \V_3}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+2 a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz}\pi z }{L}\right)\right]+\\
-+\dfrac{a_{vz} \pi v_z \Rho_3 \W_3 }{L}\cos\left(\dfrac{a_{vz}\pi z }{L}\right)+\\
-+\dfrac{a_{vx}^2 \pi^2 v_x \mu }{L^2}\cos\left(\dfrac{a_{vx} \pi x}{L}\right) +\\
-+\dfrac{4a_{vy}^2 \pi^2 v_y \mu  }{3L^2}\sin\left(\dfrac{a_{vy} \pi y}{L}\right) +\\
-+\dfrac{a_{vz}^2 \pi^2 v_z \mu }{L^2}\sin\left(\dfrac{a_{vz} \pi z}{L}\right) ,
- 
-\f]
+\begin{equation}
+ \begin{split}
+Q_v &= \dfrac{a_{\rho x} \pi \rho_x U_3 \V_3 }{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+&-\dfrac{a_{\rho y} \pi \rho_y \V_3^2 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
+&+\dfrac{a_{\rho z} \pi \rho_z \V_3 \W_3 }{L}\cos\left(\dfrac{a_{\rho z}\pi z }{L}\right)+\\
+&+\dfrac{a_{py} \pi p_y }{L}\cos\left(\dfrac{a_{py} \pi y}{L}\right)+\\
+&-\dfrac{a_{vx} \pi v_x \Rho_3 U_3 }{L}\sin\left(\dfrac{a_{vx} \pi x}{L}\right)+\\
+&+\dfrac{\pi \Rho_3 \V_3}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+2 a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz}\pi z }{L}\right)\right]+\\
+&+\dfrac{a_{vz} \pi v_z \Rho_3 \W_3 }{L}\cos\left(\dfrac{a_{vz}\pi z }{L}\right)+\\
+&+\dfrac{a_{vx}^2 \pi^2 v_x \mu }{L^2}\cos\left(\dfrac{a_{vx} \pi x}{L}\right) +\\
+&+\dfrac{4a_{vy}^2 \pi^2 v_y \mu  }{3L^2}\sin\left(\dfrac{a_{vy} \pi y}{L}\right) +\\
+&+\dfrac{a_{vz}^2 \pi^2 v_z \mu }{L^2}\sin\left(\dfrac{a_{vz} \pi z}{L}\right) ,
+ \end{split}
+\end{equation}
 and
+\begin{equation}
+ \begin{split}
+Q_w &= \dfrac{a_{\rho x} \pi \rho_x U_3 \W_3}{L} \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+&-\dfrac{a_{\rho y} \pi \rho_y \V_3 \W_3 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
+&+\dfrac{a_{\rho z} \pi \rho_z \W_3^2 }{L}\cos\left(\dfrac{a_{\rho z}\pi z }{L}\right)+\\
+&-\dfrac{a_{pz} \pi p_z }{L}\sin\left(\dfrac{a_{pz}\pi z }{L}\right)+\\
+&+\dfrac{a_{wx} \pi w_x \Rho_3 U_3 }{L}\cos\left(\dfrac{a_{wx} \pi x}{L}\right)+\\
+&+\dfrac{a_{wy} \pi w_y \Rho_3 \V_3}{L}\cos\left(\dfrac{a_{wy} \pi y}{L}\right) +\\
+&+\dfrac{\pi \Rho_3 \W_3}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-2 a_{wz} w_z \sin\left(\dfrac{a_{wz}\pi z }{L}\right)\right]+\\
+&+\dfrac{a_{wx}^2 \pi^2 w_x \mu }{L^2}\sin\left(\dfrac{a_{wx} \pi x}{L}\right) +\\
+&+\dfrac{a_{wy}^2 \pi^2 w_y \mu }{L^2}\sin\left(\dfrac{a_{wy} \pi y}{L}\right) +\\
+&+\dfrac{4 a_{wz}^2 \pi^2 w_z \mu }{3L^2}\cos\left(\dfrac{a_{wz} \pi z}{L}\right) .
+ \end{split}
+\end{equation}
+
+\subsection{3D Total Energy}
+
+Finally, the source term $Q_{e_t}$ for the 3D total energy equation is:
+\begin{equation}
+ \begin{split}\label{eq:ns_3d_e}
+Q_{e_t} &= \dfrac{a_{\rho x} \pi \rho_x U_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
+&- \dfrac{a_{\rho y} \pi \rho_y \V_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
+&+  \dfrac{a_{\rho z} \pi \rho_z \W_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\cos\left(\dfrac{a_{\rho z} \pi z}{L}\right)+\\
+&-\dfrac{\gamma}{\gamma-1}\dfrac{a_{px} \pi p_x  U_3}{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
+&+\dfrac{\gamma}{\gamma-1}\dfrac{a_{py} \pi p_y \V_3}{L}\cos\left(\dfrac{a_{py} \pi y}{L}\right) +\\
+&-\dfrac{\gamma}{\gamma-1}\dfrac{a_{pz}\pi  p_z  \W_3}{L}\sin\left(\dfrac{a_{pz} \pi z}{L}\right) +\\
+&+ \dfrac{\gamma}{\gamma-1}\dfrac{\PP_3 \pi}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz} \pi z}{L}\right)\right] +\\
+&+\dfrac{\pi \Rho_3 U_3^2}{2L}\left[3 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz} \pi z}{L}\right)\right]+\\
+&-\dfrac{\pi \Rho_3 U_3 \V_3}{L}\left[a_{uy} u_y \sin\left(\dfrac{a_{uy} \pi y}{L}\right)+a_{vx} v_x \sin\left(\dfrac{a_{vx} \pi x}{L}\right)\right] +\\
+&-\dfrac{\pi \Rho_3 U_3 \W_3}{L}\left[a_{uz} u_z \sin\left(\dfrac{a_{uz} \pi z}{L}\right)-a_{wx} w_x \cos\left(\dfrac{a_{wx} \pi x}{L}\right)\right] +\\
+&+\dfrac{\pi \Rho_3 \V_3^2}{2L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+3 a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz} \pi z}{L}\right)\right] +\\
+&+ \dfrac{\pi \Rho_3 \V_3 \W_3}{L}\left[a_{vz} v_z \cos\left(\dfrac{a_{vz} \pi z}{L}\right)+a_{wy} w_y \cos\left(\dfrac{a_{wy} \pi y}{L}\right)\right]+\\
+&+\dfrac{\pi \Rho_3 \W_3^2}{2L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-3 a_{wz} w_z \sin\left(\dfrac{a_{wz} \pi z}{L}\right)\right]+\\
+&+
+ \end{split}
+\end{equation}
+\begin{equation}
+ \begin{split}
+&+\dfrac{ \pi^2 k}{L^2 R \Rho_3}\left[a_{px}^2 p_x \cos\left(\dfrac{a_{px} \pi x}{L}\right)+a_{py}^2 p_y \sin\left(\dfrac{a_{py} \pi y}{L}\right)+a_{pz}^2 p_z \cos\left(\dfrac{a_{pz} \pi z}{L}\right)\right] +\\
+&-\dfrac{ \pi^2 k \PP_3}{L^2 R \Rho_3^2}\left[a_{\rho x}^2 \rho_x \sin\left(\dfrac{a_{\rho x} \pi x}{L}\right)+a_{\rho y}^2 \rho_y \cos\left(\dfrac{a_{\rho y} \pi y}{L}\right)+a_{\rho z}^2 \rho_z \sin\left(\dfrac{a_{\rho z} \pi z}{L}\right)\right] +\\
+&- \dfrac{2 \pi^2 k}{L^2 R \Rho_3^2}\left[a_{\rho x} a_{px} \rho_x p_x \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) \sin\left(\dfrac{a_{px} \pi x}{L}\right)+a_{\rho y} a_{py} \rho_y p_y \sin\left(\dfrac{a_{\rho y} \pi y}{L}\right) \cos\left(\dfrac{a_{py} \pi y}{L}\right)\right.+\\
+    &\qquad\left.+a_{pz} a_{\rho z} p_z \rho_z \cos\left(\dfrac{a_{\rho z} \pi z}{L}\right) \sin\left(\dfrac{a_{pz} \pi z}{L}\right)\right] +\\
+&-  \dfrac{2\pi^2 k \PP_3}{L^2 R \Rho_3^3}\left[a_{\rho x}^2 \rho_x^2 \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)^2+a_{\rho y}^2 \rho_y^2 \sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)^2+a_{\rho z}^2 \rho_z^2 \cos\left(\dfrac{a_{\rho z} \pi z}{L}\right)^2\right] +\\
+&+ \dfrac{ \pi^2 \mu U_3 }{3L^2}\left[4 a_{ux}^2 u_x \sin\left(\dfrac{a_{ux} \pi x}{L}\right)+3 a_{uy}^2 u_y \cos\left(\dfrac{a_{uy} \pi y}{L}\right)+3 a_{uz}^2 u_z \cos\left(\dfrac{a_{uz} \pi z}{L}\right)\right]+\\
+&+ \dfrac{\pi^2 \mu \V_3}{3L^2}\left[3 a_{vx}^2 v_x \cos\left(\dfrac{a_{vx} \pi x}{L}\right)+4 a_{vy}^2 v_y \sin\left(\dfrac{a_{vy} \pi y}{L}\right)+3 a_{vz}^2 v_z \sin\left(\dfrac{a_{vz} \pi z}{L}\right)\right]  +\\
+&+\dfrac{\pi^2 \mu \W_3 }{3L^2}\left[3 a_{wx}^2 w_x \sin\left(\dfrac{a_{wx} \pi x}{L}\right)+3 a_{wy}^2 w_y \sin\left(\dfrac{a_{wy} \pi y}{L}\right)+4 a_{wz}^2 w_z \cos\left(\dfrac{a_{wz} \pi z}{L}\right)\right] +\\
+&-\dfrac{\pi^2 \mu}{3L^2} \left[4 a_{ux}^2 u_x^2 \cos\left(\dfrac{a_{ux} \pi x}{L}\right)^2-4 a_{ux} a_{vy} u_x v_y \cos\left(\dfrac{a_{ux} \pi x}{L}\right) \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right.+\\
+    &\qquad+4 a_{ux} a_{wz} u_x w_z \cos\left(\dfrac{a_{ux} \pi x}{L}\right) \sin\left(\dfrac{a_{wz} \pi z}{L}\right)+3 a_{uy}^2 u_y^2 \sin\left(\dfrac{a_{uy} \pi y}{L}\right)^2+6 a_{uy} a_{vx} u_y v_x \sin\left(\dfrac{a_{uy} \pi y}{L}\right) \sin\left(\dfrac{a_{vx} \pi x}{L}\right)+\\
+    &\qquad+3 a_{uz}^2 u_z^2 \sin\left(\dfrac{a_{uz} \pi z}{L}\right)^2-6 a_{uz} a_{wx} u_z w_x \sin\left(\dfrac{a_{uz} \pi z}{L}\right) \cos\left(\dfrac{a_{wx} \pi x}{L}\right)+3 a_{vx}^2 v_x^2 \sin\left(\dfrac{a_{vx} \pi x}{L}\right)^2+\\
+    &\qquad+4 a_{vy}^2 v_y^2 \cos\left(\dfrac{a_{vy} \pi y}{L}\right)^2+4 a_{vy} a_{wz} v_y w_z \cos\left(\dfrac{a_{vy} \pi y}{L}\right) \sin\left(\dfrac{a_{wz} \pi z}{L}\right)+3 a_{vz}^2 v_z^2 \cos\left(\dfrac{a_{vz} \pi z}{L}\right)^2+\\
+    &\qquad+6 a_{vz} a_{wy} v_z w_y \cos\left(\dfrac{a_{vz} \pi z}{L}\right) \cos\left(\dfrac{a_{wy} \pi y}{L}\right)+3 a_{wx}^2 w_x^2 \cos\left(\dfrac{a_{wx} \pi x}{L}\right)^2+3 a_{wy}^2 w_y^2 \cos\left(\dfrac{a_{wy} \pi y}{L}\right)^2+\\
+    &\qquad\left.+4 a_{wz}^2 w_z^2 \sin\left(\dfrac{a_{wz} \pi z}{L}\right)^2\right]
+\end{split}
+\end{equation}
 
 
-\f[
- 
-Q_w = \dfrac{a_{\rho x} \pi \rho_x U_3 \W_3}{L} \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
--\dfrac{a_{\rho y} \pi \rho_y \V_3 \W_3 }{L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
-+\dfrac{a_{\rho z} \pi \rho_z \W_3^2 }{L}\cos\left(\dfrac{a_{\rho z}\pi z }{L}\right)+\\
--\dfrac{a_{pz} \pi p_z }{L}\sin\left(\dfrac{a_{pz}\pi z }{L}\right)+\\
-+\dfrac{a_{wx} \pi w_x \Rho_3 U_3 }{L}\cos\left(\dfrac{a_{wx} \pi x}{L}\right)+\\
-+\dfrac{a_{wy} \pi w_y \Rho_3 \V_3}{L}\cos\left(\dfrac{a_{wy} \pi y}{L}\right) +\\
-+\dfrac{\pi \Rho_3 \W_3}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-2 a_{wz} w_z \sin\left(\dfrac{a_{wz}\pi z }{L}\right)\right]+\\
-+\dfrac{a_{wx}^2 \pi^2 w_x \mu }{L^2}\sin\left(\dfrac{a_{wx} \pi x}{L}\right) +\\
-+\dfrac{a_{wy}^2 \pi^2 w_y \mu }{L^2}\sin\left(\dfrac{a_{wy} \pi y}{L}\right) +\\
-+\dfrac{4 a_{wz}^2 \pi^2 w_z \mu }{3L^2}\cos\left(\dfrac{a_{wz} \pi z}{L}\right) .
- 
-\f]
 
-\subsection 3dtot 3D Total Energy
+\section{Comments}
+The complexity, and consequently length, of the source terms increase with both dimension and physics handled by the governing equations. In some cases, such as the 3D energy equation, the final expression for $Q_{e_t}$ may reach 158,000 characters, including parenthesis and mathematical operators, prior to factorization.
 
-Finally, the source term \f$Q_{e_t}\f$ for the 3D total energy equation is:
-\f[
- 
-Q_{e_t} = \dfrac{a_{\rho x} \pi \rho_x U_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
-- \dfrac{a_{\rho y} \pi \rho_y \V_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)+\\
-+  \dfrac{a_{\rho z} \pi \rho_z \W_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\cos\left(\dfrac{a_{\rho z} \pi z}{L}\right)+\\
--\dfrac{\gamma}{\gamma-1}\dfrac{a_{px} \pi p_x  U_3}{L}\sin\left(\dfrac{a_{px} \pi x}{L}\right) +\\
-+\dfrac{\gamma}{\gamma-1}\dfrac{a_{py} \pi p_y \V_3}{L}\cos\left(\dfrac{a_{py} \pi y}{L}\right) +\\
--\dfrac{\gamma}{\gamma-1}\dfrac{a_{pz}\pi  p_z  \W_3}{L}\sin\left(\dfrac{a_{pz} \pi z}{L}\right) +\\
-+ \dfrac{\gamma}{\gamma-1}\dfrac{\PP_3 \pi}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz} \pi z}{L}\right)\right] +\\
-+\dfrac{\pi \Rho_3 U_3^2}{2L}\left[3 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz} \pi z}{L}\right)\right]+\\
--\dfrac{\pi \Rho_3 U_3 \V_3}{L}\left[a_{uy} u_y \sin\left(\dfrac{a_{uy} \pi y}{L}\right)+a_{vx} v_x \sin\left(\dfrac{a_{vx} \pi x}{L}\right)\right] +\\
--\dfrac{\pi \Rho_3 U_3 \W_3}{L}\left[a_{uz} u_z \sin\left(\dfrac{a_{uz} \pi z}{L}\right)-a_{wx} w_x \cos\left(\dfrac{a_{wx} \pi x}{L}\right)\right] +\\
-+\dfrac{\pi \Rho_3 \V_3^2}{2L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+3 a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz} \pi z}{L}\right)\right] +\\
-+ \dfrac{\pi \Rho_3 \V_3 \W_3}{L}\left[a_{vz} v_z \cos\left(\dfrac{a_{vz} \pi z}{L}\right)+a_{wy} w_y \cos\left(\dfrac{a_{wy} \pi y}{L}\right)\right]+\\
-+\dfrac{\pi \Rho_3 \W_3^2}{2L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-3 a_{wz} w_z \sin\left(\dfrac{a_{wz} \pi z}{L}\right)\right]+\\
-+
- 
-\f]
-\f[
- 
-+\dfrac{ \pi^2 k}{L^2 R \Rho_3}\left[a_{px}^2 p_x \cos\left(\dfrac{a_{px} \pi x}{L}\right)+a_{py}^2 p_y \sin\left(\dfrac{a_{py} \pi y}{L}\right)+a_{pz}^2 p_z \cos\left(\dfrac{a_{pz} \pi z}{L}\right)\right] +\\
--\dfrac{ \pi^2 k \PP_3}{L^2 R \Rho_3^2}\left[a_{\rho x}^2 \rho_x \sin\left(\dfrac{a_{\rho x} \pi x}{L}\right)+a_{\rho y}^2 \rho_y \cos\left(\dfrac{a_{\rho y} \pi y}{L}\right)+a_{\rho z}^2 \rho_z \sin\left(\dfrac{a_{\rho z} \pi z}{L}\right)\right] +\\
-- \dfrac{2 \pi^2 k}{L^2 R \Rho_3^2}\left[a_{\rho x} a_{px} \rho_x p_x \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right) \sin\left(\dfrac{a_{px} \pi x}{L}\right)+a_{\rho y} a_{py} \rho_y p_y \sin\left(\dfrac{a_{\rho y} \pi y}{L}\right) \cos\left(\dfrac{a_{py} \pi y}{L}\right)\right.+\\
-    \qquad\left.+a_{pz} a_{\rho z} p_z \rho_z \cos\left(\dfrac{a_{\rho z} \pi z}{L}\right) \sin\left(\dfrac{a_{pz} \pi z}{L}\right)\right] +\\
--  \dfrac{2\pi^2 k \PP_3}{L^2 R \Rho_3^3}\left[a_{\rho x}^2 \rho_x^2 \cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)^2+a_{\rho y}^2 \rho_y^2 \sin\left(\dfrac{a_{\rho y} \pi y}{L}\right)^2+a_{\rho z}^2 \rho_z^2 \cos\left(\dfrac{a_{\rho z} \pi z}{L}\right)^2\right] +\\
-+ \dfrac{ \pi^2 \mu U_3 }{3L^2}\left[4 a_{ux}^2 u_x \sin\left(\dfrac{a_{ux} \pi x}{L}\right)+3 a_{uy}^2 u_y \cos\left(\dfrac{a_{uy} \pi y}{L}\right)+3 a_{uz}^2 u_z \cos\left(\dfrac{a_{uz} \pi z}{L}\right)\right]+\\
-+ \dfrac{\pi^2 \mu \V_3}{3L^2}\left[3 a_{vx}^2 v_x \cos\left(\dfrac{a_{vx} \pi x}{L}\right)+4 a_{vy}^2 v_y \sin\left(\dfrac{a_{vy} \pi y}{L}\right)+3 a_{vz}^2 v_z \sin\left(\dfrac{a_{vz} \pi z}{L}\right)\right]  +\\
-+\dfrac{\pi^2 \mu \W_3 }{3L^2}\left[3 a_{wx}^2 w_x \sin\left(\dfrac{a_{wx} \pi x}{L}\right)+3 a_{wy}^2 w_y \sin\left(\dfrac{a_{wy} \pi y}{L}\right)+4 a_{wz}^2 w_z \cos\left(\dfrac{a_{wz} \pi z}{L}\right)\right] +\\
--\dfrac{\pi^2 \mu}{3L^2} \left[4 a_{ux}^2 u_x^2 \cos\left(\dfrac{a_{ux} \pi x}{L}\right)^2-4 a_{ux} a_{vy} u_x v_y \cos\left(\dfrac{a_{ux} \pi x}{L}\right) \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right.+\\
-    \qquad+4 a_{ux} a_{wz} u_x w_z \cos\left(\dfrac{a_{ux} \pi x}{L}\right) \sin\left(\dfrac{a_{wz} \pi z}{L}\right)+3 a_{uy}^2 u_y^2 \sin\left(\dfrac{a_{uy} \pi y}{L}\right)^2+6 a_{uy} a_{vx} u_y v_x \sin\left(\dfrac{a_{uy} \pi y}{L}\right) \sin\left(\dfrac{a_{vx} \pi x}{L}\right)+\\
-    \qquad+3 a_{uz}^2 u_z^2 \sin\left(\dfrac{a_{uz} \pi z}{L}\right)^2-6 a_{uz} a_{wx} u_z w_x \sin\left(\dfrac{a_{uz} \pi z}{L}\right) \cos\left(\dfrac{a_{wx} \pi x}{L}\right)+3 a_{vx}^2 v_x^2 \sin\left(\dfrac{a_{vx} \pi x}{L}\right)^2+\\
-    \qquad+4 a_{vy}^2 v_y^2 \cos\left(\dfrac{a_{vy} \pi y}{L}\right)^2+4 a_{vy} a_{wz} v_y w_z \cos\left(\dfrac{a_{vy} \pi y}{L}\right) \sin\left(\dfrac{a_{wz} \pi z}{L}\right)+3 a_{vz}^2 v_z^2 \cos\left(\dfrac{a_{vz} \pi z}{L}\right)^2+\\
-    \qquad+6 a_{vz} a_{wy} v_z w_y \cos\left(\dfrac{a_{vz} \pi z}{L}\right) \cos\left(\dfrac{a_{wy} \pi y}{L}\right)+3 a_{wx}^2 w_x^2 \cos\left(\dfrac{a_{wx} \pi x}{L}\right)^2+3 a_{wy}^2 w_y^2 \cos\left(\dfrac{a_{wy} \pi y}{L}\right)^2+\\
-    \qquad\left.+4 a_{wz}^2 w_z^2 \sin\left(\dfrac{a_{wz} \pi z}{L}\right)^2\right]
+Applying commands in order to simplify such extensive expression is challenging even with a very good machine; thus, a suitable alternative to this issue is to simplify the equation by dividing it into a combination of sub-operators handling different physical phenomena. Then, each one of the operators may be applied to the manufactured solutions individually, and the resulting sub-source terms are combined back to represent the source term for the original equation.
 
-\f]
 
-\section comm Comments
-The complexity, and consequently length, of the source terms increase with both dimension 
-and physics handled by the governing equations. In some cases, such as the 3D energy equation, 
-the final expression for \f$Q_{e_t}\f$ may reach 158,000 characters, including parenthesis and 
-mathematical operators, prior to factorization.
 
-Applying commands in order to simplify such extensive expression is challenging even with a 
-very good machine; thus, a suitable alternative to this issue is to simplify the equation by 
-dividing it into a combination of sub-operators handling different physical phenomena. Then, each one 
-of the operators may be applied to the manufactured solutions individually, and the resulting subsource terms
-combined back to represent the source term for the original equation.
-For instance, instead of writing the three dimensional Navier-Stokes energy equation using one single operator
-\f$\Lo\f$:
-
-\f[
- 
+For instance, instead of writing the three-dimensional Navier-Stokes energy equation using one single operator~$\Lo$:
+\begin{equation}
+ \label{eq:ns2d_04}
 \Lo= \nabla \cdot (\rho\mathbf{u}e_t) +\nabla\cdot \mathbf{q} +  \nabla\cdot(p  \mathbf{u})  - \nabla \cdot (\bv{\tau} \cdot \mathbf{u}),
-\f]
+%\Diff{\rho e_t}{t}& + \nabla \cdot (\rho \mathbf{u} H)+\nabla\cdot \mathbf{q} - \nabla \cdot (\bv{\tau u})
+\end{equation}
+to then be used in the MMS, let Equation (\ref{eq:ns2d_04}) be written with four operators, according to their physical meaning:
+\begin{equation}
+ \begin{split}
+  \Lo_1&=\nabla \cdot (\rho\mathbf{u}e_t),\\
+  \Lo_2&=\nabla\cdot \mathbf{q},\\
+  \Lo_3&= \nabla\cdot(p  \mathbf{u}),\\
+  \Lo_4&=- \nabla \cdot (\bv{\tau} \cdot \mathbf{u}),
+ \end{split}
+\end{equation}
+where  $\Lo_1$ is the net rate of internal and kinetic energy increase by convection, $\Lo_2$ is the net rate of heat addition due to heat conduction, $\Lo_3$ is the rate of work done on the fluid by external body forces, and $\Lo_4$ is the rate of work done on the fluid by viscous forces. Naturally:
+$$\Lo=\Lo_1+\Lo_2+\Lo_3+\Lo_4.$$
 
-to then be used in the MMS, let Equation be written with four operators, according to their physical meaning:
-\f[
- 
-  \Lo_1=\nabla \cdot (\rho\mathbf{u}e_t),\\
-  \Lo_2=\nabla\cdot \mathbf{q},\\
-  \Lo_3= \nabla\cdot(p  \mathbf{u}),\\
-  \Lo_4=- \nabla \cdot (\bv{\tau} \cdot \mathbf{u}),
- 
-\f]
+ After the application of $\Lo_i$, $i=1,\dots,4$, the corresponding sub-source terms are also simplified, factorized and sorted. Then, the final factorized version is checked against the original one, to assure that not human error has been introduced.  This strategy allowed the original  158,000 character-long  expression for $Q_{e_t}$ to be reduced to less than 5,800, and expressed in Equation (\ref{eq:ns_3d_e}).
 
-where \f$\Lo_1\f$ is the net rate of internal and kinetic energy increase by convection, 
-\f$\Lo_2\f$ is the net rate of heat addition due to heat conduction, \f$\Lo_3\f$ is 
-the rate of work done on the fluid by external body forces, and \f$\Lo_4\f$ is the rate
- of work done on the fluid by viscous forces. Naturally:
-\f$\Lo=\Lo_1+\Lo_2+\Lo_3+\Lo_4.\f$
+\subsection{Boundary Conditions}
+Additionally to verifying code capability of solving the governing equations accurately in the interior of the domain of interest, one may also verify the software capability of correctly imposing boundary conditions. Therefore, the gradients of the  analytical solutions (\ref{eq:manufactured01}) have been calculated and translated into $C$ codes. For the 3D case, they are:
+\begin{equation*}
+\nabla  \rho= \left[ \begin{array}{c}
+ \dfrac{  a_{\rho x}  \pi \rho_x}{L} \cos\left( \dfrac{ a_{\rho x}  \pi  x}{L}\right)\vspace{5pt} \\
+-\dfrac{  a_{\rho y}  \pi \rho_y}{L} \sin\left( \dfrac{ a_{\rho y}  \pi  y}{L}\right)\vspace{5pt}\\
+ \dfrac{  a_{\rho z}  \pi \rho_z}{L}  \cos\left( \dfrac{ a_{\rho z}  \pi  z}{L}\right)
+\end{array} \right],
+\qquad
+\nabla p = \left[ \begin{array}{c}
+- \dfrac{  a_{px}  \pi p_x}{L} \sin\left( \dfrac{ a_{px}  \pi  x}{L}\right)\vspace{5pt}\\
+  \dfrac{  a_{py}  \pi p_y}{L} \cos\left( \dfrac{ a_{py}  \pi  y}{L}\right) \vspace{5pt}\\
+- \dfrac{  a_{pz}  \pi p_z}{L} \sin\left( \dfrac{ a_{pz}  \pi  z}{L}\right)
+\end{array} \right],
+\quad
+\nabla u = \left[ \begin{array}{c}
+  \dfrac{  a_{ux}  \pi u_x}{L} \cos\left( \dfrac{ a_{ux}  \pi  x}{L}\right)\vspace{5pt}\\
+ -   \dfrac{  a_{uy}  \pi u_y}{L} \sin\left( \dfrac{ a_{uy}  \pi  y}{L}\right)\vspace{5pt}\\
+ -   \dfrac{  a_{uz}  \pi u_z}{L} \sin\left( \dfrac{ a_{uz}  \pi  z}{L}\right)
+\end{array} \right],
+\end{equation*}
+\begin{equation*}
+\nabla  v= \left[ \begin{array}{c}
+-  \dfrac{  a_{vx}  \pi v_x}{L}  \sin\left( \dfrac{ a_{vx}  \pi  x}{L}\right)\vspace{5pt}\\
+    \dfrac{  a_{vy}  \pi v_y}{L} \cos\left( \dfrac{ a_{vy}  \pi  y}{L}\right)\vspace{5pt}\\
+   \dfrac{  a_{vz}  \pi v_z }{L} \cos\left( \dfrac{ a_{vz}  \pi  z}{L}\right)
+\end{array} \right]
+\quad\mbox{and}\quad
+\nabla w = \left[ \begin{array}{c}
+\dfrac{  a_{wx}  \pi  w_x}{L} \cos\left( \dfrac{ a_{wx}  \pi  x}{L}\right)\vspace{5pt}\\
+  \dfrac{  a_{wy}  \pi w_y}{L}  \cos\left( \dfrac{ a_{wy}  \pi  y}{L}\right)\vspace{5pt} \\
+ - \dfrac{  a_{wz}  \pi w_z}{L}  \sin\left( \dfrac{ a_{wz}  \pi  z}{L}\right)
+\end{array} \right].
+\end{equation*}
 
-After the application of \f$\Lo_i\f$, \f$i=1,\dots,4\f$, the corresponding subsource
-terms are also simplified, factorized and sorted. Then, the final factorized version is 
-checked against the original one, to assure that not human error has been introduced.  
-This strategy allowed the original  158,000 character long  expression for \f$Q_{e_t}\f$ 
-to be reduced to less than 5,800.
 
+\subsection{C Files}
+The $C$ files for both source terms and gradients of the  manufactured solutions are:
+\begin{itemize}
+ \item \texttt{NavierStokes\_1d\_steady\_codes.C},
+ \item \texttt{NavierStokes\_1d\_manuf\_solutions\_grad\_code.C}
+ \item \texttt{NavierStokes\_2d\_steady\_e\_code.C}
+ \item \texttt{NavierStokes\_2d\_steady\_rho\_code.C}
+ \item \texttt{NavierStokes\_2d\_steady\_u\_code.C}
+ \item \texttt{NavierStokes\_2d\_steady\_v\_code.C}
+ \item \texttt{NavierStokes\_2d\_manuf\_solutions\_grad\_code.C}
+ \item \texttt{NavierStokes\_3d\_steady\_e\_code.C}
+ \item \texttt{NavierStokes\_3d\_steady\_rho\_code.C}
+ \item \texttt{NavierStokes\_3d\_steady\_u\_code.C}
+ \item \texttt{NavierStokes\_3d\_steady\_v\_code.C}
+ \item \texttt{NavierStokes\_3d\_steady\_w\_code.C}
+ \item \texttt{NavierStokes\_3d\_manuf\_solutions\_grad\_code.C}
+\end{itemize}
+
+An example of the automatically generated $C$ file from the source term for the 3D total energy source term $Q_{e_t}$~is:
+
+\begin{small}
+\begin{verbatim}
+#include <math.h>
+
+double SourceQ_e (double x, double y, double z)
+{
+  double Q_e;
+  double RHO;
+  double P;
+  double U;
+  double V;
+  double W;
+  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)
+    + rho_z * sin(a_rhoz * PI * z / L);
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
+  W = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);
+  P = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_z * cos(a_pz * PI * z / L);
+
+  Q_e = -a_px * PI * p_x * U * sin(a_px * PI * x / L) / L
+  + a_py * PI * p_y * V * cos(a_py * PI * y / L) / L
+  - a_pz * p_z * PI * W * sin(a_pz * PI * z / L) / L
+  - (a_uy * u_y * sin(a_uy * PI * y / L) + a_vx * v_x * sin(a_vx * PI * x / L)) * PI * RHO * U * V / L
+  - (a_uz * u_z * sin(a_uz * PI * z / L) - a_wx * w_x * cos(a_wx * PI * x / L)) * PI * RHO * U * W / L
+  - a_px * PI * p_x * U * sin(a_px * PI * x / L) / (Gamma - 0.1e1) / L
+  - (0.2e1 * a_rhox * a_rhox * rho_x * rho_x * pow(cos(a_rhox * PI * x / L), 0.2e1)
+    + 0.2e1 * a_rhoy * a_rhoy * rho_y * rho_y * pow(sin(a_rhoy * PI * y / L), 0.2e1)
+    + 0.2e1 * a_rhoz * a_rhoz * rho_z * rho_z * pow(cos(a_rhoz * PI * z / L), 0.2e1))
+    * PI * PI * k * P * pow(L, -0.2e1) / R * pow(RHO, -0.3e1)
+  - a_pz * p_z * PI * W * sin(a_pz * PI * z / L) / (Gamma - 0.1e1) / L
+  - (a_rhox * a_rhox * rho_x * sin(a_rhox * PI * x / L)
+    + a_rhoy * a_rhoy * rho_y * cos(a_rhoy * PI * y / L)
+    + a_rhoz * a_rhoz * rho_z * sin(a_rhoz * PI * z / L))
+    * PI * PI * k * P * pow(L, -0.2e1) / R * pow(RHO, -0.2e1)
+  + a_py * PI * p_y * V * cos(a_py * PI * y / L) / (Gamma - 0.1e1) / L
+  + (U * U + V * V + W * W) * a_rhox * PI * rho_x * U * cos(a_rhox * PI * x / L) / L / 0.2e1
+  + (U * U + V * V + W * W) * a_rhoz * PI * rho_z * W * cos(a_rhoz * PI * z / L) / L / 0.2e1
+  + (0.4e1 * a_ux * a_ux * u_x * sin(a_ux * PI * x / L)
+    + 0.3e1 * a_uy * a_uy * u_y * cos(a_uy * PI * y / L)
+    + 0.3e1 * a_uz * a_uz * u_z * cos(a_uz * PI * z / L)) * PI * PI * mu * U * pow(L, -0.2e1) / 0.3e1
+  + (0.3e1 * a_vx * a_vx * v_x * cos(a_vx * PI * x / L)
+    + 0.4e1 * a_vy * a_vy * v_y * sin(a_vy * PI * y / L)
+    + 0.3e1 * a_vz * a_vz * v_z * sin(a_vz * PI * z / L)) * PI * PI * mu * V * pow(L, -0.2e1) / 0.3e1
+  + (0.3e1 * a_wx * a_wx * w_x * sin(a_wx * PI * x / L)
+    + 0.3e1 * a_wy * a_wy * w_y * sin(a_wy * PI * y / L)
+    + 0.4e1 * a_wz * a_wz * w_z * cos(a_wz * PI * z / L)) * PI * PI * mu * W * pow(L, -0.2e1) / 0.3e1
+  + (0.3e1 * a_ux * u_x * cos(a_ux * PI * x / L)
+    + a_vy * v_y * cos(a_vy * PI * y / L)
+    - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * U * U / L / 0.2e1
+  + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)
+    - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * P / (Gamma - 0.1e1) / L
+  + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.3e1 * a_vy * v_y * cos(a_vy * PI * y / L)
+    - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * V * V / L / 0.2e1
+  + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)
+    - 0.3e1 * a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * W * W / L / 0.2e1
+  - (0.2e1 * a_rhox * a_px * rho_x * p_x * cos(a_rhox * PI * x / L) * sin(a_px * PI * x / L)
+    + 0.2e1 * a_rhoy * a_py * rho_y * p_y * sin(a_rhoy * PI * y / L) * cos(a_py * PI * y / L)
+    + 0.2e1 * a_pz * a_rhoz * p_z * rho_z * cos(a_rhoz * PI * z / L) * sin(a_pz * PI * z / L))
+    * PI * PI * k * pow(L, -0.2e1) / R * pow(RHO, -0.2e1)
+  + (a_px * a_px * p_x * cos(a_px * PI * x / L) + a_py * a_py * p_y * sin(a_py * PI * y / L)
+    + a_pz * a_pz * p_z * cos(a_pz * PI * z / L)) * PI * PI * k * pow(L, -0.2e1) / R / RHO
+  + (a_vz * v_z * cos(a_vz * PI * z / L) + a_wy * w_y * cos(a_wy * PI * y / L)) * PI * RHO * V * W / L
+  - (U * U + V * V + W * W) * a_rhoy * PI * rho_y * V * sin(a_rhoy * PI * y / L) / L / 0.2e1
+  - (0.4e1 * a_ux * a_ux * u_x * u_x * pow(cos(a_ux * PI * x / L), 0.2e1)
+    - 0.4e1 * a_ux * a_vy * u_x * v_y * cos(a_ux * PI * x / L) * cos(a_vy * PI * y / L)
+    + 0.4e1 * a_ux * a_wz * u_x * w_z * cos(a_ux * PI * x / L) * sin(a_wz * PI * z / L)
+    + 0.3e1 * a_uy * a_uy * u_y * u_y * pow(sin(a_uy * PI * y / L), 0.2e1)
+    + 0.6e1 * a_uy * a_vx * u_y * v_x * sin(a_uy * PI * y / L) * sin(a_vx * PI * x / L)
+    + 0.3e1 * a_uz * a_uz * u_z * u_z * pow(sin(a_uz * PI * z / L), 0.2e1)
+    - 0.6e1 * a_uz * a_wx * u_z * w_x * sin(a_uz * PI * z / L) * cos(a_wx * PI * x / L)
+    + 0.3e1 * a_vx * a_vx * v_x * v_x * pow(sin(a_vx * PI * x / L), 0.2e1)
+    + 0.4e1 * a_vy * a_vy * v_y * v_y * pow(cos(a_vy * PI * y / L), 0.2e1)
+    + 0.4e1 * a_vy * a_wz * v_y * w_z * cos(a_vy * PI * y / L) * sin(a_wz * PI * z / L)
+    + 0.3e1 * a_vz * a_vz * v_z * v_z * pow(cos(a_vz * PI * z / L), 0.2e1)
+    + 0.6e1 * a_vz * a_wy * v_z * w_y * cos(a_vz * PI * z / L) * cos(a_wy * PI * y / L)
+    + 0.3e1 * a_wx * a_wx * w_x * w_x * pow(cos(a_wx * PI * x / L), 0.2e1)
+    + 0.3e1 * a_wy * a_wy * w_y * w_y * pow(cos(a_wy * PI * y / L), 0.2e1)
+    + 0.4e1 * a_wz * a_wz * w_z * w_z * pow(sin(a_wz * PI * z / L), 0.2e1))
+    * PI * PI * mu * pow(L, -0.2e1) / 0.3e1
+  + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)
+    - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * P / L;
+  return(Q_e);
+}
+\end{verbatim}
+\end{small}
+%---------------------------------------------------------------------------------------------------------
+\bibliographystyle{chicago} 
+\bibliography{../../MMS_bib}
+
+
+\endlatexonly
 
 */ 
