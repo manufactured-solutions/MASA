@@ -57,7 +57,7 @@ where $\mu$ is the absolute viscosity. The heat flux vector $\mathbf{q}=(q_x,q_y
 where $k$ is the thermal conductivity, which can be determined by choosing the Prandtl number:
 $$k= \dfrac{\gamma R \mu}{ (\gamma-1) \text{Pr}}.$$
 
-\subsection{Manufactured Solution}
+\subsection{Manufactured Solutions}
 
 The Method of Manufactured Solutions (MMS) applied to Navier--Stokes equations consists in modifying Equations~(\ref{eq:ns_01})~--~(\ref{eq:ns_03}) by adding a source term to the right-hand side of each equation, so the modified set of equations conveniently has the analytical solution chosen \textit{a priori}.
 
@@ -76,7 +76,7 @@ Although \citet{Roy2002} provide the constants used in the manufactured solution
 Source terms  for mass conservation ($Q_\rho$), momentum ($Q_u$, $Q_v$ and $Q_w$)  and total energy ($Q_{e_t}$) equations are obtained by symbolic manipulations of compressible steady Navier--Stokes equations above using Maple~13~\citep{Maple} and are presented in the following sections for the one, two and three-dimensional cases.
 
 
-\subsection{1D Steady Navier--Stokes equations}
+\subsubsection{1D Steady Navier--Stokes equations}
 
 The manufactured analytical solutions (\ref{eq:manufactured01}) for each one of the variables in one-dimensional case of Navier--Stokes equations~are:
 \begin{equation}
@@ -113,8 +113,6 @@ U_1 &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right),\\
 \end{equation*}
 where the subscripts in $\Rho_1$, $\PP_1$ and $ U_1$ refer to the 1D case.
 
-\subsection{1D Mass Conservation}
-
 The mass conservation equation written as an operator is:
 \begin{equation*}
  \Lo= \Diff{\rho u}{x}.
@@ -127,9 +125,6 @@ Q_\rho &= \dfrac{a_{\rho x} \pi \rho_x U_1}{L}\cos\left(\dfrac{a_{\rho x} \pi x}
 &+\dfrac{a_{ux} \pi u_x \Rho_1}{L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right) .
  \end{split}
 \end{equation}
-
-
-\subsection{1D Momentum}
 
 For the generation of the analytical source term $Q_u$ for the $x$-momentum equation, Equation  (\ref{eq:ns_02}) is written as an  operator $\Lo$:
 \begin{equation*}
@@ -145,11 +140,6 @@ Q_u&=\dfrac{a_{\rho x} \pi \rho_x U_1^2}{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}
 &+\dfrac{4a_{ux}^2 \pi^2 u_x \mu }{3L^2}\sin\left(\dfrac{a_{ux} \pi x}{L}\right).
  \end{split}
 \end{equation}
-
-
-
-\subsection{1D Total Energy}
-
 
 The last component of Navier--Stokes equations is written as an operator:
 \begin{equation*}
@@ -173,7 +163,7 @@ Q_{e_t} &= \dfrac{a_{\rho x} \pi \rho_x U_1^3 }{2L}\cos\left(\dfrac{a_{\rho x} \
  \end{split}
 \end{equation}
 
- \subsection{2D Steady Navier--Stokes equations}
+ \subsubsection{2D Steady Navier--Stokes equations}
 The manufactured analytical solutions (\ref{eq:manufactured01}) for each one of the variables in two-dimensional case of Navier--Stokes equations~are:
 \begin{equation}
 \begin{split}
@@ -211,8 +201,6 @@ U_2 &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\fra
 %
 where the subscripts in $\Rho_2$, $\PP_2$, $U_2$ and $\V_2$ refer to the 2D case.
 
-\subsection{2D Mass Conservation}
-
 The 2D mass conservation equation written as an operator is:
 \begin{equation*}
  \Lo=  \Diff{\rho u}{x}+\Diff{\rho v}{y}.
@@ -226,8 +214,6 @@ Q_\rho &= \dfrac{a_{\rho x} \pi \rho_x U_2 }{L}\cos\left(\dfrac{a_{\rho x} \pi x
 &+\dfrac{\pi \Rho_2}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right].
  \end{split}
 \end{equation}
-
-\subsection{2D Momentum}
 
 For the generation of the analytical source term $Q_u$ for the $x$-momentum equation, the first component of Equation~(\ref{eq:ns_02}) is written as an  operator $\Lo$:
 \begin{equation*}
@@ -267,9 +253,6 @@ Q_v &=\dfrac{ a_{\rho x} \pi \rho_x U_2 \V_2 }{L}\cos\left(\dfrac{a_{\rho x} \pi
 \end{equation}
 
 
-
-\subsection{2D Total Energy}
-
 The operator for the 2D Navier--Stokes total energy is:
 \begin{equation*}
  \Lo=  \Diff{\rho ue_t }{x}+\Diff{\rho ve_t}{y}+\Diff{pu}{x} +\Diff{pv}{y}+\Diff{q_x}{x}+\Diff{q_y}{y}-\Diff{u\tau_{xx}+v\tau_{xy}}{x}-\Diff{u\tau_{yx}+v\tau_{yy}}{y}.
@@ -301,7 +284,7 @@ Q_{e_t} &=\dfrac{ a_{\rho x} \pi \rho_x  U_2 (U_2^2+\V_2^2)}{2L}\cos\left(\dfrac
 
 
 
-\subsection{3D Steady Navier--Stokes equations}
+\subsubsection{3D Steady Navier--Stokes equations}
 
 The manufactured analytical solution for for each one of the variables in the 3D steady Navier--Stokes equations are:
 \begin{equation}
@@ -347,8 +330,6 @@ U_3 &=u_{0}+u_{x} \sin\left(\frac{a_{u  x} \pi x}{L}\right)+u_{y} \cos\left(\fra
 \end{equation*}
 where, again, the subscripts in $\Rho_3$, $\PP_3$, $U_3$, $\V_3$ and $\W_3$ refer to the 3D case.
 
-\subsection{3D Mass Conservation}
-
 The source term $Q_{\rho}$ for the 3D mass conservation equation is:
 \begin{equation}
  \begin{split}
@@ -358,8 +339,6 @@ Q_\rho &=\dfrac{ a_{\rho x} \pi \rho_x U_3}{L} \cos\left(\dfrac{a_{\rho x} \pi x
 &+\dfrac{\pi \Rho_3}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz}\pi z }{L}\right)\right].
  \end{split}
 \end{equation}
-
-\subsection{3D Momentum}
 
 The source terms $Q_{u}$, $Q_{v}$ and $Q_{w}$ for the 3D momentum equations the in $x$, $y$ and $z$ directions are, respectively:
 %
@@ -408,8 +387,6 @@ Q_w &= \dfrac{a_{\rho x} \pi \rho_x U_3 \W_3}{L} \cos\left(\dfrac{a_{\rho x} \pi
 &+\dfrac{4 a_{wz}^2 \pi^2 w_z \mu }{3L^2}\cos\left(\dfrac{a_{wz} \pi z}{L}\right) .
  \end{split}
 \end{equation}
-
-\subsection{3D Total Energy}
 
 Finally, the source term $Q_{e_t}$ for the 3D total energy equation is:
 \begin{equation}
