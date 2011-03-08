@@ -449,6 +449,10 @@ combined back to represent the source term for the original equation.
 For instance, instead of writing the three dimensional Navier-Stokes energy equation using one single operator
 \f$\Lo\f$:
 
+\f[
+ 
+\Lo= \nabla \cdot (\rho\mathbf{u}e_t) +\nabla\cdot \mathbf{q} +  \nabla\cdot(p  \mathbf{u})  - \nabla \cdot (\bv{\tau} \cdot \mathbf{u}),
+\f]
 
 
 */ 
