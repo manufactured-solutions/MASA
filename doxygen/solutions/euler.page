@@ -1,7 +1,5 @@
 /*! \page euler Euler Equations
 
-
-
 1d,2d,3d steady and transient manufactured solutions to the heat equation are available in MASA, 
 for both cartesian and axisymmetric cases. 
 
@@ -40,7 +38,7 @@ and with the ideal gas equation of state:
 p=\rho RT.
 \end{equation}
 
-\subsection{Manufactured Solution}
+\subsection{Manufactured Solutions}
 
 The Method of Manufactured Solutions (MMS) applied to Euler equations consists in modifying Equations~() by adding a source term to the right-hand side of each equation, so the modified set of equations conveniently has the analytical solution chosen \textit{a priori}.
 
@@ -59,7 +57,7 @@ Although \citet{Roy2002} provide the constants used in the manufactured solution
 Source terms  for mass conservation ($Q_\rho$), momentum ($Q_u$, $Q_v$ and $Q_w$)  and total energy ($Q_{e_t}$) equations are obtained by symbolic manipulations of compressible steady Euler equations above using Maple~13~\citep{Maple} and are presented in the following sections for the one, two and three-dimensional cases.
 
 
-\subsection{1D Steady Euler equations}
+\subsubsection{1D Steady Euler equations}
 
 The manufactured analytical solutions () for each one of the variables in one-dimensional case of Euler equations~are:
 \begin{equation}
@@ -96,8 +94,6 @@ U_1 &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right),\\
 \end{equation*}
 where the subscripts refer to the 1D case.
 
-\subsection{1D Mass Conservation}
-
 The mass conservation equation written as an operator is:
 \begin{equation*}
  \Lo= \Diff{\rho u}{x}.
@@ -110,9 +106,6 @@ Q_\rho &= \dfrac{a_{\rho x} \pi \rho_x U_1}{L}\cos\left(\dfrac{a_{\rho x} \pi x}
 &+\dfrac{a_{ux} \pi u_x \Rho_1}{L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right) .
  \end{split}
 \end{equation}
-
-
-\subsection{1D Momentum}
 
 For the generation of the analytical source term $Q_u$ for the $x$-momentum equation, Equation  () is written as an  operator $\Lo$:
 \begin{equation*}
@@ -127,11 +120,6 @@ Q_u&=\dfrac{a_{\rho x} \pi \rho_x U_1^2}{L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}
 &+  \dfrac{2a_{ux} \pi u_x \Rho_1 U_1}{L}\cos\left(\dfrac{a_{ux} \pi x}{L}\right).
  \end{split}
 \end{equation}
-
-
-
-\subsection{1D Total Energy}
-
 
 The last component of Euler equations is written as an operator:
 \begin{equation*}
@@ -149,7 +137,7 @@ Q_{e_t} &= \dfrac{a_{\rho x} \pi \rho_x U_1^3 }{2L}\cos\left(\dfrac{a_{\rho x} \
  \end{split}
 \end{equation}
 
- \subsection{2D Steady Euler equations}
+ \subsubsection{2D Steady Euler equations}
 The manufactured analytical solutions () for each one of the variables in two-dimensional case of Euler equations~are:
 \begin{equation}
 \begin{split}
@@ -187,8 +175,6 @@ U_2 &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\fra
 %
 where the subscripts in $\Rho_2$, $\PP_2$, $U_2$ and $\V_2$ refer to the 2D case.
 
-\subsection{2D Mass Conservation}
-
 The 2D mass conservation equation written as an operator is:
 \begin{equation*}
  \Lo=  \Diff{\rho u}{x}+\Diff{\rho v}{y}.
@@ -202,8 +188,6 @@ Q_\rho &= \dfrac{a_{\rho x} \pi \rho_x U_2 }{L}\cos\left(\dfrac{a_{\rho x} \pi x
 &+\dfrac{\pi \Rho_2}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right].
  \end{split}
 \end{equation}
-
-\subsection{2D Momentum}
 
 For the generation of the analytical source term $Q_u$ for the $x$-momentum equation, the first component of Equation~() is written as an  operator $\Lo$:
 \begin{equation*}
@@ -237,10 +221,6 @@ Q_v &=\dfrac{ a_{\rho x} \pi \rho_x U_2 \V_2 }{L}\cos\left(\dfrac{a_{\rho x} \pi
  \end{split}
 \end{equation}
 
-
-
-\subsection{2D Total Energy}
-
 The operator for the 2D Euler total energy is:
 \begin{equation*}
  \Lo=  \Diff{\rho ue_t }{x}+\Diff{\rho ve_t}{y}+\Diff{pu}{x} +\Diff{pv}{y}.
@@ -261,9 +241,7 @@ Q_{e_t} &=\dfrac{ a_{\rho x} \pi \rho_x  U_2 (U_2^2+\V_2^2)}{2L}\cos\left(\dfrac
  \end{split}
 \end{equation}
 
-
-
-\subsection{3D Steady Euler equations}
+\subsubsection{3d Steady Euler equations}
 
 The manufactured analytical solution for for each one of the variables in 3D steady Euler equations are:
 \begin{equation}
@@ -308,8 +286,6 @@ U_3 &=u_{0}+u_{x} \sin\left(\frac{a_{u  x} \pi x}{L}\right)+u_{y} \cos\left(\fra
 \end{equation*}
 where, again, the subscripts in $\Rho_3$, $\PP_3$, $U_3$, $\V_3$ and $\W_3$ refer to the 3D case.
 
-\subsection{3D Mass Conservation}
-
 The source term $Q_{\rho}$ for the 3D mass conservation equation is:
 \begin{equation}
  \begin{split}
@@ -319,8 +295,6 @@ Q_\rho &=\dfrac{ a_{\rho x} \pi \rho_x U_3}{L} \cos\left(\dfrac{a_{\rho x} \pi x
 &+\dfrac{\pi \Rho_3}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)-a_{wz} w_z \sin\left(\dfrac{a_{wz}\pi z }{L}\right)\right].
  \end{split}
 \end{equation}
-
-\subsection{3D Momentum}
 
 The source terms $Q_{u}$, $Q_{v}$ and $Q_{w}$ for the 3D momentum equations the in $x$, $y$ and $z$ directions are, respectively:
 %
@@ -360,8 +334,6 @@ Q_w &= \dfrac{a_{\rho x} \pi \rho_x U_3 \W_3}{L} \cos\left(\dfrac{a_{\rho x} \pi
  \end{split}
 \end{equation}
 
-\subsection{3D Total Energy}
-
 Finally, the source term $Q_{e_t}$ for the 3D total energy equation is:
 \begin{equation}
  \begin{split}\label{eq:euler_3d_e}
@@ -381,11 +353,10 @@ Q_{e_t} &= \dfrac{a_{\rho x} \pi \rho_x U_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\cos\left(
  \end{split}
 \end{equation}
 
-\subsection{Comments}
+\subsubsection{Comments}
 The complexity, and consequently length, of the source terms increase with both dimension and physics handled by the governing equations. In some cases, such as the 3D energy equation, the final expression for $Q_{e_t}$ may reach 139,000 characters, including parenthesis and mathematical operators, prior to factorization.
 
 Applying commands in order to simplify such extensive expression is challenging even with a very good machine; thus, a suitable alternative to this issue is to simplify the equation by dividing it into a combination of sub-operators handling different physical phenomena. Then, each one of the operators may be applied to the manufactured solutions individually, and the resulting sub-source terms are combined back to represent the source term for the original equation.
-
 
 For instance, instead of writing the three-dimensional steady Euler energy equation using one single operator~$\Lo$:
 \begin{equation}
@@ -408,7 +379,7 @@ $$\Lo=\Lo_1+\Lo_2.$$
 
  After the application of $\Lo_1$ and $\Lo_2$, the corresponding sub-source terms are also simplified, factorized and sorted. Then, the final factorized version is checked against the original one, to assure that not human error has been introduced.  This strategy allowed the original  139,000 character-long  expression for $Q_{e_t}$ to be reduced to 3,000, and expressed in Equation ().
 
-\subsection{Boundary Conditions}
+\subsubsection{Boundary Conditions}
 Additionally to verifying code capability of solving the governing equations accurately in the interior of the domain of interest, one may also verify the software capability of correctly imposing boundary conditions. Therefore, the gradients of the  analytical solutions () have been calculated and translated into $C$ codes. For the 3D case, they are:
 \begin{equation*}
 \nabla  \rho= \left[ \begin{array}{c}
