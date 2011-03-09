@@ -19,10 +19,10 @@ further divided into the following subsections:
 <ul>
   <li> \subpage model "Library Overview" </li>
   <li> \subpage Installation "Installation/Linkage" </li>
-  <li> \subpage mms_avail "Available Manufactured Solutions"</li>
   <li> \subpage apiC "C/C++ Interface" </li>
   <li> \subpage apiF "Fortran Interface" </li>
   <li> \subpage Tutorial "Tutorial" </li>
+  <li> \subpage mms_avail "Available Manufactured Solutions"</li>
   <li> <a href="http://buildbot.ices.utexas.edu/docs/buildbot/masa/build/docs/html/lcov/build/src/index.html">Buildbot Coverage</a> </li>
 </ul>
 
@@ -118,6 +118,12 @@ Karl W. Schulz
 Chris Simmons
 
 Roy Stogner
+
+<h2> Citing MASA </h2>
+
+A paper detailing the MASA library has been submitted for publication. 
+Upon acceptance to a journal of publication, this section will be updated. 
+Please check back to find this for use as a reference for MASA.
 
 */
 

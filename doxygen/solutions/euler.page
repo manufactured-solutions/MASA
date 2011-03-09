@@ -241,7 +241,7 @@ Q_{e_t} &=\dfrac{ a_{\rho x} \pi \rho_x  U_2 (U_2^2+\V_2^2)}{2L}\cos\left(\dfrac
  \end{split}
 \end{equation}
 
-\subsubsection{3d Steady Euler equations}
+\subsubsection{3D Steady Euler equations}
 
 The manufactured analytical solution for for each one of the variables in 3D steady Euler equations are:
 \begin{equation}
