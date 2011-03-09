@@ -23,6 +23,7 @@ further divided into the following subsections:
   <li> \subpage apiF "Fortran Interface" </li>
   <li> \subpage Tutorial "Tutorial" </li>
   <li> \subpage mms_avail "Available Manufactured Solutions"</li>
+  <li> \subpage add_sol "Adding Additional Manufactured Solutions to MASA" </li>
   <li> <a href="http://buildbot.ices.utexas.edu/docs/buildbot/masa/build/docs/html/lcov/build/src/index.html">Buildbot Coverage</a> </li>
 </ul>
 
@@ -58,11 +59,6 @@ Copyright (C) 2010 The PECOS Development Team
 /*! \page model Library Overview
 
 \copydoc LicenseLGPL
-
-*/
-
-
-/*! \page model Library Overview
 
 The MASA (Manufactured Analytical Solutions Abstraction) library is a software interface that provides access 
 to various manufactured solutions for a wide variety of differential equations. The library is written in C++, 
