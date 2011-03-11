@@ -124,6 +124,7 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
   anim.push_back(new axi_cns<Scalar>());
 
   anim.push_back(new rans_sa<Scalar>());
+  anim.push_back(new radiation_integrated_intensity<Scalar>());
 
   return 0;
 }

@@ -999,6 +999,24 @@ namespace MASA
   };
 
   // ------------------------------------------------------
+  // ---------- Integrated Radiative Intensity   ----------
+  // ------------------------------------------------------
+  template <typename Scalar>
+  class radiation_integrated_intensity : public manufactured_solution<Scalar>
+  {
+    
+    Scalar cb1;
+
+  public:
+    radiation_integrated_intensity(); // constructor    
+    int init_var();
+    
+    Scalar eval_q_u (Scalar); 
+    Scalar eval_exact_u(Scalar); 
+
+  };
+
+  // ------------------------------------------------------
   // ------------- compressible navier stokes  ------------
   // ------------------------------------------------------
 
