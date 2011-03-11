@@ -292,7 +292,6 @@ namespace MASA
   class masa_test_function : public manufactured_solution<Scalar>
   {
   private:
-    Scalar dummy;
     Scalar demo_var_2;
     Scalar demo_var_3;
   public:
