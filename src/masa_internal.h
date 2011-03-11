@@ -86,12 +86,13 @@ namespace MASA
     static const Scalar MASA_VAR_DEFAULT;   
     Scalar dummy;
     int num_vars;
+    int num_vec;
 
     std::map<std::string,int> varmap;    // map to each variable
     std::vector<Scalar*>  vararr;        // arr of pointers to each variable
 
-    std::map<std::string,int> vecmap;    // map to each vector
-    std::vector<Scalar*>  vecarr;        // vector of pointers to each vector
+    std::map<std::string,int> vecmap;     // map to each vector
+    std::vector<std::vector<Scalar>* >  vecarr;// vector of pointers to each vector
 
     std::string mmsname;                 // the name of the manufactured solution  
     int dimension;                       // dimension of the solution
@@ -231,8 +232,9 @@ namespace MASA
     int purge_var();                                             // dump defaults
     Scalar pass_function(Scalar (*)(Scalar),Scalar);
     int set_var(std::string,Scalar);                             // sets variable value    
-    int set_vec(std::string,std::vector<Scalar>);                // sets vector value    
+    int set_vec(std::string,std::vector<Scalar>*);               // sets vector value    
     int register_var(std::string, Scalar*);                      // this registers a variable
+    int register_vec(std::string, std::vector<Scalar>* );              // this registers a vector
 
     int sanity_check();                                          // checks that all variables to the class have been initalized
     int poly_test();                                             // regression method for poly class (see below)

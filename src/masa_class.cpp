@@ -66,6 +66,34 @@ template <typename Scalar>
 const Scalar MASA::manufactured_solution<Scalar>::MASA_VAR_DEFAULT = -12345.67; // default init each var to 'crazy' val
 
 template <typename Scalar>
+int MASA::manufactured_solution<Scalar>::register_vec(std::string in,std::vector<Scalar>* vec)
+{
+  // first, check to ensure that no such vec has already been mapped
+  if(vecmap[in] <= 0) // 0 implies variable has not been registered
+    {  
+      // if vec has not been registered, register the vec
+      num_vec++;           // we want to step num_vars up by one ONLY when adding a new vec.
+      vecmap[in]=num_vec;
+      //*vec=MASA_VAR_DEFAULT;
+      vecarr.push_back(vec);
+    }
+  else  // variable already registered! no unique identifier can exist!
+    {
+      std::cout << "\n MASA FATAL ERROR:: \n"; 
+      std::cout << "\n Attempted to register two vectors of the same name.\n"; 
+      std::string error;
+      return_name(&error);
+      std::cout << " Info: error occured while constructing " << error << std::endl << std::endl;
+      return 1;
+    }
+
+  return 0; // smooth sailing
+  
+}// done with register_var function
+
+
+
+template <typename Scalar>
 Scalar MASA::manufactured_solution<Scalar>::get_vec(std::string var,std::vector<Scalar>)
 {
   
@@ -75,13 +103,25 @@ Scalar MASA::manufactured_solution<Scalar>::get_vec(std::string var,std::vector<
 }
 
 template <typename Scalar>
-int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Scalar>)
+int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Scalar>* vec)
 {
+  std::map<std::string,int>::const_iterator selector;
   
-  Scalar a = 2;
-  return a;
+  // find variable
+  selector = vecmap.find(var);
+  
+  // error handling
+  if(selector == vecmap.end())
+    {
+      std::cout << "\nMASA ERROR!!!:: No such array  (" << var << ") exists to be set\n";
+      return 1;
+    }
+  
+  // set new value
+  vecarr[(*selector).second] = vec;
+  return 0; // exit with no error
 
-}
+}// done with set_vec function
 
 template <typename Scalar>
 void MASA::manufactured_solution<Scalar>::display_vec()
@@ -239,7 +279,7 @@ int MASA::manufactured_solution<Scalar>::register_var(std::string in,Scalar* var
 
   return 0; // smooth sailing
   
-}// done with set_var function
+}// done with register_var function
 
 /* ------------------------------------------------
  *
