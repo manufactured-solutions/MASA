@@ -87,10 +87,14 @@ namespace MASA
     Scalar dummy;
     int num_vars;
 
-    std::map<std::string,int> varmap;               // map to each variable
-    std::vector<Scalar*>  vararr;              // arr of pointers to each variable
-    std::string mmsname;                       // the name of the manufactured solution  
-    int dimension;                        // dimension of the solution
+    std::map<std::string,int> varmap;    // map to each variable
+    std::vector<Scalar*>  vararr;        // arr of pointers to each variable
+
+    std::map<std::string,int> vecmap;    // map to each vector
+    std::vector<Scalar*>  vecarr;        // vector of pointers to each vector
+
+    std::string mmsname;                 // the name of the manufactured solution  
+    int dimension;                       // dimension of the solution
 
   public: 
     static const Scalar pi;
@@ -227,12 +231,15 @@ namespace MASA
     int purge_var();                                             // dump defaults
     Scalar pass_function(Scalar (*)(Scalar),Scalar);
     int set_var(std::string,Scalar);                             // sets variable value    
+    int set_vec(std::string,std::vector<Scalar>);                // sets vector value    
     int register_var(std::string, Scalar*);                      // this registers a variable
 
     int sanity_check();                                          // checks that all variables to the class have been initalized
     int poly_test();                                             // regression method for poly class (see below)
     Scalar get_var(std::string);                                 // returns variable value
+    Scalar get_vec(std::string,std::vector<Scalar>);             // returns variable value
     void display_var();                                          // print all variable names and values
+    void display_vec();                                          // print all variable names and values
     void return_name(std::string* inname){inname->assign(mmsname);};  // method: returns name
     void return_dim (int* indim)    {*indim=dimension;};         // method: returns dimension of solution
     
@@ -1010,7 +1017,7 @@ namespace MASA
   public:
     radiation_integrated_intensity(); // constructor    
     int init_var();
-    
+
     Scalar eval_q_u (Scalar); 
     Scalar eval_exact_u(Scalar); 
 

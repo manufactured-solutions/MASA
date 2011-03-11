@@ -63,7 +63,32 @@ template <typename Scalar>
 const Scalar MASA::manufactured_solution<Scalar>::pi = acos(Scalar(-1));
 
 template <typename Scalar>
-const Scalar MASA::manufactured_solution<Scalar>::MASA_VAR_DEFAULT = -12345.67; // default -- initialize each var to 'crazy' value
+const Scalar MASA::manufactured_solution<Scalar>::MASA_VAR_DEFAULT = -12345.67; // default init each var to 'crazy' val
+
+template <typename Scalar>
+Scalar MASA::manufactured_solution<Scalar>::get_vec(std::string var,std::vector<Scalar>)
+{
+  
+  Scalar a = 2;
+  return a;
+
+}
+
+template <typename Scalar>
+int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Scalar>)
+{
+  
+  Scalar a = 2;
+  return a;
+
+}
+
+template <typename Scalar>
+void MASA::manufactured_solution<Scalar>::display_vec()
+{
+
+
+}
 
 template <typename Scalar>
 Scalar MASA::manufactured_solution<Scalar>::get_var(std::string var)
@@ -83,6 +108,7 @@ Scalar MASA::manufactured_solution<Scalar>::get_var(std::string var)
   return *vararr[(*selector).second];   // set to value 
   
 }// done with get_var function
+
 
 template <typename Scalar>
 void MASA::manufactured_solution<Scalar>::display_var()
@@ -143,7 +169,7 @@ int MASA::manufactured_solution<Scalar>::purge_var()
       *vararr[it->second]=MASA_VAR_DEFAULT;      
     }
   return 0;
-}// done with set_var function
+}// done with purge_var function
 
 
 template <typename Scalar>

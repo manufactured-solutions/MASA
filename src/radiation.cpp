@@ -81,6 +81,9 @@ Scalar MASA::radiation_integrated_intensity<Scalar>::eval_exact_u(Scalar x)
   return exact_t;
 }
 
+//int x[5] = {2, 3, 5, 7, 11};
+//vector<int> vector1(&x[0], &x[5]);
+
 // ----------------------------------------
 //   Template Instantiation(s)
 // ----------------------------------------
