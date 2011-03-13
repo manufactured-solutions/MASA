@@ -60,27 +60,24 @@ int main()
 {
   // declarations
   Scalar tfield;
-  Scalar tempx,tempy;
+  Scalar tempx;
 
   //problem size
-  Scalar lx,ly;
-  Scalar dx,dy;
-  int nx,ny;
+  Scalar lx;
+  Scalar dx;
+  int nx;
 
   // error condition
   int err = 0;
 
   // initialize
   nx = 10;  // number of points
-  ny = 10;  
   lx=1;     // length
-  ly=1; 
 
   dx=lx/nx;
-  dy=ly/ny;
 
   // initialize the problem
-  err += masa_init<Scalar>("radiation","radiation");
+  err += masa_init<Scalar>("radiation","radiation_integrated_intensity");
 
   // initialize the default parameters
   err += masa_init_param<Scalar>();

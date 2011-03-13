@@ -37,6 +37,9 @@ cd ../examples
  ./rans_sa_example
  err=$(($err+$?))
 
+ ./radiation
+ err=$(($err+$?))
+
 # # c
  ./c_euler_example
  err=$(($err+$?))
