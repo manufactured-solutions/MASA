@@ -31,7 +31,7 @@ cd ../examples
  ./euler_chem
  err=$(($err+$?))
 
- ./navierstokes_example
+ ./navierstokes
  err=$(($err+$?))
 
  ./rans_sa_example

@@ -13,7 +13,7 @@ BUILT_SOURCES = .license.stamp
 
 bin_PROGRAMS  = MASAshell
 
-noinst_PROGRAMS  = MASAshell display_solutions euler_example navierstokes_example heat_example switch rans_sa_example euler_chem euler_transient
+noinst_PROGRAMS  = MASAshell display_solutions euler_example navierstokes heat_example switch rans_sa radiation euler_chem euler_transient
 noinst_PROGRAMS += c_heat_example c_euler_example 
 noinst_PROGRAMS += f_cns f_euler 
 
@@ -21,17 +21,18 @@ noinst_PROGRAMS += f_cns f_euler
 #    CPP
 # ----------------- 
 
-MASAshell_SOURCES            = masa_shell.cpp
-display_solutions_SOURCES    = display_solutions.cpp
-heat_example_SOURCES         = heat-eq.cpp
-euler_example_SOURCES        = euler_example.cpp
-euler_transient_SOURCES      = euler_transient.cpp
-navierstokes_example_SOURCES = compressible_navier_stokes_example.cpp
-rans_sa_example_SOURCES      = rans_sa.cpp
-euler_chem_SOURCES           = euler_chem.cpp
-switch_SOURCES               = switch.cpp
+MASAshell_SOURCES         = masa_shell.cpp
+display_solutions_SOURCES = display_solutions.cpp
+heat_example_SOURCES      = heat-eq.cpp
+euler_example_SOURCES     = euler_example.cpp
+euler_transient_SOURCES   = euler_transient.cpp
+navierstokes_SOURCES      = compressible_navier_stokes.cpp
+rans_sa_SOURCES           = rans_sa.cpp
+radiation_SOURCES         = radiation.cpp
+euler_chem_SOURCES        = euler_chem.cpp
+switch_SOURCES            = switch.cpp
 
-example_DATA                 = euler_example.cpp heat-eq.cpp compressible_navier_stokes_example.cpp
+example_DATA              = euler_example.cpp heat-eq.cpp compressible_navier_stokes.cpp
 
 # ----------------- 
 #    C
