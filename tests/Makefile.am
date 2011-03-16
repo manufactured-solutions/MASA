@@ -26,10 +26,10 @@ check_PROGRAMS   = misc                \
                    euler3d             \
                    euler_transient_1d  \
                    euler_chem_1d       \
-	           ns2d                \
-	           ns3d                \
-	           ns3d_phys           \
-	           n2d3d               \
+	           cns2d               \
+	           cns3d               \
+	           cns3d_phys          \
+	           cn2d3d              \
                    axi_euler           \
                    axi_cns             \
                    rans_sa             \
@@ -44,8 +44,8 @@ check_PROGRAMS   = misc                \
 	           c_euler2d           \
                    c_euler3d           \
                    c_euler_chem_1d     \
-	           c_navierstokes2d    \
-	           c_navierstokes3d    \
+	           c_cns2d             \
+	           c_cns3d             \
                    f_misc              \
                    f_purge             \
                    f_heat              \
@@ -79,10 +79,10 @@ euler2d_SOURCES             = euler2d.cpp
 euler3d_SOURCES             = euler3d.cpp
 euler_transient_1d_SOURCES  = euler_transient_1d.cpp
 euler_chem_1d_SOURCES       = euler_chem_1d.cpp
-ns2d_SOURCES                = ns2d.cpp
-ns3d_SOURCES                = ns3d.cpp
-ns3d_phys_SOURCES           = ns3d_phys.cpp
-n2d3d_SOURCES               = ns-2d-3d.cpp
+cns2d_SOURCES               = cns2d.cpp
+cns3d_SOURCES               = cns3d.cpp
+cns3d_phys_SOURCES          = cns3d_phys.cpp
+cn2d3d_SOURCES              = cns-2d-3d.cpp
 rans_sa_SOURCES             = rans_sa.cpp
 sod_SOURCES                 = sod.cpp
 
@@ -90,18 +90,18 @@ sod_SOURCES                 = sod.cpp
 # C Test Sources
 #----------------------
 
-c_misc_SOURCES              = c_misc.c
-c_source_SOURCES            = c_source.c
-c_purge_SOURCES             = c_purge.c
-c_heat1dsc_SOURCES          = c_heat1dsc.c
-c_heat2dsc_SOURCES          = c_heat2dsc.c
-c_heat3dsc_SOURCES          = c_heat3dsc.c
-c_euler1d_SOURCES           = c_euler1d.c
-c_euler2d_SOURCES           = c_euler2d.c
-c_euler3d_SOURCES           = c_euler3d.c
-c_euler_chem_1d_SOURCES     = c_euler_chem_1d.c
-c_navierstokes2d_SOURCES    = c_ns2d.c
-c_navierstokes3d_SOURCES    = c_ns3d.c
+c_misc_SOURCES          = c_misc.c
+c_source_SOURCES        = c_source.c
+c_purge_SOURCES         = c_purge.c
+c_heat1dsc_SOURCES      = c_heat1dsc.c
+c_heat2dsc_SOURCES      = c_heat2dsc.c
+c_heat3dsc_SOURCES      = c_heat3dsc.c
+c_euler1d_SOURCES       = c_euler1d.c
+c_euler2d_SOURCES       = c_euler2d.c
+c_euler3d_SOURCES       = c_euler3d.c
+c_euler_chem_1d_SOURCES = c_euler_chem_1d.c
+c_cns2d_SOURCES         = c_cns2d.c
+c_cns3d_SOURCES         = c_cns3d.c
 
 #----------------------
 # Fortran Test Sources
