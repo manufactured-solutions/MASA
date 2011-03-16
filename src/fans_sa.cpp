@@ -68,21 +68,54 @@ int MASA::fans_sa_transient_d_finite<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_q_u(Scalar x)
 {
-  Scalar Q_T;
-  Q_T = (cb1 * x);
-  return Q_T;
+  Scalar Q_u;
+  Q_u = (cb1 * x);
+  return Q_u;
 }
+
+// ----------------------------------------
+//   Manufactured Analytical Solutions
+// ----------------------------------------
 
 template <typename Scalar>
 Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_exact_u(Scalar x)
 {
-  Scalar exact_t;
-  exact_t = cos(cb1 * x);
-  return exact_t;
+  Scalar exact_u;
+  exact_u = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  return exact_u;
 }
 
-//int x[5] = {2, 3, 5, 7, 11};
-//vector<int> vector1(&x[0], &x[5]);
+template <typename Scalar>
+Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_exact_v(Scalar x)
+{
+  Scalar exact_v;
+  exact_v = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  return exact_v;
+}
+
+template <typename Scalar>
+Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_exact_p(Scalar x)
+{
+  Scalar exact_p;
+  exact_p = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
+  return exact_p;
+}
+
+template <typename Scalar>
+Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_exact_rho(Scalar x)
+{
+  Scalar exact_rho;
+  exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
+  return exact_rho;
+}
+
+template <typename Scalar>
+Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_exact_nu(Scalar x)
+{
+  Scalar exact_nu;
+  exact_nu = nu_sa_0 + nu_sa_x * cos(a_nusax * pi * x / L) + nu_sa_y * cos(a_nusay * pi * y / L) + nu_sa_t * cos(a_nusat * pi * t / L);
+  return exact_nu;
+}
 
 // ----------------------------------------
 //   Template Instantiation(s)
