@@ -949,6 +949,21 @@ namespace MASA
   // ---------- RANS: Spelart Alamaras (Channel) ----------
   // ------------------------------------------------------
   template <typename Scalar>
+  class   fans_sa_transient_d_finite : public manufactured_solution<Scalar>
+  {
+    
+    Scalar cb1;
+
+  public:
+    fans_sa_transient_d_finite(); // constructor    
+    int init_var();
+
+    Scalar eval_q_u (Scalar); 
+    Scalar eval_exact_u(Scalar); 
+
+  };
+
+  template <typename Scalar>
   class rans_sa : public manufactured_solution<Scalar>
   {
     
