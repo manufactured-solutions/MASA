@@ -979,6 +979,15 @@ namespace MASA
     Scalar mu;
     Scalar L;
 
+    Scalar u_t;
+    Scalar v_t;
+    Scalar p_t;
+    Scalar rho_t;
+    Scalar a_ut;
+    Scalar a_vt;
+    Scalar a_pt;
+    Scalar a_rhot;
+
     Scalar nu_sa_0;
     Scalar nu_sa_x;
     Scalar nu_sa_y;
@@ -987,11 +996,31 @@ namespace MASA
     Scalar a_nusay;
     Scalar a_nusat;
     
+    Scalar c_v1;
+    Scalar c_b1;
+    Scalar c_b2;
+    Scalar c_w1;
+    Scalar c_w2;
+    Scalar c_w3;
+    Scalar kappa;
+    Scalar d;
+    Scalar sigma;
+
+    Scalar cp;
+    Scalar cv;
+    Scalar Pr;
+    Scalar Pr_t;
+    Scalar r;
+
   public:
     fans_sa_transient_d_finite(); // constructor    
     int init_var();
 
-    Scalar eval_q_u (Scalar,Scalar); 
+    Scalar eval_q_u   (Scalar,Scalar,Scalar); 
+    Scalar eval_q_v   (Scalar,Scalar,Scalar); 
+    Scalar eval_q_rho (Scalar,Scalar,Scalar); 
+    Scalar eval_q_nu  (Scalar,Scalar,Scalar); 
+    Scalar eval_q_e   (Scalar,Scalar,Scalar); 
 
     Scalar eval_exact_u  (Scalar,Scalar); 
     Scalar eval_exact_v  (Scalar,Scalar); 
