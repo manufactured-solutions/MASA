@@ -952,14 +952,52 @@ namespace MASA
   class   fans_sa_transient_d_finite : public manufactured_solution<Scalar>
   {
     
-    Scalar cb1;
+    using manufactured_solution<Scalar>::pi;
+    using manufactured_solution<Scalar>::PI;
 
+    Scalar u_0;
+    Scalar u_x;
+    Scalar u_y;
+    Scalar v_0;
+    Scalar v_x;
+    Scalar v_y;
+    Scalar rho_0;
+    Scalar rho_x;
+    Scalar rho_y;
+    Scalar p_0;
+    Scalar p_x;
+    Scalar p_y;
+    Scalar a_px;
+    Scalar a_py;
+    Scalar a_rhox;
+    Scalar a_rhoy;
+    Scalar a_ux;
+    Scalar a_uy;
+    Scalar a_vx;
+    Scalar a_vy;
+    Scalar Gamma;
+    Scalar mu;
+    Scalar L;
+
+    Scalar nu_sa_0;
+    Scalar nu_sa_x;
+    Scalar nu_sa_y;
+    Scalar nu_sa_t;
+    Scalar a_nusax;
+    Scalar a_nusay;
+    Scalar a_nusat;
+    
   public:
     fans_sa_transient_d_finite(); // constructor    
     int init_var();
 
-    Scalar eval_q_u (Scalar); 
-    Scalar eval_exact_u(Scalar); 
+    Scalar eval_q_u (Scalar,Scalar); 
+
+    Scalar eval_exact_u  (Scalar,Scalar); 
+    Scalar eval_exact_v  (Scalar,Scalar); 
+    Scalar eval_exact_p  (Scalar,Scalar); 
+    Scalar eval_exact_rho(Scalar,Scalar); 
+    Scalar eval_exact_nu (Scalar,Scalar,Scalar); 
 
   };
 
