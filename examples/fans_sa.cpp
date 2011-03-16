@@ -63,30 +63,46 @@ void test(Scalar input)
 int main()
 {
 
-
   Scalar ufield;
   Scalar vfield;
+  Scalar efield;
+  Scalar rho;
+  Scalar nu;
 
   // declarations
   Scalar tempx;
+  Scalar tempy;
+  Scalar tempt;
 
   Scalar exact_u;
   Scalar exact_v;
+  Scalar exact_p;
+  Scalar exact_rho;
+  Scalar exact_nu;
 
   //error handing
   int err = 0;
 
   //problem size
-  Scalar lx;
-  Scalar dx;
-  int nx;
+
+  //problem size
+  Scalar lx,ly,lt;
+  Scalar dx,dy,dt;
+  int nx,ny,nt;
 
   // initialize
   nx = 10;  // number of points
+  ny = 10;  
+  nt = 10;  
+  
   lx=1;     // length
+  ly=1; 
+  lt=3;
 
-  dx=lx/nx;
-
+  dx=(Scalar)lx/(Scalar)nx;
+  dy=(Scalar)ly/(Scalar)ny;
+  dt=(Scalar)lt/(Scalar)nt;
+  
   // initialize the problem 
   err = masa_init<Scalar>("sa example","fans_sa_transient_d_finite");
 
@@ -96,6 +112,47 @@ int main()
   // call the sanity check routine 
   // (tests that all variables have been initialized)
   err = masa_sanity_check<Scalar>();
+
+  // evaluate source terms over the domain (0<x<1, 0<y<1) 
+  for(int t=0;t<nt;t++)
+    {      
+      for(int i=0;i<nx;i++)
+	{
+	  for(int j=0;j<nx;j++)
+	    {  
+	      tempx=i*dx;
+	      tempy=j*dy;
+	      tempt=t*dt;
+	      
+	      // evaluate source terms
+	      ufield = masa_eval_source_rho_u<Scalar>  (tempx,tempy,tempt);
+	      vfield = masa_eval_source_rho_v<Scalar>  (tempx,tempy,tempt);
+	      efield = masa_eval_source_rho_e<Scalar>  (tempx,tempy,tempt);
+	      rho    = masa_eval_source_rho  <Scalar>  (tempx,tempy,tempt);
+	      nu     = masa_eval_source_nu   <Scalar>  (tempx,tempy,tempt);
+	
+	      //evaluate analytical solution
+	      exact_u   = masa_eval_exact_u  <Scalar>   (tempx,tempy);
+	      exact_v   = masa_eval_exact_v  <Scalar>   (tempx,tempy);
+	      exact_p   = masa_eval_exact_p  <Scalar>   (tempx,tempy);
+	      exact_rho = masa_eval_exact_rho<Scalar>   (tempx,tempy);
+	      exact_nu  = masa_eval_exact_nu <Scalar>   (tempx,tempy,tempt);
+
+	      test(ufield);
+	      test(vfield);
+	      test(efield);
+	      test(rho);
+	      test(nu);
+
+	      test(exact_u);
+	      test(exact_v);
+	      test(exact_p);
+	      test(exact_rho);
+	      test(exact_nu);
+
+	    }
+	} // done with spatial loop
+    } // done with temporal loop
 
   return err;
 

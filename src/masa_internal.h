@@ -137,6 +137,8 @@ namespace MASA
     virtual Scalar eval_exact_rho(Scalar)              {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
     virtual Scalar eval_exact_rho(Scalar,Scalar)       {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
     virtual Scalar eval_exact_rho(Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
+
+    virtual Scalar eval_exact_nu (Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; 
    
     virtual Scalar eval_exact_rho_N(Scalar)            {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;};
     virtual Scalar eval_exact_rho_N2(Scalar)           {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;};
@@ -173,6 +175,8 @@ namespace MASA
     virtual Scalar eval_q_rho(Scalar)              {std::cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
     virtual Scalar eval_q_rho(Scalar,Scalar)       {std::cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
     virtual Scalar eval_q_rho(Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
+
+    virtual Scalar eval_q_nu (Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Source Term (nu) is unavailable or not properly loaded.\n"; return -1.33;};
 
     virtual Scalar eval_q_rho_u(Scalar)              {std::cout << "MASA ERROR:: Source Term (rho*u) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*u)
     virtual Scalar eval_q_rho_u(Scalar,Scalar)       {std::cout << "MASA ERROR:: Source Term (rho*u) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*u)
@@ -1016,11 +1020,11 @@ namespace MASA
     fans_sa_transient_d_finite(); // constructor    
     int init_var();
 
-    Scalar eval_q_u   (Scalar,Scalar,Scalar); 
-    Scalar eval_q_v   (Scalar,Scalar,Scalar); 
-    Scalar eval_q_rho (Scalar,Scalar,Scalar); 
-    Scalar eval_q_nu  (Scalar,Scalar,Scalar); 
-    Scalar eval_q_e   (Scalar,Scalar,Scalar); 
+    Scalar eval_q_rho_u (Scalar,Scalar,Scalar); 
+    Scalar eval_q_rho_v (Scalar,Scalar,Scalar); 
+    Scalar eval_q_rho_e (Scalar,Scalar,Scalar); 
+    Scalar eval_q_rho   (Scalar,Scalar,Scalar); 
+    Scalar eval_q_nu    (Scalar,Scalar,Scalar); 
 
     Scalar eval_exact_u  (Scalar,Scalar); 
     Scalar eval_exact_v  (Scalar,Scalar); 

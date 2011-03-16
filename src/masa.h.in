@@ -294,6 +294,9 @@ namespace MASA
   template <typename Scalar>
   Scalar masa_eval_source_rho_e(Scalar,Scalar,Scalar);
 
+  template <typename Scalar>
+  Scalar masa_eval_source_nu   (Scalar,Scalar,Scalar);
+
   // --------------------------------
   // manufactured analytical solution  -- 3D
   // --------------------------------
@@ -315,6 +318,9 @@ namespace MASA
 
   template <typename Scalar>
   Scalar masa_eval_exact_rho    (Scalar,Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_exact_nu     (Scalar,Scalar,Scalar);
 
   // --------------------------------
   // gradient of analytical solutions

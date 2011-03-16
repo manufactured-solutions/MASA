@@ -181,7 +181,7 @@ int MASA::fans_sa_transient_d_finite<Scalar>::init_var()
 }
 
 template <typename Scalar>
-Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_q_u(Scalar x,Scalar y,Scalar t)
+Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_q_rho_u(Scalar x,Scalar y,Scalar t)
 {
   Scalar Q_u;
   Scalar RHO;
@@ -202,7 +202,7 @@ Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_q_u(Scalar x,Scalar y,Scal
 }
 
 template <typename Scalar>
-Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_q_v(Scalar x,Scalar y,Scalar t)
+Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_q_rho_v(Scalar x,Scalar y,Scalar t)
 {
   Scalar Q_v;
   Scalar RHO;
@@ -270,7 +270,7 @@ Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_q_nu(Scalar x,Scalar y,Sca
 }
 
 template <typename Scalar>
-Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_q_e(Scalar x,Scalar y,Scalar t)
+Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_q_rho_e(Scalar x,Scalar y,Scalar t)
 {
   Scalar Q_E;
   Scalar RHO;
