@@ -34,7 +34,10 @@ cd ../examples
  ./navierstokes
  err=$(($err+$?))
 
- ./rans_sa_example
+ ./rans_sa
+ err=$(($err+$?))
+
+ ./fans_sa
  err=$(($err+$?))
 
  ./radiation
