@@ -50,8 +50,6 @@ MASA::fans_sa_transient_d_finite<Scalar>::fans_sa_transient_d_finite()
   this->mmsname = "fans_sa_transient_d_finite";
   this->dimension=1;
 
-  this->register_var("r",&r);
-
   this->register_var("u_0",&u_0);
   this->register_var("u_x",&u_x);
   this->register_var("u_y",&u_y);
@@ -73,7 +71,6 @@ MASA::fans_sa_transient_d_finite<Scalar>::fans_sa_transient_d_finite()
   this->register_var("a_vx",&a_vx);
   this->register_var("a_vy",&a_vy);
   this->register_var("L",&L);
-  this->register_var("Gamma",&Gamma);
   this->register_var("mu",&mu);
 
   this->register_var("u_t",&u_t);
@@ -138,7 +135,6 @@ int MASA::fans_sa_transient_d_finite<Scalar>::init_var()
   err += this->set_var("a_uy",1.189);
   err += this->set_var("a_vx",1.91);
   err += this->set_var("a_vy",2.901);
-  err += this->set_var("Gamma",1.01);
   err += this->set_var("mu",.918);
   err += this->set_var("L",3.02);
 
@@ -173,8 +169,6 @@ int MASA::fans_sa_transient_d_finite<Scalar>::init_var()
   err += this->set_var("a_vt",12.0);
   err += this->set_var("a_pt",12.0);
   err += this->set_var("a_rhot",12.0);
-
-  err += this->set_var("r",12.0);
 
   return err;
 
@@ -281,6 +275,7 @@ Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_q_rho_e(Scalar x,Scalar y,
   Scalar chi;
   Scalar f_v1;
   Scalar R;
+  Scalar r;
   Scalar mu_t;
 
   NU_SA = nu_sa_0 + nu_sa_x * cos(a_nusax * PI * x / L) + nu_sa_y * cos(a_nusay * PI * y / L) + nu_sa_t * cos(a_nusat * PI * t / L);

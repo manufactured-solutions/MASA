@@ -979,7 +979,6 @@ namespace MASA
     Scalar a_uy;
     Scalar a_vx;
     Scalar a_vy;
-    Scalar Gamma;
     Scalar mu;
     Scalar L;
 
@@ -1014,7 +1013,6 @@ namespace MASA
     Scalar cv;
     Scalar Pr;
     Scalar Pr_t;
-    Scalar r;
 
   public:
     fans_sa_transient_d_finite(); // constructor    
