@@ -1006,7 +1006,6 @@ namespace MASA
     Scalar c_w2;
     Scalar c_w3;
     Scalar kappa;
-    Scalar d;
     Scalar sigma;
 
     Scalar cp;
