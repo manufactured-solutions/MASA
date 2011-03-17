@@ -25,8 +25,8 @@
 // $Author: nick $
 // $Id: heat.cpp 18162 2011-03-01 05:23:07Z nick $
 //
-// heat.cpp: These are the MASA class member functions and constructors
-//          For Radiation
+// fans_sa.cpp: these are class definitions and methods of favre averaged
+//              navier stokes with spelart alamaras 
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ using namespace MASA;
 
 /* ------------------------------------------------
  *
- *   radiation_integrated_intensity
+ *   favre averaged navier stokes transient
  *
  *
  * -----------------------------------------------
@@ -277,6 +277,7 @@ Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_q_rho_e(Scalar x,Scalar y,
   Scalar mu_t;
 
   NU_SA = nu_sa_0 + nu_sa_x * cos(a_nusax * PI * x / L) + nu_sa_y * cos(a_nusay * PI * y / L) + nu_sa_t * cos(a_nusat * PI * t / L);
+  r = NU_SA / Ssa * pow(kappa, -0.2e1) * pow(y, -0.2e1);
   RHO = r * rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_t * sin(a_rhot * PI * t / L);
   U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
   V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
