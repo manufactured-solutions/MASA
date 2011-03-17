@@ -39,16 +39,55 @@ using namespace MASA;
 /* ------------------------------------------------
  *
  *   favre averaged navier stokes transient
+ *            infinite distance to wall
  *
+ * -----------------------------------------------
+ */ 
+template <typename Scalar>
+MASA::fans_sa_transient_free_shear<Scalar>::fans_sa_transient_free_shear()
+{
+  this->mmsname = "fans_sa_transient_free_shear";
+  this->dimension=1;
+
+  this->register_var("u_0",&u_0);
+
+}
+
+template <typename Scalar>
+int MASA::fans_sa_transient_free_shear<Scalar>::init_var()
+{
+  int err = 0;
+  
+  // currently randomly generated
+  err += this->set_var("u_0",1.23);
+  
+  return err;
+  
+}
+
+template <typename Scalar>
+Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_q_rho_u(Scalar x,Scalar y,Scalar t)
+{
+  
+  return 3;
+
+}
+
+/* ------------------------------------------------
+ *
+ *   favre averaged navier stokes transient
+ *            finite distance to wall
  *
  * -----------------------------------------------
  */ 
 
+
 template <typename Scalar>
 MASA::fans_sa_transient_d_finite<Scalar>::fans_sa_transient_d_finite()
 {
+  // change name to: fans_sa_transient_d_wall_bounded
   this->mmsname = "fans_sa_transient_d_finite";
-  this->dimension=1;
+  this->dimension=2;
 
   this->register_var("u_0",&u_0);
   this->register_var("u_x",&u_x);
@@ -348,3 +387,4 @@ Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_exact_nu(Scalar x,Scalar y
 // ----------------------------------------
 
 MASA_INSTANTIATE_ALL(MASA::fans_sa_transient_d_finite);
+MASA_INSTANTIATE_ALL(MASA::fans_sa_transient_free_shear);
