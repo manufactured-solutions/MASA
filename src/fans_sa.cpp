@@ -272,11 +272,17 @@ Scalar MASA::fans_sa_transient_d_finite<Scalar>::eval_q_rho_e(Scalar x,Scalar y,
   Scalar NU_SA;
   Scalar chi;
   Scalar f_v1;
+  Scalar f_v2;
   Scalar R;
   Scalar r;
   Scalar mu_t;
+  Scalar Ssa;
+  Scalar Omega;
 
+  f_v2 = 0.1e1 - chi / (0.1e1 + chi * f_v1);
+  Omega = PI * sqrt(pow(a_uy * u_y * sin(a_uy * PI * y / L) - a_vx * v_x * sin(a_vx * PI * x / L), 0.2e1) * pow(L, -0.2e1));
   NU_SA = nu_sa_0 + nu_sa_x * cos(a_nusax * PI * x / L) + nu_sa_y * cos(a_nusay * PI * y / L) + nu_sa_t * cos(a_nusat * PI * t / L);
+  Ssa = Omega + NU_SA * f_v2 * pow(kappa, -0.2e1) * pow(y, -0.2e1);
   r = NU_SA / Ssa * pow(kappa, -0.2e1) * pow(y, -0.2e1);
   RHO = r * rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_t * sin(a_rhot * PI * t / L);
   U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);

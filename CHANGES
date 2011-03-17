@@ -6,6 +6,7 @@ Version 0.40 (In Progress)
 
 Version 0.30 (23 February, 2011) -- first public release
 
+  * added Favre Averaged Navier Stokes Solution	
   * added Transient Euler Solution
   * added 1d Euler + chemistry solution	     
   * API changes-- flipped terms, e.g. masa_eval_rho_u_source -> masa_eval_source_rho_u
