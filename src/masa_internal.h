@@ -1100,8 +1100,7 @@ namespace MASA
     int init_var();
 
     Scalar eval_q_rho_u (Scalar,Scalar,Scalar); 
-    /*
-      Scalar eval_q_rho_v (Scalar,Scalar,Scalar); 
+    Scalar eval_q_rho_v (Scalar,Scalar,Scalar); 
     Scalar eval_q_rho_e (Scalar,Scalar,Scalar); 
     Scalar eval_q_rho   (Scalar,Scalar,Scalar); 
     Scalar eval_q_nu    (Scalar,Scalar,Scalar); 
@@ -1112,7 +1111,6 @@ namespace MASA
     Scalar eval_exact_rho(Scalar,Scalar); 
     Scalar eval_exact_nu (Scalar,Scalar,Scalar); 
 
-    */
   };
 
   template <typename Scalar>
