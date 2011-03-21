@@ -1,13 +1,9 @@
-Verification method:
-
-http://en.wikipedia.org/wiki/Richardson_extrapolation
-
 BASIC INFORMATION:
 
 Welcome to MASA, the Manufactured Analytical Solutions Abstraction Library. 
 
 Check the EXAMPLES directory for examples of the MASA C++, C and Fortran API.
-The source code is contained in MASA, and the regression tests are in tests.
+The source code is contained in src, and the regression tests are in tests.
 
 BUILD INFORMATION:
 
@@ -23,13 +19,3 @@ TO BUILD:
 It is recommended that new users run 'make check'
 This runs numerous diagnostic tests, which ensure the precision
 of all associated solutions are at minimum, 10e-15.
-
-TO ADD A NEW SOLUTION:
-
-1) Type the new class in masa_internal.h
-2) Add the constructor which sets all default variable names
-3) Add the source term evaluation functions 
-4) 'Register' the new solution in masa_core.cpp, get_list_mms
-
-Nice API example:
-http://vis.lbl.gov/Research/H5Part/UsingC.html

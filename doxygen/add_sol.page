@@ -1,4 +1,14 @@
 /*! \page add_sol Adding Additional Manufactured Solutions to MASA
 
+TO ADD A NEW SOLUTION:
+
+1) Add a new file, for your manufactued solution (e.g. new_mms.cpp)
+   * In this file, include a constructor which sets all variable names
+   * Add the file to cc_sources in Makefile.am (in src)
+   * Add the source term evaluation functions to
+
+2) Add the new class in masa_internal.h (example: euler_1d)
+
+3) Add the new solution in masa_core.cpp, method: get_list_mms
 
 */
