@@ -157,10 +157,10 @@ TESTS                      = init.sh              \
 	                     euler3d              \
                              euler_transient_1d   \
                              euler_chem_1d        \
-                             ns2d                 \
-                             ns3d                 \
-                             ns3d_phys            \
-	       	             n2d3d                \
+	                     cns2d                \
+                             cns3d                \
+                             cns3d_phys           \
+	       	             cn2d3d               \
                              axi_euler            \
                              axi_cns              \
                              rans_sa              \
@@ -176,8 +176,8 @@ TESTS                      = init.sh              \
 	                     c_euler2d            \
 	                     c_euler3d            \
                              c_euler_chem_1d      \
-                             c_navierstokes2d     \
-                             c_navierstokes3d     \
+                             c_cns2d              \
+                             c_cns3d              \
 			     f_init.sh            \
 		             f_misc               \
 		             f_purge              \
