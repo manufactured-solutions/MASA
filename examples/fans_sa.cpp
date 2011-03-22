@@ -104,7 +104,7 @@ int main()
   dt=(Scalar)lt/(Scalar)nt;
   
   // initialize the problem 
-  err = masa_init<Scalar>("sa example","fans_sa_transient_d_finite");
+  err = masa_init<Scalar>("sa example","fans_sa_transient_free_shear");
 
   // initialize the default parameters
   err = masa_init_param<Scalar>();
