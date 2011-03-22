@@ -506,7 +506,7 @@ FILE_VERSION_FILTER    =
 # file name after the option, if omitted DoxygenLayout.xml will be used as the name 
 # of the layout file.
 
-LAYOUT_FILE            = 
+LAYOUT_FILE            = doxygen/docs.layout
 
 #---------------------------------------------------------------------------
 # configuration options related to warning and progress messages
@@ -568,7 +568,7 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = src/masa.h examples/pecos-input.txt \
+INPUT                  = src/masa.h src/masa.f90 examples/pecos-input.txt \
 		         doxygen/masa.page \
 		         doxygen/tutorial.page \
 		         doxygen/install.page \			 
