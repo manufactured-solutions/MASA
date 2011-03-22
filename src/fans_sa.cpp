@@ -112,60 +112,59 @@ int MASA::fans_sa_transient_free_shear<Scalar>::init_var()
 {
   int err = 0;
   
-  // currently randomly generated
-  err += this->set_var("u_0",1.23);
-  err += this->set_var("u_x",1.1);
-  err += this->set_var("u_y",.08);
-  err += this->set_var("v_0",12);
-  err += this->set_var("v_x",1.6);
-  err += this->set_var("v_y",.67);
-  err += this->set_var("rho_0",1.02);
-  err += this->set_var("rho_x",7.2);
-  err += this->set_var("rho_y",9.8);
-  err += this->set_var("p_0",1.2);
-  err += this->set_var("p_x",.91);
-  err += this->set_var("p_y",.623);
-  err += this->set_var("a_px",.165);
-  err += this->set_var("a_py",.612);
-  err += this->set_var("a_rhox",.627);
-  err += this->set_var("a_rhoy",.828);
-  err += this->set_var("a_ux",.1987);
-  err += this->set_var("a_uy",1.189);
-  err += this->set_var("a_vx",1.91);
-  err += this->set_var("a_vy",2.901);
-  err += this->set_var("mu",.918);
-  err += this->set_var("L",3.02);
+  err += this->set_var("u_0",10.0);
+  err += this->set_var("u_x",1.0);
+  err += this->set_var("u_y",8.0);
+  err += this->set_var("v_0",0.0);
+  err += this->set_var("v_x",0.0);
+  err += this->set_var("v_y",1.0);
+  err += this->set_var("rho_0",1.0);
+  err += this->set_var("rho_x",0.1);
+  err += this->set_var("rho_y",-0.2);
+  err += this->set_var("p_0",1.0);
+  err += this->set_var("p_x",0.1);
+  err += this->set_var("p_y",0.1);
+  err += this->set_var("a_px",2.0);
+  err += this->set_var("a_py",1.0);
+  err += this->set_var("a_rhox",1.0);
+  err += this->set_var("a_rhoy",1.0);
+  err += this->set_var("a_ux",3.0);
+  err += this->set_var("a_uy",1.0);
+  err += this->set_var("a_vx",2.0);
+  err += this->set_var("a_vy",0.5);
+  err += this->set_var("mu",1.0e-3);
+  err += this->set_var("L",1.0);
 
-  err += this->set_var("nu_sa_0",12.0);
-  err += this->set_var("nu_sa_x",12.0);
-  err += this->set_var("nu_sa_y",12.0);
-  err += this->set_var("nu_sa_t",12.0);
+  err += this->set_var("nu_sa_0",0.2);
+  err += this->set_var("nu_sa_x",0.1);
+  err += this->set_var("nu_sa_y",0.2);
+  err += this->set_var("nu_sa_t",0.0);
 
-  err += this->set_var("a_nusay",12.0);
-  err += this->set_var("a_nusax",12.0);
-  err += this->set_var("a_nusat",12.0);
+  err += this->set_var("a_nusay",0.5);
+  err += this->set_var("a_nusax",1.0);
+  err += this->set_var("a_nusat",0.0);
 
-  err += this->set_var("c_v1",12.0);
-  err += this->set_var("c_b1",12.0);
-  err += this->set_var("c_b2",12.0);
-  err += this->set_var("c_w1",12.0);
-  err += this->set_var("c_w2",12.0);
-  err += this->set_var("c_w3",12.0);
-  err += this->set_var("kappa",12.0);
-  err += this->set_var("sigma",12.0);
-  err += this->set_var("cp",12.0);
-  err += this->set_var("cv",12.0);
-  err += this->set_var("Pr",12.0);
-  err += this->set_var("Pr_t",12.0);
+  err += this->set_var("c_v1",7.1);
+  err += this->set_var("c_b1",0.1355);
+  err += this->set_var("c_b2",0.622);
+  err += this->set_var("c_w1",3.23906781677573e+00); // = c_b1/(kappa*kappa) + (1.0+c_b2)/sigma;
+  err += this->set_var("c_w2",0.3);
+  err += this->set_var("c_w3",2.0);
+  err += this->set_var("kappa",0.41);
+  err += this->set_var("sigma",2./3.);
+  err += this->set_var("cp",3.5*8314.472/28.96); // = 3.5*Runiversal/(mol wght for air)
+  err += this->set_var("cv",3.5*8314.472/28.96/1.4); // = cp/gamma = cp/1.4
+  err += this->set_var("Pr",0.71);
+  err += this->set_var("Pr_t",0.9);
 
-  err += this->set_var("u_t",12.0);
-  err += this->set_var("v_t",12.0);
-  err += this->set_var("p_t",12.0);
-  err += this->set_var("rho_t",12.0);
-  err += this->set_var("a_ut",12.0);
-  err += this->set_var("a_vt",12.0);
-  err += this->set_var("a_pt",12.0);
-  err += this->set_var("a_rhot",12.0);
+  err += this->set_var("u_t",0.0);
+  err += this->set_var("v_t",0.0);
+  err += this->set_var("p_t",0.0);
+  err += this->set_var("rho_t",0.0);
+  err += this->set_var("a_ut",0.0);
+  err += this->set_var("a_vt",0.0);
+  err += this->set_var("a_pt",0.0);
+  err += this->set_var("a_rhot",0.0);
   
   return err;  
 }
