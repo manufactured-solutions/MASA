@@ -39,8 +39,6 @@ Although the most general case would be represented by the $3D$ unsteady distrib
 this paper is divided in two main sections: steady and transient distribution. Each one of these sections is subdivided
 into other two sections, in case of constant and variable material properties, and source terms obtained for $1D$, $2D$ and $3D$ cases are presented.
 
-
-\subsubsection{Steady Conduction}
 For the steady case, Equation (\ref{eq:temp}) is simplified to the form:
 \begin{equation}
  \label{eq:temp_steady}
@@ -53,12 +51,10 @@ Accordingly, Equation (\ref{eq:manufactured01}) is also simplified by considerin
   T ({\bf x}) = \cos(A_x x ) \cdot \cos(B_y y ) \cdot \cos(C_z z ).
 \end{equation}
 
-
 In sequence, both approximations for $k$ (constant or variable) are used in order to obtain source term~ $Q$ for the steady temperature
 distribution (\ref{eq:temp_steady}) from manufactured solution (\ref{eq:manufactured01}).
  
-\subsubsection{Constant Thermal Conductivity}
-
+\subsubsection{Steady Conduction: Constant Thermal Conductivity}
 
 By assuming constant thermal conductivity $k$, Eq. (\ref{eq:temp_steady}) turns:
 \begin{equation}
@@ -105,14 +101,13 @@ and for the 1$D$ case, both $B_y=C_z=0$, resulting:
 $$Q(x) =k A_{x} ^2  \cos(A_{x} x).$$
 
 
-\subsubsection{Variable Thermal Conductivity}
+\subsubsection{Steady Conduction: Variable Thermal Conductivity}
 
 For the more general case $k = k (T )$, and Equation (\ref{eq:temp_steady}) needs to be used for determining
 source term~$Q$. A common approximation for $k$ in many engineering analysis is the case in which $k$ is specified as a polynomial in $T$:
 \begin{equation}
 k(T)= k_0 + k_1 T +  k_2 T^2.
 \end{equation}
-
 
 Similarly to the previous case, source term $Q$ is calculated by  writing Equation (\ref{eq:temp_steady}) as an operator~ $L(T)$ and then operating on manufactured solution (\ref{eq:manufactured02}):
 $$Q({\bf x}) = L(T).$$
@@ -149,15 +144,13 @@ A_x^2 ( k_0-  2 k_2 )  \cos ( A_{x}  x ) -  A_x^2 k_1.
 $$
 
 
-\subsubsection{Transient Conduction}
+\subsubsection{Transient Conduction: Constant Material Properties}
 
 In general, density, specific heat, and thermal conductivity could all be variable, and the complete
 form~(\ref{eq:temp}) should be used to determine $Q$ in case of transient temperature distribution. Although one common simplification is to assume all material properties to be constant, a more general case consists in keeping $\rho$ constant and modeling  $k$ and $c_p$  as polynomials in $T$.
 
 In the next two sections, both approximations for $k$ and $c_p$ (constant or polynomial in $T$) are used in order to obtain source term $Q$ for the transient temperature distribution (\ref{eq:temp}) from manufactured solution~(\ref{eq:manufactured01}).
-
  
-\subsubsection{Constant Material Properties}
 In the simplest transient model where  material properties $\rho,\,c_p$ and $k$ are constant, Equation (\ref{eq:temp}) can be written as:
 \begin{equation}
  \label{eq:temp02}
@@ -198,9 +191,12 @@ Q(x,t)&= \cos(A_x x+A_t t) \cos(D_t t) k_0 A_x^2+\\
 \end{split}
 \end{equation}
 
+\subsubsection{Transient Conduction: Variable Material Properties}
 
+In general, density, specific heat, and thermal conductivity could all be variable, and the complete
+form~(\ref{eq:temp}) should be used to determine $Q$ in case of transient temperature distribution. Although one common simplification is to assume all material properties to be constant, a more general case consists in keeping $\rho$ constant and modeling  $k$ and $c_p$  as polynomials in $T$.
 
-\subsubsection{Variable Material Properties}
+In the next sections, both approximations for $k$ and $c_p$ (constant or polynomial in $T$) are used in order to obtain source term $Q$ for the transient temperature distribution (\ref{eq:temp}) from manufactured solution~(\ref{eq:manufactured01}).
 
 In a yet simpler but more general model for transient temperature distribution, it is usual to approximate the material density as constant and both specific heat and conductivity as polynomials in $T$:
 \begin{equation}\label{eq:k_cp_variable}
@@ -340,21 +336,209 @@ and for the $1D$ distribution,
 
 \subsection{MASA API}
 
-The following are strings that can initialize manufactured solutions with masa\_init:
-    
+\subsubsection{Steady Conduction: Constant Thermal Conductivity}
+
+The following strings will initialize the manufactured solution with masa\_init, for {1d,2d,3d}:
 \begin{verbatim}
 heateq_1d_steady_const
 heateq_2d_steady_const
 heateq_3d_steady_const
-heateq_1d_unsteady_const
-heateq_2d_unsteady_const
-heateq_3d_unsteady_const
-heateq_1d_unsteady_var
-heateq_2d_unsteady_var
-heateq_3d_unsteady_var
+\end{verbatim}
+
+The manufactured solution has several parameters that must be set, either with a series of masa\_set\_param 
+calls, or using masa\_init\_param().
+
+1D:
+\begin{verbatim}
+A_x
+k_0
+\end{verbatim}
+2D:
+\begin{verbatim}
+A_x
+k_0
+B_y
+\end{verbatim}
+3D:
+\begin{verbatim}
+A_x
+k_0
+B_y
+C_z
+\end{verbatim}
+
+The manufactured solution provides the following functions:
+\begin{verbatim}
+int init_var()
+Scalar masa_eval_source_t(Scalar x,Scalar y,Scalar z)
+Scalar masa_eval_exact_t (Scalar x,Scalar y,Scalar z)
+Scalar masa_eval_grad_t  (Scalar x,Scalar y,Scalar z,int direction)
+\end{verbatim}
+
+
+\subsubsection{Steady Conduction: Variable Thermal Conductivity}
+
+The following strings will initialize the manufactured solution with masa\_init, for {1d,2d,3d}:
+\begin{verbatim}
 heateq_1d_steady_var
 heateq_2d_steady_var
 heateq_3d_steady_var
+\end{verbatim}
+
+The manufactured solution has several parameters that must be set, either with a series of masa\_set\_param 
+calls, or using masa\_init\_param().
+
+1D:
+\begin{verbatim}
+A_x
+k_0
+k_1
+k_2
+\end{verbatim}
+
+2D:
+\begin{verbatim}
+A_x
+k_0
+k_1
+k_2
+B_y
+\end{verbatim}
+
+3D:
+\begin{verbatim}
+A_x
+k_0
+k_1
+k_2
+B_y
+C_z
+\end{verbatim}
+
+The manufactured solution provides the following functions:
+\begin{verbatim}
+int init_var()
+Scalar masa_eval_source_t(Scalar x,Scalar y,Scalar z)
+Scalar masa_eval_exact_t (Scalar x,Scalar y,Scalar z)
+Scalar masa_eval_grad_t  (Scalar x,Scalar y,Scalar z,int direction)
+\end{verbatim}
+
+\subsubsection{Transient Conduction: Constant Material Properties}
+The following strings will initialize the manufactured solution with masa\_init, for {1d,2d,3d}:
+\begin{verbatim}
+heateq_1d_unsteady_const
+heateq_2d_unsteady_const
+heateq_3d_unsteady_const
+\end{verbatim}
+
+The manufactured solution has several parameters that must be set, either with a series of masa\_set\_param 
+calls, or using masa\_init\_param().
+
+1D:
+\begin{verbatim}
+A_x
+A_t
+D_t
+k_0
+cp_0
+rho
+\end{verbatim}
+2D:
+\begin{verbatim}
+A_x
+A_t
+B_y
+B_t
+C_z
+C_t
+D_t
+k_0
+cp_0
+rho
+\end{verbatim}
+3D:
+\begin{verbatim}
+A_x
+A_t
+B_y
+B_t
+D_t
+k_0
+cp_0
+rho
+\end{verbatim}
+
+The manufactured solution provides the following functions:
+\begin{verbatim}
+int init_var()
+Scalar masa_eval_source_t(Scalar x,Scalar y,Scalar z)
+Scalar masa_eval_exact_t (Scalar x,Scalar y,Scalar z)
+Scalar masa_eval_grad_t  (Scalar x,Scalar y,Scalar z,int direction)
+\end{verbatim}
+
+\subsubsection{Transient Conduction: Variable Material Properties}
+The following strings will initialize the manufactured solution with masa\_init, for {1d,2d,3d}:
+\begin{verbatim}
+heateq_1d_unsteady_var
+heateq_2d_unsteady_var
+heateq_3d_unsteady_var
+\end{verbatim}
+
+The manufactured solution has several parameters that must be set, either with a series of masa\_set\_param 
+calls, or using masa\_init\_param().
+
+1D:
+\begin{verbatim}
+A_x
+A_t
+D_t
+k_0
+k_1
+k_2
+cp_0
+cp_1
+cp_2
+rho
+\end{verbatim}
+2D:
+\begin{verbatim}
+A_x
+A_t
+B_y
+B_t
+C_z
+C_t
+D_t
+k_0
+k_1
+k_2
+cp_0
+cp_1
+cp_2
+rho
+\end{verbatim}
+3D:
+\begin{verbatim}
+A_x
+A_t
+B_y
+B_t
+D_t
+k_0
+k_1
+k_2
+cp_0
+cp_1
+cp_2
+rho
+\end{verbatim}
+
+The manufactured solution provides the following functions:
+\begin{verbatim}
+int init_var()
+Scalar masa_eval_source_t(Scalar x,Scalar y,Scalar z)
+Scalar masa_eval_exact_t (Scalar x,Scalar y,Scalar z)
+Scalar masa_eval_grad_t  (Scalar x,Scalar y,Scalar z,int direction)
 \end{verbatim}
 
 \endlatexonly

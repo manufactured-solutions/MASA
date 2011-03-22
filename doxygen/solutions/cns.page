@@ -76,7 +76,7 @@ Although \citet{Roy2002} provide the constants used in the manufactured solution
 Source terms  for mass conservation ($Q_\rho$), momentum ($Q_u$, $Q_v$ and $Q_w$)  and total energy ($Q_{e_t}$) equations are obtained by symbolic manipulations of compressible steady Navier--Stokes equations above using Maple~13~\citep{Maple} and are presented in the following sections for the one, two and three-dimensional cases.
 
 
-\subsubsection{1D Steady Navier--Stokes equations}
+\subsubsection{1D Steady Navier--Stokes}
 
 The manufactured analytical solutions (\ref{eq:manufactured01}) for each one of the variables in one-dimensional case of Navier--Stokes equations~are:
 \begin{equation}
@@ -163,7 +163,7 @@ Q_{e_t} &= \dfrac{a_{\rho x} \pi \rho_x U_1^3 }{2L}\cos\left(\dfrac{a_{\rho x} \
  \end{split}
 \end{equation}
 
- \subsubsection{2D Steady Navier--Stokes equations}
+ \subsubsection{2D Steady Navier--Stokes}
 The manufactured analytical solutions (\ref{eq:manufactured01}) for each one of the variables in two-dimensional case of Navier--Stokes equations~are:
 \begin{equation}
 \begin{split}
@@ -284,7 +284,7 @@ Q_{e_t} &=\dfrac{ a_{\rho x} \pi \rho_x  U_2 (U_2^2+\V_2^2)}{2L}\cos\left(\dfrac
 
 
 
-\subsubsection{3D Steady Navier--Stokes equations}
+\subsubsection{3D Steady Navier--Stokes}
 
 The manufactured analytical solution for for each one of the variables in the 3D steady Navier--Stokes equations are:
 \begin{equation}
@@ -491,115 +491,246 @@ Additionally to verifying code capability of solving the governing equations acc
 \end{equation*}
 
 
-\subsection{C Files}
-The $C$ files for both source terms and gradients of the  manufactured solutions are:
-\begin{itemize}
- \item \texttt{NavierStokes\_1d\_steady\_codes.C},
- \item \texttt{NavierStokes\_1d\_manuf\_solutions\_grad\_code.C}
- \item \texttt{NavierStokes\_2d\_steady\_e\_code.C}
- \item \texttt{NavierStokes\_2d\_steady\_rho\_code.C}
- \item \texttt{NavierStokes\_2d\_steady\_u\_code.C}
- \item \texttt{NavierStokes\_2d\_steady\_v\_code.C}
- \item \texttt{NavierStokes\_2d\_manuf\_solutions\_grad\_code.C}
- \item \texttt{NavierStokes\_3d\_steady\_e\_code.C}
- \item \texttt{NavierStokes\_3d\_steady\_rho\_code.C}
- \item \texttt{NavierStokes\_3d\_steady\_u\_code.C}
- \item \texttt{NavierStokes\_3d\_steady\_v\_code.C}
- \item \texttt{NavierStokes\_3d\_steady\_w\_code.C}
- \item \texttt{NavierStokes\_3d\_manuf\_solutions\_grad\_code.C}
-\end{itemize}
+% \subsection{C Files}
+% The $C$ files for both source terms and gradients of the  manufactured solutions are:
+% \begin{itemize}
+%  \item \texttt{NavierStokes\_1d\_steady\_codes.C},
+%  \item \texttt{NavierStokes\_1d\_manuf\_solutions\_grad\_code.C}
+%  \item \texttt{NavierStokes\_2d\_steady\_e\_code.C}
+%  \item \texttt{NavierStokes\_2d\_steady\_rho\_code.C}
+%  \item \texttt{NavierStokes\_2d\_steady\_u\_code.C}
+%  \item \texttt{NavierStokes\_2d\_steady\_v\_code.C}
+%  \item \texttt{NavierStokes\_2d\_manuf\_solutions\_grad\_code.C}
+%  \item \texttt{NavierStokes\_3d\_steady\_e\_code.C}
+%  \item \texttt{NavierStokes\_3d\_steady\_rho\_code.C}
+%  \item \texttt{NavierStokes\_3d\_steady\_u\_code.C}
+%  \item \texttt{NavierStokes\_3d\_steady\_v\_code.C}
+%  \item \texttt{NavierStokes\_3d\_steady\_w\_code.C}
+%  \item \texttt{NavierStokes\_3d\_manuf\_solutions\_grad\_code.C}
+% \end{itemize}
 
-An example of the automatically generated $C$ file from the source term for the 3D total energy source term $Q_{e_t}$~is:
+% An example of the automatically generated $C$ file from the source term for the 3D total energy source term $Q_{e_t}$~is:
 
-\begin{small}
-\begin{verbatim}
-#include <math.h>
+% \begin{small}
+% \begin{verbatim}
+% #include <math.h>
 
-double SourceQ_e (double x, double y, double z)
-{
-  double Q_e;
-  double RHO;
-  double P;
-  double U;
-  double V;
-  double W;
-  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)
-    + rho_z * sin(a_rhoz * PI * z / L);
-  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);
-  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
-  W = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);
-  P = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_z * cos(a_pz * PI * z / L);
+% double SourceQ_e (double x, double y, double z)
+% {
+%   double Q_e;
+%   double RHO;
+%   double P;
+%   double U;
+%   double V;
+%   double W;
+%   RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L)
+%     + rho_z * sin(a_rhoz * PI * z / L);
+%   U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);
+%   V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
+%   W = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);
+%   P = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_z * cos(a_pz * PI * z / L);
 
-  Q_e = -a_px * PI * p_x * U * sin(a_px * PI * x / L) / L
-  + a_py * PI * p_y * V * cos(a_py * PI * y / L) / L
-  - a_pz * p_z * PI * W * sin(a_pz * PI * z / L) / L
-  - (a_uy * u_y * sin(a_uy * PI * y / L) + a_vx * v_x * sin(a_vx * PI * x / L)) * PI * RHO * U * V / L
-  - (a_uz * u_z * sin(a_uz * PI * z / L) - a_wx * w_x * cos(a_wx * PI * x / L)) * PI * RHO * U * W / L
-  - a_px * PI * p_x * U * sin(a_px * PI * x / L) / (Gamma - 0.1e1) / L
-  - (0.2e1 * a_rhox * a_rhox * rho_x * rho_x * pow(cos(a_rhox * PI * x / L), 0.2e1)
-    + 0.2e1 * a_rhoy * a_rhoy * rho_y * rho_y * pow(sin(a_rhoy * PI * y / L), 0.2e1)
-    + 0.2e1 * a_rhoz * a_rhoz * rho_z * rho_z * pow(cos(a_rhoz * PI * z / L), 0.2e1))
-    * PI * PI * k * P * pow(L, -0.2e1) / R * pow(RHO, -0.3e1)
-  - a_pz * p_z * PI * W * sin(a_pz * PI * z / L) / (Gamma - 0.1e1) / L
-  - (a_rhox * a_rhox * rho_x * sin(a_rhox * PI * x / L)
-    + a_rhoy * a_rhoy * rho_y * cos(a_rhoy * PI * y / L)
-    + a_rhoz * a_rhoz * rho_z * sin(a_rhoz * PI * z / L))
-    * PI * PI * k * P * pow(L, -0.2e1) / R * pow(RHO, -0.2e1)
-  + a_py * PI * p_y * V * cos(a_py * PI * y / L) / (Gamma - 0.1e1) / L
-  + (U * U + V * V + W * W) * a_rhox * PI * rho_x * U * cos(a_rhox * PI * x / L) / L / 0.2e1
-  + (U * U + V * V + W * W) * a_rhoz * PI * rho_z * W * cos(a_rhoz * PI * z / L) / L / 0.2e1
-  + (0.4e1 * a_ux * a_ux * u_x * sin(a_ux * PI * x / L)
-    + 0.3e1 * a_uy * a_uy * u_y * cos(a_uy * PI * y / L)
-    + 0.3e1 * a_uz * a_uz * u_z * cos(a_uz * PI * z / L)) * PI * PI * mu * U * pow(L, -0.2e1) / 0.3e1
-  + (0.3e1 * a_vx * a_vx * v_x * cos(a_vx * PI * x / L)
-    + 0.4e1 * a_vy * a_vy * v_y * sin(a_vy * PI * y / L)
-    + 0.3e1 * a_vz * a_vz * v_z * sin(a_vz * PI * z / L)) * PI * PI * mu * V * pow(L, -0.2e1) / 0.3e1
-  + (0.3e1 * a_wx * a_wx * w_x * sin(a_wx * PI * x / L)
-    + 0.3e1 * a_wy * a_wy * w_y * sin(a_wy * PI * y / L)
-    + 0.4e1 * a_wz * a_wz * w_z * cos(a_wz * PI * z / L)) * PI * PI * mu * W * pow(L, -0.2e1) / 0.3e1
-  + (0.3e1 * a_ux * u_x * cos(a_ux * PI * x / L)
-    + a_vy * v_y * cos(a_vy * PI * y / L)
-    - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * U * U / L / 0.2e1
-  + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)
-    - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * P / (Gamma - 0.1e1) / L
-  + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.3e1 * a_vy * v_y * cos(a_vy * PI * y / L)
-    - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * V * V / L / 0.2e1
-  + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)
-    - 0.3e1 * a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * W * W / L / 0.2e1
-  - (0.2e1 * a_rhox * a_px * rho_x * p_x * cos(a_rhox * PI * x / L) * sin(a_px * PI * x / L)
-    + 0.2e1 * a_rhoy * a_py * rho_y * p_y * sin(a_rhoy * PI * y / L) * cos(a_py * PI * y / L)
-    + 0.2e1 * a_pz * a_rhoz * p_z * rho_z * cos(a_rhoz * PI * z / L) * sin(a_pz * PI * z / L))
-    * PI * PI * k * pow(L, -0.2e1) / R * pow(RHO, -0.2e1)
-  + (a_px * a_px * p_x * cos(a_px * PI * x / L) + a_py * a_py * p_y * sin(a_py * PI * y / L)
-    + a_pz * a_pz * p_z * cos(a_pz * PI * z / L)) * PI * PI * k * pow(L, -0.2e1) / R / RHO
-  + (a_vz * v_z * cos(a_vz * PI * z / L) + a_wy * w_y * cos(a_wy * PI * y / L)) * PI * RHO * V * W / L
-  - (U * U + V * V + W * W) * a_rhoy * PI * rho_y * V * sin(a_rhoy * PI * y / L) / L / 0.2e1
-  - (0.4e1 * a_ux * a_ux * u_x * u_x * pow(cos(a_ux * PI * x / L), 0.2e1)
-    - 0.4e1 * a_ux * a_vy * u_x * v_y * cos(a_ux * PI * x / L) * cos(a_vy * PI * y / L)
-    + 0.4e1 * a_ux * a_wz * u_x * w_z * cos(a_ux * PI * x / L) * sin(a_wz * PI * z / L)
-    + 0.3e1 * a_uy * a_uy * u_y * u_y * pow(sin(a_uy * PI * y / L), 0.2e1)
-    + 0.6e1 * a_uy * a_vx * u_y * v_x * sin(a_uy * PI * y / L) * sin(a_vx * PI * x / L)
-    + 0.3e1 * a_uz * a_uz * u_z * u_z * pow(sin(a_uz * PI * z / L), 0.2e1)
-    - 0.6e1 * a_uz * a_wx * u_z * w_x * sin(a_uz * PI * z / L) * cos(a_wx * PI * x / L)
-    + 0.3e1 * a_vx * a_vx * v_x * v_x * pow(sin(a_vx * PI * x / L), 0.2e1)
-    + 0.4e1 * a_vy * a_vy * v_y * v_y * pow(cos(a_vy * PI * y / L), 0.2e1)
-    + 0.4e1 * a_vy * a_wz * v_y * w_z * cos(a_vy * PI * y / L) * sin(a_wz * PI * z / L)
-    + 0.3e1 * a_vz * a_vz * v_z * v_z * pow(cos(a_vz * PI * z / L), 0.2e1)
-    + 0.6e1 * a_vz * a_wy * v_z * w_y * cos(a_vz * PI * z / L) * cos(a_wy * PI * y / L)
-    + 0.3e1 * a_wx * a_wx * w_x * w_x * pow(cos(a_wx * PI * x / L), 0.2e1)
-    + 0.3e1 * a_wy * a_wy * w_y * w_y * pow(cos(a_wy * PI * y / L), 0.2e1)
-    + 0.4e1 * a_wz * a_wz * w_z * w_z * pow(sin(a_wz * PI * z / L), 0.2e1))
-    * PI * PI * mu * pow(L, -0.2e1) / 0.3e1
-  + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)
-    - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * P / L;
-  return(Q_e);
-}
-\end{verbatim}
-\end{small}
+%   Q_e = -a_px * PI * p_x * U * sin(a_px * PI * x / L) / L
+%   + a_py * PI * p_y * V * cos(a_py * PI * y / L) / L
+%   - a_pz * p_z * PI * W * sin(a_pz * PI * z / L) / L
+%   - (a_uy * u_y * sin(a_uy * PI * y / L) + a_vx * v_x * sin(a_vx * PI * x / L)) * PI * RHO * U * V / L
+%   - (a_uz * u_z * sin(a_uz * PI * z / L) - a_wx * w_x * cos(a_wx * PI * x / L)) * PI * RHO * U * W / L
+%   - a_px * PI * p_x * U * sin(a_px * PI * x / L) / (Gamma - 0.1e1) / L
+%   - (0.2e1 * a_rhox * a_rhox * rho_x * rho_x * pow(cos(a_rhox * PI * x / L), 0.2e1)
+%     + 0.2e1 * a_rhoy * a_rhoy * rho_y * rho_y * pow(sin(a_rhoy * PI * y / L), 0.2e1)
+%     + 0.2e1 * a_rhoz * a_rhoz * rho_z * rho_z * pow(cos(a_rhoz * PI * z / L), 0.2e1))
+%     * PI * PI * k * P * pow(L, -0.2e1) / R * pow(RHO, -0.3e1)
+%   - a_pz * p_z * PI * W * sin(a_pz * PI * z / L) / (Gamma - 0.1e1) / L
+%   - (a_rhox * a_rhox * rho_x * sin(a_rhox * PI * x / L)
+%     + a_rhoy * a_rhoy * rho_y * cos(a_rhoy * PI * y / L)
+%     + a_rhoz * a_rhoz * rho_z * sin(a_rhoz * PI * z / L))
+%     * PI * PI * k * P * pow(L, -0.2e1) / R * pow(RHO, -0.2e1)
+%   + a_py * PI * p_y * V * cos(a_py * PI * y / L) / (Gamma - 0.1e1) / L
+%   + (U * U + V * V + W * W) * a_rhox * PI * rho_x * U * cos(a_rhox * PI * x / L) / L / 0.2e1
+%   + (U * U + V * V + W * W) * a_rhoz * PI * rho_z * W * cos(a_rhoz * PI * z / L) / L / 0.2e1
+%   + (0.4e1 * a_ux * a_ux * u_x * sin(a_ux * PI * x / L)
+%     + 0.3e1 * a_uy * a_uy * u_y * cos(a_uy * PI * y / L)
+%     + 0.3e1 * a_uz * a_uz * u_z * cos(a_uz * PI * z / L)) * PI * PI * mu * U * pow(L, -0.2e1) / 0.3e1
+%   + (0.3e1 * a_vx * a_vx * v_x * cos(a_vx * PI * x / L)
+%     + 0.4e1 * a_vy * a_vy * v_y * sin(a_vy * PI * y / L)
+%     + 0.3e1 * a_vz * a_vz * v_z * sin(a_vz * PI * z / L)) * PI * PI * mu * V * pow(L, -0.2e1) / 0.3e1
+%   + (0.3e1 * a_wx * a_wx * w_x * sin(a_wx * PI * x / L)
+%     + 0.3e1 * a_wy * a_wy * w_y * sin(a_wy * PI * y / L)
+%     + 0.4e1 * a_wz * a_wz * w_z * cos(a_wz * PI * z / L)) * PI * PI * mu * W * pow(L, -0.2e1) / 0.3e1
+%   + (0.3e1 * a_ux * u_x * cos(a_ux * PI * x / L)
+%     + a_vy * v_y * cos(a_vy * PI * y / L)
+%     - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * U * U / L / 0.2e1
+%   + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)
+%     - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * P / (Gamma - 0.1e1) / L
+%   + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.3e1 * a_vy * v_y * cos(a_vy * PI * y / L)
+%     - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * V * V / L / 0.2e1
+%   + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)
+%     - 0.3e1 * a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * W * W / L / 0.2e1
+%   - (0.2e1 * a_rhox * a_px * rho_x * p_x * cos(a_rhox * PI * x / L) * sin(a_px * PI * x / L)
+%     + 0.2e1 * a_rhoy * a_py * rho_y * p_y * sin(a_rhoy * PI * y / L) * cos(a_py * PI * y / L)
+%     + 0.2e1 * a_pz * a_rhoz * p_z * rho_z * cos(a_rhoz * PI * z / L) * sin(a_pz * PI * z / L))
+%     * PI * PI * k * pow(L, -0.2e1) / R * pow(RHO, -0.2e1)
+%   + (a_px * a_px * p_x * cos(a_px * PI * x / L) + a_py * a_py * p_y * sin(a_py * PI * y / L)
+%     + a_pz * a_pz * p_z * cos(a_pz * PI * z / L)) * PI * PI * k * pow(L, -0.2e1) / R / RHO
+%   + (a_vz * v_z * cos(a_vz * PI * z / L) + a_wy * w_y * cos(a_wy * PI * y / L)) * PI * RHO * V * W / L
+%   - (U * U + V * V + W * W) * a_rhoy * PI * rho_y * V * sin(a_rhoy * PI * y / L) / L / 0.2e1
+%   - (0.4e1 * a_ux * a_ux * u_x * u_x * pow(cos(a_ux * PI * x / L), 0.2e1)
+%     - 0.4e1 * a_ux * a_vy * u_x * v_y * cos(a_ux * PI * x / L) * cos(a_vy * PI * y / L)
+%     + 0.4e1 * a_ux * a_wz * u_x * w_z * cos(a_ux * PI * x / L) * sin(a_wz * PI * z / L)
+%     + 0.3e1 * a_uy * a_uy * u_y * u_y * pow(sin(a_uy * PI * y / L), 0.2e1)
+%     + 0.6e1 * a_uy * a_vx * u_y * v_x * sin(a_uy * PI * y / L) * sin(a_vx * PI * x / L)
+%     + 0.3e1 * a_uz * a_uz * u_z * u_z * pow(sin(a_uz * PI * z / L), 0.2e1)
+%     - 0.6e1 * a_uz * a_wx * u_z * w_x * sin(a_uz * PI * z / L) * cos(a_wx * PI * x / L)
+%     + 0.3e1 * a_vx * a_vx * v_x * v_x * pow(sin(a_vx * PI * x / L), 0.2e1)
+%     + 0.4e1 * a_vy * a_vy * v_y * v_y * pow(cos(a_vy * PI * y / L), 0.2e1)
+%     + 0.4e1 * a_vy * a_wz * v_y * w_z * cos(a_vy * PI * y / L) * sin(a_wz * PI * z / L)
+%     + 0.3e1 * a_vz * a_vz * v_z * v_z * pow(cos(a_vz * PI * z / L), 0.2e1)
+%     + 0.6e1 * a_vz * a_wy * v_z * w_y * cos(a_vz * PI * z / L) * cos(a_wy * PI * y / L)
+%     + 0.3e1 * a_wx * a_wx * w_x * w_x * pow(cos(a_wx * PI * x / L), 0.2e1)
+%     + 0.3e1 * a_wy * a_wy * w_y * w_y * pow(cos(a_wy * PI * y / L), 0.2e1)
+%     + 0.4e1 * a_wz * a_wz * w_z * w_z * pow(sin(a_wz * PI * z / L), 0.2e1))
+%     * PI * PI * mu * pow(L, -0.2e1) / 0.3e1
+%   + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)
+%     - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * P / L;
+%   return(Q_e);
+% }
+% \end{verbatim}
+% \end{small}
 %---------------------------------------------------------------------------------------------------------
 \bibliographystyle{chicago} 
 \bibliography{../../MMS_bib}
 
+
+\subsection{MASA API}
+
+The 2d and 3d steady and transient manufactured solutions to the compressible 
+Navier-Stokes equations are available in MASA, 
+for both cartesian and axisymmetric cases. Examples of using the equations in c/cpp/f90 are
+in the examples directory, under compressible\_navier\_stokes.cpp, and f\_cns.f90.
+
+\subsubsection{2D Steady Navier--Stokes}
+The following string will initialize the manufactured solution with masa\_init:
+\begin{verbatim}
+navierstokes_2d_compressible
+\end{verbatim}
+
+The manufactured solution has the following parameters that must be set, either with a series of masa\_set\_param 
+calls, or using masa\_init\_param():
+\begin{verbatim}
+Scalar R
+Scalar k
+Scalar u_0
+Scalar u_x
+Scalar u_y
+Scalar v_0
+Scalar v_x
+Scalar v_y
+Scalar rho_0
+Scalar rho_x
+Scalar rho_y
+Scalar p_0
+Scalar p_x
+Scalar p_y
+Scalar a_px
+Scalar a_py
+Scalar a_rhox
+Scalar a_rhoy
+Scalar a_ux
+Scalar a_uy
+Scalar a_vx
+Scalar a_vy
+Scalar Gamma
+Scalar mu
+Scalar L
+\end{verbatim}
+
+The manufactured solution provides the following functions:
+\begin{verbatim}
+int init_var()
+Scalar masa_eval_source_rho_u (Scalar,Scalar)
+Scalar masa_eval_source_rho_v (Scalar,Scalar)
+Scalar masa_eval_source_rho_e (Scalar,Scalar)
+Scalar masa_eval_source_rho   (Scalar,Scalar)    
+Scalar masa_eval_exact_u  (Scalar,Scalar)
+Scalar masa_eval_exact_v  (Scalar,Scalar)
+Scalar masa_eval_exact_p  (Scalar,Scalar)
+Scalar masa_eval_exact_rho(Scalar,Scalar)
+Scalar masa_eval_grad_u  (Scalar,Scalar,int)
+Scalar masa_eval_grad_v  (Scalar,Scalar,int)
+Scalar masa_eval_grad_p  (Scalar,Scalar,int)
+Scalar masa_eval_grad_rho(Scalar,Scalar,int)
+\end{verbatim}
+
+\subsubsection{3D Steady Navier--Stokes}
+The following string will initialize the manufactured solution with masa\_init:
+\begin{verbatim}
+navierstokes_3d_compressible
+\end{verbatim}
+
+The manufactured solution has the following parameters that must be set, either with a series of masa\_set\_param 
+calls, or using masa\_init\_param():
+\begin{verbatim}
+Scalar k
+Scalar R
+Scalar u_0
+Scalar u_x
+Scalar u_y
+Scalar u_z
+Scalar v_0
+Scalar v_x
+Scalar v_y
+Scalar v_z
+Scalar w_0
+Scalar w_x
+Scalar w_y
+Scalar w_z
+Scalar rho_0
+Scalar rho_x
+Scalar rho_y
+Scalar rho_z
+Scalar p_0
+Scalar p_x
+Scalar p_y
+Scalar p_z
+Scalar a_px
+Scalar a_py
+Scalar a_pz
+Scalar a_rhox
+Scalar a_rhoy
+Scalar a_rhoz
+Scalar a_ux
+Scalar a_uy
+Scalar a_uz
+Scalar a_vx
+Scalar a_vy
+Scalar a_vz
+Scalar a_wx
+Scalar a_wy
+Scalar a_wz
+Scalar mu
+Scalar Gamma
+Scalar L
+\end{verbatim}
+
+The manufactured solution provides the following functions:
+\begin{verbatim}
+int init_var()
+Scalar masa_eval_source_rho_u (Scalar,Scalar,Scalar)
+Scalar masa_eval_source_rho_v (Scalar,Scalar,Scalar)
+Scalar masa_eval_source_rho_w (Scalar,Scalar,Scalar)
+Scalar masa_eval_source_rho_e (Scalar,Scalar,Scalar)
+Scalar masa_eval_source_rho   (Scalar,Scalar,Scalar)    
+Scalar masa_eval_exact_u  (Scalar,Scalar,Scalar)
+Scalar masa_eval_exact_v  (Scalar,Scalar,Scalar)
+Scalar masa_eval_exact_w  (Scalar,Scalar,Scalar)
+Scalar masa_eval_exact_p  (Scalar,Scalar,Scalar)
+Scalar masa_eval_exact_rho(Scalar,Scalar,Scalar)
+Scalar masa_eval_grad_u  (Scalar,Scalar,Scalar,int)
+Scalar masa_eval_grad_v  (Scalar,Scalar,Scalar,int)
+Scalar masa_eval_grad_w  (Scalar,Scalar,Scalar,int)
+Scalar masa_eval_grad_p  (Scalar,Scalar,Scalar,int)
+Scalar masa_eval_grad_rho(Scalar,Scalar,Scalar,int)
+\end{verbatim}
 
 \endlatexonly
 

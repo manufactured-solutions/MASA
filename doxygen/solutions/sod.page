@@ -1,7 +1,39 @@
 /*! \page sod Sod Shock Tube
 
-1d manufactured solutions to the Sod shock tube are available in MASA.
 \latexonly
+
+\subsection{MASA API}
+
+1d manufactured solutions to the Sod shock tube are available in MASA.
+Examples of using the solution in c/cpp/f90 are
+in the examples directory.
+
+The following string will initialize the manufactured solution with masa\_init:
+\begin{verbatim}
+sod_1d
+\end{verbatim}
+
+The manufactured solution has the following parameters that must be set, either with a series of masa\_set\_param 
+calls, or using masa\_init\_param():
+\begin{verbatim}
+Gamma
+mu
+pl
+pr
+rhol
+rhor
+cl
+cr
+\end{verbatim}
+
+The manufactured solution provides the following functions:
+\begin{verbatim}
+int init_var()
+Scalar masa_eval_source_rho_u (Scalar)
+Scalar masa_eval_source_rho   (Scalar)    
+Scalar masa_eval_source_p (Scalar)
+Scalar masa_eval_exact_t  (Scalar)
+\end{verbatim}
 
 \endlatexonly
 
