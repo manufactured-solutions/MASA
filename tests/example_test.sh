@@ -40,6 +40,9 @@ cd ../examples
  ./fans_sa
  err=$(($err+$?))
 
+ ./fans_sa_finite_d
+ err=$(($err+$?))
+
  ./radiation
  err=$(($err+$?))
 
