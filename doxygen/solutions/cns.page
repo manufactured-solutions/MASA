@@ -389,6 +389,7 @@ Q_w &= \dfrac{a_{\rho x} \pi \rho_x U_3 \W_3}{L} \cos\left(\dfrac{a_{\rho x} \pi
 \end{equation}
 
 Finally, the source term $Q_{e_t}$ for the 3D total energy equation is:
+
 \begin{equation}
  \begin{split}\label{eq:ns_3d_e}
 Q_{e_t} &= \dfrac{a_{\rho x} \pi \rho_x U_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\cos\left(\dfrac{a_{\rho x} \pi x}{L}\right)+\\
@@ -407,6 +408,7 @@ Q_{e_t} &= \dfrac{a_{\rho x} \pi \rho_x U_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\cos\left(
 &+
  \end{split}
 \end{equation}
+
 \begin{equation}
  \begin{split}
 &+\dfrac{ \pi^2 k}{L^2 R \Rho_3}\left[a_{px}^2 p_x \cos\left(\dfrac{a_{px} \pi x}{L}\right)+a_{py}^2 p_y \sin\left(\dfrac{a_{py} \pi y}{L}\right)+a_{pz}^2 p_z \cos\left(\dfrac{a_{pz} \pi z}{L}\right)\right] +\\
@@ -474,7 +476,7 @@ Additionally to verifying code capability of solving the governing equations acc
   \dfrac{  a_{ux}  \pi u_x}{L} \cos\left( \dfrac{ a_{ux}  \pi  x}{L}\right)\vspace{5pt}\\
  -   \dfrac{  a_{uy}  \pi u_y}{L} \sin\left( \dfrac{ a_{uy}  \pi  y}{L}\right)\vspace{5pt}\\
  -   \dfrac{  a_{uz}  \pi u_z}{L} \sin\left( \dfrac{ a_{uz}  \pi  z}{L}\right)
-\end{array} \right],
+\end{array} \right]
 \end{equation*}
 \begin{equation*}
 \nabla  v= \left[ \begin{array}{c}
@@ -605,8 +607,8 @@ Additionally to verifying code capability of solving the governing equations acc
 
 The 2d and 3d steady and transient manufactured solutions to the compressible 
 Navier-Stokes equations are available in MASA, 
-for both cartesian and axisymmetric cases. Examples of using the equations in c/cpp/f90 are
-in the examples directory, under compressible\_navier\_stokes.cpp, and f\_cns.f90.
+for both cartesian and axisymmetric cases. Examples of using the equations in C, C++ and Fortran90
+are in the examples directory, under compressible\_navier\_stokes.cpp, and f\_cns.f90.
 
 \subsubsection{2D Steady Navier--Stokes}
 The following string will initialize the manufactured solution with masa\_init:

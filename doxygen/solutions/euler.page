@@ -6,23 +6,22 @@
 The conservation of mass, momentum, and total energy for a compressible steady inviscid fluid may be written as:
 \begin{equation}
  \label{eq:euler_01}
-\nabla \cdot \left(\rho \bv{u}\right) = 0,
+\nabla \cdot \left(\rho \bv{u}\right) = 0
 \end{equation}
 
 \begin{equation}
  \label{eq:euler_02}
-\nabla\cdot\left(\rho\bv{u}\bv{u}\right) = -\nabla p,
+\nabla\cdot\left(\rho\bv{u}\bv{u}\right) = -\nabla p
 \end{equation}
 
 \begin{equation}
  \label{eq:euler_03}
-%\nabla \cdot (\rho\bv{u}e_t)+  \nabla\cdot(p  \bv{u})=0
-\nabla\cdot\left(\rho \bv{u} H\right) = 0.
+\nabla\cdot\left(\rho \bv{u} H\right) = 0
 \end{equation}
 
-
-
-Equations (\ref{eq:euler_01})--(\ref{eq:euler_03}) are known as Euler equations and, $\rho$ is the density, $\bv{u}=(u,v,w)$ is the velocity in $x$, $y$ or $z$-direction, respectively,    and $p$ is the pressure. The total enthalpy, $H$, may be expressed in terms of the total energy per unit mass $e_t$, density, and pressure:
+Equations (\ref{eq:euler_01})--(\ref{eq:euler_03}) are known as Euler equations and $\rho$ is the density, $\bv{u}=(u,v,w)$ is the velocity in 
+$x$, $y$ or $z$-direction, respectively, and $p$ is the pressure. The total enthalpy, $H$, may be expressed in terms of the total energy 
+per unit mass $e_t$, density, and pressure:
 $$H = e_t + \dfrac{p}{\rho}.$$
 
 For a calorically perfect gas, the Euler equations are closed with two auxiliary relations for energy:
@@ -60,9 +59,9 @@ The manufactured analytical solutions (\ref{eq:manufactured01}) for each one of 
 \begin{equation}
 \begin{split}
 \label{eq:manufactured_1d}
-\rho\left(x\right) &=  \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho x} \pi x}{L}\right),\\
-u\left(x\right) &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right),\\
-p\left(x\right) &= p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right).\\
+\rho\left(x\right) &=  \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho x} \pi x}{L}\right) \\
+u\left(x\right) &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right) \\
+p\left(x\right) &= p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right) \\
 \end{split}
 \end{equation}
 
@@ -71,9 +70,9 @@ The MMS applied to Euler equations consists in modifying the 1D Euler equations~
 \begin{equation}
  \label{eq:euler_mod_2d}
 \begin{split}
-&\Diff{\rho u}{x} = Q_\rho,\\
-&\Diff{\rho u^2 }{x}+ \Diff{p}{x} = Q_u,\\
-&\Diff{\rho ue_t}{x}+ \Diff{pu}{x} = Q_{e_t},
+&\Diff{\rho u}{x} = Q_\rho \\
+&\Diff{\rho u^2 }{x}+ \Diff{p}{x} = Q_u \\
+&\Diff{\rho ue_t}{x}+ \Diff{pu}{x} = Q_{e_t}
 \end{split}
 \end{equation}
 %
@@ -84,16 +83,16 @@ Source terms $Q_\rho$, $Q_u$ and $Q_{e_t}$ are obtained by symbolic manipulation
 \begin{equation*}
  \begin{split}
 \label{eq:aux_1d}
-\Rho_1 &= \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho x} \pi x}{L}\right),\\
-U_1 &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right),\\
-\PP_1 &= p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right),\\
+\Rho_1 &= \rho_{0}+ \rho_{x} \sin\left(\frac{a_{ \rho x} \pi x}{L}\right) \\
+U_1 &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right) \\
+\PP_1 &= p_{0}+p_{x} \cos\left(\frac{a_{p x} \pi x}{L}\right) \\
 \end{split}
 \end{equation*}
 where the subscripts refer to the 1D case.
 
 The mass conservation equation written as an operator is:
 \begin{equation*}
- \Lo= \Diff{\rho u}{x}.
+ \Lo= \Diff{\rho u}{x} 
 \end{equation*}
 
 Analytically differentiating Equation (\ref{eq:manufactured_1d}) for $\rho$ and $u$  using operator $\Lo$ defined above gives  the source term $Q_{\rho}$:
@@ -354,7 +353,7 @@ Q_{e_t} &= \dfrac{a_{\rho x} \pi \rho_x U_3 (U_3^2+\V_3^2+\W_3^2)}{2L}\cos\left(
 \subsubsection{Comments}
 The complexity, and consequently length, of the source terms increase with both dimension and physics handled by the governing equations. In some cases, such as the 3D energy equation, the final expression for $Q_{e_t}$ may reach 139,000 characters, including parenthesis and mathematical operators, prior to factorization.
 
-Applying commands in order to simplify such extensive expression is challenging even with a very good machine; thus, a suitable alternative to this issue is to simplify the equation by dividing it into a combination of sub-operators handling different physical phenomena. Then, each one of the operators may be applied to the manufactured solutions individually, and the resulting sub-source terms are combined back to represent the source term for the original equation.
+Applying commands in order to simplify such extensive expression is challenging even with a high performance computer; thus, a suitable alternative to this issue is to simplify the equation by dividing it into a combination of sub-operators handling different physical phenomena. Then, each one of the operators may be applied to the manufactured solutions individually, and the resulting sub-source terms are combined back to represent the source term for the original equation.
 
 For instance, instead of writing the three-dimensional steady Euler energy equation using one single operator~$\Lo$:
 \begin{equation}
@@ -396,8 +395,9 @@ Additionally to verifying code capability of solving the governing equations acc
   \dfrac{  a_{ux}  \pi u_x}{L} \cos\left( \dfrac{ a_{ux}  \pi  x}{L}\right)\vspace{5pt}\\
  -   \dfrac{  a_{uy}  \pi u_y}{L} \sin\left( \dfrac{ a_{uy}  \pi  y}{L}\right)\vspace{5pt}\\
  -   \dfrac{  a_{uz}  \pi u_z}{L} \sin\left( \dfrac{ a_{uz}  \pi  z}{L}\right)
-\end{array} \right],
+\end{array} \right]
 \end{equation*}
+
 \begin{equation*}
 \nabla  v= \left[ \begin{array}{c}
 -  \dfrac{  a_{vx}  \pi v_x}{L}  \sin\left( \dfrac{ a_{vx}  \pi  x}{L}\right)\vspace{5pt}\\
@@ -482,8 +482,8 @@ Additionally to verifying code capability of solving the governing equations acc
 
 \subsection{MASA API}
 
-1d,2d,3d steady and transient manufactured solutions to the euler equations are available in MASA, 
-for both cartesian and axisymmetric cases. Examples of using the Euler equations in c/cpp/f90 are
+\{1d,2d,3d\} steady and transient manufactured solutions to the euler equations are available in MASA, 
+for both cartesian and axisymmetric cases. Examples of using the Euler equations in C, C++ and FORTRAN90 are
 in the examples directory, under euler\_example.cpp, c\_euler\_example.c and f\_euler.f90.
 
 \subsubsection{1D Steady Euler}

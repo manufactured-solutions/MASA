@@ -1,4 +1,4 @@
-*! \mainpage The MASA Library
+/*! \mainpage The MASA Library
 
 <b>Version \version</b>, Build Date: \builddate
 
@@ -126,7 +126,7 @@ Please check back to find this for use as a reference for MASA.
 
 /*! \page mms_avail Available Manufactured Solutions
 
-    This follow sections detail all available manufactured solutions in MASA.
+    The following sections detail all available manufactured solutions in MASA.
 
 <ul>
 <li> \subpage heat  </li>

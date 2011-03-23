@@ -36,6 +36,8 @@
 // Library version/build info
 //
 
+/// \cond
+
 #define MASA_MAJOR_VERSION  0
 #define MASA_MINOR_VERSION  30
 #define MASA_MICRO_VERSION  0
@@ -55,21 +57,33 @@
 #define MASA_FC            "gfortran"
 #define MASA_FCFLAGS       "-O0 -fno-unsafe-math-optimizations"
 
+/// \endcond
+
+/** \page apiC C/C++ Library Interface                                        
+ *                                                                            
+ * This section outlines the available MASA functions for C/C++.  To          
+ * use, make sure to \#include <masa.h> within your source code               
+ * files. Several simple examples using these functions are provided          
+ * in the examples section.  
+ *
+ * \section init Initialization Routines
+ */
+
 
 // This header file contains the public functions designed to be exposed in MASA
 // What follows is the masa.h doxygen documentation headers
 
-/*! \file masa.h
-\brief MASA header file containing all public C/C++ API
-
-MASA.h is a header file that contains all the public objects and member functions for the C/C++ interfaces. 
-To use, be sure to #include <masa.h> in any C or C++ programs calling MASA routines. In addition, all functions are 
-encapsulated in a MASA namespace, and thus C++ routines require 'using namespace MASA' for access.
-
-Several simple examples for using these functions are provided in the examples section. 
-Functions which have an integer return value return "0" upon success.
-
-*/
+/** \file
+ * MASA header file containing all public C/C++ API
+ * 
+ * MASA.h is a header file that contains all the public objects and member functions for the C/C++ interfaces. 
+ * To use, be sure to #include <masa.h> in any C or C++ programs calling MASA routines. In addition, all functions are 
+ * encapsulated in a MASA namespace, and thus C++ routines require 'using namespace MASA' for access.
+ * 
+ * Several simple examples for using these functions are provided in the examples section. 
+ * Functions which have an integer return value return "0" upon success.
+ * 
+ */
 
 /*! \fn int masa_init(string unique_name, string mms)
   \brief Initialize a MASA manufactured solution class
@@ -84,9 +98,10 @@ Functions which have an integer return value return "0" upon success.
 namespace MASA
 {
 
-  // --------------------------------
-  // new masa api function
-  // --------------------------------
+  // -------------------------------------
+  /// \name Problem Definition Routines 
+  // -------------------------------------
+
 
   /**
    * masa_init: 
@@ -101,7 +116,6 @@ namespace MASA
    * for a particular masa class. ("euler_1d")
    * 
    */
-
   template <typename Scalar>
   int masa_init      (std::string, std::string);
 
@@ -530,9 +544,11 @@ extern "C" {
    */
   extern double masa_get_param(const char*);
 
-  // --------------------------------
-  // source term(s) -- 1D
-  // --------------------------------
+  //  --------------------------------
+  /// \name 1D Source Terms
+  //  --------------------------------
+
+
 
   /**
    * masa_eval_1d_source_t is a subroutine that will return
@@ -648,7 +664,7 @@ extern "C" {
   extern double masa_eval_1d_exact_rho_N2   (double);
 
   // --------------------------------
-  // source term(s) -- 2D
+  /// \name 2D Source Terms
   // --------------------------------
 
   /**
@@ -662,7 +678,7 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double masa_eval_2d_source_t  (double,double);
+  extern double masa_eval_2d_source_t  (double x,double y);
 
   /**
    * masa_eval_2d_source_u is a subroutine that will return
@@ -786,7 +802,7 @@ extern "C" {
   extern double masa_eval_2d_exact_rho    (double,double);
 
   // --------------------------------
-  // source term(s) -- 3D
+  /// \name 3D Source Terms
   // --------------------------------
 
   /**

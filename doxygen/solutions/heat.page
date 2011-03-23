@@ -326,9 +326,6 @@ and for the $1D$ distribution,
 % \end{verbatim}
 
 %---------------------------------------------------------------------------------------------------------
-\bibliographystyle{ieeetr} 
-\bibliography{../MMS_bib}
-
 
 %
 %  NOW ADDING MASA API SECTION
@@ -540,6 +537,9 @@ Scalar masa_eval_source_t(Scalar x,Scalar y,Scalar z)
 Scalar masa_eval_exact_t (Scalar x,Scalar y,Scalar z)
 Scalar masa_eval_grad_t  (Scalar x,Scalar y,Scalar z,int direction)
 \end{verbatim}
+
+\bibliographystyle{ieeetr} 
+\bibliography{MMS_bib}
 
 \endlatexonly
 

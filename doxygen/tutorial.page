@@ -54,7 +54,7 @@ your solution can be found by:
 <li> Calling the function: \c masa_display_param()
 </ul>
 
-The output from \c masa_display_param() for our euler1d example will look something like:
+The output from masa_display_param() for our euler1d example will look something like:
 \code
 
 MASA :: Solution has 14 variables.

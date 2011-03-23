@@ -35,6 +35,8 @@ module masa
   ! MMS Init/Selection Routines
   ! ---------------------------------
 
+  !! \cond
+
   interface
      subroutine masa_init_passthrough(user_tag,desired_mms_function) bind (C,name='masa_init')
        use iso_c_binding
@@ -45,6 +47,8 @@ module masa
 
      end subroutine masa_init_passthrough
   end interface
+
+  !! \endcond
 
   interface
      subroutine masa_list_mms() bind (C,name='masa_list_mms')
