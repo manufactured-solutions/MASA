@@ -117,10 +117,10 @@ namespace MASA
    * 
    */
   template <typename Scalar>
-  int masa_init      (std::string, std::string);
+  int masa_init      (std::string handle, std::string unique_solution_string);
 
   template <typename Scalar>
-  int masa_select_mms(std::string);
+  int masa_select_mms(std::string handle);
 
   template <typename Scalar>
   int masa_list_mms  ();
@@ -139,10 +139,10 @@ namespace MASA
   int    masa_init_param();
 
   template <typename Scalar>
-  void   masa_set_param(std::string,Scalar);
+  void   masa_set_param(std::string param_name,Scalar new_value);
 
   template <typename Scalar>
-  Scalar masa_get_param(std::string);
+  Scalar masa_get_param(std::string param_name);
 
   // --------------------------------
   // source term(s) -- 1D
