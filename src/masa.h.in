@@ -450,8 +450,6 @@ extern "C" {
   // --------------------------------
 
   /**
-   *  masa_init: 
-   * 
    * masa_init initalizes a masa manufactured solution class.
    * 
    * This routine takes two arguments, both strings of characters. 
@@ -459,14 +457,15 @@ extern "C" {
    * class. ("nick")
    * 
    * The second character string is the unique masa identifier string
-   * for a particular masa class. ("euler_1d")
+   * for a particular masa class. ("euler_1d"). See the tutorial for 
+   * more information on all available solution strings.
    * 
    * The routine returns an integer 0 for success. It will throw an 
    * exception and return 1 if no manufactured solutions of the 2nd
    * argument exist. 
    *
    */
-  extern int masa_init      (const char*, const char*);
+  extern int masa_init      (const char* handle, const char* unique_solution_name);
 
   /**
    *  masa_init: 
@@ -488,7 +487,7 @@ extern "C" {
    * 
    * Subroutine returns integer 0 for success.
    */
-  extern int masa_select_mms(const char*);
+  extern int masa_select_mms(const char* handle);
 
   /**
    * masa_list_mms will display (to stdout) the number of 
@@ -529,7 +528,7 @@ extern "C" {
    * This routine can be called multiple times, with subsequent
    * calls overwriting the previously held variable value. 
    */
-  extern void   masa_set_param(const char*,double);
+  extern void   masa_set_param(const char* param_name,double new_value);
 
   /**
    * masa_get_param is a subroutine that will return
@@ -542,26 +541,18 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double masa_get_param(const char*);
+  extern double masa_get_param(const char* param_name);
 
   //  --------------------------------
   /// \name 1D Source Terms
   //  --------------------------------
 
-
-
   /**
    * masa_eval_1d_source_t is a subroutine that will return
    * the value of the source term for the temperature of the currently selected
-   * 1 dimensional masa function 
-   *
-   * This subroutine takes as input a double precision number
-   * which specifies the current x location of the source term.
-   * 
-   * Subroutine returns a double of the currently held value
-   * of the specified variable. 
+   * one dimensional masa function 
    */
-  extern double masa_eval_1d_source_t  (double);
+  extern double masa_eval_1d_source_t  (double x);
 
   /**
    * masa_eval_1d_source_u is a subroutine that will return
@@ -569,13 +560,10 @@ extern "C" {
    * of the currently selected
    * one dimensional masa function 
    *
-   * This subroutine takes as input a double precision number
-   * which specifies the current x location of the source term.
-   * 
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double masa_eval_1d_source_u  (double);
+  extern double masa_eval_1d_source_u  (double x);
 
   /**
    * masa_eval_1d_source_e is a subroutine that will return
@@ -589,7 +577,7 @@ extern "C" {
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double masa_eval_1d_source_e  (double);
+  extern double masa_eval_1d_source_e  (double x);
 
   /**
    * masa_eval_1d_source_rho is a subroutine that will return
@@ -597,71 +585,70 @@ extern "C" {
    * of the currently selected
    * one dimensional masa function 
    *
-   * This subroutine takes as input a double precision number
-   * which specifies the current x location of the source term.
-   * 
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double masa_eval_1d_source_rho(double);
-  extern double masa_eval_1d_source_rho_u (double);
-  extern double masa_eval_1d_source_rho_e (double);
-  extern double masa_eval_1d_source_rho_N (double,double (*)(double));
-  extern double masa_eval_1d_source_rho_N2(double,double (*)(double));
+  extern double masa_eval_1d_source_rho(double x);
+
+  /**
+   * masa_eval_1d_source_rho_u is a subroutine that will return
+   * the value of the source term for the density*u-component of
+   * velocity of the currently selected
+   * one dimensional masa function 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
+  extern double masa_eval_1d_source_rho_u (double x);
+
+
+  /**
+   * masa_eval_1d_source_rho_e is a subroutine that will return
+   * the value of the source term for the density*energy of
+   * velocity of the currently selected
+   * one dimensional masa function 
+   * Subroutine returns a double of the currently held value
+   * of the specified variable. 
+   */
+  extern double masa_eval_1d_source_rho_e (double x);
+  extern double masa_eval_1d_source_rho_N (double x,double (*)(double));
+  extern double masa_eval_1d_source_rho_N2(double x,double (*)(double));
 
   /**
    * masa_eval_1d_exact_t is a subroutine that will return
    * the value of the analytical term for the temperature
    * of the currently selected one dimensional masa function.
    *
-   * This subroutine takes as input a single double precision number
-   * which specifies the current x location of the source term.
-   * 
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double masa_eval_1d_exact_t      (double);
+  extern double masa_eval_1d_exact_t      (double x);
 
   /**
    * masa_eval_1d_exact_u is a subroutine that will return
    * the value of the analytical term for the u component of velocity
    * of the currently selected one dimensional masa function.
-   *
-   * This subroutine takes as input a single double precision number
-   * which specifies the current x location of the source term.
-   * 
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double masa_eval_1d_exact_u      (double);
+  extern double masa_eval_1d_exact_u      (double x);
 
   /**
    * masa_eval_1d_exact_p is a subroutine that will return
    * the value of the analytical term for the pressure
    * of the currently selected one dimensional masa function.
-   *
-   * This subroutine takes as input a single double precision number
-   * which specifies the current x location of the source term.
-   * 
    * Subroutine returns a double of the currently held value
    * of the specified variable. 
    */
-  extern double masa_eval_1d_exact_p      (double);
+  extern double masa_eval_1d_exact_p      (double x);
 
   /**
    * masa_eval_1d_exact_rho is a subroutine that will return
    * the value of the analytical term for the u component of velocity
    * of the currently selected one dimensional masa function.
-   *
-   * This subroutine takes as input a single double precision number
-   * which specifies the current x location of the source term.
-   * 
-   * Subroutine returns a double of the currently held value
-   * of the specified variable. 
    */
-  extern double masa_eval_1d_exact_rho      (double);
-  extern double masa_eval_1d_exact_rho_N    (double);
-  extern double masa_eval_1d_exact_rho_N2   (double);
+  extern double masa_eval_1d_exact_rho      (double x);
+  extern double masa_eval_1d_exact_rho_N    (double x);
+  extern double masa_eval_1d_exact_rho_N2   (double x);
 
   // --------------------------------
   /// \name 2D Source Terms
@@ -670,13 +657,7 @@ extern "C" {
   /**
    * masa_eval_2d_source_t is a subroutine that will return
    * the value of the source term for the temperature of the currently selected
-   * 2 dimensional masa function 
-   *
-   * This subroutine takes as input two double precision numbers
-   * which specifies the current x and y locations of the source term.
-   * 
-   * Subroutine returns a double of the currently held value
-   * of the specified variable. 
+   * two dimensional masa function.
    */
   extern double masa_eval_2d_source_t  (double x,double y);
 
@@ -684,57 +665,54 @@ extern "C" {
    * masa_eval_2d_source_u is a subroutine that will return
    * the value of the source term for the u component of velocity
    * for the currently selected two dimensional masa function.
-   *
-   * This subroutine takes as input two double precision numbers
-   * which specifies the current x and y location of the source term.
-   * 
-   * Subroutine returns a double of the currently held value
-   * of the specified variable. 
    */
-  extern double masa_eval_2d_source_u  (double,double);
+  extern double masa_eval_2d_source_u  (double x,double y);
 
   /**
    * masa_eval_2d_source_v is a subroutine that will return
    * the value of the source term for the v component of velocity
    * for the currently selected two dimensional masa function.
-   *
-   * This subroutine takes as input two double precision numbers
-   * which specifies the current x and y location of the source term.
-   * 
-   * Subroutine returns a double of the currently held value
-   * of the specified variable. 
    */
-  extern double masa_eval_2d_source_v  (double,double);
+  extern double masa_eval_2d_source_v  (double x,double y);
 
   /**
    * masa_eval_2d_source_e is a subroutine that will return
    * the value of the source term for the energy
    * of the currently selected two dimensional masa function.
-   *
-   * This subroutine takes as input two double precision numbers
-   * which specifies the current x and y location of the source term.
-   * 
-   * Subroutine returns a double of the currently held value
-   * of the specified variable. 
    */
-  extern double masa_eval_2d_source_e  (double,double);
+  extern double masa_eval_2d_source_e  (double x,double y);
 
   /**
    * masa_eval_2d_source_rho is a subroutine that will return
    * the value of the source term for the density
    * of the currently selected two dimensional masa function.
-   *
-   * This subroutine takes as input two double precision numbers
-   * which specifies the current x and y location of the source term.
-   * 
-   * Subroutine returns a double of the currently held value
-   * of the specified variable. 
    */
-  extern double masa_eval_2d_source_rho(double,double);
-  extern double masa_eval_2d_source_rho_u(double,double);
-  extern double masa_eval_2d_source_rho_v(double,double);
-  extern double masa_eval_2d_source_rho_w(double,double);
-  extern double masa_eval_2d_source_rho_e(double,double);
+  extern double masa_eval_2d_source_rho(double x,double y);
+
+  /**
+   * masa_eval_2d_source_rho_u is a subroutine that will return
+   * the value of the source term for the density*u-component
+   * of velocity for the currently selected two dimensional masa function.
+   */
+  extern double masa_eval_2d_source_rho_u(double x,double y);
+
+  /**
+   * returns the value of the source term for the density*v-component
+   * of velocity for the currently selected two dimensional masa function.
+   */
+  extern double masa_eval_2d_source_rho_v(double x,double y);
+
+  /**
+   * returns the value of the source term for the density*w-component
+   * of velocity for the currently selected two dimensional masa function.
+   */
+  extern double masa_eval_2d_source_rho_w(double x,double y);
+
+  /**
+   * returns the value of the source term for the density*energy
+   * for the currently selected two dimensional masa function.
+   */
+  extern double masa_eval_2d_source_rho_e(double x,double y);
 
   /**
    * masa_eval_2d_exact_t is a subroutine that will return
