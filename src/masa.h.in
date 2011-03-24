@@ -903,19 +903,19 @@ extern "C" {
    * This subroutine returns the gradient of the analytical solution.
    * It should be called for solutions with a single dimension.
    */
-  extern double masa_eval_grad_1d(int direction,double x);
+  extern double masa_eval_1d_grad(int direction,double x);
 
   /**
    * This subroutine returns the gradient of the analytical solution.
    * It should be called for solutions with two dimensions.
    */
-  extern double masa_eval_grad_2d(int direction,double x,double y);
+  extern double masa_eval_2d_grad(int direction,double x,double y);
 
   /**
    * This subroutine returns the gradient of the analytical solution. 
    * It should be called for solutions with three dimensions.
    */
-  extern double masa_eval_grad_3d(int direction,double x,double y,double z);
+  extern double masa_eval_3d_grad(int direction,double x,double y,double z);
 
   // --------------------------------
   /// \name Utility functions

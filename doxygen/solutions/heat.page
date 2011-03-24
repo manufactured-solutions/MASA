@@ -100,7 +100,6 @@ Q(x,y) =k(A_{x} ^2+B_{y} ^2) \cos(A_{x} x)\cos(B_{y} y),
 and for the 1$D$ case, both $B_y=C_z=0$, resulting:
 $$Q(x) =k A_{x} ^2  \cos(A_{x} x).$$
 
-
 \subsubsection{Steady Conduction: Variable Thermal Conductivity}
 
 For the more general case $k = k (T )$, and Equation (\ref{eq:temp_steady}) needs to be used for determining
@@ -368,17 +367,26 @@ Parameters:
 
 Functions:
 \li masa_init()
-\li masa_eval_source_t( x, y, z)
-\li masa_eval_exact_t ( x, y, z)
-\li masa_eval_grad_t  ( x, y, z,int direction)
+\li masa_eval_1d_source_t()
+\li masa_eval_1d_exact_t()
+\li masa_eval_1d_grad()
+\li masa_eval_2d_source_t()
+\li masa_eval_2d_exact_t()
+\li masa_eval_2d_grad()
+\li masa_eval_3d_source_t()
+\li masa_eval_3d_exact_t()
+\li masa_eval_3d_grad()
 
-\subsubsection scvt Steady Conduction: Variable Thermal Conductivity
+\latexonly
+\subsubsection{Steady Conduction: Variable Thermal Conductivity}
+%\subsubsection scvt Steady Conduction: Variable Thermal Conductivity
+\endlatexonly
+
 
 Initialization:
-\li heateq_1d_steady_var()
-\li heateq_2d_steady_var()
-\li heateq_3d_steady_var()
-
+\li heateq_1d_steady_var
+\li heateq_2d_steady_var
+\li heateq_3d_steady_var
 
 Parameters:
 
@@ -411,11 +419,21 @@ Parameters:
 
 Functions:
 \li masa_init()
-\li masa_eval_source_t( x, y, z)
-\li masa_eval_exact_t ( x, y, z)
-\li masa_eval_grad_t  ( x, y, z, int direction)
+\li masa_eval_1d_source_t()
+\li masa_eval_1d_exact_t()
+\li masa_eval_1d_grad()
+\li masa_eval_2d_source_t()
+\li masa_eval_2d_exact_t()
+\li masa_eval_2d_grad()
+\li masa_eval_3d_source_t()
+\li masa_eval_3d_exact_t()
+\li masa_eval_3d_grad()
 
-\subsubsection tccm Transient Conduction: Constant Material Properties
+\latexonly
+\subsubsection{Transient Conduction: Constant Material Properties}
+%\subsubsection tccm Transient Conduction: Constant Material Properties
+\endlatexonly
+
 
 Initialization:
 \li heateq_1d_unsteady_const
@@ -456,11 +474,20 @@ Parameters:
 
 Functions:
 \li masa_init()
-\li masa_eval_source_t( x, y, z)
-\li masa_eval_exact_t ( x, y, z)
-\li masa_eval_grad_t  ( x, y, z, int direction)
+\li masa_eval_1d_source_t()
+\li masa_eval_1d_exact_t()
+\li masa_eval_1d_grad()
+\li masa_eval_2d_source_t()
+\li masa_eval_2d_exact_t()
+\li masa_eval_2d_grad()
+\li masa_eval_3d_source_t()
+\li masa_eval_3d_exact_t()
+\li masa_eval_3d_grad()
 
-\subsubsection tcvm Transient Conduction: Variable Material Properties
+\latexonly
+\subsubsection{Transient Conduction: Variable Material Properties}
+%\subsubsection tcvm Transient Conduction: Variable Material Propertie
+\endlatexonly
 
 Initialization:
 \li heateq_1d_unsteady_var
@@ -511,11 +538,16 @@ Parameters:
 \li rho
 
 Functions:
-\li int masa_init()
-\li masa_eval_source_t()
-\li masa_eval_exact_t()
-\li masa_eval_grad_t()
-\li masa_display_param()
+\li masa_init()
+\li masa_eval_1d_source_t()
+\li masa_eval_1d_exact_t()
+\li masa_eval_1d_grad()
+\li masa_eval_2d_source_t()
+\li masa_eval_2d_exact_t()
+\li masa_eval_2d_grad()
+\li masa_eval_3d_source_t()
+\li masa_eval_3d_exact_t()
+\li masa_eval_3d_grad()
 
 */
 
