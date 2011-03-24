@@ -30,11 +30,11 @@ The manufactured solution provides the following functions:
 
 \endlatexonly
 
-\li \c int \c init_var()
-\li \c Scalar \c masa_eval_source_rho_u (Scalar)
-\li \c Scalar \c masa_eval_source_rho   (Scalar)    
-\li \c Scalar \c masa_eval_source_p (Scalar)
-\li \c Scalar \c masa_eval_exact_t  (Scalar)
-\li \c masa_display_param()
+\li int init_var()
+\li masa_eval_source_rho_u ()
+\li masa_eval_source_rho   ()    
+\li masa_eval_source_p ()
+\li masa_eval_exact_t  ()
+\li masa_display_param()
 
 */

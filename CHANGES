@@ -16,7 +16,7 @@ Version 0.30 (23 February, 2011) -- first public release
   * gradient of source terms is now available for c++
   * adding new conditional (--masa-exceptions) that adds exception handling
   * modifications to Fortran interface
-  * added doxygen documentation for all c/cpp/fortran functions
+  * added doxygen documentation for all c/cpp functions
   * edited navier stokes default parameters, added realizability regression test
   * updated steady euler equations with hierarchic model, added realizability regression test
   * ported to 32 bit mac, ubuntu environments

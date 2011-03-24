@@ -327,221 +327,195 @@ and for the $1D$ distribution,
 
 %---------------------------------------------------------------------------------------------------------
 
-%
-%  NOW ADDING MASA API SECTION
-%
 
 \subsection{MASA API}
 
 \subsubsection{Steady Conduction: Constant Thermal Conductivity}
 
-The following strings will initialize the manufactured solution with masa\_init, for {1d,2d,3d}:
-\begin{verbatim}
-heateq_1d_steady_const
-heateq_2d_steady_const
-heateq_3d_steady_const
-\end{verbatim}
-
-The manufactured solution has several parameters that must be set, either with a series of masa\_set\_param 
-calls, or using masa\_init\_param().
-
-1D:
-\begin{verbatim}
-A_x
-k_0
-\end{verbatim}
-2D:
-\begin{verbatim}
-A_x
-k_0
-B_y
-\end{verbatim}
-3D:
-\begin{verbatim}
-A_x
-k_0
-B_y
-C_z
-\end{verbatim}
-
-The manufactured solution provides the following functions:
-\begin{verbatim}
-int init_var()
-Scalar masa_eval_source_t(Scalar x,Scalar y,Scalar z)
-Scalar masa_eval_exact_t (Scalar x,Scalar y,Scalar z)
-Scalar masa_eval_grad_t  (Scalar x,Scalar y,Scalar z,int direction)
-\end{verbatim}
-
-
-\subsubsection{Steady Conduction: Variable Thermal Conductivity}
-
-The following strings will initialize the manufactured solution with masa\_init, for {1d,2d,3d}:
-\begin{verbatim}
-heateq_1d_steady_var
-heateq_2d_steady_var
-heateq_3d_steady_var
-\end{verbatim}
-
-The manufactured solution has several parameters that must be set, either with a series of masa\_set\_param 
-calls, or using masa\_init\_param().
-
-1D:
-\begin{verbatim}
-A_x
-k_0
-k_1
-k_2
-\end{verbatim}
-
-2D:
-\begin{verbatim}
-A_x
-k_0
-k_1
-k_2
-B_y
-\end{verbatim}
-
-3D:
-\begin{verbatim}
-A_x
-k_0
-k_1
-k_2
-B_y
-C_z
-\end{verbatim}
-
-The manufactured solution provides the following functions:
-\begin{verbatim}
-int init_var()
-Scalar masa_eval_source_t(Scalar x,Scalar y,Scalar z)
-Scalar masa_eval_exact_t (Scalar x,Scalar y,Scalar z)
-Scalar masa_eval_grad_t  (Scalar x,Scalar y,Scalar z,int direction)
-\end{verbatim}
-
-\subsubsection{Transient Conduction: Constant Material Properties}
-The following strings will initialize the manufactured solution with masa\_init, for {1d,2d,3d}:
-\begin{verbatim}
-heateq_1d_unsteady_const
-heateq_2d_unsteady_const
-heateq_3d_unsteady_const
-\end{verbatim}
-
-The manufactured solution has several parameters that must be set, either with a series of masa\_set\_param 
-calls, or using masa\_init\_param().
-
-1D:
-\begin{verbatim}
-A_x
-A_t
-D_t
-k_0
-cp_0
-rho
-\end{verbatim}
-2D:
-\begin{verbatim}
-A_x
-A_t
-B_y
-B_t
-C_z
-C_t
-D_t
-k_0
-cp_0
-rho
-\end{verbatim}
-3D:
-\begin{verbatim}
-A_x
-A_t
-B_y
-B_t
-D_t
-k_0
-cp_0
-rho
-\end{verbatim}
-
-The manufactured solution provides the following functions:
-\begin{verbatim}
-int init_var()
-Scalar masa_eval_source_t(Scalar x,Scalar y,Scalar z)
-Scalar masa_eval_exact_t (Scalar x,Scalar y,Scalar z)
-Scalar masa_eval_grad_t  (Scalar x,Scalar y,Scalar z,int direction)
-\end{verbatim}
-
-\subsubsection{Transient Conduction: Variable Material Properties}
-The following strings will initialize the manufactured solution with masa\_init, for {1d,2d,3d}:
-\begin{verbatim}
-heateq_1d_unsteady_var
-heateq_2d_unsteady_var
-heateq_3d_unsteady_var
-\end{verbatim}
-
-The manufactured solution has several parameters that must be set, either with a series of masa\_set\_param 
-calls, or using masa\_init\_param().
-
-1D:
-\begin{verbatim}
-A_x
-A_t
-D_t
-k_0
-k_1
-k_2
-cp_0
-cp_1
-cp_2
-rho
-\end{verbatim}
-2D:
-\begin{verbatim}
-A_x
-A_t
-B_y
-B_t
-C_z
-C_t
-D_t
-k_0
-k_1
-k_2
-cp_0
-cp_1
-cp_2
-rho
-\end{verbatim}
-3D:
-\begin{verbatim}
-A_x
-A_t
-B_y
-B_t
-D_t
-k_0
-k_1
-k_2
-cp_0
-cp_1
-cp_2
-rho
-\end{verbatim}
-
-The manufactured solution provides the following functions:
-\begin{verbatim}
-int init_var()
-Scalar masa_eval_source_t(Scalar x,Scalar y,Scalar z)
-Scalar masa_eval_exact_t (Scalar x,Scalar y,Scalar z)
-Scalar masa_eval_grad_t  (Scalar x,Scalar y,Scalar z,int direction)
-\end{verbatim}
-
 \bibliographystyle{ieeetr} 
 \bibliography{MMS_bib}
 
+%
+%  NOW ADDING MASA API SECTION
+%
+
 \endlatexonly
+
+Initialization:
+\li heateq_1d_steady_const
+\li heateq_2d_steady_const
+\li heateq_3d_steady_const
+
+Parameters:
+
+1D:
+\li A_x
+\li k_0
+
+2D:
+
+\li A_x
+\li k_0
+\li B_y
+
+3D:
+
+\li A_x
+\li k_0
+\li B_y
+\li C_z
+
+
+Functions:
+\li masa_init()
+\li masa_eval_source_t( x, y, z)
+\li masa_eval_exact_t ( x, y, z)
+\li masa_eval_grad_t  ( x, y, z,int direction)
+
+\subsubsection scvt Steady Conduction: Variable Thermal Conductivity
+
+Initialization:
+\li heateq_1d_steady_var()
+\li heateq_2d_steady_var()
+\li heateq_3d_steady_var()
+
+
+Parameters:
+
+1D:
+
+\li A_x
+\li k_0
+\li k_1
+\li k_2
+
+
+2D:
+
+\li A_x
+\li k_0
+\li k_1
+\li k_2
+\li B_y
+
+
+3D:
+
+\li A_x
+\li k_0
+\li k_1
+\li k_2
+\li B_y
+\li C_z
+
+
+Functions:
+\li masa_init()
+\li masa_eval_source_t( x, y, z)
+\li masa_eval_exact_t ( x, y, z)
+\li masa_eval_grad_t  ( x, y, z, int direction)
+
+\subsubsection tccm Transient Conduction: Constant Material Properties
+
+Initialization:
+\li heateq_1d_unsteady_const
+\li heateq_2d_unsteady_const
+\li heateq_3d_unsteady_const
+
+Parameters:
+
+1D:
+\li A_x
+\li A_t
+\li D_t
+\li k_0
+\li cp_0
+\li rho
+
+2D:
+\li A_x
+\li A_t
+\li B_y
+\li B_t
+\li C_z
+\li C_t
+\li D_t
+\li k_0
+\li cp_0
+\li rho
+
+3D:
+\li A_x
+\li A_t
+\li B_y
+\li B_t
+\li D_t
+\li k_0
+\li cp_0
+\li rho
+
+Functions:
+\li masa_init()
+\li masa_eval_source_t( x, y, z)
+\li masa_eval_exact_t ( x, y, z)
+\li masa_eval_grad_t  ( x, y, z, int direction)
+
+\subsubsection tcvm Transient Conduction: Variable Material Properties
+
+Initialization:
+\li heateq_1d_unsteady_var
+\li heateq_2d_unsteady_var
+\li heateq_3d_unsteady_var
+
+Parameters:
+1D:
+\li A_x
+\li A_t
+\li D_t
+\li k_0
+\li k_1
+\li k_2
+\li cp_0
+\li cp_1
+\li cp_2
+\li rho
+
+2D:
+\li A_x
+\li A_t
+\li B_y
+\li B_t
+\li C_z
+\li C_t
+\li D_t
+\li k_0
+\li k_1
+\li k_2
+\li cp_0
+\li cp_1
+\li cp_2
+\li rho
+
+3D:
+\li A_x
+\li A_t
+\li B_y
+\li B_t
+\li D_t
+\li k_0
+\li k_1
+\li k_2
+\li cp_0
+\li cp_1
+\li cp_2
+\li rho
+
+Functions:
+\li int masa_init()
+\li masa_eval_source_t()
+\li masa_eval_exact_t()
+\li masa_eval_grad_t()
+\li masa_display_param()
 
 */
 

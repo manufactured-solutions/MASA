@@ -31,11 +31,9 @@ module masa
   use iso_c_binding
   implicit none
 
-  ! ---------------------------------
-  ! MMS Init/Selection Routines
-  ! ---------------------------------
-
-  !! \cond
+  ! -------------------------------------
+  !! \name MMS Init/Selection Routines
+  ! -------------------------------------
 
   interface
      subroutine masa_init_passthrough(user_tag,desired_mms_function) bind (C,name='masa_init')
@@ -47,8 +45,6 @@ module masa
 
      end subroutine masa_init_passthrough
   end interface
-
-  !! \endcond
 
   interface
      subroutine masa_list_mms() bind (C,name='masa_list_mms')
@@ -843,6 +839,8 @@ contains
 
   end function masa_get_param
 
+
+  !! \name sets the parameter value
   subroutine masa_set_param(param_name,value)
     use iso_c_binding
     implicit none
