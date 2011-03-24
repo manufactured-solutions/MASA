@@ -613,6 +613,10 @@ extern "C" {
   extern double masa_eval_1d_source_rho_N (double x,double (*)(double));
   extern double masa_eval_1d_source_rho_N2(double x,double (*)(double));
 
+  // --------------------------------
+  /// \name 1D Manufactured Analytical Solution Terms
+  // --------------------------------
+
   /**
    * masa_eval_1d_exact_t is a subroutine that will return
    * the value of the analytical term for the temperature
@@ -714,6 +718,10 @@ extern "C" {
    */
   extern double masa_eval_2d_source_rho_e(double x,double y);
 
+  // --------------------------------
+  /// \name 2D Manufactured Analytical Solution Terms
+  // --------------------------------
+
   /**
    * subroutine that returns the value of the analytical term 
    * for the temperature of the currently selected two dimensional masa function.
@@ -788,102 +796,90 @@ extern "C" {
   extern double masa_eval_3d_source_e  (double x,double y,double z);
 
   /**
-   * masa_eval_3d_source_rho is a subroutine that will return
+   * This subroutine returns 
    * the value of the source term for the density
    * of the currently selected three dimensional masa function.
    */
   extern double masa_eval_3d_source_rho(double x,double y,double z);
 
   /**
-   * masa_eval_3d_source_rho is a subroutine that will return
+   * This subroutine returns 
    * the value of the source term for the density*u-component of velocity
    * of the currently selected three dimensional masa function.
    */
-  extern double masa_eval_3d_source_rho_u(double,double,double);
-  extern double masa_eval_3d_source_rho_v(double,double,double);
-  extern double masa_eval_3d_source_rho_w(double,double,double);
-  extern double masa_eval_3d_source_rho_e(double,double,double);
+  extern double masa_eval_3d_source_rho_u(double x,double y,double z);
+
 
   /**
-   * masa_eval_3d_exact_t is a subroutine that will return
-   * the value of the analytical term for the temperature of the 
-   * currently selected three dimensional masa function.
-   *
-   * This subroutine takes as input three double precision numbers
-   * which specifies the current x,y and z location of the source term.
-   * 
-   * Subroutine returns a double of the currently held value
-   * of the specified variable. 
-   */
-  extern double masa_eval_3d_exact_t      (double,double,double);
-
-  /**
-   * masa_eval_3d_exact_u is a subroutine that will return
-   * the value of the analytical term for the u component of velocity
+   * This subroutine returns 
+   * the value of the source term for the density*v-component of velocity
    * of the currently selected three dimensional masa function.
-   *
-   * This subroutine takes as input three double precision numbers
-   * which specifies the current x,y and z location of the source term.
-   * 
-   * Subroutine returns a double of the currently held value
-   * of the specified variable. 
    */
-  extern double masa_eval_3d_exact_u      (double,double,double);
+  extern double masa_eval_3d_source_rho_v(double x,double y,double z);
+
 
   /**
-   * masa_eval_3d_exact_v is a subroutine that will return
-   * the value of the analytical term for the v component of velocity
+   * This subroutine returns 
+   * the value of the source term for the density*w-component of velocity
    * of the currently selected three dimensional masa function.
-   *
-   * This subroutine takes as input three double precision numbers
-   * which specifies the current x,y and z location of the source term.
-   * 
-   * Subroutine returns a double of the currently held value
-   * of the specified variable. 
    */
-  extern double masa_eval_3d_exact_v      (double,double,double);
+  extern double masa_eval_3d_source_rho_w(double x,double y,double z);
 
   /**
-   * masa_eval_3d_exact_w is a subroutine that will return
-   * the value of the analytical term for the w component of velocity
+   * This subroutine returns 
+   * the value of the source term for the density*energy
    * of the currently selected three dimensional masa function.
-   *
-   * This subroutine takes as input three double precision numbers
-   * which specifies the current x,y and z location of the source term.
-   * 
-   * Subroutine returns a double of the currently held value
-   * of the specified variable. 
    */
-  extern double masa_eval_3d_exact_w      (double,double,double);
-
-  /**
-   * masa_eval_3d_exact_p is a subroutine that will return
-   * the value of the analytical term for the pressure
-   * of the currently selected three dimensional masa function.
-   *
-   * This subroutine takes as input three double precision numbers
-   * which specifies the current x,y and z location of the source term.
-   * 
-   * Subroutine returns a double of the currently held value
-   * of the specified variable. 
-   */
-  extern double masa_eval_3d_exact_p      (double,double,double);
-
-  /**
-   * masa_eval_3d_exact_p is a subroutine that will return
-   * the value of the analytical term for the density
-   * of the currently selected three dimensional masa function.
-   *
-   * This subroutine takes as input three double precision numbers
-   * which specifies the current x,y and z location of the source term.
-   * 
-   * Subroutine returns a double of the currently held value
-   * of the specified variable. 
-   */
-  extern double masa_eval_3d_exact_rho    (double,double,double);
+  extern double masa_eval_3d_source_rho_e(double x,double y,double z);
 
   // --------------------------------
-  // gradient of analytical solution
+  /// \name 3D Manufactured Analytical Solution Terms
+  // --------------------------------
+
+  /**
+   * This subroutine returns 
+   * the value of the analytical term for the temperature of the 
+   * currently selected three dimensional masa function.
+   */
+  extern double masa_eval_3d_exact_t      (double x,double y,double z);
+
+  /**
+   * This subroutine returns 
+   * the value of the analytical term for the u component of velocity
+   * of the currently selected three dimensional masa function.
+   */
+  extern double masa_eval_3d_exact_u      (double x,double y,double z);
+
+  /**
+   * This subroutine returns 
+   * the value of the analytical term for the v component of velocity
+   * of the currently selected three dimensional masa function.
+   */
+  extern double masa_eval_3d_exact_v      (double x,double y,double z);
+
+  /**
+   * This subroutine returns 
+   * the value of the analytical term for the w component of velocity
+   * of the currently selected three dimensional masa function.
+   */
+  extern double masa_eval_3d_exact_w      (double x,double y,double z);
+
+  /**
+   * This subroutine returns 
+   * the value of the analytical term for the pressure
+   * of the currently selected three dimensional masa function.
+   */
+  extern double masa_eval_3d_exact_p      (double x,double y,double z);
+
+  /**
+   * This subroutine returns 
+   * the value of the analytical term for the density
+   * of the currently selected three dimensional masa function.
+   */
+  extern double masa_eval_3d_exact_rho    (double x,double y,double z);
+
+  // --------------------------------
+  /// \name Gradients of Analytical Solutions
   // --------------------------------
   extern double masa_eval_grad_1d(int,double);
   extern double masa_eval_grad_2d(int,double,double);
