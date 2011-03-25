@@ -138,6 +138,7 @@ namespace MASA
     virtual Scalar eval_exact_rho(Scalar,Scalar)       {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
     virtual Scalar eval_exact_rho(Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
 
+    virtual Scalar eval_exact_nu (Scalar,Scalar){std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; 
     virtual Scalar eval_exact_nu (Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; 
    
     virtual Scalar eval_exact_rho_N(Scalar)            {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;};
@@ -176,6 +177,7 @@ namespace MASA
     virtual Scalar eval_q_rho(Scalar,Scalar)       {std::cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
     virtual Scalar eval_q_rho(Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Source Term (rho) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density)
 
+    virtual Scalar eval_q_nu (Scalar,Scalar){std::cout << "MASA ERROR:: Source Term (nu) is unavailable or not properly loaded.\n"; return -1.33;};
     virtual Scalar eval_q_nu (Scalar,Scalar,Scalar){std::cout << "MASA ERROR:: Source Term (nu) is unavailable or not properly loaded.\n"; return -1.33;};
 
     virtual Scalar eval_q_rho_u(Scalar)              {std::cout << "MASA ERROR:: Source Term (rho*u) is unavailable or not properly loaded.\n"; return -1.33;};  // returns value of source term (density*u)
@@ -1090,8 +1092,12 @@ namespace MASA
     Scalar kappa;
     Scalar sigma;
 
-    Scalar cp;
-    Scalar cv;
+    //Scalar cp;
+    //Scalar cv;
+
+    Scalar Gamma;
+    Scalar R;
+
     Scalar Pr;
     Scalar Pr_t;
 
@@ -1099,6 +1105,16 @@ namespace MASA
     fans_sa_transient_free_shear(); // constructor    
     int init_var();
 
+    // provide steady versions
+    Scalar eval_q_rho_u (Scalar,Scalar); 
+    Scalar eval_q_rho_v (Scalar,Scalar); 
+    Scalar eval_q_rho_e (Scalar,Scalar); 
+    Scalar eval_q_rho   (Scalar,Scalar); 
+    Scalar eval_q_nu    (Scalar,Scalar); 
+
+    Scalar eval_exact_nu (Scalar,Scalar); 
+
+    // provide unsteady versions
     Scalar eval_q_rho_u (Scalar,Scalar,Scalar); 
     Scalar eval_q_rho_v (Scalar,Scalar,Scalar); 
     Scalar eval_q_rho_e (Scalar,Scalar,Scalar); 
@@ -1110,6 +1126,7 @@ namespace MASA
     Scalar eval_exact_p  (Scalar,Scalar); 
     Scalar eval_exact_rho(Scalar,Scalar); 
     Scalar eval_exact_nu (Scalar,Scalar,Scalar); 
+
 
   };
 

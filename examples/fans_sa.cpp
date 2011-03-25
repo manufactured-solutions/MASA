@@ -150,6 +150,33 @@ int main()
 	      test(exact_rho);
 	      test(exact_nu);
 
+	      // use the steady forms also
+
+	      // evaluate source terms
+	      ufield = masa_eval_source_rho_u<Scalar>  (tempx,tempy);
+	      vfield = masa_eval_source_rho_v<Scalar>  (tempx,tempy);
+	      efield = masa_eval_source_rho_e<Scalar>  (tempx,tempy);
+	      rho    = masa_eval_source_rho  <Scalar>  (tempx,tempy);
+	      nu     = masa_eval_source_nu   <Scalar>  (tempx,tempy);
+	
+	      //evaluate analytical solution
+	      exact_u   = masa_eval_exact_u  <Scalar>   (tempx,tempy);
+	      exact_v   = masa_eval_exact_v  <Scalar>   (tempx,tempy);
+	      exact_p   = masa_eval_exact_p  <Scalar>   (tempx,tempy);
+	      exact_rho = masa_eval_exact_rho<Scalar>   (tempx,tempy);
+	      exact_nu  = masa_eval_exact_nu <Scalar>   (tempx,tempy);
+
+	      test(ufield);
+	      test(vfield);
+	      test(efield);
+	      test(rho);
+	      test(nu);
+
+	      test(exact_u);
+	      test(exact_v);
+	      test(exact_p);
+	      test(exact_rho);
+	      test(exact_nu);
 	    }
 	} // done with spatial loop
     } // done with temporal loop
