@@ -104,6 +104,14 @@ Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_rho_C3(Scalar x)
   return Q_T;  
 }
 
+template <typename Scalar>
+Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_u_boundary(Scalar x)
+{
+  Scalar Q_T;
+  Q_T = k;
+  return Q_T;  
+}
+
 /* ------------------------------------------------
  * 
  *

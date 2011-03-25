@@ -1373,6 +1373,8 @@ namespace MASA
     Scalar eval_q_rho   (Scalar);
     Scalar eval_q_rho_C (Scalar);
     Scalar eval_q_rho_C3(Scalar);
+    Scalar eval_q_u_boundary (Scalar);
+
 
     Scalar eval_exact_u     (Scalar); // analytical
     Scalar eval_exact_t     (Scalar);
