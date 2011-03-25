@@ -51,7 +51,7 @@ MASA::navierstokes_ablation_1d_steady<Scalar>::navierstokes_ablation_1d_steady()
 
     this->register_var("k",&k);
 
-    //this->init_var();
+    this->init_var();
   
 }//done with constructor
 
