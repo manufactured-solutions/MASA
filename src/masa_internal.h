@@ -1364,20 +1364,49 @@ namespace MASA
     Scalar W_C;
     Scalar W_C3;    
 
+    Scalar rho_N_0;
+    Scalar rho_N_x;
+    Scalar rho_N2_0;
+    Scalar rho_N2_x;
+    Scalar a_rho_N2_x;
+    Scalar a_rho_C3_x;
+    Scalar rho_C3_0;
+    Scalar rho_C3_x;
+    Scalar a_rho_C_x;
+    Scalar rho_C_0;
+    Scalar rho_C_x;
+    Scalar rho_an_C3;
+
+    Scalar k_B;
+    Scalar beta_C3;
+    Scalar A_C3Enc;
+    Scalar D_C;
+    Scalar D_C3;
+    Scalar m_C3;
+    Scalar E_aC3nc;
+    Scalar qr;
+    Scalar alpha;
+    Scalar a_rho_N_x;
+    Scalar sigma;
+    Scalar Function_to_Calculate_h_C3;
+    Scalar epsilon;
+
   public:
     navierstokes_ablation_1d_steady(); // constructor
     int init_var();        // default problem values
 
     Scalar eval_q_rho_u (Scalar);
     Scalar eval_q_rho_e (Scalar);
-    Scalar eval_q_rho   (Scalar);
+    Scalar eval_q_e     (Scalar);
+    Scalar eval_q_C     (Scalar);
+    Scalar eval_q_C3    (Scalar);
     Scalar eval_q_rho_C (Scalar);
     Scalar eval_q_rho_C3(Scalar);
     Scalar eval_q_u_boundary (Scalar);
 
-
     Scalar eval_exact_u     (Scalar); // analytical
     Scalar eval_exact_t     (Scalar);
+    Scalar eval_exact_rho   (Scalar);
     Scalar eval_exact_rho_C (Scalar);
     Scalar eval_exact_rho_C3(Scalar);
 
