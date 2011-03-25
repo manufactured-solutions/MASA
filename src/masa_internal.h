@@ -1322,5 +1322,64 @@ namespace MASA
     Scalar eval_g_rho(Scalar,Scalar,Scalar,int);
 
   }; // done with navier stokes 3d class
+
+
+  template <typename Scalar>
+  class navierstokes_ablation_1d_steady : public manufactured_solution<Scalar>
+  {    
+    using manufactured_solution<Scalar>::pi;
+    using manufactured_solution<Scalar>::PI;
+
+    Scalar R; 
+    Scalar k; 
+
+    Scalar u_0;
+    Scalar u_x;
+    Scalar u_y;
+    Scalar v_0;
+    Scalar v_x;
+    Scalar v_y;
+    Scalar rho_0;
+    Scalar rho_x;
+    Scalar rho_y;
+    Scalar p_0;
+    Scalar p_x;
+    Scalar p_y;
+    Scalar a_px;
+    Scalar a_py;
+    Scalar a_rhox;
+    Scalar a_rhoy;
+    Scalar a_ux;
+    Scalar a_uy;
+    Scalar a_vx;
+    Scalar a_vy;
+    Scalar Gamma;
+    Scalar mu;
+    Scalar L;
+    
+    Scalar T_0;
+    Scalar T_x;
+    Scalar a_Tx;
+
+    Scalar W_C;
+    Scalar W_C3;    
+
+  public:
+    navierstokes_ablation_1d_steady(); // constructor
+    int init_var();        // default problem values
+
+    Scalar eval_q_rho_u (Scalar);
+    Scalar eval_q_rho_e (Scalar);
+    Scalar eval_q_rho   (Scalar);
+    Scalar eval_q_rho_C (Scalar);
+    Scalar eval_q_rho_C3(Scalar);
+
+    Scalar eval_exact_u     (Scalar); // analytical
+    Scalar eval_exact_t     (Scalar);
+    Scalar eval_exact_rho_C (Scalar);
+    Scalar eval_exact_rho_C3(Scalar);
+
+  };
+
   
 } // end MASA namespace

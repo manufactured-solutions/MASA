@@ -110,22 +110,21 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
   anim.push_back(new euler_1d<Scalar>());
   anim.push_back(new euler_2d<Scalar>());
   anim.push_back(new euler_3d<Scalar>());
-
   anim.push_back(new euler_transient_1d<Scalar>());
-
   anim.push_back(new euler_chem_1d<Scalar>());
+  anim.push_back(new axi_euler<Scalar>());
 
   anim.push_back(new sod_1d<Scalar>());
 
   anim.push_back(new navierstokes_2d_compressible<Scalar>());
   anim.push_back(new navierstokes_3d_compressible<Scalar>());
-
-  anim.push_back(new axi_euler<Scalar>());
+  anim.push_back(new navierstokes_ablation_1d_steady<Scalar>());
   anim.push_back(new axi_cns<Scalar>());
 
   anim.push_back(new rans_sa<Scalar>());
   anim.push_back(new fans_sa_transient_d_finite<Scalar>());
   anim.push_back(new fans_sa_transient_free_shear<Scalar>());
+
   anim.push_back(new radiation_integrated_intensity<Scalar>());
 
   return 0;
