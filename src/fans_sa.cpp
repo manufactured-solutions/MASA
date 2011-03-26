@@ -84,7 +84,7 @@ MASA::fans_sa_transient_free_shear<Scalar>::fans_sa_transient_free_shear()
   this->register_var("nu_sa_0",&nu_sa_0);
   this->register_var("nu_sa_x",&nu_sa_x);
   this->register_var("nu_sa_y",&nu_sa_y);
-  this->register_var("nu_sa_t",&nu_sa_y);
+  this->register_var("nu_sa_t",&nu_sa_t);
 
   this->register_var("a_nusax",&a_nusax);
   this->register_var("a_nusay",&a_nusay);
