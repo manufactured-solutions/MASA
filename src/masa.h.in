@@ -246,6 +246,9 @@ namespace MASA
   template <typename Scalar>
   Scalar masa_eval_source_rho_e(Scalar,Scalar);
 
+  template <typename Scalar>
+  Scalar masa_eval_source_nu   (Scalar,Scalar);
+
   // --------------------------------
   // manufactured analytical solution  -- 2D
   // --------------------------------
@@ -267,6 +270,9 @@ namespace MASA
 
   template <typename Scalar>
   Scalar masa_eval_exact_rho    (Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_exact_nu   (Scalar,Scalar);
 
   // --------------------------------
   // source term(s) -- 3D
