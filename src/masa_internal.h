@@ -1352,24 +1352,7 @@ namespace MASA
 
     Scalar u_0;
     Scalar u_x;
-    Scalar u_y;
-    Scalar v_0;
-    Scalar v_x;
-    Scalar v_y;
-    Scalar rho_0;
-    Scalar rho_x;
-    Scalar rho_y;
-    Scalar p_0;
-    Scalar p_x;
-    Scalar p_y;
-    Scalar a_px;
-    Scalar a_py;
-    Scalar a_rhox;
-    Scalar a_rhoy;
     Scalar a_ux;
-    Scalar a_uy;
-    Scalar a_vx;
-    Scalar a_vy;
     Scalar Gamma;
     Scalar mu;
     Scalar L;
@@ -1428,6 +1411,5 @@ namespace MASA
     Scalar eval_exact_rho_C3(Scalar);
 
   };
-
   
 } // end MASA namespace
