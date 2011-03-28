@@ -1369,12 +1369,15 @@ namespace MASA
     Scalar rho_N2_0;
     Scalar rho_N2_x;
     Scalar a_rho_N2_x;
-    Scalar a_rho_C3_x;
+
     Scalar rho_C3_0;
     Scalar rho_C3_x;
-    Scalar a_rho_C_x;
+    Scalar a_rho_C3_x;
+
     Scalar rho_C_0;
     Scalar rho_C_x;
+    Scalar a_rho_C_x;
+
     Scalar rho_an_C3;
 
     Scalar k_B;
@@ -1384,6 +1387,7 @@ namespace MASA
     Scalar D_C3;
     Scalar m_C3;
     Scalar E_aC3nc;
+
     Scalar qr;
     Scalar alpha;
     Scalar a_rho_N_x;

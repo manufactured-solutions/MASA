@@ -49,7 +49,52 @@ MASA::navierstokes_ablation_1d_steady<Scalar>::navierstokes_ablation_1d_steady()
     this->mmsname = "navierstokes_ablation_1d_steady";
     this->dimension=1;
 
+    this->register_var("R",&R);
     this->register_var("k",&k);
+
+    this->register_var("u_0",&u_0);
+    this->register_var("u_x",&u_x);
+    this->register_var("a_ux",&a_ux);
+    this->register_var("L",&L);
+    this->register_var("Gamma",&Gamma);
+    this->register_var("mu",&mu);
+
+    this->register_var("T_0",&T_0);
+    this->register_var("T_x",&T_x);
+    this->register_var("a_Tx",&a_Tx);
+
+    this->register_var("W_C",&W_C);
+    this->register_var("W_C3",&W_C3);
+
+    this->register_var("rho_N_0",&rho_N_0);
+    this->register_var("rho_N_x",&rho_N_x);
+    this->register_var("rho_N2_0",&rho_N2_0);
+    this->register_var("rho_N2_x",&rho_N2_x);
+    this->register_var("a_rho_N2_x",&a_rho_N2_x);
+
+    this->register_var("rho_C3_0",&rho_C3_0);
+    this->register_var("rho_C3_x",&rho_C3_x);
+    this->register_var("a_rho_C3_x",&a_rho_C3_x);
+
+    this->register_var("rho_C_0",&rho_C_0);
+    this->register_var("rho_C_x",&rho_C_x);
+    this->register_var("a_rho_C_x",&a_rho_C_x);
+
+    this->register_var("rho_an_C3",&rho_an_C3);
+
+    this->register_var("k_B",&k_B);
+    this->register_var("beta_C3",&beta_C3);
+    this->register_var("A_C3Enc",&A_C3Enc);
+    this->register_var("D_C",&D_C);
+    this->register_var("D_C3",&D_C3);
+    this->register_var("m_C3",&m_C3);
+    this->register_var("E_aC3nc",&E_aC3nc);
+
+    this->register_var("qr",&qr);
+    this->register_var("alpha",&alpha);
+    this->register_var("a_rho_N_x",&a_rho_N_x);
+    this->register_var("sigma",&sigma);
+    this->register_var("epsilon",&epsilon);
 
     this->init_var();
   
@@ -59,7 +104,14 @@ template <typename Scalar>
 int MASA::navierstokes_ablation_1d_steady<Scalar>::init_var()
 {
   int err = 0;
-  err += this->set_var("k",.82);
+  err += this->set_var("k",1.38);
+  err += this->set_var("u_0",14.191);
+  err += this->set_var("u_x",1.63);
+  err += this->set_var("a_ux",.03);
+  err += this->set_var("L",3.02);
+  err += this->set_var("Gamma",16.1);
+  err += this->set_var("mu",.091);
+
   return err;
 
 }
