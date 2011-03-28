@@ -112,6 +112,43 @@ int MASA::navierstokes_ablation_1d_steady<Scalar>::init_var()
   err += this->set_var("Gamma",16.1);
   err += this->set_var("mu",.091);
 
+  err += this->set_var("T_0",12);
+  err += this->set_var("T_x",12);
+  err += this->set_var("a_Tx",12);
+
+  err += this->set_var("W_C",12);
+  err += this->set_var("W_C3",12);
+
+  err += this->set_var("rho_N_0",12);
+  err += this->set_var("rho_N_x",12);
+  err += this->set_var("rho_N2_0",12);
+  err += this->set_var("rho_N2_x",12);
+  err += this->set_var("a_rho_N2_x",12);
+
+  err += this->set_var("rho_C3_0",12);
+  err += this->set_var("rho_C3_x",12);
+  err += this->set_var("a_rho_C3_x",12);
+
+  err += this->set_var("rho_C_0",12);
+  err += this->set_var("rho_C_x",12);
+  err += this->set_var("a_rho_C3_x",12);
+
+  err += this->set_var("rho_an_C3",12);
+
+  err += this->set_var("k_B",12);
+  err += this->set_var("beta_C3",12);
+  err += this->set_var("A_C3Enc",12);
+  err += this->set_var("D_C",12);
+  err += this->set_var("D_C3",12);
+  err += this->set_var("m_C3",12);
+  err += this->set_var("E_aC3nc",12);
+
+  err += this->set_var("qr",12);
+  err += this->set_var("alpha",12);
+  err += this->set_var("a_rho_N_x",12);
+  err += this->set_var("sigma",12);
+  err += this->set_var("epsilon",12);
+
   return err;
 
 }
