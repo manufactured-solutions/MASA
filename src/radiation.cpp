@@ -50,7 +50,12 @@ MASA::radiation_integrated_intensity<Scalar>::radiation_integrated_intensity()
     this->mmsname = "radiation_integrated_intensity";
     this->dimension=1;
 
+    // registering variables
     this->register_var("cb1",&cb1);   
+
+    // registering a vector
+    this->register_vec("test",&vec1);   
+
     this->init_var();
   
 }//done with constructor
