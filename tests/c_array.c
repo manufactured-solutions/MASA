@@ -45,7 +45,10 @@ int main()
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa; these tests currently just verify functions
   // run successfully.
-  freopen("/dev/null","w",stdout);
+  //freopen("/dev/null","w",stdout);
+
+  err += masa_display_array();
+  
 
   return 0;
 

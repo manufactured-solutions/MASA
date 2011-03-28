@@ -997,7 +997,7 @@ extern "C" {
    * Subroutine will output the currently selected manufactured
    * solution class' vector names and lengths to standard output
    */       
-  extern int masa_display_vec();
+  extern int masa_display_array();
 
   /**
    * Subroutine that will check that all parameters for

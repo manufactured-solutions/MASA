@@ -100,7 +100,7 @@ extern "C" int masa_display_param()
   return 0;
 }
 
-extern "C" int masa_display_vec()
+extern "C" int masa_display_array()
 {
   return masa_display_vec<double>();
 }
