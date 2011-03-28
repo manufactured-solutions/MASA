@@ -105,6 +105,7 @@ int MASA::navierstokes_ablation_1d_steady<Scalar>::init_var()
 {
   int err = 0;
   err += this->set_var("k",1.38);
+  err += this->set_var("R",1.01);
   err += this->set_var("u_0",14.191);
   err += this->set_var("u_x",1.63);
   err += this->set_var("a_ux",.03);
@@ -131,7 +132,7 @@ int MASA::navierstokes_ablation_1d_steady<Scalar>::init_var()
 
   err += this->set_var("rho_C_0",12);
   err += this->set_var("rho_C_x",12);
-  err += this->set_var("a_rho_C3_x",12);
+  err += this->set_var("a_rho_C_x",12);
 
   err += this->set_var("rho_an_C3",12);
 
