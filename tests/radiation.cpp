@@ -25,7 +25,7 @@
 // $Author: nick $
 // $Id: heat-eq.cpp 18184 2011-03-01 20:09:57Z nick $
 //
-// radiation.cpp: example
+// radiation.cpp: regression testing radiation solution class
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 //
@@ -38,23 +38,6 @@
 using namespace MASA;
 
 typedef double Scalar;
-
-Scalar MASA_VAR_DEFAULT = -12345.67;
-Scalar uninit = -1.33;
-
-void test(Scalar input)
-{
-  if(input == MASA_VAR_DEFAULT)
-    {
-      exit(1);
-    }
-
-  if(input == uninit)
-    {
-      exit(1);
-    }
-
-}
 
 int main()
 {

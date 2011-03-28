@@ -111,7 +111,7 @@ int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Sca
   selector = vecmap.find(var);
   
   // error handling
-  if(selector == vecmap.end())
+ if(selector == vecmap.end())
     {
       std::cout << "\nMASA ERROR!!!:: No such array  (" << var << ") exists to be set\n";
       return 1;
@@ -127,6 +127,15 @@ template <typename Scalar>
 void MASA::manufactured_solution<Scalar>::display_vec()
 {
 
+  std::cout << "\nMASA :: Solution has " << vecmap.size() << " vectors.\n";
+  std::cout << "*-------------------------------------*\n" ;
+
+  for(std::map<std::string,int>::const_iterator it = vecmap.begin(); it != vecmap.end(); ++it)
+    {      
+      std::cout << it->first <<" is size: "; //<< *vecarr[it->second].size() << '\n';      
+    }
+
+  std::cout << "*-------------------------------------*\n" ;
 
 }
 
