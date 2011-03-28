@@ -121,7 +121,7 @@ Scalar MASA::rans_sa<Scalar>::eval_q_u(Scalar eta)
   // this is just the momentum equation simplified for channel
   Scalar source_u;
   // achtung:: do we want to add one here?
-  source_u = d2u(eta)/re_tau + dvt(eta)*du(eta) + vt(eta)*d2u(eta)+1;
+  source_u = d2u()/re_tau + dvt(eta)*du(eta) + vt(eta)*d2u()+1;
   return source_u;
 }
 
@@ -173,7 +173,7 @@ Scalar MASA::rans_sa<Scalar>::du(Scalar eta)
 }
 
 template <typename Scalar>
-Scalar MASA::rans_sa<Scalar>::d2u(Scalar eta)
+Scalar MASA::rans_sa<Scalar>::d2u()
 {
   return -a1;
 }

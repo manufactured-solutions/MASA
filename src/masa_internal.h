@@ -1164,7 +1164,7 @@ namespace MASA
     // member functions not exposed by API
     Scalar   u(Scalar);
     Scalar  du(Scalar);
-    Scalar d2u(Scalar);
+    Scalar d2u();
 
     Scalar   nu(Scalar);
     Scalar  dnu(Scalar);
