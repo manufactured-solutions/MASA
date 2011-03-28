@@ -99,11 +99,22 @@ int MASA::manufactured_solution<Scalar>::register_vec(std::string in,std::vector
 }// done with register_var function
 
 template <typename Scalar>
-Scalar MASA::manufactured_solution<Scalar>::get_vec(std::string var,std::vector<Scalar>)
+int MASA::manufactured_solution<Scalar>::get_vec(std::string name,std::vector<Scalar>* vec)
 {
+  std::map<std::string,int>::const_iterator selector;
   
-  Scalar a = 2;
-  return a;
+  // find variable
+  selector = vecmap.find(name);
+  
+  // error handling
+  if(selector == vecmap.end())
+    {
+      std::cout << "\nMASA ERROR!!!:: No such variable  (" << name << ") exists\n";
+      return 1;
+    }
+  
+  vec = vecarr[(*selector).second];   // set to value 
+  return 0;
 
 }
 
@@ -242,6 +253,7 @@ int MASA::manufactured_solution<Scalar>::sanity_check()
 {
   int flag=0;
 
+  // check all scalar values
   for(std::map<std::string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
     {      
       if(*vararr[it->second] == MASA_VAR_DEFAULT)
@@ -259,6 +271,20 @@ int MASA::manufactured_solution<Scalar>::sanity_check()
       masa_exit(1);
     }
 
+  
+  // check all vector values
+  for(std::map<std::string,int>::const_iterator it = vecmap.begin(); it != vecmap.end(); ++it)
+    {    
+      std::vector<Scalar>* vec;
+      vec = vecarr[it->second];
+	
+      if((*vec).size() == 0)
+	{
+	  std::cout << "\nMASA WARNING:: vector " << it->first << " has not been initialized!\n";
+	  flag += 1;
+	}
+    }    
+  
   if(flag != 0)
     {
       return 1; // not all values init
@@ -269,7 +295,7 @@ int MASA::manufactured_solution<Scalar>::sanity_check()
     }
   
 
-}// done with set_var function
+}// done with ssanity check
 
 template <typename Scalar>
 int MASA::manufactured_solution<Scalar>::register_var(std::string in,Scalar* var)
