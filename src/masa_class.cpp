@@ -119,7 +119,7 @@ int MASA::manufactured_solution<Scalar>::get_vec(std::string name,std::vector<Sc
 }
 
 template <typename Scalar>
-int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Scalar>* vec)
+int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Scalar> *vec)
 {
   std::map<std::string,int>::const_iterator selector;
   

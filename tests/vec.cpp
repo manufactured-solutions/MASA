@@ -47,7 +47,6 @@ int main()
   // initialize the problem
   err += masa_init<Scalar>("radiation","radiation_integrated_intensity");
 
-
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa.
   freopen("/dev/null","w",stdout);
@@ -61,6 +60,8 @@ int main()
       cout << "regression test failed: masa_sanity check not catching uninitialized vectors!\n";
       return 1;
     }
+
+  // need to add test checking that the get_vec with a bad string works too!
 
   return 0;
 

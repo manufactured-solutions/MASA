@@ -55,8 +55,6 @@ MASA::radiation_integrated_intensity<Scalar>::radiation_integrated_intensity()
 
     // registering a vector
     this->register_vec("tester",&vec1);   
-    //this->display_vec();
-
     this->init_var();
   
 }//done with constructor
@@ -67,6 +65,11 @@ int MASA::radiation_integrated_intensity<Scalar>::init_var()
   int err = 0;
 
   err += this->set_var("cb1",1.4);
+
+  // set size of vectors and set default values
+  vec2.resize(2);
+  err += this->set_vec("tester",&vec2);
+
   return err;
 
 }

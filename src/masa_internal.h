@@ -1197,6 +1197,8 @@ namespace MASA
     
     Scalar cb1;
     std::vector<Scalar> vec1;
+    std::vector<Scalar> vec2;
+
 
   public:
     radiation_integrated_intensity(); // constructor    
