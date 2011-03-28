@@ -49,6 +49,7 @@ check_PROGRAMS   = misc                \
                    c_euler_chem_1d     \
 	           c_cns2d             \
 	           c_cns3d             \
+	           c_radiation         \
                    f_misc              \
                    f_purge             \
                    f_heat              \
@@ -88,7 +89,7 @@ cns3d_SOURCES               = cns3d.cpp
 cns3d_phys_SOURCES          = cns3d_phys.cpp
 cn2d3d_SOURCES              = cns-2d-3d.cpp
 rans_sa_SOURCES             = rans_sa.cpp
-radiation_SOURCES             = radiation.cpp
+radiation_SOURCES           = radiation.cpp
 sod_SOURCES                 = sod.cpp
 
 #----------------------
@@ -108,6 +109,7 @@ c_euler3d_SOURCES       = c_euler3d.c
 c_euler_chem_1d_SOURCES = c_euler_chem_1d.c
 c_cns2d_SOURCES         = c_cns2d.c
 c_cns3d_SOURCES         = c_cns3d.c
+c_radiation_SOURCES     = c_radiation.cpp
 
 #----------------------
 # Fortran Test Sources
@@ -187,6 +189,7 @@ TESTS                      = init.sh              \
                              c_euler_chem_1d      \
                              c_cns2d              \
                              c_cns3d              \
+                             c_radiation          \
 			     f_init.sh            \
 		             f_misc               \
 		             f_purge              \
