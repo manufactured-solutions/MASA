@@ -50,9 +50,13 @@ using namespace MASA;
 template <typename Scalar>
 MASA::manufactured_solution<Scalar>::manufactured_solution()
 {  
+  std::vector<Scalar> dumvec;
+
   num_vars=0;                   // default -- will ++ for each registered variable
   dummy=0;
+  dumvec.resize(2);
   vararr.push_back(&dummy);   // dummy used to start index at correct location
+  vecarr.push_back(&dumvec);   // dummy used to start index at correct location
 }
 
 // define PI and other constants
@@ -68,13 +72,16 @@ const Scalar MASA::manufactured_solution<Scalar>::MASA_VAR_DEFAULT = -12345.67; 
 template <typename Scalar>
 int MASA::manufactured_solution<Scalar>::register_vec(std::string in,std::vector<Scalar>* vec)
 {
+
+  // working fine here
+  //std::cout << (*vec).size() << std::endl;
+
   // first, check to ensure that no such vec has already been mapped
   if(vecmap[in] <= 0) // 0 implies variable has not been registered
     {  
       // if vec has not been registered, register the vec
       num_vec++;           // we want to step num_vars up by one ONLY when adding a new vec.
       vecmap[in]=num_vec;
-      //*vec=MASA_VAR_DEFAULT;
       vecarr.push_back(vec);
     }
   else  // variable already registered! no unique identifier can exist!
@@ -90,8 +97,6 @@ int MASA::manufactured_solution<Scalar>::register_vec(std::string in,std::vector
   return 0; // smooth sailing
   
 }// done with register_var function
-
-
 
 template <typename Scalar>
 Scalar MASA::manufactured_solution<Scalar>::get_vec(std::string var,std::vector<Scalar>)
@@ -126,13 +131,15 @@ int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Sca
 template <typename Scalar>
 void MASA::manufactured_solution<Scalar>::display_vec()
 {
-
-  std::cout << "\nMASA :: Solution has " << vecmap.size() << " vectors.\n";
+  std::vector<Scalar>* vec;
+  
+  std::cout << "\nMASA :: Solution has " << vecmap.size() << " vector(s).\n";
   std::cout << "*-------------------------------------*\n" ;
 
   for(std::map<std::string,int>::const_iterator it = vecmap.begin(); it != vecmap.end(); ++it)
     {      
-      std::cout << it->first <<" is size: "; //<< *vecarr[it->second].size() << '\n';      
+      vec = vecarr[it->second];
+      std::cout << it->first <<" is size: " << (*vec).size() << '\n';      
     }
 
   std::cout << "*-------------------------------------*\n" ;

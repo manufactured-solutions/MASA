@@ -25,7 +25,7 @@
 // $Author: nick $
 // $Id: heat.cpp 18162 2011-03-01 05:23:07Z nick $
 //
-// heat.cpp: These are the MASA class member functions and constructors
+// radiation.cpp: These are the MASA class member functions and constructors
 //          For Radiation
 //
 //--------------------------------------------------------------------------
@@ -54,7 +54,8 @@ MASA::radiation_integrated_intensity<Scalar>::radiation_integrated_intensity()
     this->register_var("cb1",&cb1);   
 
     // registering a vector
-    this->register_vec("test",&vec1);   
+    this->register_vec("tester",&vec1);   
+    //this->display_vec();
 
     this->init_var();
   
