@@ -433,6 +433,8 @@ namespace MASA
 
   void masa_shell_choose_solution();
   void masa_shell_print_avail();
+  void masa_shell_choose_solution();
+  void masa_shell_print_avail();
 
   
 } //end MASA namespace

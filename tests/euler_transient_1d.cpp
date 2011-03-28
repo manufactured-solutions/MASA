@@ -233,7 +233,6 @@ int run_regression()
   Scalar a_pt;
 
   Scalar Gamma;
-  Scalar mu;
   Scalar L;    
   
   // solutions
@@ -288,7 +287,6 @@ int run_regression()
   a_ut = masa_get_param<Scalar>("a_ut");
 
   Gamma = masa_get_param<Scalar>("Gamma");
-  mu    = masa_get_param<Scalar>("mu");
   L     = masa_get_param<Scalar>("L");
 
   // check that all terms have been initialized

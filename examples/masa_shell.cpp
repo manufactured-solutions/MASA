@@ -40,7 +40,7 @@ using namespace MASA;
 
 typedef double Scalar;
 
-void masa_shell_choose_solution()
+void MASA::masa_shell_choose_solution()
 {
   char userstring[100];
 
@@ -160,7 +160,7 @@ void masa_shell_choose_solution()
 
 }// end masa_shell_choose_solution
 
-void masa_shell_print_avail()
+void MASA::masa_shell_print_avail()
 {
   // this function prints the available manufactured solutions -- 
   // obviously needs to get a handle on the manufactured solutions class here
