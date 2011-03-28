@@ -1195,10 +1195,10 @@ namespace MASA
   class radiation_integrated_intensity : public manufactured_solution<Scalar>
   {
     
-    Scalar cb1;
-    std::vector<Scalar> vec1;
-    std::vector<Scalar> vec2;
-
+    Scalar no_gauss;
+    std::vector<Scalar> vec_mean;
+    std::vector<Scalar> vec_amp;
+    std::vector<Scalar> vec_stdev;
 
   public:
     radiation_integrated_intensity(); // constructor    

@@ -51,10 +51,12 @@ MASA::radiation_integrated_intensity<Scalar>::radiation_integrated_intensity()
     this->dimension=1;
 
     // registering variables
-    this->register_var("cb1",&cb1);   
+    this->register_var("no_gauss",&no_gauss);   
 
     // registering a vector
-    this->register_vec("tester",&vec1);   
+    this->register_vec("vec_mean",&vec_mean);   
+    this->register_vec("vec_amp",&vec_amp);   
+    this->register_vec("vec_stdev",&vec_stdev);   
     this->init_var();
   
 }//done with constructor
@@ -64,11 +66,16 @@ int MASA::radiation_integrated_intensity<Scalar>::init_var()
 {
   int err = 0;
 
-  err += this->set_var("cb1",1.4);
+  err += this->set_var("no_gauss",5);
 
   // set size of vectors and set default values
-  vec2.resize(2);
-  err += this->set_vec("tester",&vec2);
+  vec_mean.resize(no_gauss);
+  vec_amp.resize(no_gauss);
+  vec_stdev.resize(no_gauss);
+
+  err += this->set_vec("vec_mean",&vec_mean);
+  err += this->set_vec("vec_amp",&vec_amp);
+  err += this->set_vec("vec_stdev",&vec_stdev);
 
   return err;
 
@@ -78,7 +85,7 @@ template <typename Scalar>
 Scalar MASA::radiation_integrated_intensity<Scalar>::eval_q_u(Scalar x)
 {
   Scalar Q_T;
-  Q_T = (cb1 * x);
+  Q_T = x;
   return Q_T;
 }
 
@@ -86,7 +93,7 @@ template <typename Scalar>
 Scalar MASA::radiation_integrated_intensity<Scalar>::eval_exact_u(Scalar x)
 {
   Scalar exact_t;
-  exact_t = cos(cb1 * x);
+  exact_t = x;
   return exact_t;
 }
 

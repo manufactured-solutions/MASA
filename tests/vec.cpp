@@ -54,7 +54,7 @@ int main()
 
   err += masa_display_vec<Scalar>();
 
-  masa_set_vec<Scalar>("tester",&vec1);
+  masa_set_vec<Scalar>("vec_mean",&vec1);
   
   // deliberately ensure that the sanity check catches the vector
   // has not been initialized!
