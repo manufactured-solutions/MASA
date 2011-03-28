@@ -351,9 +351,13 @@ int MASA::masa_get_vec(std::string vector_name,std::vector<Scalar>* vector)
 template <typename Scalar>
 int MASA::masa_display_param()
 {
-  masa_master<Scalar>().get_ms().display_var();
+  return masa_master<Scalar>().get_ms().display_var();
+}
 
-  return 0;
+template <typename Scalar>
+int MASA::masa_display_vec()
+{
+  return masa_master<Scalar>().get_ms().display_vec();
 }
 
 /* ------------------------------------------------
@@ -1022,6 +1026,7 @@ int MASA::masa_get_numeric_version()
   template int masa_test_poly<Scalar>();                             \
   template int masa_printid<Scalar>(); \
   template int masa_display_param<Scalar>(); \
+  template int masa_display_vec<Scalar>(); \
   template int masa_get_name<Scalar>(std::string*); \
   template int masa_get_dimension<Scalar>(int*); \
   template int masa_sanity_check<Scalar>()

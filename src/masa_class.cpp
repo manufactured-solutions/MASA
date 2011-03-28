@@ -140,7 +140,7 @@ int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Sca
 }// done with set_vec function
 
 template <typename Scalar>
-void MASA::manufactured_solution<Scalar>::display_vec()
+int MASA::manufactured_solution<Scalar>::display_vec()
 {
   std::vector<Scalar>* vec;
   
@@ -154,6 +154,8 @@ void MASA::manufactured_solution<Scalar>::display_vec()
     }
 
   std::cout << "*-------------------------------------*\n" ;
+
+  return 0;
 
 }
 
@@ -178,7 +180,7 @@ Scalar MASA::manufactured_solution<Scalar>::get_var(std::string var)
 
 
 template <typename Scalar>
-void MASA::manufactured_solution<Scalar>::display_var()
+int MASA::manufactured_solution<Scalar>::display_var()
 {
   Scalar threshold = 5 * std::numeric_limits<Scalar>::epsilon();
 
@@ -204,6 +206,8 @@ void MASA::manufactured_solution<Scalar>::display_var()
 
   std::cout << "*-------------------------------------*\n" ;
   
+  return 0;
+
 } // done with display all variable names
 
 template <typename Scalar>

@@ -420,6 +420,9 @@ namespace MASA
   int masa_display_param();
 
   template <typename Scalar>
+  int masa_display_vec();
+
+  template <typename Scalar>
   int masa_get_name(std::string*);
 
   template <typename Scalar>

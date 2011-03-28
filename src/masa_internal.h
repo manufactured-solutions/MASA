@@ -246,8 +246,8 @@ namespace MASA
     int poly_test();                                             // regression method for poly class (see below)
     int get_vec(std::string,std::vector<Scalar>*);               // returns variable value
     Scalar get_var(std::string);                                 // returns variable value
-    void display_var();                                          // print all variable names and values
-    void display_vec();                                          // print all variable names and values
+    int display_var();                                          // print all variable names and values
+    int display_vec();                                          // print all variable names and values
     void return_name(std::string* inname){inname->assign(mmsname);};  // method: returns name
     void return_dim (int* indim)    {*indim=dimension;};         // method: returns dimension of solution
     

@@ -50,7 +50,9 @@ int main()
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa.
-  freopen("/dev/null","w",stdout);
+  //freopen("/dev/null","w",stdout);
+
+  err += masa_display_vec<Scalar>();
 
   masa_set_vec<Scalar>("tester",&vec1);
   
