@@ -947,8 +947,8 @@ namespace MASA
     Scalar eval_q_rho_u (Scalar,Scalar);
     Scalar func         (Scalar);  // helper function
     Scalar rtbis        (Scalar,Scalar,Scalar,int);
-    Scalar eval_q_t     (Scalar); // regression test function
-    Scalar eval_q_t     (Scalar,Scalar); // regression test function
+    Scalar eval_q_t     ();
+    Scalar eval_q_t     (Scalar x);
   };
 
   // ------------------------------------------------------

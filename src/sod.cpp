@@ -59,11 +59,16 @@
 //  initial state MUST BE input on the left side.
 // 
 
+
+#include <config.h>
+#include <math.h>
 #include <masa_internal.h> 
 #include <iostream>
 #include <limits>
+#include <stdlib.h>
 
 using namespace MASA;
+using namespace std;
 
 template <typename Scalar>
 MASA::sod_1d<Scalar>::sod_1d()
@@ -92,7 +97,7 @@ int MASA::sod_1d<Scalar>::init_var()
 } // done with variable initializer
 
 template <typename Scalar>
-Scalar MASA::sod_1d<Scalar>::eval_q_t(Scalar x)
+Scalar MASA::sod_1d<Scalar>::eval_q_t()
 {
   // Define the Sod problem initial conditions for the left and right states.
 
@@ -113,9 +118,10 @@ Scalar MASA::sod_1d<Scalar>::eval_q_t(Scalar x)
 }
 
 template <typename Scalar>
-Scalar MASA::sod_1d<Scalar>::eval_q_t(Scalar x,Scalar t)
+Scalar MASA::sod_1d<Scalar>::eval_q_t(Scalar x)
 {
   // Define the Sod problem initial conditions for the left and right states.
+  Scalar test = x;
 
   pl = 1.e0;
   pr = 0.125;
@@ -123,13 +129,15 @@ Scalar MASA::sod_1d<Scalar>::eval_q_t(Scalar x,Scalar t)
   rhol = 1.e0;
   rhor = 0.125;
 
+  test = 1;
+
   // Define sound speeds for the left and right sides of tube.
 
   cl = sqrt (Gamma * pl / rhol);
   cr = sqrt (Gamma * pr / rhor);
 
   // will hit 'too many bisections' 
-  return rtbis(-1,2,1,1);
+  return rtbis(-1,2,test,1);
 
 }
 
@@ -386,6 +394,7 @@ Scalar MASA::sod_1d<Scalar>::rtbis(Scalar x1,Scalar x2,Scalar xacc,int JMAX)
   int j;
   Scalar dx,f,fmid,xmid;
   Scalar myval;
+  Scalar thresh = 5 * numeric_limits<Scalar>::epsilon();
 
   fmid=func(x2);
   f=func(x1);
@@ -413,7 +422,7 @@ Scalar MASA::sod_1d<Scalar>::rtbis(Scalar x1,Scalar x2,Scalar xacc,int JMAX)
       xmid=myval+dx;
       fmid=func(xmid);
       if(fmid <= 0.) myval=xmid;
-      if(fabs(dx) < xacc || fmid == 0.) 
+      if(fabs(dx) < xacc || fmid < thresh) 
 	return(myval);
     }
   

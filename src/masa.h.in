@@ -421,11 +421,19 @@ namespace MASA
   template <typename Scalar>
   int masa_sanity_check();
 
-  // --------------------
+  // 
   // Versioning routines
   // --------------------
   int masa_version_stdout();
   int masa_get_numeric_version();
+
+  // --------------------
+  // MASAshell
+  // --------------------
+
+  void masa_shell_choose_solution();
+  void masa_shell_print_avail();
+
   
 } //end MASA namespace
 
