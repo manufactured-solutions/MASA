@@ -312,6 +312,12 @@ void MASA::masa_set_param(std::string param,Scalar paramval)
   masa_master<Scalar>().get_ms().set_var(param,paramval);
 }
 
+template <typename Scalar>
+void MASA::masa_set_vec(std::string vector_name,std::vector<Scalar>* new_vector)
+{
+  masa_master<Scalar>().get_ms().set_vec(vector_name,new_vector);
+}
+
 //
 // Set all parameters to default values
 //
@@ -329,6 +335,16 @@ template <typename Scalar>
 Scalar MASA::masa_get_param(std::string param)
 {
   return masa_master<Scalar>().get_ms().get_var(param);
+}
+
+//
+// Function that returns vector -- selected by string
+// 
+
+template <typename Scalar>
+int MASA::masa_get_vec(std::string vector_name,std::vector<Scalar>* vector)
+{
+  return masa_master<Scalar>().get_ms().get_vec(vector_name,vector);
 }
 
 

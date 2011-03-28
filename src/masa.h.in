@@ -88,6 +88,7 @@
 #ifdef __cplusplus
 
 #include <string>
+#include <vector>
 
 namespace MASA
 {
@@ -137,6 +138,12 @@ namespace MASA
 
   template <typename Scalar>
   Scalar masa_get_param(std::string param_name);
+
+  template <typename Scalar>
+  void   masa_set_vec(std::string vector_name,std::vector<Scalar>* new_vector);
+
+  template <typename Scalar>
+  int masa_get_vec(std::string vector_name,std::vector<Scalar>* vector);
 
   // --------------------------------
   // source term(s) -- 1D
