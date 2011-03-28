@@ -454,10 +454,10 @@ extern "C" {
    * 
    * This routine takes two arguments, both strings of characters. 
    * The first character string is a handle for the newly initalized 
-   * class. ("nick")
+   * class. (e.g. "nick's mms")
    * 
    * The second character string is the unique masa identifier string
-   * for a particular masa class. ("euler_1d"). See the tutorial for 
+   * for a particular masa class. (e.g. "euler_1d"). See the tutorial for 
    * more information on all available solution strings.
    * 
    * The routine returns an integer 0 for success. It will throw an 
@@ -931,13 +931,13 @@ extern "C" {
    * Subroutine will return a string with the current manufactured solution
    * name.
    */       
-  extern int masa_get_name(const char*);
+  extern int masa_get_name(const char* name);
 
   /**
    * Subroutine takes an integer pointer, which is returned as the dimension 
    * of the currently initialized solution.
    */       
-  extern int masa_get_dimension(int*);
+  extern int masa_get_dimension(int* dimension);
 
   /**
    * Subroutine will output the currently selected manufactured
