@@ -42,7 +42,8 @@ typedef double Scalar;
 
 int main()
 {
-  int err;
+  int err=0;
+  vector<Scalar> vec1;
 
   // initialize the problem
   err += masa_init<Scalar>("radiation","radiation_integrated_intensity");
@@ -50,9 +51,11 @@ int main()
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa.
   freopen("/dev/null","w",stdout);
+
+  masa_set_vec<Scalar>("tester",&vec1);
   
   // deliberately ensure that the sanity check catches the vector
-  // has not been init
+  // has not been initialized!
   err += masa_sanity_check<Scalar>();
 
   if(err != 1)
