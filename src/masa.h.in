@@ -560,6 +560,34 @@ extern "C" {
    */
   extern double masa_get_param(const char* param_name);
 
+  /**
+   * Subroutine that will set 
+   * a particular registered vector inside 
+   * the currently selected manufactured solution class. 
+   *
+   * This routine takes three arguments: a character string for
+   * the particular variable to be set, an integer passed-by-refence 
+   * specifying the length of the array, and a double precision
+   * pointer to an array.
+   * 
+   * This routine can be called multiple times, with subsequent
+   * calls overwriting the previously held array. 
+   */
+  extern void   masa_set_array(const char* vector_name,int *n,double *new_array);
+
+  /**
+   * Will return
+   * a particular registered variables inside 
+   * the currently selected manufactured solution class. 
+   *
+   * This routine takes three arguments: a character string for
+   * the particular variable value to be returned, an integer 
+   * passed-by-reference specifying the length of the array, 
+   * and a pointer returning the address of the array
+   * 
+   */
+  extern int masa_get_array(const char* param_name, int *n, double *array);
+
   //  --------------------------------
   /// \name 1D Source Terms
   //  --------------------------------
@@ -964,6 +992,12 @@ extern "C" {
    * solution class' parameter names and values to standard output
    */       
   extern int masa_display_param();
+
+  /**
+   * Subroutine will output the currently selected manufactured
+   * solution class' vector names and lengths to standard output
+   */       
+  extern int masa_display_vec();
 
   /**
    * Subroutine that will check that all parameters for

@@ -33,6 +33,7 @@
 
 #include <masa.h>
 #include <string>
+#include <vector>
 #include <stdio.h>
 
 using namespace MASA;
@@ -96,6 +97,32 @@ extern "C" int masa_sanity_check()
 extern "C" int masa_display_param()
 {
   masa_display_param<double>();
+  return 0;
+}
+
+extern "C" int masa_display_vec()
+{
+  return masa_display_vec<double>();
+}
+
+extern "C" void masa_set_array(const char* param,int *n,double *val)
+{
+  //convert array to vector and pass
+  std::vector<double> vec(&val[0],&val[*n]);
+  masa_set_vec<double>(param,&vec);
+}
+
+extern "C" int masa_get_array(const char* param,int *n,double *array)
+{
+  // grab vector
+  std::vector<double> *vec;
+  masa_get_vec<double>(param,vec);
+  
+  // copy to array
+  std::copy((*vec).begin(), (*vec).end(), array) ;  
+
+  // copy size to 'n'
+  (*n) = (*vec).size();
   return 0;
 }
 
