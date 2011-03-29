@@ -5,6 +5,10 @@ AC_PREREQ(2.61)
 
 # Release versioning
 AC_INIT([masa], [0.30], [nick@ices.utexas.edu])
+PACKAGE_DESCRIPTION="Manufactured Analytical Solutions Abstraction Library"
+AC_SUBST([PACKAGE_DESCRIPTION])
+PACKAGE_URL="https://red.ices.utexas.edu/projects/software/"
+AC_SUBST([PACKAGE_URL])
 
 GENERIC_MAJOR_VERSION=0
 GENERIC_MINOR_VERSION=30
@@ -112,7 +116,7 @@ DX_PS_FEATURE(OFF)
 DX_INIT_DOXYGEN(MASA, doxygen/masa.dox, docs) 
 
 # Generate Output Files
-AC_OUTPUT( Makefile src/Makefile examples/Makefile tests/Makefile doxygen/Makefile src/masa.h masa.spec )
+AC_OUTPUT( Makefile src/Makefile examples/Makefile tests/Makefile doxygen/Makefile src/masa.h masa.spec masa.pc )
 
 # FINAL SUMMARY
 

@@ -8,6 +8,10 @@ SUBDIRS          = src examples tests doxygen
 DISTDIRS = src examples
 EXTRA_DIST= AUTHORS README LICENSE COPYING CHANGES dist_version
 
+# Support for pkgconfig
+pkgconfigdir   = $(libdir)/pkgconfig
+pkgconfig_DATA = masa.pc
+
 # -------------------------------------------
 # Optional support for code coverage analysis
 # -------------------------------------------
