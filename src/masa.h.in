@@ -143,7 +143,7 @@ namespace MASA
   void   masa_set_vec(std::string vector_name,std::vector<Scalar>* new_vector);
 
   template <typename Scalar>
-  int masa_get_vec(std::string vector_name,std::vector<Scalar>* vector);
+  int masa_get_vec(std::string vector_name,std::vector<Scalar>& vector);
 
   // --------------------------------
   // source term(s) -- 1D
@@ -610,7 +610,7 @@ extern "C" {
    * and a pointer returning the address of the array
    * 
    */
-  extern int masa_get_array(const char* param_name, int *n, double *array);
+  //extern int masa_get_array(const char* param_name, int *n, double &array);
 
   //  --------------------------------
   /// \name 1D Source Terms

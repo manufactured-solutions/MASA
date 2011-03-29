@@ -44,6 +44,9 @@ int main()
 {
   int err=0;
   vector<Scalar> vec1;
+  vector<Scalar> vec2;
+
+  vec2.resize(2);
 
   // initialize the problem
   err += masa_init<Scalar>("radiation","radiation_integrated_intensity");
@@ -69,6 +72,14 @@ int main()
   err += masa_display_vec<Scalar>();
 
   // need to add test checking that the get_vec with a bad string works too!
+  masa_get_vec<Scalar>("vec_amp",vec2);
+  
+  if(vec2.size() != 5)
+    {
+      cout << "masa regression failure! masa_get_vec failed!\n";
+      cout << "size is: " << vec2.size() << endl;
+      return 1;
+    }
 
   return 0;
 

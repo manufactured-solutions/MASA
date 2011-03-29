@@ -99,7 +99,7 @@ int MASA::manufactured_solution<Scalar>::register_vec(std::string in,std::vector
 }// done with register_var function
 
 template <typename Scalar>
-int MASA::manufactured_solution<Scalar>::get_vec(std::string name,std::vector<Scalar>* vec)
+int MASA::manufactured_solution<Scalar>::get_vec(std::string name,std::vector<Scalar>& vec)
 {
   std::map<std::string,int>::const_iterator selector;
   
@@ -113,7 +113,10 @@ int MASA::manufactured_solution<Scalar>::get_vec(std::string name,std::vector<Sc
       return 1;
     }
   
-  vec = vecarr[(*selector).second];   // set to value 
+  std::cout << "this is: " << vec.size();
+  vec = *vecarr[selector->second];   // set to value 
+  std::cout << "this is: " << vecarr[(*selector).second]->size();
+  std::cout << "this is: " << vec.size();
   return 0;
 
 }

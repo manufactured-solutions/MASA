@@ -344,7 +344,7 @@ Scalar MASA::masa_get_param(std::string param)
 // 
 
 template <typename Scalar>
-int MASA::masa_get_vec(std::string vector_name,std::vector<Scalar>* vector)
+int MASA::masa_get_vec(std::string vector_name,std::vector<Scalar>& vector)
 {
   return masa_master<Scalar>().get_ms().get_vec(vector_name,vector);
 }
@@ -999,7 +999,7 @@ int MASA::masa_get_numeric_version()
   template void   masa_set_param<Scalar>(std::string,Scalar); \
   template Scalar masa_get_param<Scalar>(std::string); \
   template void   masa_set_vec<Scalar>(std::string,std::vector<Scalar>*); \
-  template int masa_get_vec<Scalar>(std::string,std::vector<Scalar>*); \
+  template int masa_get_vec<Scalar>(std::string,std::vector<Scalar>&); \
   template Scalar masa_eval_source_t  <Scalar>(Scalar);         \
   template Scalar masa_eval_source_t  <Scalar>(Scalar,Scalar);  \
   template Scalar masa_eval_source_u  <Scalar>(Scalar); \

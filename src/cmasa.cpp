@@ -113,19 +113,22 @@ extern "C" void masa_set_array(const char* param,int *n,double *val)
   masa_set_vec<double>(param,&vec);
 }
 
-extern "C" int masa_get_array(const char* param,int *n,double *array)
+/*
+extern "C" int masa_get_array(const char* param,int *n,double& array)
 {
   // grab vector
-  std::vector<double> *vec;
-  masa_get_vec<double>(param,vec);
-  
+  std::vector<double> vec;
+  //masa_get_vec<double>(param,&vec);
+  vec.resize(4);
+
   // copy to array
-  std::copy((*vec).begin(), (*vec).end(), array) ;  
+  std::copy(vec.begin(), vec.end(), array);
 
   // copy size to 'n'
-  (*n) = (*vec).size();
+  (*n) = vec.size();
   return 0;
 }
+*/
 
 extern "C" void masa_set_param(const char* param,double val)
 {

@@ -258,7 +258,7 @@ namespace MASA
 
     int sanity_check();                                          // checks that all variables to the class have been initalized
     int poly_test();                                             // regression method for poly class (see below)
-    int get_vec(std::string,std::vector<Scalar>*);               // returns variable value
+    int get_vec(std::string,std::vector<Scalar>&);               // returns vector values
     Scalar get_var(std::string);                                 // returns variable value
     int display_var();                                          // print all variable names and values
     int display_vec();                                          // print all variable names and values
