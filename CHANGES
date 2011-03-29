@@ -1,12 +1,10 @@
-Version 0.40 (In Progress)
+
+Version 0.30 (In Progress)
 
   * standaline version binaray renamed to masa_version
   * Further documentation edits
   * initial SMASA (stochastic masa) available 
   * gradient of source terms is now available for Fortran90 and C
-
-Version 0.30 (23 February, 2011) -- first public release
-
   * added integrated radiative intensity solution
   * added 1d Navier-Stokes + Ablation (C/C++ only) solution
   * added Favre Averaged Navier Stokes Solution	
@@ -30,7 +28,7 @@ Version 0.30 (23 February, 2011) -- first public release
   * added support for PGI compilers (tested on version 10.8)
   * documentation heavily updated (make doc) and now slightly useful
 
-Version 0.20 (23 September 2010) -- PECOS site visit 2010
+Version 0.20 (23 September 2010) 
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.20
   
   * API change for numerous functions -- source terms now return double
