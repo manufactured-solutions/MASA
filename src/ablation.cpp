@@ -222,7 +222,7 @@ Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_rho_C3(Scalar x)
 
 // this is the ablation energy equation
 template <typename Scalar>
-Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_e(Scalar x)
+Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_e(Scalar x,Scalar (*in_func)(Scalar))
 {
   Scalar Q_e;
   Scalar P;
@@ -242,7 +242,9 @@ Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_e(Scalar x)
   MF_C3 = RHO_C3 / RHO;
   MF_C3E = A_C3Enc * exp(-E_aC3nc / T) / P;
   Mdot_C3C = sqrt(T * k_B / PI / m_C3) * sqrt(0.2e1) * (-MF_C3 + MF_C3E) * RHO * beta_C3 / 0.2e1;
-  H_C3 = Function_to_Calculate_h_C3;
+  //H_C3 = Function_to_Calculate_h_C3;
+  H_C3 = in_func(T);
+
   Q_e = k * a_Tx * PI * T_x * sin(a_Tx * PI * x / L) / L - sigma * epsilon * pow(T, 0.4e1) - Mdot_C3C * H_C3 + alpha * qr;
   return(Q_e);
 }

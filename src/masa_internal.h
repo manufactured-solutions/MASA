@@ -176,6 +176,7 @@ namespace MASA
     virtual Scalar eval_q_w(Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Source Term (w) is unavailable or not properly loaded.\n"; return -1.33;};                             // overloaded for 3d problems
 
     virtual Scalar eval_q_e(Scalar)                {std::cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
+    virtual Scalar eval_q_e(Scalar,Scalar (*)(Scalar))                {std::cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
     virtual Scalar eval_q_e(Scalar,Scalar)         {std::cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
     virtual Scalar eval_q_e(Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Source Term (e) is unavailable or not properly loaded.\n"; return -1.33;};    // returns value of source term (energy)
 
@@ -805,7 +806,6 @@ namespace MASA
     Scalar etaf1_N2;
     Scalar Ea_N;
     Scalar Ea_N2;
-    //Scalar Function_to_Calculate_K;
     Scalar R_N;
     Scalar R_N2;
     Scalar theta_v_N2;
@@ -1408,7 +1408,6 @@ namespace MASA
     Scalar alpha;
     Scalar a_rho_N_x;
     Scalar sigma;
-    Scalar Function_to_Calculate_h_C3;
     Scalar epsilon;
 
   public:
@@ -1417,7 +1416,7 @@ namespace MASA
 
     Scalar eval_q_rho_u (Scalar);
     Scalar eval_q_rho_e (Scalar);
-    Scalar eval_q_e     (Scalar);
+    Scalar eval_q_e     (Scalar, Scalar (*)(Scalar));
     Scalar eval_q_C     (Scalar);
     Scalar eval_q_C3    (Scalar);
     Scalar eval_q_rho_C (Scalar);

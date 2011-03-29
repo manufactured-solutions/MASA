@@ -32,6 +32,7 @@
 //--------------------------------------------------------------------------
 //
 
+#include <math.h>
 #include <masa.h>
 #include <iostream>
 #include <fstream>
@@ -59,6 +60,16 @@ void test(Scalar input)
       exit(1);
     }
 
+}
+
+template<typename Scalar>
+Scalar funct(Scalar T)
+{
+  // hackish functional here
+  // This is an eyeballed fit (focusing on the 5000K-6000K range) 
+  // for the equilibrium constant for N2->N+N dissociation
+  Scalar K = exp(4+(T-6000)/500);
+  return K;
 }
 
 /* The following are the variables needed by the ablation solution:
@@ -162,7 +173,7 @@ int main()
       ufield = masa_eval_source_rho_u<Scalar>     (tempx);
       e_rho_field = masa_eval_source_rho_e<Scalar>(tempx);
      
-      efield  = masa_eval_source_e <Scalar>        (tempx);
+      efield  = masa_eval_source_e <Scalar>        (tempx,&funct);
       cfield  = masa_eval_source_C <Scalar>        (tempx);
       c3field = masa_eval_source_C3<Scalar>        (tempx);
       rho_cfield  = masa_eval_source_rho_C <Scalar> (tempx);
