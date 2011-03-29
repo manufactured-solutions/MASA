@@ -315,8 +315,6 @@ void MASA::masa_set_param(std::string param,Scalar paramval)
 template <typename Scalar>
 void MASA::masa_set_vec(std::string vector_name,std::vector<Scalar>* new_vector)
 {
-  std::cout << "new vector is: " << new_vector->size() << std::endl;
-
   masa_master<Scalar>().get_ms().set_vec(vector_name,new_vector);
 }
 

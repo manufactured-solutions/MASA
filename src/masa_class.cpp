@@ -137,8 +137,6 @@ int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Sca
     }
  
  // set new value
- //std::cout << "vec is: " << vec->size() << std::endl;
- //std::cout << "selector is " << selector->second << std::endl;
  vecarr[selector->second] = vec;
  return 0; // exit with no error
  
