@@ -46,18 +46,19 @@ int main()
   vector<Scalar> vec1;
   vector<Scalar> vec2;
 
-  vec2.resize(2);
+  vec2.resize(7);
 
   // initialize the problem
   err += masa_init<Scalar>("radiation","radiation_integrated_intensity");
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa.
-  freopen("/dev/null","w",stdout);
+  //freopen("/dev/null","w",stdout);
 
   err += masa_display_vec<Scalar>();
 
   masa_set_vec<Scalar>("vec_mean",&vec1);
+  masa_set_vec<Scalar>("vec_stdev",&vec2);
   
   // deliberately ensure that the sanity check catches the vector
   // has not been initialized!

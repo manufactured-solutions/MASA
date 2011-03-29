@@ -113,10 +113,10 @@ int MASA::manufactured_solution<Scalar>::get_vec(std::string name,std::vector<Sc
       return 1;
     }
   
-  std::cout << "this is: " << vec.size();
+  //std::cout << "this is: " << vec.size();
   vec = *vecarr[selector->second];   // set to value 
-  std::cout << "this is: " << vecarr[(*selector).second]->size();
-  std::cout << "this is: " << vec.size();
+  //std::cout << "this is: " << vecarr[(*selector).second]->size();
+  //std::cout << "this is: " << vec.size();
   return 0;
 
 }
@@ -124,6 +124,9 @@ int MASA::manufactured_solution<Scalar>::get_vec(std::string name,std::vector<Sc
 template <typename Scalar>
 int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Scalar> *vec)
 {
+  //std::cout << "vec is: " << (*vec)[0] << std::endl;
+  //std::cout << "vecarr is: " << vecarr[selector->second] << std::endl;
+
   std::map<std::string,int>::const_iterator selector;
 
   // find variable
