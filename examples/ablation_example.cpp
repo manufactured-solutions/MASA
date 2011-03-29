@@ -100,9 +100,10 @@ int main()
     {  
       tempx=i*dx;
 
-      // evaluate source terms
+      /* evaluate source terms */
       ufield = masa_eval_source_rho_u<Scalar>     (tempx);
       e_rho_field = masa_eval_source_rho_e<Scalar>(tempx);
+     
       efield = masa_eval_source_e<Scalar>         (tempx);
       //c
       //c3
@@ -110,7 +111,7 @@ int main()
       //rho_c3
       //boundary
 	
-      //evaluate analytical solution
+      /* evaluate manufactured analytical solution */
       exact_u   = masa_eval_exact_u  <Scalar>   (tempx);
       exact_t   = masa_eval_exact_t  <Scalar>   (tempx);
       exact_rho = masa_eval_exact_rho<Scalar>   (tempx);

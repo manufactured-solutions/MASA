@@ -34,6 +34,7 @@
 #include <masa.h>
 #include <string>
 #include <vector>
+#include <iostream>
 #include <stdio.h>
 
 using namespace MASA;
@@ -107,7 +108,7 @@ extern "C" int masa_display_array()
 
 extern "C" void masa_set_array(const char* param,int *n,double *val)
 {
-  //convert array to vector and pass
+  //convert array to vector and pass  
   std::vector<double> vec(&val[0],&val[*n]);
   masa_set_vec<double>(param,&vec);
 }

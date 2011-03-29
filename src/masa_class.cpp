@@ -122,7 +122,7 @@ template <typename Scalar>
 int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Scalar> *vec)
 {
   std::map<std::string,int>::const_iterator selector;
-  
+
   // find variable
   selector = vecmap.find(var);
   
@@ -132,11 +132,13 @@ int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Sca
       std::cout << "\nMASA ERROR!!!:: No such array  (" << var << ") exists to be set\n";
       return 1;
     }
-  
-  // set new value
-  vecarr[(*selector).second] = vec;
-  return 0; // exit with no error
-
+ 
+ // set new value
+ //std::cout << "vec is: " << vec->size() << std::endl;
+ //std::cout << "selector is " << selector->second << std::endl;
+ vecarr[selector->second] = vec;
+ return 0; // exit with no error
+ 
 }// done with set_vec function
 
 template <typename Scalar>
@@ -150,7 +152,7 @@ int MASA::manufactured_solution<Scalar>::display_vec()
   for(std::map<std::string,int>::const_iterator it = vecmap.begin(); it != vecmap.end(); ++it)
     {      
       vec = vecarr[it->second];
-      std::cout << it->first <<" is size: " << (*vec).size() << '\n';      
+      std::cout << it->first <<" is size: " << vec->size() << '\n';      
     }
 
   std::cout << "*-------------------------------------*\n" ;
