@@ -37,18 +37,44 @@
 
 int main()
 {
+  int i;
   int err=0;
-  
+  int n = 6;
+  double n2 = 6;
+  double vec1[n];
+  double vec2[n];
+
+  for(i=0;i<n;i++)
+    {
+      vec1[i]=2;
+      
+      vec2[i]=1;
+    }
   // initialize the problem
   err += masa_init("radiation","radiation_integrated_intensity");
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa; these tests currently just verify functions
   // run successfully.
-  //freopen("/dev/null","w",stdout);
+  freopen("/dev/null","w",stdout);
 
+  //err += masa_display_array();
+  printf("n is: %i\n",n);
+  printf("n2 is: %g\n",n2);
+  //masa_get_array("vec_mean",n,&vec1);
   err += masa_display_array();
+
+  masa_set_array("vec_mean",&n,&vec1);
   
+  err += masa_display_array();
+
+  //masa_get_array("vec_mean",&n,&vec2);
+
+  //printf("n is: %i\n",n);
+  //for(i=0;i<n;i++)
+  //    {
+  //        printf("vec is: %g\n",vec2[i]);
+  //}
 
   return 0;
 

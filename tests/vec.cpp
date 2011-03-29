@@ -66,6 +66,8 @@ int main()
       return 1;
     }
 
+  err += masa_display_vec<Scalar>();
+
   // need to add test checking that the get_vec with a bad string works too!
 
   return 0;
