@@ -13,7 +13,7 @@ a software interface that provides access to all manufactured solutions to
 The library is written in
 C++, but provides an API for development in C and Fortran.  
 
-Thanks for your interest in libMASA. To aid in usage, this manual is
+Thanks for your interest in MASA. To aid in usage, this manual is
 further divided into the following subsections:
 
 <ul>
