@@ -68,12 +68,20 @@ int main()
 
   Scalar ufield;
   Scalar efield;
+  Scalar cfield;
+  Scalar c3field;
+  Scalar rho_cfield;
+  Scalar rho_c3field;
+  Scalar boundary;
+
   Scalar e_rho_field;
   Scalar rho;
 
   Scalar exact_u;
   Scalar exact_t;
   Scalar exact_rho;
+  Scalar exact_c;
+  Scalar exact_c3;
 
   //problem size
   Scalar lx;
@@ -104,27 +112,34 @@ int main()
       ufield = masa_eval_source_rho_u<Scalar>     (tempx);
       e_rho_field = masa_eval_source_rho_e<Scalar>(tempx);
      
-      efield = masa_eval_source_e<Scalar>         (tempx);
-      //c
-      //c3
-      //rho_c
-      //rho_c3
-      //boundary
+      efield  = masa_eval_source_e <Scalar>        (tempx);
+      cfield  = masa_eval_source_C <Scalar>        (tempx);
+      c3field = masa_eval_source_C3<Scalar>        (tempx);
+      rho_cfield  = masa_eval_source_rho_C <Scalar> (tempx);
+      rho_c3field = masa_eval_source_rho_C3<Scalar> (tempx);
+      boundary   = masa_eval_source_boundary<Scalar> (tempx);
 	
       /* evaluate manufactured analytical solution */
       exact_u   = masa_eval_exact_u  <Scalar>   (tempx);
       exact_t   = masa_eval_exact_t  <Scalar>   (tempx);
       exact_rho = masa_eval_exact_rho<Scalar>   (tempx);
-      //c
-      //c3
+      exact_c   = masa_eval_exact_rho_C<Scalar> (tempx);
+      exact_c3  = masa_eval_exact_rho_C3<Scalar>(tempx);
 
       test(ufield);
       test(efield);
+      test(cfield);
+      test(rho_c3field);
+      test(rho_cfield);
+      test(rho_c3field);
+      test(boundary);
       test(e_rho_field);
 
       test(exact_u);
       test(exact_t);
       test(exact_rho);
+      test(exact_c);
+      test(exact_c3);
 
     }
 
