@@ -35,10 +35,10 @@ libfmasa_la_SOURCES     = masa.f90
 # Standalone binaries
 #-----------------------
 
-bin_PROGRAMS            = version
-version_SOURCES         = version.cpp masa.h #libmasa.la
-version_LDADD           = -L$(top_builddir)/src -lmasa
-version_DEPENDENCIES    = libmasa.la
+bin_PROGRAMS                           = @PACKAGE_NAME@_version
+@PACKAGE_NAME@_version_SOURCES         = version.cpp masa.h
+@PACKAGE_NAME@_version_LDADD           = -L$(top_builddir)/src -lmasa
+@PACKAGE_NAME@_version_DEPENDENCIES    = libmasa.la
 
 #-----------------------
 # F90 Module Interface
