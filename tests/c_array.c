@@ -59,12 +59,8 @@ int main()
   // run successfully.
   //freopen("/dev/null","w",stdout);
 
-  //err += masa_display_array();
-  //masa_get_array("vec_mean",n,&vec1);
   err += masa_display_array();
-
-  masa_set_array("vec_mean",&n,vec1);
-  
+  masa_set_array("vec_mean",&n,vec1);  
   err += masa_display_array();
 
   //masa_get_array("vec_mean",&n,&vec2);
