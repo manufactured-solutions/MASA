@@ -50,6 +50,7 @@ int main()
       
       vec2[i]=1;
     }
+
   // initialize the problem
   err += masa_init("radiation","radiation_integrated_intensity");
 
@@ -59,12 +60,10 @@ int main()
   //freopen("/dev/null","w",stdout);
 
   //err += masa_display_array();
-  printf("n is: %i\n",n);
-  printf("n2 is: %g\n",n2);
   //masa_get_array("vec_mean",n,&vec1);
   err += masa_display_array();
 
-  masa_set_array("vec_mean",&n,&vec1);
+  masa_set_array("vec_mean",&n,vec1);
   
   err += masa_display_array();
 
