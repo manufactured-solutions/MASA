@@ -262,13 +262,15 @@ template <typename Scalar>
 int MASA::manufactured_solution<Scalar>::sanity_check()
 {
   int flag=0;
+  Scalar thresh = 1.0e-10;
 
   // check all scalar values
   for(std::map<std::string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
     {      
-      if(*vararr[it->second] == MASA_VAR_DEFAULT)
+      if(fabs((*vararr[it->second] - MASA_VAR_DEFAULT)/MASA_VAR_DEFAULT) < thresh)
 	{
 	  std::cout << "\nMASA WARNING:: " << it->first << " has not been initialized!\n";
+	  std::cout << "Current value is: " << fabs((*vararr[it->second] - MASA_VAR_DEFAULT)/MASA_VAR_DEFAULT) << std::endl;
 	  flag += 1;
 	}
     }    
