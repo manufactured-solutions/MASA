@@ -275,7 +275,7 @@ int MASA::manufactured_solution<Scalar>::sanity_check()
 	}
     }    
   
-  if(varmap.size() != num_vars)
+  if(int(varmap.size()) != num_vars)
     {
       std::cout << "\n MASA FATAL ERROR:: mismatch in number of variables registered.\n"; 
       std::cout << "Are you calling the method manufactured_solution.register_var? This could be causing the error.\n"; 
@@ -414,7 +414,7 @@ template <typename Scalar>
 Scalar Polynomial<Scalar>::get_coeffs( const int &coeff_index ) const
 {
   assert( coeff_index >= 0 );
-  assert( coeff_index <= (coeffs.size()-1) );
+  assert( coeff_index <= (int(coeffs.size())-1) );
   return coeffs[coeff_index];
 }
 
