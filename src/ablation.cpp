@@ -353,5 +353,32 @@ Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_exact_rho_C3(Scalar x
   return rho_an_C3;
 }
 
+
+//
+// MULTI-D functions
+//
+/*
+template <typename Scalar> Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_rho_u(Scalar x,Scalar y){return this->eval_q_rho_u<Scalar>(double x);}
+template <typename Scalar> Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_rho_u(Scalar x,Scalar y,Scalar z){ return this->eval_q_rho_u<Scalar>(Scalar x,Scalar y);}
+
+template <typename Scalar> Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_rho_e(Scalar x,Scalar y,Scalar z) { return eval_q_rho_e(Scalar x,Scalar y);}
+template <typename Scalar> Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_rho_e(Scalar x,Scalar y) { return eval_q_rho_e(Scalar x);}
+
+template <typename Scalar> Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_u (Scalar x,Scalar y,Scalar z){return eval_q_u(Scalar x,Scalar y);}
+template <typename Scalar> Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_e (Scalar x,Scalar y,Scalar z){return eval_q_e(Scalar x,Scalar y);}
+template <typename Scalar> Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_u (Scalar x,Scalar y){return eval_q_u(Scalar x);}
+template <typename Scalar> Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_e (Scalar x,Scalar y){return eval_q_e(Scalar x);}
+
+// 3d->2d
+template <typename Scalar> Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_exact_u   (Scalar x,Scalar y,Scalar z) {return eval_exact_u(Scalar x,Scalar y);}
+template <typename Scalar> Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_exact_t   (Scalar x,Scalar y,Scalar z) {return eval_exact_t(Scalar x,Scalar y);}
+template <typename Scalar> Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_exact_rho (Scalar x,Scalar y,Scalar z) {return eval_exact_rho(Scalar x,Scalar y);}
+    
+//2d->1d
+template <typename Scalar> Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_exact_u   (Scalar x,Scalar y) {return eval_exact_u(Scalar x);}
+template <typename Scalar> Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_exact_t   (Scalar x,Scalar y) {return eval_exact_t(Scalar x);}
+template <typename Scalar> Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_exact_rho (Scalar x,Scalar y) {return eval_exact_rho(Scalar x);}
+*/
+
 MASA_INSTANTIATE_ALL(MASA::navierstokes_ablation_1d_steady);
 
