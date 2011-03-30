@@ -43,8 +43,8 @@ typedef double Scalar;
 int main()
 {
   int err=0;
-  vector<Scalar> vec1;
-  vector<Scalar> vec2;
+  std::vector<Scalar> vec1;
+  std::vector<Scalar> vec2;
 
   vec2.resize(7);
 

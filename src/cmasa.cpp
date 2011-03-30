@@ -108,16 +108,9 @@ extern "C" int masa_display_array()
 
 extern "C" void masa_set_array(const char* param,int *n,double val[])
 {
-  //std::cout << "n is: " << *n << std::endl;
-  //std::cout << "vec is: " << vec[4] << std::endl;
-  typedef double Scalar;
-  std::vector<Scalar> vec2;
-  vec2.resize(7);
-  
   //convert array to vector and pass  
   std::vector<double> vec(&val[0],&val[*n]);  
-  masa_set_vec<Scalar>(param,vec2);
-
+  masa_set_vec<double>(param,vec);
 }
 
 extern "C" int masa_get_array(const char* param,int *n,double* array[])

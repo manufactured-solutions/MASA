@@ -139,9 +139,9 @@ int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Sca
       return 1;
     }
  
- // set new value
- vecarr[selector->second] = &vec;
- return 0; // exit with no error
+ // fix vector to same size and values as new guy
+ *vecarr[selector->second] = vec;
+  return 0; // exit with no error
  
 }// done with set_vec function
 
