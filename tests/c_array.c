@@ -40,15 +40,17 @@ int main()
   int i;
   int err=0;
   int n = 6;
-  double n2 = 6;
   double vec1[n];
-  double vec2[n];
+  double vec2[n-1];
 
   for(i=0;i<n;i++)
     {
-      vec1[i]=2;
-      
-      vec2[i]=1;
+      vec1[i]=2;      
+    }
+
+  for(i=0;i<n-1;i++)
+    {
+      vec2[i]=1;      
     }
 
   // initialize the problem
@@ -57,20 +59,20 @@ int main()
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa; these tests currently just verify functions
   // run successfully.
-  //freopen("/dev/null","w",stdout);
+  freopen("/dev/null","w",stdout);
 
   err += masa_display_array();
   masa_set_array("vec_amp",&n,vec1);  
   err += masa_display_array();
 
-  //masa_get_array("vec_mean",&n,&vec2);
-
-  //printf("n is: %i\n",n);
-  //for(i=0;i<n;i++)
-  //    {
-  //        printf("vec is: %g\n",vec2[i]);
-  //}
-
+  //masa_get_array("vec_mean",&n,vec2);
+  
+  //if(n != 5) 
+  //  {
+  //    printf("masa regression error in c-vector interface!\n");
+  //     return 1;
+  //  }
+  
   return 0;
 
 }

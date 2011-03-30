@@ -119,15 +119,21 @@ extern "C" int masa_get_array(const char* param,int *n,double* array[])
   std::vector<double> vec;
   masa_get_vec<double>(param,vec);
   
-  // copy to array
-  //std::copy(vec.begin(), vec.end(), array); 
-  int i=0;
-  for(std::vector<double>::const_iterator it = vec.begin(); it != vec.end(); it++)
-    {
-      *array[i]= *it;
-      i++;
+  int ele = sizeof(array)/sizeof(double);
+  
+  /*
+  if(ele != vec.size())
+    { 
+      std::cout << "MASA error: array is not of sufficient size!\n"; 
+      std::cout << "vector is of size: " << vec.size() << std::endl;
+      std::cout << "array  is of size: " << ele << std::endl;
+      return 1;
     }
-    
+  */
+
+  // copy to array
+  std::copy(vec.begin(), vec.end(), *array); 
+   
   // copy size to 'n'
   (*n) = vec.size();
   return 0;
