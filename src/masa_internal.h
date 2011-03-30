@@ -1414,6 +1414,18 @@ namespace MASA
     navierstokes_ablation_1d_steady(); // constructor
     int init_var();        // default problem values
 
+    // source terms
+    // 3d -> 2d -> 1d
+    template <typename Scalar> Scalar eval_q_rho_u (Scalar x,Scalar y,Scalar z){return eval_q_rho_u(Scalar x,Scalar y);};
+    template <typename Scalar> Scalar eval_q_rho_e (Scalar x,Scalar y,Scalar z){return eval_q_rho_e(Scalar x,Scalar y);};
+    template <typename Scalar> Scalar eval_q_rho_u (Scalar x,Scalar y){return eval_q_rho_u(Scalar x);};
+    template <typename Scalar> Scalar eval_q_rho_e (Scalar x,Scalar y){return eval_q_rho_e(Scalar x);};
+
+    template <typename Scalar> Scalar eval_q_u (Scalar x,Scalar y,Scalar z){return eval_q_u(Scalar x,Scalar y);};
+    template <typename Scalar> Scalar eval_q_e (Scalar x,Scalar y,Scalar z){return eval_q_e(Scalar x,Scalar y);};
+    template <typename Scalar> Scalar eval_q_u (Scalar x,Scalar y){return eval_q_u(Scalar x);};
+    template <typename Scalar> Scalar eval_q_e (Scalar x,Scalar y){return eval_q_e(Scalar x);};
+
     Scalar eval_q_rho_u (Scalar);
     Scalar eval_q_rho_e (Scalar);
     Scalar eval_q_e     (Scalar, Scalar (*)(Scalar));
@@ -1423,7 +1435,18 @@ namespace MASA
     Scalar eval_q_rho_C3(Scalar);
     Scalar eval_q_u_boundary (Scalar);
 
-    Scalar eval_exact_u     (Scalar); // analytical
+    // manufactured analytical solution
+    // 3d->2d
+    template <typename Scalar> Scalar eval_exact_u     (Scalar x,Scalar y,Scalar z) {return eval_exact_u(Scalar x,Scalar y);};
+    template <typename Scalar> Scalar eval_exact_t     (Scalar x,Scalar y,Scalar z) {return eval_exact_t(Scalar x,Scalar y);};
+    template <typename Scalar> Scalar eval_exact_rho   (Scalar x,Scalar y,Scalar z) {return eval_exact_rho(Scalar x,Scalar y);};
+    
+    //2d->1d
+    template <typename Scalar> Scalar eval_exact_u     (Scalar x,Scalar y) {return eval_exact_u(Scalar x);};
+    template <typename Scalar> Scalar eval_exact_t     (Scalar x,Scalar y) {return eval_exact_t(Scalar x);};
+    template <typename Scalar> Scalar eval_exact_rho   (Scalar x,Scalar y) {return eval_exact_rho(Scalar x);};
+
+    Scalar eval_exact_u     (Scalar); 
     Scalar eval_exact_t     (Scalar);
     Scalar eval_exact_rho   (Scalar);
     Scalar eval_exact_rho_C (Scalar);
