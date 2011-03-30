@@ -70,7 +70,7 @@ template <typename Scalar>
 const Scalar MASA::manufactured_solution<Scalar>::MASA_VAR_DEFAULT = -12345.67; // default init each var to 'crazy' val
 
 template <typename Scalar>
-int MASA::manufactured_solution<Scalar>::register_vec(std::string in,std::vector<Scalar>* vec)
+int MASA::manufactured_solution<Scalar>::register_vec(std::string in,std::vector<Scalar>& vec)
 {
 
   // working fine here
@@ -82,7 +82,7 @@ int MASA::manufactured_solution<Scalar>::register_vec(std::string in,std::vector
       // if vec has not been registered, register the vec
       num_vec++;           // we want to step num_vars up by one ONLY when adding a new vec.
       vecmap[in]=num_vec;
-      vecarr.push_back(vec);
+      vecarr.push_back(&vec);
     }
   else  // variable already registered! no unique identifier can exist!
     {
@@ -122,7 +122,7 @@ int MASA::manufactured_solution<Scalar>::get_vec(std::string name,std::vector<Sc
 }
 
 template <typename Scalar>
-int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Scalar> *vec)
+int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Scalar>& vec)
 {
   //std::cout << "vec is: " << (*vec)[0] << std::endl;
   //std::cout << "vecarr is: " << vecarr[selector->second] << std::endl;
@@ -140,7 +140,7 @@ int MASA::manufactured_solution<Scalar>::set_vec(std::string var,std::vector<Sca
     }
  
  // set new value
- vecarr[selector->second] = vec;
+ vecarr[selector->second] = &vec;
  return 0; // exit with no error
  
 }// done with set_vec function

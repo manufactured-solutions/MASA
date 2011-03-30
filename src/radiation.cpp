@@ -54,9 +54,9 @@ MASA::radiation_integrated_intensity<Scalar>::radiation_integrated_intensity()
     this->register_var("no_gauss",&no_gauss);   
 
     // registering a vector
-    this->register_vec("vec_mean",&vec_mean);   
-    this->register_vec("vec_amp",&vec_amp);   
-    this->register_vec("vec_stdev",&vec_stdev);   
+    this->register_vec("vec_mean",vec_mean);   
+    this->register_vec("vec_amp",vec_amp);   
+    this->register_vec("vec_stdev",vec_stdev);   
     this->init_var();
   
 }//done with constructor
@@ -71,11 +71,11 @@ int MASA::radiation_integrated_intensity<Scalar>::init_var()
   // set size of vectors and set default values
   vec_mean.resize(no_gauss);
   vec_amp.resize(no_gauss);
-  vec_stdev.resize(no_gauss);
-
-  err += this->set_vec("vec_mean",&vec_mean);
-  err += this->set_vec("vec_amp",&vec_amp);
-  err += this->set_vec("vec_stdev",&vec_stdev);
+  vec_stdev.resize(no_gauss);    
+ 
+  err += this->set_vec("vec_mean",vec_mean);
+  err += this->set_vec("vec_amp",vec_amp);
+  err += this->set_vec("vec_stdev",vec_stdev);
 
   return err;
 

@@ -252,9 +252,9 @@ namespace MASA
     int purge_var();                                             // dump defaults
     Scalar pass_function(Scalar (*)(Scalar),Scalar);
     int set_var(std::string,Scalar);                             // sets variable value    
-    int set_vec(std::string,std::vector<Scalar>*);               // sets vector value    
+    int set_vec(std::string,std::vector<Scalar>&);               // sets vector value    
     int register_var(std::string, Scalar*);                      // this registers a variable
-    int register_vec(std::string, std::vector<Scalar>* );        // this registers a vector
+    int register_vec(std::string, std::vector<Scalar>& );        // this registers a vector
 
     int sanity_check();                                          // checks that all variables to the class have been initalized
     int poly_test();                                             // regression method for poly class (see below)
