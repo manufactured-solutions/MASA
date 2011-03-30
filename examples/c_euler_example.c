@@ -65,7 +65,7 @@ int main()
   //problem size
   double lx;
   double dx;
-  int nx,ny;
+  int nx;
 
   // initialize
   nx = 10;  // number of points

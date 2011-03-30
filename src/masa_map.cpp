@@ -53,7 +53,7 @@ void MASA::uptolow(std::string& str)
 void MASA::remove_line(std::string& str)
 {
   int position = str.find( "-" ); // find first space
-  while ( position != std::string::npos )
+  while ( position != int(std::string::npos) )
     {
       str.replace( position, 1, "" );
       position = str.find( "-", position + 1 );
@@ -63,7 +63,7 @@ void MASA::remove_line(std::string& str)
 void MASA::remove_whitespace(std::string& str)
 {
   int position = str.find( " " ); // find first space
-  while ( position != std::string::npos )
+  while ( position != int(std::string::npos) )
     {
       str.replace( position, 1, "" );
       position = str.find( " ", position + 1 );
