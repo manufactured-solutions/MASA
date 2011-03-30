@@ -52,11 +52,13 @@ void test(Scalar input)
 {
   if(input - MASA_VAR_DEFAULT > thresh)
     {
+      std::cout << "threshold exceeded!\n";
       exit(1);
     }
-
+  
   if(input - uninit > thresh)
     {
+    std:cout<< "threshold exceeded!\n";
       exit(1);
     }
 
