@@ -35,7 +35,6 @@
 using namespace std;
 using namespace MASA;
 
-
 template<typename Scalar>
 Scalar anQ_p (Scalar x,Scalar y,Scalar p_0,Scalar p_x,Scalar p_y,Scalar a_px,Scalar a_py,Scalar L)
 {

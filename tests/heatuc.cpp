@@ -30,11 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <math.h>
-#include <masa.h>
-#include <limits>
-#include <iostream>
-#include <stdlib.h>
+#include <tests.h>
 
 using namespace std;
 using namespace MASA;
@@ -144,14 +140,7 @@ int run_regression()
 
   tfield=fabs(tfield-tfield2);
 
-  if(tfield > threshold)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Heat Equation 1d Unsteady Constant\n";
-      cout << "T Source Term\n";
-      cout << "Exceeded Threshold by: " << tfield << endl;
-      exit(1);
-    }
-
+  threshcheck(tfield,threshold);
   //cout << "1D Unsteady Constant Heat Equation: PASSED\n";
 
   /// -----------------------------------------------------------------------
@@ -198,16 +187,7 @@ int run_regression()
 
   tfield=fabs(tfield-tfield2);
 
-  if(tfield > threshold)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Heat Equation 2d Unsteady Constant\n";
-      cout << "T Source Term\n";
-      cout << "Exceeded Threshold by: " << tfield << endl;
-      exit(1);
-    }
-
-  //cout << "2D Unsteady Constant Heat Equation: PASSED\n";
-
+  threshcheck(tfield,threshold);
 
   /// -----------------------------------------------------------------------
   // initalize 3D
@@ -259,16 +239,7 @@ int run_regression()
 
   tfield=fabs(tfield-tfield2);
 
-  if(tfield > threshold)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Heat Equation 3d Unsteady Constant\n";
-      cout << "T Source Term\n";
-      cout << "Exceeded Threshold by: " << tfield << endl;
-      exit(1);
-    }
-
-  //cout << "3D Unsteady Constant Heat Equation: PASSED\n";
-
+  threshcheck(tfield,threshold);
   // presumably, all tests passed
   return 0;
 }

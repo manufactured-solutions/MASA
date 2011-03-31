@@ -30,26 +30,10 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h>
-#include <masa.h>
-#include <math.h>
-#include <limits>
-#include <iostream>
-#include <stdlib.h>
+#include <tests.h>
 
 using namespace MASA;
 using namespace std;
-
-template<typename Scalar>
-Scalar nancheck(Scalar x)
-{
-  if(isnan(x))
-    {
-      cout << "MASA REGRESSION FAILURE:: nan found!\n";
-      exit(1);
-    }
-  return 1;
-}
 
 template<typename Scalar>
 Scalar anQ_p (Scalar x,Scalar p_0,Scalar p_x,Scalar a_px,Scalar L)

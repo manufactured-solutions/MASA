@@ -35,7 +35,6 @@
 using namespace MASA;
 using namespace std;
 
-
 template<typename Scalar>
 Scalar temp_function(Scalar T)
 {

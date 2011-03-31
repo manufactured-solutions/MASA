@@ -30,27 +30,10 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h> // for MASA_STRICT_REGRESSION
-#include <masa.h>
-#include <math.h>
-#include <stdio.h>
-#include <iostream>
-#include <stdlib.h>
-#include <limits>
+#include <tests.h>
 
 using namespace std;
 using namespace MASA;
-
-template<typename Scalar>
-Scalar nancheck(Scalar x)
-{
-  if(isnan(x))
-    {
-      cout << "MASA REGRESSION FAILURE:: nan found!\n";
-      exit(1);
-    }
-  return 1;
-}
 
 template<typename Scalar>
 Scalar anQ_p (Scalar x,Scalar y,Scalar z,Scalar p_0,Scalar p_x,Scalar p_y,Scalar p_z,Scalar a_px,Scalar a_py,Scalar a_pz,Scalar L)
