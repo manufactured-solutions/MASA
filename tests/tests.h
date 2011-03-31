@@ -199,6 +199,62 @@ Scalar SourceQ_t_3d (
   Scalar cp_0,
   Scalar rho);
 
+
+// heat uv
+template<typename Scalar>
+Scalar SourceQ_t_1d (
+  Scalar x,
+  Scalar t,
+  Scalar A_x,
+  Scalar A_t,
+  Scalar D_t,
+  Scalar rho,
+  Scalar k_0,
+  Scalar k_1,
+  Scalar k_2,
+  Scalar cp_0,
+  Scalar cp_1,
+  Scalar cp_2);
+
+template<typename Scalar>
+Scalar SourceQ_t_2d (
+  Scalar x,
+  Scalar y,
+  Scalar t,
+  Scalar A_x,
+  Scalar A_t,
+  Scalar B_y,
+  Scalar B_t,
+  Scalar D_t,
+  Scalar rho,
+  Scalar k_0,
+  Scalar k_1,
+  Scalar k_2,
+  Scalar cp_0,
+  Scalar cp_1,
+  Scalar cp_2);
+
+template<typename Scalar>
+Scalar SourceQ_t_3d (
+  Scalar x,
+  Scalar y,
+  Scalar z,
+  Scalar t,
+  Scalar A_x,
+  Scalar A_t,
+  Scalar B_y,
+  Scalar B_t,
+  Scalar C_z,
+  Scalar C_t,
+  Scalar D_t,
+  Scalar rho,
+  Scalar k_0,
+  Scalar k_1,
+  Scalar k_2,
+  Scalar cp_0,
+  Scalar cp_1,
+  Scalar cp_2);
+
 // euler 3d
 template<typename Scalar>
 Scalar anQ_p (Scalar x,Scalar y,Scalar z,Scalar p_0,Scalar p_x,Scalar p_y,Scalar p_z,Scalar a_px,Scalar a_py,Scalar a_pz,Scalar L);
@@ -467,6 +523,7 @@ Scalar SourceQ_e (
   Scalar a_vx,
   Scalar a_vy,
   Scalar Gamma,
+  Scalar mu,
   Scalar L);
 
 template<typename Scalar>
@@ -483,7 +540,9 @@ Scalar SourceQ_u ( // 23 variables
   Scalar rho_x,
   Scalar rho_y,
   Scalar p_x,
+  Scalar p_y,
   Scalar a_px,
+  Scalar a_py,
   Scalar a_rhox,
   Scalar a_rhoy,
   Scalar a_ux,
@@ -505,7 +564,9 @@ Scalar SourceQ_v (
   Scalar rho_0,
   Scalar rho_x,
   Scalar rho_y,
+  Scalar p_x,
   Scalar p_y,
+  Scalar a_px,
   Scalar a_py,
   Scalar a_rhox,
   Scalar a_rhoy,
@@ -528,6 +589,10 @@ Scalar SourceQ_rho(
   Scalar rho_0,
   Scalar rho_x,
   Scalar rho_y,
+  Scalar p_x,
+  Scalar p_y,
+  Scalar a_px,
+  Scalar a_py,
   Scalar a_rhox,
   Scalar a_rhoy,
   Scalar a_ux,
@@ -535,7 +600,6 @@ Scalar SourceQ_rho(
   Scalar a_vx,
   Scalar a_vy,
   Scalar L);
-
 
 //euler 1d
 template<typename Scalar>

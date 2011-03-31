@@ -92,7 +92,6 @@ Scalar SourceQ_e (
   Scalar a_vx,
   Scalar a_vy,
   Scalar Gamma,
-  Scalar mu,
   Scalar L)
 {
   Scalar pi = acos(-1);
@@ -371,7 +370,7 @@ int run_regression()
 	ufield2 = SourceQ_u<Scalar> (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
 	vfield2 = SourceQ_v<Scalar>   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
 	rho2    = SourceQ_rho<Scalar> (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);  
-	efield2 = SourceQ_e<Scalar>   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L);
+	efield2 = SourceQ_e<Scalar>   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,L);
 	
 	exact_u2   = anQ_u<Scalar>   (x,y,u_0,u_x,u_y,a_ux,a_uy,L);
 	exact_v2   = anQ_v<Scalar>   (x,y,v_0,v_x,v_y,a_vx,a_vy,L);
