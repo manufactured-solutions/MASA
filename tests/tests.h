@@ -72,6 +72,28 @@ Scalar threshcheck(Scalar x, Scalar thresh)
 }
 
 template<typename Scalar>
+Scalar threshcheck(Scalar x)
+{
+  Scalar MASA_VAR_DEFAULT = -12345.67;
+  Scalar uninit = -1.33;
+  Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
+
+  if(isnan(x))
+    {
+      std::cout << "MASA REGRESSION FAILURE:: nan found!\n";
+      exit(1);
+    }
+  
+  if(x > thresh)
+    {
+      std::cout << "\nMASA REGRESSION TEST FAILED!\n";
+      std::cout << "Exceeded Threshold by: " << x << endl;
+      exit(1);
+    }
+  return 0;  
+}
+
+template<typename Scalar>
 Scalar tester(Scalar a)
 {
   
@@ -96,6 +118,38 @@ Scalar test_grad(Scalar derr)
 }
 
 template<typename Scalar> int run_regression();
+
+
+// heat sv
+template<typename Scalar>
+Scalar SourceQ_t_1d(
+  Scalar x,
+  Scalar A_x,
+  Scalar k_0,
+  Scalar k_1,
+  Scalar k_2);
+
+template<typename Scalar>
+Scalar SourceQ_t_2d (
+  Scalar x,
+  Scalar y,
+  Scalar A_x,
+  Scalar B_y,
+  Scalar k_0,
+  Scalar k_1,
+  Scalar k_2);
+
+template<typename Scalar>
+Scalar SourceQ_t_3d (
+  Scalar x,
+  Scalar y,
+  Scalar z,
+  Scalar A_x,
+  Scalar B_y,
+  Scalar C_z,
+  Scalar k_0,
+  Scalar k_1,
+  Scalar k_2);
 
 // heat sc
 template<typename Scalar> Scalar SourceQ_t_1d(Scalar, Scalar, Scalar);

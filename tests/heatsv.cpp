@@ -30,14 +30,10 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <math.h>
-#include <masa.h>
-#include <limits>
-#include <iostream>
-#include <stdlib.h>
+#include <tests.h>
 
-using namespace std;
 using namespace MASA;
+using namespace std;
 
 template<typename Scalar>
 Scalar SourceQ_t_1d(
@@ -84,9 +80,6 @@ Scalar SourceQ_t_3d (
 template<typename Scalar>
 int run_regression()
 {
-
-  const Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
-
   Scalar tfield;
   Scalar tfield2;
   Scalar param=1.2;
@@ -126,13 +119,7 @@ int run_regression()
 
   tfield=fabs(tfield-tfield2);
 
-  if(tfield > threshold)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Heat Equation 1d Steady Variable\n";
-      cout << "ERROR in: T Source Term\n";
-      cout << "Exceeded Threshold by: " << tfield << endl;
-      exit(1);
-    }
+  threshcheck(tfield);
 
   //cout << "1D Steady Variable Coefficient Heat Equation: PASSED\n";
   //cout << "Residual: "<< tfield << endl;
@@ -171,13 +158,8 @@ int run_regression()
 
   tfield=fabs(tfield-tfield2);
 
-  if(tfield > threshold)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Heat Equation 2d Steady Variable\n";
-      cout << "ERROR in: T Source Term\n";
-      cout << "Exceeded Threshold by: " << tfield << endl;
-      exit(1);
-    }
+
+  threshcheck(tfield);
 
   //cout << "2D Steady Variable Coefficient Heat Equation: PASSED\n";
   //cout << "Residual: "<< tfield << endl;
@@ -210,13 +192,7 @@ int run_regression()
 
   tfield=fabs(tfield-tfield2);
 
-  if(tfield > threshold)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Heat Equation 3d Steady Variable\n";
-      cout << "ERROR in: T Source Term\n";
-      cout << "Exceeded Threshold by: " << tfield << endl;
-      exit(1);
-    }
+  threshcheck(tfield);
 
   // presumably, all tests passed
   return 0;
