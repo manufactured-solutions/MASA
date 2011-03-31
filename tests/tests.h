@@ -84,10 +84,53 @@ Scalar test_grad(Scalar derr)
   
 }
 
-
-
+template<typename Scalar> int run_regression();
 
 // heat sc
-//template<typename Scalar> Scalar SourceQ_t_1d(Scalar, Scalar, Scalar);
-//template<typename Scalar> Scalar Source_t_1d_exact(Scalar A_x,Scalar x)
-//template<typename Scalar> Scalar SourceQ_t_2d (Scalar x,Scalar y,Scalar A_x,Scalar B_y,Scalar k_0)
+template<typename Scalar> Scalar SourceQ_t_1d(Scalar, Scalar, Scalar);
+template<typename Scalar> Scalar Source_t_1d_exact(Scalar A_x,Scalar x);
+template<typename Scalar> Scalar SourceQ_t_2d (Scalar x,Scalar y,Scalar A_x,Scalar B_y,Scalar k_0);
+template<typename Scalar> Scalar SourceQ_t_3d (Scalar x,Scalar y,Scalar z,Scalar A,Scalar B,Scalar C,Scalar k_0);
+
+// heat uc
+template<typename Scalar>Scalar SourceQ_t_1d(
+  Scalar x,
+  Scalar t,
+  Scalar A_x,
+  Scalar A_t,
+  Scalar D_t,
+  Scalar k_0,
+  Scalar cp_0,
+  Scalar rho);
+
+template<typename Scalar>
+Scalar SourceQ_t_2d (
+  Scalar x,
+  Scalar y,
+  Scalar t,
+  Scalar A_x,
+  Scalar A_t,
+  Scalar B_y,
+  Scalar B_t,
+  Scalar D_t,
+  Scalar rho,
+  Scalar k_0,
+  Scalar cp_0);
+
+template<typename Scalar>
+Scalar SourceQ_t_3d (
+  Scalar x,
+  Scalar y,
+  Scalar z,
+  Scalar t,
+  Scalar A_x,
+  Scalar A_t,
+  Scalar B_y,
+  Scalar B_t,
+  Scalar C_z,
+  Scalar C_t,
+  Scalar D_t,
+  Scalar k_0,
+  Scalar cp_0,
+  Scalar rho);
+
