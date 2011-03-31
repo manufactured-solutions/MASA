@@ -72,7 +72,6 @@ Scalar SourceQ_e ( // 12
   Scalar a_rhox,
   Scalar a_ux,
   Scalar Gamma,
-  Scalar mu,
   Scalar L)
 {
   Scalar pi = acos(-1);
@@ -122,8 +121,6 @@ Scalar SourceQ_rho ( // 10
   Scalar u_x,
   Scalar rho_0,
   Scalar rho_x,
-  Scalar p_x,
-  Scalar a_px,
   Scalar a_rhox,
   Scalar a_ux,
   Scalar L)
@@ -158,7 +155,6 @@ int run_regression()
   Scalar a_rhox;
   Scalar a_ux;
   Scalar Gamma;
-  Scalar mu;
   Scalar L;
 
   // parameters
@@ -199,7 +195,6 @@ int run_regression()
   a_ux = masa_get_param<Scalar>("a_ux");
 
   Gamma = masa_get_param<Scalar>("Gamma");
-  mu    = masa_get_param<Scalar>("mu");
   L     = masa_get_param<Scalar>("L");
 
   // check that all terms have been initialized
@@ -227,8 +222,8 @@ int run_regression()
 
       // get fundamental source term solution
       ufield2   = SourceQ_u  (x,u_0,u_x,rho_0,rho_x,p_x,a_px,a_rhox,a_ux,L);
-      rho2      = SourceQ_rho(x,u_0,u_x,rho_0,rho_x,p_x,a_px,a_rhox,a_ux,L);
-      efield2   = SourceQ_e  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,Gamma,mu,L);
+      rho2      = SourceQ_rho(x,u_0,u_x,rho_0,rho_x,a_rhox,a_ux,L);
+      efield2   = SourceQ_e  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,Gamma,L);
   
       exact_u2   = anQ_u   (x,u_0,u_x,a_ux,L);
       exact_rho2 = anQ_rho (x,rho_0,rho_x,a_rhox,L);
@@ -265,6 +260,10 @@ int run_regression()
       threshcheck(exact_u3,threshold);
       threshcheck(exact_rho3,threshold);
       threshcheck(exact_p3,threshold);
+
+      threshcheck(gradx,threshold);
+      threshcheck(gradp,threshold);
+      threshcheck(gradrho,threshold);
       
       // adding a new error check: ensure physical results are coming out!
       if(0 > rho)

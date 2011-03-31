@@ -53,7 +53,7 @@ Scalar anQ_u (Scalar x,Scalar y,Scalar z,Scalar u_0,Scalar u_x,Scalar u_y,Scalar
   return exact_u;
 } 
 
- template<typename Scalar>
+template<typename Scalar>
 Scalar anQ_v (Scalar x,Scalar y,Scalar z,Scalar v_0,Scalar v_x,Scalar v_y,Scalar v_z,Scalar a_vx,Scalar a_vy,Scalar a_vz,Scalar L)
 {
   Scalar pi = acos(-1);

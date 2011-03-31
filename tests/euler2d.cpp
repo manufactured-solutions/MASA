@@ -125,7 +125,6 @@ Scalar SourceQ_u ( // 23 variables
   Scalar rho_0,
   Scalar rho_x,
   Scalar rho_y,
-  Scalar p_0,
   Scalar p_x,
   Scalar p_y,
   Scalar a_px,
@@ -166,7 +165,6 @@ Scalar SourceQ_v (
   Scalar rho_0,
   Scalar rho_x,
   Scalar rho_y,
-  Scalar p_0,
   Scalar p_x,
   Scalar p_y,
   Scalar a_px,
@@ -207,7 +205,6 @@ Scalar SourceQ_rho(
   Scalar rho_0,
   Scalar rho_x,
   Scalar rho_y,
-  Scalar p_0,
   Scalar p_x,
   Scalar p_y,
   Scalar a_px,
@@ -371,9 +368,9 @@ int run_regression()
 	grady = masa_eval_grad_rho<Scalar>(x,y,2);		
 
 	// check against maple
-	ufield2 = SourceQ_u<Scalar> (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
-	vfield2 = SourceQ_v<Scalar>   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
-	rho2    = SourceQ_rho<Scalar> (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);  
+	ufield2 = SourceQ_u<Scalar> (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
+	vfield2 = SourceQ_v<Scalar>   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);
+	rho2    = SourceQ_rho<Scalar> (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,L);  
 	efield2 = SourceQ_e<Scalar>   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,Gamma,mu,L);
 	
 	exact_u2   = anQ_u<Scalar>   (x,y,u_0,u_x,u_y,a_ux,a_uy,L);
@@ -418,6 +415,9 @@ int run_regression()
 	threshcheck(exact_v3,threshold);
 	threshcheck(exact_rho3,threshold);
 	threshcheck(exact_p3,threshold);
+
+	nancheck(gradx);
+	nancheck(grady);
 
 	if(0 > exact_rho)
 	  {
