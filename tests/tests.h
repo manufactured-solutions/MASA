@@ -64,3 +64,9 @@ Scalar tester(Scalar a)
   return a;
 
 }
+
+
+// heat sc
+//template<typename Scalar> Scalar SourceQ_t_1d(Scalar, Scalar, Scalar);
+//template<typename Scalar> Scalar Source_t_1d_exact(Scalar A_x,Scalar x)
+//template<typename Scalar> Scalar SourceQ_t_2d (Scalar x,Scalar y,Scalar A_x,Scalar B_y,Scalar k_0)
