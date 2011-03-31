@@ -115,7 +115,7 @@ Scalar SourceQ_u ( // should be 10
 }
 
 template<typename Scalar>
-Scalar SourceQ_rho ( // 10
+Scalar SourceQ_rho (
   Scalar x,
   Scalar u_0,
   Scalar u_x,
@@ -261,9 +261,9 @@ int run_regression()
       threshcheck(exact_rho3,threshold);
       threshcheck(exact_p3,threshold);
 
-      threshcheck(gradx,threshold);
-      threshcheck(gradp,threshold);
-      threshcheck(gradrho,threshold);
+      nancheck(gradx);
+      nancheck(gradp);
+      nancheck(gradrho);
       
       // adding a new error check: ensure physical results are coming out!
       if(0 > rho)

@@ -413,7 +413,6 @@ Scalar SourceQ_e (
   Scalar a_vx,
   Scalar a_vy,
   Scalar Gamma,
-  Scalar mu,
   Scalar L);
 
 template<typename Scalar>
@@ -430,9 +429,7 @@ Scalar SourceQ_u ( // 23 variables
   Scalar rho_x,
   Scalar rho_y,
   Scalar p_x,
-  Scalar p_y,
   Scalar a_px,
-  Scalar a_py,
   Scalar a_rhox,
   Scalar a_rhoy,
   Scalar a_ux,
@@ -454,9 +451,7 @@ Scalar SourceQ_v (
   Scalar rho_0,
   Scalar rho_x,
   Scalar rho_y,
-  Scalar p_x,
   Scalar p_y,
-  Scalar a_px,
   Scalar a_py,
   Scalar a_rhox,
   Scalar a_rhoy,
@@ -479,10 +474,6 @@ Scalar SourceQ_rho(
   Scalar rho_0,
   Scalar rho_x,
   Scalar rho_y,
-  Scalar p_x,
-  Scalar p_y,
-  Scalar a_px,
-  Scalar a_py,
   Scalar a_rhox,
   Scalar a_rhoy,
   Scalar a_ux,
