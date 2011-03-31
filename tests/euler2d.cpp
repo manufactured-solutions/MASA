@@ -444,63 +444,30 @@ int run_regression()
 
   // test gradient error terms
   Scalar derr = masa_eval_grad_u<Scalar>(0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: gradient (0) error condition failed!\n";
-      exit(1);
-    }
-  
-  derr = masa_eval_grad_u<Scalar>(0,0,3);
-  if(derr != -1)
-    {
-      cout << "MASA :: gradient (3) error condition failed!\n";
-      exit(1);
-    }
+  test_grad<Scalar>(derr);
 
-  // v
+  derr = masa_eval_grad_u<Scalar>(0,0,3);
+  test_grad<Scalar>(derr);
+
   derr = masa_eval_grad_v<Scalar>(0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: v gradient (0) error condition failed!\n";
-      exit(1);
-    }
-  
+  test_grad<Scalar>(derr);
+
   derr = masa_eval_grad_v<Scalar>(0,0,3);
-  if(derr != -1)
-    {
-      cout << "MASA :: v gradient (3) error condition failed!\n";
-      exit(1);
-    }
+  test_grad<Scalar>(derr);
 
   // p
   derr = masa_eval_grad_p<Scalar>(0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: p gradient (0) error condition failed!\n";
-      exit(1);
-    }
+  test_grad<Scalar>(derr);
   
   derr = masa_eval_grad_p<Scalar>(0,0,3);
-  if(derr != -1)
-    {
-      cout << "MASA :: p gradient (3) error condition failed!\n";
-      exit(1);
-    }
+  test_grad<Scalar>(derr);
 
   // rho
   derr = masa_eval_grad_rho<Scalar>(0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: rho gradient (0) error condition failed!\n";
-      exit(1);
-    }
-  
+  test_grad<Scalar>(derr);  
+
   derr = masa_eval_grad_rho<Scalar>(0,0,3);
-  if(derr != -1)
-    {
-      cout << "MASA :: rho gradient (3) error condition failed!\n";
-      exit(1);
-    }
+  test_grad<Scalar>(derr);
 
   // all tests passed
   return 0;

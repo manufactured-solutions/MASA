@@ -65,6 +65,19 @@ Scalar tester(Scalar a)
 
 }
 
+template<typename Scalar>
+Scalar test_grad(Scalar derr)
+{
+  if(derr != -1)
+    {
+      std::cout << "MASA :: gradient error condition failed!\n";
+      exit(1);
+    }
+  
+}
+
+
+
 
 // heat sc
 //template<typename Scalar> Scalar SourceQ_t_1d(Scalar, Scalar, Scalar);
