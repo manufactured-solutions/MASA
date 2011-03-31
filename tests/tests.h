@@ -1,0 +1,62 @@
+// -*-c++-*-
+//
+//-----------------------------------------------------------------------bl-
+//--------------------------------------------------------------------------
+//
+// MASA - Manufactured Analytical Solutions Abstraction Library
+//
+// Copyright (C) 2010,2011 The PECOS Development Team
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the Version 2.1 GNU Lesser General
+// Public License as published by the Free Software Foundation.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc. 51 Franklin Street, Fifth Floor,
+// Boston, MA  02110-1301  USA
+//
+//-----------------------------------------------------------------------el-
+//
+// tests.h: helper routines for testing
+//
+// $Id: masa.h.in 19231 2011-03-30 01:16:36Z nick $
+//--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
+
+#include <config.h>
+#include <masa.h>
+#include <math.h> 
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <limits>
+
+template<typename Scalar>
+Scalar nancheck(Scalar x)
+{
+  if(isnan(x))
+    {
+      std::cout << "MASA REGRESSION FAILURE:: nan found!\n";
+      exit(1);
+    }
+  return 1;
+}
+
+template<typename Scalar>
+Scalar threshcheck(Scalar x, Scalar thresh)
+{
+  
+  if(x > thresh)
+    {
+      std::cout << "\nMASA REGRESSION TEST FAILED: Euler-1d + chemistry\n";
+      std::cout << "Exceeded Threshold by: " << x << endl;
+      exit(1);
+    }
+  return 1;  
+}

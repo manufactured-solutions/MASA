@@ -30,39 +30,11 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h>
-#include <masa.h>
-#include <math.h>
-#include <limits>
-#include <iostream>
-#include <stdlib.h>
+#include <tests.h>
 
 using namespace MASA;
 using namespace std;
 
-template<typename Scalar>
-Scalar nancheck(Scalar x)
-{
-  if(isnan(x))
-    {
-      cout << "MASA REGRESSION FAILURE:: nan found!\n";
-      exit(1);
-    }
-  return 1;
-}
-
-template<typename Scalar>
-Scalar threshcheck(Scalar x, Scalar thresh)
-{
-  
-  if(x > thresh)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Euler-1d + chemistry\n";
-      cout << "Exceeded Threshold by: " << x << endl;
-      exit(1);
-    }
-  return 1;  
-}
 
 template<typename Scalar>
 Scalar temp_function(Scalar T)

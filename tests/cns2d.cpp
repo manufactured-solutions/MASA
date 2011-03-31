@@ -30,27 +30,11 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h>
-#include <masa.h>
-#include <math.h> 
-#include <iostream>
-#include <stdlib.h>
-#include <stdio.h>
-#include <limits>
+#include <tests.h>
 
 using namespace std;
 using namespace MASA;
 
-template<typename Scalar>
-Scalar nancheck(Scalar x)
-{
-  if(isnan(x))
-    {
-      cout << "MASA REGRESSION FAILURE:: nan found!\n";
-      exit(1);
-    }
-  return 1;
-}
 
 template<typename Scalar>
 Scalar anQ_p (Scalar x,Scalar y,Scalar p_0,Scalar p_x,Scalar p_y,Scalar a_px,Scalar a_py,Scalar L)
@@ -404,8 +388,8 @@ int run_regression()
 	exact_rho3 = fabs(exact_rho-exact_rho2)/fabs(exact_rho2);
 	exact_p3   = fabs(exact_p-exact_p2)/fabs(exact_p2);
 
-#endif
-	
+#endif	
+
 	nancheck(ufield3);
 	nancheck(vfield3);
 	nancheck(efield3);
