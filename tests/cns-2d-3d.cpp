@@ -68,7 +68,6 @@ int main()
   Real a_uy;
   Real a_vx;
   Real a_vy;
-  Real a_wx;
   Real mu;
   Real Gamma;
   Real L;    

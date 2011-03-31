@@ -262,14 +262,13 @@ int run_regression()
   // parameters
   Scalar x;
   Scalar y;
-  Scalar z;
 
   // solutions
   Scalar exact_u,exact_u2,exact_u3;
   Scalar exact_v,exact_v2,exact_v3;
   Scalar exact_p,exact_p2,exact_p3;
   Scalar exact_rho,exact_rho2,exact_rho3;
-  Scalar gradx,grady,gradz;
+  Scalar gradx,grady;
   //Scalar gradp,gradrho;
   
   Scalar ufield,ufield2,ufield3;

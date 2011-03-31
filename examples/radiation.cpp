@@ -59,8 +59,8 @@ void test(Scalar input)
 int main()
 {
   // declarations
-  Scalar tfield;
-  Scalar tempx;
+  //Scalar tfield;
+  //Scalar tempx;
 
   //problem size
   Scalar lx;
