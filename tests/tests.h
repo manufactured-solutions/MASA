@@ -364,6 +364,20 @@ Scalar SourceQ_rho( // 39
   Scalar L);
 
 
+// euler 2d
+template<typename Scalar>
+Scalar anQ_p (Scalar x,Scalar y,Scalar p_0,Scalar p_x,Scalar p_y,Scalar a_px,Scalar a_py,Scalar L);
+
+template<typename Scalar>
+Scalar anQ_u (Scalar x,Scalar y,Scalar u_0,Scalar u_x,Scalar u_y,Scalar a_ux,Scalar a_uy,Scalar L);
+
+template<typename Scalar> 
+Scalar anQ_v (Scalar x,Scalar y,Scalar v_0,Scalar v_x,Scalar v_y,Scalar a_vx,Scalar a_vy,Scalar L);
+
+template<typename Scalar>
+Scalar anQ_rho (Scalar x,Scalar y,Scalar rho_0,Scalar rho_x,Scalar rho_y,Scalar a_rhox,Scalar a_rhoy,Scalar L);
+
+
 
 
 
