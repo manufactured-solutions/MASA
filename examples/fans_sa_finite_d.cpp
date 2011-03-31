@@ -63,7 +63,7 @@ void test(Scalar input)
 int main()
 {
 
-
+  /*
   Scalar ufield;
   Scalar vfield;
 
@@ -72,6 +72,7 @@ int main()
 
   Scalar exact_u;
   Scalar exact_v;
+  */
 
   //error handing
   int err = 0;

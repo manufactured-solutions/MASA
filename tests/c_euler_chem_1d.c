@@ -348,7 +348,7 @@ int main()
   double efield,efield2,efield3;
   double N,N2,N3;
   double Ntwo,Ntwo2,Ntwo3;
-  double gradx,grady,gradz,gradp,gradrho;
+  //double gradx,grady,gradz,gradp,gradrho;
 
   double exact_t,exact_t2,exact_t3;
   double exact_u,exact_u2,exact_u3;

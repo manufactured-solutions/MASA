@@ -137,13 +137,11 @@ int main()
 
   // solutions
   Real ufield,ufield2,ufield3;
-  Real vfield,vfield2,vfield3;
   Real wfield,wfield2,wfield3;
   Real efield,efield2,efield3;
   Real rho,rho2,rho3;
 
   Real exact_u,exact_u2,exact_u3;
-  Real exact_v,exact_v2,exact_v3;
   Real exact_w,exact_w2,exact_w3;
   Real exact_p,exact_p2,exact_p3;
   Real exact_rho,exact_rho2,exact_rho3;

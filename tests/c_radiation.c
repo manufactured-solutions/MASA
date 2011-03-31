@@ -36,8 +36,8 @@
 int main()
 {
   // declarations
-  double tfield;
-  double tempx;
+  //double tfield;
+  //double tempx;
 
   //problem size
   double lx;

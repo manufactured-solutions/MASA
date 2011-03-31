@@ -172,12 +172,10 @@ int main()
 
   // solutions
   double ufield,ufield2,ufield3;
-  double vfield,vfield2,vfield3;
   double efield,efield2,efield3;
   double rho,rho2,rho3;
 
   double exact_u,exact_u2,exact_u3;
-  double exact_v,exact_v2,exact_v3;
   double exact_p,exact_p2,exact_p3;
   double exact_rho,exact_rho2,exact_rho3;
 

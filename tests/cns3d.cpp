@@ -393,7 +393,6 @@ int run_regression()
   Scalar mu;
   Scalar Gamma;
   Scalar L;    
-  Scalar k;
 
   Scalar R;
   Scalar K;    
@@ -409,7 +408,7 @@ int run_regression()
   Scalar wfield,wfield2,wfield3;
   Scalar efield,efield2,efield3;
   Scalar rho,rho2,rho3;
-  Scalar gradx,grady,gradz,gradp,gradrho;
+  Scalar gradx,grady,gradz;
 
   Scalar exact_u,exact_u2,exact_u3;
   Scalar exact_v,exact_v2,exact_v3;
@@ -432,7 +431,7 @@ int run_regression()
 
   // set params -- do not call default values for this problem!
   masa_set_param<Scalar>("R",1.01);
-  masa_set_param<Scalar>("k",1.38);
+  //masa_set_param<Scalar>("k",1.38);
   masa_set_param<Scalar>("u_0",2.27);
   masa_set_param<Scalar>("u_x",6.00);
   masa_set_param<Scalar>("u_y",1.35);

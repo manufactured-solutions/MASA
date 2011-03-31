@@ -380,8 +380,6 @@ int run_regression()
   Scalar mu;
   Scalar Gamma;
   Scalar L;    
-  Scalar k;
-
   Scalar R;
   Scalar K;    
 

@@ -239,7 +239,7 @@ int run_regression()
   Scalar ufield,ufield2,ufield3;
   Scalar efield,efield2,efield3;
   Scalar rho,rho2,rho3;
-  Scalar gradx,grady,gradz,gradp,gradrho;
+  //Scalar gradx,grady,gradz,gradp,gradrho;
 
   Scalar exact_u,exact_u2,exact_u3;
   Scalar exact_p,exact_p2,exact_p3;

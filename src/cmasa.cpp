@@ -119,9 +119,9 @@ extern "C" int masa_get_array(const char* param,int *n,double* array[])
   std::vector<double> vec;
   masa_get_vec<double>(param,vec);
   
+  /*
   int ele = sizeof(array)/sizeof(double);
   
-  /*
   if(ele != vec.size())
     { 
       std::cout << "MASA error: array is not of sufficient size!\n"; 

@@ -52,13 +52,13 @@ void test(Scalar input)
 {
   if(input - MASA_VAR_DEFAULT > thresh)
     {
-      std::cout << "threshold exceeded!\n";
+      cout << "threshold exceeded!\n";
       exit(1);
     }
   
   if(input - uninit > thresh)
     {
-    std:cout<< "threshold exceeded!\n";
+      cout<< "threshold exceeded!\n";
       exit(1);
     }
 
@@ -138,7 +138,6 @@ int main()
   Scalar boundary;
 
   Scalar e_rho_field;
-  Scalar rho;
 
   Scalar exact_u;
   Scalar exact_t;
