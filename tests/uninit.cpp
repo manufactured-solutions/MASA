@@ -61,7 +61,7 @@ int main()
 
   // start testing uninitialized functions
   derr = masa_init_param<Scalar>();
-  if(derr != 0) 
+  if(derr > threshold) 
     err += 1;
   
   // --------------------------------

@@ -30,10 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h>
-#include <masa.h>
-#include <iostream>
-#include <string>
+#include<tests.h>
 
 using namespace MASA;
 using namespace std;
@@ -41,17 +38,12 @@ using namespace std;
 //typedef long double Scalar;
 typedef double Scalar;
 
-Scalar tester(Scalar a)
-{
-  
-  a = 4.4;
-  return a;
-
-}
-
 
 int main()
 {
+
+  const Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
+
   Scalar u_0;
 
   // start problem
@@ -61,7 +53,7 @@ int main()
   Scalar out = pass_func<Scalar>(&tester,u_0);
   Scalar q = tester(u_0);
   
-  if(out != q) 
+  if((out - q) > threshold) 
     {
       cout << "\nMASA ERROR::function passing not functioning properly in MASA!\n";
       return 1;

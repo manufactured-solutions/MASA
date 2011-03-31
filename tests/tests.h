@@ -55,3 +55,12 @@ Scalar threshcheck(Scalar x, Scalar thresh)
     }
   return 0;  
 }
+
+template<typename Scalar>
+Scalar tester(Scalar a)
+{
+  
+  a = 4.4;
+  return a;
+
+}
