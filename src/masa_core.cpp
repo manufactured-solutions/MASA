@@ -917,13 +917,11 @@ int MASA::masa_get_dimension(int* dim)
   return 0;
 }
 
-
 template <typename Scalar>
 int MASA::masa_test_poly()
 {
   return masa_master<Scalar>().get_ms().poly_test(); // return error condition
 }
-
 
 template <typename Scalar>
 int MASA::masa_sanity_check()

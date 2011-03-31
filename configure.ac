@@ -64,7 +64,7 @@ AC_PROG_CXX
 AC_PROG_FC
 AC_PROG_F77
 AC_PROG_LIBTOOL
-
+AX_WARNINGS_SANITIZE
 AM_SANITY_CHECK
 
 #---------------------------------------------
