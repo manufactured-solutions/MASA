@@ -68,7 +68,7 @@ Scalar tester(Scalar a)
 template<typename Scalar>
 Scalar test_grad(Scalar derr)
 {
-  if(derr != -1)
+  if(fabs(derr+1) > thresh)
     {
       std::cout << "MASA :: gradient error condition failed!\n";
       exit(1);
