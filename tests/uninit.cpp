@@ -30,10 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h>
-#include <masa.h>
-#include <cstdio>
-#include <iostream>
+#include <tests.h>
 
 using namespace MASA;
 using namespace std;
@@ -42,7 +39,10 @@ typedef double Scalar;
 
 int main()
 {
+  Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
+
   Scalar derr;
+  
   int err=0;
 
   Scalar x=0;
@@ -69,216 +69,216 @@ int main()
   // --------------------------------
   
   derr = masa_eval_source_t<Scalar>(x); 
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_t<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_u<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_v<Scalar>(x);  
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_w<Scalar>(x);  
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_e<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho_u<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho_v<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho_w<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho_e<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_rho_N <Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
   
   derr = masa_eval_exact_rho_N2<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho_u<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
   
   derr = masa_eval_exact_t<Scalar>(x); 
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_t<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_u<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_v<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_w<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_p<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_rho<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;  
 
   derr = masa_eval_grad_u<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;  
 
   derr = masa_eval_grad_v<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;  
 
   derr = masa_eval_grad_w<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;  
 
   derr = masa_eval_grad_p<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;  
 
   derr = masa_eval_grad_rho<Scalar>(x);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;  
   
   // --------------------------------
   // source term(s) -- 2D
   // --------------------------------
   derr = masa_eval_source_t<Scalar>(x,y,z); 
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_u<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_v<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_w<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_e<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho_u<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho_v<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho_w<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho_e<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_t<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_u<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_v<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_w<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_p<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_rho<Scalar>(x,y);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
   
   // gradient terms
 
   derr = masa_eval_grad_u<Scalar>(x,y,1);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_u<Scalar>(x,y,2);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_v<Scalar>(x,y,1);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_v<Scalar>(x,y,2);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_w<Scalar>(x,y,1);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_w<Scalar>(x,y,2);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_p<Scalar>(x,y,1);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_p<Scalar>(x,y,2);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_rho<Scalar>(x,y,1);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_rho<Scalar>(x,y,2);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   // --------------------------------
@@ -286,129 +286,129 @@ int main()
   // --------------------------------
 
   derr = masa_eval_source_t<Scalar>(x,y,z,t);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_u<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_v<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_w<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_e<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho_u<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho_v<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho_w<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_source_rho_e<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   // gradient terms
   derr = masa_eval_grad_u<Scalar>(x,y,z,1);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_u<Scalar>(x,y,z,2);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_u<Scalar>(x,y,z,3);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
   
   derr = masa_eval_grad_v<Scalar>(x,y,z,1);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_v<Scalar>(x,y,z,2);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_v<Scalar>(x,y,z,3);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_w<Scalar>(x,y,z,1);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_w<Scalar>(x,y,z,2);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_w<Scalar>(x,y,z,3);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_p<Scalar>(x,y,z,1);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_p<Scalar>(x,y,z,2);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_p<Scalar>(x,y,z,3);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_rho<Scalar>(x,y,z,1);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_rho<Scalar>(x,y,z,2);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_grad_rho<Scalar>(x,y,z,3);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   // done with gradient
   derr = masa_eval_exact_t<Scalar>(x,y,z,t);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
   err += 1;
 
   derr = masa_eval_exact_u<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_v<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_w<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_p<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   derr = masa_eval_exact_rho<Scalar>(x,y,z);
-  if(derr != -1.33) 
+  if( (derr + 1.33) > threshold) 
     err += 1;
 
   if(err != 0)
