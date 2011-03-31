@@ -40,31 +40,7 @@ typedef double Scalar;
 
 int main()
 {
-
-  /*
-  Scalar ufield;
-  Scalar vfield;
-
-  // declarations
-  Scalar tempx;
-
-  Scalar exact_u;
-  Scalar exact_v;
-  */
-
-  //error handing
-  int err = 0;
-
-  //problem size
-  Scalar lx;
-  Scalar dx;
-  int nx;
-
-  // initialize
-  nx = 10;  // number of points
-  lx=1;     // length
-
-  dx=lx/nx;
+  int err;
 
   // initialize the problem 
   err = masa_init<Scalar>("sa example","fans_sa_transient_d_finite");
