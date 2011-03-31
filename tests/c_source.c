@@ -52,20 +52,20 @@ int main()
   out = masa_eval_1d_source_u(x);
   out = masa_eval_1d_source_e(x);
 
-  out = masa_eval_grad_1d_u(x);
-  out = masa_eval_grad_1d_p(x);
-  out = masa_eval_grad_1d_rho(x);
+  out = masa_eval_1d_grad_u(x);
+  out = masa_eval_1d_grad_p(x);
+  out = masa_eval_1d_grad_rho(x);
 
   out = masa_eval_2d_source_u(x,x);
   out = masa_eval_2d_source_v(x,x);
   out = masa_eval_2d_source_e(x,x);
   out = masa_eval_2d_source_rho_w(x,x);
 
-  out = masa_eval_grad_2d_u(x,x,i);
-  out = masa_eval_grad_2d_v(x,x,i);
-  out = masa_eval_grad_2d_w(x,x,i);
-  out = masa_eval_grad_2d_p(x,x,i);
-  out = masa_eval_grad_2d_rho(x,x,i);
+  out = masa_eval_2d_grad_u(x,x,i);
+  out = masa_eval_2d_grad_v(x,x,i);
+  out = masa_eval_2d_grad_w(x,x,i);
+  out = masa_eval_2d_grad_p(x,x,i);
+  out = masa_eval_2d_grad_rho(x,x,i);
 
   out = masa_eval_3d_source_u(x,x,x);
   out = masa_eval_3d_source_v(x,x,x);

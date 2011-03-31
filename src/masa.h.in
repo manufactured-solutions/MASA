@@ -977,23 +977,132 @@ extern "C" {
   /// \name Gradients of Analytical Solutions
   // --------------------------------
 
+  //
+  // u-component
+  //
+
   /**
-   * This subroutine returns the gradient of the analytical solution.
+   * This subroutine returns the gradient of the analytical solution
+   * for the u-component of velocity.
    * It should be called for solutions with a single dimension.
    */
-  extern double masa_eval_1d_grad(int direction,double x);
+  extern double masa_eval_1d_grad_u(double x);
 
   /**
-   * This subroutine returns the gradient of the analytical solution.
+   * This subroutine returns the gradient of the analytical solution
+   * for the u-component of velocity.
    * It should be called for solutions with two dimensions.
    */
-  extern double masa_eval_2d_grad(int direction,double x,double y);
+  extern double masa_eval_2d_grad_u(double x,double y,int direction);
 
   /**
-   * This subroutine returns the gradient of the analytical solution. 
+   * This subroutine returns the gradient of the analytical solution
+   * for the u-component of velocity.
    * It should be called for solutions with three dimensions.
    */
-  extern double masa_eval_3d_grad(int direction,double x,double y,double z);
+  extern double masa_eval_3d_grad_u(double x,double y,double z,int direction);
+
+  //
+  // v-component
+  //
+
+  /**
+   * This subroutine returns the gradient of the analytical solution
+   * for the v-component of velocity.
+   * It should be called for solutions with a single dimension.
+   */
+  extern double masa_eval_1d_grad_v(double x);
+
+  /**
+   * This subroutine returns the gradient of the analytical solution
+   * for the v-component of velocity.
+   * It should be called for solutions with two dimensions.
+   */
+  extern double masa_eval_2d_grad_v(double x,double y,int direction);
+
+  /**
+   * This subroutine returns the gradient of the analytical solution
+   * for the v-component of velocity.
+   * It should be called for solutions with three dimensions.
+   */
+  extern double masa_eval_3d_grad_v(double x,double y,double z,int direction);
+
+  //
+  // w-component
+  //
+
+  /**
+   * This subroutine returns the gradient of the analytical solution
+   * for the w-component of velocity.
+   * It should be called for solutions with a single dimension.
+   */
+  extern double masa_eval_1d_grad_w(double x);
+
+  /**
+   * This subroutine returns the gradient of the analytical solution
+   * for the w-component of velocity.
+   * It should be called for solutions with two dimensions.
+   */
+  extern double masa_eval_2d_grad_w(double x,double y,int direction);
+
+  /**
+   * This subroutine returns the gradient of the analytical solution
+   * for the w-component of velocity.
+   * It should be called for solutions with three dimensions.
+   */
+  extern double masa_eval_3d_grad_w(double x,double y,double z,int direction);
+
+
+  //
+  // pressure
+  //
+
+  /**
+   * This subroutine returns the gradient of the analytical solution
+   * for the pressure.
+   * It should be called for solutions with a single dimension.
+   */
+  extern double masa_eval_1d_grad_p(double x);
+
+  /**
+   * This subroutine returns the gradient of the analytical solution
+   * for the pressure.
+   * It should be called for solutions with two dimensions.
+   */
+  extern double masa_eval_2d_grad_p(double x,double y,int direction);
+
+  /**
+   * This subroutine returns the gradient of the analytical solution
+   * for the pressure.
+   * It should be called for solutions with three dimensions.
+   */
+  extern double masa_eval_3d_grad_p(double x,double y,double z,int direction);
+
+  //
+  // density (rho)
+  //
+
+  /**
+   * This subroutine returns the gradient of the analytical solution
+   * for the density (rho).
+   * It should be called for solutions with a single dimension.
+   */
+  extern double masa_eval_1d_grad_rho(double x);
+
+  /**
+   * This subroutine returns the gradient of the analytical solution
+   * for the density (rho).
+   * It should be called for solutions with two dimensions.
+   */
+  extern double masa_eval_2d_grad_rho(double x,double y,int direction);
+
+  /**
+   * This subroutine returns the gradient of the analytical solution
+   * for the density (rho).
+   * It should be called for solutions with three dimensions.
+   */
+  extern double masa_eval_3d_grad_rho(double x,double y,double z,int direction);
+
 
   // --------------------------------
   /// \name Utility functions

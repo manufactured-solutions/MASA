@@ -53,7 +53,6 @@ Functions which have an integer return value return "0" upon success.
 
 */
 
-
 extern "C" int masa_init(const char* specificname,const char* functionname)
 {
   
@@ -175,9 +174,9 @@ extern "C" double masa_eval_1d_exact_rho    (double x){return(masa_eval_exact_rh
 extern "C" double masa_eval_1d_exact_rho_N  (double x){return(masa_eval_exact_rho_N<double>(x));}
 extern "C" double masa_eval_1d_exact_rho_N2 (double x){return(masa_eval_exact_rho_N2<double>(x));}
 
-extern "C" double masa_eval_grad_1d_u    (double x){return(masa_eval_grad_u<double>  (x));}
-extern "C" double masa_eval_grad_1d_p    (double x){return(masa_eval_grad_p<double>  (x));}
-extern "C" double masa_eval_grad_1d_rho  (double x){return(masa_eval_grad_rho<double>(x));}
+extern "C" double masa_eval_1d_grad_u    (double x){return(masa_eval_grad_u<double>  (x));}
+extern "C" double masa_eval_1d_grad_p    (double x){return(masa_eval_grad_p<double>  (x));}
+extern "C" double masa_eval_1d_grad_rho  (double x){return(masa_eval_grad_rho<double>(x));}
 
 // --------------------------------
 // source, analytical and gradient term(s) -- 2D
@@ -199,11 +198,11 @@ extern "C" double masa_eval_2d_exact_v     (double x,double y){return(masa_eval_
 extern "C" double masa_eval_2d_exact_p     (double x,double y){return(masa_eval_exact_p<double>  (x,y));}
 extern "C" double masa_eval_2d_exact_rho   (double x,double y){return(masa_eval_exact_rho<double>(x,y));}
 
-extern "C" double masa_eval_grad_2d_u   (double x,double y,int i){return(masa_eval_grad_u<double>  (x,y,i));}
-extern "C" double masa_eval_grad_2d_v   (double x,double y,int i){return(masa_eval_grad_v<double>  (x,y,i));}
-extern "C" double masa_eval_grad_2d_w   (double x,double y,int i){return(masa_eval_grad_w<double>  (x,y,i));}
-extern "C" double masa_eval_grad_2d_p   (double x,double y,int i){return(masa_eval_grad_p<double>  (x,y,i));}
-extern "C" double masa_eval_grad_2d_rho (double x,double y,int i){return(masa_eval_grad_rho<double>(x,y,i));}
+extern "C" double masa_eval_2d_grad_u   (double x,double y,int i){return(masa_eval_grad_u<double>  (x,y,i));}
+extern "C" double masa_eval_2d_grad_v   (double x,double y,int i){return(masa_eval_grad_v<double>  (x,y,i));}
+extern "C" double masa_eval_2d_grad_w   (double x,double y,int i){return(masa_eval_grad_w<double>  (x,y,i));}
+extern "C" double masa_eval_2d_grad_p   (double x,double y,int i){return(masa_eval_grad_p<double>  (x,y,i));}
+extern "C" double masa_eval_2d_grad_rho (double x,double y,int i){return(masa_eval_grad_rho<double>(x,y,i));}
 
 // --------------------------------
 // source, analytical and gradient term(s) -- 3D
@@ -227,8 +226,8 @@ extern "C" double masa_eval_3d_exact_w     (double x,double y,double z){return(m
 extern "C" double masa_eval_3d_exact_p     (double x,double y,double z){return(masa_eval_exact_p<double>  (x,y,z));}
 extern "C" double masa_eval_3d_exact_rho   (double x,double y,double z){return(masa_eval_exact_rho<double>(x,y,z));}
 
-extern "C" double masa_eval_grad_3d_u   (double x,double y,double z,int i){return(masa_eval_grad_u  <double>(x,y,z,i));}
-extern "C" double masa_eval_grad_3d_v   (double x,double y,double z,int i){return(masa_eval_grad_v  <double>(x,y,z,i));}
-extern "C" double masa_eval_grad_3d_w   (double x,double y,double z,int i){return(masa_eval_grad_w  <double>(x,y,z,i));}
-extern "C" double masa_eval_grad_3d_p   (double x,double y,double z,int i){return(masa_eval_grad_p  <double>(x,y,z,i));}
-extern "C" double masa_eval_grad_3d_rho (double x,double y,double z,int i){return(masa_eval_grad_rho<double>(x,y,z,i));}
+extern "C" double masa_eval_3d_grad_u   (double x,double y,double z,int i){return(masa_eval_grad_u  <double>(x,y,z,i));}
+extern "C" double masa_eval_3d_grad_v   (double x,double y,double z,int i){return(masa_eval_grad_v  <double>(x,y,z,i));}
+extern "C" double masa_eval_3d_grad_w   (double x,double y,double z,int i){return(masa_eval_grad_w  <double>(x,y,z,i));}
+extern "C" double masa_eval_3d_grad_p   (double x,double y,double z,int i){return(masa_eval_grad_p  <double>(x,y,z,i));}
+extern "C" double masa_eval_3d_grad_rho (double x,double y,double z,int i){return(masa_eval_grad_rho<double>(x,y,z,i));}

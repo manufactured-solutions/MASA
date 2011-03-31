@@ -219,25 +219,25 @@ program main
            exact_rho = masa_eval_3d_exact_rho    (x,y,z)
 
            ! check gradient bindings here
-           u_gradx = masa_eval_grad_3d_u(x,y,z,1)
-           u_grady = masa_eval_grad_3d_u(x,y,z,2)
-           u_gradz = masa_eval_grad_3d_u(x,y,z,3)
+           u_gradx = masa_eval_3d_grad_u(x,y,z,1)
+           u_grady = masa_eval_3d_grad_u(x,y,z,2)
+           u_gradz = masa_eval_3d_grad_u(x,y,z,3)
 
-           v_gradx = masa_eval_grad_3d_v(x,y,z,1)
-           v_grady = masa_eval_grad_3d_v(x,y,z,2)
-           v_gradz = masa_eval_grad_3d_v(x,y,z,3)
+           v_gradx = masa_eval_3d_grad_v(x,y,z,1)
+           v_grady = masa_eval_3d_grad_v(x,y,z,2)
+           v_gradz = masa_eval_3d_grad_v(x,y,z,3)
 
-           w_gradx = masa_eval_grad_3d_w(x,y,z,1)
-           w_grady = masa_eval_grad_3d_w(x,y,z,2)
-           w_gradz = masa_eval_grad_3d_w(x,y,z,3)
+           w_gradx = masa_eval_3d_grad_w(x,y,z,1)
+           w_grady = masa_eval_3d_grad_w(x,y,z,2)
+           w_gradz = masa_eval_3d_grad_w(x,y,z,3)
  
-           p_gradx = masa_eval_grad_3d_p(x,y,z,1)
-           p_grady = masa_eval_grad_3d_p(x,y,z,2)
-           p_gradz = masa_eval_grad_3d_p(x,y,z,3)
+           p_gradx = masa_eval_3d_grad_p(x,y,z,1)
+           p_grady = masa_eval_3d_grad_p(x,y,z,2)
+           p_gradz = masa_eval_3d_grad_p(x,y,z,3)
  
-           rho_gradx = masa_eval_grad_3d_rho(x,y,z,1)
-           rho_grady = masa_eval_grad_3d_rho(x,y,z,2)
-           rho_gradz = masa_eval_grad_3d_rho(x,y,z,3) 
+           rho_gradx = masa_eval_3d_grad_rho(x,y,z,1)
+           rho_grady = masa_eval_3d_grad_rho(x,y,z,2)
+           rho_gradz = masa_eval_3d_grad_rho(x,y,z,3) 
 
            ! check against maple
            ufield2 = eval_3d_source_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,&
