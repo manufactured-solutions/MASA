@@ -30,11 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <math.h>
-#include <masa.h>
-#include <iostream>
-#include <stdlib.h>
-#include <limits>
+#include <tests.h>
 
 using namespace std;
 using namespace MASA;

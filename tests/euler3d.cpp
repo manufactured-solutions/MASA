@@ -605,122 +605,17 @@ int run_regression()
 	  exact_p3   = fabs(exact_p-exact_p2)/fabs(exact_p2);
 #endif	  
 
-	  nancheck(ufield3);
-	  nancheck(vfield3);
-	  nancheck(wfield3);
-	  nancheck(efield3);
-	  nancheck(rho3);
+	  threshcheck(ufield3,threshold);
+	  threshcheck(vfield3,threshold);
+	  threshcheck(wfield3,threshold);
+	  threshcheck(efield3,threshold);
+	  threshcheck(rho3,threshold);
 	  
-	  nancheck(exact_u3);
-	  nancheck(exact_v3);
-	  nancheck(exact_w3);
-	  nancheck(exact_rho3);
-	  nancheck(exact_p3);
-
-	  if(ufield3 > threshold)
-	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
-	      cout << "U Field Source Term\n";
-	      cout.precision(16);
-	      cout << "Exceeded Threshold by: " << ufield3 << endl;
-	      cout << "Source term is:                   " << ufield2 << endl;
-	      cout << "MASA term is:                     " << ufield << endl;
-	      exit(1);
-	    }
-	  
-	  if(exact_u3 > threshold)
-	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
-	      cout << "U Field Analytical Term\n";
-	      cout.precision(16);
-	      cout << "Exceeded Threshold by: " << exact_u << endl;
-	      cout << x << " " << y << " " << z << endl;
-	      exit(1);
-	    }
-
-	  if(vfield3 > threshold)
-	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
-	      cout << "V Field Source Term\n";
-	      cout.precision(16);
-	      cout << "Exceeded Threshold by: " << vfield3 << endl;
-	      cout << "Source term is:                   " << vfield2 << endl;
-	      cout << "MASA term is:                     " << vfield << endl;
-	      cout << x << " " << y << " " << z << endl;
-	      exit(1);
-	    }
-
-	  if(exact_v3 > threshold)
-	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
-	      cout << "V Field Analytical Term\n";
-	      cout.precision(16);
-	      cout << "Exceeded Threshold by: " << exact_v << endl;
-	      cout << x << " " << y << " " << z << endl;
-	      exit(1);
-	    }
-
-	  if(wfield3 > threshold)
-	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
-	      cout << "W Field Source Term\n";
-	      cout.precision(16);
-	      cout << "Exceeded Threshold by: " << wfield << endl;
-	      cout << x << " " << y << " " << z << endl;
-	      exit(1);
-	    }
-
-	  if(exact_w3 > threshold)
-	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
-	      cout << "W Field Analytical Term\n";
-	      cout.precision(16);
-	      cout << "Exceeded Threshold by: " << exact_w << endl;
-	      cout << x << " " << y << " " << z << endl;
-	      exit(1);
-	    }
-
-	  if(efield3 > threshold)
-	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
-	      cout << "Energy Source Term\n";
-	      cout.precision(16);
-	      cout << "Exceeded Threshold by: " << efield3 << endl;
-	      cout << "Source term is:                   " << efield2 << endl;
-	      cout << "MASA term is:                     " << efield << endl;
-	      cout << x << " " << y << endl;
-	      exit(1);
-	    }
-
-	  if(exact_p3 > threshold)
-	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
-	      cout << "P Field Analytical Term\n";
-	      cout.precision(16);
-	      cout << "Exceeded Threshold by: " << exact_p << endl;
-	      cout << x << " " << y << " " << z << endl;
-	      exit(1);
-	    }
-
-	  if(rho3 > threshold)
-	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
-	      cout << "RHO Source Term\n";
-	      cout.precision(16);
-	      cout << "Exceeded Threshold by: " << rho << endl;
-	      cout << x << " " << y << " " << z << endl;
-	      exit(1);
-	    }
-
-	  if(exact_rho3 > threshold)
-	    {
-	      cout << "\nMASA REGRESSION TEST FAILED: Euler-3d\n";
-	      cout << "RHO Analytical Term\n";
-	      cout.precision(16);
-	      cout << "Exceeded Threshold by: " << exact_rho << endl;
-	      cout << x << " " << y << " " << z << endl;
-	      exit(1);
-	    }
+	  threshcheck(exact_u3,threshold);
+	  threshcheck(exact_v3,threshold);
+	  threshcheck(exact_w3,threshold);
+	  threshcheck(exact_rho3,threshold);
+	  threshcheck(exact_p3,threshold);
 
 	  // adding a new error check: ensure physical results are coming out!
 	  if(0 > exact_rho)

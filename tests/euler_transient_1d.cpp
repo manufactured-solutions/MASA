@@ -30,35 +30,10 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h>
-#include <masa.h>
-#include <math.h>
-#include <limits>
-#include <iostream>
-#include <stdlib.h>
+#include <tests.h>
 
 using namespace MASA;
 using namespace std;
-
-template<typename Scalar>
-Scalar nancheck(Scalar x,Scalar thresh)
-{
-  if(isnan(x))
-    {
-      cout << "MASA REGRESSION FAILURE:: nan found!\n";
-      exit(1);
-    }
-  
-  if(x > thresh)
-    {
-      cout << "\nMASA REGRESSION TEST FAILED: Transient Euler-1d\n";
-      cout << "Exceeded Threshold by: " << x << endl;
-      exit(1);
-    }
-
-  return 0;  
-
-}
 
 /* ------------------------------------------------
  *
@@ -393,13 +368,12 @@ int run_regression()
 
 #endif
 
-	nancheck(ufield3,threshold);
-	nancheck(efield3,threshold);
-	nancheck(rho3,threshold);
-	
-	nancheck(exact_u3,threshold);
-	nancheck(exact_rho3,threshold);
-	nancheck(exact_p3,threshold);
+	threshcheck(ufield3,threshold);
+	threshcheck(efield3,threshold);
+	threshcheck(rho3,threshold);
+	threshcheck(exact_u3,threshold);
+	threshcheck(exact_rho3,threshold);
+	threshcheck(exact_p3,threshold);
 
       }// done with time and space loop
   

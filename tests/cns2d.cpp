@@ -389,87 +389,15 @@ int run_regression()
 
 #endif	
 
-	nancheck(ufield3);
-	nancheck(vfield3);
-	nancheck(efield3);
-	nancheck(rho3);
+	threshcheck(ufield3,threshold);
+	threshcheck(vfield3,threshold);
+	threshcheck(efield3,threshold);
+	threshcheck(rho3,threshold);
 	
-	nancheck(exact_u3);
-	nancheck(exact_v3);
-	nancheck(exact_rho3);
-	nancheck(exact_p3);
-
-
-	if(ufield3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
-	    cout << "U Field Source Term\n";
-	    cout << "Exceeded Threshold by: " << ufield << endl;
-	    exit(1);
-	  }
-
-	if(exact_u3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
-	    cout << "U Field Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << exact_u3 << endl;
-	    exit(1);
-	  }
-
-	if(vfield3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
-	    cout << "V Field Source Term\n";
-	    cout << "Exceeded Threshold of: " << threshold <<  " by: " << vfield3 << endl;
-	    exit(1);
-	  }
-
-	if(exact_v3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
-	    cout << "V Field Analytical Term\n";
-	    cout << "Exceeded Threshold of: " << threshold <<  " by: " << exact_v3 << endl;
-	    exit(1);
-	  }
-
-	if(efield3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
-	    cout << "Energy Source Term\n";
-	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << efield3 << endl;
-	    cout << "Source term is:                   " << efield2 << endl;
-	    cout << "MASA term is:                     " << efield << endl;
-	    cout << x << " " << y << endl;
-	    exit(1);
-	  }
-
-	if(exact_p3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
-	    cout << "P Field Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << exact_p3 << endl;
-	    cout << x << " " << y << endl;
-	    exit(1);
-	  }
-
-	if(rho3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
-	    cout << "RHO Source Term\n";
-	    cout << "Exceeded Threshold by: " << rho3 << endl;
-	    cout << x << " " << y <<  endl;
-	    exit(1);
-	  }
-
-	if(exact_rho3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Navier-Stokes 2d\n";
-	    cout << "RHO Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << exact_rho3 << endl;
-	    cout << x << " " << y << endl;
-	    exit(1);
-	  }
+	threshcheck(exact_u3,threshold);
+	threshcheck(exact_v3,threshold);
+	threshcheck(exact_rho3,threshold);
+	threshcheck(exact_p3,threshold);
 
       } // done iterating
 

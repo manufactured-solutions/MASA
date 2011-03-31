@@ -260,71 +260,16 @@ int run_regression()
 
 #endif
 
-      nancheck(ufield3);
-      nancheck(efield3);
-      nancheck(rho3);
+      threshcheck(ufield3,threshold);
+      threshcheck(efield3,threshold);
+      threshcheck(rho3,threshold);
       
-      nancheck(exact_u3);
-      nancheck(exact_rho3);
-      nancheck(exact_p3);
+      threshcheck(exact_u3,threshold);
+      threshcheck(exact_rho3,threshold);
+      threshcheck(exact_p3,threshold);
       
-      if(ufield3 > threshold)
-	{
-	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
-	  cout << "U Field Source Term\n";
-	  cout << "Exceeded Threshold by: " << ufield << endl;
-	  cout << x << " " << endl;
-	  exit(1);
-	}
-
-      if(exact_u3 > threshold)
-	{
-	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
-	  cout << "U Field Analytical Term\n";
-	  cout << "Exceeded Threshold by: " << exact_u << endl;
-	  cout << x << " " << endl;
-	  exit(1);
-	}
-      
-      if(efield3 > threshold)
-	{
-	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
-	  cout << "Threshold Exceeded: " << efield3 << endl;
-	  cout << "MASA:               " <<  efield << endl;
-	  cout << "Maple:              " <<  efield2 << endl;
-	  cout << x << endl;
-	  exit(1);
-	}
-
-      if(exact_p3 > threshold)
-	{
-	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
-	  cout << "P Field Analytical Term\n";
-	  cout << "Exceeded Threshold by: " << exact_p << endl;
-	  cout << x << endl;
-	  exit(1);
-	}
-      
-      if(rho3 > threshold)
-	{
-	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
-	  cout << "RHO Source Term\n";
-	  cout << "Exceeded Threshold by: " << rho << endl;
-	  cout << x << endl;
-	  exit(1);
-	}
-      
-      if(exact_rho3 > threshold)
-	{
-	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
-	  cout << "RHO Analytical Term\n";
-	  cout << "Exceeded Threshold by: " << exact_rho << endl;
-	  cout << x << endl;
-	  exit(1);
-	}
-
       // adding a new error check: ensure physical results are coming out!
-	if(0 > rho)
+      if(0 > rho)
 	{
 	  cout << "\nMASA REGRESSION TEST FAILED: Euler-1d\n";
    	  cout << "Initial Variables are returning non-physical results!\n";

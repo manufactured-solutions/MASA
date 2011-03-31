@@ -409,129 +409,16 @@ int run_regression()
 
 #endif
 
-	nancheck(ufield3);
-	nancheck(vfield3);
-	nancheck(efield3);
-	nancheck(rho3);
+	threshcheck(ufield3,threshold);
+	threshcheck(vfield3,threshold);
+	threshcheck(efield3,threshold);
+	threshcheck(rho3,threshold);
 	
-	nancheck(exact_u3);
-	nancheck(exact_v3);
-	nancheck(exact_rho3);
-	nancheck(exact_p3);
-	
-	if(ufield3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
-	    cout << "U Field Source Term\n";
-	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << ufield3 << endl;
-	    cout << "Source term is:                   " << ufield2 << endl;
-	    cout << "MASA term is:                     " << ufield << endl;
-	    cout << x << " " << y << endl;
-	    exit(1);
-	  }
+	threshcheck(exact_u3,threshold);
+	threshcheck(exact_v3,threshold);
+	threshcheck(exact_rho3,threshold);
+	threshcheck(exact_p3,threshold);
 
-	if(exact_u3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
-	    cout << "U Field Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << exact_u << endl;
-	    cout.precision(16);
-	    cout << x << " " << y << endl;
-	    exit(1);
-	  }
-
-	if(vfield3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
-	    cout << "V Field Source Term\n";
-	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << vfield3 << endl;
-	    cout << "Source term is:                   " << vfield2 << endl;
-	    cout << "MASA term is:                     " << vfield << endl;
-	    cout << x << " " << y << endl;
-	    exit(1);
-	  }
-
-	if(exact_v3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
-	    cout << "V Field Analytical Term\n";
-	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << exact_v3 << endl;
-	    cout << "Source term is:        " << exact_v2 << endl;
-	    cout << "MASA term is:          " << exact_v << endl;
-	    cout << x << " " << y << endl;
-	    exit(1);
-	  }
-
-	if(efield3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
-	    cout << "Energy Source Term\n";
-	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << efield3 << endl;
-	    cout << "Threshold was: " << threshold << endl;
-	    cout << "Source term is:        " << efield2 << endl;
-	    cout << "MASA term is:          " << efield << endl;
-	    cout << x << " " << y << endl;
-	    exit(1);
-	  }
-
-	if(exact_p3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
-	    cout << "P Field Analytical Term\n";
-	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << exact_p << endl;
-	    cout << x << " " << y << endl;
-	    exit(1);
-	  }
-
-	if(rho3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
-	    cout.precision(16);
-	    cout << "RHO Source Term\n";
-	    cout << "Exceeded Threshold by: " << rho << endl;
-	    cout << x << " " << y << endl;
-	    exit(1);
-	  }
-
-	if(exact_rho3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
-	    cout.precision(16);
-	    cout << "RHO Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << exact_rho << endl;
-	    cout << x << " " << y << endl;
-	    exit(1);
-	  }
-
-	// adding a new error check: ensure physical results are coming out!
-	/*
-	  // we dont care about source terms!
-	if(0 > rho)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
-	    cout << "Initial Variables are returning non-physical results!\n";
-	    cout << "RHO\n";
-	    cout << rho << endl;
-	    cout << x << " " << y << endl;
-	    exit(1);
-	  }
-
-	if(0 > efield)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";
-	    cout << "Initial Variables are returning non-physical results!\n";
-	    cout << "Energy is negative!\n";
-	    cout << efield << endl;
-	    cout << x << " " << y << endl;
-	    exit(1);
-	  }
-
-	*/
 	if(0 > exact_rho)
 	  {
 	    cout << "\nMASA REGRESSION TEST FAILED: Euler-2d\n";

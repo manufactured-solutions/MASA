@@ -38,25 +38,19 @@
 #include <limits>
 
 template<typename Scalar>
-Scalar nancheck(Scalar x)
+Scalar threshcheck(Scalar x, Scalar thresh)
 {
   if(isnan(x))
     {
       std::cout << "MASA REGRESSION FAILURE:: nan found!\n";
       exit(1);
     }
-  return 1;
-}
-
-template<typename Scalar>
-Scalar threshcheck(Scalar x, Scalar thresh)
-{
   
   if(x > thresh)
     {
-      std::cout << "\nMASA REGRESSION TEST FAILED: Euler-1d + chemistry\n";
+      std::cout << "\nMASA REGRESSION TEST FAILED!\n";
       std::cout << "Exceeded Threshold by: " << x << endl;
       exit(1);
     }
-  return 1;  
+  return 0;  
 }
