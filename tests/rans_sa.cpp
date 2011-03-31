@@ -30,10 +30,6 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-//
-// OBVIOUSLY NOT FINISHED!!
-//
-
 #include <config.h>
 #include <masa.h>
 #include <cmath>
@@ -90,9 +86,9 @@ int run_regression()
 int main()
 {
   int err=0;
-
+  
   err += run_regression<double>();
   err += run_regression<long double>();
-
+  
   return err;
 }

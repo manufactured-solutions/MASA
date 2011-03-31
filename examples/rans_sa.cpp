@@ -33,37 +33,14 @@
 //--------------------------------------------------------------------------
 //
 
-
-// still under contruction, so will need to fill out more as time goes on
-#include <masa.h>
-#include <iostream>
-#include <fstream>
-#include <stdlib.h>
+#include <examples.h>
 
 using namespace MASA;
 
 typedef double Scalar;
 
-Scalar MASA_VAR_DEFAULT = -12345.67;
-Scalar uninit = -1.33;
-
-void test(Scalar input)
-{
-  if(input == MASA_VAR_DEFAULT)
-    {
-      exit(1);
-    }
-
-  if(input == uninit)
-    {
-      exit(1);
-    }
-
-}
-
 int main()
 {
-
 
   Scalar ufield;
   Scalar vfield;

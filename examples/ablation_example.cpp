@@ -32,37 +32,12 @@
 //--------------------------------------------------------------------------
 //
 
-#include <math.h>
-#include <masa.h>
-#include <iostream>
-#include <fstream>
-#include <stdlib.h>
-#include <limits>
+#include <examples.h>
 
 using namespace MASA;
 using namespace std;
 
 typedef double Scalar;
-
-Scalar MASA_VAR_DEFAULT = -12345.67;
-Scalar uninit = -1.33;
-Scalar thresh = 5 * numeric_limits<Scalar>::epsilon();
-
-void test(Scalar input)
-{
-  if(input - MASA_VAR_DEFAULT > thresh)
-    {
-      cout << "threshold exceeded!\n";
-      exit(1);
-    }
-  
-  if(input - uninit > thresh)
-    {
-      cout<< "threshold exceeded!\n";
-      exit(1);
-    }
-
-}
 
 template<typename Scalar>
 Scalar funct(Scalar T)
@@ -191,6 +166,7 @@ int main()
       test(ufield);
       test(efield);
       test(cfield);
+      test(c3field);
       test(rho_c3field);
       test(rho_cfield);
       test(rho_c3field);
