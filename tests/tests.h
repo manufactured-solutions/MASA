@@ -377,6 +377,61 @@ Scalar anQ_v (Scalar x,Scalar y,Scalar v_0,Scalar v_x,Scalar v_y,Scalar a_vx,Sca
 template<typename Scalar>
 Scalar anQ_rho (Scalar x,Scalar y,Scalar rho_0,Scalar rho_x,Scalar rho_y,Scalar a_rhox,Scalar a_rhoy,Scalar L);
 
+//euler 1d
+template<typename Scalar>
+Scalar anQ_u (Scalar x,Scalar u_0,Scalar u_x,Scalar a_ux,Scalar L);
+
+template<typename Scalar>
+Scalar anQ_p (Scalar x,Scalar p_0,Scalar p_x,Scalar a_px,Scalar L);
+
+template<typename Scalar>
+Scalar anQ_rho (Scalar x,Scalar rho_0,Scalar rho_x,Scalar a_rhox,Scalar L);
+
+template<typename Scalar>
+Scalar SourceQ_e ( // 12
+  Scalar x,
+  Scalar u_0,
+  Scalar u_x,
+  Scalar rho_0,
+  Scalar rho_x,
+  Scalar p_0,
+  Scalar p_x,
+  Scalar a_px,
+  Scalar a_rhox,
+  Scalar a_ux,
+  Scalar Gamma,
+  Scalar mu,
+  Scalar L);
+
+template<typename Scalar>
+Scalar SourceQ_u ( // should be 10
+  Scalar x,
+  Scalar u_0,
+  Scalar u_x,
+  Scalar rho_0,
+  Scalar rho_x,
+  Scalar p_x,
+  Scalar a_px,
+  Scalar a_rhox,
+  Scalar a_ux,
+  Scalar L);
+
+template<typename Scalar>
+Scalar SourceQ_rho ( // 10
+  Scalar x,
+  Scalar u_0,
+  Scalar u_x,
+  Scalar rho_0,
+  Scalar rho_x,
+  Scalar p_0,
+  Scalar p_x,
+  Scalar a_px,
+  Scalar a_rhox,
+  Scalar a_ux,
+  Scalar L);
+
+
+
 
 
 

@@ -96,7 +96,6 @@ Scalar SourceQ_u ( // should be 10
   Scalar u_x,
   Scalar rho_0,
   Scalar rho_x,
-  Scalar p_0,
   Scalar p_x,
   Scalar a_px,
   Scalar a_rhox,
@@ -123,7 +122,6 @@ Scalar SourceQ_rho ( // 10
   Scalar u_x,
   Scalar rho_0,
   Scalar rho_x,
-  Scalar p_0,
   Scalar p_x,
   Scalar a_px,
   Scalar a_rhox,
@@ -228,8 +226,8 @@ int run_regression()
       gradrho = masa_eval_grad_rho(x);
 
       // get fundamental source term solution
-      ufield2   = SourceQ_u  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
-      rho2      = SourceQ_rho(x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,L);
+      ufield2   = SourceQ_u  (x,u_0,u_x,rho_0,rho_x,p_x,a_px,a_rhox,a_ux,L);
+      rho2      = SourceQ_rho(x,u_0,u_x,rho_0,rho_x,p_x,a_px,a_rhox,a_ux,L);
       efield2   = SourceQ_e  (x,u_0,u_x,rho_0,rho_x,p_0,p_x,a_px,a_rhox,a_ux,Gamma,mu,L);
   
       exact_u2   = anQ_u   (x,u_0,u_x,a_ux,L);
