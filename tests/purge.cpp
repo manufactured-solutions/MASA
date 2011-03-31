@@ -46,11 +46,13 @@ int main()
   // start problem
   masa_init<Scalar>("masa-test","euler_1d");
   
-  // values should be set by default: checking
+  // values should be set to something other than default: checking
   u_0 = masa_get_param<Scalar>("u_0");
-  if((u_0 -MASA_DEFAULT) > threshold)
+  if(fabs((u_0 - MASA_DEFAULT)/MASA_DEFAULT) < threshold)
     {
       cout << "\nMASA ERROR:: Variables not being auto initalized!\n";
+      cout << " value is : " << fabs((u_0 - MASA_DEFAULT)/MASA_DEFAULT) << endl;
+      cout << " value is : " << u_0 << endl;
       return 1;
     }
 
