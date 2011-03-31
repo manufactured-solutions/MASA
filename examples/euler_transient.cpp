@@ -25,38 +25,17 @@
 // $Author: nick $
 // $Id: euler_example.cpp 17232 2011-02-07 23:35:22Z nick $
 //
-// euler_example.cpp:
-// this is an example of the API used for calling the 2D euler equation
+// euler_transient.cpp:
+// this is an example of the API used for calling the 1d transient euler equation
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 //
 
-#include <masa.h>
-#include <iostream>
-#include <fstream>
-#include <stdlib.h>
+#include <examples.h>
 
 using namespace MASA;
-
 typedef double Scalar;
-
-Scalar MASA_VAR_DEFAULT = -12345.67;
-Scalar uninit = -1.33;
-
-void test(Scalar input)
-{
-  if(input == MASA_VAR_DEFAULT)
-    {
-      exit(1);
-    }
-
-  if(input == uninit)
-    {
-      exit(1);
-    }
-
-}
 
 int main()
 {
