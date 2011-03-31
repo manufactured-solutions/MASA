@@ -30,10 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h>
-#include <masa.h>
-#include <iostream>
-#include <string>
+#include <tests.h>
 
 using namespace MASA;
 using namespace std;
@@ -44,13 +41,14 @@ Scalar MASA_DEFAULT = -12345.67;
 int main()
 {
   Scalar u_0;
+  const Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
 
   // start problem
   masa_init<Scalar>("masa-test","euler_1d");
   
   // values should be set by default: checking
   u_0 = masa_get_param<Scalar>("u_0");
-  if(u_0 == MASA_DEFAULT)
+  if((u_0 -MASA_DEFAULT) > threshold)
     {
       cout << "\nMASA ERROR:: Variables not being auto initalized!\n";
       return 1;
@@ -61,7 +59,7 @@ int main()
 
   // values should be set to default: checking
   u_0 = masa_get_param<Scalar>("u_0");
-  if(u_0 != MASA_DEFAULT)
+  if((u_0 - MASA_DEFAULT) > threshold)
     {
       cout << "\nMASA ERROR:: Variables not being purged properly!\n";
       return 1;
@@ -81,7 +79,7 @@ int main()
     }
   catch(int err) // return one on fatal error
     {
-      if(err != 1)
+      if((err - 1) > threshold)
 	{
 	  cout << "regression test failed: masa sanity_check error condition not triggered!\n";
 	  return 1; // fail
