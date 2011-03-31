@@ -41,6 +41,10 @@
 template<typename Scalar>
 Scalar threshcheck(Scalar x, Scalar thresh)
 {
+  Scalar MASA_VAR_DEFAULT = -12345.67;
+  Scalar uninit = -1.33;
+  //Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
+
   if(isnan(x))
     {
       std::cout << "MASA REGRESSION FAILURE:: nan found!\n";
@@ -68,6 +72,10 @@ Scalar tester(Scalar a)
 template<typename Scalar>
 Scalar test_grad(Scalar derr)
 {
+  Scalar MASA_VAR_DEFAULT = -12345.67;
+  Scalar uninit = -1.33;
+  Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
+
   if(fabs(derr+1) > thresh)
     {
       std::cout << "MASA :: gradient error condition failed!\n";
