@@ -523,7 +523,6 @@ Scalar SourceQ_e (
   Scalar a_vx,
   Scalar a_vy,
   Scalar Gamma,
-  Scalar mu,
   Scalar L);
 
 template<typename Scalar>

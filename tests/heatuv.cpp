@@ -30,11 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <math.h>
-#include <masa.h>
-#include <limits>
-#include <iostream>
-#include <stdlib.h>
+#include <tests.h>
 
 using namespace std;
 using namespace MASA;
@@ -43,6 +39,7 @@ typedef double Scalar;
 
 const Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
 
+template<typename Scalar>
 Scalar SourceQ_t_1d (
   Scalar x,
   Scalar t,
@@ -64,6 +61,8 @@ Scalar SourceQ_t_1d (
   return Q_T;
 }
 
+
+template<typename Scalar>
 Scalar SourceQ_t_2d (
   Scalar x,
   Scalar y,
@@ -87,6 +86,7 @@ Scalar SourceQ_t_2d (
   return Q_T;
 }
 
+template<typename Scalar>
 Scalar SourceQ_t_3d (
   Scalar x,
   Scalar y,
