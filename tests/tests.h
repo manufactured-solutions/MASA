@@ -709,4 +709,62 @@ Scalar SourceQ_rho (
   Scalar a_ux,
   Scalar L);
 
+//euler transient
+
+template<typename Scalar>
+Scalar SourceQ_e (
+  Scalar x,
+  Scalar t,
+  Scalar u_0,
+  Scalar u_x,
+  Scalar u_t,
+  Scalar rho_0,
+  Scalar rho_x,
+  Scalar rho_t,
+  Scalar p_0,
+  Scalar p_x,
+  Scalar p_t,
+  Scalar a_px,
+  Scalar a_pt,
+  Scalar a_rhox,
+  Scalar a_rhot,
+  Scalar a_ux,
+  Scalar a_ut,
+  Scalar L,
+  Scalar Gamma);
+
+template<typename Scalar>
+Scalar SourceQ_u (
+  Scalar x,
+  Scalar t,
+  Scalar u_0,
+  Scalar u_x,
+  Scalar u_t,
+  Scalar rho_0,
+  Scalar rho_x,
+  Scalar rho_t,
+  Scalar p_x,
+  Scalar a_px,
+  Scalar a_rhox,
+  Scalar a_rhot,
+  Scalar a_ux,
+  Scalar a_ut,
+  Scalar L);
+
+template<typename Scalar>
+Scalar SourceQ_rho (
+  Scalar x,
+  Scalar t,
+  Scalar u_0,
+  Scalar u_x,
+  Scalar u_t,
+  Scalar rho_0,
+  Scalar rho_x,
+  Scalar rho_t,
+  Scalar a_rhox,
+  Scalar a_rhot,
+  Scalar a_ux,
+  Scalar a_ut,
+  Scalar L);
+
 #endif // __cplusplus
