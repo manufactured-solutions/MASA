@@ -35,16 +35,6 @@
 using namespace MASA;
 using namespace std;
 
-template<typename Scalar>
-Scalar temp_function(Scalar T)
-{
-  // hackish functional here
-  // This is an eyeballed fit (focusing on the 5000K-6000K range) 
-  // for the equilibrium constant for N2->N+N dissociation
-  Scalar K = exp(4+(T-6000)/500);
-  return K;
-}
-
 template <typename Scalar>
 Scalar SourceQ_rho_u(Scalar x, 
 		     Scalar R_N, 
