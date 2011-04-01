@@ -339,16 +339,24 @@ int run_regression()
 	
 	// eval gradient terms
 	gradx = masa_eval_grad_u<Scalar>(x,y,1);
+	nancheck(gradx);
 	grady = masa_eval_grad_u<Scalar>(x,y,2);		
+	nancheck(grady);
 
 	gradx = masa_eval_grad_v<Scalar>(x,y,1);
+	nancheck(gradx);
 	grady = masa_eval_grad_v<Scalar>(x,y,2);		
+	nancheck(grady);
 
 	gradx = masa_eval_grad_p<Scalar>(x,y,1);
+	nancheck(gradx);
 	grady = masa_eval_grad_p<Scalar>(x,y,2);		
+	nancheck(grady);
   
 	gradx = masa_eval_grad_rho<Scalar>(x,y,1);
+	nancheck(gradx);
 	grady = masa_eval_grad_rho<Scalar>(x,y,2);		
+	nancheck(grady);
 
 	// check against maple
 	ufield2 = SourceQ_u   (x,y,u_0,u_x,u_y,v_0,v_x,v_y,rho_0,rho_x,rho_y,p_0,p_x,p_y,a_px,a_py,a_rhox,a_rhoy,a_ux,a_uy,a_vx,a_vy,mu,L,R,k);
