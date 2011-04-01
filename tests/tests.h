@@ -187,7 +187,6 @@ Scalar test_grad(Scalar derr)
 
 template<typename Scalar> int run_regression();
 
-
 // heat sv
 template<typename Scalar>
 Scalar SourceQ_t_1d(
@@ -709,11 +708,5 @@ Scalar SourceQ_rho (
   Scalar a_rhox,
   Scalar a_ux,
   Scalar L);
-
-
-
-
-
-
 
 #endif // __cplusplus

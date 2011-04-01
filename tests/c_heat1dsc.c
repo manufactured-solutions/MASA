@@ -30,11 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h>
-#include <masa.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <tests.h>
 
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
 

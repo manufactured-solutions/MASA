@@ -129,15 +129,12 @@ Scalar SourceQ_rho_e(Scalar x,
 template <typename Scalar>
 Scalar SourceQ_rho_N(Scalar x,
 		     Scalar M_N,
-		     Scalar h0_N,
-		     Scalar h0_N2,
 		     Scalar Cf1_N,
 		     Scalar Cf1_N2,
 		     Scalar etaf1_N,
 		     Scalar etaf1_N2,
 		     Scalar Ea_N,
 		     Scalar Ea_N2,
-		     //Scalar (*in_func)(),
 		     Scalar R_N,
 		     Scalar R_N2,
 		     Scalar theta_v_N2,
@@ -185,8 +182,6 @@ Scalar SourceQ_rho_N(Scalar x,
 template <typename Scalar>
 Scalar SourceQ_rho_N2(Scalar x,
 		      Scalar M_N,
-		      Scalar h0_N,
-		      Scalar h0_N2,
 		      Scalar Cf1_N,
 		      Scalar Cf1_N2,
 		      Scalar etaf1_N,
@@ -419,7 +414,7 @@ int run_regression()
 				  rho_N2_x,a_rho_N2_x,L,u_0,u_x,a_ux,
 				  T_0,T_x,a_Tx);
 
-      N2        = SourceQ_rho_N  (x,M_N,h0_N,h0_N2,Cf1_N,Cf1_N2,
+      N2        = SourceQ_rho_N  (x,M_N,Cf1_N,Cf1_N2,
 				  etaf1_N,etaf1_N2,Ea_N,Ea_N2,
 				  R_N,R_N2,theta_v_N2,
 				  rho_N_0,rho_N_x,a_rho_N_x,rho_N2_0,
@@ -427,7 +422,7 @@ int run_regression()
 				  T_0,T_x,a_Tx,R);
 
 
-      Ntwo2     = SourceQ_rho_N2 (x,M_N,h0_N,h0_N2,Cf1_N,Cf1_N2,etaf1_N,etaf1_N2,
+      Ntwo2     = SourceQ_rho_N2 (x,M_N,Cf1_N,Cf1_N2,etaf1_N,etaf1_N2,
 				  Ea_N,Ea_N2,
 				  K,R_N,R_N2,theta_v_N2,
 				  rho_N_0,rho_N_x,a_rho_N_x,rho_N2_0,rho_N2_x,
