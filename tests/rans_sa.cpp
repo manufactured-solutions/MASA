@@ -61,7 +61,7 @@ int run_regression()
   // check that all terms have been initialized
   masa_sanity_check<Scalar>();
 
-  for(int i=0;i<nx;i++)
+  for(int i=1;i<nx;i++)
     {
       x=i*dx;
 
@@ -77,7 +77,7 @@ int run_regression()
       nancheck(exact_v);
 
       nancheck(ufield);
-      //nancheck(vfield);
+      nancheck(vfield);
 
     } 
   
