@@ -30,12 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h> // for MASA_STRICT_REGRESSION
-#include <masa.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-
+#include <tests.h>
 const double threshold = 1.0e-15; // should be small enough to catch any obvious problems
 
 double anQ_p (double x,double y,double p_0,double p_x,double p_y,double a_px,double a_py,double L)
@@ -266,7 +261,7 @@ int main()
   // parameters
   double x;
   double y;
-  int i,j,k;
+  int i,j;
 
   // solutions -- efield is MASA term, efield2 is maple, efield3 is abs error between them
   double ufield,ufield2,ufield3;
