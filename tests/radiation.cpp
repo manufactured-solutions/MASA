@@ -41,23 +41,6 @@ typedef double Scalar;
 
 int main()
 {
-  // declarations
-  //Scalar tfield;
-  //Scalar tempx;
-
-  //problem size
-  Scalar lx;
-  Scalar dx;
-  int nx;
-
-  // error condition
-  int err = 0;
-
-  // initialize
-  nx = 10;  // number of points
-  lx=1;     // length
-
-  dx=lx/nx;
 
   // initialize the problem
   err += masa_init<Scalar>("radiation","radiation_integrated_intensity");
