@@ -777,4 +777,95 @@ Scalar SourceQ_rho (
   Scalar a_ut,
   Scalar L);
 
+// euler chemistry
+
+template <typename Scalar>
+Scalar SourceQ_rho_u(Scalar x, 
+		     Scalar R_N, 
+		     Scalar rho_N_0, 
+		     Scalar rho_N_x,
+		     Scalar a_rho_N_x, 
+		     Scalar rho_N2_0, 
+		     Scalar rho_N2_x,
+		     Scalar a_rho_N2_x,
+		     Scalar L,
+		     Scalar u_0,
+		     Scalar u_x,
+		     Scalar a_ux,
+		     Scalar T_0,
+		     Scalar T_x,
+		     Scalar a_Tx);
+
+template <typename Scalar>
+Scalar SourceQ_rho_e(Scalar x,
+		     Scalar R_N,
+		     Scalar R_N2,
+		     Scalar h0_N,
+		     Scalar h0_N2,
+		     Scalar theta_v_N2,
+		     Scalar rho_N_0, 
+		     Scalar rho_N_x,
+		     Scalar a_rho_N_x, 
+		     Scalar rho_N2_0, 
+		     Scalar rho_N2_x,
+		     Scalar a_rho_N2_x,
+		     Scalar L,
+		     Scalar u_0,
+		     Scalar u_x,
+		     Scalar a_ux,
+		     Scalar T_0,
+		     Scalar T_x,
+		     Scalar a_Tx);
+
+template <typename Scalar>
+Scalar SourceQ_rho_N(Scalar x,
+		     Scalar M_N,
+		     Scalar Cf1_N,
+		     Scalar Cf1_N2,
+		     Scalar etaf1_N,
+		     Scalar etaf1_N2,
+		     Scalar Ea_N,
+		     Scalar Ea_N2,
+		     Scalar rho_N_0, 
+		     Scalar rho_N_x,
+		     Scalar a_rho_N_x, 
+		     Scalar rho_N2_0, 
+		     Scalar rho_N2_x,
+		     Scalar a_rho_N2_x,
+		     Scalar L,
+		     Scalar u_0,
+		     Scalar u_x,
+		     Scalar a_ux,
+		     Scalar T_0,
+		     Scalar T_x,
+		     Scalar a_Tx,
+		     Scalar R);
+
+template <typename Scalar>
+Scalar SourceQ_rho_N2(Scalar x,
+		      Scalar M_N,
+		      Scalar Cf1_N,
+		      Scalar Cf1_N2,
+		      Scalar etaf1_N,
+		      Scalar etaf1_N2,
+		      Scalar Ea_N,
+		      Scalar Ea_N2,
+		      Scalar rho_N_0, 
+		      Scalar rho_N_x,
+		      Scalar a_rho_N_x, 
+		      Scalar rho_N2_0, 
+		      Scalar rho_N2_x,
+		      Scalar a_rho_N2_x,
+		      Scalar L,
+		      Scalar u_0,
+		      Scalar u_x,
+		      Scalar a_ux,
+		      Scalar T_0,
+		      Scalar T_x,
+		      Scalar a_Tx,
+		      Scalar R);
+
+
+
+
 #endif // __cplusplus
