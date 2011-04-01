@@ -30,10 +30,7 @@
 //--------------------------------------------------------------------------
 //
 
-#include <masa.h>
-#include <iostream>
-#include <fstream>
-#include <stdlib.h>
+#include<tests.h>
 
 using namespace MASA;
 
@@ -41,6 +38,8 @@ typedef double Scalar;
 
 int main()
 {
+
+  int err = 0;
 
   // initialize the problem
   err += masa_init<Scalar>("radiation","radiation_integrated_intensity");

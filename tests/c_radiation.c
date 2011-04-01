@@ -35,23 +35,7 @@
 
 int main()
 {
-  // declarations
-  //double tfield;
-  //double tempx;
-
-  //problem size
-  double lx;
-  double dx;
-  int nx;
-
-  // error condition
-  int err = 0;
-
-  // initialize
-  nx = 10;  // number of points
-  lx=1;     // length
-
-  dx=lx/nx;
+  int err=0;
 
   // initialize the problem
   err += masa_init("radiation","radiation_integrated_intensity");

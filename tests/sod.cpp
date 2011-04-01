@@ -30,12 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h>
-#include <masa.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
+#include <tests.h>
 
 using namespace MASA;
 using namespace std;
@@ -66,7 +61,10 @@ int run_regression()
 	t=j*dt;
 	
 	out = masa_eval_source_rho  <Scalar>(x,t);
-	out = masa_eval_source_rho_u<Scalar>(x,t);
+	nancheck(out);
+	out = masa_eval_source_rho_u<Scalar>(x,t);	
+	nancheck(out);
+
       } //done iterating
 
   // below are barely a regression test: 
@@ -76,7 +74,9 @@ int run_regression()
   x = -1;
   t =  1;
   out = masa_eval_source_rho<Scalar>(x,t);
+  nancheck(out);
   out = masa_eval_source_rho_u<Scalar>(x,t);
+  nancheck(out);
 
   // touching sod error condition if root not bracketed in rtbis
   x = 1;
