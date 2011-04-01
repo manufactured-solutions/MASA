@@ -1430,4 +1430,20 @@ Scalar anQ_u (Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,
 template<typename Scalar>
 Scalar anQ_w (Scalar r,Scalar z,Scalar w_0,Scalar w_1,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L);
 
+template<typename Scalar>
+Scalar anQ_rho (Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma);
+
+template<typename Scalar>
+Scalar SourceQ_e(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma);
+
+template<typename Scalar>
+Scalar SourceQ_w(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma);
+
+template<typename Scalar>
+Scalar SourceQ_rho(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma);
+
+
+
+
+
 #endif // __cplusplus

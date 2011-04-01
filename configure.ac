@@ -40,13 +40,13 @@ AC_SUBST(GENERIC_RELEASE)
 AX_CC_MINOPT	# request minimum optimization level for C
 AX_CFLAGS_WARN_ALL
 if test "$ax_cv_c_compiler_vendor" == "intel"; then
-  CFLAGS="$CFLAGS -wd981 -wd383 -wd2259 -wd869"
+  CFLAGS="$CFLAGS -wd981 -wd383 -wd2259 -wd869 -wd1418"
 fi
 
 AX_CXX_MINOPT	# request minimum optimization level for CXX
 AX_CXXFLAGS_WARN_ALL
 if test "$ax_cv_cxx_compiler_vendor" == "intel"; then
-  CXXFLAGS="$CXXFLAGS -wd981 -wd383 -wd2259 -wd869"
+  CXXFLAGS="$CXXFLAGS -wd981 -wd383 -wd2259 -wd869 -wd1418"
 fi
 
 # set suffix to .F90 to get CPP support for testing vendor Fortran compiler
