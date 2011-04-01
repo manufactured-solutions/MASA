@@ -22,7 +22,7 @@
 // Boston, MA  02110-1301  USA
 //
 //-----------------------------------------------------------------------el-
-// $Author: roystgnr $
+// $Author: 
 // $Id: ns2d.cpp 15166 2010-10-20 03:26:27Z roystgnr $
 //
 // ns2d.cpp: program that tests navier-stokes-2d against known source term
@@ -408,63 +408,31 @@ int run_regression()
   
   // test gradient error terms
   Scalar derr = masa_eval_grad_u<Scalar>(0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: gradient (0) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
   
   derr = masa_eval_grad_u<Scalar>(0,0,3);
-  if(derr != -1)
-    {
-      cout << "MASA :: gradient (3) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
 
   // v
   derr = masa_eval_grad_v<Scalar>(0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: v gradient (0) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
   
   derr = masa_eval_grad_v<Scalar>(0,0,3);
-  if(derr != -1)
-    {
-      cout << "MASA :: v gradient (3) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
 
   // p
   derr = masa_eval_grad_p<Scalar>(0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: p gradient (0) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
   
   derr = masa_eval_grad_p<Scalar>(0,0,3);
-  if(derr != -1)
-    {
-      cout << "MASA :: p gradient (3) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
 
   // rho
   derr = masa_eval_grad_rho<Scalar>(0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: rho gradient (0) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
   
   derr = masa_eval_grad_rho<Scalar>(0,0,3);
-  if(derr != -1)
-    {
-      cout << "MASA :: rho gradient (3) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
 
   // tests passed
   return 0;
