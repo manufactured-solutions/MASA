@@ -29,14 +29,27 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <cstdio>
 #include <config.h>
 #include <masa.h>
 #include <math.h> 
-#include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+#ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
 #include <limits>
+#include <iostream>
+#include <iostream>
+
 
 template<typename Scalar>
 Scalar nancheck(Scalar x)
@@ -648,3 +661,4 @@ Scalar SourceQ_rho (
 
 
 
+#endif // __cplusplus
