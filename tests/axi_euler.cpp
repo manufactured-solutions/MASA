@@ -30,48 +30,33 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h> // for MASA_STRICT_REGRESSION
-#include <masa.h>
-#include <math.h>
-#include <iostream>
-#include <stdlib.h>
+#include <tests.h>
 
 using namespace MASA;
 using namespace std;
 
-typedef double Scalar;
-
-const Scalar pi = acos(-1);
-const Scalar threshold = 1.0e-15; // should be small enough to catch any obvious problems
-
-Scalar nancheck(Scalar x)
-{
-  if(isnan(x))
-    {
-      cout << "MASA REGRESSION FAILURE:: nan found!\n";
-      exit(1);
-    }
-  return 1;
-}
-
+template<typename Scalar>
 Scalar anQ_p(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
   Scalar exact_p = p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L);
   return exact_p;
 }
   
+template<typename Scalar>
 Scalar anQ_u (Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
   Scalar exact_u = u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_uz * pi * z / L);
   return exact_u;
 } 
  
+template<typename Scalar>
 Scalar anQ_w (Scalar r,Scalar z,Scalar w_0,Scalar w_1,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L)
 {
   Scalar exact_w = w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L);
   return exact_w;
 }
 
+template<typename Scalar>
 Scalar anQ_rho (Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 { 
   Scalar exact_rho = rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L);
@@ -82,34 +67,38 @@ Scalar anQ_rho (Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_
 //   Source Terms
 // ----------------------------------------
 
+template<typename Scalar>
 Scalar SourceQ_e(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
   Scalar Q_e = Gamma * cos(a_pz * pi * z / L) * cos(a_pr * pi * r / L) * p_1 * u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_uz * pi * z / L) * a_pr * pi / L / (Gamma - 0.1e1) - Gamma * sin(a_pz * pi * z / L) * sin(a_pr * pi * r / L) * p_1 * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_pz * pi / L / (Gamma - 0.1e1) - sin(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) * sin(a_uz * pi * z / L) * u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * (pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_rhor * pi * rho_1 / L / 0.2e1 + cos(a_rhor * pi * r / L) * cos(a_rhoz * pi * z / L) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * (pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_rhoz * pi * rho_1 / L / 0.2e1 - sin(a_uz * pi * z / L) * sin(a_ur * pi * r / L) * (p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L)) * a_ur * pi * u_1 * Gamma / L / (Gamma - 0.1e1) - sin(a_uz * pi * z / L) * sin(a_ur * pi * r / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + 0.3e1 * pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_ur * pi * u_1 / L / 0.2e1 + (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * u_1 * u_1 * cos(a_uz * pi * z / L) * sin(a_uz * pi * z / L) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * a_uz * pi / L - sin(a_uz * pi * z / L) * (cos(a_ur * pi * r / L) - 0.1e1) * u_1 * w_1 * sin(a_wr * pi * r / L) * sin(a_wz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_wr * pi / L + cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) * (p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L)) * a_wz * pi * w_1 * Gamma / L / (Gamma - 0.1e1) + cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (0.3e1 * pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) * a_wz * pi * w_1 / L / 0.2e1 + sin(a_uz * pi * z / L) * (cos(a_ur * pi * r / L) - 0.1e1) * u_1 * (p_0 + p_1 * sin(a_pr * pi * r / L) * cos(a_pz * pi * z / L)) * Gamma / (Gamma - 0.1e1) / r + sin(a_uz * pi * z / L) * (cos(a_ur * pi * r / L) - 0.1e1) * u_1 * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) + pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * u_1 * u_1) / r / 0.2e1;
   return(Q_e);
 }
 
+template<typename Scalar>
 Scalar SourceQ_u(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
   Scalar Q_u = p_1 * cos(a_pr * pi * r / L) * cos(a_pz * pi * z / L) * a_pr * pi / L - u_1 * u_1 * pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * rho_1 * sin(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) * a_rhor * pi / L + u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * rho_1 * cos(a_rhor * pi * r / L) * cos(a_rhoz * pi * z / L) * sin(a_uz * pi * z / L) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_rhoz * pi / L - 0.2e1 * u_1 * u_1 * pow(sin(a_uz * pi * z / L), 0.2e1) * (cos(a_ur * pi * r / L) - 0.1e1) * sin(a_ur * pi * r / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * a_ur * pi / L + u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * cos(a_uz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_uz * pi / L + u_1 * (cos(a_ur * pi * r / L) - 0.1e1) * w_1 * cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) * sin(a_uz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * a_wz * pi / L + u_1 * u_1 * pow(sin(a_uz * pi * z / L), 0.2e1) * pow(cos(a_ur * pi * r / L) - 0.1e1, 0.2e1) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) / r;
   return(Q_u);  
 }
 
+template<typename Scalar>
 Scalar SourceQ_w(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
   Scalar Q_w = -p_1 * sin(a_pr * pi * r / L) * sin(a_pz * pi * z / L) * a_pz * pi / L - u_1 * sin(a_uz * pi * z / L) * rho_1 * sin(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * (cos(a_ur * pi * r / L) - 0.1e1) * a_rhor * pi / L + pow(w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L), 0.2e1) * rho_1 * cos(a_rhor * pi * r / L) * cos(a_rhoz * pi * z / L) * a_rhoz * pi / L - u_1 * sin(a_uz * pi * z / L) * sin(a_ur * pi * r / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * a_ur * pi / L - u_1 * sin(a_uz * pi * z / L) * w_1 * sin(a_wr * pi * r / L) * sin(a_wz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (cos(a_ur * pi * r / L) - 0.1e1) * a_wr * pi / L + (0.2e1 * w_0 + 0.2e1 * w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * w_1 * cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * a_wz * pi / L + u_1 * sin(a_uz * pi * z / L) * (rho_0 + rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L)) * (cos(a_ur * pi * r / L) - 0.1e1) / r;
   return(Q_w);
 }
 
+template<typename Scalar>
 Scalar SourceQ_rho(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
   Scalar Q_rho = -(cos(a_ur * pi * r / L) - 0.1e1) * a_rhor * pi * rho_1 * u_1 * sin(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) * sin(a_uz * pi * z / L) / L + (w_1 * cos(a_wr * pi * r / L) * sin(a_wz * pi * z / L) + w_0) * a_rhoz * pi * rho_1 * cos(a_rhor * pi * r / L) * cos(a_rhoz * pi * z / L) / L - (rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) + rho_0) * a_ur * pi * u_1 * sin(a_ur * pi * r / L) * sin(a_uz * pi * z / L) / L + (rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) + rho_0) * a_wz * pi * w_1 * cos(a_wr * pi * r / L) * cos(a_wz * pi * z / L) / L + (rho_1 * cos(a_rhor * pi * r / L) * sin(a_rhoz * pi * z / L) + rho_0) * (cos(a_ur * pi * r / L) - 0.1e1) * u_1 * sin(a_uz * pi * z / L) / r;
   return(Q_rho);
 }
 
-int main()
+template<typename Scalar>
+int run_regression()
 {  
   //variables
-  Scalar R;  
   Scalar p_0;
   Scalar p_1;
   Scalar rho_0;
@@ -126,7 +115,6 @@ int main()
   Scalar a_wr;
   Scalar a_wz;
   Scalar L;
-  Scalar mu;
   Scalar Gamma;    
   
   // parameters
@@ -144,6 +132,8 @@ int main()
   Scalar exact_p,exact_p2,exact_p3;
   Scalar exact_rho,exact_rho2,exact_rho3;
 
+  const Scalar pi = acos(Scalar(-1));
+
   // initalize
   int nx = 115;  // number of points
   int ny = 68;  
@@ -159,7 +149,6 @@ int main()
   masa_init_param<Scalar>();
   
   // get vars
-  R      = masa_get_param<Scalar>("R");
   p_0    = masa_get_param<Scalar>("p_0");
   p_1    = masa_get_param<Scalar>("p_1");
   rho_0  = masa_get_param<Scalar>("rho_0");
@@ -177,7 +166,6 @@ int main()
   a_wz   = masa_get_param<Scalar>("a_wz");
   L      = masa_get_param<Scalar>("L");
   Gamma  = masa_get_param<Scalar>("Gamma");
-  mu     = masa_get_param<Scalar>("mu");
 
   // check that all terms have been initialized
   int err = masa_sanity_check<Scalar>();
@@ -245,107 +233,28 @@ int main()
 
 #endif
 
-	nancheck(ufield3);
-	nancheck(wfield3);
-	nancheck(efield3);
-	nancheck(rho3);
+	threshcheck(ufield3);
+	threshcheck(wfield3);
+	threshcheck(efield3);
+	threshcheck(rho3);
 
-	nancheck(exact_u3);
-	nancheck(exact_w3);
-	nancheck(exact_rho3);
-	nancheck(exact_p3);
-
-	if(ufield3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
-	    cout << "U Field Source Term\n";
-	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << ufield3 << endl;
-	    cout << "Source term is:                   " << ufield2 << endl;
-	    cout << "MASA term is:                     " << ufield << endl;
-	    cout << r << " " << z << endl;
-	    exit(1);
-	  }
-
-	if(exact_u3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
-	    cout << "U Field Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << exact_u << endl;
-	    cout.precision(16);
-	    cout << r << " " << z << endl;
-	    exit(1);
-	  }
-
-	if(wfield3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
-	    cout << "W Field Source Term\n";
-	    cout.precision(16);
-	    cout << "Exceeded Threshold by:            " << wfield3 << endl;
-	    cout << "Source term is:                   " << wfield2 << endl;
-	    cout << "MASA term is:                     " << wfield << endl;
-	    cout << r << " " << z << endl;
-	    exit(1);
-	  }
-
-	// this is the 'bad' term: rho_0 is corrupting somehow
-	if(exact_w3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
-	    cout << "W Field Analytical Term\n";
-	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << exact_w3 << endl;
-	    cout << "Source term is:        " << exact_w2 << endl;
-	    cout << "MASA term is:          " << exact_w << endl;
-	    cout << r << " " << z << endl;
-	    exit(1);
-	  }
-
-	if(efield3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
-	    cout << "Energy Source Term\n";
-	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << efield3 << endl;
-	    cout << "Source term is:        " << efield2 << endl;
-	    cout << "MASA term is:          " << efield << endl;
-	    cout << r << " " << z << endl;
-	    exit(1);
-	  }
-
-	if(exact_p3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
-	    cout << "P Field Analytical Term\n";
-	    cout.precision(16);
-	    cout << "Exceeded Threshold by: " << exact_p << endl;
-	    cout << r << " " << z << endl;
-	    exit(1);
-	  }
-
-	if(rho3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
-	    cout.precision(16);
-	    cout << "RHO Source Term\n";
-	    cout << "Exceeded Threshold by: " << rho << endl;
-	    cout << r << " " << z << endl;
-	    exit(1);
-	  }
-
-	if(exact_rho3 > threshold)
-	  {
-	    cout << "\nMASA REGRESSION TEST FAILED: Axisymmetric Euler\n";
-	    cout.precision(16);
-	    cout << "RHO Analytical Term\n";
-	    cout << "Exceeded Threshold by: " << exact_rho << endl;
-	    cout << r << " " << z << endl;
-	    exit(1);
-	  }
+	threshcheck(exact_u3);
+	threshcheck(exact_w3);
+	threshcheck(exact_rho3);
+	threshcheck(exact_p3);
 
       } // done iterating
 
   // tests passed
   return 0;
+}
+
+int main()
+{
+  int err=0;
+
+  err += run_regression<double>();
+  //err += run_regression<long double>();
+
+  return err;
 }

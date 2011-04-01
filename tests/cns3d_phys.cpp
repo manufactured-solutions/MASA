@@ -30,12 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h> // for MASA_STRICT_REGRESSION
-#include <masa.h>
-#include <math.h>
-#include <limits>
-#include <iostream>
-#include <stdlib.h>
+#include <tests.h>
 
 using namespace std;
 using namespace MASA;

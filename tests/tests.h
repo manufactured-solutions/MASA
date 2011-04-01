@@ -81,8 +81,6 @@ double test_default(double x)
 #ifdef __cplusplus
 #include <limits>
 #include <iostream>
-#include <iostream>
-
 
 template<typename Scalar>
 Scalar nancheck(Scalar x)
@@ -1422,6 +1420,14 @@ Scalar SourceQ_rho(
   Scalar k);
 
 
+// axi euler
+template<typename Scalar>
+Scalar anQ_p(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma);
 
+template<typename Scalar>
+Scalar anQ_u (Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma);
+
+template<typename Scalar>
+Scalar anQ_w (Scalar r,Scalar z,Scalar w_0,Scalar w_1,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L);
 
 #endif // __cplusplus
