@@ -37,17 +37,18 @@ double MASA_DEFAULT = -12345.67;
 int main()
 {
   double u_0;
+  double thresh = 5e-15;
 
   // start problem
   masa_init("euler-test","euler_1d");
 
   u_0 = masa_get_param("u_0");
-  if(u_0 == MASA_DEFAULT)
+  if((fabs(u_0 - MASA_DEFAULT) < thresh))
     {
       printf("\nMASA ERROR:: Variables not being auto initalized!\n");
       return 1;
     }
-  
+      
   // now purge default values
   masa_purge_default_param();
   // values should be set to default: checking

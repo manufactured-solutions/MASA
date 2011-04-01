@@ -30,12 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h>
-#include <masa.h>
-#include <cmath>
-#include <limits>
-#include <iostream>
-#include <stdlib.h>
+#include <tests.h>
 
 using namespace MASA;
 using namespace std;
@@ -77,6 +72,12 @@ int run_regression()
       // simple source term check
       ufield = masa_eval_source_u<Scalar>(x);
       vfield = masa_eval_source_v<Scalar>(x);      
+
+      nancheck(exact_u);
+      nancheck(exact_v);
+
+      nancheck(ufield);
+      //nancheck(vfield);
 
     } 
   
