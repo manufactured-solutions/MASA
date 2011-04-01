@@ -140,7 +140,6 @@ double SourceQ_rho_N(double x,
 		     double etaf1_N2,
 		     double Ea_N,
 		     double Ea_N2,
-		     //double Function_to_Calculate_K,
 		     double (*in_func)(double),
 		     double R_N,
 		     double R_N2,
@@ -197,9 +196,7 @@ double SourceQ_rho_N2(double x,
 		      double etaf1_N2,
 		      double Ea_N,
 		      double Ea_N2,
-		      //double Function_to_Calculate_K,
 		      double (*in_func)(double),
-		      double K,
 		      double R_N,
 		      double R_N2,
 		      double theta_v_N2,
@@ -320,7 +317,6 @@ int main()
   double M_N;
   double h0_N;
   double h0_N2;
-  double K;
 
   double rho_N_0;
   double rho_N_x;
@@ -384,7 +380,6 @@ int main()
   M_N   = masa_get_param("M_N");
   h0_N  = masa_get_param("h0_N");
   h0_N2 = masa_get_param("h0_N2");
-  K     = masa_get_param("K");
 
   rho_N_0   = masa_get_param("rho_N_0");
   rho_N_x   = masa_get_param("rho_N_x");
@@ -431,7 +426,6 @@ int main()
 
       N2        = SourceQ_rho_N  (x,M_N,h0_N,h0_N2,Cf1_N,Cf1_N2,
 				  etaf1_N,etaf1_N2,Ea_N,Ea_N2,
-				  //Function_to_Calculate_K,
 				  &temp_function,
 				  R_N,R_N2,theta_v_N2,
 				  rho_N_0,rho_N_x,a_rho_N_x,rho_N2_0,
@@ -449,9 +443,7 @@ int main()
 				  etaf1_N2,
 				  Ea_N,
 				  Ea_N2,
-				  //Function_to_Calculate_K,
 				  &temp_function,
-				  K,
 				  R_N,
 				  R_N2,
 				  theta_v_N2,

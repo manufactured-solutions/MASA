@@ -68,7 +68,6 @@ MASA::euler_chem_1d<Scalar>::euler_chem_1d()
 
   this->register_var("h0_N",&h0_N);
   this->register_var("h0_N2",&h0_N2);
-  this->register_var("K",&K);
   this->register_var("L",&L);
 
   this->register_var("u_0",&u_0);
@@ -113,7 +112,6 @@ int MASA::euler_chem_1d<Scalar>::init_var()
 
   err += this->set_var("h0_N",1.31);
   err += this->set_var("h0_N2",2.21);
-  err += this->set_var("K",0.0256833);
   err += this->set_var("L",10.00);
 
   err += this->set_var("u_0",70);

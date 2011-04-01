@@ -74,7 +74,6 @@ program main
   real(8) :: M_N
   real(8) :: h0_N
   real(8) :: h0_N2
-  real(8) :: K
 
   real(8) :: rho_N_0
   real(8) :: rho_N_x
@@ -143,7 +142,6 @@ program main
   M_N   = masa_get_param("M_N");
   h0_N  = masa_get_param("h0_N");
   h0_N2 = masa_get_param("h0_N2");
-  K     = masa_get_param("K");
 
   rho_N_0   = masa_get_param("rho_N_0");
   rho_N_x   = masa_get_param("rho_N_x");

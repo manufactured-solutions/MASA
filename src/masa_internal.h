@@ -812,7 +812,6 @@ namespace MASA
     Scalar M_N;
     Scalar h0_N;
     Scalar h0_N2;
-    Scalar K;
 
     Scalar L;
     Scalar u_x;
