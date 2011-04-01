@@ -380,7 +380,6 @@ namespace MASA
   template <typename Scalar>
   Scalar masa_eval_grad_u  (Scalar,Scalar,Scalar,int);
 
-
   template <typename Scalar>
   Scalar masa_eval_grad_v  (Scalar);
 

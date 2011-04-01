@@ -273,7 +273,6 @@ Scalar SourceQ_w ( // 38
   Scalar rho_x,
   Scalar rho_y,
   Scalar rho_z,
-  Scalar p_y,
   Scalar p_z,
   Scalar a_px,
   Scalar a_py,
@@ -553,7 +552,7 @@ int run_regression()
 	  // check against maple output
 	  ufield2   = SourceQ_u  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_x,a_px,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,L);
 	  vfield2   = SourceQ_v  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,L);
-	  wfield2   = SourceQ_w  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,L);
+	  wfield2   = SourceQ_w  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,L);
 	  rho2      = SourceQ_rho(x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,L);
 	  efield2   = SourceQ_e  (x,y,z,u_0,u_x,u_y,u_z,v_0,v_x,v_y,v_z,w_0,w_x,w_y,w_z,rho_0,rho_x,rho_y,rho_z,p_0,p_x,p_y,p_z,a_px,a_py,a_pz,a_rhox,a_rhoy,a_rhoz,a_ux,a_uy,a_uz,a_vx,a_vy,a_vz,a_wx,a_wy,a_wz,mu,Gamma,L);
   
@@ -632,78 +631,38 @@ int run_regression()
 
   // test gradient error terms
   Scalar derr = masa_eval_grad_u<Scalar>(0,0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: gradient (0) error condition failed!\n";
-      exit(1);
-    }
-  
+  test_grad(derr);
+
   derr = masa_eval_grad_u<Scalar>(0,0,0,4);
-  if(derr != -1)
-    {
-      cout << "MASA :: gradient (4) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
 
   // v
   derr = masa_eval_grad_v<Scalar>(0,0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: v gradient (0) error condition failed!\n";
-      exit(1);
-    }
-  
+  test_grad(derr);
+
   derr = masa_eval_grad_v<Scalar>(0,0,0,4);
-  if(derr != -1)
-    {
-      cout << "MASA :: v gradient (4) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
 
   // w
   derr = masa_eval_grad_w<Scalar>(0,0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: w gradient (0) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
   
   derr = masa_eval_grad_w<Scalar>(0,0,0,4);
-  if(derr != -1)
-    {
-      cout << "MASA :: w gradient (4) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
 
   // p
   derr = masa_eval_grad_p<Scalar>(0,0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: p gradient (0) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
   
   derr = masa_eval_grad_p<Scalar>(0,0,0,4);
-  if(derr != -1)
-    {
-      cout << "MASA :: p gradient (4) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
 
   // rho
   derr = masa_eval_grad_rho<Scalar>(0,0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: rho gradient (0) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
   
   derr = masa_eval_grad_rho<Scalar>(0,0,0,4);
-  if(derr != -1)
-    {
-      cout << "MASA :: rho gradient (4) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
 
   // all tests passed
   return 0;
