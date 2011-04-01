@@ -39,6 +39,17 @@
 extern "C" {
 #endif
 
+double nancheck(double x)
+{
+
+  if(isnan(x))
+    {
+      printf("MASA REGRESSION FAILURE:: nan found!\n");
+      exit(1);
+    }
+}
+
+
 
 #ifdef __cplusplus
 }

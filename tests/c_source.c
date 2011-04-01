@@ -30,11 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h>
-#include <masa.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include<tests.h>
 
 int main()
 {
@@ -49,28 +45,54 @@ int main()
 
   masa_init("source term","euler_2d");
 
+
+  // 1D
   out = masa_eval_1d_source_u(x);
+  nancheck(out);
+
   out = masa_eval_1d_source_e(x);
+  nancheck(out);
 
   out = masa_eval_1d_grad_u(x);
+  nancheck(out);
   out = masa_eval_1d_grad_p(x);
+  nancheck(out);
+
   out = masa_eval_1d_grad_rho(x);
+  nancheck(out);
+
+  // 2D
 
   out = masa_eval_2d_source_u(x,x);
+  nancheck(out);
   out = masa_eval_2d_source_v(x,x);
+  nancheck(out);
   out = masa_eval_2d_source_e(x,x);
+  nancheck(out);
   out = masa_eval_2d_source_rho_w(x,x);
+  nancheck(out);
 
   out = masa_eval_2d_grad_u(x,x,i);
+  nancheck(out);
   out = masa_eval_2d_grad_v(x,x,i);
+  nancheck(out);
   out = masa_eval_2d_grad_w(x,x,i);
+  nancheck(out);
   out = masa_eval_2d_grad_p(x,x,i);
+  nancheck(out);
   out = masa_eval_2d_grad_rho(x,x,i);
+  nancheck(out);
+
+  // 3D
 
   out = masa_eval_3d_source_u(x,x,x);
+  nancheck(out);
   out = masa_eval_3d_source_v(x,x,x);
+  nancheck(out);
   out = masa_eval_3d_source_w(x,x,x);
+  nancheck(out);
   out = masa_eval_3d_source_e(x,x,x);
+  nancheck(out);
 
   //tests passed
   return 0;
