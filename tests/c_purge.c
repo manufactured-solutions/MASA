@@ -52,11 +52,7 @@ int main()
   masa_purge_default_param();
   // values should be set to default: checking
   u_0 = masa_get_param("u_0");
-  if(u_0 != MASA_DEFAULT)
-    {
-      printf("\nMASA ERROR:: Variables not being purged properly!\n");
-      return 1;
-    }
+  test_default(u_0);
   
   // steady as she goes
   return 0;
