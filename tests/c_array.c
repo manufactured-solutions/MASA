@@ -41,16 +41,10 @@ int main()
   int err=0;
   int n = 6;
   double vec1[n];
-  double vec2[n-1];
 
   for(i=0;i<n;i++)
     {
       vec1[i]=2;      
-    }
-
-  for(i=0;i<n-1;i++)
-    {
-      vec2[i]=1;      
     }
 
   // initialize the problem

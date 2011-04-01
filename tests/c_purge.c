@@ -30,11 +30,7 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include <config.h>
-#include <masa.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <tests.h>
 
 double MASA_DEFAULT = -12345.67;
 

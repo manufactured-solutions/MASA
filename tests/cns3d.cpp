@@ -614,6 +614,10 @@ int run_regression()
 	  threshcheck(exact_rho3,threshold);
 	  threshcheck(exact_p3,threshold);
 
+	  nancheck(gradx);
+	  nancheck(grady);
+	  nancheck(gradz);
+	  
 	} // done iterating
 
   // reroute stdout for regressions: TODO remove when logger mechanism
@@ -623,78 +627,38 @@ int run_regression()
 
   // test gradient error terms
   Scalar derr = masa_eval_grad_u<Scalar>(0,0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: gradient (0) error condition failed!\n";
-      exit(1);
-    }
-  
+  test_grad(derr);
+
   derr = masa_eval_grad_u<Scalar>(0,0,0,4);
-  if(derr != -1)
-    {
-      cout << "MASA :: gradient (4) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
 
   // v
   derr = masa_eval_grad_v<Scalar>(0,0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: v gradient (0) error condition failed!\n";
-      exit(1);
-    }
-  
+  test_grad(derr);
+
   derr = masa_eval_grad_v<Scalar>(0,0,0,4);
-  if(derr != -1)
-    {
-      cout << "MASA :: v gradient (4) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
 
   // w
   derr = masa_eval_grad_w<Scalar>(0,0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: w gradient (0) error condition failed!\n";
-      exit(1);
-    }
-  
+  test_grad(derr);  
+
   derr = masa_eval_grad_w<Scalar>(0,0,0,4);
-  if(derr != -1)
-    {
-      cout << "MASA :: w gradient (4) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
 
   // p
   derr = masa_eval_grad_p<Scalar>(0,0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: p gradient (0) error condition failed!\n";
-      exit(1);
-    }
-  
+  test_grad(derr);  
+
   derr = masa_eval_grad_p<Scalar>(0,0,0,4);
-  if(derr != -1)
-    {
-      cout << "MASA :: p gradient (4) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
 
   // rho
   derr = masa_eval_grad_rho<Scalar>(0,0,0,0);
-  if(derr != -1)
-    {
-      cout << "MASA :: rho gradient (0) error condition failed!\n";
-      exit(1);
-    }
-  
+  test_grad(derr);  
+
   derr = masa_eval_grad_rho<Scalar>(0,0,0,4);
-  if(derr != -1)
-    {
-      cout << "MASA :: rho gradient (4) error condition failed!\n";
-      exit(1);
-    }
+  test_grad(derr);
 
   // tests passed
   return 0;
