@@ -406,7 +406,6 @@ Parameters:
 \li k_2
 \li B_y
 
-
 3D:
 
 \li A_x
@@ -415,7 +414,6 @@ Parameters:
 \li k_2
 \li B_y
 \li C_z
-
 
 Functions:
 \li masa_init()
@@ -433,7 +431,6 @@ Functions:
 \subsubsection{Transient Conduction: Constant Material Properties}
 %\subsubsection tccm Transient Conduction: Constant Material Properties
 \endlatexonly
-
 
 Initialization:
 \li heateq_1d_unsteady_const
@@ -494,48 +491,52 @@ Initialization:
 \li heateq_2d_unsteady_var
 \li heateq_3d_unsteady_var
 
-Parameters:
-1D:
-\li A_x
-\li A_t
-\li D_t
-\li k_0
-\li k_1
-\li k_2
-\li cp_0
-\li cp_1
-\li cp_2
-\li rho
+\latexonly
+% parameter list
+\begin{table} 
+\begin{center} 
+\begin{tabular}{|rrrrrrr|}
+\hline
+A\_x   & A\_t   &        &         & D\_t    &  k\_0   & k\_1  \\
+k\_2   & cp\_0  & cp\_1  & cp\_2   & rho     &         &       \\
+\hline
+\end{tabular} 
+\end{center}  
+\caption{Parameters used by the 1D Transient Conduction: Variable Material Properties}
+\end{table}
+\endlatexonly
 
-2D:
-\li A_x
-\li A_t
-\li B_y
-\li B_t
-\li C_z
-\li C_t
-\li D_t
-\li k_0
-\li k_1
-\li k_2
-\li cp_0
-\li cp_1
-\li cp_2
-\li rho
 
-3D:
-\li A_x
-\li A_t
-\li B_y
-\li B_t
-\li D_t
-\li k_0
-\li k_1
-\li k_2
-\li cp_0
-\li cp_1
-\li cp_2
-\li rho
+
+\latexonly
+% parameter list
+\begin{table} 
+\begin{center} 
+\begin{tabular}{|rrrrrrr|}
+\hline
+A\_x   & A\_t   & B\_y   & B\_t    & D\_t    &  k\_0   & k\_1  \\
+k\_2   & cp\_0  & cp\_1  & cp\_2   & rho     &         &       \\
+\hline
+\end{tabular} 
+\end{center}  
+\caption{Parameters used by the 2D Transient Conduction: Variable Material Properties}
+\end{table}
+\endlatexonly
+
+\latexonly
+% parameter list
+\begin{table} 
+\begin{center} 
+\begin{tabular}{|rrrrrrr|}
+\hline
+A\_x   & A\_t   & B\_y   & B\_t    & D\_t    &  k\_0   & k\_1  \\
+k\_2   & cp\_0  & cp\_1  & cp\_2   & rho     & C_z     & C_t   \\
+\hline
+\end{tabular} 
+\end{center}  
+\caption{Parameters used by the 3D Transient Conduction: Variable Material Properties}
+\end{table}
+\endlatexonly
 
 Functions:
 \li masa_init()
