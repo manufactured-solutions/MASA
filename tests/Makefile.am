@@ -58,7 +58,8 @@ check_PROGRAMS   = misc                \
                    f_euler3d           \
                    f_euler_chem_1d     \
                    f_cns2d             \
-                   f_cns3d             
+                   f_cns3d             \
+                   f_radiation             
 
 #----------------------
 # C++ Test Sources
@@ -142,6 +143,9 @@ f_cns2d_LDADD               = -lfmasa
 f_cns3d_SOURCES             = f_cns_source.F90 f_cns3d.F90 cns_source.c
 f_cns3d_LDADD               = -lfmasa
 
+f_radiation_SOURCES         = f_radiation.F90
+f_radiation_LDADD           = -lfmasa
+
 #----------------------
 # Regression Tests
 #----------------------
@@ -200,6 +204,7 @@ TESTS                      = init.sh              \
 		             f_euler_chem_1d      \
 		             f_cns2d              \
 		             f_cns3d              \
+		             f_radiation          \
                              example_test.sh      \
                              finalize.sh
 
