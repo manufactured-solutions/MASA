@@ -616,32 +616,23 @@ are in the examples directory, under compressible\_navier\_stokes.cpp, and f\_cn
 Initialization:
 \li navierstokes_2d_compressible
 
-Parameters:
-\li R
-\li k
-\li u_0
-\li u_x
-\li u_y
-\li v_0
-\li v_x
-\li v_y
-\li rho_0
-\li rho_x
-\li rho_y
-\li p_0
-\li p_x
-\li p_y
-\li a_px
-\li a_py
-\li a_rhox
-\li a_rhoy
-\li a_ux
-\li a_uy
-\li a_vx
-\li a_vy
-\li Gamma
-\li mu
-\li L
+\latexonly
+% parameter list
+\begin{table} 
+\begin{center} 
+\begin{tabular}{|rrrrrrr|}
+\hline
+R     & k      & u\_0    & u\_x    & u\_y  & v\_0 & v\_x  \\
+v\_y  & rho\_0 & rho\_x  & rho\_y  & p\_0  & p\_x & p\_y  \\
+a\_px & a\_py  & a\_rhox & a\_rhoy & a\_ux & a\_uy& a\_vx \\
+a\_vy & Gamma  & mu      & L       &       &      &      \\
+\hline
+\end{tabular} 
+\end{center}  
+\caption{Parameters used by the 2D Steady Navier--Stokes}
+\label{tab:L_values}
+\end{table}
+\endlatexonly
 
 Functions:
 \li masa_init()
@@ -664,7 +655,6 @@ Functions:
 
 Initialization:
 \li navierstokes_3d_compressible
-
 
 \latexonly
 % parameter list
@@ -705,9 +695,3 @@ Functions:
 \li masa_eval_3d_grad_rho()
 
 */ 
-
-
-
-
-
-

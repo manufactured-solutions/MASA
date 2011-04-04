@@ -492,6 +492,22 @@ in the examples directory, under euler\_example.cpp, c\_euler\_example.c and f\_
 Initialization:
 \li euler_1d
 
+\latexonly
+% parameter list
+\begin{table} 
+\begin{center} 
+\begin{tabular}{|rrrrrrr|}
+\hline
+L     & k      & u\_0    & u\_x    & rho\_0  & rho\_x & p\_0  \\
+p\_x  & a\_px  & a\_rhox & a\_ux   & Gamma   & mu     & L     \\
+\hline
+\end{tabular} 
+\end{center}  
+\caption{Parameters used by the 1d Steady Euler}
+\label{tab:L_values}
+\end{table}
+\endlatexonly
+
 Parameters:
 \li k
 \li u_0
@@ -526,30 +542,23 @@ Functions:
 Initialization:
 \li euler_2d
 
-Parameters:
-\li u_0
-\li u_x
-\li u_y
-\li v_0
-\li v_x
-\li v_y
-\li rho_0
-\li rho_x
-\li rho_y
-\li p_0
-\li p_x
-\li p_y
-\li a_px
-\li a_py
-\li a_rhox
-\li a_rhoy
-\li a_ux
-\li a_uy
-\li a_vx
-\li a_vy
-\li Gamma
-\li mu
-\li L
+\latexonly
+% parameter list
+\begin{table} 
+\begin{center} 
+\begin{tabular}{|rrrrrrr|}
+\hline
+L     & k      & u\_0    & u\_x    & u\_y  & v\_0 & v\_x  \\
+v\_y  & rho\_0 & rho\_x  & rho\_y  & p\_0  & p\_x & p\_y  \\
+a\_px & a\_py  & a\_rhox & a\_rhoy & a\_ux & a\_uy& a\_vx \\
+a\_vy & Gamma  & mu      &         &       &      &      \\
+\hline
+\end{tabular} 
+\end{center}  
+\caption{Parameters used by the 2D Steady Euler}
+\label{tab:L_values}
+\end{table}
+\endlatexonly
 
 Functions:
 \li masa_init()
@@ -573,46 +582,25 @@ Functions:
 Initialization:
 \li euler_3d
 
-Parameters:
-\li k
-\li u_0
-\li u_x
-\li u_y
-\li u_z
-\li v_0
-\li v_x
-\li v_y
-\li v_z
-\li w_0
-\li w_x
-\li w_y
-\li w_z
-\li rho_0 
-\li rho_x
-\li rho_y
-\li rho_z
-\li p_0
-\li p_x
-\li p_y
-\li p_z
-\li a_px
-\li a_py
-\li a_pz
-\li a_rhox
-\li a_rhoy
-\li a_rhoz
-\li a_ux
-\li a_uy
-\li a_uz
-\li a_vx
-\li a_vy
-\li a_vz
-\li a_wx
-\li a_wy
-\li a_wz
-\li mu
-\li Gamma
-\li L
+\latexonly
+% parameter list
+\begin{table} 
+\begin{center} 
+\begin{tabular}{|rrrrrrr|}
+\hline
+k      & u\_0   & u\_x    & u\_y    & u\_z    & v\_0   & L  \\
+v\_0   & v\_x   & v\_y   & v\_z    & w\_0    & w\_x    & w\_y  \\
+rho\_0 & rho\_x & rho\_y & rho\_z  & p\_0    & p\_y    & p\_z  \\
+a\_px  & a\_py  & a\_pz  & a\_rhox & a\_rhoy & a\_rhoz & a\_ux \\
+a\_uy  & a\_uz  & a\_vx  & a\_vy   & a\_vz   & a\_wx   & a\_wy \\
+a\_wz  & mu     & Gamma  &         &         &         &      \\
+\hline
+\end{tabular} 
+\end{center}  
+\caption{Parameters used by the 3D Steady Euler}
+\label{tab:L_values}
+\end{table}
+\endlatexonly
 
 Functions:
 \li masa_init()
