@@ -30,14 +30,13 @@
 //--------------------------------------------------------------------------
 //
 
-#include <masa.h>
-#include <stdlib.h>
+#include<tests.h>
 
 int main()
 {
   int err=0;
-  int n = 6;
-  double vec1[n];
+  //int n = 6;
+  //double vec1[n];
 
   // initialize the problem
   err += masa_init("radiation","radiation_integrated_intensity");
@@ -49,6 +48,13 @@ int main()
   // call the sanity check routine 
   // (tests that all variables have been initialized)
   err += masa_sanity_check();
+
+  double x=0;
+  double source = masa_eval_1d_source_u(x);
+  double exact  = masa_eval_1d_exact_u(x);
+
+  nancheck(source);
+  nancheck(exact);
 
 
 
