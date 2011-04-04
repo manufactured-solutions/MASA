@@ -497,16 +497,14 @@ Initialization:
 \begin{center} 
 \begin{tabular}{|rrrrrrr|}
 \hline
-A\_x   & A\_t   &        &         & D\_t    &  k\_0   & k\_1  \\
-k\_2   & cp\_0  & cp\_1  & cp\_2   & rho     &         &       \\
+A\_x   & A\_t   & cp\_1  & cp\_2  & D\_t  &  k\_0   & k\_1  \\
+k\_2   & cp\_0  & rho    &        &       &         &       \\
 \hline
 \end{tabular} 
 \end{center}  
 \caption{Parameters used by the 1D Transient Conduction: Variable Material Properties}
 \end{table}
 \endlatexonly
-
-
 
 \latexonly
 % parameter list
@@ -530,7 +528,7 @@ k\_2   & cp\_0  & cp\_1  & cp\_2   & rho     &         &       \\
 \begin{tabular}{|rrrrrrr|}
 \hline
 A\_x   & A\_t   & B\_y   & B\_t    & D\_t    &  k\_0   & k\_1  \\
-k\_2   & cp\_0  & cp\_1  & cp\_2   & rho     & C_z     & C_t   \\
+k\_2   & cp\_0  & cp\_1  & cp\_2   & rho     & C\_z     & C\_t   \\
 \hline
 \end{tabular} 
 \end{center}  
