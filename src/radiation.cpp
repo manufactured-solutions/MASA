@@ -98,8 +98,7 @@ int MASA::radiation_integrated_intensity<Scalar>::check_vec()
 template <typename Scalar>
 Scalar MASA::radiation_integrated_intensity<Scalar>::eval_q_u(Scalar x)
 {
-  // this is the source term: i.e. integrated intensity
-
+  // this is the manufactured solution: i.e. the gaussians contributions
   Scalar Q_I = 0;
 
   // error handling for vectors
@@ -108,35 +107,34 @@ Scalar MASA::radiation_integrated_intensity<Scalar>::eval_q_u(Scalar x)
       return -1;
     }
   
-  // sum up gaussians for integrated intensity
-  // achtung: some sort of iterator failure here, hacking together a loop for now
-  //  for(std::vector<Scalar>::iterator it = vec_amp.begin(); it != vec_amp.end(); it++)
-  for(int it = 0;it<int(vec_amp.size());it++)
-    {
-      Q_I += vec_amp[it];
-    }
-  
-  return Q_I;
-  
-}
-
-template <typename Scalar>
-Scalar MASA::radiation_integrated_intensity<Scalar>::eval_exact_u(Scalar x)
-{
-  // this is the manufactured solution: i.e. the gaussians
-  Scalar exact_I = 0;
-  // error handling for vectors
-  if(check_vec() == 1)
-    return -1;
-
   // sum up intensity at particular location by
   // looping over gaussians of intensity
   for(int it = 0;it<int(vec_amp.size());it++)
     {
       // this is evaluating the gaussians contributions at 
       // a particular spatial location
-      exact_I += vec_amp[it]*exp( -pow(x-vec_mean[it],2)/(2*pow(vec_stdev[it],2)));
+      Q_I += vec_amp[it]*exp( -pow(x-vec_mean[it],2)/(2*pow(vec_stdev[it],2)));
     }
+
+  return Q_I;  
+}
+
+template <typename Scalar>
+Scalar MASA::radiation_integrated_intensity<Scalar>::eval_exact_u(Scalar x)
+{
+  // this is the source term: i.e. integrated intensity
+  Scalar exact_I = 0;
+  // error handling for vectors
+  if(check_vec() == 1)
+    return -1;
+
+  // sum up gaussians for integrated intensity
+  // achtung: some sort of iterator failure here, hacking together a loop for now
+  //  for(std::vector<Scalar>::iterator it = vec_amp.begin(); it != vec_amp.end(); it++)
+  for(int it = 0;it<int(vec_amp.size());it++)
+    {
+      exact_I += vec_amp[it];
+    }  
 
   return exact_I;
 }
