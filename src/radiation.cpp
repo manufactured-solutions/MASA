@@ -124,18 +124,22 @@ template <typename Scalar>
 Scalar MASA::radiation_integrated_intensity<Scalar>::eval_exact_u(Scalar x)
 {
   // this is the manufactured solution: i.e. the gaussians
-  Scalar exact_t = 0;
-  exact_t = x;
-
+  Scalar exact_I = 0;
   // error handling for vectors
   if(check_vec() == 1)
     return -1;
 
-  return exact_t;
-}
+  // sum up intensity at particular location by
+  // looping over gaussians of intensity
+  for(int it = 0;it<int(vec_amp.size());it++)
+    {
+      // this is evaluating the gaussians contributions at 
+      // a particular spatial location
+      exact_I += vec_amp[it]*exp( -pow(x-vec_mean[it],2)/(2*pow(vec_stdev[it],2)));
+    }
 
-//int x[5] = {2, 3, 5, 7, 11};
-//vector<int> vector1(&x[0], &x[5]);
+  return exact_I;
+}
 
 // ----------------------------------------
 //   Template Instantiation(s)
