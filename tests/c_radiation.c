@@ -50,8 +50,6 @@ int main()
   // (tests that all variables have been initialized)
   err += masa_sanity_check();
 
-  masa_set_array("vec_amp",&n,vec1);  
-
 
   return err;
 

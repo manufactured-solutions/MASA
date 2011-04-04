@@ -98,21 +98,33 @@ int MASA::radiation_integrated_intensity<Scalar>::check_vec()
 template <typename Scalar>
 Scalar MASA::radiation_integrated_intensity<Scalar>::eval_q_u(Scalar x)
 {
-  Scalar Q_T;
-  Q_T = x;
+  // this is the source term: i.e. integrated intensity
+
+  Scalar Q_I = 0;
 
   // error handling for vectors
   if(check_vec() == 1)
-    return -1;
-
-  return Q_T;
+    {
+      return -1;
+    }
+  
+  // sum up gaussians for integrated intensity
+  // achtung: some sort of iterator failure here, hacking together a loop for now
+  //  for(std::vector<Scalar>::iterator it = vec_amp.begin(); it != vec_amp.end(); it++)
+  for(int it = 0;it<int(vec_amp.size());it++)
+    {
+      Q_I += vec_amp[it];
+    }
+  
+  return Q_I;
   
 }
 
 template <typename Scalar>
 Scalar MASA::radiation_integrated_intensity<Scalar>::eval_exact_u(Scalar x)
 {
-  Scalar exact_t;
+  // this is the manufactured solution: i.e. the gaussians
+  Scalar exact_t = 0;
   exact_t = x;
 
   // error handling for vectors
