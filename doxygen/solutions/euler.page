@@ -508,20 +508,21 @@ p\_x  & a\_px  & a\_rhox & a\_ux   & Gamma   & mu     & L     \\
 \end{table}
 \endlatexonly
 
-Parameters:
-\li k
-\li u_0
-\li u_x
-\li rho_0
-\li rho_x
-\li p_0
-\li p_x
-\li a_px
-\li a_rhox
-\li a_ux
-\li Gamma
-\li mu
-\li L
+\latexonly
+% parameter list
+\begin{table} 
+\begin{center} 
+\begin{tabular}{|rrrrrrr|}
+\hline
+L     & k      & u\_0    & u\_x    & rho\_0  & rho\_x & p\_0  \\
+p\_x  & a\_px  & a\_rhox & a\_ux   & Gamma   & mu     &       \\
+\hline
+\end{tabular} 
+\end{center}  
+\caption{Parameters used by the 1D Steady Euler}
+\label{tab:L_values}
+\end{table}
+\endlatexonly
 
 Functions:
 \li masa_init()
