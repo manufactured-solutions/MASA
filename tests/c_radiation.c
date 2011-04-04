@@ -36,6 +36,8 @@
 int main()
 {
   int err=0;
+  int n = 6;
+  double vec1[n];
 
   // initialize the problem
   err += masa_init("radiation","radiation_integrated_intensity");
@@ -47,6 +49,9 @@ int main()
   // call the sanity check routine 
   // (tests that all variables have been initialized)
   err += masa_sanity_check();
+
+  masa_set_array("vec_amp",&n,vec1);  
+
 
   return err;
 

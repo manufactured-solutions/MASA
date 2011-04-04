@@ -1215,6 +1215,7 @@ namespace MASA
   public:
     radiation_integrated_intensity(); // constructor    
     int init_var();
+    int check_vec();  // sanity check
 
     Scalar eval_q_u (Scalar); 
     Scalar eval_exact_u(Scalar); 

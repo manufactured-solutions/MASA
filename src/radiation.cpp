@@ -82,11 +82,31 @@ int MASA::radiation_integrated_intensity<Scalar>::init_var()
 }
 
 template <typename Scalar>
+int MASA::radiation_integrated_intensity<Scalar>::check_vec()
+{
+
+  if(vec_mean.size() != vec_amp.size() || vec_mean.size() != vec_stdev.size())
+    {
+      std::cout << "MASA WARNING:: in mms radiation_integrated_intensity--\n";
+      std::cout << "Vectors vec_amp,vec_mean,vec_stdev are not identically sized!\n";	
+      return 1;
+    }
+
+  return 0;
+}
+
+template <typename Scalar>
 Scalar MASA::radiation_integrated_intensity<Scalar>::eval_q_u(Scalar x)
 {
   Scalar Q_T;
   Q_T = x;
+
+  // error handling for vectors
+  if(check_vec() == 1)
+    return -1;
+
   return Q_T;
+  
 }
 
 template <typename Scalar>
@@ -94,6 +114,11 @@ Scalar MASA::radiation_integrated_intensity<Scalar>::eval_exact_u(Scalar x)
 {
   Scalar exact_t;
   exact_t = x;
+
+  // error handling for vectors
+  if(check_vec() == 1)
+    return -1;
+
   return exact_t;
 }
 
