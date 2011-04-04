@@ -40,6 +40,13 @@ int main()
 {
 
   int err = 0;
+  Scalar source;
+  Scalar exact;
+  Scalar x;
+  Scalar amp=0;
+
+  Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
+  std::vector<Scalar> vec2;
 
   // initialize the problem
   err += masa_init<Scalar>("radiation","radiation_integrated_intensity");
@@ -51,6 +58,26 @@ int main()
   // call the sanity check routine 
   // (tests that all variables have been initialized)
   err += masa_sanity_check<Scalar>();
+
+  x = 0;
+
+  source = masa_eval_source_u<Scalar>(x);
+  exact  = masa_eval_exact_u<Scalar>(x);
+
+  nancheck(source);
+  nancheck(exact);
+
+  masa_get_vec<Scalar>("vec_amp",vec2);
+  for(std::vector<Scalar>::iterator it = vec2.begin(); it != vec2.end(); it++)
+    {
+      amp+= *it;
+    }
+
+  if(fabs(amp - exact) > thresh)
+    {
+      std::cout << "MASA REGRESSION FAILURE\n";
+      return 1;
+    }
 
   return err;
 
