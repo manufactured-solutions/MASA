@@ -56,8 +56,6 @@ int main()
   nancheck(source);
   nancheck(exact);
 
-
-
   return err;
 
 }// end program
