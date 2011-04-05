@@ -1418,7 +1418,11 @@ namespace MASA
     // 3d -> 2d -> 1d
     template <typename Scalar> Scalar eval_q_rho_u (Scalar x,Scalar y){return eval_q_rho_u(Scalar x);};
     template <typename Scalar> Scalar eval_q_e     (Scalar x,Scalar y){return eval_q_e(Scalar x);};
+    template <typename Scalar> Scalar eval_q_C     (Scalar x,Scalar y){return eval_q_C(Scalar x);};
+    template <typename Scalar> Scalar eval_q_C3    (Scalar x,Scalar y){return eval_q_C3(Scalar x);};
+    template <typename Scalar> Scalar eval_q_rho_C (Scalar x,Scalar y){return eval_q_rho_C(Scalar x);};
     /*
+
     template <typename Scalar> Scalar eval_q_u (Scalar x,Scalar y,Scalar z){return eval_q_u(Scalar x,Scalar y);};
     template <typename Scalar> Scalar eval_q_rho_u (Scalar x,Scalar y,Scalar z){return eval_q_rho_u(Scalar x,Scalar y);};
     template <typename Scalar> Scalar eval_q_rho_e (Scalar x,Scalar y,Scalar z){return eval_q_rho_e(Scalar x,Scalar y);};
@@ -1450,15 +1454,6 @@ namespace MASA
     Scalar eval_q_e (Scalar,Scalar,Scalar);
     Scalar eval_q_u (Scalar,Scalar);
     Scalar eval_q_e (Scalar,Scalar);
-
-    Scalar eval_q_rho_u (Scalar);
-    Scalar eval_q_rho_e (Scalar);
-    Scalar eval_q_e     (Scalar, Scalar (*)(Scalar));
-    Scalar eval_q_C     (Scalar);
-    Scalar eval_q_C3    (Scalar);
-    Scalar eval_q_rho_C (Scalar);
-    Scalar eval_q_rho_C3(Scalar);
-    Scalar eval_q_u_boundary (Scalar);
 
     // manufactured analytical solution
     // 3d->2d
