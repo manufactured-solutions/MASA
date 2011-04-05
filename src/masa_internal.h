@@ -1415,7 +1415,7 @@ namespace MASA
     int init_var();        // default problem values
 
     // source terms
-    // 3d -> 2d -> 1d
+    // 2d -> 1d
     template <typename Scalar> Scalar eval_q_rho_u     (Scalar x,Scalar y){return eval_q_rho_u(Scalar x);};
     template <typename Scalar> Scalar eval_q_e         (Scalar x,Scalar y){return eval_q_e(Scalar x);};
     template <typename Scalar> Scalar eval_q_C         (Scalar x,Scalar y){return eval_q_C(Scalar x);};
@@ -1423,6 +1423,16 @@ namespace MASA
     template <typename Scalar> Scalar eval_q_rho_C     (Scalar x,Scalar y){return eval_q_rho_C(Scalar x);};
     template <typename Scalar> Scalar eval_q_rho_C3    (Scalar x,Scalar y){return eval_q_rho_C3(Scalar x);};
     template <typename Scalar> Scalar eval_q_u_boundary(Scalar x,Scalar y){return eval_q_u_boundary(Scalar x);};
+
+    // 3d-> 1d
+    template <typename Scalar> Scalar eval_q_rho_u     (Scalar x,Scalar y,Scalar z){return eval_q_rho_u(Scalar x);};
+    template <typename Scalar> Scalar eval_q_e         (Scalar x,Scalar y,Scalar z){return eval_q_e(Scalar x);};
+    template <typename Scalar> Scalar eval_q_C         (Scalar x,Scalar y,Scalar z){return eval_q_C(Scalar x);};
+    template <typename Scalar> Scalar eval_q_C3        (Scalar x,Scalar y,Scalar z){return eval_q_C3(Scalar x);};
+    template <typename Scalar> Scalar eval_q_rho_C     (Scalar x,Scalar y,Scalar z){return eval_q_rho_C(Scalar x);};
+    template <typename Scalar> Scalar eval_q_rho_C3    (Scalar x,Scalar y,Scalar z){return eval_q_rho_C3(Scalar x);};
+    template <typename Scalar> Scalar eval_q_u_boundary(Scalar x,Scalar y,Scalar z){return eval_q_u_boundary(Scalar x);};
+
     /*
 
     template <typename Scalar> Scalar eval_q_u (Scalar x,Scalar y,Scalar z){return eval_q_u(Scalar x,Scalar y);};
