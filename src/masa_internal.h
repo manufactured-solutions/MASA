@@ -1414,17 +1414,18 @@ namespace MASA
     navierstokes_ablation_1d_steady(); // constructor
     int init_var();        // default problem values
 
-    /*
     // source terms
     // 3d -> 2d -> 1d
+    template <typename Scalar> Scalar eval_q_rho_u (Scalar x,Scalar y){return eval_q_rho_u(Scalar x);};
+    template <typename Scalar> Scalar eval_q_e     (Scalar x,Scalar y){return eval_q_e(Scalar x);};
+    /*
+    template <typename Scalar> Scalar eval_q_u (Scalar x,Scalar y,Scalar z){return eval_q_u(Scalar x,Scalar y);};
     template <typename Scalar> Scalar eval_q_rho_u (Scalar x,Scalar y,Scalar z){return eval_q_rho_u(Scalar x,Scalar y);};
     template <typename Scalar> Scalar eval_q_rho_e (Scalar x,Scalar y,Scalar z){return eval_q_rho_e(Scalar x,Scalar y);};
     template <typename Scalar> Scalar eval_q_rho_u (Scalar x,Scalar y){return eval_q_rho_u(Scalar x);};
     template <typename Scalar> Scalar eval_q_rho_e (Scalar x,Scalar y){return eval_q_rho_e(Scalar x);};
 
-    template <typename Scalar> Scalar eval_q_u (Scalar x,Scalar y,Scalar z){return eval_q_u(Scalar x,Scalar y);};
     template <typename Scalar> Scalar eval_q_e (Scalar x,Scalar y,Scalar z){return eval_q_e(Scalar x,Scalar y);};
-    template <typename Scalar> Scalar eval_q_u (Scalar x,Scalar y){return eval_q_u(Scalar x);};
     template <typename Scalar> Scalar eval_q_e (Scalar x,Scalar y){return eval_q_e(Scalar x);};
 
     // manufactured analytical solution
