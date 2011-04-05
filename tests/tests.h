@@ -109,7 +109,7 @@ Scalar threshcheck(Scalar x, Scalar thresh)
   if(x > thresh)
     {
       std::cout << "\nMASA REGRESSION TEST FAILED!\n";
-      std::cout << "Exceeded Threshold by: " << x << endl;
+      std::cout << "Exceeded Threshold by: " << x << std::endl;
       exit(1);
     }
   return 0;  
@@ -131,7 +131,7 @@ Scalar test_default(Scalar x)
   if((fabs(x-MASA_VAR_DEFAULT)/MASA_VAR_DEFAULT) > thresh)
     {
       std::cout << "\nMASA REGRESSION TEST FAILED!\n";
-      std::cout << "Exceeded Threshold by: " << x << endl;
+      std::cout << "Exceeded Threshold by: " << x << std::endl;
       exit(1);
     }
   return 0;  
@@ -153,7 +153,7 @@ Scalar threshcheck(Scalar x)
   if(x > thresh)
     {
       std::cout << "\nMASA REGRESSION TEST FAILED!\n";
-      std::cout << "Exceeded Threshold by: " << x << endl;
+      std::cout << "Exceeded Threshold by: " << x << std::endl;
       exit(1);
     }
   return 0;  
