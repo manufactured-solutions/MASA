@@ -1418,6 +1418,7 @@ namespace MASA
 
     // source terms
     // 2d -> 1d
+    // note: using 'real' here instead of scalar to avoid compilation difficulties.
     template <typename Real> Real eval_q_rho_u     (Real x,Real y){return eval_q_rho_u(Real x);};
     template <typename Real> Real eval_q_e         (Real x,Real y,Real (*in_func)(Real)) {return eval_q_e(Real x,Real (*in_func)(Real));};
     template <typename Real> Real eval_q_C         (Real x,Real y){return eval_q_C(Real x);};
