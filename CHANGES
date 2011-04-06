@@ -3,8 +3,6 @@ Version 0.30 (In Progress)
 
   * standaline version binaray renamed to masa_version
   * Further documentation edits
-  * initial SMASA (stochastic masa) available 
-  * gradient of source terms is now available for Fortran90 and C
   * added integrated radiative intensity solution
   * added 1d Navier-Stokes + Ablation (C/C++ only) solution
   * added Favre Averaged Navier Stokes Solution	

@@ -354,4 +354,3 @@ Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_exact_rho_C3(Scalar x
 }
 
 MASA_INSTANTIATE_ALL(MASA::navierstokes_ablation_1d_steady);
-
