@@ -706,6 +706,18 @@ Scalar MASA::masa_eval_exact_nu(Scalar x,Scalar y)
 }
 
 template <typename Scalar>
+Scalar MASA::masa_eval_exact_rho_C(Scalar x,Scalar y)
+{
+  return masa_master<Scalar>().get_ms().eval_exact_rho_C(x,y);
+}
+
+template <typename Scalar>
+Scalar MASA::masa_eval_exact_rho_C3(Scalar x,Scalar y)
+{
+  return masa_master<Scalar>().get_ms().eval_exact_rho_C3(x,y);
+}
+
+template <typename Scalar>
 Scalar MASA::masa_eval_grad_u(Scalar x,Scalar y,int i)
 {
   return masa_master<Scalar>().get_ms().eval_g_u(x,y,i);
@@ -862,6 +874,18 @@ template <typename Scalar>
 Scalar MASA::masa_eval_exact_nu(Scalar x,Scalar y,Scalar t)
 {
   return masa_master<Scalar>().get_ms().eval_exact_nu(x,y,t);
+}
+
+template <typename Scalar>
+Scalar MASA::masa_eval_exact_rho_C(Scalar x,Scalar y,Scalar z)
+{
+  return masa_master<Scalar>().get_ms().eval_exact_rho_C(x,y,z);
+}
+
+template <typename Scalar>
+Scalar MASA::masa_eval_exact_rho_C3(Scalar x,Scalar y,Scalar z)
+{
+  return masa_master<Scalar>().get_ms().eval_exact_rho_C3(x,y,z);
 }
 
 template <typename Scalar>
@@ -1026,6 +1050,10 @@ int MASA::masa_get_numeric_version()
   template Scalar masa_eval_exact_rho_N2  <Scalar>(Scalar); \
   template Scalar masa_eval_exact_rho_C   <Scalar>(Scalar); \
   template Scalar masa_eval_exact_rho_C3  <Scalar>(Scalar); \
+  template Scalar masa_eval_exact_rho_C   <Scalar>(Scalar,Scalar);	\
+  template Scalar masa_eval_exact_rho_C3  <Scalar>(Scalar,Scalar);		\
+  template Scalar masa_eval_exact_rho_C   <Scalar>(Scalar,Scalar,Scalar);	\
+  template Scalar masa_eval_exact_rho_C3  <Scalar>(Scalar,Scalar,Scalar);	\
   template Scalar masa_eval_source_t  <Scalar>(Scalar,Scalar,Scalar);  \
   template Scalar masa_eval_source_u  <Scalar>(Scalar,Scalar); \
   template Scalar masa_eval_source_v  <Scalar>(Scalar,Scalar); \

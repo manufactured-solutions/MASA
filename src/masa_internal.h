@@ -145,10 +145,12 @@ namespace MASA
     virtual Scalar eval_exact_rho_N2(Scalar)           {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;};
     virtual Scalar eval_exact_rho_C(Scalar)            {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;};
     virtual Scalar eval_exact_rho_C3(Scalar)           {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;};
+    virtual Scalar eval_exact_rho_C(Scalar,Scalar)     {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;};
+    virtual Scalar eval_exact_rho_C3(Scalar,Scalar)    {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;};
+    virtual Scalar eval_exact_rho_C(Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;};
+    virtual Scalar eval_exact_rho_C3(Scalar,Scalar,Scalar) {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;};
 
     virtual Scalar eval_exact_u_boundary(Scalar)            {std::cout << "MASA ERROR:: Analytical Solution (boundary) is unavailable or not properly loaded.\n"; return -1.33;};
-
-
 
   /* 
    * -------------------------------------------------------------------------------------------   

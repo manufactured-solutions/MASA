@@ -305,6 +305,12 @@ namespace MASA
   template <typename Scalar>
   Scalar masa_eval_exact_nu   (Scalar,Scalar);
 
+  template <typename Scalar>
+  Scalar masa_eval_exact_rho_C  (Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_exact_rho_C3  (Scalar,Scalar);
+
   // --------------------------------
   // source term(s) -- 3D
   // --------------------------------
@@ -366,6 +372,13 @@ namespace MASA
 
   template <typename Scalar>
   Scalar masa_eval_exact_nu     (Scalar,Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_exact_rho_C  (Scalar,Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_exact_rho_C3  (Scalar,Scalar,Scalar);
+
 
   // --------------------------------
   // gradient of analytical solutions
