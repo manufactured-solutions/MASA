@@ -1417,7 +1417,7 @@ namespace MASA
     // source terms
     // 2d -> 1d
     template <typename Scalar> Scalar eval_q_rho_u     (Scalar x,Scalar y){return eval_q_rho_u(Scalar x);};
-    template <typename Scalar> Scalar eval_q_e         (Scalar x,Scalar y){return eval_q_e(Scalar x);};
+    template <typename Scalar> Scalar eval_q_e         (Scalar x,Scalar y,Scalar (*in_func)(Scalar)) {return eval_q_e(Scalar x,Scalar (*in_func)(Scalar));};
     template <typename Scalar> Scalar eval_q_C         (Scalar x,Scalar y){return eval_q_C(Scalar x);};
     template <typename Scalar> Scalar eval_q_C3        (Scalar x,Scalar y){return eval_q_C3(Scalar x);};
     template <typename Scalar> Scalar eval_q_rho_C     (Scalar x,Scalar y){return eval_q_rho_C(Scalar x);};
@@ -1426,7 +1426,7 @@ namespace MASA
 
     // 3d-> 1d
     template <typename Scalar> Scalar eval_q_rho_u     (Scalar x,Scalar y,Scalar z){return eval_q_rho_u(Scalar x);};
-    template <typename Scalar> Scalar eval_q_e         (Scalar x,Scalar y,Scalar z){return eval_q_e(Scalar x);};
+    template <typename Scalar> Scalar eval_q_e         (Scalar x,Scalar y,Scalar z,Scalar (*in_func)(Scalar)) {return eval_q_e(Scalar x,Scalar (*in_func)(Scalar);};
     template <typename Scalar> Scalar eval_q_C         (Scalar x,Scalar y,Scalar z){return eval_q_C(Scalar x);};
     template <typename Scalar> Scalar eval_q_C3        (Scalar x,Scalar y,Scalar z){return eval_q_C3(Scalar x);};
     template <typename Scalar> Scalar eval_q_rho_C     (Scalar x,Scalar y,Scalar z){return eval_q_rho_C(Scalar x);};
@@ -1440,43 +1440,16 @@ namespace MASA
     template <typename Scalar> Scalar eval_exact_rho   (Scalar x,Scalar y,Scalar z) {return eval_exact_rho(Scalar x);};
     template <typename Scalar> Scalar eval_exact_rho_C (Scalar x,Scalar y,Scalar z) {return eval_exact_rho_C(Scalar x);};
     template <typename Scalar> Scalar eval_exact_rho_C3(Scalar x,Scalar y,Scalar z) {return eval_exact_rho_C3(Scalar x);};
-    /*
 
-    // manufactured analytical solution
-    // 3d->2d
-    template <typename Scalar> Scalar eval_exact_u     (Scalar x,Scalar y,Scalar z) {return eval_exact_u(Scalar x,Scalar y);};
-    template <typename Scalar> Scalar eval_exact_t     (Scalar x,Scalar y,Scalar z) {return eval_exact_t(Scalar x,Scalar y);};
-    template <typename Scalar> Scalar eval_exact_rho   (Scalar x,Scalar y,Scalar z) {return eval_exact_rho(Scalar x,Scalar y);};
-    
-    //2d->1d
+    // 2d-> 1d
     template <typename Scalar> Scalar eval_exact_u     (Scalar x,Scalar y) {return eval_exact_u(Scalar x);};
     template <typename Scalar> Scalar eval_exact_t     (Scalar x,Scalar y) {return eval_exact_t(Scalar x);};
     template <typename Scalar> Scalar eval_exact_rho   (Scalar x,Scalar y) {return eval_exact_rho(Scalar x);};
+    template <typename Scalar> Scalar eval_exact_rho_C (Scalar x,Scalar y) {return eval_exact_rho_C(Scalar x);};
+    template <typename Scalar> Scalar eval_exact_rho_C3(Scalar x,Scalar y) {return eval_exact_rho_C3(Scalar x);};
 
-    // source terms
-    // 3d -> 2d -> 1d
-    Scalar eval_q_rho_u (Scalar,Scalar,Scalar);
-    Scalar eval_q_rho_e (Scalar,Scalar,Scalar);
-    Scalar eval_q_rho_u (Scalar,Scalar);
-    Scalar eval_q_rho_e (Scalar,Scalar);
 
-    Scalar eval_q_u (Scalar,Scalar,Scalar);
-    Scalar eval_q_e (Scalar,Scalar,Scalar);
-    Scalar eval_q_u (Scalar,Scalar);
-    Scalar eval_q_e (Scalar,Scalar);
-
-    // manufactured analytical solution
-    // 3d->2d
-    Scalar eval_exact_u     (Scalar x,Scalar y,Scalar z);
-    Scalar eval_exact_t     (Scalar x,Scalar y,Scalar z);
-    Scalar eval_exact_rho   (Scalar x,Scalar y,Scalar z);
-    
-    //2d->1d
-    Scalar eval_exact_u     (Scalar x,Scalar y);
-    Scalar eval_exact_t     (Scalar x,Scalar y);
-    Scalar eval_exact_rho   (Scalar x,Scalar y);
-*/
-
+    // 1d (Actual) Source terms
     Scalar eval_q_rho_u (Scalar);
     Scalar eval_q_rho_e (Scalar);
     Scalar eval_q_e     (Scalar, Scalar (*)(Scalar));
