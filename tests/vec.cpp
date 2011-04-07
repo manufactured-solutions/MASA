@@ -75,7 +75,7 @@ int main()
   // need to add test checking that the get_vec with a bad string works too!
   masa_get_vec<Scalar>("vec_amp",vec2);
   
-  if(vec2.size() != 5)
+  if(vec2.size() != 25)
     {
       cout << "masa regression failure! masa_get_vec failed!\n";
       cout << "size is: " << vec2.size() << endl;
