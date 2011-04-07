@@ -236,7 +236,7 @@ Scalar MASA::radiation_integrated_intensity<Scalar>::eval_exact_u(Scalar x)
        // 0.50*erf((c*vec_mean[it])/(2.0*vec_stdev[it]))*vec_amp[it]*sqrt(pi)*sqrt(2.0)*vec_stdev[it]  
        // - 0.5*erf((vec_stdev[it]*(-1.0+vec_mean[it]))/(2.0*vec_stdev[it])) * vec_amp[it]*p*c*vec_stdev[it];    
     }  
-
+  
   return exact_I;
 }
 
