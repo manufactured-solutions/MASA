@@ -200,26 +200,53 @@ Scalar MASA::radiation_integrated_intensity<Scalar>::eval_exact_u(Scalar x)
 {
   // this is the source term: i.e. integrated intensity
   Scalar exact_I = 0;
+  Scalar xs,s;
   // error handling for vectors
   if(check_vec() == 1)
     return -1;
+
+  // error handling for x
+  if(x <= 0)
+    {
+      std::cout << "MASA WARNING:: in mms radiation_integrated_intensity--\n";
+      std::cout << "Integration bound must be greater than zero!\n";
+      return -1;
+    }
 
   // sum up gaussians for integrated intensity
   // achtung: some sort of iterator failure here, hacking together a loop for now
   //  for(std::vector<Scalar>::iterator it = vec_amp.begin(); it != vec_amp.end(); it++)
   for(int it = 0;it<int(vec_amp.size());it++)
     {
-      exact_I += vec_amp[it];
+      xs = (x-vec_mean[it])/vec_stdev[it];
+       s = -vec_mean[it]/vec_stdev[it];
+      
+       // integrate [0,inf]
+       if(x>1000.0)
+	 {
+	   exact_I += vec_amp[it]*(1-phi(s));
+	 }       
+       else // integrate [0,x]
+	 {
+	   exact_I += vec_amp[it]*(phi(xs)-phi(s));
+	 }
+       
+       // c = pow(2.0,0.5);
+       // p = pow(pi,0.5);
+       // 0.50*erf((c*vec_mean[it])/(2.0*vec_stdev[it]))*vec_amp[it]*sqrt(pi)*sqrt(2.0)*vec_stdev[it]  
+       // - 0.5*erf((vec_stdev[it]*(-1.0+vec_mean[it]))/(2.0*vec_stdev[it])) * vec_amp[it]*p*c*vec_stdev[it];    
     }  
 
-  // using c99 provided erf(double x) from cmath
-
-  //aux(i) = 0.5d0*erf((2.d0**(0.5d0)*b(i))/(2.d0*c(i)))*a(i)*dsqrt(pi)*dsqrt(2.d0)*c(i) & 
-  // - 0.5d0*erf((2.d0**(0.5d0)*(-1.d0+b(i)))/(2.d0*c(i))) &
-  // * a(i)*pi**(0.5d0)*2.d0**(0.5d0)*c(i)
-    
-
   return exact_I;
+}
+
+template <typename Scalar>
+Scalar MASA::radiation_integrated_intensity<Scalar>::phi(Scalar x)
+{
+  Scalar out;
+  // using c99 provided erf(double x) from cmath      
+  out = 0.5 * (1 + erf(x));
+  return out;  
 }
 
 // ----------------------------------------

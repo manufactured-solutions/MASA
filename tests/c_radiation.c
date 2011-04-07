@@ -49,7 +49,7 @@ int main()
   // (tests that all variables have been initialized)
   err += masa_sanity_check();
 
-  double x=0;
+  double x=12;
   double source = masa_eval_1d_source_u(x);
   double exact  = masa_eval_1d_exact_u(x);
 

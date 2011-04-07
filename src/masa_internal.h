@@ -1208,7 +1208,9 @@ namespace MASA
   template <typename Scalar>
   class radiation_integrated_intensity : public manufactured_solution<Scalar>
   {
-    
+    using manufactured_solution<Scalar>::pi;
+    using manufactured_solution<Scalar>::PI;
+
     Scalar no_gauss;
     std::vector<Scalar> vec_mean;
     std::vector<Scalar> vec_amp;
@@ -1221,6 +1223,7 @@ namespace MASA
 
     Scalar eval_q_u (Scalar); 
     Scalar eval_exact_u(Scalar); 
+    Scalar phi(Scalar); 
 
   };
 
