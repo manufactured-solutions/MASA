@@ -69,4 +69,5 @@ example_DATA                += f_euler.f90
 	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE *.c *.cpp
 	echo 'updated source license headers' >$@
 
+EXTRA_DIST  = examples.h
 CLEANFILES = .license.stamp *.mod *.gcda *.gcno
