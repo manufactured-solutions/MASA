@@ -898,7 +898,7 @@ contains
     
     character(len=*)       :: param_name
     integer (c_int), value :: it    
-    real (c_double), value :: arr
+    real (c_double)        :: arr
 
     call masa_get_array_passthrough(param_name//C_NULL_CHAR, it, arr)
     
