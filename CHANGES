@@ -2,18 +2,18 @@
 Version 0.30 (In Progress)
 
   * standaline version binaray renamed to masa_version
-  * Further documentation edits
+  * many documentation additions and edits
   * added integrated radiative intensity solution
-  * added 1d Navier-Stokes + Ablation (C/C++ only) solution
-  * added Favre Averaged Navier Stokes Solution	
+  * added 1d Navier-Stokes + ablation (C/C++ only) solution
+  * added Favre Averaged Navier Stokes solution	
   * added support for function pointers in C/C++/f90 interface
-  * added Transient Euler Solution
+  * added transient Euler solution
   * added 1d Euler + chemistry solution	     
   * API changes-- flipped terms, e.g. masa_eval_rho_u_source -> masa_eval_source_rho_u
   * improved parallel build support
-  * code has 99%+ line coverage	
+  * regressions expanded  to achieve 99%+ line coverage	
   * c++ bindings now support arbitrary precision (double, long double, etc.) w/ regression testing
-  * gradient of source terms is now available for c++
+  * gradient of source terms available for c++
   * adding new conditional (--masa-exceptions) that adds exception handling
   * modifications to Fortran interface
   * added doxygen documentation for all c/cpp functions
@@ -24,7 +24,6 @@ Version 0.30 (In Progress)
   * added check for presence of 'nan's within regression tests
   * fixed bug for axisymmetric euler and navier-stokes in 32 bit compilers
   * added support for PGI compilers (tested on version 10.8)
-  * documentation heavily updated (make doc) and now slightly useful
 
 Version 0.20 (23 September 2010) 
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.20
