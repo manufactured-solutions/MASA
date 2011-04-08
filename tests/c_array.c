@@ -41,6 +41,7 @@ int main()
   int err=0;
   int n = 6;
   double vec1[n];
+  double vec2[n*10];
 
   for(i=0;i<n;i++)
     {
@@ -57,15 +58,16 @@ int main()
 
   err += masa_display_array();
   masa_set_array("vec_amp",&n,vec1);  
-  err += masa_display_array();
+  //err += masa_display_array();
 
-  //masa_get_array("vec_mean",&n,vec2);
+  masa_get_array("vec_mean",&n,vec2);
   
-  //if(n != 5) 
-  //  {
-  //    printf("masa regression error in c-vector interface!\n");
-  //     return 1;
-  //  }
+  if(n != 25) 
+    {
+      printf("masa regression error in c-vector interface!\n");
+      printf("size was %i\n",n);
+      return 1;
+    }
   
   return 0;
 
