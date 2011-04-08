@@ -1023,7 +1023,6 @@ PAPER_TYPE             = $(PAPER_SIZE)
 
 # The EXTRA_PACKAGES tag can be to specify one or more names of LaTeX 
 # packages that should be included in the LaTeX output. 
-# /workspace/pecos/mms/MASA/trunk/doxygen/masa.sty
 
 EXTRA_PACKAGES = ../../doxygen/masa
 
