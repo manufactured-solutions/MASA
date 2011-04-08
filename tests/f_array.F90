@@ -36,7 +36,7 @@ program main
 
   ! test display_array
   call masa_init('3rd test','radiation_integrated_intensity')
-  call masa_display_array()
+  !call masa_display_array()
 
   !call masa_get_array("vec_mean",n,arr)
 
