@@ -32,7 +32,7 @@ program main
   implicit none
 
   integer(4)           :: n
-  real(8),dimension(6) :: arr
+  real(8),dimension(100) :: arr
 
   ! test display_array
   call masa_init('3rd test','radiation_integrated_intensity')
