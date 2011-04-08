@@ -134,6 +134,29 @@ module masa
      end subroutine masa_display_array
   end interface
 
+  interface
+     subroutine masa_get_array_passthrough(param_name,it,array) bind (C,name='masa_get_array')
+       use iso_c_binding
+       implicit none
+
+       character(c_char), intent(in) :: param_name(*)
+       integer (c_int), value :: it
+       real (c_double), value :: array
+
+     end subroutine masa_get_array_passthrough
+  end interface
+
+!  interface
+!     subroutine masa_set_array_passthrough(param_name,value) bind (C,name='masa_set_array')
+!       use iso_c_binding
+!       implicit none
+!       
+!       character(c_char), intent(in) :: param_name(*)
+!       real (c_double), value        :: value
+!       
+!     end subroutine masa_set_array_passthrough
+!  end interface
+
   ! ---------------------------------
   ! MMS source term interfaces -- 1d
   ! ---------------------------------
@@ -852,7 +875,6 @@ contains
 
   end function masa_get_param
 
-
   !! \name sets the parameter value
   subroutine masa_set_param(param_name,value)
     use iso_c_binding
@@ -861,8 +883,25 @@ contains
     character(len=*), intent(in)        :: param_name
     real (c_double), intent(in), value  :: value
 
+
     call masa_set_param_passthrough(param_name//C_NULL_CHAR,value)
 
   end subroutine masa_set_param
+
+  ! ---------------------------------
+  ! MMS Vector/Array Routines
+  ! ---------------------------------
+
+  subroutine masa_get_array(param_name,it,arr)
+    use iso_c_binding
+    implicit none
+    
+    character(len=*)       :: param_name
+    integer (c_int), value :: it    
+    real (c_double), value :: arr
+
+    call masa_get_array_passthrough(param_name//C_NULL_CHAR, it, arr)
+    
+  end subroutine masa_get_array
 
 end module masa
