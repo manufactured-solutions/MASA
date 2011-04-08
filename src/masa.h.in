@@ -38,24 +38,24 @@
 
 /// \cond
 
-#define MASA_MAJOR_VERSION  0
-#define MASA_MINOR_VERSION  30
-#define MASA_MICRO_VERSION  0
+#define MASA_MAJOR_VERSION  @GENERIC_MAJOR_VERSION@
+#define MASA_MINOR_VERSION  @GENERIC_MINOR_VERSION@
+#define MASA_MICRO_VERSION  @GENERIC_MICRO_VERSION@
 
-#define MASA_BUILD_USER     "nick"
-#define MASA_BUILD_ARCH     "x86_64-unknown-linux-gnu"
-#define MASA_BUILD_HOST     "magus"
-#define MASA_BUILD_DATE     "2011-02-24 18:47"
-#define MASA_BUILD_VERSION  "18049:18051"
+#define MASA_BUILD_USER     "@BUILD_USER@"
+#define MASA_BUILD_ARCH     "@BUILD_ARCH@"
+#define MASA_BUILD_HOST     "@BUILD_HOST@"
+#define MASA_BUILD_DATE     "@BUILD_DATE@" 
+#define MASA_BUILD_VERSION  "@BUILD_VERSION@"
 
-#define MASA_LIB_VERSION    "0.30"
-#define MASA_LIB_RELEASE    "Development Build"
+#define MASA_LIB_VERSION    "@VERSION@" 
+#define MASA_LIB_RELEASE    "@BUILD_DEVSTATUS@"
 
-#define MASA_CXX            "g++"
-#define MASA_CXXFLAGS       "-O0 -fno-unsafe-math-optimizations"
+#define MASA_CXX            "@CXX@"
+#define MASA_CXXFLAGS       "@CXXFLAGS@"
 
-#define MASA_FC            "gfortran"
-#define MASA_FCFLAGS       "-O0 -fno-unsafe-math-optimizations"
+#define MASA_FC            "@FC@"
+#define MASA_FCFLAGS       "@FCFLAGS@"
 
 /// \endcond
 
