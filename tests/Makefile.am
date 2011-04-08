@@ -111,7 +111,7 @@ c_euler3d_SOURCES       = c_euler3d.c
 c_euler_chem_1d_SOURCES = c_euler_chem_1d.c
 c_cns2d_SOURCES         = c_cns2d.c
 c_cns3d_SOURCES         = c_cns3d.c
-c_radiation_SOURCES     = c_radiation.cpp
+c_radiation_SOURCES     = c_radiation.c
 
 #----------------------
 # Fortran Test Sources
