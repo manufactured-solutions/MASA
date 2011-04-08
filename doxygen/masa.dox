@@ -1025,9 +1025,7 @@ PAPER_TYPE             = $(PAPER_SIZE)
 # packages that should be included in the LaTeX output. 
 # /workspace/pecos/mms/MASA/trunk/doxygen/masa.sty
 
-#EXTRA_PACKAGES = /workspace/pecos/mms/MASA/trunk/doxygen/masa
-# nick
-EXTRA_PACKAGES = @CXX@/masa
+EXTRA_PACKAGES = ../../doxygen/masa
 
 # The LATEX_HEADER tag can be used to specify a personal LaTeX header for 
 # the generated latex document. The header should contain everything until 
