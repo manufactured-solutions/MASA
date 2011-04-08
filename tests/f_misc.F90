@@ -70,4 +70,8 @@ program main
      call exit(1)
   endif 
 
+  ! test display_array
+  call masa_init('3rd test','radiation_integrated_intensity')
+  call masa_display_array()
+
 end program

@@ -1,3 +1,4 @@
+!! -*-f90-*-
 ! -----------------------------------------------------------------------bl-
 ! --------------------------------------------------------------------------
 ! 
@@ -119,6 +120,18 @@ module masa
        real (c_double), value        :: value
 
      end subroutine masa_set_param_passthrough
+  end interface
+
+  ! ---------------------------------
+  ! MMS Vector/Array Routines
+  ! ---------------------------------
+
+  interface
+     subroutine masa_display_array() bind (C,name='masa_display_array')
+       use iso_c_binding
+       implicit none
+
+     end subroutine masa_display_array
   end interface
 
   ! ---------------------------------
