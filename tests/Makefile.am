@@ -219,7 +219,9 @@ EXTRA_DIST                 = init.sh \
 			     c_init.sh \
 	                     f_init.sh \
 	                     example_test.sh \
-                             finalize.sh
+                             finalize.sh \
+			     tests.h
+
 
 # License Information
 .license.stamp: $(top_srcdir)/LICENSE
@@ -227,5 +229,4 @@ EXTRA_DIST                 = init.sh \
 	$(top_srcdir)/src/lic_utils/update_license.pl --c2f_comment $(top_srcdir)/LICENSE *.F90
 	echo 'updated source license headers' >$@
 
-EXTRA_DIST  = tests.h
 CLEANFILES = .license.stamp *.mod *.gcda *.gcno
