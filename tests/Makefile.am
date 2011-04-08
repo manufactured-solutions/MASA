@@ -51,6 +51,7 @@ check_PROGRAMS   = misc                \
 	           c_cns3d             \
 	           c_radiation         \
                    f_misc              \
+                   f_array             \
                    f_purge             \
                    f_heat              \
                    f_euler1d           \
@@ -119,6 +120,9 @@ c_radiation_SOURCES     = c_radiation.cpp
 f_misc_SOURCES              = f_misc.F90
 f_misc_LDADD                = -lfmasa
 
+f_array_SOURCES              = f_array.F90
+f_array_LDADD                = -lfmasa
+
 f_purge_SOURCES              = f_purge.F90
 f_purge_LDADD                = -lfmasa
 
@@ -181,8 +185,8 @@ TESTS                      = init.sh              \
                              sod                  \
 			     c_init.sh            \
 	                     c_misc               \
-	                     c_source             \
 	                     c_array              \
+	                     c_source             \
 	                     c_purge              \
 	                     c_heat1dsc           \
 	                     c_heat2dsc           \
@@ -196,6 +200,7 @@ TESTS                      = init.sh              \
                              c_radiation          \
 			     f_init.sh            \
 		             f_misc               \
+	                     f_array              \
 		             f_purge              \
 		             f_heat               \
 		             f_euler1d            \
