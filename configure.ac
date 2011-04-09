@@ -37,12 +37,18 @@ AC_SUBST(GENERIC_RELEASE)
 # CFLAGS/CXXFLAGS settings.
 # ------------------------------------------------------------------
 
+AX_CC_MINOPT	# request minimum optimization level for C	
+AX_CXX_MINOPT	# request minimum optimization level for CXX
 
 # set suffix to .F90 to get CPP support for testing vendor Fortran compiler
-
 AC_FC_SRCEXT([F90]) 
-
 AX_FC_MINOPT	# request minimum optimization level for FC
+
+#---------------------------------------------
+# Enable/Disable -Wall (Warn all)
+#---------------------------------------------
+
+AX_MASA_WARN_ALL
 
 # ------------------------------
 # Checks for required programs
@@ -54,12 +60,6 @@ AC_PROG_FC
 AC_PROG_F77
 AC_PROG_LIBTOOL
 AM_SANITY_CHECK
-
-#---------------------------------------------
-# Enable/Disable -Wall (Warn all)
-#---------------------------------------------
-
-AX_MASA_WARN_ALL
 
 #---------------------------------------------
 # Check for extra-strict regression tolerance
