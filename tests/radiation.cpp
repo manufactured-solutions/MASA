@@ -45,7 +45,7 @@ int main()
   Scalar x;
   Scalar amp=0;
 
-  Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
+  //Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
   std::vector<Scalar> vec2;
 
   // initialize the problem
