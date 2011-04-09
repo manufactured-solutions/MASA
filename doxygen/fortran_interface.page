@@ -2,6 +2,68 @@
 
 mention 'use masa'
 
-put an example in
+An example of a fortran routine is below: 
+\code
+program main
+  use masa
+  use iso_c_binding
+  implicit none
+
+  ! solutions
+  real(8) :: ufield
+  real(8) :: vfield
+  real(8) :: efield
+  real(8) :: rho
+
+  real(8) :: exact_u
+  real(8) :: exact_v
+  real(8) :: exact_p
+  real(8) :: exact_rho
+
+  ! problem size
+  integer :: i,j
+  integer :: nx = 71
+  integer :: ny = 93  
+  integer :: lx=3
+  integer :: ly=1 
+  real(8) :: dx,dy
+  real(8) :: x,y
+
+  ! initialize the problem
+  dx = real(lx)/real(nx)
+  dy = real(ly)/real(ny);
+
+  ! initialize the problem
+  call masa_init('mytest','navierstokes_2d_compressible')
+
+  ! test that all variables have been initialized
+  call masa_sanity_check()
+
+  ! evaluate masa functions (2D)
+  do i=0, nx
+     do j=0, ny
+         
+        y = j*dy        
+        x = i*dx
+        
+        ! evalulate source terms
+        ufield = masa_eval_2d_source_rho_u (x,y)
+	vfield = masa_eval_2d_source_rho_v (x,y)
+        efield = masa_eval_2d_source_rho_e (x,y)
+        rho    = masa_eval_2d_source_rho   (x,y)
+
+	! evaluate analytical terms
+        exact_u = masa_eval_2d_exact_u     (x,y)
+        exact_v = masa_eval_2d_exact_v     (x,y)
+        exact_p = masa_eval_2d_exact_p     (x,y)
+        exact_rho = masa_eval_2d_exact_rho (x,y)
+
+     enddo
+  enddo
+
+end program main
+\endcode
+
+Additional routines are provided in the examples directory.
 
 */
