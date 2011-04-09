@@ -1,6 +1,5 @@
-EXTRA_DIST  = masa.dox masa.page txt_common fig_common solutions masa.sty
-EXTRA_DIST += install.page masa.sty tutorial.page
-
+EXTRA_DIST  = masa.dox masa.page txt_common fig_common solutions
+EXTRA_DIST += install.page masa.sty tutorial.page fortran_interface.page
 
 dist-hook:
 	rm -rf `find $(distdir)/ -name .svn`

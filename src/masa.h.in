@@ -625,7 +625,9 @@ extern "C" {
   extern int masa_get_array(const char* param_name, int *n, double* array);
 
   //  --------------------------------
+  ///
   /// \name 1D Source Terms
+  ///
   //  --------------------------------
 
   /**
@@ -828,7 +830,9 @@ extern "C" {
   extern double masa_eval_2d_source_rho_e(double x,double y);
 
   // --------------------------------
+  ///
   /// \name 2D Manufactured Analytical Solution Terms
+  ///
   // --------------------------------
 
   /**
@@ -866,7 +870,9 @@ extern "C" {
   extern double masa_eval_2d_exact_rho    (double x,double y);
 
   // --------------------------------
+  ///
   /// \name 3D Source Terms
+  ///
   // --------------------------------
 
   /**
@@ -940,7 +946,9 @@ extern "C" {
   extern double masa_eval_3d_source_rho_e(double x,double y,double z);
 
   // --------------------------------
+  ///
   /// \name 3D Manufactured Analytical Solution Terms
+  ///
   // --------------------------------
 
   /**
@@ -986,7 +994,9 @@ extern "C" {
   extern double masa_eval_3d_exact_rho    (double x,double y,double z);
 
   // --------------------------------
+  ///
   /// \name Gradients of Analytical Solutions
+  ///
   // --------------------------------
 
   //
@@ -1117,7 +1127,9 @@ extern "C" {
 
 
   // --------------------------------
+  ///
   /// \name Utility functions
+  ///
   // --------------------------------
   
   /**
