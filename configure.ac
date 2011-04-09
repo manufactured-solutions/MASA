@@ -89,6 +89,14 @@ AC_ARG_ENABLE([masa-exceptions], AC_HELP_STRING([--enable-masa-exceptions],[enab
 	       AC_DEFINE(MASA_EXCEPTIONS,1,[Define if exception handling enabled]),[])
 
 #--------------------------
+# test
+#-------------------------
+
+AC_ARG_ENABLE([warn-all], AC_HELP_STRING([--enable-warn-all],[enable all warnings]),
+ 	       MASA_WARN_ALL=1 
+	       AC_DEFINE(MASA_WARN_ALL,1,[Define if strict warnings enabled]),[])
+
+#--------------------------
 # Checks for code coverage
 #-------------------------
 

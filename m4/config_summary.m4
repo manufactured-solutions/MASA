@@ -48,6 +48,12 @@ echo Optional Features:
      echo '   'Enable absolute error tests.. : no
    fi
 
+   if test "$MASA_WARN_ALL" = "1"; then
+     echo '   'Enable -Wall.. : yes
+   else
+     echo '   'Enable -Wall.. : no
+   fi
+
 echo
 echo '-------------------------------------------------------------------------------'
 

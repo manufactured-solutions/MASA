@@ -234,6 +234,8 @@ Scalar SourceQ_v ( // 38
   Scalar a_wz,
   Scalar L)
 {
+  (void) p_z;
+  (void) a_pz;
 
   Scalar pi = acos(-1);
   Scalar Q_v;
@@ -353,6 +355,12 @@ Scalar SourceQ_rho( // 39
   Scalar U;
   Scalar V;
   Scalar W;
+  (void) p_y;
+  (void) a_py;
+  (void) p_z;
+  (void) a_pz;
+  (void) mu;
+
 
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_z * sin(a_rhoz * pi * z / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_z * cos(a_uz * pi * z / L);

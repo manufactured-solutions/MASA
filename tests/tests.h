@@ -47,13 +47,16 @@ double nancheck(double x)
       printf("MASA REGRESSION FAILURE:: nan found!\n");
       exit(1);
     }
+  
+  return 0;
+
 }
 
 
 double test_default(double x)
 {
   double MASA_VAR_DEFAULT = -12345.67;
-  double uninit = -1.33;
+  //double uninit = -1.33;
   double thresh = 5 * 1e-15;
 
   if(isnan(x))
@@ -96,8 +99,8 @@ Scalar nancheck(Scalar x)
 template<typename Scalar>
 Scalar threshcheck(Scalar x, Scalar thresh)
 {
-  Scalar MASA_VAR_DEFAULT = -12345.67;
-  Scalar uninit = -1.33;
+  //Scalar MASA_VAR_DEFAULT = -12345.67;
+  //Scalar uninit = -1.33;
   //Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
 
   if(isnan(x))
@@ -119,7 +122,7 @@ template<typename Scalar>
 Scalar test_default(Scalar x)
 {
   Scalar MASA_VAR_DEFAULT = -12345.67;
-  Scalar uninit = -1.33;
+  //Scalar uninit = -1.33;
   Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
 
   if(isnan(x))
@@ -140,8 +143,8 @@ Scalar test_default(Scalar x)
 template<typename Scalar>
 Scalar threshcheck(Scalar x)
 {
-  Scalar MASA_VAR_DEFAULT = -12345.67;
-  Scalar uninit = -1.33;
+  //Scalar MASA_VAR_DEFAULT = -12345.67;
+  //Scalar uninit = -1.33;
   Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
 
   if(isnan(x))
@@ -171,8 +174,8 @@ Scalar tester(Scalar a)
 template<typename Scalar>
 Scalar test_grad(Scalar derr)
 {
-  Scalar MASA_VAR_DEFAULT = -12345.67;
-  Scalar uninit = -1.33;
+  //Scalar MASA_VAR_DEFAULT = -12345.67;
+  //Scalar uninit = -1.33;
   Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
 
   if(fabs(derr+1) > thresh)

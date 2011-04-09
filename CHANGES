@@ -1,6 +1,7 @@
 
 Version 0.30 (In Progress)
 
+  * adding new conditional (--masa-warn-all) that adds all warnings
   * standaline version binaray renamed to masa_version
   * many documentation additions and edits
   * added integrated radiative intensity solution
