@@ -29,6 +29,9 @@ AC_ARG_ENABLE([warn-all], AC_HELP_STRING([--enable-warn-all],[enable all warning
 	       AC_DEFINE(MASA_WARN_ALL,1,[Define if strict warnings enabled]),[])
 
 if test "$MASA_WARN_ALL" = "1"; then
+
+   AX_WARNINGS_SANITIZE
+
    AX_CC_MINOPT	   # request minimum optimization level for C
    AX_CFLAGS_WARN_ALL
    if test "$ax_cv_c_compiler_vendor" == "intel"; then
