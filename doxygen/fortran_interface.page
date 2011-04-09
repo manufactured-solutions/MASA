@@ -1,8 +1,10 @@
 /*! \page apiF Fortran Interface
 
-mention 'use masa'
+This section outlines the MASA interface for Fortran90.  
+To use the masa fortran interfaces, make sure to 'use masa' within 
+your source code files. An example of a fortran routine is below,
+and several other simple examples are provided in the examples section.
 
-An example of a fortran routine is below: 
 \code
 program main
   use masa
@@ -10,15 +12,8 @@ program main
   implicit none
 
   ! solutions
-  real(8) :: ufield
-  real(8) :: vfield
-  real(8) :: efield
-  real(8) :: rho
-
-  real(8) :: exact_u
-  real(8) :: exact_v
-  real(8) :: exact_p
-  real(8) :: exact_rho
+  real(8) :: ufield,vfield,efield,rho
+  real(8) :: exact_u,exact_v,exact_p,exact_rho
 
   ! problem size
   integer :: i,j
@@ -63,7 +58,5 @@ program main
 
 end program main
 \endcode
-
-Additional routines are provided in the examples directory.
 
 */
