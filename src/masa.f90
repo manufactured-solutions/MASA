@@ -164,7 +164,7 @@ module masa
      !! @param param_name A character string for the 
      !! particular variable to be set. 
      !!
-     !! @param Double precision number to use as the new 
+     !! @param Real(8) number to use as the new 
      !! value of the variable.
      !!
      subroutine masa_set_param_passthrough(param_name,value) bind (C,name='masa_set_param')
@@ -231,8 +231,8 @@ module masa
   interface 
      !> Evaluates the one dimensional source term of the temperature.
      !!
-     !! @param[in] x Double precision value of the spatial location.
-     !! @return Double precision value for the source term.
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @return Real(8) value for the source term.
      !!
      real (c_double) function masa_eval_1d_source_t(x) bind (C,name='masa_eval_1d_source_t')
        use iso_c_binding
@@ -246,8 +246,8 @@ module masa
   interface 
      !> Evaluates the one dimensional source term of the velocity.
      !!
-     !! @param[in] x Double precision value of the spatial location.
-     !! @return Double precision value for the source term.
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @return Real(8) value for the source term.
      !!
      real (c_double) function masa_eval_1d_source_u(x) bind (C,name='masa_eval_1d_source_u')
        use iso_c_binding
@@ -261,8 +261,8 @@ module masa
   interface 
      !> Evaluates the one dimensional source term of the energy.
      !!
-     !! @param[in] x Double precision value of the spatial location.
-     !! @return Double precision value for the source term.
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @return Real(8) value for the source term.
      !!
      real (c_double) function masa_eval_1d_source_e(x) bind (C,name='masa_eval_1d_source_e')
        use iso_c_binding
@@ -276,8 +276,8 @@ module masa
   interface 
      !> Evaluates the one dimensional source term of the density.
      !!
-     !! @param[in] x Double precision value of the spatial location.
-     !! @return Double precision value for the source term.
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @return Real(8) value for the source term.
      !!
      real (c_double) function masa_eval_1d_source_rho(x) bind (C,name='masa_eval_1d_source_rho')
        use iso_c_binding
@@ -291,8 +291,8 @@ module masa
   interface 
      !> Evaluates the one dimensional source term of the density*velocity.
      !!
-     !! @param[in] x Double precision value of the spatial location.
-     !! @return Double precision value for the source term.
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @return Real(8) value for the source term.
      !!
      real (c_double) function masa_eval_1d_source_rho_u(x) bind (C,name='masa_eval_1d_source_rho_u')
        use iso_c_binding
@@ -306,8 +306,8 @@ module masa
   interface 
      !> Evaluates the one dimensional source term of the energy*density.
      !!
-     !! @param[in] x Double precision value of the spatial location.
-     !! @return Double precision value for the source term.
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @return Real(8) value for the source term.
      !!
      real (c_double) function masa_eval_1d_source_rho_e(x) bind (C,name='masa_eval_1d_source_rho_e')
        use iso_c_binding
@@ -322,10 +322,10 @@ module masa
      !> Evaluates the one dimensional source term of the 
      !! concentration of Nitrogen.
      !!
-     !! @param[in] x Double precision value of the spatial location.
+     !! @param[in] x Real(8) value of the x-coordinate.
      !! @param[in] funct Procedure that returns value of 
      !! equilibrium constant as a function of temperature, e.g. f(T)
-     !! @return Double precision value for the source term.
+     !! @return Real(8) value for the source term.
      !!
      real (c_double) function masa_eval_1d_source_rho_N(x,funct) bind (C,name='masa_eval_1d_source_rho_N')
        use iso_c_binding
@@ -342,10 +342,10 @@ module masa
      !> Evaluates the one dimensional source term of the 
      !! concentration of Nitrogen-two.
      !!
-     !! @param[in] x Double precision value of the spatial location.
+     !! @param[in] x Real(8) value of the x-coordinate.
      !! @param[in] funct Procedure that returns value of 
      !! equilibrium constant as a function of temperature, e.g. f(T)
-     !! @return Double precision value for the source term.
+     !! @return Real(8) value for the source term.
      !!
      real (c_double) function masa_eval_1d_source_rho_N2(x,funct) bind (C,name='masa_eval_1d_source_rho_N2')
        use iso_c_binding
@@ -729,6 +729,12 @@ module masa
   ! ---------------------------------
 
   interface 
+     !> Evaluates the one dimensional exact solution of the 
+     !! temperature.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_1d_exact_t(x) bind (C,name='masa_eval_1d_exact_t')
        use iso_c_binding
        implicit none
@@ -739,6 +745,12 @@ module masa
   end interface
 
   interface 
+     !> Evaluates the one dimensional exact solution of the 
+     !! u-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_1d_exact_u(x) bind (C,name='masa_eval_1d_exact_u')
        use iso_c_binding
        implicit none
@@ -749,6 +761,12 @@ module masa
   end interface
 
   interface 
+     !> Evaluates the one dimensional exact solution of the 
+     !! pressure.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_1d_exact_p(x) bind (C,name='masa_eval_1d_exact_p')
        use iso_c_binding
        implicit none
@@ -759,6 +777,12 @@ module masa
   end interface
 
   interface 
+     !> Evaluates the one dimensional exact solution of the 
+     !! density.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_1d_exact_rho(x) bind (C,name='masa_eval_1d_exact_rho')
        use iso_c_binding
        implicit none
@@ -769,6 +793,12 @@ module masa
   end interface
 
   interface 
+     !> Evaluates the one dimensional exact solution of the 
+     !! Nitrogen.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_1d_exact_rho_N(x) bind (C,name='masa_eval_1d_exact_rho_N')
        use iso_c_binding
        implicit none
@@ -779,6 +809,12 @@ module masa
   end interface
 
   interface 
+     !> Evaluates the one dimensional exact solution of the 
+     !! Nitrogen two.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_1d_exact_rho_N2(x) bind (C,name='masa_eval_1d_exact_rho_N2')
        use iso_c_binding
        implicit none
@@ -793,6 +829,13 @@ module masa
   ! ---------------------------------
 
   interface 
+     !> Evaluates the two dimensional exact solution of the 
+     !! temperature.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_2d_exact_t(x,y) bind (C,name='masa_eval_2d_exact_t')
        use iso_c_binding
        implicit none
@@ -804,6 +847,13 @@ module masa
   end interface
 
   interface 
+     !> Evaluates the two dimensional exact solution of the 
+     !! u-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_2d_exact_u(x,y) bind (C,name='masa_eval_2d_exact_u')
        use iso_c_binding
        implicit none
@@ -815,6 +865,13 @@ module masa
   end interface
 
   interface 
+     !> Evaluates the two dimensional exact solution of the 
+     !! v-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_2d_exact_v(x,y) bind (C,name='masa_eval_2d_exact_v')
        use iso_c_binding
        implicit none
@@ -826,6 +883,13 @@ module masa
   end interface
 
   interface 
+     !> Evaluates the two dimensional exact solution of the 
+     !! pressure.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_2d_exact_p(x,y) bind (C,name='masa_eval_2d_exact_p')
        use iso_c_binding
        implicit none
@@ -837,6 +901,13 @@ module masa
   end interface
 
   interface 
+     !> Evaluates the two dimensional exact solution of the 
+     !! density.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_2d_exact_rho(x,y) bind (C,name='masa_eval_2d_exact_rho')
        use iso_c_binding
        implicit none
@@ -852,6 +923,14 @@ module masa
   ! ---------------------------------
 
   interface 
+     !> Evaluates the three dimensional exact solution of the 
+     !! temperature.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_3d_exact_t(x,y,z) bind (C,name='masa_eval_3d_exact_t')
        use iso_c_binding
        implicit none
@@ -864,6 +943,14 @@ module masa
   end interface
 
   interface 
+     !> Evaluates the three dimensional exact solution of the 
+     !! u-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_3d_exact_u(x,y,z) bind (C,name='masa_eval_3d_exact_u')
        use iso_c_binding
        implicit none
@@ -876,6 +963,14 @@ module masa
   end interface
 
   interface 
+     !> Evaluates the three dimensional exact solution of the 
+     !! v-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_3d_exact_v(x,y,z) bind (C,name='masa_eval_3d_exact_v')
        use iso_c_binding
        implicit none
@@ -888,6 +983,14 @@ module masa
   end interface
 
   interface 
+     !> Evaluates the three dimensional exact solution of the 
+     !! w-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_3d_exact_w(x,y,z) bind (C,name='masa_eval_3d_exact_w')
        use iso_c_binding
        implicit none
@@ -899,7 +1002,15 @@ module masa
      end function masa_eval_3d_exact_w
   end interface
 
-  interface 
+  interface
+     !> Evaluates the three dimensional exact solution of the 
+     !! pressure.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_3d_exact_p(x,y,z) bind (C,name='masa_eval_3d_exact_p')
        use iso_c_binding
        implicit none
@@ -912,6 +1023,14 @@ module masa
   end interface
 
   interface 
+     !> Evaluates the three dimensional exact solution of the 
+     !! density.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
      real (c_double) function masa_eval_3d_exact_rho(x,y,z) bind (C,name='masa_eval_3d_exact_rho')
        use iso_c_binding
        implicit none
