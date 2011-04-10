@@ -5,6 +5,8 @@ To use the masa fortran interfaces, make sure to "use masa" within
 your source code files. An example of a fortran routine is below,
 and several other simple examples are provided in the examples section.
 
+In addition, the user should reference \link masa.f90 the full Fortran90 API documentation \endlink. 
+
 \code
 program main
   use masa
