@@ -1,4 +1,4 @@
-/*! \page Installation Installation/Linkage
+/*! \page install Installation/Linkage
 
 libMASA uses the GNU autotools suite (autoconf, automake, and libtool)
 for its development build system.  This system is popular among the

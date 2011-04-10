@@ -18,10 +18,10 @@ further divided into the following subsections:
 
 <ul>
   <li> \subpage model "Library Overview" </li>
-  <li> \subpage Installation "Installation/Linkage" </li>
+  <li> \subpage install "Installation/Linkage" </li>
   <li> \link masa.h C/C++ Interface \endlink </li>
-  <li> \subpage apiF "Fortran Interface" </li>
-  <li> \subpage Tutorial "Tutorial" </li>
+  <li> \subpage apiF </li>
+  <li> \link Tutorial Tutorial </li>
   <li> \subpage mms_avail "Available Manufactured Solutions"</li>
   <li> \subpage add_sol "Adding Additional Manufactured Solutions to MASA" </li>
   <li> <a href="http://buildbot.ices.utexas.edu/docs/buildbot/masa/build/docs/html/lcov/build/src/index.html">Buildbot Coverage</a> </li>
