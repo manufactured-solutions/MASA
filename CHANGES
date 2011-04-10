@@ -2,7 +2,7 @@
 Version 0.30 (10 April 2011)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.30
 
-  * adding new compiler configuration option (--masa-warn-all)
+  * added new compiler configuration option (--masa-warn-all)
   * standalone version binary renamed to masa_version
   * many documentation additions and edits
   * added integrated radiative intensity solution
