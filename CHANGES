@@ -1,8 +1,9 @@
 
-Version 0.30 (In Progress)
+Version 0.30 (10 April 2011)
+https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.30
 
-  * adding new conditional (--masa-warn-all) that adds all warnings
-  * standaline version binaray renamed to masa_version
+  * adding new compiler configuration option (--masa-warn-all)
+  * standalone version binary renamed to masa_version
   * many documentation additions and edits
   * added integrated radiative intensity solution
   * added 1d Navier-Stokes + ablation (C/C++ only) solution
@@ -18,12 +19,12 @@ Version 0.30 (In Progress)
   * adding new conditional (--masa-exceptions) that adds exception handling
   * modifications to Fortran interface
   * added doxygen documentation for all c/cpp functions
-  * edited navier stokes default parameters, added realizability regression test
+  * edited Navier-Stokes default parameters, added realizability regression test
   * updated steady euler equations with hierarchic model, added realizability regression test
-  * ported to 32 bit mac, ubuntu environments
-  * added reynolds averaged navier stokes solution
+  * ported to 32 bit OSX, Ubuntu environments
+  * added reynolds averaged Navier-Stokes solution
   * added check for presence of 'nan's within regression tests
-  * fixed bug for axisymmetric euler and navier-stokes in 32 bit compilers
+  * fixed bug for axisymmetric euler and Navier-Stokes in 32 bit compilers
   * added support for PGI compilers (tested on version 10.8)
 
 Version 0.20 (23 September 2010) 
