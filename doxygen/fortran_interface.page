@@ -1,4 +1,4 @@
-/*! \page apiF Fortran Interface
+/*! \page apif Fortran Interface
 
 This section outlines the MASA interface for Fortran90.  
 To use the masa fortran interfaces, make sure to "use masa" within 
