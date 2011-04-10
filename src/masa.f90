@@ -32,6 +32,9 @@ module masa
   use iso_c_binding
   implicit none
 
+  !> \file
+  !! MASA Fortran Interface
+
   ! -------------------------------------
   !! \name MMS Init/Selection Routines
   ! -------------------------------------
