@@ -10,7 +10,7 @@
 #
 # LAST MODIFICATION
 #
-#   2010-7-20
+#   $Id$
 #
 
 AC_DEFUN([AX_SUMMARIZE_CONFIG],
