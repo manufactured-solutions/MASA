@@ -501,7 +501,7 @@ extern "C" {
   // --------------------------------
 
   /**
-   * Masa_init initalizes a masa manufactured solution class.
+   * Initalizes a masa manufactured solution class.
    * 
    * This routine takes two arguments, both strings of characters. 
    * The first character string is a handle for the newly initalized 

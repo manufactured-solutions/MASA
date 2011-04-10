@@ -21,7 +21,7 @@ further divided into the following subsections:
   <li> \subpage install "Installation/Linkage" </li>
   <li> \link masa.h C/C++ Interface \endlink </li>
   <li> \subpage apif "Fortran Interface" </li>
-  <li> \link Tutorial Tutorial </li>
+  <li> \link tut Tutorial </li>
   <li> \subpage mms_avail "Available Manufactured Solutions"</li>
   <li> \subpage add_sol "Adding Additional Manufactured Solutions to MASA" </li>
   <li> <a href="http://buildbot.ices.utexas.edu/docs/buildbot/masa/build/docs/html/lcov/build/src/index.html">Buildbot Coverage</a> </li>
@@ -126,7 +126,7 @@ Please check back for details on how to cite MASA.
 
 /*! \page mms_avail Available Manufactured Solutions
 
-    The following sections detail all available manufactured solutions in MASA.
+The following sections detail all available manufactured solutions in MASA.
 
 <ul>
 <li> \subpage heat  </li>

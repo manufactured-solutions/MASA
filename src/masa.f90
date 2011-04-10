@@ -37,12 +37,21 @@ module masa
   ! -------------------------------------
 
   interface
-     subroutine masa_init_passthrough(user_tag,desired_mms_function) bind (C,name='masa_init')
+     !> Initalizes a masa manufactured solution class.
+     !! @param user_tag The first character string is a handle 
+     !! for the newly initalized class. (e.g. "nick's mms")
+     !!
+     !! @param mms_id The second character string is the unique masa 
+     !! identifier string for a particular masa class. (e.g. "euler_1d"). 
+     !! See \subpage mms_avail "Available Manufactured Solutions"
+     !! for information on all available solution strings.
+     !!
+     subroutine masa_init_passthrough(user_tag,mms_id) bind (C,name='masa_init')
        use iso_c_binding
        implicit none
 
        character(c_char), intent(in) :: user_tag(*)
-       character(c_char), intent(in) :: desired_mms_function(*)
+       character(c_char), intent(in) :: mms_id(*)
 
      end subroutine masa_init_passthrough
   end interface
@@ -235,73 +244,115 @@ module masa
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_source_u(value) bind (C,name='masa_eval_1d_source_u')
+     !> Evaluates the one dimensional source term of the velocity.
+     !!
+     !! @param[in] x Double precision value of the spatial location.
+     !! @return Double precision value for the source term.
+     !!
+     real (c_double) function masa_eval_1d_source_u(x) bind (C,name='masa_eval_1d_source_u')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
+       real (c_double), value :: x
        
      end function masa_eval_1d_source_u
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_source_e(value) bind (C,name='masa_eval_1d_source_e')
+     !> Evaluates the one dimensional source term of the energy.
+     !!
+     !! @param[in] x Double precision value of the spatial location.
+     !! @return Double precision value for the source term.
+     !!
+     real (c_double) function masa_eval_1d_source_e(x) bind (C,name='masa_eval_1d_source_e')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
+       real (c_double), value :: x
        
      end function masa_eval_1d_source_e
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_source_rho(value) bind (C,name='masa_eval_1d_source_rho')
+     !> Evaluates the one dimensional source term of the density.
+     !!
+     !! @param[in] x Double precision value of the spatial location.
+     !! @return Double precision value for the source term.
+     !!
+     real (c_double) function masa_eval_1d_source_rho(x) bind (C,name='masa_eval_1d_source_rho')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
+       real (c_double), value :: x
        
      end function masa_eval_1d_source_rho
   end interface  
 
   interface 
-     real (c_double) function masa_eval_1d_source_rho_u(value) bind (C,name='masa_eval_1d_source_rho_u')
+     !> Evaluates the one dimensional source term of the density*velocity.
+     !!
+     !! @param[in] x Double precision value of the spatial location.
+     !! @return Double precision value for the source term.
+     !!
+     real (c_double) function masa_eval_1d_source_rho_u(x) bind (C,name='masa_eval_1d_source_rho_u')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
+       real (c_double), value :: x
        
      end function masa_eval_1d_source_rho_u
   end interface  
 
   interface 
-     real (c_double) function masa_eval_1d_source_rho_e(value) bind (C,name='masa_eval_1d_source_rho_e')
+     !> Evaluates the one dimensional source term of the energy*density.
+     !!
+     !! @param[in] x Double precision value of the spatial location.
+     !! @return Double precision value for the source term.
+     !!
+     real (c_double) function masa_eval_1d_source_rho_e(x) bind (C,name='masa_eval_1d_source_rho_e')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
+       real (c_double), value :: x
        
      end function masa_eval_1d_source_rho_e
   end interface
 
   interface 
-     real (c_double) function masa_eval_1d_source_rho_N(value,fun) bind (C,name='masa_eval_1d_source_rho_N')
+     !> Evaluates the one dimensional source term of the 
+     !! concentration of Nitrogen.
+     !!
+     !! @param[in] x Double precision value of the spatial location.
+     !! @param[in] funct Procedure that returns value of 
+     !! equilibrium constant as a function of temperature, e.g. f(T)
+     !! @return Double precision value for the source term.
+     !!
+     real (c_double) function masa_eval_1d_source_rho_N(x,funct) bind (C,name='masa_eval_1d_source_rho_N')
        use iso_c_binding
        implicit none
        
-       real (c_double), value    :: value
-       real (c_double), external :: fun
+       real (c_double), value    :: x
+       real (c_double), external :: funct
        
      end function masa_eval_1d_source_rho_N
   end interface  
 
   interface 
-     real (c_double) function masa_eval_1d_source_rho_N2(value,fun) bind (C,name='masa_eval_1d_source_rho_N2')
+ 
+     !> Evaluates the one dimensional source term of the 
+     !! concentration of Nitrogen-two.
+     !!
+     !! @param[in] x Double precision value of the spatial location.
+     !! @param[in] funct Procedure that returns value of 
+     !! equilibrium constant as a function of temperature, e.g. f(T)
+     !! @return Double precision value for the source term.
+     !!
+     real (c_double) function masa_eval_1d_source_rho_N2(x,funct) bind (C,name='masa_eval_1d_source_rho_N2')
        use iso_c_binding
        implicit none
        
-       real (c_double), value    :: value
-       real (c_double), external :: fun
+       real (c_double), value    :: x
+       real (c_double), external :: funct
        
      end function masa_eval_1d_source_rho_N2
   end interface  
@@ -311,100 +362,160 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_2d_source_t(value,value2) bind (C,name='masa_eval_2d_source_t')
+     !> Evaluates the two dimensional source term of the temperature.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_2d_source_t(x,y) bind (C,name='masa_eval_2d_source_t')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
+       real (c_double), value :: x
+       real (c_double), value :: y
        
      end function masa_eval_2d_source_t
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_source_u(value,value2) bind (C,name='masa_eval_2d_source_u')
+     !> Evaluates the two dimensional source term of the u-component
+     !! of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_2d_source_u(x,y) bind (C,name='masa_eval_2d_source_u')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
+       real (c_double), value :: x
+       real (c_double), value :: y
 
      end function masa_eval_2d_source_u
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_source_v(value,value2) bind (C,name='masa_eval_2d_source_v')
+     !> Evaluates the two dimensional source term of the v-component
+     !! of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_2d_source_v(x,y) bind (C,name='masa_eval_2d_source_v')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
+       real (c_double), value :: x
+       real (c_double), value :: y
        
      end function masa_eval_2d_source_v
   end interface
 
-  interface 
-     real (c_double) function masa_eval_2d_source_e(value,value2) bind (C,name='masa_eval_2d_source_e')
+  interface
+     !> Evaluates the two dimensional source term of the energy.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_2d_source_e(x,y) bind (C,name='masa_eval_2d_source_e')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
+       real (c_double), value :: x
+       real (c_double), value :: y
        
      end function masa_eval_2d_source_e
   end interface
 
   interface 
-     real (c_double) function masa_eval_2d_source_rho(value,value2) bind (C,name='masa_eval_2d_source_rho')
+     !> Evaluates the two dimensional source term of the density.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_2d_source_rho(x,y) bind (C,name='masa_eval_2d_source_rho')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
+       real (c_double), value :: x
+       real (c_double), value :: y
        
      end function masa_eval_2d_source_rho
   end interface  
 
   interface 
-     real (c_double) function masa_eval_2d_source_rho_u(value,value2) bind (C,name='masa_eval_2d_source_rho_u')
+     !> Evaluates the two dimensional source term of the 
+     !! density*u-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_2d_source_rho_u(x,y) bind (C,name='masa_eval_2d_source_rho_u')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
+       real (c_double), value :: x
+       real (c_double), value :: y
        
      end function masa_eval_2d_source_rho_u
   end interface  
 
   interface 
-     real (c_double) function masa_eval_2d_source_rho_v(value,value2) bind (C,name='masa_eval_2d_source_rho_v')
+     !> Evaluates the two dimensional source term of the 
+     !! density*v-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_2d_source_rho_v(x,y) bind (C,name='masa_eval_2d_source_rho_v')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
+       real (c_double), value :: x
+       real (c_double), value :: y
        
      end function masa_eval_2d_source_rho_v
   end interface
   
   interface 
-     real (c_double) function masa_eval_2d_source_rho_w(value,value2) bind (C,name='masa_eval_2d_source_rho_w')
+     !> Evaluates the two dimensional source term of the 
+     !! density*w-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_2d_source_rho_w(x,y) bind (C,name='masa_eval_2d_source_rho_w')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
+       real (c_double), value :: x
+       real (c_double), value :: y
        
      end function masa_eval_2d_source_rho_w
   end interface  
 
   interface 
-     real (c_double) function masa_eval_2d_source_rho_e(value,value2) bind (C,name='masa_eval_2d_source_rho_e')
+     !> Evaluates the two dimensional source term of the 
+     !! density*energy.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_2d_source_rho_e(x,y) bind (C,name='masa_eval_2d_source_rho_e')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
+       real (c_double), value :: x
+       real (c_double), value :: y
        
      end function masa_eval_2d_source_rho_e
   end interface  
@@ -413,122 +524,202 @@ module masa
   ! MMS source term interfaces -- 3d
   ! ---------------------------------
 
-  interface 
-     real (c_double) function masa_eval_3d_source_t(value,value2,value3) bind (C,name='masa_eval_3d_source_t')
+  interface  
+     !> Evaluates the three dimensional source term of the 
+     !! temperature.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_3d_source_t(x,y,z) bind (C,name='masa_eval_3d_source_t')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
-       real (c_double), value :: value3
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
        
      end function masa_eval_3d_source_t
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_source_u(value,value2,value3) bind (C,name='masa_eval_3d_source_u')
+     !> Evaluates the three dimensional source term of the 
+     !! u-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_3d_source_u(x,y,z) bind (C,name='masa_eval_3d_source_u')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
-       real (c_double), value :: value3
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
        
      end function masa_eval_3d_source_u
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_source_v(value,value2,value3) bind (C,name='masa_eval_3d_source_v')
+     !> Evaluates the three dimensional source term of the 
+     !! v-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_3d_source_v(x,y,z) bind (C,name='masa_eval_3d_source_v')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
-       real (c_double), value :: value3       
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
 
      end function masa_eval_3d_source_v
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_source_w(value,value2,value3) bind (C,name='masa_eval_3d_source_w')
+     !> Evaluates the three dimensional source term of the 
+     !! w-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_3d_source_w(x,y,z) bind (C,name='masa_eval_3d_source_w')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
-       real (c_double), value :: value3       
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
 
      end function masa_eval_3d_source_w
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_source_e(value,value2,value3) bind (C,name='masa_eval_3d_source_e')
+     !> Evaluates the three dimensional source term of the 
+     !! energy.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_3d_source_e(x,y,z) bind (C,name='masa_eval_3d_source_e')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
-       real (c_double), value :: value3
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
        
      end function masa_eval_3d_source_e
   end interface
 
   interface 
-     real (c_double) function masa_eval_3d_source_rho(value,value2,value3) bind (C,name='masa_eval_3d_source_rho')
+     !> Evaluates the three dimensional source term of the 
+     !! density.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_3d_source_rho(x,y,z) bind (C,name='masa_eval_3d_source_rho')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
-       real (c_double), value :: value3       
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
 
      end function masa_eval_3d_source_rho
   end interface  
 
   interface 
-     real (c_double) function masa_eval_3d_source_rho_u(value,value2,value3) bind (C,name='masa_eval_3d_source_rho_u')
+     !> Evaluates the three dimensional source term of the 
+     !! density*u-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_3d_source_rho_u(x,y,z) bind (C,name='masa_eval_3d_source_rho_u')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
-       real (c_double), value :: value3       
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
 
      end function masa_eval_3d_source_rho_u
   end interface  
 
   interface 
-     real (c_double) function masa_eval_3d_source_rho_v(value,value2,value3) bind (C,name='masa_eval_3d_source_rho_v')
+     !> Evaluates the three dimensional source term of the 
+     !! density*v-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_3d_source_rho_v(x,y,z) bind (C,name='masa_eval_3d_source_rho_v')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
-       real (c_double), value :: value3       
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
 
      end function masa_eval_3d_source_rho_v
   end interface  
 
   interface 
-     real (c_double) function masa_eval_3d_source_rho_w(value,value2,value3) bind (C,name='masa_eval_3d_source_rho_w')
+     !> Evaluates the three dimensional source term of the 
+     !! density*w-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_3d_source_rho_w(x,y,z) bind (C,name='masa_eval_3d_source_rho_w')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
-       real (c_double), value :: value3       
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
 
      end function masa_eval_3d_source_rho_w
   end interface  
 
   interface 
-     real (c_double) function masa_eval_3d_source_rho_e(value,value2,value3) bind (C,name='masa_eval_3d_source_rho_e')
+     !> Evaluates the three dimensional source term of the 
+     !! density*energy.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_3d_source_rho_e(x,y,z) bind (C,name='masa_eval_3d_source_rho_e')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
-       real (c_double), value :: value2
-       real (c_double), value :: value3       
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
        
      end function masa_eval_3d_source_rho_e
   end interface  
