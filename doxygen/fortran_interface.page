@@ -6,7 +6,7 @@ your source code files. An example of a fortran routine is below,
 and several other simple examples are provided in the examples section.
 
 Compiling MASA requires additional library linkage. The user is encouraged to 
-reference \subpage install "Installation/Linkage" for details.
+reference \link install Installation/Linkage \endlink for details.
 
 In addition, the user should reference the \link masa.f90 
 full Fortran90 API documentation \endlink for complete details on 
