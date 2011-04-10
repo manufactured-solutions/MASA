@@ -48,6 +48,11 @@ module masa
   end interface
 
   interface
+     !> Display (to stdout) the number of user initalized solutions. 
+     !!
+     !! This will then display each solutions unique handle and 
+     !! full manufactured class name.
+     !!
      subroutine masa_list_mms() bind (C,name='masa_list_mms')
        use iso_c_binding
        implicit none
@@ -55,7 +60,10 @@ module masa
      end subroutine masa_list_mms
   end interface
 
-  interface
+  interface     
+     !> This function sets all masa parameters of the currently 
+     !! initialized solution to uninitalized.
+     !!
      subroutine masa_purge_default_param() bind (C,name='masa_purge_default_param')
        use iso_c_binding
        implicit none
@@ -64,6 +72,15 @@ module masa
   end interface
 
   interface
+     !> Selects an already initalized manufactured solution class.
+     !!
+     !! Thus, if the user had created two manufactured 
+     !! classes (say, nick and bob) using masa_init, 
+     !! he could switch between them by passing the 
+     !! handle to this routine. ex. masa_select_mms("nick")
+     !!
+     !! @param desired_mms_function Unique manufactured class handle string.
+     !! 
      subroutine masa_select_mms_passthrough(desired_mms_function) bind (C,name='masa_select_mms')
        use iso_c_binding
        implicit none
@@ -74,6 +91,9 @@ module masa
   end interface
 
   interface
+     !> Checks that all parameters for the currently selected 
+     !! manufactured class have been initalized to some value.
+     !!
      subroutine masa_sanity_check() bind (C,name='masa_sanity_check')
        use iso_c_binding
        implicit none
@@ -82,10 +102,14 @@ module masa
   end interface
 
   ! ---------------------------------
-  ! MMS Parameter Routines
+  !! /name MMS Parameter Routines
   ! ---------------------------------
 
   interface
+     !> Subroutine that will initalize
+     !! all the registered variables to selected defaults
+     !! for the currently selected manufactured solution class. 
+     !!
      subroutine masa_init_param() bind (C,name='masa_init_param')
        use iso_c_binding
        implicit none
@@ -94,14 +118,27 @@ module masa
   end interface
 
   interface
+     !> Output the currently selected manufactured
+     !! solution class' parameter names and values to standard output
+     !!
      subroutine masa_display_param() bind (C,name='masa_display_param')
        use iso_c_binding
        implicit none
-
+       
      end subroutine masa_display_param
   end interface
 
   interface
+     
+     !> Will return a particular registered variables inside 
+     !! the currently selected manufactured solution class. 
+     !!
+     !! @param param_name a character string for
+     !! the particular variable value to be returned.
+     !!
+     !! @return a double of the currently held value 
+     !! of the specified variable. 
+     !!
      real (c_double) function masa_get_param_passthrough(param_name) bind (C,name='masa_get_param')
        use iso_c_binding
        implicit none
@@ -112,6 +149,15 @@ module masa
   end interface
 
   interface
+     !> Set a particular registered variables inside 
+     !! the currently selected manufactured solution class. 
+     !!
+     !! @param param_name A character string for the 
+     !! particular variable to be set. 
+     !!
+     !! @param Double precision number to use as the new 
+     !! value of the variable.
+     !!
      subroutine masa_set_param_passthrough(param_name,value) bind (C,name='masa_set_param')
        use iso_c_binding
        implicit none
@@ -127,6 +173,9 @@ module masa
   ! ---------------------------------
 
   interface
+     !> Output the currently selected manufactured
+     !! solution class' vector names and lengths to standard output.
+     !!
      subroutine masa_display_array() bind (C,name='masa_display_array')
        use iso_c_binding
        implicit none
@@ -135,11 +184,20 @@ module masa
   end interface
 
   interface
-     subroutine masa_get_array_passthrough(param_name,it,array) bind (C,name='masa_get_array')
+     !> Return an array from the currently selected manufactured 
+     !! solution class. 
+     !!
+     !! @param array_name Name of the desired array.
+     !!
+     !! @param it Integer specifying the length of the array.
+     !!
+     !! @param array The array.
+     !!
+     subroutine masa_get_array_passthrough(array_name,it,array) bind (C,name='masa_get_array')
        use iso_c_binding
        implicit none
 
-       character(c_char), intent(in) :: param_name(*)
+       character(c_char), intent(in) :: array_name(*)
        integer (c_int), value        :: it
        real (c_double),dimension(*),intent(out)  :: array
 
@@ -162,11 +220,16 @@ module masa
   ! ---------------------------------
 
   interface 
-     real (c_double) function masa_eval_1d_source_t(value) bind (C,name='masa_eval_1d_source_t')
+     !> Evaluates the one dimensional source term of the temperature.
+     !!
+     !! @param[in] x Double precision value of the spatial location.
+     !! @return Double precision value for the source term.
+     !!
+     real (c_double) function masa_eval_1d_source_t(x) bind (C,name='masa_eval_1d_source_t')
        use iso_c_binding
        implicit none
        
-       real (c_double), value :: value
+       real (c_double), value :: x
        
      end function masa_eval_1d_source_t
   end interface

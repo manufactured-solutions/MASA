@@ -626,9 +626,11 @@ extern "C" {
   //  --------------------------------
 
   /**
-   * Subroutine that will return the value of the source 
-   * term for the temperature of the currently selected
-   * one dimensional masa function 
+   * Evaluate the one dimensional source term of the temperature.
+   * @param[in] x Double precision value of the spatial location.
+   * 
+   * @return Double precision value for the source term.
+   *
    */
   extern double masa_eval_1d_source_t  (double x);
 
