@@ -1,7 +1,7 @@
 /*! \page apiF Fortran Interface
 
 This section outlines the MASA interface for Fortran90.  
-To use the masa fortran interfaces, make sure to 'use masa' within 
+To use the masa fortran interfaces, make sure to "use masa" within 
 your source code files. An example of a fortran routine is below,
 and several other simple examples are provided in the examples section.
 
