@@ -59,29 +59,24 @@
 
 /// \endcond
 
-/** \page apiC C/C++ Library Interface                                        
- *                                                                            
- * This section outlines the available MASA functions for C/C++.  To          
- * use, make sure to \#include <masa.h> within your source code               
- * files. Several simple examples using these functions are provided          
- * in the examples section.  
- *
- * \section init Initialization Routines
- */
-
-
 // This header file contains the public functions designed to be exposed in MASA
 // What follows is the masa.h doxygen documentation headers
 
 /** \file
- * MASA header file containing all public C/C++ API
+ * MASA public API.
  * 
- * MASA.h is a header file that contains all the public objects and member functions for the C/C++ interfaces. 
- * To use, be sure to #include <masa.h> in any C or C++ programs calling MASA routines. In addition, all functions are 
- * encapsulated in a MASA namespace, and thus C++ routines require 'using namespace MASA' for access.
+ * masa.h is the header file for the MASA library which contains all
+ * public objects and member functions for the C/C++ interfaces.  To
+ * use, be sure to \code #include <masa.h> \endcode in any C or C++
+ * programs calling MASA routines. In addition, all C++ functions are
+ * encapsulated within a MASA namespace, and thus C++ routines require
+ * an additional namespace directive for access: 
+ * \code using namespace MASA; \endcode
  * 
- * Several simple examples for using these functions are provided in the examples section. 
- * Functions which have an integer return value return "0" upon success.
+ * Several simple examples for using these functions are provided in
+ * the examples/ director from a local MASA installation.  Note that
+ * functions which have an integer return value return "0" upon
+ * success. The following sections highlight the available MASA functions.
  * 
  */
 

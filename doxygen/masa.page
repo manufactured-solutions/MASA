@@ -19,7 +19,7 @@ further divided into the following subsections:
 <ul>
   <li> \subpage model "Library Overview" </li>
   <li> \subpage Installation "Installation/Linkage" </li>
-  <li> \subpage apiC "C/C++ Interface" </li>
+  <li> \link masa.h C/C++ Interface \endlink </li>
   <li> \subpage apiF "Fortran Interface" </li>
   <li> \subpage Tutorial "Tutorial" </li>
   <li> \subpage mms_avail "Available Manufactured Solutions"</li>
