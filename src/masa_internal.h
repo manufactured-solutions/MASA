@@ -266,7 +266,30 @@ namespace MASA
     int display_vec();                                          // print all variable names and values
     void return_name(std::string* inname){inname->assign(mmsname);};  // method: returns name
     void return_dim (int* indim)    {*indim=dimension;};         // method: returns dimension of solution
+
+  /* 
+   * -------------------------------------------------------------------------------------------   
+   *
+   * smasa: functions (stochastic masa)
+   * 
+   * -------------------------------------------------------------------------------------------
+   */
+
+    virtual Scalar eval_likelyhood(Scalar){std::cout << "SMASA ERROR:: likelyhood is unavailable or not properly loaded.\n";return -1.33;};
+    virtual Scalar eval_prior     (Scalar){std::cout << "SMASA ERROR:: prior is unavailable or not properly loaded.\n";return -1.33;};
+    virtual Scalar eval_posterior (Scalar){std::cout << "SMASA ERROR:: posterior is unavailable or not properly loaded.\n";return -1.33;};
+
+  /* 
+   * -------------------------------------------------------------------------------------------   
+   *
+   * smasa: distance between probability distributions
+   * 
+   * -------------------------------------------------------------------------------------------
+   */
     
+    virtual Scalar eval_hellinger (Scalar) {std::cout << "SMASA ERROR:: likelyhood is unavailable or not properly loaded.\n";return -1.33;};
+    virtual Scalar eval_kolmogorov(Scalar) {std::cout << "SMASA ERROR:: likelyhood is unavailable or not properly loaded.\n";return -1.33;};
+
   }; // done with MMS base class
 
   /* 

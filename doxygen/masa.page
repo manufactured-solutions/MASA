@@ -33,7 +33,7 @@ further divided into the following subsections:
 \section bugs Reporting Bugs
 
 Bugs in the code and errors or omissions in the documentation can be
-reported to nick@ices.utexas.edu.  Requests and contributions are
+reported to masa-dev@ices.utexas.edu.  Requests and contributions are
 welcome at the same e-mail address.  All bug reports should include:
 <ul>
 <li>the version number of the MASA library,
