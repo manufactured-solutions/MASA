@@ -3,7 +3,7 @@ Version 0.31 (In Progress)
   * initial stochastic masa (smasa) solutions and api developed (C++)
 
 Version 0.30 (10 April 2011)
-https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.30
+https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.30.0
 
   * added new compiler configuration option (--masa-warn-all)
   * standalone version binary renamed to masa_version
