@@ -79,9 +79,9 @@ int main()
     {
       masa_sanity_check<Scalar>();
     }
-  catch(int err) // return one on fatal error
+  catch(int err2) // return one on fatal error
     {
-      if(err != 1)
+      if(err2 != 1)
 	{
 	  cout << "regression test failed: masa sanity_check error condition not triggered!\n";
 	  return 1; // fail

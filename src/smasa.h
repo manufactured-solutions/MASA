@@ -51,7 +51,12 @@ namespace MASA
   {
     using manufactured_solution<Scalar>::pi;
 
-    Scalar Gamma;    
+    Scalar m;    
+    Scalar sigma;
+    Scalar sigma_d;
+
+    Scalar n;     // size of data vector
+    Scalar x_bar; // mean of the data
 
   public:
     cp_normal();

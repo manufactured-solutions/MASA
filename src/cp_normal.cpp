@@ -46,7 +46,17 @@ using namespace MASA;
 template <typename Scalar>
 MASA::cp_normal<Scalar>::cp_normal()
 {
+    this->mmsname = "cp_normal";
+    this->dimension=1;
 
+    this->register_var("m",&m);
+    this->register_var("sigma",&sigma);
+    this->register_var("sigma_d",&sigma_d);
+
+    this->register_var("n",&n);
+
+
+    this->init_var();
 
 }
 
@@ -54,27 +64,40 @@ template <typename Scalar>
 int MASA::cp_normal<Scalar>::init_var()
 {
 
-  return 1;
+  int err = 0;
+
+  err += this->set_var("m",12);
+  err += this->set_var("sigma",12);
+  err += this->set_var("sigma_d",12);
+
+  return err;
 }
 
 template <typename Scalar>
 Scalar MASA::cp_normal<Scalar>::eval_likelyhood(Scalar x)
 {
-
-  return 1;
+  Scalar likelyhood;
+  likelyhood = exp(-(n/(2*pow(sigma_d,2)))*pow((x-x_bar),2));
+  return likelyhood;
 }
 
 template <typename Scalar>
 Scalar MASA::cp_normal<Scalar>::eval_prior(Scalar x)
 {
-
-
-  return 1;
+  Scalar prior;
+  prior = sqrt(2*pi*pow(sigma,2)) * exp(-(1/(2*pow(sigma,2)))*pow((x-m),2));
+  return prior;
 }
 
 template <typename Scalar>
 Scalar MASA::cp_normal<Scalar>::eval_posterior(Scalar x)
 {
-
-  return 1;
+  Scalar post;
+  Scalar sigmap;
+  Scalar mp;
+  
+  sigmap = sqrt(1/((1/pow(sigma,2)) + (n/pow(sigma_d,2))));
+  mp     = pow(sigmap,2) * (m/pow(sigma,2) + (n*x_bar/pow(sigma_d,2)));
+  post   = sqrt(2*pi*pow(sigmap,2)) * exp(-(1/(2*pow(sigmap,2)))*pow((x-mp),2));
+  return post;
 }
