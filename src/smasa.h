@@ -55,8 +55,8 @@ namespace MASA
     Scalar sigma;
     Scalar sigma_d;
 
-    Scalar n;     // size of data vector
     Scalar x_bar; // mean of the data
+    std::vector<Scalar> vec_data;
 
   public:
     cp_normal();
