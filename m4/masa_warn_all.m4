@@ -1,8 +1,7 @@
 # SYNOPSIS
 #
 #   Enables -Wall (Warn all)
-#
-#   AM_MASA_WARN()
+#   AX_MASA_WARN_ALL()
 #
 # DESCRIPTION
 #
