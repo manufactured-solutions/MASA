@@ -287,8 +287,8 @@ namespace MASA
    * -------------------------------------------------------------------------------------------
    */
     
-    virtual Scalar eval_hellinger (Scalar) {std::cout << "SMASA ERROR:: likelyhood is unavailable or not properly loaded.\n";return -1.33;};
-    virtual Scalar eval_kolmogorov(Scalar) {std::cout << "SMASA ERROR:: likelyhood is unavailable or not properly loaded.\n";return -1.33;};
+    virtual Scalar eval_hellinger (Scalar) {std::cout << "SMASA ERROR:: Hellinger distance is unavailable or not properly loaded.\n";return -1.33;};
+    virtual Scalar eval_kolmogorov(Scalar) {std::cout << "SMASA ERROR:: Kolmogorov distance is unavailable or not properly loaded.\n";return -1.33;};
 
   }; // done with MMS base class
 
@@ -1494,5 +1494,6 @@ namespace MASA
     Scalar eval_exact_rho_C3(Scalar);
 
   };
+
   
 } // end MASA namespace
