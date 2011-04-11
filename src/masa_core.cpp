@@ -550,6 +550,34 @@ Scalar MASA::masa_eval_exact_rho_C3(Scalar x)
   return masa_master<Scalar>().get_ms().eval_exact_rho_C3(x);
 }
 
+// --------------------------------
+// smasa: 1D
+// --------------------------------
+
+template <typename Scalar>
+Scalar MASA::masa_eval_likelyhood(Scalar x)
+{
+  return masa_master<Scalar>().get_ms().eval_likelyhood(x);
+}
+
+template <typename Scalar>
+Scalar MASA::masa_eval_prior(Scalar x)
+{
+  return masa_master<Scalar>().get_ms().eval_prior(x);
+}
+
+template <typename Scalar>
+Scalar MASA::masa_eval_posterior(Scalar x)
+{
+  return masa_master<Scalar>().get_ms().eval_posterior(x);
+}
+
+
+// --------------------------------
+// gradients: 1D
+// --------------------------------
+
+
 template <typename Scalar>
 Scalar MASA::masa_eval_grad_u(Scalar x)
 {
@@ -1050,6 +1078,9 @@ int MASA::masa_get_numeric_version()
   template Scalar masa_eval_exact_rho_N2  <Scalar>(Scalar); \
   template Scalar masa_eval_exact_rho_C   <Scalar>(Scalar); \
   template Scalar masa_eval_exact_rho_C3  <Scalar>(Scalar); \
+  template Scalar masa_eval_posterior  <Scalar>(Scalar); \
+  template Scalar masa_eval_prior      <Scalar>(Scalar); \
+  template Scalar masa_eval_likelyhood <Scalar>(Scalar); \
   template Scalar masa_eval_exact_rho_C   <Scalar>(Scalar,Scalar);	\
   template Scalar masa_eval_exact_rho_C3  <Scalar>(Scalar,Scalar);		\
   template Scalar masa_eval_exact_rho_C   <Scalar>(Scalar,Scalar,Scalar);	\

@@ -239,6 +239,19 @@ namespace MASA
   Scalar masa_eval_exact_rho_C3  (Scalar);
 
   // --------------------------------
+  // smasa: 1D
+  // --------------------------------
+
+  template <typename Scalar>
+  Scalar masa_eval_likelyhood (Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_prior      (Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_posterior  (Scalar);
+
+  // --------------------------------
   // source term(s) -- 2D
   // --------------------------------
 
