@@ -101,9 +101,9 @@ Scalar MASA::cp_normal<Scalar>::eval_likelyhood(Scalar x)
     }
   
   //set x_bar to average of data vector
-  err += this->set_var("x_bar",av);
+  this->set_var("x_bar",av);
   
-  likelyhood = exp(-(n/(2*pow(sigma_d,2)))*pow((x-x_bar),2));
+  likelyhood = exp(-(vec_data.size()/(2*pow(sigma_d,2)))*pow((x-x_bar),2));
   return likelyhood;
 }
 
@@ -118,6 +118,7 @@ Scalar MASA::cp_normal<Scalar>::eval_prior(Scalar x)
 template <typename Scalar>
 Scalar MASA::cp_normal<Scalar>::eval_posterior(Scalar x)
 {
+  Scalar av = 0;
   Scalar post;
   Scalar sigmap;
   Scalar mp;
@@ -128,10 +129,16 @@ Scalar MASA::cp_normal<Scalar>::eval_posterior(Scalar x)
     }
 
   //set x_bar to average of data vector
-  err += this->set_var("x_bar",av);
+  this->set_var("x_bar",av);
   
-  sigmap = sqrt(1/((1/pow(sigma,2)) + (Scalar(vec_mean.size())/pow(sigma_d,2))));
-  mp     = pow(sigmap,2) * (m/pow(sigma,2) + (Scalar(vec_mean.size())*x_bar/pow(sigma_d,2)));
+  sigmap = sqrt(1/((1/pow(sigma,2)) + (Scalar(vec_data.size())/pow(sigma_d,2))));
+  mp     = pow(sigmap,2) * (m/pow(sigma,2) + (Scalar(vec_data.size())*x_bar/pow(sigma_d,2)));
   post   = sqrt(2*pi*pow(sigmap,2)) * exp(-(1/(2*pow(sigmap,2)))*pow((x-mp),2));
   return post;
 }
+
+// ----------------------------------------
+//   Template Instantiation(s)
+// ----------------------------------------
+
+MASA_INSTANTIATE_ALL(MASA::cp_normal);
