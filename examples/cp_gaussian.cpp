@@ -25,7 +25,8 @@
 // $Author: nick $
 // $Id: euler_example.cpp 19315 2011-03-31 18:26:04Z nick $
 //
-// cp_gaussian.cpp:
+// cp_gaussian.cpp: conjugate prior gaussian distribution
+// 
 // this is an example of the API used for calling the smasa mms
 // for a normal prior -- normal likelyhood -- normal posterior
 //
@@ -41,6 +42,11 @@ typedef double Scalar;
 
 int main()
 {
+  int err = 0;
+  Scalar x = 1;
+  Scalar source;
+  std::vector<Scalar> data;
+
   // initialize the problem
   err += masa_init<Scalar>("smasa-example-gaussian","cp_normal");
 
@@ -48,7 +54,21 @@ int main()
   // (tests that all variables have been initialized)
   err += masa_sanity_check<Scalar>();
 
+  // grab the default data vector:
+  masa_get_vec<Scalar>("vec_data",data);
 
+  // change the data vector to new values:
+  masa_set_vec<Scalar>("vec_data",data);
 
+  // evaluate likelyhood, prior, posterior
+  source = masa_eval_likelyhood(x);
+  test(source);
 
+  source = masa_eval_prior(x);
+  test(source);
+
+  source = masa_eval_posterior(x);
+  test(source);
+
+  return err;
 }

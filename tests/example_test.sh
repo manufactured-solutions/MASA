@@ -46,9 +46,8 @@ cd ../examples
  ./radiation
  err=$(($err+$?))
 
- #./ablation_example
- #err=$(($err+$?))
-
+ ./cp_gaussian
+ err=$(($err+$?))
 
 # # c
  ./c_euler_example

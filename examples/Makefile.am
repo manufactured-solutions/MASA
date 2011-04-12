@@ -37,7 +37,7 @@ fans_sa_finite_d_SOURCES  = fans_sa_finite_d.cpp
 radiation_SOURCES         = radiation.cpp
 euler_chem_SOURCES        = euler_chem.cpp
 switch_SOURCES            = switch.cpp
-example_SOURCES           = euler_example.cpp heat-eq.cpp compressible_navier_stokes.cpp
+example_DATA              = euler_example.cpp heat-eq.cpp compressible_navier_stokes.cpp
 
 
 # ----------------- 
