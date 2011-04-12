@@ -25,8 +25,9 @@
 // $Author: nick $
 // $Id: euler_example.cpp 19315 2011-03-31 18:26:04Z nick $
 //
-// euler_example.cpp:
-// this is an example of the API used for calling the 2D euler equation
+// cp_gaussian.cpp:
+// this is an example of the API used for calling the smasa mms
+// for a normal prior -- normal likelyhood -- normal posterior
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
@@ -40,6 +41,12 @@ typedef double Scalar;
 
 int main()
 {
+  // initialize the problem
+  err += masa_init<Scalar>("smasa-example-gaussian","cp_normal");
+
+  // call the sanity check routine 
+  // (tests that all variables have been initialized)
+  err += masa_sanity_check<Scalar>();
 
 
 
