@@ -63,6 +63,7 @@ namespace MASA
     int init_var();
 
     Scalar eval_likelyhood(Scalar);
+    Scalar eval_loglikelyhood(Scalar);
     Scalar eval_prior     (Scalar);
     Scalar eval_posterior (Scalar);
 

@@ -565,6 +565,12 @@ Scalar MASA::masa_eval_likelyhood(Scalar x)
 }
 
 template <typename Scalar>
+Scalar MASA::masa_eval_loglikelyhood(Scalar x)
+{
+  return masa_master<Scalar>().get_ms().eval_loglikelyhood(x);
+}
+
+template <typename Scalar>
 Scalar MASA::masa_eval_prior(Scalar x)
 {
   return masa_master<Scalar>().get_ms().eval_prior(x);
@@ -1085,6 +1091,7 @@ int MASA::masa_get_numeric_version()
   template Scalar masa_eval_posterior  <Scalar>(Scalar); \
   template Scalar masa_eval_prior      <Scalar>(Scalar); \
   template Scalar masa_eval_likelyhood <Scalar>(Scalar); \
+  template Scalar masa_eval_loglikelyhood <Scalar>(Scalar); \
   template Scalar masa_eval_exact_rho_C   <Scalar>(Scalar,Scalar);	\
   template Scalar masa_eval_exact_rho_C3  <Scalar>(Scalar,Scalar);		\
   template Scalar masa_eval_exact_rho_C   <Scalar>(Scalar,Scalar,Scalar);	\

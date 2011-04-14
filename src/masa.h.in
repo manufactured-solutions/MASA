@@ -246,6 +246,9 @@ namespace MASA
   Scalar masa_eval_likelyhood (Scalar);
 
   template <typename Scalar>
+  Scalar masa_eval_loglikelyhood (Scalar);
+
+  template <typename Scalar>
   Scalar masa_eval_prior      (Scalar);
 
   template <typename Scalar>

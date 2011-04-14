@@ -107,6 +107,25 @@ Scalar MASA::cp_normal<Scalar>::eval_likelyhood(Scalar x)
 }
 
 template <typename Scalar>
+Scalar MASA::cp_normal<Scalar>::eval_loglikelyhood(Scalar x)
+{
+  Scalar loglikelyhood;
+  Scalar av = 0;
+
+  for(int it = 0;it<int(vec_data.size());it++)
+    {
+      av +=vec_data[it];
+    }
+  
+  //set x_bar to average of data vector
+  this->set_var("x_bar",av);
+  
+  loglikelyhood = -(vec_data.size()/(2*pow(sigma_d,2)))*pow((x-x_bar),2);
+  return loglikelyhood;
+}
+
+
+template <typename Scalar>
 Scalar MASA::cp_normal<Scalar>::eval_prior(Scalar x)
 {
   Scalar prior;
