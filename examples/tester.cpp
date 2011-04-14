@@ -55,10 +55,7 @@ int main()
   
   // init
   masa_init("nick","heateq_1d_steady_const");
-  masa_init_param();
-
   masa_init( "bob","heateq_2d_steady_const");
-  masa_init_param();
 
   // list
   masa_list_mms();

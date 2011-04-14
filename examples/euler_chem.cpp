@@ -73,10 +73,6 @@ int main()
   // initialize the problem
   err += masa_init<Scalar>("euler-chemistry-example","euler_chem_1d");
 
-  // initialize the default parameters
-  err += masa_init_param<Scalar>();
-
-  // intialize the various parameters required for Euler 2D
   // call the sanity check routine 
   // (tests that all variables have been initialized)
   err += masa_sanity_check<Scalar>();

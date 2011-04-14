@@ -60,8 +60,7 @@ int main()
   dx=(double)lx/(double)nx;
   
   // init
-  err += masa_init("nick","euler_1d");
-  err += masa_init_param();
+  err += masa_init("nick","euler_1d");  
 
   //check all initialized properly
   err += masa_sanity_check();

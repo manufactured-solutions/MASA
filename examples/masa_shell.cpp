@@ -102,7 +102,6 @@ void MASA::masa_shell_choose_solution()
 
 	case 3:
 	  printf("\n User Selected 3: Set to default values\n");
-	  masa_init_param<Scalar>();
 	  break;
 	  
 	case 4:

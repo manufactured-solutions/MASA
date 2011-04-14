@@ -70,10 +70,6 @@ program main
   ! initialize the problem
   call masa_init('mytest','navierstokes_2d_compressible')
 
-  ! initialize the default parameters
-  call masa_init_param()
-
-  ! intialize the various parameters required for Euler 2D
   ! call the sanity check routine 
   ! (tests that all variables have been initialized)
   call masa_sanity_check()

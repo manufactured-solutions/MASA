@@ -52,12 +52,10 @@ int main()
 
   // initialize first solution
   masa_init<Scalar>("alice","heateq_1d_steady_const");
-  masa_init_param<Scalar>();
 
   // initialize 2nd solution
   masa_init<Scalar>("bob"  ,"euler_2d");
-  masa_init_param<Scalar>();
-  
+
   // list all initialized solutions
   masa_list_mms<Scalar>();
 

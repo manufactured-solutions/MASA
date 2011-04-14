@@ -60,10 +60,6 @@ int main()
   // initialize the problem
   err += masa_init<Scalar>("heat equation example","heateq_2d_steady_const");
 
-  // initialize the default parameters
-  err += masa_init_param<Scalar>();
-
-  // intialize the various parameters required for Euler 2D
   // call the sanity check routine 
   // (tests that all variables have been initialized)
   err += masa_sanity_check<Scalar>();

@@ -40,9 +40,6 @@ program main
   ! initialize the problem
   call masa_init('mytest','euler_1d')
 
-  ! initialize the default parameters
-  call masa_init_param()
-
   ! display selected manufactured solution
   call masa_list_mms()
 
