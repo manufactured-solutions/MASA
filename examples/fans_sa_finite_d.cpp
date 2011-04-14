@@ -43,7 +43,7 @@ int main()
   int err;
 
   // initialize the problem 
-  err = masa_init<Scalar>("sa example","fans_sa_transient_d_finite");
+  err = masa_init<Scalar>("sa example","fans_sa_steady_wall_bounded");
 
   // initialize the default parameters
   err = masa_init_param<Scalar>();

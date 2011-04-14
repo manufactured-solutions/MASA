@@ -992,81 +992,72 @@ namespace MASA
   // ---------- RANS: Spelart Alamaras (Channel) ----------
   // ------------------------------------------------------
   template <typename Scalar>
-  class   fans_sa_transient_d_finite : public manufactured_solution<Scalar>
+  class   fans_sa_steady_wall_bounded : public manufactured_solution<Scalar>
   {
     
     using manufactured_solution<Scalar>::pi;
     using manufactured_solution<Scalar>::PI;
-
-    Scalar u_0;
-    Scalar u_x;
-    Scalar u_y;
-    Scalar v_0;
-    Scalar v_x;
-    Scalar v_y;
-    Scalar rho_0;
-    Scalar rho_x;
-    Scalar rho_y;
-    Scalar p_0;
-    Scalar p_x;
-    Scalar p_y;
-    Scalar a_px;
-    Scalar a_py;
-    Scalar a_rhox;
-    Scalar a_rhoy;
-    Scalar a_ux;
-    Scalar a_uy;
-    Scalar a_vx;
-    Scalar a_vy;
-    Scalar mu;
-    Scalar L;
-
-    Scalar u_t;
-    Scalar v_t;
-    Scalar p_t;
-    Scalar rho_t;
-    Scalar a_ut;
-    Scalar a_vt;
-    Scalar a_pt;
-    Scalar a_rhot;
-
-    Scalar nu_sa_0;
-    Scalar nu_sa_x;
-    Scalar nu_sa_y;
-    Scalar nu_sa_t;
-    Scalar a_nusax;
-    Scalar a_nusay;
-    Scalar a_nusat;
     
-    Scalar c_v1;
+    // fluid properties
+    Scalar mu;
+    Scalar cp;
+    Scalar cv;
+    Scalar R;
+    Scalar p_0;
+    Scalar u_tau;
+    Scalar Pr;
+    Scalar Pr_t;
+    
+    // SA calibration model
+    Scalar d;
+    Scalar eta1;
+    Scalar eta_v;
+    Scalar sigma;
+    Scalar kappa;
     Scalar c_b1;
     Scalar c_b2;
+    Scalar c_v1;
+    Scalar c_v2;
+    Scalar c_v3;
     Scalar c_w1;
     Scalar c_w2;
     Scalar c_w3;
-    Scalar kappa;
-    Scalar sigma;
 
-    Scalar cp;
-    Scalar cv;
-    Scalar Pr;
-    Scalar Pr_t;
+    // manufactured solutions
+    Scalar u_inf;
+    Scalar A;
+    Scalar nu_v;
+    Scalar u_eq;
+    Scalar T_inf;
+    Scalar T_an;
+    Scalar T_aw;
+    Scalar M_inf;
+    Scalar r_T;
+    Scalar Gamma;
+    Scalar alpha;
+    Scalar C_cf;
+    Scalar F_c;
+    Scalar rho_inf;
+    Scalar C1;
+    Scalar c;
+    Scalar b;
+    Scalar nu_w;
 
   public:
-    fans_sa_transient_d_finite(); // constructor    
+    fans_sa_steady_wall_bounded(); // constructor    
     int init_var();
 
-    Scalar eval_q_rho_u (Scalar,Scalar,Scalar); 
-    Scalar eval_q_rho_v (Scalar,Scalar,Scalar); 
-    Scalar eval_q_rho_e (Scalar,Scalar,Scalar); 
-    Scalar eval_q_rho   (Scalar,Scalar,Scalar); 
-    Scalar eval_q_nu    (Scalar,Scalar,Scalar); 
+    Scalar eval_q_rho_u (Scalar,Scalar); 
+    Scalar eval_q_rho_v (Scalar,Scalar); 
+    Scalar eval_q_rho_e (Scalar,Scalar); 
+    Scalar eval_q_rho   (Scalar,Scalar); 
+    Scalar eval_q_nu    (Scalar,Scalar); 
 
     Scalar eval_exact_u  (Scalar,Scalar); 
     Scalar eval_exact_v  (Scalar,Scalar); 
     Scalar eval_exact_p  (Scalar,Scalar); 
     Scalar eval_exact_rho(Scalar,Scalar); 
-    Scalar eval_exact_nu (Scalar,Scalar,Scalar); 
+    Scalar eval_exact_nu (Scalar,Scalar); 
 
   };
 
