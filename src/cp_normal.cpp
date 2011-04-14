@@ -81,6 +81,7 @@ int MASA::cp_normal<Scalar>::init_var()
     {
       av +=vec_data[it];
     }
+  av = av / (Scalar)vec_data.size();
 
   //set x_bar to average of data vector
   err += this->set_var("x_bar",av);
@@ -98,6 +99,7 @@ Scalar MASA::cp_normal<Scalar>::eval_likelyhood(Scalar x)
     {
       av +=vec_data[it];
     }
+  av = av / (Scalar)vec_data.size();
   
   //set x_bar to average of data vector
   this->set_var("x_bar",av);
@@ -105,6 +107,7 @@ Scalar MASA::cp_normal<Scalar>::eval_likelyhood(Scalar x)
   likelyhood = exp(-(vec_data.size()/(2*pow(sigma_d,2)))*pow((x-x_bar),2));
   return likelyhood;
 }
+
 
 template <typename Scalar>
 Scalar MASA::cp_normal<Scalar>::eval_loglikelyhood(Scalar x)
@@ -116,6 +119,7 @@ Scalar MASA::cp_normal<Scalar>::eval_loglikelyhood(Scalar x)
     {
       av +=vec_data[it];
     }
+  av = av / (Scalar)vec_data.size();
   
   //set x_bar to average of data vector
   this->set_var("x_bar",av);
@@ -123,7 +127,6 @@ Scalar MASA::cp_normal<Scalar>::eval_loglikelyhood(Scalar x)
   loglikelyhood = -(vec_data.size()/(2*pow(sigma_d,2)))*pow((x-x_bar),2);
   return loglikelyhood;
 }
-
 
 template <typename Scalar>
 Scalar MASA::cp_normal<Scalar>::eval_prior(Scalar x)
@@ -145,6 +148,7 @@ Scalar MASA::cp_normal<Scalar>::eval_posterior(Scalar x)
     {
       av +=vec_data[it];
     }
+  av = av / (Scalar)vec_data.size();
 
   //set x_bar to average of data vector
   this->set_var("x_bar",av);
@@ -152,6 +156,7 @@ Scalar MASA::cp_normal<Scalar>::eval_posterior(Scalar x)
   sigmap = sqrt(1/((1/pow(sigma,2)) + (Scalar(vec_data.size())/pow(sigma_d,2))));
   mp     = pow(sigmap,2) * (m/pow(sigma,2) + (Scalar(vec_data.size())*x_bar/pow(sigma_d,2)));
   post   = sqrt(2*pi*pow(sigmap,2)) * exp(-(1/(2*pow(sigmap,2)))*pow((x-mp),2));
+
   return post;
 }
 
