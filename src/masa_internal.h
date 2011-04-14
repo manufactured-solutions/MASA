@@ -48,7 +48,7 @@ namespace MASA
 {
   // masa map functions here
   // probably want to hide this from the user eventually
-  
+
   int masa_map_solution  (std::string, std::string);
   int masa_map_temporal  (std::string, std::string);
   int masa_map_coeff     (std::string, std::string); 
@@ -250,7 +250,7 @@ namespace MASA
    * 
    * -------------------------------------------------------------------------------------------
    */
-    manufactured_solution();                                      // constructor
+    manufactured_solution();                                     // constructor
     int purge_var();                                             // dump defaults
     Scalar pass_function(Scalar (*)(Scalar),Scalar);
     int set_var(std::string,Scalar);                             // sets variable value    
@@ -262,10 +262,16 @@ namespace MASA
     int poly_test();                                             // regression method for poly class (see below)
     int get_vec(std::string,std::vector<Scalar>&);               // returns vector values
     Scalar get_var(std::string);                                 // returns variable value
-    int display_var();                                          // print all variable names and values
-    int display_vec();                                          // print all variable names and values
+    int display_var();                                           // print all variable names and values
+    int display_vec();                                           // print all variable names and values
     void return_name(std::string* inname){inname->assign(mmsname);};  // method: returns name
     void return_dim (int* indim)    {*indim=dimension;};         // method: returns dimension of solution
+
+    // overloading pow
+    Scalar pow(long double, double);
+    //Scalar pow(double, long double);  
+    //Scalar pow(long double, long double);
+    //Scalar pow(double, double);  
 
   /* 
    * -------------------------------------------------------------------------------------------   

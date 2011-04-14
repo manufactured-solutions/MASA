@@ -48,6 +48,42 @@ using namespace MASA;
  */ 
 
 template <typename Scalar>
+Scalar MASA::manufactured_solution<Scalar>::pow(long double x, double y)
+{
+  Scalar tx = Scalar(x);
+  Scalar ty = Scalar(y);
+
+  return std::pow(tx,ty);
+}
+
+/* template <typename Scalar>
+Scalar MASA::manufactured_solution<Scalar>::pow(double x, long double y)
+{
+  Scalar tx = Scalar(x);
+  Scalar ty = Scalar(y);
+
+  return std::pow(tx,ty);
+}
+
+template <typename Scalar>
+Scalar MASA::manufactured_solution<Scalar>::pow(long double x, long double y)
+{
+  Scalar tx = Scalar(x);
+  Scalar ty = Scalar(y);
+
+  return std::pow(tx,ty);
+}
+
+template <typename Scalar>
+Scalar MASA::manufactured_solution<Scalar>::pow(double x, double y)
+{
+  Scalar tx = Scalar(x);
+  Scalar ty = Scalar(y);
+
+  return std::pow(tx,ty);
+} */
+
+template <typename Scalar>
 MASA::manufactured_solution<Scalar>::manufactured_solution()
 {  
   std::vector<Scalar> dumvec;
@@ -57,7 +93,7 @@ MASA::manufactured_solution<Scalar>::manufactured_solution()
   dumvec.resize(2);
   vararr.push_back(&dummy);   // dummy used to start index at correct location
   vecarr.push_back(&dumvec);   // dummy used to start index at correct location
-}
+  }
 
 // define PI and other constants
 template <typename Scalar>

@@ -27,6 +27,7 @@
 !!--------------------------------------------------------------------------
 
 module euler_source_interface
+  use iso_c_binding
 
   interface
      real (c_double) function eval_3d_source_u(x,y,z,&
