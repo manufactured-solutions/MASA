@@ -1,5 +1,6 @@
 Version 0.31 (In Progress)
   
+  * added new smasa mms, conjugate prior for standard deviation
   * initial stochastic masa (smasa) solutions and api developed (C++)
 
 Version 0.30 (10 April 2011)
