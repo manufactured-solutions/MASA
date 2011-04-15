@@ -39,8 +39,15 @@ template<typename Scalar>
 int run_regression()
 {  
   int err = 0;
-  Scalar x = 1;
+  Scalar x;
   Scalar source;
+  Scalar likelyhood,prior,posterior,first_moment;
+
+
+  int nx = 115;  // number of points
+  int lx = 2;  // number of points
+  Scalar dx=Scalar(lx)/Scalar(nx);
+
   std::vector<Scalar> data;
 
   // initialize the problem
@@ -57,25 +64,27 @@ int run_regression()
   masa_set_vec<Scalar>("vec_data",data);
 
   // evaluate likelyhood, prior, posterior
-    for(int j=0;j<nx;j++)
+    for(int i=0;i<nx;i++)
       {  
-	tempx=i*dx;
+	x=i*dx;
 	
-	likelyhood   = masa_eval_likelyhood(x);	
-	prior        = masa_eval_prior(x);	
-	posterior    = masa_eval_posterior(x);
-	first_moment = masa_eval_central_moment(1);
-	  if(first_moment != 0)
-	    {
-	      cout << "error in first moment";
-	      return 1;
-	    }
+	likelyhood   = masa_eval_likelyhood<Scalar>(x);	
+	prior        = masa_eval_prior<Scalar>(x);	
+	posterior    = masa_eval_posterior<Scalar>(x);
+	first_moment = masa_eval_central_moment<Scalar>(1);
+	if(first_moment != 0)
+	  {
+	    cout << "error in first moment";
+	    return 1;
+	  }
 
-	test(likelyhood);
-	test(prior);
-	test(posterior);
+	nancheck(likelyhood);
+	nancheck(prior);
+	nancheck(posterior);
 
       }
+
+    return err;
 }
 
 // queue

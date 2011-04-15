@@ -36,6 +36,7 @@ check_PROGRAMS   = misc                \
                    rans_sa             \
                    radiation           \
                    sod                 \
+                   cp_normal           \
 	           c_misc              \
 	           c_source            \
 	           c_purge             \
@@ -93,6 +94,7 @@ cn2d3d_SOURCES              = cns-2d-3d.cpp
 rans_sa_SOURCES             = rans_sa.cpp
 radiation_SOURCES           = radiation.cpp
 sod_SOURCES                 = sod.cpp
+cp_normal_SOURCES           = cp_normal.cpp
 
 #----------------------
 # C Test Sources
@@ -183,6 +185,7 @@ TESTS                      = init.sh              \
                              rans_sa              \
                              radiation            \
                              sod                  \
+                             cp_normal            \
 			     c_init.sh            \
 	                     c_misc               \
 	                     c_array              \
