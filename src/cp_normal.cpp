@@ -184,6 +184,24 @@ Scalar MASA::cp_normal<Scalar>::eval_cen_mom(int k)
   return moment;
 
 }
+
+template <typename Scalar>
+Scalar MASA::cp_normal<Scalar>::eval_post_mean()
+{
+  Scalar mean;
+  Scalar sigmap = sqrt(1/((1/pow(sigma,2)) + (Scalar(vec_data.size())/pow(sigma_d,2))));
+  mean     = pow(sigmap,2) * (m/pow(sigma,2) + (Scalar(vec_data.size())*x_bar/pow(sigma_d,2)));  
+  return mean;
+}
+
+template <typename Scalar>
+Scalar MASA::cp_normal<Scalar>::eval_post_var()
+{
+  Scalar var;
+  var =1/((1/pow(sigma,2)) + (Scalar(vec_data.size())/pow(sigma_d,2)));
+  return var;
+}
+
 // ----------------------------------------
 //   Template Instantiation(s)
 // ----------------------------------------

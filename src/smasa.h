@@ -62,6 +62,8 @@ namespace MASA
     cp_normal();
     int init_var();
 
+    Scalar eval_post_mean ();
+    Scalar eval_post_var  ();
     Scalar factorial      (int);
     Scalar eval_cen_mom   (int);
     Scalar eval_prior     (Scalar);
