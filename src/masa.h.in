@@ -254,6 +254,9 @@ namespace MASA
   template <typename Scalar>
   Scalar masa_eval_posterior  (Scalar);
 
+  template <typename Scalar>
+  Scalar masa_eval_central_moment (int);
+
   // --------------------------------
   // source term(s) -- 2D
   // --------------------------------

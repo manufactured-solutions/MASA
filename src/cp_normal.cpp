@@ -160,6 +160,30 @@ Scalar MASA::cp_normal<Scalar>::eval_posterior(Scalar x)
   return post;
 }
 
+template <typename Scalar>
+Scalar MASA::cp_normal<Scalar>::factorial(int n)
+{
+  return (n == 1 || n == 0) ? 1 : factorial(n - 1) * n;
+}
+
+template <typename Scalar>
+Scalar MASA::cp_normal<Scalar>::eval_cen_mom(int k)
+{
+
+  Scalar moment;
+
+  if(k%2 == 0 ) // k is even!
+    {
+      moment = pow(sigma,k) * (factorial(k) / pow(2,k/2) * factorial(k/2));
+    }
+  else // k is odd
+    {
+      moment = 0;
+    }
+
+  return moment;
+
+}
 // ----------------------------------------
 //   Template Instantiation(s)
 // ----------------------------------------

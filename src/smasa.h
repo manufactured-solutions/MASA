@@ -62,10 +62,12 @@ namespace MASA
     cp_normal();
     int init_var();
 
-    Scalar eval_likelyhood(Scalar);
-    Scalar eval_loglikelyhood(Scalar);
+    Scalar factorial      (int);
+    Scalar eval_cen_mom   (int);
     Scalar eval_prior     (Scalar);
     Scalar eval_posterior (Scalar);
+    Scalar eval_likelyhood(Scalar);
+    Scalar eval_loglikelyhood (Scalar);
 
   };
 

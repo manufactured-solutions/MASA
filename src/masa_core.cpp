@@ -582,6 +582,11 @@ Scalar MASA::masa_eval_posterior(Scalar x)
   return masa_master<Scalar>().get_ms().eval_posterior(x);
 }
 
+template <typename Scalar>
+Scalar MASA::masa_eval_central_moment(int x)
+{
+  return masa_master<Scalar>().get_ms().eval_cen_mom(x);
+}
 
 // --------------------------------
 // gradients: 1D
@@ -1090,6 +1095,7 @@ int MASA::masa_get_numeric_version()
   template Scalar masa_eval_exact_rho_C3  <Scalar>(Scalar); \
   template Scalar masa_eval_posterior  <Scalar>(Scalar); \
   template Scalar masa_eval_prior      <Scalar>(Scalar); \
+  template Scalar masa_eval_central_moment <Scalar>(int); \
   template Scalar masa_eval_likelyhood <Scalar>(Scalar); \
   template Scalar masa_eval_loglikelyhood <Scalar>(Scalar); \
   template Scalar masa_eval_exact_rho_C   <Scalar>(Scalar,Scalar);	\
