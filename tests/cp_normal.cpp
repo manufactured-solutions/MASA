@@ -23,25 +23,21 @@
 //
 //-----------------------------------------------------------------------el-
 // $Author: nick $
-// $Id: euler_example.cpp 19315 2011-03-31 18:26:04Z nick $
+// $Id: euler2d.cpp 19332 2011-03-31 20:05:16Z nick $
 //
-// cp_gaussian.cpp: conjugate prior gaussian distribution
-// 
-// this is an example of the API used for calling the smasa mms
-// for a normal prior -- normal likelyhood -- normal posterior
+// euler2d.cpp :program that tests euler2d from masa against known source term
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
-//
 
-#include <examples.h>
+#include <tests.h>
 
 using namespace MASA;
+using namespace std;
 
-typedef double Scalar;
-
-int main()
-{
+template<typename Scalar>
+int run_regression()
+{  
   int err = 0;
   Scalar x = 1;
   Scalar source;
@@ -61,24 +57,34 @@ int main()
   masa_set_vec<Scalar>("vec_data",data);
 
   // evaluate likelyhood, prior, posterior
-  source = masa_eval_likelyhood(x);
-  test(source);
+    for(int j=0;j<nx;j++)
+      {  
+	tempx=i*dx;
+	
+	likelyhood   = masa_eval_likelyhood(x);	
+	prior        = masa_eval_prior(x);	
+	posterior    = masa_eval_posterior(x);
+	first_moment = masa_eval_central_moment(1);
+	  if(first_moment != 0)
+	    {
+	      cout << "error in first moment";
+	      return 1;
+	    }
 
-  source = masa_eval_prior(x);
-  test(source);
+	test(likelyhood);
+	test(prior);
+	test(posterior);
 
-  source = masa_eval_posterior(x);
-  test(source);
+      }
+}
 
-  // all odd moments must be 0 
-  double first_moment  = masa_eval_central_moment<Scalar>(1);
-  if(first_moment != 0)
-    {
-      std::cout << "error in first moment";
-      return 1;
-    }
+// queue
+int main()
+{
+  int err=0;
 
-  double second_moment = masa_eval_central_moment<Scalar>(2);
+  err += run_regression<double>();
+  err += run_regression<long double>();
 
   return err;
 }
