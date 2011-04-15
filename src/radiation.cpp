@@ -101,7 +101,7 @@ int MASA::radiation_integrated_intensity<Scalar>::init_var()
   // set size of vectors and set default values
   vec_mean.resize(no_gauss);
   vec_mean[0]=0.2;
-  for(int it = 0;it<int(vec_amp.size());it++)
+  for(int it = 1;it<int(vec_mean.size());it++)
     {
       //vec_mean[it]=it;
       vec_mean[it]=vec_mean[it-1]+(0.8-0.2)/(24.0);;

@@ -32,7 +32,6 @@
 //--------------------------------------------------------------------------
 
 #include <config.h>        // for MASA_EXCEPTIONS conditional
-//#include <masa_internal.h>
 #include <smasa.h>
 #include <map>
 
