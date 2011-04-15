@@ -42,7 +42,7 @@ int run_regression()
   Scalar x;
   Scalar source;
   Scalar likelyhood,prior,posterior,first_moment;
-
+  Scalar mean, variance;
 
   int nx = 115;  // number of points
   int lx = 2;  // number of points
@@ -77,7 +77,11 @@ int run_regression()
 	    cout << "error in first moment";
 	    return 1;
 	  }
+	mean = masa_eval_posterior_mean<Scalar>();
+	variance = masa_eval_posterior_variance<Scalar>();
 
+	nancheck(mean);
+	nancheck(variance);
 	nancheck(likelyhood);
 	nancheck(prior);
 	nancheck(posterior);

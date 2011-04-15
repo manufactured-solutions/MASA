@@ -44,7 +44,7 @@ int main()
 {
   int err = 0;
   Scalar x = 1;
-  Scalar source;
+  Scalar source,mean,variance;
   std::vector<Scalar> data;
 
   // initialize the problem
@@ -79,6 +79,12 @@ int main()
     }
 
   double second_moment = masa_eval_central_moment<Scalar>(2);
+
+  // calculate mean and variance:
+  mean = masa_eval_posterior_mean<Scalar>();
+  test(mean);
+  variance = masa_eval_posterior_variance<Scalar>();
+  test(variance);
 
   return err;
 }
