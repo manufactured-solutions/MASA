@@ -57,6 +57,8 @@ MASA::radiation_integrated_intensity<Scalar>::radiation_integrated_intensity()
     this->register_vec("vec_mean",vec_mean);   
     this->register_vec("vec_amp",vec_amp);   
     this->register_vec("vec_stdev",vec_stdev);   
+
+    // initialize all defaults
     this->init_var();
   
 }//done with constructor
@@ -65,6 +67,7 @@ template <typename Scalar>
 int MASA::radiation_integrated_intensity<Scalar>::init_var()
 {
   int err = 0;
+  std::vector<Scalar> vec1,vec2,vec3;
 
   /*
   ! Random number generated :: Matlab
@@ -93,7 +96,6 @@ int MASA::radiation_integrated_intensity<Scalar>::init_var()
       
   */
 
-
   // using marcos defaults
 
   err += this->set_var("no_gauss",25);
@@ -106,6 +108,7 @@ int MASA::radiation_integrated_intensity<Scalar>::init_var()
       //vec_mean[it]=it;
       vec_mean[it]=vec_mean[it-1]+(0.8-0.2)/(24.0);;
     }
+
   
   vec_amp.resize(no_gauss);
   vec_amp[0] = 7.4462631920000945;
@@ -133,28 +136,15 @@ int MASA::radiation_integrated_intensity<Scalar>::init_var()
   vec_amp[22]= 8.6586119282933510;
   vec_amp[23]= 8.2387298156815334;
   vec_amp[24]= 7.2546185321547242;
-
-  /*
-    for(int it = 0;it<int(vec_amp.size());it++)
-    {
-      //vec_amp[it]=12; //should sum to 60
-
-    }
-  */
-
+  
   vec_stdev.resize(no_gauss);    
   vec_amp.resize(no_gauss);
   for(int it = 0;it<int(vec_amp.size());it++)
     {
       vec_stdev[it]=0.05; 
     }
- 
-  err += this->set_vec("vec_mean",vec_mean);
-  err += this->set_vec("vec_amp",vec_amp);
-  err += this->set_vec("vec_stdev",vec_stdev);
-
+  
   return err;
-
 }
 
 template <typename Scalar>

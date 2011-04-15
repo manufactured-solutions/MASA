@@ -52,6 +52,8 @@ int main()
   // (tests that all variables have been initialized)
   err += masa_sanity_check<Scalar>();
 
+  //masa_display_vec<Scalar>();
+
   return err;
 
 }// end program

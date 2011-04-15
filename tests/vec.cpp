@@ -50,6 +50,7 @@ int main()
 
   // initialize the problem
   err += masa_init<Scalar>("radiation","radiation_integrated_intensity");
+  err += masa_init_param<Scalar>();
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa.

@@ -36,7 +36,8 @@ program main
   ! threshold calculation
   real(8) :: thresh = 1e-15
 
-  call masa_init("radiation","radiation_integrated_intensity");
+  call masa_init("radiation","radiation_integrated_intensity")
+  call masa_init_param()
 
   ! call the sanity check routine 
   ! (tests that all variables have been initialized)

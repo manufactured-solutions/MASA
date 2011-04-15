@@ -50,6 +50,7 @@ int main()
 
   // initialize the problem
   err += masa_init("radiation","radiation_integrated_intensity");
+  err += masa_init_param();
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa; these tests currently just verify functions
