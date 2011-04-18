@@ -268,7 +268,7 @@ namespace MASA
     void return_dim (int* indim)    {*indim=dimension;};         // method: returns dimension of solution
 
     // overloading pow
-    Scalar pow(long double, double);
+    //Scalar pow(long double, double);
     //Scalar pow(double, long double);  
     //Scalar pow(long double, long double);
     //Scalar pow(double, double);  
@@ -1069,10 +1069,11 @@ namespace MASA
     Scalar eval_exact_rho(Scalar,Scalar); 
     Scalar eval_exact_nu (Scalar,Scalar); 
 
+    Scalar pow(long double, double);
   };
 
   // ------------------------------------------------------
-  // ---------- RANS: Spelart Alamaras (Channel) ----------
+  // ---------- RANS: Spelart Alamaras (Free Shear) -------
   // ------------------------------------------------------
   template <typename Scalar>
   class   fans_sa_transient_free_shear : public manufactured_solution<Scalar>
@@ -1165,7 +1166,7 @@ namespace MASA
     Scalar eval_exact_rho(Scalar,Scalar); 
     Scalar eval_exact_nu (Scalar,Scalar,Scalar); 
 
-
+    Scalar pow(long double, double);
   };
 
   template <typename Scalar>

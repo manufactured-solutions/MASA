@@ -278,18 +278,18 @@ Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_q_rho_e(Scalar x,Scalar 
 template <typename Scalar>
 Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_q_rho_e(Scalar x,Scalar y,Scalar t)
 {
-  double Q_E;
-  double RHO;
-  double U;
-  double V;
-  double P;
-  double NU_SA;
-  double chi;
-  double f_v1;
-  //double R;
-  double cp;
-  double cv;
-  double mu_t;
+  Scalar Q_E;
+  Scalar RHO;
+  Scalar U;
+  Scalar V;
+  Scalar P;
+  Scalar NU_SA;
+  Scalar chi;
+  Scalar f_v1;
+  //Scalar R;
+  Scalar cp;
+  Scalar cv;
+  Scalar mu_t;
   NU_SA = nu_sa_0 + nu_sa_x * cos(a_nusax * PI * x / L) + nu_sa_y * cos(a_nusay * PI * y / L) + nu_sa_t * cos(a_nusat * PI * t / L);
   RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_t * sin(a_rhot * PI * t / L);
   U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
@@ -356,8 +356,14 @@ Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_exact_rho(Scalar x,Scala
   return rho_an;
 }
 
+template <typename Scalar>
+Scalar MASA::fans_sa_transient_free_shear<Scalar>::pow(long double x, double y)
+{
+  Scalar tx = Scalar(x);
+  Scalar ty = Scalar(y);
 
-
+  return std::pow(tx,ty);
+}
 
 /* ------------------------------------------------
  *
@@ -715,6 +721,7 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho_e(Scalar x,Scalar y
   D2vDxy = -0.15e2 / 0.14e2 * V / y / x;
   D2TDx2 = T_inf * r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * u_tau * u_tau * pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * pow(u_inf, -0.2e1) * pow(x, -0.2e1) * (pow(cos(A / u_inf * u_eq), 0.2e1) - pow(sin(A / u_inf * u_eq), 0.2e1)) / 0.196e3 + T_inf * r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * sin(A / u_inf * u_eq) * cos(A / u_inf * u_eq) * d_ueqx2 / u_inf / A;
   D2TDy2 = T_inf * r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * y_plus * y_plus * d_eqplus_yplus * d_eqplus_yplus * u_tau * u_tau * pow(u_inf, -0.2e1) * pow(y, -0.2e1) * (pow(cos(A / u_inf * u_eq), 0.2e1) - pow(sin(A / u_inf * u_eq), 0.2e1)) + T_inf * r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * sin(A / u_inf * u_eq) * cos(A / u_inf * u_eq) * d_ueqy2 / u_inf / A;
+
   Qe = 0.4e1 / 0.3e1 * (0.2e1 * alpha * y - kappa * u_tau) * f_v1 * RHO * V * V / y + (-0.2e1 * mu - 0.2e1 * mu_t) * (y_plus * y_plus * u_tau * u_tau * d_eqplus_yplus * d_eqplus_yplus * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(y, -0.2e1) / 0.2e1 + pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * u_tau * u_tau * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(x, -0.2e1) / 0.294e3 - (0.43e2 * y_plus * d_eqplus_yplus - 0.2e1 * u_eq_plus) * u_tau * V * cos(A / u_inf * u_eq) / y / x / 0.42e2 + (0.2e1 / 0.3e1 * D2uDx2 + D2vDxy / 0.6e1 + D2uDy2 / 0.2e1) * U + (D2uDxy / 0.6e1 + D2vDx2 / 0.2e1 + 0.2e1 / 0.3e1 * D2vDy2) * V + 0.225e3 / 0.392e3 * V * V * pow(x, -0.2e1) + 0.2e1 / 0.3e1 * V * V * pow(y, -0.2e1)) + (Scalar) (Gamma - 1) * mu_t * r_T * M_inf * M_inf * T_inf * y_plus * y_plus * u_tau * u_tau * d_eqplus_yplus * d_eqplus_yplus * U * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.2e1) * pow(y, -0.2e1) / T - (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * mu_t * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * u_tau * d_eqplus_yplus * U * V * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.2e1) / x / y / T / 0.42e2 - (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * y * f_v1 * kappa * cp * r_T * M_inf * M_inf * T_inf * u_tau * u_tau * RHO * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) * pow(x, -0.2e1) / Pr_t / 0.196e3 + (0.2e1 * alpha * y - kappa * u_tau) * (Scalar) (Gamma - 1) * f_v1 * cp * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * RHO * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / y / Pr_t - (Scalar) (Gamma - 1) * (U * U + V * V) * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * RHO * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / y / T / 0.2e1 + 0.4e1 / 0.3e1 * (Scalar) (Gamma - 1) * mu_t * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * U * V * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) * pow(y, -0.2e1) / T + (Scalar) (Gamma - 1) * pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * mu_t * r_T * M_inf * M_inf * T_inf * u_tau * u_tau * U * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.2e1) * pow(x, -0.2e1) / T / 0.147e3 - (Scalar) (Gamma - 1) * (0.43e2 * y_plus * d_eqplus_yplus - 0.2e1 * u_eq_plus) * mu_t * r_T * M_inf * M_inf * T_inf * u_tau * U * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / y / T / 0.42e2 + (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * (U * U + V * V) * r_T * M_inf * M_inf * T_inf * u_tau * RHO * U * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / T / 0.28e2 + 0.15e2 / 0.196e3 * (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * mu_t * r_T * M_inf * M_inf * T_inf * u_tau * U * V * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) * pow(x, -0.2e1) / T + (Scalar) (int) pow((Scalar) (Gamma - 1), (Scalar) 2) * mu_t * cp * r_T * r_T * pow(M_inf, 0.4e1) * T_inf * T_inf * y_plus * y_plus * u_tau * u_tau * d_eqplus_yplus * d_eqplus_yplus * U * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.4e1) * pow(y, -0.2e1) / Pr_t / T + (Scalar) (int) pow((Scalar) (Gamma - 1), (Scalar) 2) * pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * mu_t * cp * r_T * r_T * pow(M_inf, 0.4e1) * T_inf * T_inf * u_tau * u_tau * U * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.4e1) * pow(x, -0.2e1) / Pr_t / T / 0.196e3 + 0.2e1 / 0.21e2 * (u_eq_plus + y_plus * d_eqplus_yplus) * alpha * y * f_v1 * u_tau * RHO * V * cos(A / u_inf * u_eq) / x - (u_eq_plus + y_plus * d_eqplus_yplus) * y * f_v1 * kappa * u_tau * u_tau * RHO * U * cos(A / u_inf * u_eq) * pow(x, -0.2e1) / 0.147e3 + (0.2e1 * alpha * y - kappa * u_tau) * f_v1 * y_plus * u_tau * d_eqplus_yplus * RHO * U * cos(A / u_inf * u_eq) / y - 0.15e2 / 0.196e3 * y * f_v1 * kappa * u_tau * RHO * V * V * pow(x, -0.2e1) - (0.90e2 * alpha * y - 0.43e2 * kappa * u_tau) * f_v1 * RHO * U * V / x / 0.42e2 - (u_eq_plus + y_plus * d_eqplus_yplus) * (0.2e1 * cp * T + 0.3e1 * U * U + V * V) * u_tau * RHO * cos(A / u_inf * u_eq) / x / 0.28e2 + (y_plus * d_eqplus_yplus - 0.2e1 * u_eq_plus) * f_v1 * kappa * u_tau * u_tau * RHO * V * cos(A / u_inf * u_eq) / x / 0.42e2 + y_plus * u_tau * d_eqplus_yplus * RHO * U * V * cos(A / u_inf * u_eq) / y + (-mu / Pr - mu_t / Pr_t) * (D2TDx2 + D2TDy2) * cp - 0.15e2 / 0.14e2 * RHO * U * V * V / x + (0.2e1 * cp * T + U * U + 0.3e1 * V * V) * RHO * V / y / 0.2e1;
   return(Qe);
 }
@@ -763,6 +770,15 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_nu(Scalar x,Scalar 
   Scalar nu_sa_an;
   nu_sa_an = kappa * u_tau * y - alpha * y * y;
   return nu_sa_an;
+}
+
+template <typename Scalar>
+Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::pow(long double x, double y)
+{
+  Scalar tx = Scalar(x);
+  Scalar ty = Scalar(y);
+
+  return std::pow(tx,ty);
 }
 
 // ----------------------------------------
