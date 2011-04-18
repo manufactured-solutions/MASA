@@ -104,7 +104,7 @@ Scalar MASA::cp_normal<Scalar>::eval_likelyhood(Scalar x)
   //set x_bar to average of data vector
   this->set_var("x_bar",av);
   
-  likelyhood = exp(-(vec_data.size()/(2*pow(sigma_d,2)))*pow((x-x_bar),2));
+  likelyhood = exp(-(vec_data.size()/(2*pow(Scalar(sigma_d),2)))*pow((x-x_bar),2));
   return likelyhood;
 }
 
@@ -174,7 +174,7 @@ Scalar MASA::cp_normal<Scalar>::eval_cen_mom(int k)
 
   if(k%2 == 0 ) // k is even!
     {
-      moment = pow(sigma,k) * (factorial(k) / pow(2,k/2) * factorial(k/2));
+      moment = pow(sigma,k) * (factorial(k) / pow(Scalar(2),k/2) * factorial(k/2));
     }
   else // k is odd
     {

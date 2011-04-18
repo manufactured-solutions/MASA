@@ -1,5 +1,6 @@
 Version 0.31 (In Progress)
   
+  * bug fix associated with radiation_integrated_intensity constructor
   * added new smasa mms, conjugate prior for standard deviation
   * initial stochastic masa (smasa) solutions and api developed (C++)
 
