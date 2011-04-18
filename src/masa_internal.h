@@ -1495,6 +1495,8 @@ namespace MASA
     Scalar eval_exact_rho_C (Scalar);
     Scalar eval_exact_rho_C3(Scalar);
 
+    Scalar pow(long double, double);
+
   };
 
   

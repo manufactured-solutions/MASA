@@ -42,6 +42,15 @@ using namespace MASA;
  *
  * -----------------------------------------------
  */ 
+template <typename Scalar>
+Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::pow(long double x, double y)
+{
+  Scalar tx = Scalar(x);
+  Scalar ty = Scalar(y);
+
+  return std::pow(tx,ty);
+}
+
 
 template <typename Scalar>
 MASA::navierstokes_ablation_1d_steady<Scalar>::navierstokes_ablation_1d_steady()
