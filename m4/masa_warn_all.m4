@@ -31,13 +31,23 @@ if test "$MASA_WARN_ALL" = "1"; then
 
    AX_WARNINGS_SANITIZE
    AX_CFLAGS_WARN_ALL
+   # vendor specific warning settings
    if test "$ax_cv_c_compiler_vendor" == "intel"; then
      CFLAGS="$CFLAGS -wd981 -wd383 -wd2259 -wd869 -wd1418"
    fi
 
+   if test "$ax_cv_c_compiler_vendor" == "portland"; then
+     CFLAGS="$CFLAGS -Minform=inform"
+   fi
+
+
    AX_CXXFLAGS_WARN_ALL
    if test "$ax_cv_cxx_compiler_vendor" == "intel"; then
      CXXFLAGS="$CXXFLAGS -wd981 -wd383 -wd2259 -wd869 -wd1418"
+   fi
+
+   if test "$ax_cv_cxx_compiler_vendor" == "portland"; then
+     CXXFLAGS="$CXXFLAGS -Minform=inform"
    fi
 
 fi
