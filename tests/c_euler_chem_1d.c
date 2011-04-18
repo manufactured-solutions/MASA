@@ -114,6 +114,8 @@ double SourceQ_rho_e(double x,
   double T;
   double alpha;
   double E_vib_N2;
+  double C  = -0.2e1;
+  double C2 =  0.3e1;
 
   double pi = acos(-1);
 
@@ -125,7 +127,7 @@ double SourceQ_rho_e(double x,
   alpha = exp(theta_v_N2 / T);
   E_vib_N2 = R_N2 * theta_v_N2 / (alpha - 0.1e1);
 
-  Q_e = -a_Tx * pi * T_x * alpha * theta_v_N2 * E_vib_N2 * RHO_N2 * U * sin(a_Tx * pi * x / L) / L / (alpha - 0.1e1) * pow(T, -0.2e1) - 0.5e1 / 0.2e1 * a_Tx * pi * T_x * R_N * RHO_N * U * sin(a_Tx * pi * x / L) / L - 0.7e1 / 0.4e1 * a_Tx * pi * T_x * R_N * RHO_N2 * U * sin(a_Tx * pi * x / L) / L + 0.5e1 / 0.2e1 * a_ux * pi * u_x * R_N * RHO_N * T * cos(a_ux * pi * x / L) / L + 0.7e1 / 0.4e1 * a_ux * pi * u_x * R_N * RHO_N2 * T * cos(a_ux * pi * x / L) / L + 0.3e1 / 0.2e1 * a_ux * pi * u_x * RHO * U * U * cos(a_ux * pi * x / L) / L - a_rho_N2_x * pi * rho_N2_x * E_vib_N2 * U * sin(a_rho_N2_x * pi * x / L) / L + a_ux * pi * u_x * E_vib_N2 * RHO_N2 * cos(a_ux * pi * x / L) / L + (h0_N * RHO_N + h0_N2 * RHO_N2) * a_ux * pi * u_x * cos(a_ux * pi * x / L) / L - (-0.10e2 * a_rho_N_x * rho_N_x * cos(a_rho_N_x * pi * x / L) + 0.7e1 * a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * pi * x / L)) * pi * R_N * U * T / L / 0.4e1 - (-a_rho_N_x * rho_N_x * cos(a_rho_N_x * pi * x / L) + a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * pi * x / L)) * pi * pow(U, 0.3e1) / L / 0.2e1 - (-a_rho_N_x * rho_N_x * h0_N * cos(a_rho_N_x * pi * x / L) + a_rho_N2_x * rho_N2_x * h0_N2 * sin(a_rho_N2_x * pi * x / L)) * pi * U / L;
+  Q_e = -a_Tx * pi * T_x * alpha * theta_v_N2 * E_vib_N2 * RHO_N2 * U * sin(a_Tx * pi * x / L) / L / (alpha - 0.1e1) * pow(T, C) - 0.5e1 / 0.2e1 * a_Tx * pi * T_x * R_N * RHO_N * U * sin(a_Tx * pi * x / L) / L - 0.7e1 / 0.4e1 * a_Tx * pi * T_x * R_N * RHO_N2 * U * sin(a_Tx * pi * x / L) / L + 0.5e1 / 0.2e1 * a_ux * pi * u_x * R_N * RHO_N * T * cos(a_ux * pi * x / L) / L + 0.7e1 / 0.4e1 * a_ux * pi * u_x * R_N * RHO_N2 * T * cos(a_ux * pi * x / L) / L + 0.3e1 / 0.2e1 * a_ux * pi * u_x * RHO * U * U * cos(a_ux * pi * x / L) / L - a_rho_N2_x * pi * rho_N2_x * E_vib_N2 * U * sin(a_rho_N2_x * pi * x / L) / L + a_ux * pi * u_x * E_vib_N2 * RHO_N2 * cos(a_ux * pi * x / L) / L + (h0_N * RHO_N + h0_N2 * RHO_N2) * a_ux * pi * u_x * cos(a_ux * pi * x / L) / L - (-0.10e2 * a_rho_N_x * rho_N_x * cos(a_rho_N_x * pi * x / L) + 0.7e1 * a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * pi * x / L)) * pi * R_N * U * T / L / 0.4e1 - (-a_rho_N_x * rho_N_x * cos(a_rho_N_x * pi * x / L) + a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * pi * x / L)) * pi * pow(U, C2) / L / 0.2e1 - (-a_rho_N_x * rho_N_x * h0_N * cos(a_rho_N_x * pi * x / L) + a_rho_N2_x * rho_N2_x * h0_N2 * sin(a_rho_N2_x * pi * x / L)) * pi * U / L;
 
   return(Q_e);
 }
@@ -168,7 +170,7 @@ double SourceQ_rho_N(double x,
   double kf1_N;
   double kf1_N2;
   double K_eq;
-
+  double C  = -0.2e1;
   double pi = acos(-1);
 
   // Equilibrium Konstant
@@ -181,7 +183,7 @@ double SourceQ_rho_N(double x,
   kf1_N = Cf1_N * pow(T, etaf1_N) * exp(-Ea_N / R / T);
   kf1_N2 = Cf1_N2 * pow(T, etaf1_N2) * exp(-Ea_N2 / R / T);
 
-  Q_rho_N = a_rho_N_x * pi * rho_N_x * U * cos(a_rho_N_x * pi * x / L) / L + a_ux * pi * u_x * RHO_N * cos(a_ux * pi * x / L) / L + (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * pow(M_N, -0.2e1) / K_eq - (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / 0.2e1;
+  Q_rho_N = a_rho_N_x * pi * rho_N_x * U * cos(a_rho_N_x * pi * x / L) / L + a_ux * pi * u_x * RHO_N * cos(a_ux * pi * x / L) / L + (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * pow(M_N, C) / K_eq - (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / 0.2e1;
 
   return(Q_rho_N);
 }
@@ -224,7 +226,7 @@ double SourceQ_rho_N2(double x,
   double kf1_N;
   double kf1_N2;
   double K_eq;
-
+  double C  = -0.2e1;
   double pi = acos(-1);
 
   // Equilibrium Konstant
@@ -237,7 +239,7 @@ double SourceQ_rho_N2(double x,
   kf1_N = Cf1_N * pow(T, etaf1_N) * exp(-Ea_N / R / T);
   kf1_N2 = Cf1_N2 * pow(T, etaf1_N2) * exp(-Ea_N2 / R / T);
 
-  Q_rho_N2 = -a_rho_N2_x * pi * rho_N2_x * U * sin(a_rho_N2_x * pi * x / L) / L + a_ux * pi * u_x * RHO_N2 * cos(a_ux * pi * x / L) / L - (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * pow(M_N, -0.2e1) / K_eq + (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / 0.2e1;
+  Q_rho_N2 = -a_rho_N2_x * pi * rho_N2_x * U * sin(a_rho_N2_x * pi * x / L) / L + a_ux * pi * u_x * RHO_N2 * cos(a_ux * pi * x / L) / L - (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * pow(M_N, C) / K_eq + (0.2e1 * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / 0.2e1;
   return(Q_rho_N2);
 }
 
