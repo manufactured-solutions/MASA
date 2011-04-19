@@ -1,6 +1,7 @@
 Version 0.31 (April 19th 2011)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.31.0
-
+  
+  * enable STL debug mode with --enable-warn-all option when using GNU compiler family
   * ported codebase to Portland group compilers   
   * bug fix associated with radiation_integrated_intensity constructor
   * added new smasa mms: conjugate prior for standard deviation
@@ -9,7 +10,7 @@ https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.31.0
 Version 0.30 (10 April 2011)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.30.0
 
-  * added new compiler configuration option (--masa-warn-all)
+  * added new compiler configuration option (--enable-warn-all)
   * standalone version binary renamed to masa_version
   * many documentation additions and edits
   * added integrated radiative intensity solution
@@ -56,7 +57,7 @@ https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.10
   * MMS Solutions include heat equation, compressible Navier-Stokes,
     and Euler equations in one-,two-, and three-dimensions
   * several bug fixes
-  * successfully tested on x86_64 with gnu and Intel compilers
+  * successfully tested on x86_64 with GNU and Intel compilers
   * force default C/CPP flags to -O0 and strict ANSI std.
   * added automake style test suite ("make check")
   * added library versioning routines
