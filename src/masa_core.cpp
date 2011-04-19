@@ -111,8 +111,10 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
   anim.push_back(new euler_2d<Scalar>());
   anim.push_back(new euler_3d<Scalar>());
   anim.push_back(new euler_transient_1d<Scalar>());
-  anim.push_back(new euler_chem_1d<Scalar>());
   anim.push_back(new axi_euler<Scalar>());
+#ifndef portland_compiler
+  anim.push_back(new euler_chem_1d<Scalar>());
+#endif
 
   anim.push_back(new sod_1d<Scalar>());
 

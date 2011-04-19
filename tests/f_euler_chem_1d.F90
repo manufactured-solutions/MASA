@@ -115,6 +115,8 @@ program main
   ! initialize the problem
   dx = real(lx)/real(nx)
 
+#ifndef portland_compiler
+
   call masa_init("mytest","euler_chem_1d")
 
   ! initialize the default parameters
@@ -178,6 +180,8 @@ program main
      exact_Ntwo = masa_eval_1d_exact_rho_N2(x);
      
   enddo
+
+#endif 
 
   ! steady as she goes...
   call exit(0)
