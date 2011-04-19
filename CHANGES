@@ -1,8 +1,5 @@
-Version 0.32 (In progress)
-
-  * 
-
-Version 0.31 (April 18th 2011)
+Version 0.31 (April 19th 2011)
+https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.31.0
 
   * ported codebase to Portland group compilers   
   * bug fix associated with radiation_integrated_intensity constructor
@@ -23,7 +20,7 @@ https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.30.0
   * added 1d Euler + chemistry solution	     
   * API changes-- flipped terms, e.g. masa_eval_rho_u_source -> masa_eval_source_rho_u
   * improved parallel build support
-  * regressions expanded  to achieve 99%+ line coverage	
+  * regressions expanded to achieve 90%+ line coverage	
   * c++ bindings now support arbitrary precision (double, long double, etc.) w/ regression testing
   * gradient of source terms available for c++
   * adding new conditional (--masa-exceptions) that adds exception handling
