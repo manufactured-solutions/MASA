@@ -28,9 +28,6 @@ cd ../examples
  ./euler_transient
  err=$(($err+$?))
 
- ./euler_chem
- err=$(($err+$?))
-
  ./navierstokes
  err=$(($err+$?))
 

@@ -297,7 +297,7 @@ double temp_function(double T)
 }
 
 
-int main()
+int regression()
 {
 
   //variables 
@@ -499,5 +499,17 @@ int main()
   
   // steady as she goes
   return 0;
+
+}
+
+int main()
+{
+  int err = 0;
+
+#ifndef portland_compiler
+  err += regression();
+#endif
+
+  return err;
 
 }

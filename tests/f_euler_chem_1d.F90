@@ -169,8 +169,8 @@ program main
      ! evalulate source terms
      ufield = masa_eval_1d_source_rho_u (x);
      efield = masa_eval_1d_source_rho_e (x);
-     !N      = masa_eval_1d_source_rho_N (x,k_func);
-     !Ntwo   = masa_eval_1d_source_rho_N2(x,k_func);
+     N      = masa_eval_1d_source_rho_N (x,k_func);
+     Ntwo   = masa_eval_1d_source_rho_N2(x,k_func);
 
      ! evaluate analytical solution terms
      exact_t    = masa_eval_1d_exact_t     (x);

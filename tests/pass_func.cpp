@@ -47,6 +47,7 @@ int main()
   Scalar u_0;
 
   // start problem
+#ifndef portland_compiler
   masa_init<Scalar>("masa-test","euler_chem_1d");
 
   u_0 = 1.234567890123456789;
@@ -58,6 +59,8 @@ int main()
       cout << "\nMASA ERROR::function passing not functioning properly in MASA!\n";
       return 1;
     }
+
+#endif
 
   // steady as she goes
   return 0;

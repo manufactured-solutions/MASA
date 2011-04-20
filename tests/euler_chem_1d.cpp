@@ -471,8 +471,10 @@ int main()
 {
   int err=0;
 
+#ifndef portland_compiler
   err += run_regression<double>();
   //err += run_regression<long double>();
+#endif
 
   return err;
 }
