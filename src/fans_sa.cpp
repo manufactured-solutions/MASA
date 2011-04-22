@@ -622,7 +622,6 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_nu(Scalar x,Scalar y)
   Scalar u_eq_plus;
   Scalar u_eq;
   Scalar d_eqplus_yplus;
-  Scalar mu_t;
   Scalar chi;
   Scalar f_v1;
   Scalar f_v2;

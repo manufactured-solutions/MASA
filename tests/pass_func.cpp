@@ -44,10 +44,9 @@ int main()
 
   const Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
 
-  Scalar u_0;
-
   // start problem
 #ifndef portland_compiler
+  Scalar u_0;
   masa_init<Scalar>("masa-test","euler_chem_1d");
 
   u_0 = 1.234567890123456789;

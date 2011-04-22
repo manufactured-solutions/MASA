@@ -209,7 +209,6 @@ Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_N(Scalar x, Scalar (*in_func)(Sca
   Scalar kf1_N2;
   Scalar K_eq;
   Scalar C  = -0.2e1;
-  Scalar C2 =  0.3e1;
 
   // Calculate Equilibrium Konstant
   T = T_0 + T_x * cos(a_Tx * PI * x / L);
@@ -239,7 +238,6 @@ Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_N2(Scalar x, Scalar (*in_func)(Sc
   Scalar kf1_N2;
   Scalar K_eq;
   Scalar C  = -0.2e1;
-  Scalar C2 =  0.3e1;
 
   // Calculate Equilibrium Konstant
   T = T_0 + T_x * cos(a_Tx * PI * x / L);

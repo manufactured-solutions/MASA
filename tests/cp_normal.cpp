@@ -40,7 +40,6 @@ int run_regression()
 {  
   int err = 0;
   Scalar x;
-  Scalar source;
   Scalar likelyhood,prior,posterior,first_moment;
   Scalar mean, variance;
 
