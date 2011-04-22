@@ -4,14 +4,14 @@
 AC_PREREQ(2.61)
 
 # Release versioning
-AC_INIT([masa], [0.31], [masa-dev@ices.utexas.edu])
+CCAC_INIT([masa], [0.32], [masa-dev@ices.utexas.edu])
 PACKAGE_DESCRIPTION="Manufactured Analytical Solutions Abstraction Library"
 AC_SUBST([PACKAGE_DESCRIPTION])
 PACKAGE_URL="https://red.ices.utexas.edu/projects/software/"
 AC_SUBST([PACKAGE_URL])
 
 GENERIC_MAJOR_VERSION=0
-GENERIC_MINOR_VERSION=31
+GENERIC_MINOR_VERSION=32
 GENERIC_MICRO_VERSION=0
 
 GENERIC_VERSION=$GENERIC_MAJOR_VERSION.$GENERIC_MINOR_VERSION.$GENERIC_MICRO_VERSION 
