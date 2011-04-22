@@ -4,16 +4,18 @@
 AC_PREREQ(2.61)
 
 #init
-AC_INIT([masa],[0.32], [masa-dev@ices.utexas.edu])
+AC_INIT([masa],[0.32.0], [masa-dev@ices.utexas.edu])
+AC_CONFIG_HEADER(config.h)
+AC_CONFIG_AUX_DIR([build-aux])
+AM_INIT_AUTOMAKE
 
-# Release versioning
-GENERIC_MAJOR_VERSION=m4_esyscmd([echo 0])
-GENERIC_MINOR_VERSION=m4_esyscmd([echo 100])
-GENERIC_MICRO_VERSION=0
-
+# snarf and provide versioning numbers
+AX_SPLIT_VERSION
+GENERIC_MAJOR_VERSION=$AX_MAJOR_VERSION
+GENERIC_MINOR_VERSION=$AX_MINOR_VERSION
+GENERIC_MICRO_VERSION=$AX_POINT_VERSION
 GENERIC_VERSION=$GENERIC_MAJOR_VERSION.$GENERIC_MINOR_VERSION.$GENERIC_MICRO_VERSION 
 GENERIC_RELEASE=$GENERIC_MAJOR_VERSION.$GENERIC_MINOR_VERSION
-
 AC_SUBST(GENERIC_VERSION)
 AC_SUBST(GENERIC_MAJOR_VERSION)
 AC_SUBST(GENERIC_MINOR_VERSION)
@@ -25,10 +27,6 @@ PACKAGE_DESCRIPTION="Manufactured Analytical Solutions Abstraction Library"
 AC_SUBST([PACKAGE_DESCRIPTION])
 PACKAGE_URL="https://red.ices.utexas.edu/projects/software/"
 AC_SUBST([PACKAGE_URL])
-
-AC_CONFIG_HEADER(config.h)
-AC_CONFIG_AUX_DIR([build-aux])
-AM_INIT_AUTOMAKE
 
 # ------------------------------------------------------------------
 # Optimization Settings:
