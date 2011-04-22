@@ -1,4 +1,6 @@
+--------------------------------------------------
 Code Development:
+--------------------------------------------------
 Paul Bauman
 Nicholas Malaya
 Onkar Sahni
@@ -6,18 +8,22 @@ Karl W. Schulz
 Chris Simmons
 Roy Stogner
 
+--------------------------------------------------
 Manufactured Solution Generation:
+--------------------------------------------------
 Kemelli Estacio-Hiroms
-Todd Oliver  (RANS)
-Marco Panesi (Radiation)
+Todd Oliver      (FANS/RANS)
+Marco Panesi     (Radiation)
 Gabriel Terejanu (SMASA)
 
+--------------------------------------------------
 Misc: 
+--------------------------------------------------
 PECOS TEAM
 
 --------------------------------------------------
 Primary maintainer:
- 
+--------------------------------------------------
 Nicholas Malaya
 PECOS, ICES, UTEXAS
 nick@ices.utexas.edu

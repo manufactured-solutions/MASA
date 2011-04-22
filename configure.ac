@@ -3,29 +3,32 @@
 
 AC_PREREQ(2.61)
 
-# Release versioning
-AC_INIT([masa], [0.32], [masa-dev@ices.utexas.edu])
-PACKAGE_DESCRIPTION="Manufactured Analytical Solutions Abstraction Library"
-AC_SUBST([PACKAGE_DESCRIPTION])
-PACKAGE_URL="https://red.ices.utexas.edu/projects/software/"
-AC_SUBST([PACKAGE_URL])
+#init
+AC_INIT([masa],[0.32], [masa-dev@ices.utexas.edu])
 
-GENERIC_MAJOR_VERSION=0
-GENERIC_MINOR_VERSION=32
+# Release versioning
+GENERIC_MAJOR_VERSION=m4_esyscmd([echo 0])
+GENERIC_MINOR_VERSION=m4_esyscmd([echo 100])
 GENERIC_MICRO_VERSION=0
 
 GENERIC_VERSION=$GENERIC_MAJOR_VERSION.$GENERIC_MINOR_VERSION.$GENERIC_MICRO_VERSION 
 GENERIC_RELEASE=$GENERIC_MAJOR_VERSION.$GENERIC_MINOR_VERSION
-
-AC_CONFIG_HEADER(config.h)
-AC_CONFIG_AUX_DIR([build-aux])
-AM_INIT_AUTOMAKE
 
 AC_SUBST(GENERIC_VERSION)
 AC_SUBST(GENERIC_MAJOR_VERSION)
 AC_SUBST(GENERIC_MINOR_VERSION)
 AC_SUBST(GENERIC_MICRO_VERSION)
 AC_SUBST(GENERIC_RELEASE)
+
+# define
+PACKAGE_DESCRIPTION="Manufactured Analytical Solutions Abstraction Library"
+AC_SUBST([PACKAGE_DESCRIPTION])
+PACKAGE_URL="https://red.ices.utexas.edu/projects/software/"
+AC_SUBST([PACKAGE_URL])
+
+AC_CONFIG_HEADER(config.h)
+AC_CONFIG_AUX_DIR([build-aux])
+AM_INIT_AUTOMAKE
 
 # ------------------------------------------------------------------
 # Optimization Settings:
@@ -61,7 +64,7 @@ AC_PROG_F77
 AC_PROG_LIBTOOL
 AM_SANITY_CHECK
 
-#---------------------------------------------
+ #---------------------------------------------
 # Check for extra-strict regression tolerance
 #---------------------------------------------
 
