@@ -4,7 +4,7 @@
 AC_PREREQ(2.61)
 
 # Release versioning
-CCAC_INIT([masa], [0.32], [masa-dev@ices.utexas.edu])
+AC_INIT([masa], [0.32], [masa-dev@ices.utexas.edu])
 PACKAGE_DESCRIPTION="Manufactured Analytical Solutions Abstraction Library"
 AC_SUBST([PACKAGE_DESCRIPTION])
 PACKAGE_URL="https://red.ices.utexas.edu/projects/software/"
