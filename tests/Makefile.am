@@ -35,6 +35,7 @@ check_PROGRAMS   = misc                \
                    axi_euler           \
                    axi_cns             \
                    rans_sa             \
+                   fans_sa_wall        \
                    radiation           \
                    sod                 \
                    cp_normal           \
@@ -94,6 +95,7 @@ cns3d_SOURCES               = cns3d.cpp
 cns3d_phys_SOURCES          = cns3d_phys.cpp
 cn2d3d_SOURCES              = cns-2d-3d.cpp
 rans_sa_SOURCES             = rans_sa.cpp
+fans_sa_wall_SOURCES        = fans_sa_wall.cpp
 radiation_SOURCES           = radiation.cpp
 sod_SOURCES                 = sod.cpp
 cp_normal_SOURCES           = cp_normal.cpp
@@ -186,6 +188,7 @@ TESTS                      = init.sh              \
                              axi_euler            \
                              axi_cns              \
                              rans_sa              \
+                             fans_sa_wall         \
                              radiation            \
                              sod                  \
                              cp_normal            \
