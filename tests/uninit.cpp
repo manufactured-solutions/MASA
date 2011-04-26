@@ -35,9 +35,8 @@
 using namespace MASA;
 using namespace std;
 
-typedef double Scalar;
-
-int main()
+template<typename Scalar>
+int run_regression()
 {
   Scalar threshold = 5 * numeric_limits<Scalar>::epsilon();
 
@@ -478,4 +477,14 @@ int main()
 
   return 0; // steady as she goes
 
+}
+
+int main()
+{
+  int err=0;
+
+  err += run_regression<double>();
+  err += run_regression<long double>();
+
+  return err;
 }
