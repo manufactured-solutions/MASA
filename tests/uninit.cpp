@@ -444,6 +444,31 @@ int main()
   if( (derr + 1.33) > threshold) 
     err += 1;
 
+  // --------------------------------
+  // SMASA 
+  // --------------------------------
+  
+  derr = masa_eval_likelyhood<Scalar>(x);	
+  if( (derr + 1.33) > threshold) 
+    err += 1;
+
+  derr = masa_eval_loglikelyhood<Scalar>(x);	
+  if( (derr + 1.33) > threshold) 
+    err += 1;
+
+  derr = masa_eval_prior<Scalar>(x);	
+  if( (derr + 1.33) > threshold) 
+    err += 1;
+
+  derr = masa_eval_posterior<Scalar>(x);
+  if( (derr + 1.33) > threshold) 
+    err += 1;
+
+  derr = masa_eval_central_moment<Scalar>(1);
+  if( (derr + 1.33) > threshold) 
+    err += 1;
+
+
   if(err != 0)
     {
       cout << "MASA ERROR: Default output for virtual function failing\n";
