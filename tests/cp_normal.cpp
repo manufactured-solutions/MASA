@@ -40,7 +40,7 @@ int run_regression()
 {  
   int err = 0;
   Scalar x;
-  Scalar likelyhood,prior,posterior,first_moment;
+  Scalar likelyhood,loglikelyhood,prior,posterior,first_moment;
   Scalar mean, variance;
 
   int nx = 115;  // number of points
@@ -68,6 +68,7 @@ int run_regression()
 	x=i*dx;
 	
 	likelyhood   = masa_eval_likelyhood<Scalar>(x);	
+	loglikelyhood= masa_eval_loglikelyhood<Scalar>(x);	
 	prior        = masa_eval_prior<Scalar>(x);	
 	posterior    = masa_eval_posterior<Scalar>(x);
 	first_moment = masa_eval_central_moment<Scalar>(1);
@@ -82,6 +83,7 @@ int run_regression()
 	nancheck(mean);
 	nancheck(variance);
 	nancheck(likelyhood);
+	nancheck(loglikelyhood);
 	nancheck(prior);
 	nancheck(posterior);
 

@@ -63,11 +63,8 @@ int main()
   derr = masa_init_param<Scalar>();
   if(derr > threshold) 
     err += 1;
-  
-  // --------------------------------
-  // source term(s) -- 1D
-  // --------------------------------
-  
+   
+ 
   derr = masa_eval_source_t<Scalar>(x); 
   if( (derr + 1.33) > threshold) 
     err += 1;
@@ -112,6 +109,14 @@ int main()
   if( (derr + 1.33) > threshold) 
     err += 1;
 
+  derr = masa_eval_source_boundary <Scalar>(x);
+  if( (derr + 1.33) > threshold) 
+    err += 1;
+
+  // --------------------------------
+  // exact term(s) -- 1D
+  // --------------------------------
+  
   derr = masa_eval_exact_rho_N <Scalar>(x);
   if( (derr + 1.33) > threshold) 
     err += 1;
@@ -151,6 +156,18 @@ int main()
   derr = masa_eval_exact_rho<Scalar>(x);
   if( (derr + 1.33) > threshold) 
     err += 1;  
+
+  derr = masa_eval_exact_rho_C <Scalar>(x);
+  if( (derr + 1.33) > threshold) 
+    err += 1;
+
+  derr = masa_eval_exact_rho_C3 <Scalar>(x);
+  if( (derr + 1.33) > threshold) 
+    err += 1;
+
+  // --------------------------------
+  // gradient term(s) -- 1D
+  // --------------------------------
 
   derr = masa_eval_grad_u<Scalar>(x);
   if( (derr + 1.33) > threshold) 
@@ -212,6 +229,22 @@ int main()
     err += 1;
 
   derr = masa_eval_source_rho_e<Scalar>(x,y);
+  if( (derr + 1.33) > threshold) 
+    err += 1;
+
+  // --------------------------------
+  // exact term(s) -- 2D
+  // --------------------------------
+
+  derr = masa_eval_exact_nu <Scalar>(x,y);
+  if( (derr + 1.33) > threshold) 
+    err += 1;
+
+  derr = masa_eval_exact_rho_C  <Scalar>(x,y);
+  if( (derr + 1.33) > threshold) 
+    err += 1;
+
+  derr = masa_eval_exact_rho_C3 <Scalar>(x,y);
   if( (derr + 1.33) > threshold) 
     err += 1;
 
