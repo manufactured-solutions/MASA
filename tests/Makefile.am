@@ -31,6 +31,7 @@ check_PROGRAMS   = misc                \
 	           cns3d               \
 	           cns3d_phys          \
 	           cn2d3d              \
+	           ablation            \
                    axi_euler           \
                    axi_cns             \
                    rans_sa             \
@@ -81,6 +82,7 @@ heat_var_steady_SOURCES     = heatsv.cpp
 heat_const_unsteady_SOURCES = heatuc.cpp
 heat_var_unsteady_SOURCES   = heatuv.cpp
 axi_euler_SOURCES           = axi_euler.cpp
+ablation_SOURCES            = ablation.cpp
 axi_cns_SOURCES             = axi_cns.cpp
 euler1d_SOURCES             = euler1d.cpp
 euler2d_SOURCES             = euler2d.cpp
@@ -180,6 +182,7 @@ TESTS                      = init.sh              \
                              cns3d                \
                              cns3d_phys           \
 	       	             cn2d3d               \
+	       	             ablation             \
                              axi_euler            \
                              axi_cns              \
                              rans_sa              \
