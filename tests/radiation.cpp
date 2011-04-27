@@ -65,6 +65,9 @@ int main()
   source = masa_eval_source_u<Scalar>(x);
   exact  = masa_eval_exact_u<Scalar>(x);
 
+  nancheck(source);
+  nancheck(exact);
+
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa.
   freopen("/dev/null","w",stdout);
@@ -77,8 +80,9 @@ int main()
       return 1;
     }
 
-  nancheck(source);
+  exact  = masa_eval_exact_u<Scalar>(1001.2);
   nancheck(exact);
+
 
   masa_get_vec<Scalar>("vec_amp",vec2);
   for(std::vector<Scalar>::iterator it = vec2.begin(); it != vec2.end(); it++)
