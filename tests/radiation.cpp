@@ -39,6 +39,8 @@ typedef double Scalar;
 int main()
 {
 
+  const Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
+
   int err = 0;
   Scalar source;
   Scalar exact;
@@ -62,6 +64,18 @@ int main()
   x = 1;
   source = masa_eval_source_u<Scalar>(x);
   exact  = masa_eval_exact_u<Scalar>(x);
+
+  // reroute stdout for regressions: TODO remove when logger mechanism
+  // is used inside masa.
+  freopen("/dev/null","w",stdout);
+
+  exact  = masa_eval_exact_u<Scalar>(-1);
+  if(abs(exact+1) > thresh)
+    {
+      std::cout << "MASA Error: radiation not set properly\n";
+      std::cout << abs(exact+1) << std::endl;
+      return 1;
+    }
 
   nancheck(source);
   nancheck(exact);
