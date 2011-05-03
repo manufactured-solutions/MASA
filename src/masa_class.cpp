@@ -268,10 +268,10 @@ int MASA::manufactured_solution<Scalar>::sanity_check()
   // check all scalar values
   for(std::map<std::string,int>::const_iterator it = varmap.begin(); it != varmap.end(); ++it)
     {      
-      if(fabs((*vararr[it->second] - MASA_VAR_DEFAULT)/MASA_VAR_DEFAULT) < thresh)
+      if(std::abs((*vararr[it->second] - MASA_VAR_DEFAULT)/MASA_VAR_DEFAULT) < thresh)
 	{
 	  std::cout << "\nMASA WARNING:: " << it->first << " has not been initialized!\n";
-	  std::cout << "Current value is: " << fabs((*vararr[it->second] - MASA_VAR_DEFAULT)/MASA_VAR_DEFAULT) << std::endl;
+	  std::cout << "Current value is: " << std::abs((*vararr[it->second] - MASA_VAR_DEFAULT)/MASA_VAR_DEFAULT) << std::endl;
 	  flag += 1;
 	}
     }    
@@ -473,10 +473,10 @@ int MASA::manufactured_solution<Scalar>::poly_test()
   poly.set_coeffs( a );
 
   // Check to make sure we get back what we set
-  if( fabs( a0 - poly.get_coeffs( 0 ) ) > thresh ) return_flag = 1;
-  if( fabs( a1 - poly.get_coeffs( 1 ) ) > thresh ) return_flag = 1;
-  if( fabs( a2 - poly.get_coeffs( 2 ) ) > thresh ) return_flag = 1;
-  if( fabs( a3 - poly.get_coeffs( 3 ) ) > thresh ) return_flag = 1;
+  if( std::abs( a0 - poly.get_coeffs( 0 ) ) > thresh ) return_flag = 1;
+  if( std::abs( a1 - poly.get_coeffs( 1 ) ) > thresh ) return_flag = 1;
+  if( std::abs( a2 - poly.get_coeffs( 2 ) ) > thresh ) return_flag = 1;
+  if( std::abs( a3 - poly.get_coeffs( 3 ) ) > thresh ) return_flag = 1;
 
   // Check polynomial evaluation
   const Scalar x = 2.0;
@@ -486,7 +486,7 @@ int MASA::manufactured_solution<Scalar>::poly_test()
   computed_value = poly( x , &ierr);
   if(ierr != 0) return_flag=1;
 
-  if( fabs( exact_value - computed_value ) > thresh ) return_flag = 1;
+  if( std::abs( exact_value - computed_value ) > thresh ) return_flag = 1;
 
   // Check derivatives
   const Scalar dx = 62;
@@ -497,10 +497,10 @@ int MASA::manufactured_solution<Scalar>::poly_test()
 
   poly.eval_derivs( x, 4, derivs );
   
-  if( fabs( exact_value - derivs[0] ) > thresh ) return_flag = 1;
-  if( fabs( dx  - derivs[1] ) > thresh ) return_flag = 1;
-  if( fabs( d2x - derivs[2] ) > thresh ) return_flag = 1;
-  if( fabs( d3x - derivs[3] ) > thresh ) return_flag = 1;
+  if( std::abs( exact_value - derivs[0] ) > thresh ) return_flag = 1;
+  if( std::abs( dx  - derivs[1] ) > thresh ) return_flag = 1;
+  if( std::abs( d2x - derivs[2] ) > thresh ) return_flag = 1;
+  if( std::abs( d3x - derivs[3] ) > thresh ) return_flag = 1;
 
   return return_flag;
 }

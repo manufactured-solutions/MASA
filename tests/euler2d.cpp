@@ -371,27 +371,27 @@ int run_regression()
 	// choose between abs and rel error
 #ifdef MASA_STRICT_REGRESSION
 
-	ufield3 = fabs(ufield-ufield2);
-	vfield3 = fabs(vfield-vfield2);
-	efield3 = fabs(efield-efield2);
-	rho3    = fabs(rho-rho2);
+	ufield3 = std::abs(ufield-ufield2);
+	vfield3 = std::abs(vfield-vfield2);
+	efield3 = std::abs(efield-efield2);
+	rho3    = std::abs(rho-rho2);
 	
-	exact_u3   = fabs(exact_u-exact_u2);
-	exact_v3   = fabs(exact_v-exact_v2);
-	exact_rho3 = fabs(exact_rho-exact_rho2);
-	exact_p3   = fabs(exact_p-exact_p2);
+	exact_u3   = std::abs(exact_u-exact_u2);
+	exact_v3   = std::abs(exact_v-exact_v2);
+	exact_rho3 = std::abs(exact_rho-exact_rho2);
+	exact_p3   = std::abs(exact_p-exact_p2);
 
 #else
 
-	ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
-	vfield3 = fabs(vfield-vfield2)/fabs(vfield2);
-	efield3 = fabs(efield-efield2)/fabs(efield2);
-	rho3    = fabs(rho-rho2)/fabs(rho2);
+	ufield3 = std::abs(ufield-ufield2)/std::abs(ufield2);
+	vfield3 = std::abs(vfield-vfield2)/std::abs(vfield2);
+	efield3 = std::abs(efield-efield2)/std::abs(efield2);
+	rho3    = std::abs(rho-rho2)/std::abs(rho2);
 	
-	exact_u3   = fabs(exact_u-exact_u2)/fabs(exact_u2);
-	exact_v3   = fabs(exact_v-exact_v2)/fabs(exact_v2);
-	exact_rho3 = fabs(exact_rho-exact_rho2)/fabs(exact_rho2);
-	exact_p3   = fabs(exact_p-exact_p2)/fabs(exact_p2);
+	exact_u3   = std::abs(exact_u-exact_u2)/std::abs(exact_u2);
+	exact_v3   = std::abs(exact_v-exact_v2)/std::abs(exact_v2);
+	exact_rho3 = std::abs(exact_rho-exact_rho2)/std::abs(exact_rho2);
+	exact_p3   = std::abs(exact_p-exact_p2)/std::abs(exact_p2);
 
 #endif
 

@@ -111,8 +111,8 @@ int run_regression()
   tfield2   = SourceQ_t_1d(x,A_x,k_0);
   exact_t2     = Source_t_1d_exact(A_x,x);
 
-  tfield3 = fabs(tfield-tfield2);
-  exact_t3   = fabs(exact_t-exact_t2);
+  tfield3 = std::abs(tfield-tfield2);
+  exact_t3   = std::abs(exact_t-exact_t2);
 
   if(tfield3 > threshold)
     {
@@ -147,7 +147,7 @@ int run_regression()
   tfield    = masa_eval_source_t<Scalar>(x,y);
   tfield2   = SourceQ_t_2d(x,y,A_x,B_y,k_0);
 
-  tfield=fabs(tfield-tfield2);
+  tfield=std::abs(tfield-tfield2);
 
   if(tfield > threshold)
     {
@@ -177,7 +177,7 @@ int run_regression()
 
   tfield  = masa_eval_source_t<Scalar>(x,y,z);
   tfield2 = SourceQ_t_3d(x,y,z,A_x,B_y,C_z,k_0);
-  tfield=fabs(tfield-tfield2);
+  tfield=std::abs(tfield-tfield2);
 
   if(tfield > threshold)
     {

@@ -90,7 +90,7 @@ int main()
       amp+= *it;
     }
 
-  //if(fabs(amp - exact) > thresh)
+  //if(std::abs(amp - exact) > thresh)
   //  {
   //    std::cout << "MASA REGRESSION FAILURE\n";
   //    return 1;

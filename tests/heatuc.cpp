@@ -138,7 +138,7 @@ int run_regression()
   tfield   = masa_eval_source_t<Scalar>(x,t);
   tfield2  = SourceQ_t_1d(x,t,A_x,A_t,D_t,k_0,cp_0,rho);
 
-  tfield=fabs(tfield-tfield2);
+  tfield=std::abs(tfield-tfield2);
 
   threshcheck(tfield,threshold);
   //cout << "1D Unsteady Constant Heat Equation: PASSED\n";
@@ -185,7 +185,7 @@ int run_regression()
   tfield   = masa_eval_source_t<Scalar>(x,y,t);
   tfield2   = SourceQ_t_2d(x,y,t,A_x,A_t,B_y,B_t,D_t,rho,k_0,cp_0);
 
-  tfield=fabs(tfield-tfield2);
+  tfield=std::abs(tfield-tfield2);
 
   threshcheck(tfield,threshold);
 
@@ -237,7 +237,7 @@ int run_regression()
   tfield    = masa_eval_source_t<Scalar>(x,y,z,t);
   tfield2   = SourceQ_t_3d(x,y,z,t,A_x,A_t,B_y,B_t,C_z,C_t,D_t,k_0,cp_0,rho);
 
-  tfield=fabs(tfield-tfield2);
+  tfield=std::abs(tfield-tfield2);
 
   threshcheck(tfield,threshold);
   // presumably, all tests passed

@@ -224,26 +224,26 @@ int main()
 	// choose between abs and rel error
 #ifdef MASA_STRICT_REGRESSION
 
-	ufield3 = fabs(ufield-ufield2);
-	wfield3 = fabs(wfield-wfield2);
-	efield3 = fabs(efield-efield2);
-	rho3    = fabs(rho-rho2);
+	ufield3 = std::abs(ufield-ufield2);
+	wfield3 = std::abs(wfield-wfield2);
+	efield3 = std::abs(efield-efield2);
+	rho3    = std::abs(rho-rho2);
 	
-	exact_u3   = fabs(exact_u-exact_u2);
-	exact_w3  = fabs(exact_w-exact_w2);
-	exact_rho3 = fabs(exact_rho-exact_rho2);
-	exact_p3   = fabs(exact_p-exact_p2);
+	exact_u3   = std::abs(exact_u-exact_u2);
+	exact_w3  = std::abs(exact_w-exact_w2);
+	exact_rho3 = std::abs(exact_rho-exact_rho2);
+	exact_p3   = std::abs(exact_p-exact_p2);
 
 #else
-	ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
-	wfield3 = fabs(wfield-wfield2)/fabs(wfield2);
-	efield3 = fabs(efield-efield2)/fabs(efield2);
-	rho3    = fabs(rho-rho2)/fabs(rho2);
+	ufield3 = std::abs(ufield-ufield2)/std::abs(ufield2);
+	wfield3 = std::abs(wfield-wfield2)/std::abs(wfield2);
+	efield3 = std::abs(efield-efield2)/std::abs(efield2);
+	rho3    = std::abs(rho-rho2)/std::abs(rho2);
 	
-	exact_u3   = fabs(exact_u-exact_u2)/fabs(exact_u2);
-	exact_w3   = fabs(exact_w-exact_w2)/fabs(exact_w2);
-	exact_rho3 = fabs(exact_rho-exact_rho2)/fabs(exact_rho2);
-	exact_p3   = fabs(exact_p-exact_p2)/fabs(exact_p2);
+	exact_u3   = std::abs(exact_u-exact_u2)/std::abs(exact_u2);
+	exact_w3   = std::abs(exact_w-exact_w2)/std::abs(exact_w2);
+	exact_rho3 = std::abs(exact_rho-exact_rho2)/std::abs(exact_rho2);
+	exact_p3   = std::abs(exact_p-exact_p2)/std::abs(exact_p2);
 #endif
 
 	nancheck(ufield3);

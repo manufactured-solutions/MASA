@@ -422,29 +422,29 @@ int run_regression()
       
       // #ifdef MASA_STRICT_REGRESSION
 
-      ufield3 = fabs(ufield-ufield2);
-      efield3 = fabs(efield-efield2);
-      N3      = fabs(N-N2);
-      Ntwo3   = fabs(Ntwo-Ntwo2);
+      ufield3 = std::abs(ufield-ufield2);
+      efield3 = std::abs(efield-efield2);
+      N3      = std::abs(N-N2);
+      Ntwo3   = std::abs(Ntwo-Ntwo2);
 
-      exact_t3    = fabs(exact_t2-exact_t);
-      exact_u3    = fabs(exact_u2-exact_u);
-      exact_rho3  = fabs(exact_rho2-exact_rho);
-      exact_N3    = fabs(exact_N2-exact_N);
-      exact_Ntwo3 = fabs(exact_Ntwo2-exact_Ntwo);
+      exact_t3    = std::abs(exact_t2-exact_t);
+      exact_u3    = std::abs(exact_u2-exact_u);
+      exact_rho3  = std::abs(exact_rho2-exact_rho);
+      exact_N3    = std::abs(exact_N2-exact_N);
+      exact_Ntwo3 = std::abs(exact_Ntwo2-exact_Ntwo);
 
       /* #else
 
-      ufield3 = fabs(ufield-ufield2)/fabs(ufield2);
-      efield3 = fabs(efield-efield2)/fabs(efield2);
-      N3      = fabs(N-N2)/fabs(N2);
-      Ntwo3   = fabs(Ntwo-Ntwo2)/fabs(Ntwo2);
+      ufield3 = std::abs(ufield-ufield2)/std::abs(ufield2);
+      efield3 = std::abs(efield-efield2)/std::abs(efield2);
+      N3      = std::abs(N-N2)/std::abs(N2);
+      Ntwo3   = std::abs(Ntwo-Ntwo2)/std::abs(Ntwo2);
 
-      exact_t3    = fabs(exact_t2-exact_t)/fabs(exact_t3);
-      exact_u3    = fabs(exact_u2-exact_u)/fabs(exact_u3);
-      exact_rho3  = fabs(exact_rho2-exact_rho)/fabs(exact_rho3);
-      exact_N3    = fabs(exact_N2-exact_N)/fabs(exact_N3);
-      exact_Ntwo3 = fabs(exact_Ntwo2-exact_Ntwo)/fabs(exact_Ntwo3);
+      exact_t3    = std::abs(exact_t2-exact_t)/std::abs(exact_t3);
+      exact_u3    = std::abs(exact_u2-exact_u)/std::abs(exact_u3);
+      exact_rho3  = std::abs(exact_rho2-exact_rho)/std::abs(exact_rho3);
+      exact_N3    = std::abs(exact_N2-exact_N)/std::abs(exact_N3);
+      exact_Ntwo3 = std::abs(exact_Ntwo2-exact_Ntwo)/std::abs(exact_Ntwo3);
 
       #endif */
 

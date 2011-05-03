@@ -170,7 +170,7 @@ int main()
   tfield   = masa_eval_source_t<Scalar>(x,t);
   tfield2  = SourceQ_t_1d(x,t,A_x,A_t,D_t,rho,k_0,k_1,k_2,cp_0,cp_1,cp_2);
 
-  tfield=fabs(tfield-tfield2);
+  tfield=std::abs(tfield-tfield2);
 
   if(tfield > threshold)
     {
@@ -235,7 +235,7 @@ int main()
   tfield   = masa_eval_source_t<Scalar>(x,y,t);
   tfield2   = SourceQ_t_2d(x,y,t,A_x,A_t,B_y,B_t,D_t,rho,k_0,k_1,k_2,cp_0,cp_1,cp_2);
 
-  tfield=fabs(tfield-tfield2);
+  tfield=std::abs(tfield-tfield2);
 
   if(tfield > threshold)
     {
@@ -310,7 +310,7 @@ int main()
   tfield   = masa_eval_source_t<Scalar>(x,y,z,t);
   tfield2   = SourceQ_t_3d(x,y,z,t,A_x,A_t,B_y,B_t,C_z,C_t,D_t,rho,k_0,k_1,k_2,cp_0,cp_1,cp_2);
 
-  tfield=fabs(tfield-tfield2);
+  tfield=std::abs(tfield-tfield2);
 
   if(tfield > threshold)
     {

@@ -117,7 +117,7 @@ int run_regression()
   tfield    = masa_eval_source_t<Scalar>(x);  
   tfield2   = SourceQ_t_1d(x,A_x,k_0,k_1,k_2);
 
-  tfield=fabs(tfield-tfield2);
+  tfield=std::abs(tfield-tfield2);
 
   threshcheck(tfield);
 
@@ -156,7 +156,7 @@ int run_regression()
   tfield    = masa_eval_source_t<Scalar>(x,y);  
   tfield2   = SourceQ_t_2d(x,y,A_x,B_y,k_0,k_1,k_2);
 
-  tfield=fabs(tfield-tfield2);
+  tfield=std::abs(tfield-tfield2);
 
 
   threshcheck(tfield);
@@ -190,7 +190,7 @@ int run_regression()
   tfield    = masa_eval_source_t<Scalar>(x,y,z);  
   tfield2   = SourceQ_t_3d(x,y,z,A_x,B_y,C_z,k_0,k_1,k_2);
 
-  tfield=fabs(tfield-tfield2);
+  tfield=std::abs(tfield-tfield2);
 
   threshcheck(tfield);
 

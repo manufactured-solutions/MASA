@@ -48,10 +48,10 @@ int main()
   
   // values should be set to something other than default: checking
   u_0 = masa_get_param<Scalar>("u_0");
-  if(fabs((u_0 - MASA_DEFAULT)/MASA_DEFAULT) < threshold)
+  if(std::abs((u_0 - MASA_DEFAULT)/MASA_DEFAULT) < threshold)
     {
       cout << "\nMASA ERROR:: Variables not being auto initalized!\n";
-      cout << " value is : " << fabs((u_0 - MASA_DEFAULT)/MASA_DEFAULT) << endl;
+      cout << " value is : " << std::abs((u_0 - MASA_DEFAULT)/MASA_DEFAULT) << endl;
       cout << " value is : " << u_0 << endl;
       return 1;
     }

@@ -422,7 +422,7 @@ Scalar MASA::sod_1d<Scalar>::rtbis(Scalar x1,Scalar x2,Scalar xacc,int JMAX)
       xmid=myval+dx;
       fmid=func(xmid);
       if(fmid <= 0.) myval=xmid;
-      if(fabs(dx) < xacc || fmid < thresh) 
+      if(std::abs(dx) < xacc || fmid < thresh) 
 	return(myval);
     }
   
