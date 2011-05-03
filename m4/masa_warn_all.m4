@@ -35,7 +35,7 @@ if test "$MASA_WARN_ALL" = "1"; then
    # vendor specific warning settings
 
    if test "$ax_cv_c_compiler_vendor" == "intel"; then
-     CFLAGS="$CFLAGS -wd981 -wd383 -wd869 -wd1418"
+     CFLAGS="$CFLAGS -wd981 -wd383 -wd1418"
    fi
 
    if test "$ax_cv_c_compiler_vendor" == "portland"; then
@@ -49,7 +49,7 @@ if test "$MASA_WARN_ALL" = "1"; then
    fi
 
    if test "$ax_cv_cxx_compiler_vendor" == "intel"; then
-     CXXFLAGS="$CXXFLAGS -wd981 -wd383 -wd869 -wd1418"
+     CXXFLAGS="$CXXFLAGS -wd981 -wd383 -wd1418"
    fi
 
    if test "$ax_cv_cxx_compiler_vendor" == "portland"; then
