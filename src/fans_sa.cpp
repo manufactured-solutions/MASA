@@ -732,7 +732,7 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho_e(Scalar x,Scalar y
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_u(Scalar x,Scalar y)
+Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_u(Scalar /*x*/,Scalar /*y*/)
 {
   Scalar u_an;
   u_an = u_inf / A * sin(A / u_inf * u_eq);
@@ -748,7 +748,7 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_v(Scalar x,Scalar y
 }
 
 template <typename Scalar>
-Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_p(Scalar x,Scalar y)
+Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_p(Scalar /*x*/,Scalar /*y*/)
 {
   Scalar p_an;
   p_an = p_0;
@@ -756,7 +756,7 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_p(Scalar x,Scalar y
 }
 
 template <typename Scalar>
-Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_rho(Scalar x,Scalar y)
+Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_rho(Scalar /*x*/,Scalar /*y*/)
 {
   Scalar rho_an;
   rho_an = p_0 / R / T_an;
@@ -764,7 +764,7 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_rho(Scalar x,Scalar
 }
 
 template <typename Scalar>
-Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_nu(Scalar x,Scalar y)
+Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_nu(Scalar /*x*/,Scalar y)
 {
   Scalar nu_sa_an;
   nu_sa_an = kappa * u_tau * y - alpha * y * y;
