@@ -74,7 +74,7 @@ template <typename Scalar>
 Scalar MASA::heateq_1d_steady_const<Scalar>::eval_q_t(Scalar x)
 {
   Scalar Q_T;
-  Q_T = A_x * A_x * k_0 * cos(A_x * x);
+  Q_T = A_x * A_x * k_0 * std::cos(A_x * x);
   return Q_T;
 }
 
@@ -82,7 +82,7 @@ template <typename Scalar>
 Scalar MASA::heateq_1d_steady_const<Scalar>::eval_exact_t(Scalar x)
 {
   Scalar exact_t;
-  exact_t = cos(A_x * x);
+  exact_t = std::cos(A_x * x);
   return exact_t;
 }
 
@@ -119,7 +119,7 @@ int MASA::heateq_2d_steady_const<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::heateq_2d_steady_const<Scalar>::eval_q_t(Scalar x,Scalar y)
 {
-  Scalar Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * (A_x * A_x + B_y * B_y);
+  Scalar Q_T = k_0 * std::cos(A_x * x) * std::cos(B_y * y) * (A_x * A_x + B_y * B_y);
   return Q_T;
 }
 
@@ -127,7 +127,7 @@ template <typename Scalar>
 Scalar MASA::heateq_2d_steady_const<Scalar>::eval_exact_t(Scalar x,Scalar y)
 {
   Scalar exact_t;
-  exact_t = cos(A_x * x) * cos(B_y * y);
+  exact_t = std::cos(A_x * x) * std::cos(B_y * y);
   return exact_t;
 }
 
@@ -167,7 +167,7 @@ int MASA::heateq_3d_steady_const<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::heateq_3d_steady_const<Scalar>::eval_q_t(Scalar x,Scalar y,Scalar z)
 {
-  Scalar Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * cos(C_z * z) * (A_x * A_x + B_y * B_y + C_z * C_z);
+  Scalar Q_T = k_0 * std::cos(A_x * x) * std::cos(B_y * y) * std::cos(C_z * z) * (A_x * A_x + B_y * B_y + C_z * C_z);
   return Q_T;
 }
 
@@ -175,7 +175,7 @@ template <typename Scalar>
 Scalar MASA::heateq_3d_steady_const<Scalar>::eval_exact_t(Scalar x,Scalar y,Scalar z)
 {
   Scalar exact_t;
-  exact_t = cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
+  exact_t = std::cos(A_x * x) * std::cos(B_y * y) * std::cos(C_z * z);
   return exact_t;
 }
 
@@ -226,7 +226,7 @@ int MASA::heateq_1d_unsteady_const<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::heateq_1d_unsteady_const<Scalar>::eval_q_t(Scalar x,Scalar t)
 {
-  Scalar Q_T = cos(A_x * x + A_t * t) * cos(D_t * t) * k_0 * A_x * A_x - (sin(A_x * x + A_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(D_t * t) * D_t) * rho * cp_0;
+  Scalar Q_T = std::cos(A_x * x + A_t * t) * std::cos(D_t * t) * k_0 * A_x * A_x - (std::sin(A_x * x + A_t * t) * std::cos(D_t * t) * A_t + std::cos(A_x * x + A_t * t) * std::sin(D_t * t) * D_t) * rho * cp_0;
   return Q_T;
 }
 
@@ -271,7 +271,7 @@ int MASA::heateq_2d_unsteady_const<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::heateq_2d_unsteady_const<Scalar>::eval_q_t(Scalar x,Scalar y, Scalar t)
 {
-  Scalar Q_T = -(sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * k_0;
+  Scalar Q_T = -(std::sin(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(D_t * t) * A_t + std::cos(A_x * x + A_t * t) * std::sin(B_y * y + B_t * t) * std::cos(D_t * t) * B_t + std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y) * std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(D_t * t) * k_0;
   return Q_T;
 }
 
@@ -319,7 +319,7 @@ int MASA::heateq_3d_unsteady_const<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::heateq_3d_unsteady_const<Scalar>::eval_q_t(Scalar x,Scalar y, Scalar z,Scalar t)
 {
-  Scalar Q_T = -(sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * B_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * C_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y + C_z * C_z) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * k_0;
+  Scalar Q_T = -(std::sin(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::cos(D_t * t) * A_t + std::cos(A_x * x + A_t * t) * std::sin(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::cos(D_t * t) * B_t + std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::sin(C_z * z + C_t * t) * std::cos(D_t * t) * C_t + std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y + C_z * C_z) * std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::cos(D_t * t) * k_0;
   return Q_T;
 }
 
@@ -378,7 +378,7 @@ int MASA::heateq_1d_unsteady_var<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::heateq_1d_unsteady_var<Scalar>::eval_q_t(Scalar x, Scalar t)
 {
-  Scalar Q_T = -pow(cos(D_t * t), Scalar(2)) * A_x * A_x * k_1 + Scalar(3) * pow(cos(A_x * x + A_t * t), Scalar(3)) * pow(cos(D_t * t), Scalar(3)) * A_x * A_x * k_2 - sin(A_x * x + A_t * t) * cos(D_t * t) * A_t * rho * cp_0 - cos(A_x * x + A_t * t) * sin(D_t * t) * D_t * rho * cp_0 + (A_x * A_x * k_0 - Scalar(2) * pow(cos(D_t * t), Scalar(2)) * A_x * A_x * k_2 - sin(A_x * x + A_t * t) * cos(D_t * t) * A_t * rho * cp_1 - cos(A_x * x + A_t * t) * sin(D_t * t) * D_t * rho * cp_1) * cos(A_x * x + A_t * t) * cos(D_t * t) + (Scalar(2) * A_x * A_x * k_1 - sin(A_x * x + A_t * t) * cos(D_t * t) * A_t * rho * cp_2 - cos(A_x * x + A_t * t) * sin(D_t * t) * D_t * rho * cp_2) * pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2));
+  Scalar Q_T = -std::pow(std::cos(D_t * t), Scalar(2)) * A_x * A_x * k_1 + Scalar(3) * std::pow(std::cos(A_x * x + A_t * t), Scalar(3)) * std::pow(std::cos(D_t * t), Scalar(3)) * A_x * A_x * k_2 - std::sin(A_x * x + A_t * t) * std::cos(D_t * t) * A_t * rho * cp_0 - std::cos(A_x * x + A_t * t) * std::sin(D_t * t) * D_t * rho * cp_0 + (A_x * A_x * k_0 - Scalar(2) * std::pow(std::cos(D_t * t), Scalar(2)) * A_x * A_x * k_2 - std::sin(A_x * x + A_t * t) * std::cos(D_t * t) * A_t * rho * cp_1 - std::cos(A_x * x + A_t * t) * std::sin(D_t * t) * D_t * rho * cp_1) * std::cos(A_x * x + A_t * t) * std::cos(D_t * t) + (Scalar(2) * A_x * A_x * k_1 - std::sin(A_x * x + A_t * t) * std::cos(D_t * t) * A_t * rho * cp_2 - std::cos(A_x * x + A_t * t) * std::sin(D_t * t) * D_t * rho * cp_2) * std::pow(std::cos(A_x * x + A_t * t), Scalar(2)) * std::pow(std::cos(D_t * t), Scalar(2));
   return Q_T;
 }
 
@@ -431,7 +431,7 @@ int MASA::heateq_2d_unsteady_var<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::heateq_2d_unsteady_var<Scalar>::eval_q_t(Scalar x,Scalar y,Scalar t)
 {
-  Scalar Q_T = -pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * A_x * A_x * k_1 - sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t * rho * cp_0 - pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * B_y * B_y * k_1 - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t * rho * cp_0 - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t * rho * cp_0 + Scalar(3) * pow(cos(A_x * x + A_t * t), Scalar(3)) * pow(cos(B_y * y + B_t * t), Scalar(3)) * pow(cos(D_t * t), Scalar(3)) * (A_x * A_x + B_y * B_y) * k_2 + (Scalar(2) * A_x * A_x * k_1 - sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t * rho * cp_2 + Scalar(2) * B_y * B_y * k_1 - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t * rho * cp_2 - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t * rho * cp_2) * pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) + (A_x * A_x * k_0 - Scalar(2) * pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * A_x * A_x * k_2 - sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t * rho * cp_1 + B_y * B_y * k_0 - Scalar(2) * pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * B_y * B_y * k_2 - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t * rho * cp_1 - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t * rho * cp_1) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t);
+  Scalar Q_T = -std::pow(std::cos(B_y * y + B_t * t), Scalar(2)) * std::pow(std::cos(D_t * t), Scalar(2)) * A_x * A_x * k_1 - std::sin(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(D_t * t) * A_t * rho * cp_0 - std::pow(std::cos(A_x * x + A_t * t), Scalar(2)) * std::pow(std::cos(D_t * t), Scalar(2)) * B_y * B_y * k_1 - std::cos(A_x * x + A_t * t) * std::sin(B_y * y + B_t * t) * std::cos(D_t * t) * B_t * rho * cp_0 - std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::sin(D_t * t) * D_t * rho * cp_0 + Scalar(3) * std::pow(std::cos(A_x * x + A_t * t), Scalar(3)) * std::pow(std::cos(B_y * y + B_t * t), Scalar(3)) * std::pow(std::cos(D_t * t), Scalar(3)) * (A_x * A_x + B_y * B_y) * k_2 + (Scalar(2) * A_x * A_x * k_1 - std::sin(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(D_t * t) * A_t * rho * cp_2 + Scalar(2) * B_y * B_y * k_1 - std::cos(A_x * x + A_t * t) * std::sin(B_y * y + B_t * t) * std::cos(D_t * t) * B_t * rho * cp_2 - std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::sin(D_t * t) * D_t * rho * cp_2) * std::pow(std::cos(A_x * x + A_t * t), Scalar(2)) * std::pow(std::cos(B_y * y + B_t * t), Scalar(2)) * std::pow(std::cos(D_t * t), Scalar(2)) + (A_x * A_x * k_0 - Scalar(2) * std::pow(std::cos(B_y * y + B_t * t), Scalar(2)) * std::pow(std::cos(D_t * t), Scalar(2)) * A_x * A_x * k_2 - std::sin(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(D_t * t) * A_t * rho * cp_1 + B_y * B_y * k_0 - Scalar(2) * std::pow(std::cos(A_x * x + A_t * t), Scalar(2)) * std::pow(std::cos(D_t * t), Scalar(2)) * B_y * B_y * k_2 - std::cos(A_x * x + A_t * t) * std::sin(B_y * y + B_t * t) * std::cos(D_t * t) * B_t * rho * cp_1 - std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::sin(D_t * t) * D_t * rho * cp_1) * std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(D_t * t);
   return Q_T;
 }
 
@@ -488,7 +488,7 @@ int MASA::heateq_3d_unsteady_var<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::heateq_3d_unsteady_var<Scalar>::eval_q_t(Scalar x,Scalar y,Scalar z,Scalar t)
 {
-  Scalar Q_T = -sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_0 * A_t - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_0 * B_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_0 * C_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * rho * cp_0 * D_t - pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(C_z * z + C_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * k_1 * A_x * A_x - pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(C_z * z + C_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * k_1 * B_y * B_y - pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * k_1 * C_z * C_z + Scalar(3) * pow(cos(A_x * x + A_t * t), Scalar(3)) * pow(cos(B_y * y + B_t * t), Scalar(3)) * pow(cos(C_z * z + C_t * t), Scalar(3)) * pow(cos(D_t * t), Scalar(3)) * (A_x * A_x + B_y * B_y + C_z * C_z) * k_2 + (-sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_1 * A_t - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_1 * B_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_1 * C_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * rho * cp_1 * D_t + k_0 * A_x * A_x + k_0 * B_y * B_y + k_0 * C_z * C_z - Scalar(2) * pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(C_z * z + C_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * k_2 * A_x * A_x - Scalar(2) * pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(C_z * z + C_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * k_2 * B_y * B_y - Scalar(2) * pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2)) * k_2 * C_z * C_z) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) + (-sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_2 * A_t - cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_2 * B_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * rho * cp_2 * C_t - cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * rho * cp_2 * D_t + Scalar(2) * k_1 * A_x * A_x + Scalar(2) * k_1 * B_y * B_y + Scalar(2) * k_1 * C_z * C_z) * pow(cos(A_x * x + A_t * t), Scalar(2)) * pow(cos(B_y * y + B_t * t), Scalar(2)) * pow(cos(C_z * z + C_t * t), Scalar(2)) * pow(cos(D_t * t), Scalar(2));
+  Scalar Q_T = -std::sin(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::cos(D_t * t) * rho * cp_0 * A_t - std::cos(A_x * x + A_t * t) * std::sin(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::cos(D_t * t) * rho * cp_0 * B_t - std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::sin(C_z * z + C_t * t) * std::cos(D_t * t) * rho * cp_0 * C_t - std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::sin(D_t * t) * rho * cp_0 * D_t - std::pow(std::cos(B_y * y + B_t * t), Scalar(2)) * std::pow(std::cos(C_z * z + C_t * t), Scalar(2)) * std::pow(std::cos(D_t * t), Scalar(2)) * k_1 * A_x * A_x - std::pow(std::cos(A_x * x + A_t * t), Scalar(2)) * std::pow(std::cos(C_z * z + C_t * t), Scalar(2)) * std::pow(std::cos(D_t * t), Scalar(2)) * k_1 * B_y * B_y - std::pow(std::cos(A_x * x + A_t * t), Scalar(2)) * std::pow(std::cos(B_y * y + B_t * t), Scalar(2)) * std::pow(std::cos(D_t * t), Scalar(2)) * k_1 * C_z * C_z + Scalar(3) * std::pow(std::cos(A_x * x + A_t * t), Scalar(3)) * std::pow(std::cos(B_y * y + B_t * t), Scalar(3)) * std::pow(std::cos(C_z * z + C_t * t), Scalar(3)) * std::pow(std::cos(D_t * t), Scalar(3)) * (A_x * A_x + B_y * B_y + C_z * C_z) * k_2 + (-std::sin(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::cos(D_t * t) * rho * cp_1 * A_t - std::cos(A_x * x + A_t * t) * std::sin(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::cos(D_t * t) * rho * cp_1 * B_t - std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::sin(C_z * z + C_t * t) * std::cos(D_t * t) * rho * cp_1 * C_t - std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::sin(D_t * t) * rho * cp_1 * D_t + k_0 * A_x * A_x + k_0 * B_y * B_y + k_0 * C_z * C_z - Scalar(2) * std::pow(std::cos(B_y * y + B_t * t), Scalar(2)) * std::pow(std::cos(C_z * z + C_t * t), Scalar(2)) * std::pow(std::cos(D_t * t), Scalar(2)) * k_2 * A_x * A_x - Scalar(2) * std::pow(std::cos(A_x * x + A_t * t), Scalar(2)) * std::pow(std::cos(C_z * z + C_t * t), Scalar(2)) * std::pow(std::cos(D_t * t), Scalar(2)) * k_2 * B_y * B_y - Scalar(2) * std::pow(std::cos(A_x * x + A_t * t), Scalar(2)) * std::pow(std::cos(B_y * y + B_t * t), Scalar(2)) * std::pow(std::cos(D_t * t), Scalar(2)) * k_2 * C_z * C_z) * std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::cos(D_t * t) + (-std::sin(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::cos(D_t * t) * rho * cp_2 * A_t - std::cos(A_x * x + A_t * t) * std::sin(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::cos(D_t * t) * rho * cp_2 * B_t - std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::sin(C_z * z + C_t * t) * std::cos(D_t * t) * rho * cp_2 * C_t - std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::sin(D_t * t) * rho * cp_2 * D_t + Scalar(2) * k_1 * A_x * A_x + Scalar(2) * k_1 * B_y * B_y + Scalar(2) * k_1 * C_z * C_z) * std::pow(std::cos(A_x * x + A_t * t), Scalar(2)) * std::pow(std::cos(B_y * y + B_t * t), Scalar(2)) * std::pow(std::cos(C_z * z + C_t * t), Scalar(2)) * std::pow(std::cos(D_t * t), Scalar(2));
   return Q_T;
 }
 
@@ -537,7 +537,7 @@ int MASA::heateq_1d_steady_var<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::heateq_1d_steady_var<Scalar>::eval_q_t(Scalar x)
 {
-  Scalar Q_T = Scalar(3) * A_x * A_x * k_2 * pow(cos(A_x * x), Scalar(3)) + Scalar(2) * A_x * A_x * k_1 * pow(cos(A_x * x), Scalar(2)) - A_x * A_x * k_1 + (k_0 - Scalar(2) * k_2) * A_x * A_x * cos(A_x * x);
+  Scalar Q_T = Scalar(3) * A_x * A_x * k_2 * std::pow(std::cos(A_x * x), Scalar(3)) + Scalar(2) * A_x * A_x * k_1 * std::pow(std::cos(A_x * x), Scalar(2)) - A_x * A_x * k_1 + (k_0 - Scalar(2) * k_2) * A_x * A_x * std::cos(A_x * x);
   return Q_T;
 }
 
@@ -575,7 +575,7 @@ int MASA::heateq_2d_steady_var<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::heateq_2d_steady_var<Scalar>::eval_q_t(Scalar x,Scalar y)
 {
-  Scalar Q_T = (Scalar(3) * A_x * A_x + Scalar(3) * B_y * B_y) * k_2 * pow(cos(A_x * x), Scalar(3)) * pow(cos(B_y * y), Scalar(3)) + (Scalar(2) * A_x * A_x + Scalar(2) * B_y * B_y) * k_1 * pow(cos(A_x * x), Scalar(2)) * pow(cos(B_y * y), Scalar(2)) - (pow(cos(B_y * y), Scalar(2)) * A_x * A_x + pow(cos(A_x * x), Scalar(2)) * B_y * B_y) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y - Scalar(2) * pow(cos(B_y * y), Scalar(2)) * k_2 * A_x * A_x - Scalar(2) * pow(cos(A_x * x), Scalar(2)) * k_2 * B_y * B_y) * cos(A_x * x) * cos(B_y * y);
+  Scalar Q_T = (Scalar(3) * A_x * A_x + Scalar(3) * B_y * B_y) * k_2 * std::pow(std::cos(A_x * x), Scalar(3)) * std::pow(std::cos(B_y * y), Scalar(3)) + (Scalar(2) * A_x * A_x + Scalar(2) * B_y * B_y) * k_1 * std::pow(std::cos(A_x * x), Scalar(2)) * std::pow(std::cos(B_y * y), Scalar(2)) - (std::pow(std::cos(B_y * y), Scalar(2)) * A_x * A_x + std::pow(std::cos(A_x * x), Scalar(2)) * B_y * B_y) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y - Scalar(2) * std::pow(std::cos(B_y * y), Scalar(2)) * k_2 * A_x * A_x - Scalar(2) * std::pow(std::cos(A_x * x), Scalar(2)) * k_2 * B_y * B_y) * std::cos(A_x * x) * std::cos(B_y * y);
   return Q_T;
 }
 
@@ -614,7 +614,7 @@ int MASA::heateq_3d_steady_var<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::heateq_3d_steady_var<Scalar>::eval_q_t(Scalar x,Scalar y,Scalar z)
 {
-  Scalar Q_T = (Scalar(3) * A_x * A_x + Scalar(3) * B_y * B_y + Scalar(3) * C_z * C_z) * k_2 * pow(cos(A_x * x), Scalar(3)) * pow(cos(B_y * y), Scalar(3)) * pow(cos(C_z * z), Scalar(3)) + (Scalar(2) * A_x * A_x + Scalar(2) * B_y * B_y + Scalar(2) * C_z * C_z) * k_1 * pow(cos(A_x * x), Scalar(2)) * pow(cos(B_y * y), Scalar(2)) * pow(cos(C_z * z), Scalar(2)) - (pow(cos(B_y * y), Scalar(2)) * pow(cos(C_z * z), Scalar(2)) * A_x * A_x + pow(cos(A_x * x), Scalar(2)) * pow(cos(C_z * z), Scalar(2)) * B_y * B_y + pow(cos(A_x * x), Scalar(2)) * pow(cos(B_y * y), Scalar(2)) * C_z * C_z) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y + k_0 * C_z * C_z - Scalar(2) * pow(cos(B_y * y), Scalar(2)) * pow(cos(C_z * z), Scalar(2)) * k_2 * A_x * A_x - Scalar(2) * pow(cos(A_x * x), Scalar(2)) * pow(cos(C_z * z), Scalar(2)) * k_2 * B_y * B_y - Scalar(2) * pow(cos(A_x * x), Scalar(2)) * pow(cos(B_y * y), Scalar(2)) * k_2 * C_z * C_z) * cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
+  Scalar Q_T = (Scalar(3) * A_x * A_x + Scalar(3) * B_y * B_y + Scalar(3) * C_z * C_z) * k_2 * std::pow(std::cos(A_x * x), Scalar(3)) * std::pow(std::cos(B_y * y), Scalar(3)) * std::pow(std::cos(C_z * z), Scalar(3)) + (Scalar(2) * A_x * A_x + Scalar(2) * B_y * B_y + Scalar(2) * C_z * C_z) * k_1 * std::pow(std::cos(A_x * x), Scalar(2)) * std::pow(std::cos(B_y * y), Scalar(2)) * std::pow(std::cos(C_z * z), Scalar(2)) - (std::pow(std::cos(B_y * y), Scalar(2)) * std::pow(std::cos(C_z * z), Scalar(2)) * A_x * A_x + std::pow(std::cos(A_x * x), Scalar(2)) * std::pow(std::cos(C_z * z), Scalar(2)) * B_y * B_y + std::pow(std::cos(A_x * x), Scalar(2)) * std::pow(std::cos(B_y * y), Scalar(2)) * C_z * C_z) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y + k_0 * C_z * C_z - Scalar(2) * std::pow(std::cos(B_y * y), Scalar(2)) * std::pow(std::cos(C_z * z), Scalar(2)) * k_2 * A_x * A_x - Scalar(2) * std::pow(std::cos(A_x * x), Scalar(2)) * std::pow(std::cos(C_z * z), Scalar(2)) * k_2 * B_y * B_y - Scalar(2) * std::pow(std::cos(A_x * x), Scalar(2)) * std::pow(std::cos(B_y * y), Scalar(2)) * k_2 * C_z * C_z) * std::cos(A_x * x) * std::cos(B_y * y) * std::cos(C_z * z);
   return Q_T;
 }
 

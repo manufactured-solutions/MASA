@@ -62,10 +62,10 @@ MASA::manufactured_solution<Scalar>::manufactured_solution()
 
 // define PI and other constants
 template <typename Scalar>
-const Scalar MASA::manufactured_solution<Scalar>::PI = acos(Scalar(-1));
+const Scalar MASA::manufactured_solution<Scalar>::PI = std::acos(Scalar(-1));
 
 template <typename Scalar>
-const Scalar MASA::manufactured_solution<Scalar>::pi = acos(Scalar(-1));
+const Scalar MASA::manufactured_solution<Scalar>::pi = std::acos(Scalar(-1));
 
 template <typename Scalar>
 const Scalar MASA::manufactured_solution<Scalar>::MASA_VAR_DEFAULT = -12345.67; // default init each var to 'crazy' val

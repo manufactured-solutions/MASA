@@ -190,13 +190,13 @@ Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_q_rho_u(Scalar x,Scalar 
   Scalar NU_SA;
   Scalar f_v1;
   Scalar chi;
-  NU_SA = nu_sa_0 + nu_sa_x * cos(a_nusax * PI * x / L) + nu_sa_y * cos(a_nusay * PI * y / L) + nu_sa_t * cos(a_nusat * PI * t / L);
-  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_t * sin(a_rhot * PI * t / L);
-  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
-  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
+  NU_SA = nu_sa_0 + nu_sa_x * std::cos(a_nusax * PI * x / L) + nu_sa_y * std::cos(a_nusay * PI * y / L) + nu_sa_t * std::cos(a_nusat * PI * t / L);
+  RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L) + rho_t * std::sin(a_rhot * PI * t / L);
+  U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L) + u_t * std::cos(a_ut * PI * t / L);
+  V = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L) + v_t * std::sin(a_vt * PI * t / L);
   chi = RHO * NU_SA / mu;
-  f_v1 = pow(chi, 0.3e1) / (pow(chi, 0.3e1) + pow(c_v1, 0.3e1));
-  Q_u = a_rhox * PI * rho_x * U * U * cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * U * V * sin(a_rhoy * PI * y / L) / L - a_uy * PI * u_y * RHO * V * sin(a_uy * PI * y / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * RHO * U / L - a_px * PI * p_x * sin(a_px * PI * x / L) / L + (0.4e1 / 0.3e1 * a_ux * a_ux * u_x * sin(a_ux * PI * x / L) + a_uy * a_uy * u_y * cos(a_uy * PI * y / L)) * f_v1 * PI * PI * RHO * NU_SA * pow(L, -0.2e1) + (0.4e1 / 0.3e1 * a_ux * a_nusax * u_x * nu_sa_x * cos(a_ux * PI * x / L) * sin(a_nusax * PI * x / L) - a_uy * a_nusay * u_y * nu_sa_y * sin(a_uy * PI * y / L) * sin(a_nusay * PI * y / L) - a_vx * a_nusay * v_x * nu_sa_y * sin(a_vx * PI * x / L) * sin(a_nusay * PI * y / L) - 0.2e1 / 0.3e1 * a_vy * a_nusax * v_y * nu_sa_x * cos(a_vy * PI * y / L) * sin(a_nusax * PI * x / L)) * f_v1 * PI * PI * RHO * pow(L, -0.2e1) + (-0.4e1 / 0.3e1 * a_rhox * a_ux * rho_x * u_x * cos(a_rhox * PI * x / L) * cos(a_ux * PI * x / L) + 0.2e1 / 0.3e1 * a_rhox * a_vy * rho_x * v_y * cos(a_rhox * PI * x / L) * cos(a_vy * PI * y / L) - a_rhoy * a_uy * rho_y * u_y * sin(a_rhoy * PI * y / L) * sin(a_uy * PI * y / L) - a_rhoy * a_vx * rho_y * v_x * sin(a_rhoy * PI * y / L) * sin(a_vx * PI * x / L)) * f_v1 * PI * PI * NU_SA * pow(L, -0.2e1) + (pow(c_v1, 0.3e1) / (pow(chi, 0.3e1) + pow(c_v1, 0.3e1)) + f_v1) * (0.4e1 * a_ux * a_ux * u_x * sin(a_ux * PI * x / L) + 0.3e1 * a_uy * a_uy * u_y * cos(a_uy * PI * y / L)) * PI * PI * mu * pow(L, -0.2e1) / 0.3e1 + a_rhot * PI * rho_t * U * cos(a_rhot * PI * t / L) / L - a_ut * PI * u_t * RHO * sin(a_ut * PI * t / L) / L;
+  f_v1 = std::pow(chi, 0.3e1) / (std::pow(chi, 0.3e1) + std::pow(c_v1, 0.3e1));
+  Q_u = a_rhox * PI * rho_x * U * U * std::cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * U * V * std::sin(a_rhoy * PI * y / L) / L - a_uy * PI * u_y * RHO * V * std::sin(a_uy * PI * y / L) / L + (0.2e1 * a_ux * u_x * std::cos(a_ux * PI * x / L) + a_vy * v_y * std::cos(a_vy * PI * y / L)) * PI * RHO * U / L - a_px * PI * p_x * std::sin(a_px * PI * x / L) / L + (0.4e1 / 0.3e1 * a_ux * a_ux * u_x * std::sin(a_ux * PI * x / L) + a_uy * a_uy * u_y * std::cos(a_uy * PI * y / L)) * f_v1 * PI * PI * RHO * NU_SA * std::pow(L, -0.2e1) + (0.4e1 / 0.3e1 * a_ux * a_nusax * u_x * nu_sa_x * std::cos(a_ux * PI * x / L) * std::sin(a_nusax * PI * x / L) - a_uy * a_nusay * u_y * nu_sa_y * std::sin(a_uy * PI * y / L) * std::sin(a_nusay * PI * y / L) - a_vx * a_nusay * v_x * nu_sa_y * std::sin(a_vx * PI * x / L) * std::sin(a_nusay * PI * y / L) - 0.2e1 / 0.3e1 * a_vy * a_nusax * v_y * nu_sa_x * std::cos(a_vy * PI * y / L) * std::sin(a_nusax * PI * x / L)) * f_v1 * PI * PI * RHO * std::pow(L, -0.2e1) + (-0.4e1 / 0.3e1 * a_rhox * a_ux * rho_x * u_x * std::cos(a_rhox * PI * x / L) * std::cos(a_ux * PI * x / L) + 0.2e1 / 0.3e1 * a_rhox * a_vy * rho_x * v_y * std::cos(a_rhox * PI * x / L) * std::cos(a_vy * PI * y / L) - a_rhoy * a_uy * rho_y * u_y * std::sin(a_rhoy * PI * y / L) * std::sin(a_uy * PI * y / L) - a_rhoy * a_vx * rho_y * v_x * std::sin(a_rhoy * PI * y / L) * std::sin(a_vx * PI * x / L)) * f_v1 * PI * PI * NU_SA * std::pow(L, -0.2e1) + (std::pow(c_v1, 0.3e1) / (std::pow(chi, 0.3e1) + std::pow(c_v1, 0.3e1)) + f_v1) * (0.4e1 * a_ux * a_ux * u_x * std::sin(a_ux * PI * x / L) + 0.3e1 * a_uy * a_uy * u_y * std::cos(a_uy * PI * y / L)) * PI * PI * mu * std::pow(L, -0.2e1) / 0.3e1 + a_rhot * PI * rho_t * U * std::cos(a_rhot * PI * t / L) / L - a_ut * PI * u_t * RHO * std::sin(a_ut * PI * t / L) / L;
   return(Q_u);
 
 }
@@ -217,13 +217,13 @@ Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_q_rho_v(Scalar x,Scalar 
   Scalar NU_SA;
   Scalar f_v1;
   Scalar chi;
-  NU_SA = nu_sa_0 + nu_sa_x * cos(a_nusax * PI * x / L) + nu_sa_y * cos(a_nusay * PI * y / L) + nu_sa_t * cos(a_nusat * PI * t / L);
-  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_t * sin(a_rhot * PI * t / L);
-  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
-  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
+  NU_SA = nu_sa_0 + nu_sa_x * std::cos(a_nusax * PI * x / L) + nu_sa_y * std::cos(a_nusay * PI * y / L) + nu_sa_t * std::cos(a_nusat * PI * t / L);
+  RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L) + rho_t * std::sin(a_rhot * PI * t / L);
+  U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L) + u_t * std::cos(a_ut * PI * t / L);
+  V = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L) + v_t * std::sin(a_vt * PI * t / L);
   chi = RHO * NU_SA / mu;
-  f_v1 = pow(chi, 0.3e1) / (pow(chi, 0.3e1) + pow(c_v1, 0.3e1));
-  Q_v = a_rhox * PI * rho_x * U * V * cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * V * sin(a_rhoy * PI * y / L) / L - a_vx * PI * v_x * RHO * U * sin(a_vx * PI * x / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * RHO * V / L + a_py * PI * p_y * cos(a_py * PI * y / L) / L + (a_vx * a_vx * v_x * cos(a_vx * PI * x / L) + 0.4e1 / 0.3e1 * a_vy * a_vy * v_y * sin(a_vy * PI * y / L)) * f_v1 * PI * PI * RHO * NU_SA * pow(L, -0.2e1) + (-0.2e1 / 0.3e1 * a_ux * a_nusay * u_x * nu_sa_y * cos(a_ux * PI * x / L) * sin(a_nusay * PI * y / L) - a_uy * a_nusax * u_y * nu_sa_x * sin(a_uy * PI * y / L) * sin(a_nusax * PI * x / L) - a_vx * a_nusax * v_x * nu_sa_x * sin(a_vx * PI * x / L) * sin(a_nusax * PI * x / L) + 0.4e1 / 0.3e1 * a_vy * a_nusay * v_y * nu_sa_y * cos(a_vy * PI * y / L) * sin(a_nusay * PI * y / L)) * f_v1 * PI * PI * RHO * pow(L, -0.2e1) + (a_rhox * a_uy * rho_x * u_y * cos(a_rhox * PI * x / L) * sin(a_uy * PI * y / L) + a_rhox * a_vx * rho_x * v_x * cos(a_rhox * PI * x / L) * sin(a_vx * PI * x / L) - 0.2e1 / 0.3e1 * a_rhoy * a_ux * rho_y * u_x * sin(a_rhoy * PI * y / L) * cos(a_ux * PI * x / L) + 0.4e1 / 0.3e1 * a_rhoy * a_vy * rho_y * v_y * sin(a_rhoy * PI * y / L) * cos(a_vy * PI * y / L)) * f_v1 * PI * PI * NU_SA * pow(L, -0.2e1) + (pow(c_v1, 0.3e1) / (pow(chi, 0.3e1) + pow(c_v1, 0.3e1)) + f_v1) * (0.3e1 * a_vx * a_vx * v_x * cos(a_vx * PI * x / L) + 0.4e1 * a_vy * a_vy * v_y * sin(a_vy * PI * y / L)) * PI * PI * mu * pow(L, -0.2e1) / 0.3e1 + a_rhot * PI * rho_t * V * cos(a_rhot * PI * t / L) / L + a_vt * PI * v_t * RHO * cos(a_vt * PI * t / L) / L;
+  f_v1 = std::pow(chi, 0.3e1) / (std::pow(chi, 0.3e1) + std::pow(c_v1, 0.3e1));
+  Q_v = a_rhox * PI * rho_x * U * V * std::cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * V * std::sin(a_rhoy * PI * y / L) / L - a_vx * PI * v_x * RHO * U * std::sin(a_vx * PI * x / L) / L + (a_ux * u_x * std::cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * std::cos(a_vy * PI * y / L)) * PI * RHO * V / L + a_py * PI * p_y * std::cos(a_py * PI * y / L) / L + (a_vx * a_vx * v_x * std::cos(a_vx * PI * x / L) + 0.4e1 / 0.3e1 * a_vy * a_vy * v_y * std::sin(a_vy * PI * y / L)) * f_v1 * PI * PI * RHO * NU_SA * std::pow(L, -0.2e1) + (-0.2e1 / 0.3e1 * a_ux * a_nusay * u_x * nu_sa_y * std::cos(a_ux * PI * x / L) * std::sin(a_nusay * PI * y / L) - a_uy * a_nusax * u_y * nu_sa_x * std::sin(a_uy * PI * y / L) * std::sin(a_nusax * PI * x / L) - a_vx * a_nusax * v_x * nu_sa_x * std::sin(a_vx * PI * x / L) * std::sin(a_nusax * PI * x / L) + 0.4e1 / 0.3e1 * a_vy * a_nusay * v_y * nu_sa_y * std::cos(a_vy * PI * y / L) * std::sin(a_nusay * PI * y / L)) * f_v1 * PI * PI * RHO * std::pow(L, -0.2e1) + (a_rhox * a_uy * rho_x * u_y * std::cos(a_rhox * PI * x / L) * std::sin(a_uy * PI * y / L) + a_rhox * a_vx * rho_x * v_x * std::cos(a_rhox * PI * x / L) * std::sin(a_vx * PI * x / L) - 0.2e1 / 0.3e1 * a_rhoy * a_ux * rho_y * u_x * std::sin(a_rhoy * PI * y / L) * std::cos(a_ux * PI * x / L) + 0.4e1 / 0.3e1 * a_rhoy * a_vy * rho_y * v_y * std::sin(a_rhoy * PI * y / L) * std::cos(a_vy * PI * y / L)) * f_v1 * PI * PI * NU_SA * std::pow(L, -0.2e1) + (std::pow(c_v1, 0.3e1) / (std::pow(chi, 0.3e1) + std::pow(c_v1, 0.3e1)) + f_v1) * (0.3e1 * a_vx * a_vx * v_x * std::cos(a_vx * PI * x / L) + 0.4e1 * a_vy * a_vy * v_y * std::sin(a_vy * PI * y / L)) * PI * PI * mu * std::pow(L, -0.2e1) / 0.3e1 + a_rhot * PI * rho_t * V * std::cos(a_rhot * PI * t / L) / L + a_vt * PI * v_t * RHO * std::cos(a_vt * PI * t / L) / L;
   return(Q_v);
 }
 
@@ -240,10 +240,10 @@ Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_q_rho(Scalar x,Scalar y,
   Scalar RHO;
   Scalar U;
   Scalar V;
-  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_t * sin(a_rhot * PI * t / L);
-  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
-  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
-  Q_rho = a_rhox * PI * rho_x * U * cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * sin(a_rhoy * PI * y / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * RHO / L + a_rhot * PI * rho_t * cos(a_rhot * PI * t / L) / L;
+  RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L) + rho_t * std::sin(a_rhot * PI * t / L);
+  U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L) + u_t * std::cos(a_ut * PI * t / L);
+  V = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L) + v_t * std::sin(a_vt * PI * t / L);
+  Q_rho = a_rhox * PI * rho_x * U * std::cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * std::sin(a_rhoy * PI * y / L) / L + (a_ux * u_x * std::cos(a_ux * PI * x / L) + a_vy * v_y * std::cos(a_vy * PI * y / L)) * PI * RHO / L + a_rhot * PI * rho_t * std::cos(a_rhot * PI * t / L) / L;
   return(Q_rho);
 }
 
@@ -261,11 +261,11 @@ Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_q_nu(Scalar x,Scalar y,S
   Scalar U;
   Scalar V;
   Scalar NU_SA;
-  NU_SA = nu_sa_0 + nu_sa_x * cos(a_nusax * PI * x / L) + nu_sa_y * cos(a_nusay * PI * y / L) + nu_sa_t * cos(a_nusat * PI * t / L);
-  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_t * sin(a_rhot * PI * t / L);
-  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
-  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
-  Q_nu = a_rhox * PI * rho_x * U * NU_SA * cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * NU_SA * sin(a_rhoy * PI * y / L) / L - a_nusax * PI * nu_sa_x * RHO * U * sin(a_nusax * PI * x / L) / L - a_nusay * PI * nu_sa_y * RHO * V * sin(a_nusay * PI * y / L) / L + a_rhot * PI * rho_t * NU_SA * cos(a_rhot * PI * t / L) / L - a_nusat * PI * nu_sa_t * RHO * sin(a_nusat * PI * t / L) / L - (a_nusax * a_nusax * nu_sa_x * nu_sa_x * pow(sin(a_nusax * PI * x / L), 0.2e1) + a_nusay * a_nusay * nu_sa_y * nu_sa_y * pow(sin(a_nusay * PI * y / L), 0.2e1)) * (0.1e1 + c_b2) * PI * PI * RHO / sigma * pow(L, -0.2e1) + (a_rhox * a_nusax * rho_x * nu_sa_x * cos(a_rhox * PI * x / L) * sin(a_nusax * PI * x / L) - a_rhoy * a_nusay * rho_y * nu_sa_y * sin(a_rhoy * PI * y / L) * sin(a_nusay * PI * y / L)) * PI * PI * NU_SA / sigma * pow(L, -0.2e1) - c_b1 * sqrt(pow(-a_uy * u_y * sin(a_uy * PI * y / L) + a_vx * v_x * sin(a_vx * PI * x / L), 0.2e1) * pow(L, -0.2e1)) * PI * RHO * NU_SA + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * RHO * NU_SA / L + (a_nusax * a_nusax * nu_sa_x * cos(a_nusax * PI * x / L) + a_nusay * a_nusay * nu_sa_y * cos(a_nusay * PI * y / L)) * (RHO * NU_SA + mu) * PI * PI / sigma * pow(L, -0.2e1);
+  NU_SA = nu_sa_0 + nu_sa_x * std::cos(a_nusax * PI * x / L) + nu_sa_y * std::cos(a_nusay * PI * y / L) + nu_sa_t * std::cos(a_nusat * PI * t / L);
+  RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L) + rho_t * std::sin(a_rhot * PI * t / L);
+  U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L) + u_t * std::cos(a_ut * PI * t / L);
+  V = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L) + v_t * std::sin(a_vt * PI * t / L);
+  Q_nu = a_rhox * PI * rho_x * U * NU_SA * std::cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * NU_SA * std::sin(a_rhoy * PI * y / L) / L - a_nusax * PI * nu_sa_x * RHO * U * std::sin(a_nusax * PI * x / L) / L - a_nusay * PI * nu_sa_y * RHO * V * std::sin(a_nusay * PI * y / L) / L + a_rhot * PI * rho_t * NU_SA * std::cos(a_rhot * PI * t / L) / L - a_nusat * PI * nu_sa_t * RHO * std::sin(a_nusat * PI * t / L) / L - (a_nusax * a_nusax * nu_sa_x * nu_sa_x * std::pow(std::sin(a_nusax * PI * x / L), 0.2e1) + a_nusay * a_nusay * nu_sa_y * nu_sa_y * std::pow(std::sin(a_nusay * PI * y / L), 0.2e1)) * (0.1e1 + c_b2) * PI * PI * RHO / sigma * std::pow(L, -0.2e1) + (a_rhox * a_nusax * rho_x * nu_sa_x * std::cos(a_rhox * PI * x / L) * std::sin(a_nusax * PI * x / L) - a_rhoy * a_nusay * rho_y * nu_sa_y * std::sin(a_rhoy * PI * y / L) * std::sin(a_nusay * PI * y / L)) * PI * PI * NU_SA / sigma * std::pow(L, -0.2e1) - c_b1 * std::sqrt(std::pow(-a_uy * u_y * std::sin(a_uy * PI * y / L) + a_vx * v_x * std::sin(a_vx * PI * x / L), 0.2e1) * std::pow(L, -0.2e1)) * PI * RHO * NU_SA + (a_ux * u_x * std::cos(a_ux * PI * x / L) + a_vy * v_y * std::cos(a_vy * PI * y / L)) * PI * RHO * NU_SA / L + (a_nusax * a_nusax * nu_sa_x * std::cos(a_nusax * PI * x / L) + a_nusay * a_nusay * nu_sa_y * std::cos(a_nusay * PI * y / L)) * (RHO * NU_SA + mu) * PI * PI / sigma * std::pow(L, -0.2e1);
   return(Q_nu);
 }
 
@@ -290,18 +290,18 @@ Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_q_rho_e(Scalar x,Scalar 
   Scalar cp;
   Scalar cv;
   Scalar mu_t;
-  NU_SA = nu_sa_0 + nu_sa_x * cos(a_nusax * PI * x / L) + nu_sa_y * cos(a_nusay * PI * y / L) + nu_sa_t * cos(a_nusat * PI * t / L);
-  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_t * sin(a_rhot * PI * t / L);
-  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
-  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
-  P = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_t * cos(a_pt * PI * t / L);
+  NU_SA = nu_sa_0 + nu_sa_x * std::cos(a_nusax * PI * x / L) + nu_sa_y * std::cos(a_nusay * PI * y / L) + nu_sa_t * std::cos(a_nusat * PI * t / L);
+  RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L) + rho_t * std::sin(a_rhot * PI * t / L);
+  U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L) + u_t * std::cos(a_ut * PI * t / L);
+  V = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L) + v_t * std::sin(a_vt * PI * t / L);
+  P = p_0 + p_x * std::cos(a_px * PI * x / L) + p_y * std::sin(a_py * PI * y / L) + p_t * std::cos(a_pt * PI * t / L);
   chi = RHO * NU_SA / mu;
-  f_v1 = pow(chi, 0.3e1) / (pow(chi, 0.3e1) + pow(c_v1, 0.3e1));
+  f_v1 = std::pow(chi, 0.3e1) / (std::pow(chi, 0.3e1) + std::pow(c_v1, 0.3e1));
   mu_t = RHO * NU_SA * f_v1;
   //R = cp - cv;
   cv = R/(Gamma-1.0);
   cp = Gamma*cv;
-  Q_E = -(mu_t / Pr_t + mu / Pr) * (-(a_px * a_px * p_x * cos(a_px * PI * x / L) + a_py * a_py * p_y * sin(a_py * PI * y / L)) * cp * PI * PI * pow(L, -0.2e1) / R / RHO + (a_rhox * a_rhox * rho_x * sin(a_rhox * PI * x / L) + a_rhoy * a_rhoy * rho_y * cos(a_rhoy * PI * y / L)) * cp * PI * PI * P * pow(L, -0.2e1) / R * pow(RHO, -0.2e1)) + (U * U + V * V) * a_rhox * PI * rho_x * U * cos(a_rhox * PI * x / L) / L / 0.2e1 - (a_rhox * a_rhox * rho_x * rho_x * pow(cos(a_rhox * PI * x / L), 0.2e1) + a_rhoy * a_rhoy * rho_y * rho_y * pow(sin(a_rhoy * PI * y / L), 0.2e1)) * (Pr * mu_t + 0.2e1 * Pr_t * mu) * cp * PI * PI * P / Pr / Pr_t * pow(L, -0.2e1) / R * pow(RHO, -0.3e1) - (a_rhox * a_px * rho_x * p_x * cos(a_rhox * PI * x / L) * sin(a_px * PI * x / L) + a_rhoy * a_py * rho_y * p_y * sin(a_rhoy * PI * y / L) * cos(a_py * PI * y / L)) * (Pr * mu_t + 0.2e1 * Pr_t * mu) * cp * PI * PI / Pr / Pr_t * pow(L, -0.2e1) / R * pow(RHO, -0.2e1) - (a_rhox * a_nusax * rho_x * nu_sa_x * cos(a_rhox * PI * x / L) * sin(a_nusax * PI * x / L) - a_rhoy * a_nusay * rho_y * nu_sa_y * sin(a_rhoy * PI * y / L) * sin(a_nusay * PI * y / L)) * cp * PI * PI * mu_t * P * pow(L, -0.2e1) / Pr_t / R * pow(RHO, -0.2e1) / NU_SA - (a_px * a_nusax * p_x * nu_sa_x * sin(a_px * PI * x / L) * sin(a_nusax * PI * x / L) - a_py * a_nusay * p_y * nu_sa_y * cos(a_py * PI * y / L) * sin(a_nusay * PI * y / L)) * cp * PI * PI * mu_t * pow(L, -0.2e1) / Pr_t / R / RHO / NU_SA + (0.4e1 / 0.3e1 * a_ux * a_nusax * u_x * nu_sa_x * cos(a_ux * PI * x / L) * sin(a_nusax * PI * x / L) - a_uy * a_nusay * u_y * nu_sa_y * sin(a_uy * PI * y / L) * sin(a_nusay * PI * y / L) - a_vx * a_nusay * v_x * nu_sa_y * sin(a_vx * PI * x / L) * sin(a_nusay * PI * y / L) - 0.2e1 / 0.3e1 * a_vy * a_nusax * v_y * nu_sa_x * cos(a_vy * PI * y / L) * sin(a_nusax * PI * x / L)) * PI * PI * f_v1 * RHO * U * pow(L, -0.2e1) + (-0.2e1 / 0.3e1 * a_ux * a_nusay * u_x * nu_sa_y * cos(a_ux * PI * x / L) * sin(a_nusay * PI * y / L) - a_uy * a_nusax * u_y * nu_sa_x * sin(a_uy * PI * y / L) * sin(a_nusax * PI * x / L) - a_vx * a_nusax * v_x * nu_sa_x * sin(a_vx * PI * x / L) * sin(a_nusax * PI * x / L) + 0.4e1 / 0.3e1 * a_vy * a_nusay * v_y * nu_sa_y * cos(a_vy * PI * y / L) * sin(a_nusay * PI * y / L)) * PI * PI * f_v1 * RHO * V * pow(L, -0.2e1) + (-0.4e1 / 0.3e1 * a_rhox * a_ux * rho_x * u_x * cos(a_rhox * PI * x / L) * cos(a_ux * PI * x / L) + 0.2e1 / 0.3e1 * a_rhox * a_vy * rho_x * v_y * cos(a_rhox * PI * x / L) * cos(a_vy * PI * y / L) - a_rhoy * a_uy * rho_y * u_y * sin(a_rhoy * PI * y / L) * sin(a_uy * PI * y / L) - a_rhoy * a_vx * rho_y * v_x * sin(a_rhoy * PI * y / L) * sin(a_vx * PI * x / L)) * PI * PI * f_v1 * U * NU_SA * pow(L, -0.2e1) + (a_rhox * a_uy * rho_x * u_y * cos(a_rhox * PI * x / L) * sin(a_uy * PI * y / L) + a_rhox * a_vx * rho_x * v_x * cos(a_rhox * PI * x / L) * sin(a_vx * PI * x / L) - 0.2e1 / 0.3e1 * a_rhoy * a_ux * rho_y * u_x * sin(a_rhoy * PI * y / L) * cos(a_ux * PI * x / L) + 0.4e1 / 0.3e1 * a_rhoy * a_vy * rho_y * v_y * sin(a_rhoy * PI * y / L) * cos(a_vy * PI * y / L)) * PI * PI * f_v1 * V * NU_SA * pow(L, -0.2e1) + (U * U + V * V) * a_rhot * PI * rho_t * cos(a_rhot * PI * t / L) / L / 0.2e1 + (f_v1 + pow(c_v1, 0.3e1) / (pow(chi, 0.3e1) + pow(c_v1, 0.3e1))) * (0.4e1 * a_ux * a_ux * u_x * sin(a_ux * PI * x / L) + 0.3e1 * a_uy * a_uy * u_y * cos(a_uy * PI * y / L)) * PI * PI * mu * U * pow(L, -0.2e1) / 0.3e1 + (f_v1 + pow(c_v1, 0.3e1) / (pow(chi, 0.3e1) + pow(c_v1, 0.3e1))) * (0.3e1 * a_vx * a_vx * v_x * cos(a_vx * PI * x / L) + 0.4e1 * a_vy * a_vy * v_y * sin(a_vy * PI * y / L)) * PI * PI * mu * V * pow(L, -0.2e1) / 0.3e1 - (a_uy * u_y * sin(a_uy * PI * y / L) + a_vx * v_x * sin(a_vx * PI * x / L)) * PI * RHO * U * V / L + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * cp * PI * P / L / R - a_ut * PI * u_t * RHO * U * sin(a_ut * PI * t / L) / L - (U * U + V * V) * a_rhoy * PI * rho_y * V * sin(a_rhoy * PI * y / L) / L / 0.2e1 + a_vt * PI * v_t * RHO * V * cos(a_vt * PI * t / L) / L + cp * a_py * PI * p_y * V * cos(a_py * PI * y / L) / L / R - cp * a_px * PI * p_x * U * sin(a_px * PI * x / L) / L / R + (0.4e1 * a_ux * a_ux * u_x * sin(a_ux * PI * x / L) + 0.3e1 * a_uy * a_uy * u_y * cos(a_uy * PI * y / L)) * PI * PI * mu_t * U * pow(L, -0.2e1) / 0.3e1 + (0.3e1 * a_vx * a_vx * v_x * cos(a_vx * PI * x / L) + 0.4e1 * a_vy * a_vy * v_y * sin(a_vy * PI * y / L)) * PI * PI * mu_t * V * pow(L, -0.2e1) / 0.3e1 + (0.3e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * RHO * U * U / L / 0.2e1 + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.3e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * RHO * V * V / L / 0.2e1 - (f_v1 + pow(c_v1, 0.3e1) / (pow(chi, 0.3e1) + pow(c_v1, 0.3e1))) * (0.4e1 * a_ux * a_ux * u_x * u_x * pow(cos(a_ux * PI * x / L), 0.2e1) - 0.4e1 * a_ux * a_vy * u_x * v_y * cos(a_ux * PI * x / L) * cos(a_vy * PI * y / L) + 0.3e1 * a_uy * a_uy * u_y * u_y * pow(sin(a_uy * PI * y / L), 0.2e1) + 0.6e1 * a_uy * a_vx * u_y * v_x * sin(a_uy * PI * y / L) * sin(a_vx * PI * x / L) + 0.3e1 * a_vx * a_vx * v_x * v_x * pow(sin(a_vx * PI * x / L), 0.2e1) + 0.4e1 * a_vy * a_vy * v_y * v_y * pow(cos(a_vy * PI * y / L), 0.2e1)) * PI * PI * mu * pow(L, -0.2e1) / 0.3e1 - (0.4e1 * a_ux * a_ux * u_x * u_x * pow(cos(a_ux * PI * x / L), 0.2e1) - 0.4e1 * a_ux * a_vy * u_x * v_y * cos(a_ux * PI * x / L) * cos(a_vy * PI * y / L) + 0.3e1 * a_uy * a_uy * u_y * u_y * pow(sin(a_uy * PI * y / L), 0.2e1) + 0.6e1 * a_uy * a_vx * u_y * v_x * sin(a_uy * PI * y / L) * sin(a_vx * PI * x / L) + 0.3e1 * a_vx * a_vx * v_x * v_x * pow(sin(a_vx * PI * x / L), 0.2e1) + 0.4e1 * a_vy * a_vy * v_y * v_y * pow(cos(a_vy * PI * y / L), 0.2e1)) * PI * PI * mu_t * pow(L, -0.2e1) / 0.3e1 + cv * a_rhot * PI * rho_t * P * cos(a_rhot * PI * t / L) / L / R / RHO;
+  Q_E = -(mu_t / Pr_t + mu / Pr) * (-(a_px * a_px * p_x * std::cos(a_px * PI * x / L) + a_py * a_py * p_y * std::sin(a_py * PI * y / L)) * cp * PI * PI * std::pow(L, -0.2e1) / R / RHO + (a_rhox * a_rhox * rho_x * std::sin(a_rhox * PI * x / L) + a_rhoy * a_rhoy * rho_y * std::cos(a_rhoy * PI * y / L)) * cp * PI * PI * P * std::pow(L, -0.2e1) / R * std::pow(RHO, -0.2e1)) + (U * U + V * V) * a_rhox * PI * rho_x * U * std::cos(a_rhox * PI * x / L) / L / 0.2e1 - (a_rhox * a_rhox * rho_x * rho_x * std::pow(std::cos(a_rhox * PI * x / L), 0.2e1) + a_rhoy * a_rhoy * rho_y * rho_y * std::pow(std::sin(a_rhoy * PI * y / L), 0.2e1)) * (Pr * mu_t + 0.2e1 * Pr_t * mu) * cp * PI * PI * P / Pr / Pr_t * std::pow(L, -0.2e1) / R * std::pow(RHO, -0.3e1) - (a_rhox * a_px * rho_x * p_x * std::cos(a_rhox * PI * x / L) * std::sin(a_px * PI * x / L) + a_rhoy * a_py * rho_y * p_y * std::sin(a_rhoy * PI * y / L) * std::cos(a_py * PI * y / L)) * (Pr * mu_t + 0.2e1 * Pr_t * mu) * cp * PI * PI / Pr / Pr_t * std::pow(L, -0.2e1) / R * std::pow(RHO, -0.2e1) - (a_rhox * a_nusax * rho_x * nu_sa_x * std::cos(a_rhox * PI * x / L) * std::sin(a_nusax * PI * x / L) - a_rhoy * a_nusay * rho_y * nu_sa_y * std::sin(a_rhoy * PI * y / L) * std::sin(a_nusay * PI * y / L)) * cp * PI * PI * mu_t * P * std::pow(L, -0.2e1) / Pr_t / R * std::pow(RHO, -0.2e1) / NU_SA - (a_px * a_nusax * p_x * nu_sa_x * std::sin(a_px * PI * x / L) * std::sin(a_nusax * PI * x / L) - a_py * a_nusay * p_y * nu_sa_y * std::cos(a_py * PI * y / L) * std::sin(a_nusay * PI * y / L)) * cp * PI * PI * mu_t * std::pow(L, -0.2e1) / Pr_t / R / RHO / NU_SA + (0.4e1 / 0.3e1 * a_ux * a_nusax * u_x * nu_sa_x * std::cos(a_ux * PI * x / L) * std::sin(a_nusax * PI * x / L) - a_uy * a_nusay * u_y * nu_sa_y * std::sin(a_uy * PI * y / L) * std::sin(a_nusay * PI * y / L) - a_vx * a_nusay * v_x * nu_sa_y * std::sin(a_vx * PI * x / L) * std::sin(a_nusay * PI * y / L) - 0.2e1 / 0.3e1 * a_vy * a_nusax * v_y * nu_sa_x * std::cos(a_vy * PI * y / L) * std::sin(a_nusax * PI * x / L)) * PI * PI * f_v1 * RHO * U * std::pow(L, -0.2e1) + (-0.2e1 / 0.3e1 * a_ux * a_nusay * u_x * nu_sa_y * std::cos(a_ux * PI * x / L) * std::sin(a_nusay * PI * y / L) - a_uy * a_nusax * u_y * nu_sa_x * std::sin(a_uy * PI * y / L) * std::sin(a_nusax * PI * x / L) - a_vx * a_nusax * v_x * nu_sa_x * std::sin(a_vx * PI * x / L) * std::sin(a_nusax * PI * x / L) + 0.4e1 / 0.3e1 * a_vy * a_nusay * v_y * nu_sa_y * std::cos(a_vy * PI * y / L) * std::sin(a_nusay * PI * y / L)) * PI * PI * f_v1 * RHO * V * std::pow(L, -0.2e1) + (-0.4e1 / 0.3e1 * a_rhox * a_ux * rho_x * u_x * std::cos(a_rhox * PI * x / L) * std::cos(a_ux * PI * x / L) + 0.2e1 / 0.3e1 * a_rhox * a_vy * rho_x * v_y * std::cos(a_rhox * PI * x / L) * std::cos(a_vy * PI * y / L) - a_rhoy * a_uy * rho_y * u_y * std::sin(a_rhoy * PI * y / L) * std::sin(a_uy * PI * y / L) - a_rhoy * a_vx * rho_y * v_x * std::sin(a_rhoy * PI * y / L) * std::sin(a_vx * PI * x / L)) * PI * PI * f_v1 * U * NU_SA * std::pow(L, -0.2e1) + (a_rhox * a_uy * rho_x * u_y * std::cos(a_rhox * PI * x / L) * std::sin(a_uy * PI * y / L) + a_rhox * a_vx * rho_x * v_x * std::cos(a_rhox * PI * x / L) * std::sin(a_vx * PI * x / L) - 0.2e1 / 0.3e1 * a_rhoy * a_ux * rho_y * u_x * std::sin(a_rhoy * PI * y / L) * std::cos(a_ux * PI * x / L) + 0.4e1 / 0.3e1 * a_rhoy * a_vy * rho_y * v_y * std::sin(a_rhoy * PI * y / L) * std::cos(a_vy * PI * y / L)) * PI * PI * f_v1 * V * NU_SA * std::pow(L, -0.2e1) + (U * U + V * V) * a_rhot * PI * rho_t * std::cos(a_rhot * PI * t / L) / L / 0.2e1 + (f_v1 + std::pow(c_v1, 0.3e1) / (std::pow(chi, 0.3e1) + std::pow(c_v1, 0.3e1))) * (0.4e1 * a_ux * a_ux * u_x * std::sin(a_ux * PI * x / L) + 0.3e1 * a_uy * a_uy * u_y * std::cos(a_uy * PI * y / L)) * PI * PI * mu * U * std::pow(L, -0.2e1) / 0.3e1 + (f_v1 + std::pow(c_v1, 0.3e1) / (std::pow(chi, 0.3e1) + std::pow(c_v1, 0.3e1))) * (0.3e1 * a_vx * a_vx * v_x * std::cos(a_vx * PI * x / L) + 0.4e1 * a_vy * a_vy * v_y * std::sin(a_vy * PI * y / L)) * PI * PI * mu * V * std::pow(L, -0.2e1) / 0.3e1 - (a_uy * u_y * std::sin(a_uy * PI * y / L) + a_vx * v_x * std::sin(a_vx * PI * x / L)) * PI * RHO * U * V / L + (a_ux * u_x * std::cos(a_ux * PI * x / L) + a_vy * v_y * std::cos(a_vy * PI * y / L)) * cp * PI * P / L / R - a_ut * PI * u_t * RHO * U * std::sin(a_ut * PI * t / L) / L - (U * U + V * V) * a_rhoy * PI * rho_y * V * std::sin(a_rhoy * PI * y / L) / L / 0.2e1 + a_vt * PI * v_t * RHO * V * std::cos(a_vt * PI * t / L) / L + cp * a_py * PI * p_y * V * std::cos(a_py * PI * y / L) / L / R - cp * a_px * PI * p_x * U * std::sin(a_px * PI * x / L) / L / R + (0.4e1 * a_ux * a_ux * u_x * std::sin(a_ux * PI * x / L) + 0.3e1 * a_uy * a_uy * u_y * std::cos(a_uy * PI * y / L)) * PI * PI * mu_t * U * std::pow(L, -0.2e1) / 0.3e1 + (0.3e1 * a_vx * a_vx * v_x * std::cos(a_vx * PI * x / L) + 0.4e1 * a_vy * a_vy * v_y * std::sin(a_vy * PI * y / L)) * PI * PI * mu_t * V * std::pow(L, -0.2e1) / 0.3e1 + (0.3e1 * a_ux * u_x * std::cos(a_ux * PI * x / L) + a_vy * v_y * std::cos(a_vy * PI * y / L)) * PI * RHO * U * U / L / 0.2e1 + (a_ux * u_x * std::cos(a_ux * PI * x / L) + 0.3e1 * a_vy * v_y * std::cos(a_vy * PI * y / L)) * PI * RHO * V * V / L / 0.2e1 - (f_v1 + std::pow(c_v1, 0.3e1) / (std::pow(chi, 0.3e1) + std::pow(c_v1, 0.3e1))) * (0.4e1 * a_ux * a_ux * u_x * u_x * std::pow(std::cos(a_ux * PI * x / L), 0.2e1) - 0.4e1 * a_ux * a_vy * u_x * v_y * std::cos(a_ux * PI * x / L) * std::cos(a_vy * PI * y / L) + 0.3e1 * a_uy * a_uy * u_y * u_y * std::pow(std::sin(a_uy * PI * y / L), 0.2e1) + 0.6e1 * a_uy * a_vx * u_y * v_x * std::sin(a_uy * PI * y / L) * std::sin(a_vx * PI * x / L) + 0.3e1 * a_vx * a_vx * v_x * v_x * std::pow(std::sin(a_vx * PI * x / L), 0.2e1) + 0.4e1 * a_vy * a_vy * v_y * v_y * std::pow(std::cos(a_vy * PI * y / L), 0.2e1)) * PI * PI * mu * std::pow(L, -0.2e1) / 0.3e1 - (0.4e1 * a_ux * a_ux * u_x * u_x * std::pow(std::cos(a_ux * PI * x / L), 0.2e1) - 0.4e1 * a_ux * a_vy * u_x * v_y * std::cos(a_ux * PI * x / L) * std::cos(a_vy * PI * y / L) + 0.3e1 * a_uy * a_uy * u_y * u_y * std::pow(std::sin(a_uy * PI * y / L), 0.2e1) + 0.6e1 * a_uy * a_vx * u_y * v_x * std::sin(a_uy * PI * y / L) * std::sin(a_vx * PI * x / L) + 0.3e1 * a_vx * a_vx * v_x * v_x * std::pow(std::sin(a_vx * PI * x / L), 0.2e1) + 0.4e1 * a_vy * a_vy * v_y * v_y * std::pow(std::cos(a_vy * PI * y / L), 0.2e1)) * PI * PI * mu_t * std::pow(L, -0.2e1) / 0.3e1 + cv * a_rhot * PI * rho_t * P * std::cos(a_rhot * PI * t / L) / L / R / RHO;
   return(Q_E);
 }
 
@@ -313,7 +313,7 @@ template <typename Scalar>
 Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_exact_u(Scalar x,Scalar y)
 {
   Scalar u_an;
-  u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  u_an = u_0 + u_x * std::sin(a_ux * pi * x / L) + u_y * std::cos(a_uy * pi * y / L);
   return u_an; 
 }
 
@@ -321,7 +321,7 @@ template <typename Scalar>
 Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_exact_v(Scalar x,Scalar y)
 {
   Scalar v_an;
-  v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
+  v_an = v_0 + v_x * std::cos(a_vx * pi * x / L) + v_y * std::sin(a_vy * pi * y / L);
   return v_an;
 }
 
@@ -329,7 +329,7 @@ template <typename Scalar>
 Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_exact_p(Scalar x,Scalar y)
 {
   Scalar p_an;
-  p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L);
+  p_an = p_0 + p_x * std::cos(a_px * pi * x / L) + p_y * std::sin(a_py * pi * y / L);
   return p_an;
 
 }
@@ -344,7 +344,7 @@ template <typename Scalar>
 Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_exact_nu(Scalar x,Scalar y,Scalar t)
 {
   Scalar nu_an;
-  nu_an = nu_sa_0 + nu_sa_x * cos(a_nusax * pi * x / L) + nu_sa_y * cos(a_nusay * pi * y / L) + nu_sa_t * cos(a_nusat * pi * t / L);
+  nu_an = nu_sa_0 + nu_sa_x * std::cos(a_nusax * pi * x / L) + nu_sa_y * std::cos(a_nusay * pi * y / L) + nu_sa_t * std::cos(a_nusat * pi * t / L);
   return nu_an;
 }
 
@@ -352,7 +352,7 @@ template <typename Scalar>
 Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_exact_rho(Scalar x,Scalar y)
 {
   Scalar rho_an;
-  rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L);
+  rho_an = rho_0 + rho_x * std::sin(a_rhox * pi * x / L) + rho_y * std::cos(a_rhoy * pi * y / L);
   return rho_an;
 }
 
@@ -508,26 +508,26 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho_u(Scalar x,Scalar y
   Scalar chi;
   Scalar f_v1;
   Re_x = rho_inf * u_inf * x / mu;
-  c_f = C_cf / F_c * pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
-  u_tau = u_inf * sqrt(c_f / 0.2e1);
+  c_f = C_cf / F_c * std::pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
+  u_tau = u_inf * std::sqrt(c_f / 0.2e1);
   y_plus = y * u_tau / nu_w;
-  u_eq_plus = 0.1e1 / kappa * log(0.1e1 + kappa * y_plus) + C1 * (0.1e1 - exp(-y_plus / eta1) - y_plus / eta1 * exp(-y_plus * b));
+  u_eq_plus = 0.1e1 / kappa * std::log(0.1e1 + kappa * y_plus) + C1 * (0.1e1 - std::exp(-y_plus / eta1) - y_plus / eta1 * std::exp(-y_plus * b));
   u_eq = u_tau * u_eq_plus;
-  d_eqplus_yplus = 0.1e1 / (0.1e1 + kappa * y_plus) + C1 * (exp(-y_plus / eta1) / eta1 - exp(-y_plus * b) / eta1 + y_plus * b * exp(-y_plus * b) / eta1);
-  U = u_inf / A * sin(A / u_inf * u_eq);
+  d_eqplus_yplus = 0.1e1 / (0.1e1 + kappa * y_plus) + C1 * (std::exp(-y_plus / eta1) / eta1 - std::exp(-y_plus * b) / eta1 + y_plus * b * std::exp(-y_plus * b) / eta1);
+  U = u_inf / A * std::sin(A / u_inf * u_eq);
   V = eta_v * u_tau * y / x / 0.14e2;
-  T = T_inf * (0.1e1 - r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * (0.1e1 - U * U * pow(u_inf, -0.2e1)) / 0.2e1);
+  T = T_inf * (0.1e1 - r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * (0.1e1 - U * U * std::pow(u_inf, -0.2e1)) / 0.2e1);
   RHO = p_0 / R / T;
   NU_SA = kappa * u_tau * y - alpha * y * y;
   chi = RHO * NU_SA / mu;
-  f_v1 = pow(chi, 0.3e1) / (pow(chi, 0.3e1) + pow(c_v1, 0.3e1));
+  f_v1 = std::pow(chi, 0.3e1) / (std::pow(chi, 0.3e1) + std::pow(c_v1, 0.3e1));
   mu_t = RHO * NU_SA * f_v1;
-  d_ueqx2 = -y_plus * y_plus * u_tau * d_eqplus_yplus / eta1 * pow(x, -0.2e1) / 0.196e3 - (b * b * eta1 * y_plus - y_plus * b + 0.1e1 - 0.2e1 * b * eta1) * exp(-y_plus * b) * C1 * y_plus * y_plus * u_tau * pow(eta1, -0.2e1) * pow(x, -0.2e1) / 0.196e3 - (-kappa * y_plus + kappa * eta1 - 0.1e1) * y_plus * y_plus * u_tau * pow(0.1e1 + kappa * y_plus, -0.2e1) / eta1 * pow(x, -0.2e1) / 0.196e3 + 0.17e2 / 0.196e3 * y_plus * u_tau * d_eqplus_yplus * pow(x, -0.2e1) + 0.15e2 / 0.196e3 * u_tau * u_eq_plus * pow(x, -0.2e1);
-  d_ueqy2 = -y_plus * y_plus * u_tau * d_eqplus_yplus * pow(y, -0.2e1) / eta1 + y_plus * y_plus * u_tau * (-(b * b * eta1 * y_plus - y_plus * b + 0.1e1 - 0.2e1 * b * eta1) * exp(-y_plus * b) * C1 * pow(y, -0.2e1) * pow(eta1, -0.2e1) - (-kappa * y_plus + kappa * eta1 - 0.1e1) * pow(0.1e1 + kappa * y_plus, -0.2e1) / eta1 * pow(y, -0.2e1));
-  D2uDx2 = -U * A * A * u_tau * u_tau * pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * pow(u_inf, -0.2e1) * pow(x, -0.2e1) / 0.196e3 + cos(A / u_inf * u_eq) * d_ueqx2;
-  D2uDy2 = -U * A * A * y_plus * y_plus * d_eqplus_yplus * d_eqplus_yplus * u_tau * u_tau * pow(u_inf, -0.2e1) * pow(y, -0.2e1) + cos(A / u_inf * u_eq) * d_ueqy2;
+  d_ueqx2 = -y_plus * y_plus * u_tau * d_eqplus_yplus / eta1 * std::pow(x, -0.2e1) / 0.196e3 - (b * b * eta1 * y_plus - y_plus * b + 0.1e1 - 0.2e1 * b * eta1) * std::exp(-y_plus * b) * C1 * y_plus * y_plus * u_tau * std::pow(eta1, -0.2e1) * std::pow(x, -0.2e1) / 0.196e3 - (-kappa * y_plus + kappa * eta1 - 0.1e1) * y_plus * y_plus * u_tau * std::pow(0.1e1 + kappa * y_plus, -0.2e1) / eta1 * std::pow(x, -0.2e1) / 0.196e3 + 0.17e2 / 0.196e3 * y_plus * u_tau * d_eqplus_yplus * std::pow(x, -0.2e1) + 0.15e2 / 0.196e3 * u_tau * u_eq_plus * std::pow(x, -0.2e1);
+  d_ueqy2 = -y_plus * y_plus * u_tau * d_eqplus_yplus * std::pow(y, -0.2e1) / eta1 + y_plus * y_plus * u_tau * (-(b * b * eta1 * y_plus - y_plus * b + 0.1e1 - 0.2e1 * b * eta1) * std::exp(-y_plus * b) * C1 * std::pow(y, -0.2e1) * std::pow(eta1, -0.2e1) - (-kappa * y_plus + kappa * eta1 - 0.1e1) * std::pow(0.1e1 + kappa * y_plus, -0.2e1) / eta1 * std::pow(y, -0.2e1));
+  D2uDx2 = -U * A * A * u_tau * u_tau * std::pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * std::pow(u_inf, -0.2e1) * std::pow(x, -0.2e1) / 0.196e3 + std::cos(A / u_inf * u_eq) * d_ueqx2;
+  D2uDy2 = -U * A * A * y_plus * y_plus * d_eqplus_yplus * d_eqplus_yplus * u_tau * u_tau * std::pow(u_inf, -0.2e1) * std::pow(y, -0.2e1) + std::cos(A / u_inf * u_eq) * d_ueqy2;
   D2vDxy = -0.15e2 / 0.14e2 * V / y / x;
-  Q_u = r_T * (Scalar) (Gamma - 1) * mu_t * M_inf * M_inf * T_inf * y_plus * y_plus * u_tau * u_tau * d_eqplus_yplus * d_eqplus_yplus * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.2e1) * pow(y, -0.2e1) / T - r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * RHO * U * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / y / T + r_T * (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * M_inf * M_inf * T_inf * u_tau * RHO * pow(U, 0.3e1) * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / T / 0.14e2 + r_T * (Scalar) (Gamma - 1) * pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * mu_t * M_inf * M_inf * T_inf * u_tau * u_tau * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.2e1) * pow(x, -0.2e1) / T / 0.147e3 + y_plus * u_tau * d_eqplus_yplus * RHO * V * cos(A / u_inf * u_eq) / y - (u_eq_plus + y_plus * d_eqplus_yplus) * u_tau * RHO * U * cos(A / u_inf * u_eq) / x / 0.7e1 + RHO * U * V / y + (-0.2e1 * mu_t - 0.2e1 * mu) * (0.2e1 / 0.3e1 * D2uDx2 + D2vDxy / 0.6e1 + D2uDy2 / 0.2e1) - r_T * (Scalar) (Gamma - 1) * mu_t * M_inf * M_inf * T_inf * u_tau * U * V * cos(A / u_inf * u_eq) * (0.43e2 * y_plus * d_eqplus_yplus - 0.2e1 * u_eq_plus) * pow(u_inf, -0.2e1) / x / y / T / 0.42e2;
+  Q_u = r_T * (Scalar) (Gamma - 1) * mu_t * M_inf * M_inf * T_inf * y_plus * y_plus * u_tau * u_tau * d_eqplus_yplus * d_eqplus_yplus * U * std::pow(std::cos(A / u_inf * u_eq), 0.2e1) * std::pow(u_inf, -0.2e1) * std::pow(y, -0.2e1) / T - r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * RHO * U * U * V * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) / y / T + r_T * (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * M_inf * M_inf * T_inf * u_tau * RHO * std::pow(U, 0.3e1) * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) / x / T / 0.14e2 + r_T * (Scalar) (Gamma - 1) * std::pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * mu_t * M_inf * M_inf * T_inf * u_tau * u_tau * U * std::pow(std::cos(A / u_inf * u_eq), 0.2e1) * std::pow(u_inf, -0.2e1) * std::pow(x, -0.2e1) / T / 0.147e3 + y_plus * u_tau * d_eqplus_yplus * RHO * V * std::cos(A / u_inf * u_eq) / y - (u_eq_plus + y_plus * d_eqplus_yplus) * u_tau * RHO * U * std::cos(A / u_inf * u_eq) / x / 0.7e1 + RHO * U * V / y + (-0.2e1 * mu_t - 0.2e1 * mu) * (0.2e1 / 0.3e1 * D2uDx2 + D2vDxy / 0.6e1 + D2uDy2 / 0.2e1) - r_T * (Scalar) (Gamma - 1) * mu_t * M_inf * M_inf * T_inf * u_tau * U * V * std::cos(A / u_inf * u_eq) * (0.43e2 * y_plus * d_eqplus_yplus - 0.2e1 * u_eq_plus) * std::pow(u_inf, -0.2e1) / x / y / T / 0.42e2;
   return(Q_u);
 }
 
@@ -554,24 +554,24 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho_v(Scalar x,Scalar y
   Scalar chi;
   Scalar f_v1;
   Re_x = rho_inf * u_inf * x / mu;
-  c_f = C_cf / F_c * pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
-  u_tau = u_inf * sqrt(c_f / 0.2e1);
+  c_f = C_cf / F_c * std::pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
+  u_tau = u_inf * std::sqrt(c_f / 0.2e1);
   y_plus = y * u_tau / nu_w;
-  u_eq_plus = 0.1e1 / kappa * log(0.1e1 + kappa * y_plus) + C1 * (0.1e1 - exp(-y_plus / eta1) - y_plus / eta1 * exp(-y_plus * b));
+  u_eq_plus = 0.1e1 / kappa * std::log(0.1e1 + kappa * y_plus) + C1 * (0.1e1 - std::exp(-y_plus / eta1) - y_plus / eta1 * std::exp(-y_plus * b));
   u_eq = u_tau * u_eq_plus;
-  d_eqplus_yplus = 0.1e1 / (0.1e1 + kappa * y_plus) + C1 * (exp(-y_plus / eta1) / eta1 - exp(-y_plus * b) / eta1 + y_plus * b * exp(-y_plus * b) / eta1);
-  U = u_inf / A * sin(A / u_inf * u_eq);
+  d_eqplus_yplus = 0.1e1 / (0.1e1 + kappa * y_plus) + C1 * (std::exp(-y_plus / eta1) / eta1 - std::exp(-y_plus * b) / eta1 + y_plus * b * std::exp(-y_plus * b) / eta1);
+  U = u_inf / A * std::sin(A / u_inf * u_eq);
   V = eta_v * u_tau * y / x / 0.14e2;
-  T = T_inf * (0.1e1 - r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * (0.1e1 - U * U * pow(u_inf, -0.2e1)) / 0.2e1);
+  T = T_inf * (0.1e1 - r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * (0.1e1 - U * U * std::pow(u_inf, -0.2e1)) / 0.2e1);
   RHO = p_0 / R / T;
   NU_SA = kappa * u_tau * y - alpha * y * y;
   chi = RHO * NU_SA / mu;
-  f_v1 = pow(chi, 0.3e1) / (pow(chi, 0.3e1) + pow(c_v1, 0.3e1));
+  f_v1 = std::pow(chi, 0.3e1) / (std::pow(chi, 0.3e1) + std::pow(c_v1, 0.3e1));
   mu_t = RHO * NU_SA * f_v1;
-  D2uDxy = U * A * A * u_tau * u_tau * (u_eq_plus + y_plus * d_eqplus_yplus) * y_plus * d_eqplus_yplus * pow(u_inf, -0.2e1) / x / y / 0.14e2;
-  D2vDx2 = 0.435e3 / 0.196e3 * V * pow(x, -0.2e1);
+  D2uDxy = U * A * A * u_tau * u_tau * (u_eq_plus + y_plus * d_eqplus_yplus) * y_plus * d_eqplus_yplus * std::pow(u_inf, -0.2e1) / x / y / 0.14e2;
+  D2vDx2 = 0.435e3 / 0.196e3 * V * std::pow(x, -0.2e1);
   D2vDy2 = 0.0e0;
-  Q_v = -r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * RHO * U * V * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / y / T - (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * mu_t * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * u_tau * d_eqplus_yplus * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.2e1) / x / y / T / 0.42e2 + 0.4e1 / 0.3e1 * (Scalar) (Gamma - 1) * mu_t * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) * pow(y, -0.2e1) / T + (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * r_T * M_inf * M_inf * T_inf * u_tau * RHO * U * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / T / 0.14e2 + 0.15e2 / 0.196e3 * (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * mu_t * r_T * M_inf * M_inf * T_inf * u_tau * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) * pow(x, -0.2e1) / T - (u_eq_plus + y_plus * d_eqplus_yplus) * u_tau * RHO * V * cos(A / u_inf * u_eq) / x / 0.14e2 - 0.15e2 / 0.14e2 * RHO * U * V / x + 0.2e1 * RHO * V * V / y + (-0.2e1 * mu - 0.2e1 * mu_t) * (D2uDxy / 0.6e1 + D2vDx2 / 0.2e1 + 0.2e1 / 0.3e1 * D2vDy2);
+  Q_v = -r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * RHO * U * V * V * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) / y / T - (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * mu_t * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * u_tau * d_eqplus_yplus * U * std::pow(std::cos(A / u_inf * u_eq), 0.2e1) * std::pow(u_inf, -0.2e1) / x / y / T / 0.42e2 + 0.4e1 / 0.3e1 * (Scalar) (Gamma - 1) * mu_t * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * U * V * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) * std::pow(y, -0.2e1) / T + (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * r_T * M_inf * M_inf * T_inf * u_tau * RHO * U * U * V * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) / x / T / 0.14e2 + 0.15e2 / 0.196e3 * (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * mu_t * r_T * M_inf * M_inf * T_inf * u_tau * U * V * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) * std::pow(x, -0.2e1) / T - (u_eq_plus + y_plus * d_eqplus_yplus) * u_tau * RHO * V * std::cos(A / u_inf * u_eq) / x / 0.14e2 - 0.15e2 / 0.14e2 * RHO * U * V / x + 0.2e1 * RHO * V * V / y + (-0.2e1 * mu - 0.2e1 * mu_t) * (D2uDxy / 0.6e1 + D2vDx2 / 0.2e1 + 0.2e1 / 0.3e1 * D2vDy2);
   return(Q_v);
 
 }
@@ -592,17 +592,17 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho(Scalar x,Scalar y)
   Scalar u_eq;
   Scalar d_eqplus_yplus;
   Re_x = rho_inf * u_inf * x / mu;
-  c_f = C_cf / F_c * pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
-  u_tau = u_inf * sqrt(c_f / 0.2e1);
+  c_f = C_cf / F_c * std::pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
+  u_tau = u_inf * std::sqrt(c_f / 0.2e1);
   y_plus = y * u_tau / nu_w;
-  u_eq_plus = 0.1e1 / kappa * log(0.1e1 + kappa * y_plus) + C1 * (0.1e1 - exp(-y_plus / eta1) - y_plus / eta1 * exp(-y_plus * b));
+  u_eq_plus = 0.1e1 / kappa * std::log(0.1e1 + kappa * y_plus) + C1 * (0.1e1 - std::exp(-y_plus / eta1) - y_plus / eta1 * std::exp(-y_plus * b));
   u_eq = u_tau * u_eq_plus;
-  d_eqplus_yplus = 0.1e1 / (0.1e1 + kappa * y_plus) + C1 * (exp(-y_plus / eta1) / eta1 - exp(-y_plus * b) / eta1 + y_plus * b * exp(-y_plus * b) / eta1);
-  U = u_inf / A * sin(A / u_inf * u_eq);
+  d_eqplus_yplus = 0.1e1 / (0.1e1 + kappa * y_plus) + C1 * (std::exp(-y_plus / eta1) / eta1 - std::exp(-y_plus * b) / eta1 + y_plus * b * std::exp(-y_plus * b) / eta1);
+  U = u_inf / A * std::sin(A / u_inf * u_eq);
   V = eta_v * u_tau * y / x / 0.14e2;
-  T = T_inf * (0.1e1 - r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * (0.1e1 - U * U * pow(u_inf, -0.2e1)) / 0.2e1);
+  T = T_inf * (0.1e1 - r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * (0.1e1 - U * U * std::pow(u_inf, -0.2e1)) / 0.2e1);
   RHO = p_0 / R / T;
-  Q_rho = -r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * RHO * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / y / T + r_T * (Scalar) (Gamma - 1) * (y_plus * d_eqplus_yplus + u_eq_plus) * M_inf * M_inf * T_inf * u_tau * RHO * U * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / T / 0.14e2 - (y_plus * d_eqplus_yplus + u_eq_plus) * u_tau * RHO * cos(A / u_inf * u_eq) / x / 0.14e2 + RHO * V / y;
+  Q_rho = -r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * RHO * U * V * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) / y / T + r_T * (Scalar) (Gamma - 1) * (y_plus * d_eqplus_yplus + u_eq_plus) * M_inf * M_inf * T_inf * u_tau * RHO * U * U * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) / x / T / 0.14e2 - (y_plus * d_eqplus_yplus + u_eq_plus) * u_tau * RHO * std::cos(A / u_inf * u_eq) / x / 0.14e2 + RHO * V / y;
   return(Q_rho);
 }
 
@@ -635,22 +635,22 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_nu(Scalar x,Scalar y)
   Scalar g;
   Scalar r;
   Re_x = rho_inf * u_inf * x / mu;
-  c_f = C_cf / F_c * pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
-  u_tau = u_inf * sqrt(c_f / 0.2e1);
+  c_f = C_cf / F_c * std::pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
+  u_tau = u_inf * std::sqrt(c_f / 0.2e1);
   y_plus = y * u_tau / nu_w;
-  u_eq_plus = 0.1e1 / kappa * log(0.1e1 + kappa * y_plus) + C1 * (0.1e1 - exp(-y_plus / eta1) - y_plus / eta1 * exp(-y_plus * b));
+  u_eq_plus = 0.1e1 / kappa * std::log(0.1e1 + kappa * y_plus) + C1 * (0.1e1 - std::exp(-y_plus / eta1) - y_plus / eta1 * std::exp(-y_plus * b));
   u_eq = u_tau * u_eq_plus;
-  d_eqplus_yplus = 0.1e1 / (0.1e1 + kappa * y_plus) + C1 * (exp(-y_plus / eta1) / eta1 - exp(-y_plus * b) / eta1 + y_plus * b * exp(-y_plus * b) / eta1);
-  U = u_inf / A * sin(A / u_inf * u_eq);
+  d_eqplus_yplus = 0.1e1 / (0.1e1 + kappa * y_plus) + C1 * (std::exp(-y_plus / eta1) / eta1 - std::exp(-y_plus * b) / eta1 + y_plus * b * std::exp(-y_plus * b) / eta1);
+  U = u_inf / A * std::sin(A / u_inf * u_eq);
   V = eta_v * u_tau * y / x / 0.14e2;
-  T = T_inf * (0.1e1 - r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * (0.1e1 - U * U * pow(u_inf, -0.2e1)) / 0.2e1);
+  T = T_inf * (0.1e1 - r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * (0.1e1 - U * U * std::pow(u_inf, -0.2e1)) / 0.2e1);
   RHO = p_0 / R / T;
   NU_SA = kappa * u_tau * y - alpha * y * y;
   chi = RHO * NU_SA / mu;
-  f_v1 = pow(chi, 0.3e1) / (pow(chi, 0.3e1) + pow(c_v1, 0.3e1));
+  f_v1 = std::pow(chi, 0.3e1) / (std::pow(chi, 0.3e1) + std::pow(c_v1, 0.3e1));
   f_v2 = 0.1e1 - chi / (0.1e1 + chi * f_v1);
-  Omega = sqrt(pow(0.196e3 * x * x * y_plus * d_eqplus_yplus * cos(A / u_inf * u_eq) + 0.15e2 * eta_v * y * y, 0.2e1) * u_tau * u_tau * pow(x, -0.4e1) * pow(y, -0.2e1)) / 0.196e3;
-  Sm_orig = NU_SA * pow(kappa, -0.2e1) * pow(d, -0.2e1) * f_v2;
+  Omega = std::sqrt(std::pow(0.196e3 * x * x * y_plus * d_eqplus_yplus * std::cos(A / u_inf * u_eq) + 0.15e2 * eta_v * y * y, 0.2e1) * u_tau * u_tau * std::pow(x, -0.4e1) * std::pow(y, -0.2e1)) / 0.196e3;
+  Sm_orig = NU_SA * std::pow(kappa, -0.2e1) * std::pow(d, -0.2e1) * f_v2;
   Sm1 = Sm_orig;
   // nick: making change to equality after consulting with kemelli
   Sm2 = Omega * (c_v2 * c_v2 * Omega + c_v3 * Sm_orig) / ((c_v3 + (-0.1e1) * 0.20e1 * c_v2) * Omega - Sm_orig);
@@ -659,10 +659,10 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_nu(Scalar x,Scalar y)
   else
     Sm = Sm2;
   S_sa = Sm + Omega;
-  r = NU_SA / S_sa * pow(kappa, -0.2e1) * pow(d, -0.2e1);
-  g = r + c_w2 * (pow(r, 0.6e1) - r);
-  f_w = g * pow((0.1e1 + pow(c_w3, 0.6e1)) / (pow(g, 0.6e1) + pow(c_w3, 0.6e1)), 0.1e1 / 0.6e1);
-  Q_nu = -r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * NU_SA * RHO * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / y / T + (Scalar) (Gamma - 1) * (y_plus * d_eqplus_yplus + u_eq_plus) * y * kappa * r_T * M_inf * M_inf * T_inf * u_tau * u_tau * NU_SA * RHO * U * cos(A / u_inf * u_eq) / sigma * pow(u_inf, -0.2e1) * pow(x, -0.2e1) / T / 0.196e3 - (Scalar) (Gamma - 1) * (0.2e1 * alpha * y - kappa * u_tau) * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * NU_SA * RHO * U * cos(A / u_inf * u_eq) / sigma * pow(u_inf, -0.2e1) / y / T + (Scalar) (Gamma - 1) * (y_plus * d_eqplus_yplus + u_eq_plus) * r_T * M_inf * M_inf * T_inf * u_tau * NU_SA * RHO * U * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / T / 0.14e2 - (Scalar) (1 + c_b2) * y * y * kappa * kappa * u_tau * u_tau * RHO / sigma * pow(x, -0.2e1) / 0.196e3 - kappa * u_tau * y * RHO * U / x / 0.14e2 - (y_plus * d_eqplus_yplus + u_eq_plus) * u_tau * NU_SA * RHO * cos(A / u_inf * u_eq) / x / 0.14e2 + c_w1 * f_w * NU_SA * NU_SA * RHO * pow(d, -0.2e1) + RHO * NU_SA * V / y - S_sa * c_b1 * NU_SA * RHO + (-0.2e1 * alpha * y + kappa * u_tau) * RHO * V - pow(0.2e1 * alpha * y - kappa * u_tau, 0.2e1) * (Scalar) (1 + c_b2) * RHO / sigma + (RHO * NU_SA + mu) * (0.392e3 * alpha * x * x - 0.15e2 * kappa * u_tau * y) / sigma * pow(x, -0.2e1) / 0.196e3;
+  r = NU_SA / S_sa * std::pow(kappa, -0.2e1) * std::pow(d, -0.2e1);
+  g = r + c_w2 * (std::pow(r, 0.6e1) - r);
+  f_w = g * std::pow((0.1e1 + std::pow(c_w3, 0.6e1)) / (std::pow(g, 0.6e1) + std::pow(c_w3, 0.6e1)), 0.1e1 / 0.6e1);
+  Q_nu = -r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * NU_SA * RHO * U * V * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) / y / T + (Scalar) (Gamma - 1) * (y_plus * d_eqplus_yplus + u_eq_plus) * y * kappa * r_T * M_inf * M_inf * T_inf * u_tau * u_tau * NU_SA * RHO * U * std::cos(A / u_inf * u_eq) / sigma * std::pow(u_inf, -0.2e1) * std::pow(x, -0.2e1) / T / 0.196e3 - (Scalar) (Gamma - 1) * (0.2e1 * alpha * y - kappa * u_tau) * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * NU_SA * RHO * U * std::cos(A / u_inf * u_eq) / sigma * std::pow(u_inf, -0.2e1) / y / T + (Scalar) (Gamma - 1) * (y_plus * d_eqplus_yplus + u_eq_plus) * r_T * M_inf * M_inf * T_inf * u_tau * NU_SA * RHO * U * U * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) / x / T / 0.14e2 - (Scalar) (1 + c_b2) * y * y * kappa * kappa * u_tau * u_tau * RHO / sigma * std::pow(x, -0.2e1) / 0.196e3 - kappa * u_tau * y * RHO * U / x / 0.14e2 - (y_plus * d_eqplus_yplus + u_eq_plus) * u_tau * NU_SA * RHO * std::cos(A / u_inf * u_eq) / x / 0.14e2 + c_w1 * f_w * NU_SA * NU_SA * RHO * std::pow(d, -0.2e1) + RHO * NU_SA * V / y - S_sa * c_b1 * NU_SA * RHO + (-0.2e1 * alpha * y + kappa * u_tau) * RHO * V - std::pow(0.2e1 * alpha * y - kappa * u_tau, 0.2e1) * (Scalar) (1 + c_b2) * RHO / sigma + (RHO * NU_SA + mu) * (0.392e3 * alpha * x * x - 0.15e2 * kappa * u_tau * y) / sigma * std::pow(x, -0.2e1) / 0.196e3;
   return(Q_nu);
 }
 
@@ -696,32 +696,32 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho_e(Scalar x,Scalar y
   Scalar chi;
   Scalar f_v1;
   Re_x = rho_inf * u_inf * x / mu;
-  c_f = C_cf / F_c * pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
-  u_tau = u_inf * sqrt(c_f / 0.2e1);
+  c_f = C_cf / F_c * std::pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
+  u_tau = u_inf * std::sqrt(c_f / 0.2e1);
   y_plus = y * u_tau / nu_w;
-  u_eq_plus = 0.1e1 / kappa * log(0.1e1 + kappa * y_plus) + C1 * (0.1e1 - exp(-y_plus / eta1) - y_plus / eta1 * exp(-y_plus * b));
+  u_eq_plus = 0.1e1 / kappa * std::log(0.1e1 + kappa * y_plus) + C1 * (0.1e1 - std::exp(-y_plus / eta1) - y_plus / eta1 * std::exp(-y_plus * b));
   u_eq = u_tau * u_eq_plus;
-  d_eqplus_yplus = 0.1e1 / (0.1e1 + kappa * y_plus) + C1 * (exp(-y_plus / eta1) / eta1 - exp(-y_plus * b) / eta1 + y_plus * b * exp(-y_plus * b) / eta1);
-  U = u_inf / A * sin(A / u_inf * u_eq);
+  d_eqplus_yplus = 0.1e1 / (0.1e1 + kappa * y_plus) + C1 * (std::exp(-y_plus / eta1) / eta1 - std::exp(-y_plus * b) / eta1 + y_plus * b * std::exp(-y_plus * b) / eta1);
+  U = u_inf / A * std::sin(A / u_inf * u_eq);
   V = eta_v * u_tau * y / x / 0.14e2;
-  T = T_inf * (0.1e1 - r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * (0.1e1 - U * U * pow(u_inf, -0.2e1)) / 0.2e1);
+  T = T_inf * (0.1e1 - r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * (0.1e1 - U * U * std::pow(u_inf, -0.2e1)) / 0.2e1);
   RHO = p_0 / R / T;
   NU_SA = kappa * u_tau * y - alpha * y * y;
   chi = RHO * NU_SA / mu;
-  f_v1 = pow(chi, 0.3e1) / (pow(chi, 0.3e1) + pow(c_v1, 0.3e1));
+  f_v1 = std::pow(chi, 0.3e1) / (std::pow(chi, 0.3e1) + std::pow(c_v1, 0.3e1));
   mu_t = RHO * NU_SA * f_v1;
-  d_ueqx2 = -y_plus * y_plus * u_tau * d_eqplus_yplus / eta1 * pow(x, -0.2e1) / 0.196e3 - (b * b * eta1 * y_plus - y_plus * b + 0.1e1 - 0.2e1 * b * eta1) * exp(-y_plus * b) * C1 * y_plus * y_plus * u_tau * pow(eta1, -0.2e1) * pow(x, -0.2e1) / 0.196e3 - (-kappa * y_plus + kappa * eta1 - 0.1e1) * y_plus * y_plus * u_tau * pow(0.1e1 + kappa * y_plus, -0.2e1) / eta1 * pow(x, -0.2e1) / 0.196e3 + 0.17e2 / 0.196e3 * y_plus * u_tau * d_eqplus_yplus * pow(x, -0.2e1) + 0.15e2 / 0.196e3 * u_tau * u_eq_plus * pow(x, -0.2e1);
-  d_ueqy2 = -y_plus * y_plus * u_tau * d_eqplus_yplus * pow(y, -0.2e1) / eta1 + y_plus * y_plus * u_tau * (-(b * b * eta1 * y_plus - y_plus * b + 0.1e1 - 0.2e1 * b * eta1) * exp(-y_plus * b) * C1 * pow(y, -0.2e1) * pow(eta1, -0.2e1) - (-kappa * y_plus + kappa * eta1 - 0.1e1) * pow(0.1e1 + kappa * y_plus, -0.2e1) / eta1 * pow(y, -0.2e1));
-  D2uDx2 = -U * A * A * u_tau * u_tau * pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * pow(u_inf, -0.2e1) * pow(x, -0.2e1) / 0.196e3 + cos(A / u_inf * u_eq) * d_ueqx2;
-  D2uDy2 = -U * A * A * y_plus * y_plus * d_eqplus_yplus * d_eqplus_yplus * u_tau * u_tau * pow(u_inf, -0.2e1) * pow(y, -0.2e1) + cos(A / u_inf * u_eq) * d_ueqy2;
-  D2uDxy = U * A * A * u_tau * u_tau * (u_eq_plus + y_plus * d_eqplus_yplus) * y_plus * d_eqplus_yplus * pow(u_inf, -0.2e1) / x / y / 0.14e2;
-  D2vDx2 = 0.435e3 / 0.196e3 * V * pow(x, -0.2e1);
+  d_ueqx2 = -y_plus * y_plus * u_tau * d_eqplus_yplus / eta1 * std::pow(x, -0.2e1) / 0.196e3 - (b * b * eta1 * y_plus - y_plus * b + 0.1e1 - 0.2e1 * b * eta1) * std::exp(-y_plus * b) * C1 * y_plus * y_plus * u_tau * std::pow(eta1, -0.2e1) * std::pow(x, -0.2e1) / 0.196e3 - (-kappa * y_plus + kappa * eta1 - 0.1e1) * y_plus * y_plus * u_tau * std::pow(0.1e1 + kappa * y_plus, -0.2e1) / eta1 * std::pow(x, -0.2e1) / 0.196e3 + 0.17e2 / 0.196e3 * y_plus * u_tau * d_eqplus_yplus * std::pow(x, -0.2e1) + 0.15e2 / 0.196e3 * u_tau * u_eq_plus * std::pow(x, -0.2e1);
+  d_ueqy2 = -y_plus * y_plus * u_tau * d_eqplus_yplus * std::pow(y, -0.2e1) / eta1 + y_plus * y_plus * u_tau * (-(b * b * eta1 * y_plus - y_plus * b + 0.1e1 - 0.2e1 * b * eta1) * std::exp(-y_plus * b) * C1 * std::pow(y, -0.2e1) * std::pow(eta1, -0.2e1) - (-kappa * y_plus + kappa * eta1 - 0.1e1) * std::pow(0.1e1 + kappa * y_plus, -0.2e1) / eta1 * std::pow(y, -0.2e1));
+  D2uDx2 = -U * A * A * u_tau * u_tau * std::pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * std::pow(u_inf, -0.2e1) * std::pow(x, -0.2e1) / 0.196e3 + std::cos(A / u_inf * u_eq) * d_ueqx2;
+  D2uDy2 = -U * A * A * y_plus * y_plus * d_eqplus_yplus * d_eqplus_yplus * u_tau * u_tau * std::pow(u_inf, -0.2e1) * std::pow(y, -0.2e1) + std::cos(A / u_inf * u_eq) * d_ueqy2;
+  D2uDxy = U * A * A * u_tau * u_tau * (u_eq_plus + y_plus * d_eqplus_yplus) * y_plus * d_eqplus_yplus * std::pow(u_inf, -0.2e1) / x / y / 0.14e2;
+  D2vDx2 = 0.435e3 / 0.196e3 * V * std::pow(x, -0.2e1);
   D2vDy2 = 0.0e0;
   D2vDxy = -0.15e2 / 0.14e2 * V / y / x;
-  D2TDx2 = T_inf * r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * u_tau * u_tau * pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * pow(u_inf, -0.2e1) * pow(x, -0.2e1) * (pow(cos(A / u_inf * u_eq), 0.2e1) - pow(sin(A / u_inf * u_eq), 0.2e1)) / 0.196e3 + T_inf * r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * sin(A / u_inf * u_eq) * cos(A / u_inf * u_eq) * d_ueqx2 / u_inf / A;
-  D2TDy2 = T_inf * r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * y_plus * y_plus * d_eqplus_yplus * d_eqplus_yplus * u_tau * u_tau * pow(u_inf, -0.2e1) * pow(y, -0.2e1) * (pow(cos(A / u_inf * u_eq), 0.2e1) - pow(sin(A / u_inf * u_eq), 0.2e1)) + T_inf * r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * sin(A / u_inf * u_eq) * cos(A / u_inf * u_eq) * d_ueqy2 / u_inf / A;
+  D2TDx2 = T_inf * r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * u_tau * u_tau * std::pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * std::pow(u_inf, -0.2e1) * std::pow(x, -0.2e1) * (std::pow(std::cos(A / u_inf * u_eq), 0.2e1) - std::pow(std::sin(A / u_inf * u_eq), 0.2e1)) / 0.196e3 + T_inf * r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * std::sin(A / u_inf * u_eq) * std::cos(A / u_inf * u_eq) * d_ueqx2 / u_inf / A;
+  D2TDy2 = T_inf * r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * y_plus * y_plus * d_eqplus_yplus * d_eqplus_yplus * u_tau * u_tau * std::pow(u_inf, -0.2e1) * std::pow(y, -0.2e1) * (std::pow(std::cos(A / u_inf * u_eq), 0.2e1) - std::pow(std::sin(A / u_inf * u_eq), 0.2e1)) + T_inf * r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * std::sin(A / u_inf * u_eq) * std::cos(A / u_inf * u_eq) * d_ueqy2 / u_inf / A;
 
-  Qe = 0.4e1 / 0.3e1 * (0.2e1 * alpha * y - kappa * u_tau) * f_v1 * RHO * V * V / y + (-0.2e1 * mu - 0.2e1 * mu_t) * (y_plus * y_plus * u_tau * u_tau * d_eqplus_yplus * d_eqplus_yplus * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(y, -0.2e1) / 0.2e1 + pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * u_tau * u_tau * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(x, -0.2e1) / 0.294e3 - (0.43e2 * y_plus * d_eqplus_yplus - 0.2e1 * u_eq_plus) * u_tau * V * cos(A / u_inf * u_eq) / y / x / 0.42e2 + (0.2e1 / 0.3e1 * D2uDx2 + D2vDxy / 0.6e1 + D2uDy2 / 0.2e1) * U + (D2uDxy / 0.6e1 + D2vDx2 / 0.2e1 + 0.2e1 / 0.3e1 * D2vDy2) * V + 0.225e3 / 0.392e3 * V * V * pow(x, -0.2e1) + 0.2e1 / 0.3e1 * V * V * pow(y, -0.2e1)) + (Scalar) (Gamma - 1) * mu_t * r_T * M_inf * M_inf * T_inf * y_plus * y_plus * u_tau * u_tau * d_eqplus_yplus * d_eqplus_yplus * U * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.2e1) * pow(y, -0.2e1) / T - (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * mu_t * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * u_tau * d_eqplus_yplus * U * V * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.2e1) / x / y / T / 0.42e2 - (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * y * f_v1 * kappa * cp * r_T * M_inf * M_inf * T_inf * u_tau * u_tau * RHO * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) * pow(x, -0.2e1) / Pr_t / 0.196e3 + (0.2e1 * alpha * y - kappa * u_tau) * (Scalar) (Gamma - 1) * f_v1 * cp * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * RHO * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / y / Pr_t - (Scalar) (Gamma - 1) * (U * U + V * V) * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * RHO * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / y / T / 0.2e1 + 0.4e1 / 0.3e1 * (Scalar) (Gamma - 1) * mu_t * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * U * V * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) * pow(y, -0.2e1) / T + (Scalar) (Gamma - 1) * pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * mu_t * r_T * M_inf * M_inf * T_inf * u_tau * u_tau * U * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.2e1) * pow(x, -0.2e1) / T / 0.147e3 - (Scalar) (Gamma - 1) * (0.43e2 * y_plus * d_eqplus_yplus - 0.2e1 * u_eq_plus) * mu_t * r_T * M_inf * M_inf * T_inf * u_tau * U * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / y / T / 0.42e2 + (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * (U * U + V * V) * r_T * M_inf * M_inf * T_inf * u_tau * RHO * U * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / T / 0.28e2 + 0.15e2 / 0.196e3 * (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * mu_t * r_T * M_inf * M_inf * T_inf * u_tau * U * V * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) * pow(x, -0.2e1) / T + (Scalar) (int) pow((Scalar) (Gamma - 1), (Scalar) 2) * mu_t * cp * r_T * r_T * pow(M_inf, 0.4e1) * T_inf * T_inf * y_plus * y_plus * u_tau * u_tau * d_eqplus_yplus * d_eqplus_yplus * U * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.4e1) * pow(y, -0.2e1) / Pr_t / T + (Scalar) (int) pow((Scalar) (Gamma - 1), (Scalar) 2) * pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * mu_t * cp * r_T * r_T * pow(M_inf, 0.4e1) * T_inf * T_inf * u_tau * u_tau * U * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.4e1) * pow(x, -0.2e1) / Pr_t / T / 0.196e3 + 0.2e1 / 0.21e2 * (u_eq_plus + y_plus * d_eqplus_yplus) * alpha * y * f_v1 * u_tau * RHO * V * cos(A / u_inf * u_eq) / x - (u_eq_plus + y_plus * d_eqplus_yplus) * y * f_v1 * kappa * u_tau * u_tau * RHO * U * cos(A / u_inf * u_eq) * pow(x, -0.2e1) / 0.147e3 + (0.2e1 * alpha * y - kappa * u_tau) * f_v1 * y_plus * u_tau * d_eqplus_yplus * RHO * U * cos(A / u_inf * u_eq) / y - 0.15e2 / 0.196e3 * y * f_v1 * kappa * u_tau * RHO * V * V * pow(x, -0.2e1) - (0.90e2 * alpha * y - 0.43e2 * kappa * u_tau) * f_v1 * RHO * U * V / x / 0.42e2 - (u_eq_plus + y_plus * d_eqplus_yplus) * (0.2e1 * cp * T + 0.3e1 * U * U + V * V) * u_tau * RHO * cos(A / u_inf * u_eq) / x / 0.28e2 + (y_plus * d_eqplus_yplus - 0.2e1 * u_eq_plus) * f_v1 * kappa * u_tau * u_tau * RHO * V * cos(A / u_inf * u_eq) / x / 0.42e2 + y_plus * u_tau * d_eqplus_yplus * RHO * U * V * cos(A / u_inf * u_eq) / y + (-mu / Pr - mu_t / Pr_t) * (D2TDx2 + D2TDy2) * cp - 0.15e2 / 0.14e2 * RHO * U * V * V / x + (0.2e1 * cp * T + U * U + 0.3e1 * V * V) * RHO * V / y / 0.2e1;
+  Qe = 0.4e1 / 0.3e1 * (0.2e1 * alpha * y - kappa * u_tau) * f_v1 * RHO * V * V / y + (-0.2e1 * mu - 0.2e1 * mu_t) * (y_plus * y_plus * u_tau * u_tau * d_eqplus_yplus * d_eqplus_yplus * std::pow(std::cos(A / u_inf * u_eq), 0.2e1) * std::pow(y, -0.2e1) / 0.2e1 + std::pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * u_tau * u_tau * std::pow(std::cos(A / u_inf * u_eq), 0.2e1) * std::pow(x, -0.2e1) / 0.294e3 - (0.43e2 * y_plus * d_eqplus_yplus - 0.2e1 * u_eq_plus) * u_tau * V * std::cos(A / u_inf * u_eq) / y / x / 0.42e2 + (0.2e1 / 0.3e1 * D2uDx2 + D2vDxy / 0.6e1 + D2uDy2 / 0.2e1) * U + (D2uDxy / 0.6e1 + D2vDx2 / 0.2e1 + 0.2e1 / 0.3e1 * D2vDy2) * V + 0.225e3 / 0.392e3 * V * V * std::pow(x, -0.2e1) + 0.2e1 / 0.3e1 * V * V * std::pow(y, -0.2e1)) + (Scalar) (Gamma - 1) * mu_t * r_T * M_inf * M_inf * T_inf * y_plus * y_plus * u_tau * u_tau * d_eqplus_yplus * d_eqplus_yplus * U * U * std::pow(std::cos(A / u_inf * u_eq), 0.2e1) * std::pow(u_inf, -0.2e1) * std::pow(y, -0.2e1) / T - (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * mu_t * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * u_tau * d_eqplus_yplus * U * V * std::pow(std::cos(A / u_inf * u_eq), 0.2e1) * std::pow(u_inf, -0.2e1) / x / y / T / 0.42e2 - (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * y * f_v1 * kappa * cp * r_T * M_inf * M_inf * T_inf * u_tau * u_tau * RHO * U * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) * std::pow(x, -0.2e1) / Pr_t / 0.196e3 + (0.2e1 * alpha * y - kappa * u_tau) * (Scalar) (Gamma - 1) * f_v1 * cp * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * RHO * U * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) / y / Pr_t - (Scalar) (Gamma - 1) * (U * U + V * V) * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * RHO * U * V * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) / y / T / 0.2e1 + 0.4e1 / 0.3e1 * (Scalar) (Gamma - 1) * mu_t * r_T * M_inf * M_inf * T_inf * y_plus * u_tau * d_eqplus_yplus * U * V * V * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) * std::pow(y, -0.2e1) / T + (Scalar) (Gamma - 1) * std::pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * mu_t * r_T * M_inf * M_inf * T_inf * u_tau * u_tau * U * U * std::pow(std::cos(A / u_inf * u_eq), 0.2e1) * std::pow(u_inf, -0.2e1) * std::pow(x, -0.2e1) / T / 0.147e3 - (Scalar) (Gamma - 1) * (0.43e2 * y_plus * d_eqplus_yplus - 0.2e1 * u_eq_plus) * mu_t * r_T * M_inf * M_inf * T_inf * u_tau * U * U * V * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) / x / y / T / 0.42e2 + (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * (U * U + V * V) * r_T * M_inf * M_inf * T_inf * u_tau * RHO * U * U * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) / x / T / 0.28e2 + 0.15e2 / 0.196e3 * (Scalar) (Gamma - 1) * (u_eq_plus + y_plus * d_eqplus_yplus) * mu_t * r_T * M_inf * M_inf * T_inf * u_tau * U * V * V * std::cos(A / u_inf * u_eq) * std::pow(u_inf, -0.2e1) * std::pow(x, -0.2e1) / T + (Scalar) (int) std::pow((Scalar) (Gamma - 1), (Scalar) 2) * mu_t * cp * r_T * r_T * std::pow(M_inf, 0.4e1) * T_inf * T_inf * y_plus * y_plus * u_tau * u_tau * d_eqplus_yplus * d_eqplus_yplus * U * U * std::pow(std::cos(A / u_inf * u_eq), 0.2e1) * std::pow(u_inf, -0.4e1) * std::pow(y, -0.2e1) / Pr_t / T + (Scalar) (int) std::pow((Scalar) (Gamma - 1), (Scalar) 2) * std::pow(u_eq_plus + y_plus * d_eqplus_yplus, 0.2e1) * mu_t * cp * r_T * r_T * std::pow(M_inf, 0.4e1) * T_inf * T_inf * u_tau * u_tau * U * U * std::pow(std::cos(A / u_inf * u_eq), 0.2e1) * std::pow(u_inf, -0.4e1) * std::pow(x, -0.2e1) / Pr_t / T / 0.196e3 + 0.2e1 / 0.21e2 * (u_eq_plus + y_plus * d_eqplus_yplus) * alpha * y * f_v1 * u_tau * RHO * V * std::cos(A / u_inf * u_eq) / x - (u_eq_plus + y_plus * d_eqplus_yplus) * y * f_v1 * kappa * u_tau * u_tau * RHO * U * std::cos(A / u_inf * u_eq) * std::pow(x, -0.2e1) / 0.147e3 + (0.2e1 * alpha * y - kappa * u_tau) * f_v1 * y_plus * u_tau * d_eqplus_yplus * RHO * U * std::cos(A / u_inf * u_eq) / y - 0.15e2 / 0.196e3 * y * f_v1 * kappa * u_tau * RHO * V * V * std::pow(x, -0.2e1) - (0.90e2 * alpha * y - 0.43e2 * kappa * u_tau) * f_v1 * RHO * U * V / x / 0.42e2 - (u_eq_plus + y_plus * d_eqplus_yplus) * (0.2e1 * cp * T + 0.3e1 * U * U + V * V) * u_tau * RHO * std::cos(A / u_inf * u_eq) / x / 0.28e2 + (y_plus * d_eqplus_yplus - 0.2e1 * u_eq_plus) * f_v1 * kappa * u_tau * u_tau * RHO * V * std::cos(A / u_inf * u_eq) / x / 0.42e2 + y_plus * u_tau * d_eqplus_yplus * RHO * U * V * std::cos(A / u_inf * u_eq) / y + (-mu / Pr - mu_t / Pr_t) * (D2TDx2 + D2TDy2) * cp - 0.15e2 / 0.14e2 * RHO * U * V * V / x + (0.2e1 * cp * T + U * U + 0.3e1 * V * V) * RHO * V / y / 0.2e1;
   return(Qe);
 }
 
@@ -735,7 +735,7 @@ template <typename Scalar>
 Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_u(Scalar /*x*/,Scalar /*y*/)
 {
   Scalar u_an;
-  u_an = u_inf / A * sin(A / u_inf * u_eq);
+  u_an = u_inf / A * std::sin(A / u_inf * u_eq);
   return u_an;
 }
 

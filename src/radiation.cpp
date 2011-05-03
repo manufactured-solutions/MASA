@@ -179,7 +179,7 @@ Scalar MASA::radiation_integrated_intensity<Scalar>::eval_q_u(Scalar x)
     {
       // this is evaluating the gaussians contributions at 
       // a particular spatial location
-      Q_I += vec_amp[it]*exp( -pow(x-vec_mean[it],2)/(2*pow(vec_stdev[it],2)));
+      Q_I += vec_amp[it]*std::exp( -std::pow(x-vec_mean[it],2)/(2*std::pow(vec_stdev[it],2)));
     }
 
   return Q_I;  
@@ -221,9 +221,9 @@ Scalar MASA::radiation_integrated_intensity<Scalar>::eval_exact_u(Scalar x)
 	   exact_I += vec_amp[it]*(phi(xs)-phi(s));
 	 }
        
-       // c = pow(2.0,0.5);
-       // p = pow(pi,0.5);
-       // 0.50*erf((c*vec_mean[it])/(2.0*vec_stdev[it]))*vec_amp[it]*sqrt(pi)*sqrt(2.0)*vec_stdev[it]  
+       // c = std::pow(2.0,0.5);
+       // p = std::pow(pi,0.5);
+       // 0.50*erf((c*vec_mean[it])/(2.0*vec_stdev[it]))*vec_amp[it]*std::sqrt(pi)*std::sqrt(2.0)*vec_stdev[it]  
        // - 0.5*erf((vec_stdev[it]*(-1.0+vec_mean[it]))/(2.0*vec_stdev[it])) * vec_amp[it]*p*c*vec_stdev[it];    
     }  
   

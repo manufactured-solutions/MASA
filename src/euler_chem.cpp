@@ -150,13 +150,13 @@ Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_u(Scalar x)
   Scalar U;
   Scalar T;
 
-  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * PI * x / L);
-  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * PI * x / L);
+  RHO_N = rho_N_0 + rho_N_x * std::sin(a_rho_N_x * PI * x / L);
+  RHO_N2 = rho_N2_0 + rho_N2_x * std::cos(a_rho_N2_x * PI * x / L);
   RHO = RHO_N + RHO_N2;
-  U = u_0 + u_x * sin(a_ux * PI * x / L);
-  T = T_0 + T_x * cos(a_Tx * PI * x / L);
+  U = u_0 + u_x * std::sin(a_ux * PI * x / L);
+  T = T_0 + T_x * std::cos(a_Tx * PI * x / L);
 
-  Q_u = a_rho_N_x * PI * rho_N_x * U * U * cos(a_rho_N_x * PI * x / L) / L - a_rho_N2_x * PI * rho_N2_x * U * U * sin(a_rho_N2_x * PI * x / L) / L - a_Tx * PI * T_x * R_N * RHO_N * sin(a_Tx * PI * x / L) / L - a_Tx * PI * T_x * R_N * RHO_N2 * sin(a_Tx * PI * x / L) / L / Scalar(0.2e1) + Scalar(0.2e1) * a_ux * PI * u_x * RHO * U * cos(a_ux * PI * x / L) / L - (Scalar(-0.2e1) * a_rho_N_x * rho_N_x * cos(a_rho_N_x * PI * x / L) + a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * PI * x / L)) * PI * R_N * T / L / Scalar(0.2e1);
+  Q_u = a_rho_N_x * PI * rho_N_x * U * U * std::cos(a_rho_N_x * PI * x / L) / L - a_rho_N2_x * PI * rho_N2_x * U * U * std::sin(a_rho_N2_x * PI * x / L) / L - a_Tx * PI * T_x * R_N * RHO_N * std::sin(a_Tx * PI * x / L) / L - a_Tx * PI * T_x * R_N * RHO_N2 * std::sin(a_Tx * PI * x / L) / L / Scalar(0.2e1) + Scalar(0.2e1) * a_ux * PI * u_x * RHO * U * std::cos(a_ux * PI * x / L) / L - (Scalar(-0.2e1) * a_rho_N_x * rho_N_x * std::cos(a_rho_N_x * PI * x / L) + a_rho_N2_x * rho_N2_x * std::sin(a_rho_N2_x * PI * x / L)) * PI * R_N * T / L / Scalar(0.2e1);
   return(Q_u);
 }
 
@@ -183,15 +183,15 @@ Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_e(Scalar x)
   Scalar C  = -0.2e1;
   Scalar C2 =  0.3e1;
 
-  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * PI * x / L);
-  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * PI * x / L);
+  RHO_N = rho_N_0 + rho_N_x * std::sin(a_rho_N_x * PI * x / L);
+  RHO_N2 = rho_N2_0 + rho_N2_x * std::cos(a_rho_N2_x * PI * x / L);
   RHO = RHO_N + RHO_N2;
-  U = u_0 + u_x * sin(a_ux * PI * x / L);
-  T = T_0 + T_x * cos(a_Tx * PI * x / L);
-  alpha = exp(theta_v_N2 / T);
+  U = u_0 + u_x * std::sin(a_ux * PI * x / L);
+  T = T_0 + T_x * std::cos(a_Tx * PI * x / L);
+  alpha = std::exp(theta_v_N2 / T);
   E_vib_N2 = R_N2 * theta_v_N2 / (alpha - 0.1e1);
 
-  Q_e = -a_Tx * PI * T_x * alpha * theta_v_N2 * E_vib_N2 * RHO_N2 * U * sin(a_Tx * PI * x / L) / L / (alpha - Scalar(0.1e1)) * pow(T, C) - Scalar(0.5e1) / Scalar(0.2e1) * a_Tx * PI * T_x * R_N * RHO_N * U * sin(a_Tx * PI * x / L) / L - Scalar(0.7e1) / Scalar(0.4e1) * a_Tx * PI * T_x * R_N * RHO_N2 * U * sin(a_Tx * PI * x / L) / L + Scalar(0.5e1) / Scalar(0.2e1) * a_ux * PI * u_x * R_N * RHO_N * T * cos(a_ux * PI * x / L) / L + Scalar(0.7e1) / Scalar(0.4e1) * a_ux * PI * u_x * R_N * RHO_N2 * T * cos(a_ux * PI * x / L) / L + Scalar(0.3e1) / Scalar(0.2e1) * a_ux * PI * u_x * RHO * U * U * cos(a_ux * PI * x / L) / L - a_rho_N2_x * PI * rho_N2_x * E_vib_N2 * U * sin(a_rho_N2_x * PI * x / L) / L + a_ux * PI * u_x * E_vib_N2 * RHO_N2 * cos(a_ux * PI * x / L) / L + (h0_N * RHO_N + h0_N2 * RHO_N2) * a_ux * PI * u_x * cos(a_ux * PI * x / L) / L - (Scalar(-0.10e2) * a_rho_N_x * rho_N_x * cos(a_rho_N_x * PI * x / L) + Scalar(0.7e1) * a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * PI * x / L)) * PI * R_N * U * T / L / Scalar(0.4e1) - (-a_rho_N_x * rho_N_x * cos(a_rho_N_x * PI * x / L) + a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * PI * x / L)) * PI * pow(U, C2) / L / Scalar(0.2e1) - (-a_rho_N_x * rho_N_x * h0_N * cos(a_rho_N_x * PI * x / L) + a_rho_N2_x * rho_N2_x * h0_N2 * sin(a_rho_N2_x * PI * x / L)) * PI * U / L;
+  Q_e = -a_Tx * PI * T_x * alpha * theta_v_N2 * E_vib_N2 * RHO_N2 * U * std::sin(a_Tx * PI * x / L) / L / (alpha - Scalar(0.1e1)) * std::pow(T, C) - Scalar(0.5e1) / Scalar(0.2e1) * a_Tx * PI * T_x * R_N * RHO_N * U * std::sin(a_Tx * PI * x / L) / L - Scalar(0.7e1) / Scalar(0.4e1) * a_Tx * PI * T_x * R_N * RHO_N2 * U * std::sin(a_Tx * PI * x / L) / L + Scalar(0.5e1) / Scalar(0.2e1) * a_ux * PI * u_x * R_N * RHO_N * T * std::cos(a_ux * PI * x / L) / L + Scalar(0.7e1) / Scalar(0.4e1) * a_ux * PI * u_x * R_N * RHO_N2 * T * std::cos(a_ux * PI * x / L) / L + Scalar(0.3e1) / Scalar(0.2e1) * a_ux * PI * u_x * RHO * U * U * std::cos(a_ux * PI * x / L) / L - a_rho_N2_x * PI * rho_N2_x * E_vib_N2 * U * std::sin(a_rho_N2_x * PI * x / L) / L + a_ux * PI * u_x * E_vib_N2 * RHO_N2 * std::cos(a_ux * PI * x / L) / L + (h0_N * RHO_N + h0_N2 * RHO_N2) * a_ux * PI * u_x * std::cos(a_ux * PI * x / L) / L - (Scalar(-0.10e2) * a_rho_N_x * rho_N_x * std::cos(a_rho_N_x * PI * x / L) + Scalar(0.7e1) * a_rho_N2_x * rho_N2_x * std::sin(a_rho_N2_x * PI * x / L)) * PI * R_N * U * T / L / Scalar(0.4e1) - (-a_rho_N_x * rho_N_x * std::cos(a_rho_N_x * PI * x / L) + a_rho_N2_x * rho_N2_x * std::sin(a_rho_N2_x * PI * x / L)) * PI * std::pow(U, C2) / L / Scalar(0.2e1) - (-a_rho_N_x * rho_N_x * h0_N * std::cos(a_rho_N_x * PI * x / L) + a_rho_N2_x * rho_N2_x * h0_N2 * std::sin(a_rho_N2_x * PI * x / L)) * PI * U / L;
 
   return(Q_e);
 }
@@ -211,16 +211,16 @@ Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_N(Scalar x, Scalar (*in_func)(Sca
   Scalar C  = -0.2e1;
 
   // Calculate Equilibrium Konstant
-  T = T_0 + T_x * cos(a_Tx * PI * x / L);
+  T = T_0 + T_x * std::cos(a_Tx * PI * x / L);
   K_eq = in_func(T);
 
-  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * PI * x / L);
-  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * PI * x / L);
-  U = u_0 + u_x * sin(a_ux * PI * x / L);
-  kf1_N = Cf1_N * pow(T, etaf1_N) * exp(-Ea_N / R / T);
-  kf1_N2 = Cf1_N2 * pow(T, etaf1_N2) * exp(-Ea_N2 / R / T);
+  RHO_N = rho_N_0 + rho_N_x * std::sin(a_rho_N_x * PI * x / L);
+  RHO_N2 = rho_N2_0 + rho_N2_x * std::cos(a_rho_N2_x * PI * x / L);
+  U = u_0 + u_x * std::sin(a_ux * PI * x / L);
+  kf1_N = Cf1_N * std::pow(T, etaf1_N) * std::exp(-Ea_N / R / T);
+  kf1_N2 = Cf1_N2 * std::pow(T, etaf1_N2) * std::exp(-Ea_N2 / R / T);
 
-  Q_rho_N = a_rho_N_x * PI * rho_N_x * U * cos(a_rho_N_x * PI * x / L) / L + a_ux * PI * u_x * RHO_N * cos(a_ux * PI * x / L) / L + (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * pow(M_N, C) / K_eq - (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / Scalar(0.2e1);
+  Q_rho_N = a_rho_N_x * PI * rho_N_x * U * std::cos(a_rho_N_x * PI * x / L) / L + a_ux * PI * u_x * RHO_N * std::cos(a_ux * PI * x / L) / L + (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * std::pow(M_N, C) / K_eq - (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / Scalar(0.2e1);
 
   return(Q_rho_N);
 }
@@ -240,16 +240,16 @@ Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_N2(Scalar x, Scalar (*in_func)(Sc
   Scalar C  = -0.2e1;
 
   // Calculate Equilibrium Konstant
-  T = T_0 + T_x * cos(a_Tx * PI * x / L);
+  T = T_0 + T_x * std::cos(a_Tx * PI * x / L);
   K_eq = in_func(T);
   
-  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * PI * x / L);
-  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * PI * x / L);
-  U = u_0 + u_x * sin(a_ux * PI * x / L);
-  kf1_N = Cf1_N * pow(T, etaf1_N) * exp(-Ea_N / R / T);
-  kf1_N2 = Cf1_N2 * pow(T, etaf1_N2) * exp(-Ea_N2 / R / T);
+  RHO_N = rho_N_0 + rho_N_x * std::sin(a_rho_N_x * PI * x / L);
+  RHO_N2 = rho_N2_0 + rho_N2_x * std::cos(a_rho_N2_x * PI * x / L);
+  U = u_0 + u_x * std::sin(a_ux * PI * x / L);
+  kf1_N = Cf1_N * std::pow(T, etaf1_N) * std::exp(-Ea_N / R / T);
+  kf1_N2 = Cf1_N2 * std::pow(T, etaf1_N2) * std::exp(-Ea_N2 / R / T);
 
-  Q_rho_N2 = -a_rho_N2_x * PI * rho_N2_x * U * sin(a_rho_N2_x * PI * x / L) / L + a_ux * PI * u_x * RHO_N2 * cos(a_ux * PI * x / L) / L - (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * pow(M_N, C) / K_eq + (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / Scalar(0.2e1);
+  Q_rho_N2 = -a_rho_N2_x * PI * rho_N2_x * U * std::sin(a_rho_N2_x * PI * x / L) / L + a_ux * PI * u_x * RHO_N2 * std::cos(a_ux * PI * x / L) / L - (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * std::pow(M_N, C) / K_eq + (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / Scalar(0.2e1);
   return(Q_rho_N2);
 }
 
@@ -260,35 +260,35 @@ Scalar MASA::euler_chem_1d<Scalar>::eval_q_rho_N2(Scalar x, Scalar (*in_func)(Sc
 template <typename Scalar>
 Scalar MASA::euler_chem_1d<Scalar>::eval_exact_t(Scalar x)
 {
-  Scalar T_an = T_0 + T_x * cos(a_Tx * pi * x / L);
+  Scalar T_an = T_0 + T_x * std::cos(a_Tx * pi * x / L);
   return T_an;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_chem_1d<Scalar>::eval_exact_u(Scalar x)
 {
-  Scalar u_an = u_0 + u_x * sin(a_ux * pi * x / L);
+  Scalar u_an = u_0 + u_x * std::sin(a_ux * pi * x / L);
   return u_an;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_chem_1d<Scalar>::eval_exact_rho(Scalar x)
 {
-  Scalar rho_an = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L) + rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
+  Scalar rho_an = rho_N_0 + rho_N_x * std::sin(a_rho_N_x * pi * x / L) + rho_N2_0 + rho_N2_x * std::cos(a_rho_N2_x * pi * x / L);
   return rho_an;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_chem_1d<Scalar>::eval_exact_rho_N(Scalar x)
 {
-  Scalar rho_an_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
+  Scalar rho_an_N = rho_N_0 + rho_N_x * std::sin(a_rho_N_x * pi * x / L);
   return rho_an_N;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_chem_1d<Scalar>::eval_exact_rho_N2(Scalar x)
 {
-  Scalar rho_an_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
+  Scalar rho_an_N2 = rho_N2_0 + rho_N2_x * std::cos(a_rho_N2_x * pi * x / L);
   return rho_an_N2;
 }
 
@@ -297,19 +297,19 @@ Scalar MASA::euler_chem_1d<Scalar>::eval_exact_rho_N2(Scalar x)
 // ----------------------------------------
 
 /*
-  grad_rho_an_N[0] = rho_N_x * cos(a_rho_N_x * pi * x / L) * a_rho_N_x * pi / L;
+  grad_rho_an_N[0] = rho_N_x * std::cos(a_rho_N_x * pi * x / L) * a_rho_N_x * pi / L;
   grad_rho_an_N[1] = 0;
   grad_rho_an_N[2] = 0;
-  grad_rho_an_N2[0] = -rho_N2_x * sin(a_rho_N2_x * pi * x / L) * a_rho_N2_x * pi / L;
+  grad_rho_an_N2[0] = -rho_N2_x * std::sin(a_rho_N2_x * pi * x / L) * a_rho_N2_x * pi / L;
   grad_rho_an_N2[1] = 0;
   grad_rho_an_N2[2] = 0;
-  grad_rho_an[0] = rho_N_x * cos(a_rho_N_x * pi * x / L) * a_rho_N_x * pi / L - rho_N2_x * sin(a_rho_N2_x * pi * x / L) * a_rho_N2_x * pi / L;
+  grad_rho_an[0] = rho_N_x * std::cos(a_rho_N_x * pi * x / L) * a_rho_N_x * pi / L - rho_N2_x * std::sin(a_rho_N2_x * pi * x / L) * a_rho_N2_x * pi / L;
   grad_rho_an[1] = 0;
   grad_rho_an[2] = 0;
-  grad_u_an[0] = u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
+  grad_u_an[0] = u_x * std::cos(a_ux * pi * x / L) * a_ux * pi / L;
   grad_u_an[1] = 0;
   grad_u_an[2] = 0;
-  grad_T_an[0] = -T_x * sin(a_Tx * pi * x / L) * a_Tx * pi / L;
+  grad_T_an[0] = -T_x * std::sin(a_Tx * pi * x / L) * a_Tx * pi / L;
   grad_T_an[1] = 0;
   grad_T_an[2] = 0;
 */

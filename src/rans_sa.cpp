@@ -182,7 +182,7 @@ Scalar MASA::rans_sa<Scalar>::d2u()
 template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::nu(Scalar eta)
 {
-  return b1*eta - .5*(etam+1)*b1*eta*eta/etam + b1*pow(eta,3)/(3*etam);
+  return b1*eta - .5*(etam+1)*b1*eta*eta/etam + b1*std::pow(eta,3)/(3*etam);
 }
 
 template <typename Scalar>
@@ -220,7 +220,7 @@ template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::destruction(Scalar eta)
 {
 
-  return cw1()*fw(eta)*pow((nu(eta)/eta),2);
+  return cw1()*fw(eta)*std::pow((nu(eta)/eta),2);
 
 }
 
@@ -229,7 +229,7 @@ template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::transport(Scalar eta)
 {
 
-  return (1/sigma)* ((1/re_tau + nu(eta)) * d2nu(eta) + (1+cb2)*pow(dnu(eta),2));
+  return (1/sigma)* ((1/re_tau + nu(eta)) * d2nu(eta) + (1+cb2)*std::pow(dnu(eta),2));
 
 }
 
@@ -262,7 +262,7 @@ template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::fv1(Scalar eta)
 {
 
-  return pow(chi(eta),3)/(pow(chi(eta),3) + pow(cv1,3));
+  return std::pow(chi(eta),3)/(std::pow(chi(eta),3) + std::pow(cv1,3));
 
 }
 
@@ -313,7 +313,7 @@ template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::g(Scalar eta)
 {
 
-  return r(eta) + cw2*(pow(r(eta),6) - r(eta));
+  return r(eta) + cw2*(std::pow(r(eta),6) - r(eta));
 
 }
 
@@ -322,7 +322,7 @@ template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::fw(Scalar eta)
 {
 
-  return g(eta)*pow((1.+pow(cw3,6))/(pow(g(eta),6)+pow(cw3,6)),1/Scalar(6));
+  return g(eta)*std::pow((1.+std::pow(cw3,6))/(std::pow(g(eta),6)+std::pow(cw3,6)),1/Scalar(6));
 
 }
 
@@ -334,8 +334,8 @@ Scalar MASA::rans_sa<Scalar>::dvt(Scalar eta)
   // oliver: I can't reproduce this expresssion... tried again below
 
 //   // see modeling document for this beast
-//   Scalar a = 3* pow(cv1,3) * pow(re_tau,3) * pow(nu(eta),4);
-//   Scalar b = pow(re_tau,3)*pow(nu(eta),4) + nu(eta)*pow(cv1,3);
+//   Scalar a = 3* std::pow(cv1,3) * std::pow(re_tau,3) * std::pow(nu(eta),4);
+//   Scalar b = std::pow(re_tau,3)*std::pow(nu(eta),4) + nu(eta)*std::pow(cv1,3);
   
 //   return a/(b*b);
 
