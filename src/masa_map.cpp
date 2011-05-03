@@ -45,8 +45,8 @@ using namespace MASA;
 // should simplify our user stuff
 void MASA::uptolow(std::string& str) 
 {
-  for (int i=0;i<int(str.length());i++) 
-    str[i] = std::tolower(str[i]);
+  for (unsigned int i=0;i!=str.length();i++) 
+    str[i] = char(std::tolower(str[i]));
 }
 
 // remove dashes from strings
