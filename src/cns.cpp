@@ -401,7 +401,7 @@ int MASA::navierstokes_3d_compressible<Scalar>::init_var()
   err += this->set_var("a_rhox",.75);
   err += this->set_var("a_rhoy",1);
 
-  err += this->set_var("a_ux",5/3);
+  err += this->set_var("a_ux",Scalar(5)/Scalar(3));
   err += this->set_var("a_uy",1.5);
 
   err += this->set_var("a_vx",1.5);
