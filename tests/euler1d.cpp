@@ -38,7 +38,7 @@ using namespace std;
 template<typename Scalar>
 Scalar anQ_p (Scalar x,Scalar p_0,Scalar p_x,Scalar a_px,Scalar L)
 {
-  Scalar pi = acos(-1);
+  Scalar pi = acos(Scalar(-1));
   Scalar exact_p = p_0 + p_x * cos(a_px * pi * x / L);
   return exact_p;
 }
@@ -46,7 +46,7 @@ Scalar anQ_p (Scalar x,Scalar p_0,Scalar p_x,Scalar a_px,Scalar L)
 template<typename Scalar>
 Scalar anQ_u (Scalar x,Scalar u_0,Scalar u_x,Scalar a_ux,Scalar L)
 {
-  Scalar pi = acos(-1);
+  Scalar pi = acos(Scalar(-1));
   Scalar exact_u = u_0 + u_x * sin(a_ux * pi * x / L);
   return exact_u;
 } 
@@ -54,7 +54,7 @@ Scalar anQ_u (Scalar x,Scalar u_0,Scalar u_x,Scalar a_ux,Scalar L)
 template<typename Scalar>
 Scalar anQ_rho (Scalar x,Scalar rho_0,Scalar rho_x,Scalar a_rhox,Scalar L)
 { 
-  Scalar pi = acos(-1);
+  Scalar pi = acos(Scalar(-1));
   Scalar exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L);
   return exact_rho;
 }
@@ -74,7 +74,7 @@ Scalar SourceQ_e ( // 12
   Scalar Gamma,
   Scalar L)
 {
-  Scalar pi = acos(-1);
+  Scalar pi = acos(Scalar(-1));
   Scalar Q_e;
 
   Scalar RHO;
@@ -83,7 +83,7 @@ Scalar SourceQ_e ( // 12
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L);
   P = p_0 + p_x * cos(a_px * pi * x / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L);
-  Q_e = cos(a_rhox * pi * x / L) * pow(U, 0.3e1) * a_rhox * pi * rho_x / L / 0.2e1 + cos(a_ux * pi * x / L) * P * a_ux * pi * u_x * Gamma / L / (Gamma - 0.1e1) + 0.3e1 / 0.2e1 * cos(a_ux * pi * x / L) * RHO * U * U * a_ux * pi * u_x / L - sin(a_px * pi * x / L) * U * a_px * pi * p_x * Gamma / L / (Gamma - 0.1e1);
+  Q_e = cos(a_rhox * pi * x / L) * pow(U, Scalar(0.3e1)) * a_rhox * pi * rho_x / L / Scalar(0.2e1) + cos(a_ux * pi * x / L) * P * a_ux * pi * u_x * Gamma / L / (Gamma - Scalar(0.1e1)) + Scalar(0.3e1) / Scalar(0.2e1) * cos(a_ux * pi * x / L) * RHO * U * U * a_ux * pi * u_x / L - sin(a_px * pi * x / L) * U * a_px * pi * p_x * Gamma / L / (Gamma - Scalar(0.1e1));
 
   return(Q_e);
 }
@@ -101,7 +101,7 @@ Scalar SourceQ_u ( // should be 10
   Scalar a_ux,
   Scalar L)
 {
-  Scalar pi = acos(-1);
+  Scalar pi = acos(Scalar(-1));
   Scalar Q_u;
   Scalar RHO;
   Scalar U;
@@ -109,7 +109,7 @@ Scalar SourceQ_u ( // should be 10
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L);
 
-  Q_u = 0.2e1 * cos(a_ux * pi * x / L) * RHO * U * a_ux * pi * u_x / L + cos(a_rhox * pi * x / L) * U * U * a_rhox * pi * rho_x / L - sin(a_px * pi * x / L) * a_px * pi * p_x / L;
+  Q_u = Scalar(0.2e1) * cos(a_ux * pi * x / L) * RHO * U * a_ux * pi * u_x / L + cos(a_rhox * pi * x / L) * U * U * a_rhox * pi * rho_x / L - sin(a_px * pi * x / L) * a_px * pi * p_x / L;
 
   return(Q_u);
 }
@@ -125,7 +125,7 @@ Scalar SourceQ_rho (
   Scalar a_ux,
   Scalar L)
 {
-  Scalar pi = acos(-1);
+  Scalar pi = acos(Scalar(-1));
   Scalar Q_rho;
   Scalar RHO;
   Scalar U;
@@ -309,7 +309,7 @@ int main()
   int err=0;
 
   err += run_regression<double>();
-  //err += run_regression<long double>();
+  err += run_regression<long double>();
 
   return err;
 }

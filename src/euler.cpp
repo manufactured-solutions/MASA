@@ -110,7 +110,7 @@ Scalar MASA::euler_1d<Scalar>::eval_q_rho_u(Scalar x)
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L);
 
-  Q_u = 0.2e1 * cos(a_ux * PI * x / L) * RHO * U * a_ux * PI * u_x / L + cos(a_rhox * PI * x / L) * U * U * a_rhox * PI * rho_x / L - sin(a_px * PI * x / L) * a_px * PI * p_x / L;
+  Q_u = Scalar(0.2e1) * cos(a_ux * PI * x / L) * RHO * U * a_ux * PI * u_x / L + cos(a_rhox * PI * x / L) * U * U * a_rhox * PI * rho_x / L - sin(a_px * PI * x / L) * a_px * PI * p_x / L;
   
   return(Q_u);
 }
@@ -127,7 +127,7 @@ Scalar MASA::euler_1d<Scalar>::eval_q_rho_e(Scalar x)
   P = p_0 + p_x * cos(a_px * pi * x / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L);
 
-  Q_e = cos(a_rhox * PI * x / L) * pow(Scalar(U), Scalar(0.3e1)) * a_rhox * PI * rho_x / L / 0.2e1 + cos(a_ux * PI * x / L) * P * a_ux * PI * u_x * Gamma / L / (Gamma - 0.1e1) + 0.3e1 / 0.2e1 * cos(a_ux * PI * x / L) * RHO * U * U * a_ux * PI * u_x / L - sin(a_px * PI * x / L) * U * a_px * PI * p_x * Gamma / L / (Gamma - 0.1e1);
+  Q_e = cos(a_rhox * PI * x / L) * pow(Scalar(U), Scalar(Scalar(0.3e1))) * a_rhox * PI * rho_x / L / Scalar(0.2e1) + cos(a_ux * PI * x / L) * P * a_ux * PI * u_x * Gamma / L / (Gamma - Scalar(0.1e1)) + Scalar(0.3e1) / Scalar(0.2e1) * cos(a_ux * PI * x / L) * RHO * U * U * a_ux * PI * u_x / L - sin(a_px * PI * x / L) * U * a_px * PI * p_x * Gamma / L / (Gamma - Scalar(0.1e1));
 
   return(Q_e);
 }

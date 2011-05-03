@@ -65,7 +65,7 @@ Scalar SourceQ_e (
   Scalar L,
   Scalar Gamma)
 {
-  Scalar pi = acos(-1);
+  Scalar pi = acos(Scalar(-1));
   Scalar Q_e_t;
   Scalar RHO;
   Scalar U;
@@ -75,7 +75,7 @@ Scalar SourceQ_e (
   P = p_0 + p_x * cos(a_px * pi * x / L) + p_t * cos(a_pt * pi * t / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L) + u_t * cos(a_ut * pi * t / L);
 
-  Q_e_t = cos(a_rhot * pi * t / L) * a_rhot * pi * rho_t * U * U / L / 0.2e1 - sin(a_ut * pi * t / L) * a_ut * pi * u_t * RHO * U / L - sin(a_pt * pi * t / L) * a_pt * pi * p_t / (Gamma - 0.1e1) / L + cos(a_rhox * pi * x / L) * pow(U, 0.3e1) * a_rhox * pi * rho_x / L / 0.2e1 + cos(a_ux * pi * x / L) * P * a_ux * pi * u_x * Gamma / (Gamma - 0.1e1) / L + 0.3e1 / 0.2e1 * cos(a_ux * pi * x / L) * RHO * U * U * a_ux * pi * u_x / L - sin(a_px * pi * x / L) * U * a_px * pi * p_x * Gamma / (Gamma - 0.1e1) / L;
+  Q_e_t = cos(a_rhot * pi * t / L) * a_rhot * pi * rho_t * U * U / L / Scalar(0.2e1) - sin(a_ut * pi * t / L) * a_ut * pi * u_t * RHO * U / L - sin(a_pt * pi * t / L) * a_pt * pi * p_t / (Gamma - Scalar(0.1e1)) / L + cos(a_rhox * pi * x / L) * pow(U, Scalar(0.3e1)) * a_rhox * pi * rho_x / L / Scalar(0.2e1) + cos(a_ux * pi * x / L) * P * a_ux * pi * u_x * Gamma / (Gamma - Scalar(0.1e1)) / L + Scalar(0.3e1) / Scalar(0.2e1) * cos(a_ux * pi * x / L) * RHO * U * U * a_ux * pi * u_x / L - sin(a_px * pi * x / L) * U * a_px * pi * p_x * Gamma / (Gamma - Scalar(0.1e1)) / L;
   return(Q_e_t);
 
 }
@@ -98,7 +98,7 @@ Scalar SourceQ_u (
   Scalar a_ut,
   Scalar L)
 {
-  Scalar pi = acos(-1);
+  Scalar pi = acos(Scalar(-1));
   Scalar Q_u_t;
   Scalar RHO;
   Scalar U;
@@ -106,7 +106,7 @@ Scalar SourceQ_u (
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_t * sin(a_rhot * pi * t / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L) + u_t * cos(a_ut * pi * t / L);
 
-  Q_u_t = cos(a_rhox * pi * x / L) * a_rhox * pi * rho_x * U * U / L + 0.2e1 * cos(a_ux * pi * x / L) * RHO * a_ux * pi * u_x * U / L + cos(a_rhot * pi * t / L) * a_rhot * pi * rho_t * U / L - sin(a_ut * pi * t / L) * a_ut * pi * u_t * RHO / L - sin(a_px * pi * x / L) * a_px * pi * p_x / L;
+  Q_u_t = cos(a_rhox * pi * x / L) * a_rhox * pi * rho_x * U * U / L + Scalar(0.2e1) * cos(a_ux * pi * x / L) * RHO * a_ux * pi * u_x * U / L + cos(a_rhot * pi * t / L) * a_rhot * pi * rho_t * U / L - sin(a_ut * pi * t / L) * a_ut * pi * u_t * RHO / L - sin(a_px * pi * x / L) * a_px * pi * p_x / L;
   return(Q_u_t);
 
 }
@@ -127,7 +127,7 @@ Scalar SourceQ_rho (
   Scalar a_ut,
   Scalar L)
 {
-  Scalar pi = acos(-1);
+  Scalar pi = acos(Scalar(-1));
   Scalar Q_rho_t;
   Scalar RHO;
   Scalar U;
@@ -151,7 +151,7 @@ Scalar SourceQ_rho (
 template<typename Scalar>
 Scalar anQ_p (Scalar x,Scalar t,Scalar p_0,Scalar p_x,Scalar p_t,Scalar a_px,Scalar a_pt,Scalar L)
 {
-  Scalar pi = acos(-1);
+  Scalar pi = acos(Scalar(-1));
   Scalar exact_p;
   exact_p = p_0 + p_x * cos(a_px * pi * x / L) + p_t * cos(a_pt * pi * t / L);
   return exact_p;
@@ -160,7 +160,7 @@ Scalar anQ_p (Scalar x,Scalar t,Scalar p_0,Scalar p_x,Scalar p_t,Scalar a_px,Sca
 template<typename Scalar>
 Scalar anQ_u (Scalar x,Scalar t,Scalar u_0,Scalar u_x,Scalar a_ux,Scalar u_t,Scalar a_ut,Scalar L)
 {
-  Scalar pi = acos(-1);
+  Scalar pi = acos(Scalar(-1));
   Scalar exact_u;
   exact_u = u_0 + u_x * sin(a_ux * pi * x / L) + u_t * cos(a_ut * pi * t / L);
   return exact_u;
@@ -169,7 +169,7 @@ Scalar anQ_u (Scalar x,Scalar t,Scalar u_0,Scalar u_x,Scalar a_ux,Scalar u_t,Sca
 template<typename Scalar>
 Scalar anQ_rho (Scalar x,Scalar t,Scalar rho_0,Scalar rho_x,Scalar a_rhox,Scalar rho_t,Scalar a_rhot,Scalar L)
 { 
-  Scalar pi = acos(-1);
+  Scalar pi = acos(Scalar(-1));
   Scalar exact_rho;
   exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_t * sin(a_rhot * pi * t / L);
   return exact_rho;
