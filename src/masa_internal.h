@@ -284,7 +284,7 @@ namespace MASA
     virtual Scalar eval_post_mean () {std::cout << "SMASA ERROR:: posterior mean is unavailable.\n";return -1.33;};
     virtual Scalar eval_post_var  () {std::cout << "SMASA ERROR:: posterior variance is unavailable.\n";return -1.33;};
 
-    virtual Scalar eval_cen_mom      (int x) {std::cout << "SMASA ERROR:: central moment is unavailable or not properly loaded.\n";return -1.33;};
+    virtual Scalar eval_cen_mom      (int /*x*/) {std::cout << "SMASA ERROR:: central moment is unavailable or not properly loaded.\n";return -1.33;};
     virtual Scalar eval_likelyhood   (Scalar){std::cout << "SMASA ERROR:: likelyhood is unavailable or not properly loaded.\n";return -1.33;};
     virtual Scalar eval_loglikelyhood(Scalar){std::cout << "SMASA ERROR:: loglikelyhood is unavailable or not properly loaded.\n";return -1.33;};
     virtual Scalar eval_prior        (Scalar){std::cout << "SMASA ERROR:: prior is unavailable or not properly loaded.\n";return -1.33;};
