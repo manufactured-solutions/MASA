@@ -112,7 +112,8 @@ Scalar threshcheck(Scalar x, Scalar thresh)
   if(x > thresh)
     {
       std::cout << "\nMASA REGRESSION TEST FAILED!\n";
-      std::cout << "Exceeded Threshold by: " << x << std::endl;
+      std::cout << "Difference of: " << x << std::endl;
+      std::cout << "Exceeded Threshold: " << thresh << std::endl;
       exit(1);
     }
   return 0;  
