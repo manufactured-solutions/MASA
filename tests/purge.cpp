@@ -32,6 +32,8 @@
 
 #include <tests.h>
 
+#include <cmath>
+
 using namespace MASA;
 using namespace std;
 
