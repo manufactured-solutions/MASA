@@ -47,7 +47,7 @@ Scalar SourceQ_t_1d(
   Scalar cp_0,
   Scalar rho)
 {
-  Scalar Q_T = cos(A_x * x + A_t * t) * cos(D_t * t) * k_0 * A_x * A_x - (sin(A_x * x + A_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(D_t * t) * D_t) * rho * cp_0;
+  Scalar Q_T = std::cos(A_x * x + A_t * t) * std::cos(D_t * t) * k_0 * A_x * A_x - (std::sin(A_x * x + A_t * t) * std::cos(D_t * t) * A_t + std::cos(A_x * x + A_t * t) * std::sin(D_t * t) * D_t) * rho * cp_0;
   return Q_T;
 }
 
@@ -65,7 +65,7 @@ Scalar SourceQ_t_2d (
   Scalar k_0,
   Scalar cp_0)
 {
-  Scalar Q_T = -(sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(D_t * t) * B_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t) * k_0;
+  Scalar Q_T = -(std::sin(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(D_t * t) * A_t + std::cos(A_x * x + A_t * t) * std::sin(B_y * y + B_t * t) * std::cos(D_t * t) * B_t + std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y) * std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(D_t * t) * k_0;
   return Q_T;
 }
 
@@ -86,7 +86,7 @@ Scalar SourceQ_t_3d (
   Scalar cp_0,
   Scalar rho)
 {
-  Scalar Q_T = -(sin(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * A_t + cos(A_x * x + A_t * t) * sin(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * B_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * sin(C_z * z + C_t * t) * cos(D_t * t) * C_t + cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y + C_z * C_z) * cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(C_z * z + C_t * t) * cos(D_t * t) * k_0;
+  Scalar Q_T = -(std::sin(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::cos(D_t * t) * A_t + std::cos(A_x * x + A_t * t) * std::sin(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::cos(D_t * t) * B_t + std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::sin(C_z * z + C_t * t) * std::cos(D_t * t) * C_t + std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::sin(D_t * t) * D_t) * rho * cp_0 + (A_x * A_x + B_y * B_y + C_z * C_z) * std::cos(A_x * x + A_t * t) * std::cos(B_y * y + B_t * t) * std::cos(C_z * z + C_t * t) * std::cos(D_t * t) * k_0;
   return Q_T;
 }
 

@@ -39,7 +39,7 @@ using namespace MASA;
 template<typename Scalar>
 Scalar SourceQ_t_1d(Scalar x, Scalar A_x, Scalar k_0)
 {
-  Scalar Q_T = A_x * A_x * k_0 * cos(A_x * x);
+  Scalar Q_T = A_x * A_x * k_0 * std::cos(A_x * x);
   return Q_T;
 }
 
@@ -47,7 +47,7 @@ template<typename Scalar>
 Scalar Source_t_1d_exact(Scalar A_x,Scalar x)
 {
   Scalar exact_t;
-  exact_t = cos(A_x * x);
+  exact_t = std::cos(A_x * x);
   return exact_t;
 }
 
@@ -59,7 +59,7 @@ Scalar SourceQ_t_2d (
   Scalar B_y,
   Scalar k_0)
 {
-  Scalar Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * (A_x * A_x + B_y * B_y);
+  Scalar Q_T = k_0 * std::cos(A_x * x) * std::cos(B_y * y) * (A_x * A_x + B_y * B_y);
   return Q_T;
 }
 
@@ -73,7 +73,7 @@ Scalar SourceQ_t_3d (
   Scalar C_z,
   Scalar k_0)
 {
-  Scalar Q_T = k_0 * cos(A_x * x) * cos(B_y * y) * cos(C_z * z) * (A_x * A_x + B_y * B_y + C_z * C_z);
+  Scalar Q_T = k_0 * std::cos(A_x * x) * std::cos(B_y * y) * std::cos(C_z * z) * (A_x * A_x + B_y * B_y + C_z * C_z);
   return Q_T;
 }
 

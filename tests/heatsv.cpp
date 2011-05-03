@@ -44,7 +44,7 @@ Scalar SourceQ_t_1d(
   Scalar k_1,
   Scalar k_2)
 {
-  Scalar Q_T = Scalar(0.3e1) * A_x * A_x * k_2 * pow(cos(A_x * x), Scalar(0.3e1)) + Scalar(0.2e1) * A_x * A_x * k_1 * pow(cos(A_x * x), Scalar(0.2e1)) - A_x * A_x * k_1 + (k_0 - Scalar(0.2e1) * k_2) * A_x * A_x * cos(A_x * x);
+  Scalar Q_T = Scalar(0.3e1) * A_x * A_x * k_2 * std::pow(cos(A_x * x), Scalar(0.3e1)) + Scalar(0.2e1) * A_x * A_x * k_1 * std::pow(cos(A_x * x), Scalar(0.2e1)) - A_x * A_x * k_1 + (k_0 - Scalar(0.2e1) * k_2) * A_x * A_x * std::cos(A_x * x);
   return Q_T;
 }
 
@@ -58,7 +58,7 @@ Scalar SourceQ_t_2d (
   Scalar k_1,
   Scalar k_2)
 {
-  Scalar Q_T = (Scalar(0.3e1) * A_x * A_x + Scalar(0.3e1) * B_y * B_y) * k_2 * pow(cos(A_x * x), Scalar(0.3e1)) * pow(cos(B_y * y), Scalar(0.3e1)) + (Scalar(0.2e1) * A_x * A_x + Scalar(0.2e1) * B_y * B_y) * k_1 * pow(cos(A_x * x), Scalar(0.2e1)) * pow(cos(B_y * y), Scalar(0.2e1)) - (pow(cos(B_y * y), Scalar(0.2e1)) * A_x * A_x + pow(cos(A_x * x), Scalar(0.2e1)) * B_y * B_y) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y - Scalar(0.2e1) * pow(cos(B_y * y), Scalar(0.2e1)) * k_2 * A_x * A_x - Scalar(0.2e1) * pow(cos(A_x * x), Scalar(0.2e1)) * k_2 * B_y * B_y) * cos(A_x * x) * cos(B_y * y);
+  Scalar Q_T = (Scalar(0.3e1) * A_x * A_x + Scalar(0.3e1) * B_y * B_y) * k_2 * std::pow(cos(A_x * x), Scalar(0.3e1)) * std::pow(cos(B_y * y), Scalar(0.3e1)) + (Scalar(0.2e1) * A_x * A_x + Scalar(0.2e1) * B_y * B_y) * k_1 * std::pow(cos(A_x * x), Scalar(0.2e1)) * std::pow(cos(B_y * y), Scalar(0.2e1)) - (std::pow(cos(B_y * y), Scalar(0.2e1)) * A_x * A_x + std::pow(cos(A_x * x), Scalar(0.2e1)) * B_y * B_y) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y - Scalar(0.2e1) * std::pow(cos(B_y * y), Scalar(0.2e1)) * k_2 * A_x * A_x - Scalar(0.2e1) * std::pow(cos(A_x * x), Scalar(0.2e1)) * k_2 * B_y * B_y) * std::cos(A_x * x) * std::cos(B_y * y);
   return Q_T;
 }
 
@@ -74,7 +74,7 @@ Scalar SourceQ_t_3d (
   Scalar k_1,
   Scalar k_2)
 {
-  Scalar Q_T = (Scalar(0.3e1) * A_x * A_x + Scalar(0.3e1) * B_y * B_y + Scalar(0.3e1) * C_z * C_z) * k_2 * pow(cos(A_x * x), Scalar(0.3e1)) * pow(cos(B_y * y), Scalar(0.3e1)) * pow(cos(C_z * z), Scalar(0.3e1)) + (Scalar(0.2e1) * A_x * A_x + Scalar(0.2e1) * B_y * B_y + Scalar(0.2e1) * C_z * C_z) * k_1 * pow(cos(A_x * x), Scalar(0.2e1)) * pow(cos(B_y * y), Scalar(0.2e1)) * pow(cos(C_z * z), Scalar(0.2e1)) - (pow(cos(B_y * y), Scalar(0.2e1)) * pow(cos(C_z * z), Scalar(0.2e1)) * A_x * A_x + pow(cos(A_x * x), Scalar(0.2e1)) * pow(cos(C_z * z), Scalar(0.2e1)) * B_y * B_y + pow(cos(A_x * x), Scalar(0.2e1)) * pow(cos(B_y * y), Scalar(0.2e1)) * C_z * C_z) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y + k_0 * C_z * C_z - Scalar(0.2e1) * pow(cos(B_y * y), Scalar(0.2e1)) * pow(cos(C_z * z), Scalar(0.2e1)) * k_2 * A_x * A_x - Scalar(0.2e1) * pow(cos(A_x * x), Scalar(0.2e1)) * pow(cos(C_z * z), Scalar(0.2e1)) * k_2 * B_y * B_y - Scalar(0.2e1) * pow(cos(A_x * x), Scalar(0.2e1)) * pow(cos(B_y * y), Scalar(0.2e1)) * k_2 * C_z * C_z) * cos(A_x * x) * cos(B_y * y) * cos(C_z * z);
+  Scalar Q_T = (Scalar(0.3e1) * A_x * A_x + Scalar(0.3e1) * B_y * B_y + Scalar(0.3e1) * C_z * C_z) * k_2 * std::pow(cos(A_x * x), Scalar(0.3e1)) * std::pow(cos(B_y * y), Scalar(0.3e1)) * std::pow(cos(C_z * z), Scalar(0.3e1)) + (Scalar(0.2e1) * A_x * A_x + Scalar(0.2e1) * B_y * B_y + Scalar(0.2e1) * C_z * C_z) * k_1 * std::pow(cos(A_x * x), Scalar(0.2e1)) * std::pow(cos(B_y * y), Scalar(0.2e1)) * std::pow(cos(C_z * z), Scalar(0.2e1)) - (std::pow(cos(B_y * y), Scalar(0.2e1)) * std::pow(cos(C_z * z), Scalar(0.2e1)) * A_x * A_x + std::pow(cos(A_x * x), Scalar(0.2e1)) * std::pow(cos(C_z * z), Scalar(0.2e1)) * B_y * B_y + std::pow(cos(A_x * x), Scalar(0.2e1)) * std::pow(cos(B_y * y), Scalar(0.2e1)) * C_z * C_z) * k_1 + (k_0 * A_x * A_x + k_0 * B_y * B_y + k_0 * C_z * C_z - Scalar(0.2e1) * std::pow(cos(B_y * y), Scalar(0.2e1)) * std::pow(cos(C_z * z), Scalar(0.2e1)) * k_2 * A_x * A_x - Scalar(0.2e1) * std::pow(cos(A_x * x), Scalar(0.2e1)) * std::pow(cos(C_z * z), Scalar(0.2e1)) * k_2 * B_y * B_y - Scalar(0.2e1) * std::pow(cos(A_x * x), Scalar(0.2e1)) * std::pow(cos(B_y * y), Scalar(0.2e1)) * k_2 * C_z * C_z) * std::cos(A_x * x) * std::cos(B_y * y) * std::cos(C_z * z);
   return Q_T;
 }
 

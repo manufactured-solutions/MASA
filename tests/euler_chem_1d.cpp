@@ -60,15 +60,15 @@ Scalar SourceQ_rho_u(Scalar x,
   Scalar U;
   Scalar T;
 
-  Scalar pi = acos(Scalar(-1));
+  Scalar pi = std::acos(Scalar(-1));
 
-  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
-  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
+  RHO_N = rho_N_0 + rho_N_x * std::sin(a_rho_N_x * pi * x / L);
+  RHO_N2 = rho_N2_0 + rho_N2_x * std::cos(a_rho_N2_x * pi * x / L);
   RHO = RHO_N + RHO_N2;
-  U = u_0 + u_x * sin(a_ux * pi * x / L);
-  T = T_0 + T_x * cos(a_Tx * pi * x / L);
+  U = u_0 + u_x * std::sin(a_ux * pi * x / L);
+  T = T_0 + T_x * std::cos(a_Tx * pi * x / L);
 
-  Q_u = a_rho_N_x * pi * rho_N_x * U * U * cos(a_rho_N_x * pi * x / L) / L - a_rho_N2_x * pi * rho_N2_x * U * U * sin(a_rho_N2_x * pi * x / L) / L - a_Tx * pi * T_x * R_N * RHO_N * sin(a_Tx * pi * x / L) / L - a_Tx * pi * T_x * R_N * RHO_N2 * sin(a_Tx * pi * x / L) / L / Scalar(0.2e1) + Scalar(0.2e1) * a_ux * pi * u_x * RHO * U * cos(a_ux * pi * x / L) / L - (Scalar(-0.2e1) * a_rho_N_x * rho_N_x * cos(a_rho_N_x * pi * x / L) + a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * pi * x / L)) * pi * R_N * T / L / 0.2e1;
+  Q_u = a_rho_N_x * pi * rho_N_x * U * U * std::cos(a_rho_N_x * pi * x / L) / L - a_rho_N2_x * pi * rho_N2_x * U * U * std::sin(a_rho_N2_x * pi * x / L) / L - a_Tx * pi * T_x * R_N * RHO_N * std::sin(a_Tx * pi * x / L) / L - a_Tx * pi * T_x * R_N * RHO_N2 * std::sin(a_Tx * pi * x / L) / L / Scalar(0.2e1) + Scalar(0.2e1) * a_ux * pi * u_x * RHO * U * std::cos(a_ux * pi * x / L) / L - (Scalar(-0.2e1) * a_rho_N_x * rho_N_x * std::cos(a_rho_N_x * pi * x / L) + a_rho_N2_x * rho_N2_x * std::sin(a_rho_N2_x * pi * x / L)) * pi * R_N * T / L / 0.2e1;
   return(Q_u);
 }
 
@@ -103,17 +103,17 @@ Scalar SourceQ_rho_e(Scalar x,
   Scalar E_vib_N2;
   Scalar C  = -0.2e1;
   Scalar C2 =  0.3e1;
-  Scalar pi = acos(Scalar(-1));
+  Scalar pi = std::acos(Scalar(-1));
 
-  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
-  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
+  RHO_N = rho_N_0 + rho_N_x * std::sin(a_rho_N_x * pi * x / L);
+  RHO_N2 = rho_N2_0 + rho_N2_x * std::cos(a_rho_N2_x * pi * x / L);
   RHO = RHO_N + RHO_N2;
-  U = u_0 + u_x * sin(a_ux * pi * x / L);
-  T = T_0 + T_x * cos(a_Tx * pi * x / L);
-  alpha = exp(theta_v_N2 / T);
+  U = u_0 + u_x * std::sin(a_ux * pi * x / L);
+  T = T_0 + T_x * std::cos(a_Tx * pi * x / L);
+  alpha = std::exp(theta_v_N2 / T);
   E_vib_N2 = R_N2 * theta_v_N2 / (alpha - Scalar(0.1e1));
 
-  Q_e = -a_Tx * pi * T_x * alpha * theta_v_N2 * E_vib_N2 * RHO_N2 * U * sin(a_Tx * pi * x / L) / L / (alpha - Scalar(0.1e1)) * pow(T, C) - Scalar(0.5e1) / Scalar(0.2e1) * a_Tx * pi * T_x * R_N * RHO_N * U * sin(a_Tx * pi * x / L) / L - Scalar(0.7e1) / Scalar(0.4e1) * a_Tx * pi * T_x * R_N * RHO_N2 * U * sin(a_Tx * pi * x / L) / L + Scalar(0.5e1) / Scalar(0.2e1) * a_ux * pi * u_x * R_N * RHO_N * T * cos(a_ux * pi * x / L) / L + Scalar(0.7e1) / Scalar(0.4e1) * a_ux * pi * u_x * R_N * RHO_N2 * T * cos(a_ux * pi * x / L) / L + Scalar(0.3e1) / Scalar(0.2e1) * a_ux * pi * u_x * RHO * U * U * cos(a_ux * pi * x / L) / L - a_rho_N2_x * pi * rho_N2_x * E_vib_N2 * U * sin(a_rho_N2_x * pi * x / L) / L + a_ux * pi * u_x * E_vib_N2 * RHO_N2 * cos(a_ux * pi * x / L) / L + (h0_N * RHO_N + h0_N2 * RHO_N2) * a_ux * pi * u_x * cos(a_ux * pi * x / L) / L - (Scalar(-0.10e2) * a_rho_N_x * rho_N_x * cos(a_rho_N_x * pi * x / L) + Scalar(0.7e1) * a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * pi * x / L)) * pi * R_N * U * T / L / Scalar(0.4e1) - (-a_rho_N_x * rho_N_x * cos(a_rho_N_x * pi * x / L) + a_rho_N2_x * rho_N2_x * sin(a_rho_N2_x * pi * x / L)) * pi * pow(U, C2) / L / Scalar(0.2e1) - (-a_rho_N_x * rho_N_x * h0_N * cos(a_rho_N_x * pi * x / L) + a_rho_N2_x * rho_N2_x * h0_N2 * sin(a_rho_N2_x * pi * x / L)) * pi * U / L;
+  Q_e = -a_Tx * pi * T_x * alpha * theta_v_N2 * E_vib_N2 * RHO_N2 * U * std::sin(a_Tx * pi * x / L) / L / (alpha - Scalar(0.1e1)) * std::pow(T, C) - Scalar(0.5e1) / Scalar(0.2e1) * a_Tx * pi * T_x * R_N * RHO_N * U * std::sin(a_Tx * pi * x / L) / L - Scalar(0.7e1) / Scalar(0.4e1) * a_Tx * pi * T_x * R_N * RHO_N2 * U * std::sin(a_Tx * pi * x / L) / L + Scalar(0.5e1) / Scalar(0.2e1) * a_ux * pi * u_x * R_N * RHO_N * T * std::cos(a_ux * pi * x / L) / L + Scalar(0.7e1) / Scalar(0.4e1) * a_ux * pi * u_x * R_N * RHO_N2 * T * std::cos(a_ux * pi * x / L) / L + Scalar(0.3e1) / Scalar(0.2e1) * a_ux * pi * u_x * RHO * U * U * std::cos(a_ux * pi * x / L) / L - a_rho_N2_x * pi * rho_N2_x * E_vib_N2 * U * std::sin(a_rho_N2_x * pi * x / L) / L + a_ux * pi * u_x * E_vib_N2 * RHO_N2 * std::cos(a_ux * pi * x / L) / L + (h0_N * RHO_N + h0_N2 * RHO_N2) * a_ux * pi * u_x * std::cos(a_ux * pi * x / L) / L - (Scalar(-0.10e2) * a_rho_N_x * rho_N_x * std::cos(a_rho_N_x * pi * x / L) + Scalar(0.7e1) * a_rho_N2_x * rho_N2_x * std::sin(a_rho_N2_x * pi * x / L)) * pi * R_N * U * T / L / Scalar(0.4e1) - (-a_rho_N_x * rho_N_x * std::cos(a_rho_N_x * pi * x / L) + a_rho_N2_x * rho_N2_x * std::sin(a_rho_N2_x * pi * x / L)) * pi * std::pow(U, C2) / L / Scalar(0.2e1) - (-a_rho_N_x * rho_N_x * h0_N * std::cos(a_rho_N_x * pi * x / L) + a_rho_N2_x * rho_N2_x * h0_N2 * std::sin(a_rho_N2_x * pi * x / L)) * pi * U / L;
 
   return(Q_e);
 }
@@ -153,18 +153,18 @@ Scalar SourceQ_rho_N(Scalar x,
   Scalar K_eq;
   Scalar C  = -0.2e1;
 
-  Scalar pi = acos(Scalar(-1));
+  Scalar pi = std::acos(Scalar(-1));
 
-  T = T_0 + T_x * cos(a_Tx * pi * x / L);
+  T = T_0 + T_x * std::cos(a_Tx * pi * x / L);
   K_eq = temp_function(T);
 
-  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
-  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
-  U = u_0 + u_x * sin(a_ux * pi * x / L);
-  kf1_N = Cf1_N * pow(T, etaf1_N) * exp(-Ea_N / R / T);
-  kf1_N2 = Cf1_N2 * pow(T, etaf1_N2) * exp(-Ea_N2 / R / T);
+  RHO_N = rho_N_0 + rho_N_x * std::sin(a_rho_N_x * pi * x / L);
+  RHO_N2 = rho_N2_0 + rho_N2_x * std::cos(a_rho_N2_x * pi * x / L);
+  U = u_0 + u_x * std::sin(a_ux * pi * x / L);
+  kf1_N = Cf1_N * std::pow(T, etaf1_N) * std::exp(-Ea_N / R / T);
+  kf1_N2 = Cf1_N2 * std::pow(T, etaf1_N2) * std::exp(-Ea_N2 / R / T);
 
-  Q_rho_N = a_rho_N_x * pi * rho_N_x * U * cos(a_rho_N_x * pi * x / L) / L + a_ux * pi * u_x * RHO_N * cos(a_ux * pi * x / L) / L + (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * pow(M_N, C) / K_eq - (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / Scalar(0.2e1);
+  Q_rho_N = a_rho_N_x * pi * rho_N_x * U * std::cos(a_rho_N_x * pi * x / L) / L + a_ux * pi * u_x * RHO_N * std::cos(a_ux * pi * x / L) / L + (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * std::pow(M_N, C) / K_eq - (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / Scalar(0.2e1);
 
   return(Q_rho_N);
 }
@@ -204,17 +204,17 @@ Scalar SourceQ_rho_N2(Scalar x,
   Scalar K_eq;
   Scalar C  = -0.2e1;
 
-  Scalar pi = acos(Scalar(-1));
-  T = T_0 + T_x * cos(a_Tx * pi * x / L);
+  Scalar pi = std::acos(Scalar(-1));
+  T = T_0 + T_x * std::cos(a_Tx * pi * x / L);
   K_eq = temp_function(T);
 
-  RHO_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
-  RHO_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
-  U = u_0 + u_x * sin(a_ux * pi * x / L);
-  kf1_N = Cf1_N * pow(T, etaf1_N) * exp(-Ea_N / R / T);
-  kf1_N2 = Cf1_N2 * pow(T, etaf1_N2) * exp(-Ea_N2 / R / T);
+  RHO_N = rho_N_0 + rho_N_x * std::sin(a_rho_N_x * pi * x / L);
+  RHO_N2 = rho_N2_0 + rho_N2_x * std::cos(a_rho_N2_x * pi * x / L);
+  U = u_0 + u_x * std::sin(a_ux * pi * x / L);
+  kf1_N = Cf1_N * std::pow(T, etaf1_N) * std::exp(-Ea_N / R / T);
+  kf1_N2 = Cf1_N2 * std::pow(T, etaf1_N2) * std::exp(-Ea_N2 / R / T);
 
-  Q_rho_N2 = -a_rho_N2_x * pi * rho_N2_x * U * sin(a_rho_N2_x * pi * x / L) / L + a_ux * pi * u_x * RHO_N2 * cos(a_ux * pi * x / L) / L - (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * pow(M_N, C) / K_eq + (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / Scalar(0.2e1);
+  Q_rho_N2 = -a_rho_N2_x * pi * rho_N2_x * U * std::sin(a_rho_N2_x * pi * x / L) / L + a_ux * pi * u_x * RHO_N2 * std::cos(a_ux * pi * x / L) / L - (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N * RHO_N * std::pow(M_N, C) / K_eq + (Scalar(0.2e1) * kf1_N * RHO_N + kf1_N2 * RHO_N2) * RHO_N2 / M_N / Scalar(0.2e1);
   return(Q_rho_N2);
 }
 
@@ -225,16 +225,16 @@ Scalar SourceQ_rho_N2(Scalar x,
 template <typename Scalar>
 Scalar anQ_t(Scalar x,Scalar T_0,Scalar T_x,Scalar a_Tx,Scalar L)
 {
-  Scalar pi = acos(Scalar(-1));
-  Scalar T_an = T_0 + T_x * cos(a_Tx * pi * x / L);
+  Scalar pi = std::acos(Scalar(-1));
+  Scalar T_an = T_0 + T_x * std::cos(a_Tx * pi * x / L);
   return T_an;
 }
 
 template <typename Scalar>
 Scalar anQ_u(Scalar x,Scalar u_0,Scalar u_x,Scalar a_ux,Scalar L)
 {
-  Scalar pi = acos(Scalar(-1));
-  Scalar u_an = u_0 + u_x * sin(a_ux * pi * x / L);
+  Scalar pi = std::acos(Scalar(-1));
+  Scalar u_an = u_0 + u_x * std::sin(a_ux * pi * x / L);
   return u_an;
 }
 
@@ -242,24 +242,24 @@ template <typename Scalar>
 Scalar anQ_rho(Scalar x,Scalar rho_N_0,Scalar rho_N_x,Scalar a_rho_N_x,
 	       Scalar L,Scalar rho_N2_0,Scalar rho_N2_x,Scalar a_rho_N2_x)
 {  
-  Scalar pi = acos(Scalar(-1));
-  Scalar rho_an = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L) + rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
+  Scalar pi = std::acos(Scalar(-1));
+  Scalar rho_an = rho_N_0 + rho_N_x * std::sin(a_rho_N_x * pi * x / L) + rho_N2_0 + rho_N2_x * std::cos(a_rho_N2_x * pi * x / L);
   return rho_an;
 }
 
 template <typename Scalar>
 Scalar anQ_rho_N(Scalar x,Scalar rho_N_0,Scalar rho_N_x,Scalar a_rho_N_x,Scalar L)
 {
-  Scalar pi = acos(Scalar(-1));
-  Scalar rho_an_N = rho_N_0 + rho_N_x * sin(a_rho_N_x * pi * x / L);
+  Scalar pi = std::acos(Scalar(-1));
+  Scalar rho_an_N = rho_N_0 + rho_N_x * std::sin(a_rho_N_x * pi * x / L);
   return rho_an_N;
 }
 
 template <typename Scalar>
 Scalar anQ_rho_N2(Scalar x,Scalar rho_N2_0,Scalar rho_N2_x,Scalar a_rho_N2_x,Scalar L)
 {
-  Scalar pi = acos(Scalar(-1));
-  Scalar rho_an_N2 = rho_N2_0 + rho_N2_x * cos(a_rho_N2_x * pi * x / L);
+  Scalar pi = std::acos(Scalar(-1));
+  Scalar rho_an_N2 = rho_N2_0 + rho_N2_x * std::cos(a_rho_N2_x * pi * x / L);
   return rho_an_N2;
 }
 
