@@ -122,9 +122,9 @@ int MASA::euler_transient_1d<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::euler_transient_1d<Scalar>::eval_q_rho_u(Scalar x,Scalar t)
 {
-  double Q_u_t;
-  double RHO;
-  double U;
+  Scalar Q_u_t;
+  Scalar RHO;
+  Scalar U;
 
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_t * sin(a_rhot * pi * t / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L) + u_t * cos(a_ut * pi * t / L);
@@ -138,10 +138,10 @@ Scalar MASA::euler_transient_1d<Scalar>::eval_q_rho_u(Scalar x,Scalar t)
 template <typename Scalar>
 Scalar MASA::euler_transient_1d<Scalar>::eval_q_rho_e(Scalar x,Scalar t)
 {
-  double Q_e_t;
-  double RHO;
-  double U;
-  double P;
+  Scalar Q_e_t;
+  Scalar RHO;
+  Scalar U;
+  Scalar P;
 
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_t * sin(a_rhot * pi * t / L);
   P = p_0 + p_x * cos(a_px * pi * x / L) + p_t * cos(a_pt * pi * t / L);
@@ -156,9 +156,9 @@ template <typename Scalar>
 Scalar MASA::euler_transient_1d<Scalar>::eval_q_rho(Scalar x,Scalar t)
 {
 
-  double Q_rho_t;
-  double RHO;
-  double U;
+  Scalar Q_rho_t;
+  Scalar RHO;
+  Scalar U;
 
   RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_t * sin(a_rhot * pi * t / L);
   U = u_0 + u_x * sin(a_ux * pi * x / L) + u_t * cos(a_ut * pi * t / L);
