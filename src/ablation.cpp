@@ -42,14 +42,6 @@ using namespace MASA;
  *
  * -----------------------------------------------
  */ 
-template <typename Scalar>
-Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::pow(long double x, double y)
-{
-  Scalar tx = Scalar(x);
-  Scalar ty = Scalar(y);
-
-  return std::pow(tx,ty);
-}
 
 
 template <typename Scalar>
@@ -177,7 +169,7 @@ Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_rho_u(Scalar x)
   RHO = RHO_N + RHO_N2;
   U = u_0 + u_x * std::sin(a_ux * PI * x / L);
   T = T_0 + T_x * std::cos(a_Tx * PI * x / L);
-  Q_u = -a_rho_C3_x * PI * rho_C3_x * R * T * std::sin(a_rho_C3_x * PI * x / L) / L / W_C3 + a_rho_C_x * PI * rho_C_x * R * T * std::cos(a_rho_C_x * PI * x / L) / L / W_C + 0.4e1 / 0.3e1 * mu * a_ux * a_ux * PI * PI * u_x * std::sin(a_ux * PI * x / L) * std::pow(L, -0.2e1) + 0.2e1 * a_ux * PI * u_x * RHO * U * std::cos(a_ux * PI * x / L) / L;
+  Q_u = -a_rho_C3_x * PI * rho_C3_x * R * T * std::sin(a_rho_C3_x * PI * x / L) / L / W_C3 + a_rho_C_x * PI * rho_C_x * R * T * std::cos(a_rho_C_x * PI * x / L) / L / W_C + Scalar(0.4e1) / Scalar(0.3e1) * mu * a_ux * a_ux * PI * PI * u_x * std::sin(a_ux * PI * x / L) * std::pow(L, Scalar(-0.2e1)) + Scalar(0.2e1) * a_ux * PI * u_x * RHO * U * std::cos(a_ux * PI * x / L) / L;
   return(Q_u);
 
 }
@@ -203,7 +195,7 @@ Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_rho_e(Scalar x)
   U = u_0 + u_x * std::sin(a_ux * PI * x / L);
   T = T_0 + T_x * std::cos(a_Tx * PI * x / L);
   P = R * T * (RHO_C / W_C + RHO_C3 / W_C3);
-  Q_e = -0.4e1 / 0.3e1 * mu * a_ux * a_ux * PI * PI * u_x * u_x * std::pow(std::cos(a_ux * PI * x / L), 0.2e1) * std::pow(L, -0.2e1) - a_rho_C3_x * PI * rho_C3_x * R * T * U * std::sin(a_rho_C3_x * PI * x / L) / W_C3 / L + a_rho_C_x * PI * rho_C_x * R * T * U * std::cos(a_rho_C_x * PI * x / L) / W_C / L - a_Tx * PI * T_x * R * RHO_C3 * U * std::sin(a_Tx * PI * x / L) / W_C3 / L - a_Tx * PI * T_x * R * RHO_C * U * std::sin(a_Tx * PI * x / L) / W_C / L - a_Tx * PI * T_x * R * RHO * U * std::sin(a_Tx * PI * x / L) / (Gamma - 0.1e1) / L + 0.4e1 / 0.3e1 * mu * a_ux * a_ux * PI * PI * u_x * U * std::sin(a_ux * PI * x / L) * std::pow(L, -0.2e1) + a_ux * PI * u_x * R * RHO * T * std::cos(a_ux * PI * x / L) / (Gamma - 0.1e1) / L + 0.3e1 / 0.2e1 * a_ux * PI * u_x * RHO * U * U * std::cos(a_ux * PI * x / L) / L + k * a_Tx * a_Tx * PI * PI * T_x * std::cos(a_Tx * PI * x / L) * std::pow(L, -0.2e1) + a_ux * PI * u_x * P * std::cos(a_ux * PI * x / L) / L - (a_rho_C3_x * rho_C3_x * std::sin(a_rho_C3_x * PI * x / L) - a_rho_C_x * rho_C_x * std::cos(a_rho_C_x * PI * x / L)) * PI * R * T * U / (Gamma - 0.1e1) / L - (a_rho_C3_x * rho_C3_x * std::sin(a_rho_C3_x * PI * x / L) - a_rho_C_x * rho_C_x * std::cos(a_rho_C_x * PI * x / L)) * PI * std::pow(U, 0.3e1) / L / 0.2e1;
+  Q_e = Scalar(-0.4e1) / Scalar(0.3e1) * mu * a_ux * a_ux * PI * PI * u_x * u_x * std::pow(std::cos(a_ux * PI * x / L), Scalar(0.2e1)) * std::pow(L, Scalar(-0.2e1)) - a_rho_C3_x * PI * rho_C3_x * R * T * U * std::sin(a_rho_C3_x * PI * x / L) / W_C3 / L + a_rho_C_x * PI * rho_C_x * R * T * U * std::cos(a_rho_C_x * PI * x / L) / W_C / L - a_Tx * PI * T_x * R * RHO_C3 * U * std::sin(a_Tx * PI * x / L) / W_C3 / L - a_Tx * PI * T_x * R * RHO_C * U * std::sin(a_Tx * PI * x / L) / W_C / L - a_Tx * PI * T_x * R * RHO * U * std::sin(a_Tx * PI * x / L) / (Gamma - Scalar(0.1e1)) / L + Scalar(0.4e1) / Scalar(0.3e1) * mu * a_ux * a_ux * PI * PI * u_x * U * std::sin(a_ux * PI * x / L) * std::pow(L, Scalar(-0.2e1)) + a_ux * PI * u_x * R * RHO * T * std::cos(a_ux * PI * x / L) / (Gamma - Scalar(0.1e1)) / L + Scalar(0.3e1) / Scalar(0.2e1) * a_ux * PI * u_x * RHO * U * U * std::cos(a_ux * PI * x / L) / L + k * a_Tx * a_Tx * PI * PI * T_x * std::cos(a_Tx * PI * x / L) * std::pow(L, Scalar(-0.2e1)) + a_ux * PI * u_x * P * std::cos(a_ux * PI * x / L) / L - (a_rho_C3_x * rho_C3_x * std::sin(a_rho_C3_x * PI * x / L) - a_rho_C_x * rho_C_x * std::cos(a_rho_C_x * PI * x / L)) * PI * R * T * U / (Gamma - Scalar(0.1e1)) / L - (a_rho_C3_x * rho_C3_x * std::sin(a_rho_C3_x * PI * x / L) - a_rho_C_x * rho_C_x * std::cos(a_rho_C_x * PI * x / L)) * PI * std::pow(U, Scalar(0.3e1)) / L / 0.2e1;
   return(Q_e);
 }
 
@@ -250,11 +242,11 @@ Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_e(Scalar x,Scalar (
   P = R * T * (RHO_C / W_C + RHO_C3 / W_C3);
   MF_C3 = RHO_C3 / RHO;
   MF_C3E = A_C3Enc * std::exp(-E_aC3nc / T) / P;
-  Mdot_C3C = std::sqrt(T * k_B / PI / m_C3) * std::sqrt(0.2e1) * (-MF_C3 + MF_C3E) * RHO * beta_C3 / 0.2e1;
+  Mdot_C3C = std::sqrt(T * k_B / PI / m_C3) * std::sqrt(Scalar(0.2e1)) * (-MF_C3 + MF_C3E) * RHO * beta_C3 / 0.2e1;
   //H_C3 = Function_to_Calculate_h_C3;
   H_C3 = in_func(T);
 
-  Q_e = k * a_Tx * PI * T_x * std::sin(a_Tx * PI * x / L) / L - sigma * epsilon * std::pow(T, 0.4e1) - Mdot_C3C * H_C3 + alpha * qr;
+  Q_e = k * a_Tx * PI * T_x * std::sin(a_Tx * PI * x / L) / L - sigma * epsilon * std::pow(T, Scalar(0.4e1)) - Mdot_C3C * H_C3 + alpha * qr;
   return(Q_e);
 }
 
@@ -285,8 +277,8 @@ Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_C3(Scalar x)
   P = R * T * (RHO_C / W_C + RHO_C3 / W_C3);
   MF_C3 = RHO_C3 / RHO;
   MF_C3E = A_C3Enc * std::exp(-E_aC3nc / T) / P;
-  Mdot_C3C = std::sqrt(T * k_B / PI / m_C3) * std::sqrt(0.2e1) * (-MF_C3 + MF_C3E) * RHO * beta_C3 / 0.2e1;
-  Q_rho_C3 = a_rho_C_x * PI * rho_C_x * D_C3 * RHO_C3 * std::cos(a_rho_C_x * PI * x / L) / L / RHO + a_rho_C3_x * PI * rho_C3_x * D_C3 * RHO_C * std::sin(a_rho_C3_x * PI * x / L) / L / RHO + a_rho_C_x * (D_C - D_C3) * PI * rho_C_x * RHO_C3 * RHO_C3 * std::cos(a_rho_C_x * PI * x / L) / L * std::pow(RHO, -0.2e1) + a_rho_C3_x * (D_C - D_C3) * PI * rho_C3_x * RHO_C * RHO_C3 * std::sin(a_rho_C3_x * PI * x / L) / L * std::pow(RHO, -0.2e1) + Mdot_C3C * (MF_C3 - 0.1e1);
+  Mdot_C3C = std::sqrt(T * k_B / PI / m_C3) * std::sqrt(Scalar(0.2e1)) * (-MF_C3 + MF_C3E) * RHO * beta_C3 / 0.2e1;
+  Q_rho_C3 = a_rho_C_x * PI * rho_C_x * D_C3 * RHO_C3 * std::cos(a_rho_C_x * PI * x / L) / L / RHO + a_rho_C3_x * PI * rho_C3_x * D_C3 * RHO_C * std::sin(a_rho_C3_x * PI * x / L) / L / RHO + a_rho_C_x * (D_C - D_C3) * PI * rho_C_x * RHO_C3 * RHO_C3 * std::cos(a_rho_C_x * PI * x / L) / L * std::pow(RHO, Scalar(-0.2e1)) + a_rho_C3_x * (D_C - D_C3) * PI * rho_C3_x * RHO_C * RHO_C3 * std::sin(a_rho_C3_x * PI * x / L) / L * std::pow(RHO, Scalar(-0.2e1)) + Mdot_C3C * (MF_C3 - Scalar(0.1e1));
   return(Q_rho_C3);
 }
 
@@ -312,7 +304,7 @@ Scalar MASA::navierstokes_ablation_1d_steady<Scalar>::eval_q_u_boundary(Scalar x
   P = R * T * (RHO_C / W_C + RHO_C3 / W_C3);
   MF_C3 = RHO_C3 / RHO;
   MF_C3E = A_C3Enc * std::exp(-E_aC3nc / T) / P;
-  Mdot_C3C = std::sqrt(T * k_B / PI / m_C3) * std::sqrt(0.2e1) * (-MF_C3 + MF_C3E) * RHO * beta_C3 / 0.2e1;
+  Mdot_C3C = std::sqrt(T * k_B / PI / m_C3) * std::sqrt(Scalar(0.2e1)) * (-MF_C3 + MF_C3E) * RHO * beta_C3 / 0.2e1;
   Q_u_boundary = -Mdot_C3C / RHO + U;
   return(Q_u_boundary);
 }
