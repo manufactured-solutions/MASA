@@ -199,7 +199,7 @@ int MASA::manufactured_solution<Scalar>::display_var()
       // adding conditional to avoid confusing our users about uninitalized variables
       // this is because the default is a bit odd... -12345.7 might appear 'set'
 
-      if((*vararr[it->second] - MASA_VAR_DEFAULT) <= threshold)
+      if(fabs(*vararr[it->second] - MASA_VAR_DEFAULT) <= threshold)
 	{
 	  std::cout << it->first <<" is set to: Uninitialized\n";
 	}
