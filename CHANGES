@@ -1,6 +1,7 @@
 Version 0.32 (In progress)
   * regressions expanded to achieve 98%+ line coverage
   * bug fix associated with arbitrary precision
+  * corrected typos in documentation
 
 Version 0.31 (20 April 2011)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.31.0
