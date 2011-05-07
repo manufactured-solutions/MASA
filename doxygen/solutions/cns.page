@@ -312,7 +312,7 @@ The MMS applied to 3D Navier--Stokes equations consists in modifying Equations~(
 &\Diff{\rho uw }{ x}+\Diff{\rho  vw }{ y}+\Diff{\rho w^2 }{ z}+\Diff{p}{z}-\Diff{\tau_{zx}}{x}-\Diff{\tau_{zy}}{y}-\Diff{\tau_{zz}}{z}=Q_w,\\
 %
 &\Diff{\rho u e_t}{x}+\Diff{\rho v e_t}{y}+\Diff{\rho we_t}{z}+\Diff{pu}{x}+\Diff{pv}{y}+\Diff{pw}{z} +\Diff{q_x}{x} +\Diff{q_y}{y} +\Diff{q_z}{z}+\\
-    &\qquad-\Diff{u\tau_{xx}+v\tau_{xy}+w\tau_{xz}}{x}-\Diff{u\tau_{yx}+v\tau_{yy}+w\tau_{yz}}{y}-\Diff{u\tau_{zx}+v\tau_{zy}+w\tau_{zz}}{y}=Q_{e_t},
+    &\qquad-\Diff{u\tau_{xx}+v\tau_{xy}+w\tau_{xz}}{x}-\Diff{u\tau_{yx}+v\tau_{yy}+w\tau_{yz}}{y}-\Diff{u\tau_{zx}+v\tau_{zy}+w\tau_{zz}}{z}=Q_{e_t},
 \end{split}
 \end{equation}
 so this modified set of equations has for analytical solution Equation (\ref{eq:manufactured_3d}).
