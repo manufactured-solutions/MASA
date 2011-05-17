@@ -233,9 +233,16 @@ EXTRA_DIST                 = init.sh \
 
 
 # License Information
+
 .license.stamp: $(top_srcdir)/LICENSE
-	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE *.c *.cpp
-	$(top_srcdir)/src/lic_utils/update_license.pl --c2f_comment $(top_srcdir)/LICENSE *.F90
+	for file in $(srcdir)/*.h $(srcdir)/*.c $(srcdir)/*.cpp ; do \
+		$(top_srcdir)/src/lic_utils/update_license.pl \
+			$(top_srcdir)/LICENSE $$file | tee -a $@ ;\
+	done
+	for file in $(srcdir)/*.f90 $(srcdir)/*.F90 ; do \
+		$(top_srcdir)/src/lic_utils/update_license.pl \
+			--c2f_comment $(top_srcdir)/LICENSE $$file | tee -a $@ ;\
+	done
 	echo 'updated source license headers' >$@
 
 CLEANFILES = .license.stamp *.mod *.gcda *.gcno

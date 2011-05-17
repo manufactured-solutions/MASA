@@ -57,7 +57,7 @@ c_euler_example_SOURCES   = c_euler_example.c
 example_DATA             += c_heat_example.c c_euler_example.c
 
 # ----------------- 
-#    Fortran
+#    Pf'ortran
 # ----------------- 
 
 f_euler_SOURCES           = f_euler.f90
@@ -70,12 +70,20 @@ f_cns_LIBTOOLFLAGS        = --tag=FC
 
 example_DATA             += f_euler.f90
 
-# ----------------- 
-# License
-# ----------------- 
+#---------------------------------
+# Embedded license header support
+#---------------------------------
+
 .license.stamp: $(top_srcdir)/LICENSE
-	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE *.c *.cpp
-	echo 'updated source license headers' >$@
+	for file in $(srcdir)/*.c $(srcdir)/*.cpp $(srcdir)/*.h; do \
+		$(top_srcdir)/src/lic_utils/update_license.pl \
+			$(top_srcdir)/LICENSE $$file | tee -a $@ ;\
+	done
+	for file in $(srcdir)/*.f90 $(srcdir)/*.F90 ; do \
+		$(top_srcdir)/src/lic_utils/update_license.pl \
+			--c2f_comment $(top_srcdir)/LICENSE $$file | tee -a $@ ;\
+	done
+	touch .license.stamp
 
 EXTRA_DIST  = examples.h
 CLEANFILES = .license.stamp *.mod *.gcda *.gcno

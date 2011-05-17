@@ -55,7 +55,7 @@ main.f90: libmasa.la libfmasa.la
 #-----------------------
 
 .license.stamp: $(top_srcdir)/LICENSE
-	$(top_srcdir)/src/lic_utils/update_license.pl $(top_srcdir)/LICENSE $(cc_sources) $(h_sources)
+	$(top_srcdir)/src/lic_utils/update_license.pl -S=$(top_srcdir)/src $(top_srcdir)/LICENSE $(cc_sources) $(h_sources)
 	echo 'updated source license headers' >$@
 
 #------------------------
