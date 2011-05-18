@@ -1,4 +1,7 @@
+
 Version 0.32 (In progress)
+
+  * enabled support for VPATH builds
   * regressions expanded to achieve 98%+ line coverage
   * bug fix associated with arbitrary precision
   * corrected typos in documentation
