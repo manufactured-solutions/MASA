@@ -154,8 +154,6 @@ int MASA::fans_sa_transient_free_shear<Scalar>::init_var()
   err += this->set_var("c_w3",2.0);
   err += this->set_var("kappa",0.41);
   err += this->set_var("sigma",2./3.);
-  //err += this->set_var("cp",3.5*8314.472/28.96); // = 3.5*Runiversal/(mol wght for air)
-  //err += this->set_var("cv",3.5*8314.472/28.96/1.4); // = cp/gamma = cp/1.4
   err += this->set_var("Gamma", 1.4);
   err += this->set_var("R", 287.0);
   
@@ -373,48 +371,33 @@ MASA::fans_sa_steady_wall_bounded<Scalar>::fans_sa_steady_wall_bounded()
 
   // fluid properties
   this->register_var("mu",&mu);
-  this->register_var("cp",&cp);
-  this->register_var("cv",&cv);
   this->register_var("R",&R);
   this->register_var("p_0",&p_0);
-  this->register_var("u_tau",&u_tau);
   this->register_var("Pr",&Pr);
   this->register_var("Pr_t",&Pr_t);
 
   // SA calibration model
-  this->register_var("d",&d);
   this->register_var("eta1",&eta1);
   this->register_var("eta_v",&eta_v);
-  this->register_var("sigma",&sigma);
   this->register_var("kappa",&kappa);
+  this->register_var("sigma",&sigma);
   this->register_var("c_b1",&c_b1);
   this->register_var("c_b2",&c_b2);
   this->register_var("c_v1",&c_v1);
   this->register_var("c_v2",&c_v2);
   this->register_var("c_v3",&c_v3);
-  this->register_var("c_w1",&c_w1);
   this->register_var("c_w2",&c_w2);
   this->register_var("c_w3",&c_w3);
 
   // manufactured solutions
-  this->register_var("u_inf",&u_inf);
-  this->register_var("A",&A);
-  this->register_var("nu_v",&nu_v);
-  this->register_var("u_eq",&u_eq);
   this->register_var("T_inf",&T_inf);
-  this->register_var("T_an",&T_an);
-  this->register_var("T_aw",&T_aw);
   this->register_var("M_inf",&M_inf);
   this->register_var("r_T",&r_T);
   this->register_var("Gamma",&Gamma);
   this->register_var("alpha",&alpha);
   this->register_var("C_cf",&C_cf);
-  this->register_var("F_c",&F_c);
-  this->register_var("rho_inf",&rho_inf);
   this->register_var("C1",&C1);
-  this->register_var("c",&c);
   this->register_var("b",&b);
-  this->register_var("nu_w",&nu_w);
 
   // initalize
   this->init_var();
@@ -427,49 +410,34 @@ int MASA::fans_sa_steady_wall_bounded<Scalar>::init_var()
   int err = 0;
 
   // fluid properties
-  err += this->set_var("mu",12);
-  err += this->set_var("cp",12);
-  err += this->set_var("cv",12);
-  err += this->set_var("R",12);
-  err += this->set_var("p_0",12);
-  err += this->set_var("u_tau",12);
-  err += this->set_var("Pr",12);
-  err += this->set_var("Pr_t",12);
+  err += this->set_var("mu",0.0001);
+  err += this->set_var("R",287);
+  err += this->set_var("p_0",1000);
+  err += this->set_var("Pr",0.71);
+  err += this->set_var("Pr_t",0.9);
 
   // SA calibration model
-  err += this->set_var("d",12);
-  err += this->set_var("eta1",12);
-  err += this->set_var("eta_v",12);
-  err += this->set_var("sigma",12);
-  err += this->set_var("kappa",12);
-  err += this->set_var("c_b1",12);
-  err += this->set_var("c_b2",12);
-  err += this->set_var("c_v1",12);
+  err += this->set_var("eta1",11.0);
+  err += this->set_var("eta_v",30.0);
+  err += this->set_var("kappa",0.41);
+  err += this->set_var("sigma",2.0/3.0);
+  err += this->set_var("c_b1",0.1355);
+  err += this->set_var("c_b2",0.622);
+  err += this->set_var("c_v1",7.1);
   err += this->set_var("c_v2",12);
   err += this->set_var("c_v3",12);
-  err += this->set_var("c_w1",12);
-  err += this->set_var("c_w2",12);
-  err += this->set_var("c_w3",12);
+  err += this->set_var("c_w2",0.3);
+  err += this->set_var("c_w3",2.0);
 
   // manufactured solutions
-  err += this->set_var("u_inf",12);
-  err += this->set_var("A",12);
-  err += this->set_var("nu_v",12);
-  err += this->set_var("u_eq",12);
-  err += this->set_var("T_inf",12);
-  err += this->set_var("T_an",12);
-  err += this->set_var("T_aw",12);
-  err += this->set_var("M_inf",12);
-  err += this->set_var("r_T",12);
-  err += this->set_var("Gamma",12);
-  err += this->set_var("alpha",12);
-  err += this->set_var("C_cf",12);  
-  err += this->set_var("F_c",12);
-  err += this->set_var("rho_inf",12);
-  err += this->set_var("C1",12);
-  err += this->set_var("c",12);
-  err += this->set_var("b",12);
-  err += this->set_var("nu_w",12);
+  err += this->set_var("T_inf",250.0);
+  err += this->set_var("M_inf",0.8);
+  err += this->set_var("r_T",0.9);
+  err += this->set_var("Gamma",1.4);
+  err += this->set_var("alpha",5.0);
+  err += this->set_var("C_cf",0.027);  
+  err += this->set_var("C1",5.0);
+  err += this->set_var("b",0.33);
 
   return err;
 }
@@ -726,6 +694,15 @@ template <typename Scalar>
 Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_u(Scalar /*x*/,Scalar /*y*/)
 {
   Scalar u_an;
+  Scalar c_f = C_cf / F_c * pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
+  Scalar u_tau = u_inf * std::sqrt(c_f / Scalar(0.2e1));
+  Scalar y_plus = y * u_tau / nu_w;
+  Scalar u_eq_plus = Scalar(0.1e1) / kappa * std::log(Scalar(0.1e1) + kappa * y_plus) + C1 * (Scalar(0.1e1) - std::exp(-y_plus / eta1) - y_plus / eta1 * std::exp(-y_plus * b));
+  Scalar u_eq = u_tau * u_eq_plus;
+  Scalar u_inf = M_inf * sqrt(Gamma*R*T_inf);
+  Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*pow(M_inf,2))  ;
+  Scalar rho_w = p_0/(R*T_aw);
+  Scalar A     = (mu/rho_w)/sqrt(1-(T_inf/T_aw));
   u_an = u_inf / A * std::sin(A / u_inf * u_eq);
   return u_an;
 }
@@ -734,12 +711,13 @@ template <typename Scalar>
 Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_v(Scalar x,Scalar y)
 {
   Scalar v_an;
+  Scalar u_tau = u_inf * std::sqrt(c_f / Scalar(0.2e1));
   v_an = eta_v * u_tau * y / x / 0.14e2;
   return v_an;
 }
 
 template <typename Scalar>
-Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_p(Scalar /*x*/,Scalar /*y*/)
+Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_p(Scalar x,Scalar y)
 {
   Scalar p_an;
   p_an = p_0;
@@ -747,18 +725,42 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_p(Scalar /*x*/,Scal
 }
 
 template <typename Scalar>
-Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_rho(Scalar /*x*/,Scalar /*y*/)
+Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_rho(Scalar x,Scalar y)
 {
   Scalar rho_an;
-  rho_an = p_0 / R / T_an;
+  Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
+  Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*pow(M_inf,2))  ;
+  Scalar rho_w = p_0/(R*T_aw);
+  Scalar A     = (mu/rho_w)/sqrt(1-(T_inf/T_aw));
+  Scalar nu_w  = mu/rho_w;
+  Scalar F_c     = (T_aw/(T_inf-1))/pow(asin(A),2);
+  Scalar rho_inf = p_0/(R*T_inf);
+  Scalar Re_x    = rho_inf * u_inf * x / mu;
+  Scalar c_f     = C_cf / F_c * pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
+  Scalar u_tau   = u_inf * std::sqrt(c_f / Scalar(0.2e1));
+  Scalar y_plus = y * u_tau / nu_w;
+  Scalar u_eq_plus = 0.1e1 / kappa * log(0.1e1 + kappa * y_plus) + C1 * (0.1e1 - exp(-y_plus / eta1) - y_plus / eta1 * exp(-y_plus * b));
+  Scalar u_eq = u_tau * u_eq_plus;
+  Scalar u_an = u_inf / A * sin(A / u_inf * u_eq);
+  Scalar T = T_inf * (0.1e1 - r_T * (double) (Gamma - 1) * M_inf * M_inf * (0.1e1 - u_an * u_an * pow(u_inf, -0.2e1)) / 0.2e1);
+  rho_an = p_0 / R / T;
   return rho_an;
 }
 
 template <typename Scalar>
-Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_nu(Scalar /*x*/,Scalar y)
+Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_nu(Scalar x,Scalar y)
 {
   Scalar nu_sa_an;
-  nu_sa_an = kappa * u_tau * y - alpha * y * y;
+  Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
+  Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*pow(M_inf,2))  ;
+  Scalar rho_w = p_0/(R*T_aw);
+  Scalar A     = (mu/rho_w)/sqrt(1-(T_inf/T_aw));
+  Scalar F_c     = (T_aw/(T_inf-1))/pow(asin(A),2);
+  Scalar rho_inf = p_0/(R*T_inf);
+  Scalar Re_x    = rho_inf * u_inf * x / mu;
+  Scalar c_f     = C_cf / F_c * pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
+  Scalar u_tau   = u_inf * std::sqrt(c_f / Scalar(0.2e1));
+  nu_sa_an       = kappa * u_tau * y - alpha * y * y;
   return nu_sa_an;
 }
 

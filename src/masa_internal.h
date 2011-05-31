@@ -1004,48 +1004,33 @@ namespace MASA
     
     // fluid properties
     Scalar mu;
-    Scalar cp;
-    Scalar cv;
     Scalar R;
     Scalar p_0;
-    Scalar u_tau;
     Scalar Pr;
     Scalar Pr_t;
     
     // SA calibration model
-    Scalar d;
     Scalar eta1;
     Scalar eta_v;
-    Scalar sigma;
     Scalar kappa;
+    Scalar sigma;
     Scalar c_b1;
     Scalar c_b2;
     Scalar c_v1;
     Scalar c_v2;
     Scalar c_v3;
-    Scalar c_w1;
     Scalar c_w2;
     Scalar c_w3;
 
     // manufactured solutions
-    Scalar u_inf;
-    Scalar A;
-    Scalar nu_v;
-    Scalar u_eq;
     Scalar T_inf;
-    Scalar T_an;
-    Scalar T_aw;
     Scalar M_inf;
     Scalar r_T;
     Scalar Gamma;
     Scalar alpha;
     Scalar C_cf;
-    Scalar F_c;
-    Scalar rho_inf;
     Scalar C1;
-    Scalar c;
     Scalar b;
-    Scalar nu_w;
 
   public:
     fans_sa_steady_wall_bounded(); // constructor    
