@@ -691,18 +691,24 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho_e(Scalar x,Scalar y
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_u(Scalar /*x*/,Scalar /*y*/)
+Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_u(Scalar x,Scalar y)
 {
-  Scalar u_an;
-  Scalar c_f = C_cf / F_c * pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
-  Scalar u_tau = u_inf * std::sqrt(c_f / Scalar(0.2e1));
-  Scalar y_plus = y * u_tau / nu_w;
-  Scalar u_eq_plus = Scalar(0.1e1) / kappa * std::log(Scalar(0.1e1) + kappa * y_plus) + C1 * (Scalar(0.1e1) - std::exp(-y_plus / eta1) - y_plus / eta1 * std::exp(-y_plus * b));
-  Scalar u_eq = u_tau * u_eq_plus;
-  Scalar u_inf = M_inf * sqrt(Gamma*R*T_inf);
+
+  Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
   Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*pow(M_inf,2))  ;
   Scalar rho_w = p_0/(R*T_aw);
   Scalar A     = (mu/rho_w)/sqrt(1-(T_inf/T_aw));
+  Scalar nu_w  = mu/rho_w;
+  Scalar F_c     = (T_aw/(T_inf-1))/pow(asin(A),2);
+  Scalar rho_inf = p_0/(R*T_inf);
+  Scalar Re_x    = rho_inf * u_inf * x / mu;
+  Scalar c_f     = C_cf / F_c * pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
+  Scalar u_tau   = u_inf * std::sqrt(c_f / Scalar(0.2e1));
+  Scalar y_plus = y * u_tau / nu_w;
+  Scalar u_eq_plus = 0.1e1 / kappa * log(0.1e1 + kappa * y_plus) + C1 * (0.1e1 - exp(-y_plus / eta1) - y_plus / eta1 * exp(-y_plus * b));
+  Scalar u_eq = u_tau * u_eq_plus;
+  Scalar u_an = u_inf / A * sin(A / u_inf * u_eq);
+  Scalar T = T_inf * (0.1e1 - r_T * (double) (Gamma - 1) * M_inf * M_inf * (0.1e1 - u_an * u_an * pow(u_inf, -0.2e1)));
   u_an = u_inf / A * std::sin(A / u_inf * u_eq);
   return u_an;
 }
@@ -711,7 +717,22 @@ template <typename Scalar>
 Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_v(Scalar x,Scalar y)
 {
   Scalar v_an;
-  Scalar u_tau = u_inf * std::sqrt(c_f / Scalar(0.2e1));
+
+  Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
+  Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*pow(M_inf,2))  ;
+  Scalar rho_w = p_0/(R*T_aw);
+  Scalar A     = (mu/rho_w)/sqrt(1-(T_inf/T_aw));
+  Scalar nu_w  = mu/rho_w;
+  Scalar F_c     = (T_aw/(T_inf-1))/pow(asin(A),2);
+  Scalar rho_inf = p_0/(R*T_inf);
+  Scalar Re_x    = rho_inf * u_inf * x / mu;
+  Scalar c_f     = C_cf / F_c * pow(0.1e1 / F_c * Re_x, -0.1e1 / 0.7e1);
+  Scalar u_tau   = u_inf * std::sqrt(c_f / Scalar(0.2e1));
+  Scalar y_plus = y * u_tau / nu_w;
+  Scalar u_eq_plus = 0.1e1 / kappa * log(0.1e1 + kappa * y_plus) + C1 * (0.1e1 - exp(-y_plus / eta1) - y_plus / eta1 * exp(-y_plus * b));
+  Scalar u_eq = u_tau * u_eq_plus;
+  Scalar u_an = u_inf / A * sin(A / u_inf * u_eq);
+  Scalar T = T_inf * (0.1e1 - r_T * (Scalar) (Gamma - 1) * M_inf * M_inf * (0.1e1 - u_an * u_an * pow(u_inf, -0.2e1)));
   v_an = eta_v * u_tau * y / x / 0.14e2;
   return v_an;
 }
