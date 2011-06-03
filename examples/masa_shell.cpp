@@ -47,7 +47,7 @@ void MASA::masa_shell_choose_solution()
   int q = 1;
   int dimension;
 
-  Scalar x,y,z;
+  Scalar x,y,z,t;
   Scalar dbl;
   Scalar dbl2;
   Scalar field;
@@ -141,6 +141,27 @@ void MASA::masa_shell_choose_solution()
 
 	      field = masa_eval_source_u<Scalar>(x,y,z);
 	      cout << "source term is:" << field << endl << endl;
+	      break;
+	      
+	    case 4:
+	      cout << "\nplease input x location: \n";
+	      cin >> x;
+
+	      cout << "\nplease input y location: \n";
+	      cin >> y;
+
+	      cout << "\nplease input z location: \n";
+	      cin >> z;
+
+	      cout << "\nplease input t location: \n";
+	      cin >> t;
+
+	      cout << "source term rho   is:" << masa_eval_source_rho  <Scalar>(x,y,z,t) << endl;
+	      cout << "source term rho_u is:" << masa_eval_source_rho_u<Scalar>(x,y,z,t) << endl;
+	      cout << "source term rho_v is:" << masa_eval_source_rho_v<Scalar>(x,y,z,t) << endl;
+	      cout << "source term rho_w is:" << masa_eval_source_rho_w<Scalar>(x,y,z,t) << endl;
+	      cout << "source term rho_e is:" << masa_eval_source_rho_e<Scalar>(x,y,z,t) << endl;
+	      cout << endl;
 	      break;
 	      
 	    default: 

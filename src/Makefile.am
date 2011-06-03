@@ -1,14 +1,15 @@
-h_sources               = masa.h masa_internal.h smasa.h
-cc_sources              = masa_core.cpp masa_class.cpp masa_map.cpp heat.cpp euler.cpp \
-			  cns.cpp sod.cpp cmasa.cpp axi_euler.cpp axi_cns.cpp rans_sa.cpp \
-			  euler_chem.cpp euler_transient.cpp radiation.cpp fans_sa.cpp \
-			  ablation.cpp cp_normal.cpp
+h_sources  = masa.h masa_internal.h smasa.h                                  \
+             nsctpl_fwd.hpp nsctpl.hpp
+cc_sources = masa_core.cpp masa_class.cpp masa_map.cpp heat.cpp euler.cpp    \
+             cns.cpp sod.cpp cmasa.cpp axi_euler.cpp axi_cns.cpp rans_sa.cpp \
+             euler_chem.cpp euler_transient.cpp radiation.cpp fans_sa.cpp    \
+             ablation.cpp cp_normal.cpp nsctpl.cpp
 
 # License Information
 
 BUILT_SOURCES = .license.stamp
 
-INCLUDES                = 
+INCLUDES                =
 AM_FCFLAGS              = $(INCLUDES)
 AM_CFLAGS               = $(INCLUDES)
 AM_CXXFLAGS             = $(INCLUDES)
@@ -44,7 +45,7 @@ bin_PROGRAMS                           = @PACKAGE_NAME@_version
 # F90 Module Interface
 #-----------------------
 
-noinst_PROGRAMS         = test 
+noinst_PROGRAMS         = test
 test_SOURCES            = main.f90
 test_LDADD              = -L$(top_builddir)/src -lfmasa -lmasa
 
