@@ -288,7 +288,7 @@ Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_q_rho_e(Scalar x,Scalar 
   Scalar cv;
   Scalar mu_t;
   
-  Scalar d = std::sqrt(std::pow(x,2) + std::pow(y,2));
+Scalar d = y;
   NU_SA = nu_sa_0 + nu_sa_x * std::cos(a_nusax * PI * x / L) + nu_sa_y * std::cos(a_nusay * PI * y / L) + nu_sa_t * std::cos(a_nusat * PI * t / L);
   RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L) + rho_t * std::sin(a_rhot * PI * t / L);
   U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L) + u_t * std::cos(a_ut * PI * t / L);
@@ -563,7 +563,7 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho(Scalar x,Scalar y)
   Scalar T;
   Scalar d_eqplus_yplus;
 
-  Scalar d = std::sqrt(std::pow(x,2) + std::pow(y,2));
+Scalar d = y;
   Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
   Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*pow(M_inf,2))  ;
   Scalar rho_w = p_0/(R*T_aw);
@@ -611,7 +611,7 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_nu(Scalar x,Scalar y)
   Scalar g;
   Scalar r;
 
-  Scalar d = std::sqrt(std::pow(x,2) + std::pow(y,2));
+  Scalar d = y;
   Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
   Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*pow(M_inf,2))  ;
   Scalar rho_w = p_0/(R*T_aw);
