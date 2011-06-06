@@ -1,13 +1,13 @@
 BASIC INFORMATION:
 
-Welcome to MASA, the Manufactured Analytical Solutions Abstraction Library. 
+Welcome to MASA, the Manufactured Analytical Solutions Abstraction Library.
 
 Check the EXAMPLES directory for examples of the MASA C++, C and Fortran API.
 The source code is contained in src, and the regression tests are in tests.
 
 BUILD INFORMATION:
 
-MASA currently supports gcc and intel compilers. 
+MASA currently supports gcc and intel compilers.
 
 TO BUILD:
 
@@ -16,6 +16,6 @@ TO BUILD:
 3) make
 4) make install
 
-It is recommended that new users run 'make check'
-This runs numerous diagnostic tests, which ensure the precision
-of all associated solutions are at minimum, 10e-15.
+It is recommended that new users run 'make check' This runs numerous diagnostic
+tests, which ensure the precision of all associated solutions are at minimum,
+10e-15.
