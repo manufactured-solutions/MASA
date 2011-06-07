@@ -1402,8 +1402,8 @@ namespace MASA
     navierstokes_4d_compressible_powerlaw();
 
     // default parameters set by nsctpl::zero and nsctpl::isothermal_channel
-    friend void MASA::nsctpl::zero<>(navierstokes_4d_compressible_powerlaw&);
-    friend void MASA::nsctpl::isothermal_channel<>(navierstokes_4d_compressible_powerlaw&);
+    friend void MASA::nsctpl::zero<>(navierstokes_4d_compressible_powerlaw<Scalar>&);
+    friend void MASA::nsctpl::isothermal_channel<>(navierstokes_4d_compressible_powerlaw<Scalar>&);
     int init_var();
 
     // solution
