@@ -11,7 +11,7 @@ Version 0.31 (20 April 2011)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.31.0
   
   * enable STL debug mode with --enable-warn-all option when using GNU compiler family
-  * fixed incompatibilities with PGI compilers: euler+chemistry mms currenlty unavailable with PGI
+  * fixed incompatibilities with PGI compilers: euler+chemistry mms currently unavailable with PGI
   * ported codebase to Portland group compilers
   * bug fix associated with radiation_integrated_intensity constructor
   * added new smasa mms: conjugate prior for standard deviation
