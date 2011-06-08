@@ -43,7 +43,7 @@ using namespace std;
 
 typedef double Real;
 
-const Real pi = std::acos(-1);
+const Real pi = std::acos(Real(-1));
 const Real threshold = 1.0e-15; // should be small enough to catch any obvious problems
 
 Real nancheck(Real x)
