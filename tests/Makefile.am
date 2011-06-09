@@ -239,7 +239,7 @@ EXTRA_DIST                 = init.sh \
 		$(top_srcdir)/src/lic_utils/update_license.pl \
 			$(top_srcdir)/LICENSE $$file | tee -a $@ ;\
 	done
-	for file in $(srcdir)/*.f90 $(srcdir)/*.F90 ; do \
+	for file in $(srcdir)/*.F90 ; do \
 		$(top_srcdir)/src/lic_utils/update_license.pl \
 			--c2f_comment $(top_srcdir)/LICENSE $$file | tee -a $@ ;\
 	done
