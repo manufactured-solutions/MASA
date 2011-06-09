@@ -1491,37 +1491,37 @@ namespace MASA
     // source terms
     // 2d -> 1d
     // note: using 'real' here instead of scalar to avoid compilation difficulties.
-    template <typename Real> Real eval_q_rho_u     (Real x,Real y){return eval_q_rho_u(x);};
-    template <typename Real> Real eval_q_e         (Real x,Real y,Real (*in_func)(Real)) {return eval_q_e(x,in_func);};
-    template <typename Real> Real eval_q_C         (Real x,Real y){return eval_q_C(x);};
-    template <typename Real> Real eval_q_C3        (Real x,Real y){return eval_q_C3(x);};
-    template <typename Real> Real eval_q_rho_C     (Real x,Real y){return eval_q_rho_C(x);};
-    template <typename Real> Real eval_q_rho_C3    (Real x,Real y){return eval_q_rho_C3(x);};
-    template <typename Real> Real eval_q_u_boundary(Real x,Real y){return eval_q_u_boundary(x);};
+    template <typename Real> Real eval_q_rho_u     (Real x,Real y){return eval_q_rho_u(x);}
+    template <typename Real> Real eval_q_e         (Real x,Real y,Real (*in_func)(Real)) {return eval_q_e(x,in_func);}
+    template <typename Real> Real eval_q_C         (Real x,Real y){return eval_q_C(x);}
+    template <typename Real> Real eval_q_C3        (Real x,Real y){return eval_q_C3(x);}
+    template <typename Real> Real eval_q_rho_C     (Real x,Real y){return eval_q_rho_C(x);}
+    template <typename Real> Real eval_q_rho_C3    (Real x,Real y){return eval_q_rho_C3(x);}
+    template <typename Real> Real eval_q_u_boundary(Real x,Real y){return eval_q_u_boundary(x);}
 
     // 3d-> 1d
-    template <typename Real> Real eval_q_rho_u     (Real x,Real y,Real z){return eval_q_rho_u(x);};
-    template <typename Real> Real eval_q_e         (Real x,Real y,Real z,Real (*in_func)(Real)) {return eval_q_e(x,in_func);};
-    template <typename Real> Real eval_q_C         (Real x,Real y,Real z){return eval_q_C(x);};
-    template <typename Real> Real eval_q_C3        (Real x,Real y,Real z){return eval_q_C3(x);};
-    template <typename Real> Real eval_q_rho_C     (Real x,Real y,Real z){return eval_q_rho_C(x);};
-    template <typename Real> Real eval_q_rho_C3    (Real x,Real y,Real z){return eval_q_rho_C3(x);};
-    template <typename Real> Real eval_q_u_boundary(Real x,Real y,Real z){return eval_q_u_boundary(x);};
+    template <typename Real> Real eval_q_rho_u     (Real x,Real y,Real z){return eval_q_rho_u(x);}
+    template <typename Real> Real eval_q_e         (Real x,Real y,Real z,Real (*in_func)(Real)) {return eval_q_e(x,in_func);}
+    template <typename Real> Real eval_q_C         (Real x,Real y,Real z){return eval_q_C(x);}
+    template <typename Real> Real eval_q_C3        (Real x,Real y,Real z){return eval_q_C3(x);}
+    template <typename Real> Real eval_q_rho_C     (Real x,Real y,Real z){return eval_q_rho_C(x);}
+    template <typename Real> Real eval_q_rho_C3    (Real x,Real y,Real z){return eval_q_rho_C3(x);}
+    template <typename Real> Real eval_q_u_boundary(Real x,Real y,Real z){return eval_q_u_boundary(x);}
 
     // manufactured analytical solutions
     // 3d-> 1d
-    template <typename Real> Real eval_exact_u     (Real x,Real y,Real z) {return eval_exact_u(x);};
-    template <typename Real> Real eval_exact_t     (Real x,Real y,Real z) {return eval_exact_t(x);};
-    template <typename Real> Real eval_exact_rho   (Real x,Real y,Real z) {return eval_exact_rho(x);};
-    template <typename Real> Real eval_exact_rho_C (Real x,Real y,Real z) {return eval_exact_rho_C(x);};
-    template <typename Real> Real eval_exact_rho_C3(Real x,Real y,Real z) {return eval_exact_rho_C3(x);};
+    template <typename Real> Real eval_exact_u     (Real x,Real y,Real z) {return eval_exact_u(x);}
+    template <typename Real> Real eval_exact_t     (Real x,Real y,Real z) {return eval_exact_t(x);}
+    template <typename Real> Real eval_exact_rho   (Real x,Real y,Real z) {return eval_exact_rho(x);}
+    template <typename Real> Real eval_exact_rho_C (Real x,Real y,Real z) {return eval_exact_rho_C(x);}
+    template <typename Real> Real eval_exact_rho_C3(Real x,Real y,Real z) {return eval_exact_rho_C3(x);}
 
     // 2d-> 1d
-    template <typename Real> Real eval_exact_u     (Real x,Real y) {return eval_exact_u(x);};
-    template <typename Real> Real eval_exact_t     (Real x,Real y) {return eval_exact_t(x);};
-    template <typename Real> Real eval_exact_rho   (Real x,Real y) {return eval_exact_rho(x);};
-    template <typename Real> Real eval_exact_rho_C (Real x,Real y) {return eval_exact_rho_C(x);};
-    template <typename Real> Real eval_exact_rho_C3(Real x,Real y) {return eval_exact_rho_C3(x);};
+    template <typename Real> Real eval_exact_u     (Real x,Real y) {return eval_exact_u(x);}
+    template <typename Real> Real eval_exact_t     (Real x,Real y) {return eval_exact_t(x);}
+    template <typename Real> Real eval_exact_rho   (Real x,Real y) {return eval_exact_rho(x);}
+    template <typename Real> Real eval_exact_rho_C (Real x,Real y) {return eval_exact_rho_C(x);}
+    template <typename Real> Real eval_exact_rho_C3(Real x,Real y) {return eval_exact_rho_C3(x);}
 
     // 1d (Actual) Source terms
     Scalar eval_q_rho_u (Scalar);

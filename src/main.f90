@@ -30,5 +30,4 @@ program main
   out = masa_eval_1d_source_u(value)
   write(6,*) "value is: ", out 
 
-  stop
-end program main
+end program
