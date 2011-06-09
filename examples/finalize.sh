@@ -2,6 +2,6 @@
 
 echo ""
 echo "-------------------------------------------------------"
-echo "Finalizing MASA Tests, have a well verified day"
+echo "Finalizing MASA Examples Tests, have a well verified day"
 echo "-------------------------------------------------------"
 echo ""

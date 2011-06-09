@@ -3,5 +3,5 @@
 echo " "
 echo " "
 echo "-------------------------------------------------------"
-echo "Initializing MASA Tests"
+echo "Initializing MASA Examples Tests"
 echo "-------------------------------------------------------"

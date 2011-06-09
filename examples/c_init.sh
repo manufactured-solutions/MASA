@@ -2,5 +2,5 @@
 
 echo " "
 echo "-------------------------------------------------------"
-echo "Initializing CMASA Tests"
+echo "Initializing CMASA Examples Tests"
 echo "-------------------------------------------------------"

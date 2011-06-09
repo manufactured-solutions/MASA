@@ -2,5 +2,5 @@
 
 echo " "
 echo "-------------------------------------------------------"
-echo "Initializing FortMASA Tests"
+echo "Initializing FortMASA Examples Tests"
 echo "-------------------------------------------------------"
