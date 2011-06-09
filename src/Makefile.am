@@ -42,16 +42,6 @@ bin_PROGRAMS                           = @PACKAGE_NAME@_version
 @PACKAGE_NAME@_version_DEPENDENCIES    = libmasa.la
 
 #-----------------------
-# F90 Module Interface
-#-----------------------
-
-noinst_PROGRAMS         = test
-test_SOURCES            = main.f90
-test_LDADD              = -L$(top_builddir)/src -lfmasa -lmasa
-
-main.f90: libmasa.la libfmasa.la
-
-#-----------------------
 # Licensing updates
 #-----------------------
 
