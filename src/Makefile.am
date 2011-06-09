@@ -47,6 +47,7 @@ bin_PROGRAMS                           = @PACKAGE_NAME@_version
 
 .license.stamp: $(top_srcdir)/LICENSE
 	$(top_srcdir)/src/lic_utils/update_license.pl -S=$(top_srcdir)/src $(top_srcdir)/LICENSE $(cc_sources) $(h_sources)
+	$(top_srcdir)/src/lic_utils/update_license.pl -S=$(top_srcdir)/src --c2f_comment $(top_srcdir)/LICENSE masa.f90
 	echo 'updated source license headers' >$@
 
 #------------------------
