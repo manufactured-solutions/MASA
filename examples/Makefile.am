@@ -70,6 +70,23 @@ f_cns_LIBTOOLFLAGS        = --tag=FC
 
 example_DATA             += f_euler.f90
 
+
+#----------------------
+# Regression Tests
+#----------------------
+
+TESTS_ENVIRONMENT          = 
+TESTS                      = init.sh              \
+			     c_init.sh            \
+			     f_init.sh            \
+                             finalize.sh
+
+EXTRA_DIST                 = init.sh \
+			     c_init.sh \
+	                     f_init.sh \
+                             finalize.sh \
+			     tests.h
+
 #---------------------------------
 # Embedded license header support
 #---------------------------------
