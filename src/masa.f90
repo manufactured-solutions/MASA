@@ -210,7 +210,7 @@ module masa
        implicit none
 
        character(c_char), intent(in)                :: array_name(*)
-       integer  (c_int)                             :: it
+       integer  (c_int)                             :: it      ! pass-by-ref is intentional
        real     (c_double),dimension(*),intent(out) :: array
 
      end subroutine masa_get_array_passthrough
