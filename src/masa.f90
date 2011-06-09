@@ -1257,7 +1257,7 @@ contains
     implicit none
 
     character(len=*), intent(in)        :: param_name
-    real (c_double),  intent(in)         :: value
+    real  (c_double), intent(in)        :: value
 
     call masa_set_param_passthrough(param_name//C_NULL_CHAR,value)
 
