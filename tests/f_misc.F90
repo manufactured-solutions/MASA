@@ -31,17 +31,23 @@ program main
   use masa
   implicit none
 
-  real(8) :: value = 0
+  real(8) :: value
 
-  ! initialize the problem
+  ! initialize first MMS
+
   call masa_init('mytest','euler_1d')
+
   ! initialize the default parameters
+
   call masa_init_param()
+
+  ! initialize second MMS and params
 
   call masa_init('2nd test','euler_3d')
   call masa_init_param()
   
   ! test get_param function
+
   value = masa_get_param("L")
 
   if(value .ne. 3.02d0) then
@@ -51,6 +57,7 @@ program main
   endif 
 
   ! test set_param function
+
   call masa_set_param("L",3.1415d0)
   value = masa_get_param("L")
 
@@ -61,6 +68,7 @@ program main
   endif 
 
   ! test select_mms
+
   call masa_select_mms("mytest")
   value = masa_get_param("L") ! this should no longer be 3.14
 
