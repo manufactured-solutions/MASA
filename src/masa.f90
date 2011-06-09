@@ -209,9 +209,9 @@ module masa
        use iso_c_binding
        implicit none
 
-       character(c_char), intent(in) :: array_name(*)
-       integer (c_int), value        :: it
-       real (c_double),dimension(*),intent(out)  :: array
+       character(c_char), intent(in)                :: array_name(*)
+       integer  (c_int)                             :: it
+       real     (c_double),dimension(*),intent(out) :: array
 
      end subroutine masa_get_array_passthrough
   end interface
@@ -1271,9 +1271,9 @@ contains
     use iso_c_binding
     implicit none
     
-    character(len=*)              :: param_name
-    integer (c_int), value        :: it    
-    real (c_double),dimension(*)  :: arr
+    character(len=*)                :: param_name
+    integer (c_int)                 :: it          ! pass-by-ref is intentional
+    real    (c_double),dimension(*) :: arr
 
     call masa_get_array_passthrough(param_name//C_NULL_CHAR, it, arr)
     
