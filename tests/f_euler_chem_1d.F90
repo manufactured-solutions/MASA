@@ -27,30 +27,27 @@
 !! $Id: 
 !! -------------------------------------------------------------------------
 !! -------------------------------------------------------------------------
-module func
+
+
+! User function to be provided to MASA for MMS flow+chemistry 
+
+real (8) function k_func(T)
   use iso_c_binding
-  implicit none
-
-  contains
-
-  real (c_double) function k_func(T) BIND(C)
-    real(c_double),intent(in), value :: T
-    
-    !! hackish functional here
-    !! This is an eyeballed fit (focusing on the 5000K-6000K range) 
-    !! for the equilibrium constant for N2->N+N dissociation
-    
-    k_func = exp(4+(T-6000)/500)
-    
-  end function k_func
-
-end module func
+  real(c_double),intent(in), value :: T
+   
+  !! This is an eyeballed fit (focusing on the 5000K-6000K range) 
+  !! for the equilibrium constant for N2->N+N dissociation
+  
+  k_func = exp(4+(T-6000)/500)
+  
+end function k_func
 
 program main
-  use func
   use iso_c_binding
   use masa
   implicit none
+
+  real(8), external :: k_func
 
   real(8) :: MASA_DEFAULT = -12345.67d0
 
@@ -86,12 +83,14 @@ program main
   real(8) :: a_Tx
 
   !problem size
+
   integer :: nx
   integer :: lx  
   real(8) ::  x
   real(8) :: dx
 
   ! solutions
+
   real(8) :: ufield,ufield2,ufield3
   real(8) :: efield,efield2,efield3
   real(8) :: N,N2,N3
@@ -105,19 +104,20 @@ program main
   real(8) :: exact_Ntwo,exact_Ntwo2,exact_Ntwo3
 
   ! iterators
+
   integer :: i
 
   nx = 200
   lx = 10
 
   ! initialize the problem
-
+  
   dx = real(lx)/real(nx)
-
+  
   call masa_init("mytest","euler_chem_1d")
-
+  
   ! initialize the default parameters
-
+  
   call masa_init_param()
 
   ! get defaults for comparison to source terms
@@ -127,15 +127,15 @@ program main
   a_ux       = masa_get_param("a_ux")
   L          = masa_get_param("L")
   R          = masa_get_param("R")
-             
+  
   Cf1_N      = masa_get_param("Cf1_N")
   Cf1_N2     = masa_get_param("Cf1_N2")
   etaf1_N    = masa_get_param("etaf1_N")
   etaf1_N2   = masa_get_param("etaf1_N2")
-             
+
   Ea_N       = masa_get_param("Ea_N")
   Ea_N2      = masa_get_param("Ea_N2")
-             
+
   R_N        = masa_get_param("R_N")
   R_N2       = masa_get_param("R_N2")
 
@@ -151,7 +151,7 @@ program main
   rho_N2_0   = masa_get_param("rho_N2_0")  
   rho_N2_x   = masa_get_param("rho_N2_x")
   a_rho_N2_x = masa_get_param("a_rho_N2_x")
-  
+
   T_0        = masa_get_param("T_0")
   T_x        = masa_get_param("T_x")
   a_Tx       = masa_get_param("a_Tx")
@@ -165,7 +165,7 @@ program main
   do i=0, nx
 
      x = i * dx
-     
+
      ! evalulate source terms
 
      ufield     = masa_eval_1d_source_rho_u (x)
@@ -180,10 +180,10 @@ program main
      exact_rho  = masa_eval_1d_exact_rho   (x)
      exact_N    = masa_eval_1d_exact_rho_N (x)
      exact_Ntwo = masa_eval_1d_exact_rho_N2(x)
-     
+
   enddo
 
-  ! steady as she goes...
+  !   ! steady as she goes...
 
   call exit(0)
 
