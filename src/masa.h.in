@@ -715,7 +715,7 @@ extern "C" {
    * This routine can be called multiple times, with subsequent
    * calls overwriting the previously held array.
    */
-  extern void   masa_set_array(const char* vector_name,int *n,double new_array[]);
+  extern void   masa_set_array(const char* vector_name,int *length,double new_array[]);
 
   /**
    * Will return
@@ -728,7 +728,7 @@ extern "C" {
    * and a pointer returning the address of the array
    *
    */
-  extern int masa_get_array(const char* param_name, int *n, double* array);
+  extern int masa_get_array(const char* param_name, int *length, double* array);
 
   //  --------------------------------
   ///
