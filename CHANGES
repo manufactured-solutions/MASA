@@ -1,7 +1,8 @@
 
 Version 0.32 (In progress)
 
-  * add PGI function pointer support
+  * bug fix to support older PGI 8.X and 9.X compilers
+  * bug fix for Fortran function pointer support (only affects euler+chemistry MMS)
   * enabled support for VPATH builds
   * regressions expanded to achieve 98%+ line coverage
   * bug fix associated with arbitrary precision
