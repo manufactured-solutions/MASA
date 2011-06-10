@@ -148,12 +148,11 @@ int main()
       tempz=0;
 
       /* evaluate source terms */
-      ufield = masa_eval_source_rho_u<Scalar>     (tempx);
-      e_rho_field = masa_eval_source_rho_e<Scalar>(tempx);
-     
-      efield  = masa_eval_source_e <Scalar>        (tempx,&funct);
-      cfield  = masa_eval_source_C <Scalar>        (tempx);
-      c3field = masa_eval_source_C3<Scalar>        (tempx);
+      ufield = masa_eval_source_rho_u<Scalar>       (tempx);
+      e_rho_field = masa_eval_source_rho_e<Scalar>  (tempx);     
+      efield  = masa_eval_source_e <Scalar>         (tempx,&funct);
+      cfield  = masa_eval_source_C <Scalar>         (tempx);
+      c3field = masa_eval_source_C3<Scalar>         (tempx);
       rho_cfield  = masa_eval_source_rho_C <Scalar> (tempx);
       rho_c3field = masa_eval_source_rho_C3<Scalar> (tempx);
       boundary   = masa_eval_source_boundary<Scalar> (tempx);
@@ -164,25 +163,7 @@ int main()
       exact_rho = masa_eval_exact_rho<Scalar>   (tempx);
       exact_c   = masa_eval_exact_rho_C<Scalar> (tempx);
       exact_c3  = masa_eval_exact_rho_C3<Scalar>(tempx);
-
-      
-      /* 
-	 note you can also call any function with additional arguments
-	 which will subsequently be ignored, as below:
-      */
-      exact_u   = masa_eval_exact_u  <Scalar>   (tempx,tempy);
-      exact_t   = masa_eval_exact_t  <Scalar>   (tempx,tempy);
-      exact_rho = masa_eval_exact_rho<Scalar>   (tempx,tempy);
-      exact_c   = masa_eval_exact_rho_C<Scalar> (tempx,tempy);
-      exact_c3  = masa_eval_exact_rho_C3<Scalar>(tempx,tempy);
-
-      // or 3d
-      exact_u   = masa_eval_exact_u  <Scalar>   (tempx,tempy,tempz);
-      exact_t   = masa_eval_exact_t  <Scalar>   (tempx,tempy,tempz);
-      exact_rho = masa_eval_exact_rho<Scalar>   (tempx,tempy,tempz);
-      exact_c   = masa_eval_exact_rho_C<Scalar> (tempx,tempy,tempz);
-      exact_c3  = masa_eval_exact_rho_C3<Scalar>(tempx,tempy,tempz);
-
+    
       test(ufield);
       test(efield);
       test(cfield);

@@ -65,7 +65,7 @@ program main
   print*,'Updated L = ',value
 
   ! evaluate at a particular point
-  out = masa_eval_1d_source_u(value)
+  out = masa_eval_1d_source_rho_u(value)
   write(6,*) "value is: ", out 
 
   call exit(0)

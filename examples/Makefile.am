@@ -77,8 +77,25 @@ example_DATA             += f_euler.f90
 
 TESTS_ENVIRONMENT          = 
 TESTS                      = init.sh              \
+			     display_solutions    \
+                             switch               \
+	                     euler_example        \
+	                     euler_transient      \
+                             heat_example         \
+                             navierstokes         \
+                             radiation            \
+                             ablation_example     \
+                             rans_sa              \
+                             fans_sa              \
+                             fans_sa_finite_d     \
+                             cp_gaussian          \
+	                     euler_chem           \
 			     c_init.sh            \
+                             c_euler_example      \
+                             c_heat_example       \
 			     f_init.sh            \
+                             f_euler              \
+                             f_cns                \
                              finalize.sh
 
 EXTRA_DIST                 = init.sh \
