@@ -48,30 +48,27 @@ int main()
   masa_init("nick","heateq_1d_steady_const");
   masa_init("bob","heateq_1d_steady_const");
   
-  // list
-  masa_list_mms();
+  // we can list these mms with 
+  // masa_list_mms();
 
   // switch
   masa_select_mms("nick");
-  masa_display_param();
+  
+  // we can display the parameter list with
+  // masa_display_param();
 
   // lets examine a particular parameter 
   q=masa_get_param(a);
-  printf("A_x is set to: %g\n", q);
 
   // now lets change that parameters value to something else.
   masa_set_param(a,1.984);
   q=masa_get_param(a);
-  printf("A_x is set to: %g\n", q);
 
   //check all initialized properly
   masa_sanity_check();
   sol = masa_eval_1d_source_t(x);
-  printf("\nt source: %g\n",sol);
   
   masa_select_mms("bob");
-  masa_display_param();
   sol = masa_eval_1d_source_t(x2);
-  printf("\nt source: %g\n",sol);
   return 0; // done
 }

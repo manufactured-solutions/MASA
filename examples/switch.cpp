@@ -48,7 +48,6 @@ int main()
 
   // print all solutions
   masa_printid<Scalar>();
-  cout << endl << endl;
 
   // initialize first solution
   masa_init<Scalar>("alice","heateq_1d_steady_const");
@@ -63,13 +62,11 @@ int main()
   masa_select_mms<Scalar>("alice");
   masa_display_param<Scalar>();
   solution = masa_eval_source_t<Scalar>(1.2);
-  cout << solution << endl;
 
   // now switch to and edit bob
   masa_select_mms<Scalar>("bob");
   masa_display_param<Scalar>();
   solution = masa_eval_source_rho_u<Scalar>(1,1);
-  cout << solution << endl;
 
 }
 
