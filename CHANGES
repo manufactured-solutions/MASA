@@ -1,7 +1,8 @@
 
-Version 0.32 (In progress)
+Version 0.32 (10 June 2011)
+https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.32.0
 
-  * bug fix to support older PGI 8.X and 9.X compilers
+  * bug fixes using iso_c_bindings to support older PGI 8.X and 9.X compilers
   * bug fix for Fortran function pointer support (only affects euler+chemistry MMS)
   * enabled support for VPATH builds
   * regressions expanded to achieve 98%+ line coverage
