@@ -54,8 +54,8 @@
 #define MASA_CXX            "@CXX@"
 #define MASA_CXXFLAGS       "@CXXFLAGS@"
 
-#define MASA_FC            "@FC@"
-#define MASA_FCFLAGS       "@FCFLAGS@"
+#define MASA_FC             "@FC@"
+#define MASA_FCFLAGS        "@FCFLAGS@"
 
 /// \endcond
 
