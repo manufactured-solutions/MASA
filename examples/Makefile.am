@@ -102,7 +102,6 @@ EXTRA_DIST                 = init.sh \
 			     c_init.sh \
 	                     f_init.sh \
                              finalize.sh \
-			     tests.h \
 			     examples.h
 
 #---------------------------------
