@@ -102,7 +102,8 @@ EXTRA_DIST                 = init.sh \
 			     c_init.sh \
 	                     f_init.sh \
                              finalize.sh \
-			     tests.h
+			     tests.h \
+			     examples.h
 
 #---------------------------------
 # Embedded license header support
@@ -119,5 +120,4 @@ EXTRA_DIST                 = init.sh \
 	done
 	touch .license.stamp
 
-EXTRA_DIST  = examples.h
-CLEANFILES = .license.stamp *.mod *.gcda *.gcno
+CLEANFILES  = .license.stamp *.mod *.gcda *.gcno
