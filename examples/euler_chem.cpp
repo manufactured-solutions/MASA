@@ -26,7 +26,9 @@
 // $Id: euler_example.cpp 17232 2011-02-07 23:35:22Z nick $
 //
 // euler_example.cpp:
-// this is an example of the API used for calling the 2D euler equation
+//                    this is an example of the API used for calling 
+//                    the 1D euler equation with chemistry
+// 
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------

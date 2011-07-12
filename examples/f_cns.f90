@@ -22,7 +22,7 @@
 !!
 !!-----------------------------------------------------------------------el-
 !!
-!! f_cns.f90: Fortran Compressible Navier Stokes Example
+!! f_cns.f90: Fortran Compressible Navier Stokes 2D Example
 !!
 !! $Id: 
 !! -------------------------------------------------------------------------

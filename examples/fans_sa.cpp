@@ -25,9 +25,9 @@
 // $Author: nick $
 // $Id: rans_sa.cpp 18184 2011-03-01 20:09:57Z nick $
 //
-// fans_sa_transient_d_finite:
-// this is an example of the API used for calling the spelart alamaras 
-// Favre Average Navier Stokes (FANS) model
+// fans_sa_transient_d_finite: this is an example of the API used for 
+//                             calling the spelart alamaras Favre Average 
+//                             Navier Stokes (FANS) model
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------

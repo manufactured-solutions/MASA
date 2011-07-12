@@ -26,7 +26,8 @@
 // $Id: verify.cpp 12695 2010-08-26 03:47:26Z nick $
 //
 //
-// verify.cpp: test routine to check the conjugate gradient solver
+// display_solutions.cpp: when run, will display all available 
+//                        masa solutions in STDOUT
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------

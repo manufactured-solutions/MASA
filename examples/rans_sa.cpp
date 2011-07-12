@@ -25,9 +25,8 @@
 // $Author$
 // $Id$
 //
-// euler_example.cpp:
-// this is an example of the API used for calling the spelart alamaras 
-// (RANS) model
+// rans_sa.cpp: this is an example of the API used for 
+//              calling the spelart alamaras (RANS) model
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------

@@ -25,8 +25,9 @@
 // $Author: nick $
 // $Id: euler_example.cpp 17232 2011-02-07 23:35:22Z nick $
 //
-// euler_transient.cpp:
-// this is an example of the API used for calling the 1d transient euler equation
+// euler_transient.cpp: this is an example of the API used for 
+//                      calling the 1d transient euler equation
+// 
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
@@ -61,7 +62,7 @@ int main()
   Scalar dt = Scalar(lt)/Scalar(nt);
 
   // initalize
-  err += masa_init<Scalar>("euler-chemistry-test","euler_transient_1d");
+  err += masa_init<Scalar>("euler-test","euler_transient_1d");
 
   // check that all terms have been initialized
   err += masa_sanity_check<Scalar>();

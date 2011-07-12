@@ -25,8 +25,8 @@
 // $Author$
 // $Id$
 //
-// switch.cpp:
-// C++ example demonstrating how to switch between two different solutions
+// switch.cpp: C++ example demonstrating how to switch 
+//             between two different solutions
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------

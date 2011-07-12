@@ -25,7 +25,7 @@
 // $Author: nick $
 // $Id: heat-eq.cpp 18184 2011-03-01 20:09:57Z nick $
 //
-// radiation.cpp: example
+// radiation.cpp: example of calling the radiation apis in masa
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 //
