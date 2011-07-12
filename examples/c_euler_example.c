@@ -25,7 +25,7 @@
 // $Author$
 // $Id$
 //
-// c_euler_example.c: this is an example of the heat equation in 1d for C
+// c_euler_example.c: this is an example of the euler equation in 1d for C
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
