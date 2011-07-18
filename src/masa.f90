@@ -449,6 +449,24 @@ module masa
        real (c_double), value :: y
        
      end function masa_eval_2d_source_rho
+
+  end interface  
+
+  interface 
+     !> Evaluates the two dimensional source term of the laplacian.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_2d_source_f(x,y) bind (C,name='masa_eval_2d_source_f')
+       use iso_c_binding
+       implicit none
+       
+       real (c_double), value :: x
+       real (c_double), value :: y
+       
+     end function masa_eval_2d_source_f
   end interface  
 
   interface 
@@ -847,6 +865,23 @@ module masa
        real (c_double), value :: y
        
      end function masa_eval_2d_exact_t
+  end interface
+
+  interface 
+     !> Evaluates the two dimensional exact solution of phi.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @return Real(8) value for the exact solution.
+     !!
+     real (c_double) function masa_eval_2d_exact_phi(x,y) bind (C,name='masa_eval_2d_exact_phi')
+       use iso_c_binding
+       implicit none
+       
+       real (c_double), value :: x
+       real (c_double), value :: y
+       
+     end function masa_eval_2d_exact_phi
   end interface
 
   interface 

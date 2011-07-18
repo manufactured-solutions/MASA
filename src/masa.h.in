@@ -943,6 +943,11 @@ extern "C" {
    */
   extern double masa_eval_2d_source_rho_e(double x,double y);
 
+  /**
+   * Returns the value of the source term for the laplacian operator.
+   */
+  extern double masa_eval_2d_source_f(double x,double y);
+
   // --------------------------------
   ///
   /// \name 2D Manufactured Analytical Solution Terms
@@ -982,6 +987,13 @@ extern "C" {
    * of the currently selected two dimensional masa function.
    */
   extern double masa_eval_2d_exact_rho    (double x,double y);
+
+  /**
+   * Subroutine that returns
+   * the value of the analytical term for phi
+   * of the currently selected two dimensional masa function.
+   */
+  extern double masa_eval_2d_exact_phi    (double x,double y);
 
   // --------------------------------
   ///
