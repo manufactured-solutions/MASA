@@ -19,6 +19,8 @@ noinst_PROGRAMS += euler_transient heat_example switch ablation_example
 noinst_PROGRAMS += c_heat_example c_euler_example 
 noinst_PROGRAMS += f_cns f_euler 
 noinst_PROGRAMS += cp_gaussian
+noinst_PROGRAMS += laplace_example
+
 
 # ----------------- 
 #    CPP
@@ -28,6 +30,7 @@ MASAshell_SOURCES         = masa_shell.cpp
 display_solutions_SOURCES = display_solutions.cpp
 heat_example_SOURCES      = heat-eq.cpp
 euler_example_SOURCES     = euler_example.cpp
+laplace_example_SOURCES   = laplace_example.cpp
 ablation_example_SOURCES  = ablation_example.cpp
 euler_transient_SOURCES   = euler_transient.cpp
 navierstokes_SOURCES      = compressible_navier_stokes.cpp
@@ -80,6 +83,7 @@ TESTS                      = init.sh              \
 			     display_solutions    \
                              switch               \
 	                     euler_example        \
+	                     laplace_example      \
 	                     euler_transient      \
                              heat_example         \
                              navierstokes         \
