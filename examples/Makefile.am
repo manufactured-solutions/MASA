@@ -16,11 +16,10 @@ bin_PROGRAMS  = MASAshell
 noinst_PROGRAMS  = MASAshell display_solutions euler_example navierstokes 
 noinst_PROGRAMS += rans_sa fans_sa fans_sa_finite_d radiation euler_chem 
 noinst_PROGRAMS += euler_transient heat_example switch ablation_example
-noinst_PROGRAMS += c_heat_example c_euler_example 
+noinst_PROGRAMS += c_heat_example c_euler_example c_laplace_example
 noinst_PROGRAMS += f_cns f_euler 
 noinst_PROGRAMS += cp_gaussian
 noinst_PROGRAMS += laplace_example
-
 
 # ----------------- 
 #    CPP
@@ -96,6 +95,7 @@ TESTS                      = init.sh              \
 	                     euler_chem           \
 			     c_init.sh            \
                              c_euler_example      \
+                             c_laplace_example    \
                              c_heat_example       \
 			     f_init.sh            \
                              f_euler              \

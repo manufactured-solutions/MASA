@@ -175,6 +175,7 @@ extern "C" double masa_eval_1d_grad_rho  (double x){return(masa_eval_grad_rho<do
 // --------------------------------
 
 extern "C" double masa_eval_2d_source_t    (double x,double y){return masa_eval_source_t<double>  (x,y);}
+extern "C" double masa_eval_2d_source_f    (double x,double y){return masa_eval_source_f<double>  (x,y);}
 extern "C" double masa_eval_2d_source_u    (double x,double y){return(masa_eval_source_u<double>  (x,y));}
 extern "C" double masa_eval_2d_source_v    (double x,double y){return(masa_eval_source_v<double>  (x,y));}
 extern "C" double masa_eval_2d_source_e    (double x,double y){return(masa_eval_source_e<double>  (x,y));}
@@ -189,6 +190,7 @@ extern "C" double masa_eval_2d_exact_u     (double x,double y){return(masa_eval_
 extern "C" double masa_eval_2d_exact_v     (double x,double y){return(masa_eval_exact_v<double>  (x,y));}
 extern "C" double masa_eval_2d_exact_p     (double x,double y){return(masa_eval_exact_p<double>  (x,y));}
 extern "C" double masa_eval_2d_exact_rho   (double x,double y){return(masa_eval_exact_rho<double>(x,y));}
+extern "C" double masa_eval_2d_exact_phi   (double x,double y){return(masa_eval_exact_phi<double>(x,y));}
 
 extern "C" double masa_eval_2d_grad_u   (double x,double y,int i){return(masa_eval_grad_u<double>  (x,y,i));}
 extern "C" double masa_eval_2d_grad_v   (double x,double y,int i){return(masa_eval_grad_v<double>  (x,y,i));}

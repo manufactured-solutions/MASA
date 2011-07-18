@@ -25,25 +25,24 @@
 // $Author: nick $
 // $Id: 
 //
-// laplace_example.cpp: example of the API used for
-//                      the 2D laplace's equation
+// c_laplace_example.cpp: example of the API used for
+//                        the 2D laplace's equation
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 //
 #include <examples.h>
 
-using namespace MASA;
-typedef double Scalar;
-
 int main()
 {
+  int i,j,k;
+
   // declarations
-  Scalar ffield,phi_field;
-  Scalar tempx,tempy;
+  double ffield,phi_field;
+  double tempx,tempy;
 
   //problem size
-  Scalar lx,ly;
-  Scalar dx,dy;
+  double lx,ly;
+  double dx,dy;
   int nx,ny;
 
   // error condition
@@ -59,17 +58,17 @@ int main()
   dy=ly/ny;
 
   // initialize the problem
-  err += masa_init<Scalar>("laplace example","laplace_2d");
+  err += masa_init("laplace example","laplace_2d");
 
   // evaluate source terms over the domain (0<x<1, 0<y<1) 
-  for(int i=0;i<nx;i++)
-    for(int j=0;j<nx;j++)
+  for(i=0;i<nx;i++)
+    for(j=0;j<nx;j++)
       {  
 	tempx=i*dx;
 	tempy=j*dy;
 
-	ffield    = masa_eval_source_f <Scalar>  (tempx,tempy);
-	phi_field = masa_eval_exact_phi<Scalar>  (tempx,tempy);
+	ffield    = masa_eval_2d_source_f (tempx,tempy);
+	phi_field = masa_eval_2d_exact_phi(tempx,tempy);
 
 	test(ffield);
 	test(phi_field);
