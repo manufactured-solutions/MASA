@@ -127,6 +127,7 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
   anim.push_back(new fans_sa_transient_free_shear<Scalar>());
 
   anim.push_back(new radiation_integrated_intensity<Scalar>());
+  anim.push_back(new laplace_2d<Scalar>());
 
   // SMASA::
   anim.push_back(new cp_normal<Scalar>());

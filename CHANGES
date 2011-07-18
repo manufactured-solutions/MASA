@@ -1,6 +1,7 @@
 
 Version 0.33 (In Progress)
-  * added navierstokes_4d_compressible_powerlaw solution
+  * partially added navierstokes_4d_compressible_powerlaw solution
+  * added laplaces equation (2d) solution, with examples
 
 Version 0.32 (10 June 2011)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.32.0

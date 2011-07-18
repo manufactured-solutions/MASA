@@ -3,7 +3,7 @@ h_sources  = masa.h masa_internal.h smasa.h                                  \
 cc_sources = masa_core.cpp masa_class.cpp masa_map.cpp heat.cpp euler.cpp    \
              cns.cpp sod.cpp cmasa.cpp axi_euler.cpp axi_cns.cpp rans_sa.cpp \
              euler_chem.cpp euler_transient.cpp radiation.cpp fans_sa.cpp    \
-             ablation.cpp cp_normal.cpp nsctpl.cpp
+             ablation.cpp cp_normal.cpp nsctpl.cpp laplace.cpp
 
 # License Information
 

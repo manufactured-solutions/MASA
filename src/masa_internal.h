@@ -1254,6 +1254,26 @@ namespace MASA
   };
 
   // ------------------------------------------------------
+  // ---------- Laplace's Equation               ----------
+  // ------------------------------------------------------
+  template <typename Scalar>
+  class laplace_2d : public manufactured_solution<Scalar>
+  {
+    using manufactured_solution<Scalar>::pi;
+    using manufactured_solution<Scalar>::PI;
+
+    Scalar Ly;
+    Scalar Lx;
+
+  public:
+    laplace_2d(); // constructor
+    int init_var();
+
+    Scalar eval_q_t (Scalar,Scalar);
+
+  };
+
+  // ------------------------------------------------------
   // ------------- compressible navier stokes  ------------
   // ------------------------------------------------------
 
