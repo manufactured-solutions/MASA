@@ -79,7 +79,6 @@ Scalar MASA::laplace_2d<Scalar>::eval_q_f(Scalar x,Scalar y)
   f  = 2*pow(Lx-x,2) - 8*(Lx-x)*(Lx+x) + 2*pow(Lx+x,2);
   f += 2*pow(Ly-y,2) - 8*(Ly-y)*(Ly+y) + 2*pow(Ly+y,2);
   return f;
-
 }
 
 template <typename Scalar>
@@ -88,7 +87,6 @@ Scalar MASA::laplace_2d<Scalar>::eval_exact_phi(Scalar x,Scalar y)
   Scalar phi;
   phi = pow(Ly-y,2)*pow(Ly+y,2) + pow(Lx-x,2)*pow(Lx+x,2);
   return phi;
-
 }
 
 // ----------------------------------------

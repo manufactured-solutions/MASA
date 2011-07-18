@@ -18,6 +18,7 @@ check_PROGRAMS   = misc                \
 	           vec                 \
 	           pass_func           \
 		   purge               \
+		   laplace             \
 	           heat_const_steady   \
 		   heat_var_steady     \
 	           heat_const_unsteady \
@@ -78,6 +79,7 @@ uninit_SOURCES              = uninit.cpp
 vec_SOURCES                 = vec.cpp
 pass_func_SOURCES           = pass_func.cpp
 purge_SOURCES               = purge.cpp
+laplace_SOURCES             = laplace.cpp
 heat_const_steady_SOURCES   = heatsc.cpp
 heat_var_steady_SOURCES     = heatsv.cpp
 heat_const_unsteady_SOURCES = heatuc.cpp
@@ -171,6 +173,7 @@ TESTS                      = init.sh              \
 			     vec                  \
 			     pass_func            \
 			     purge                \
+			     laplace              \
 			     heat_const_steady    \
 			     heat_var_steady      \
 	                     heat_const_unsteady  \
