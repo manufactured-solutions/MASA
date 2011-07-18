@@ -25,30 +25,28 @@
 // $Author: nick $
 // $Id: 
 //
-// laplace.cpp: regression testing laplace solution class
+// c_laplace.c: regression testing laplace solution class
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 //
 
 #include<tests.h>
-#include <cmath>
 
-using namespace MASA;
+const double thresh = 1.0e-15; // should be small enough to catch any obvious problems
 
-template<typename Scalar>
-int run_regression()
+int main()
 {
-  const Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
 
   // variables: 
-  Scalar Lx;
-  Scalar Ly;
-  Scalar field,field2,field3;
-  Scalar exact_phi,exact_phi2,exact_phi3;
+  double Lx;
+  double Ly;
+  double field,field2,field3;
+  double exact_phi,exact_phi2,exact_phi3;
 
   // parameters
-  Scalar x;
-  Scalar y;
+  double x;
+  double y;
+  int i,j,k;
 
   // initalize
   int err;
@@ -57,38 +55,38 @@ int run_regression()
   int lx=2;     // length
   int ly=1; 
   
-  Scalar dx=Scalar(lx)/Scalar(nx);
-  Scalar dy=Scalar(ly)/Scalar(ny);
+  double dx=(double)lx/(double)nx;
+  double dy=(double)ly/(double)ny;
 
-  masa_init<Scalar>("laplace regression test","laplace_2d");
+  masa_init("laplace regression test","laplace_2d");
 
   // set params
-  masa_init_param<Scalar>();
+  masa_init_param();
 
   // get vars for comparison
-  Ly = masa_get_param<Scalar>("Ly");
-  Lx = masa_get_param<Scalar>("Lx");
+  Ly = masa_get_param("Ly");
+  Lx = masa_get_param("Lx");
 
   // check that all terms have been initialized
-  err = masa_sanity_check<Scalar>();
+  err = masa_sanity_check();
   if(err != 0)
     {
-      std::cout << "MASA :: Sanity Check Failed!\n";
+      printf( "MASA :: Sanity Check Failed!\n");
       exit(1);
     }  
 
-  // evaluate source terms (2D)
-  for(int i=0;i<nx;i++)
-    for(int j=0;j<ny;j++)    
+  // evaluate source terms (2d)
+  for(i=0;i<nx;i++)
+    for(j=0;j<ny;j++)    
       {
 	x=i*dx;
 	y=j*dy;
 
 	//evalulate source terms
-	field     = masa_eval_source_f  <Scalar>(x,y);
+	field     = masa_eval_2d_source_f  (x,y);
 
 	//evaluate analytical terms
-	exact_phi = masa_eval_exact_phi <Scalar>(x,y);
+	exact_phi = masa_eval_2d_exact_phi (x,y);
 
 	// get 'exact' solution
 	field2  = 2*pow(Lx-x,2) - 8*(Lx-x)*(Lx+x) + 2*pow(Lx+x,2);
@@ -100,13 +98,13 @@ int run_regression()
 	// choose between abs and rel error
 #ifdef MASA_STRICT_REGRESSION
 
-	field3     = std::abs(field-field2);
-	exact_phi3 = std::abs(exact_phi-exact_phi2);
+	field3     = fabs(field-field2);
+	exact_phi3 = fabs(exact_phi-exact_phi2);
 
 #else
 
-	field3     = std::abs(field-field2)/std::abs(field2);
-	exact_phi3 = std::abs(exact_phi-exact_phi2)/std::abs(exact_phi2);
+	field3     = fabs(field-field2)/fabs(field2);
+	exact_phi3 = fabs(exact_phi-exact_phi2)/fabs(exact_phi2);
 
 #endif	
 	threshcheck(field3,thresh);
@@ -118,14 +116,3 @@ int run_regression()
   return 0;
   
 } // end run_regression
-
-int main()
-{
-  int err=0;
-
-  err += run_regression<double>();
-  err += run_regression<long double>();
-
-  return err;
-}
-

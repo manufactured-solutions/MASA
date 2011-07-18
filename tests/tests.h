@@ -52,6 +52,25 @@ double nancheck(double x)
 
 }
 
+double threshcheck(double x, double thresh)
+{
+  if(isnan(x))
+    {
+      printf("MASA REGRESSION FAILURE:: nan found!\n");
+      exit(1);
+    }
+  
+  if(x > thresh)
+    {
+      printf("\nMASA REGRESSION TEST FAILED!\n");
+      printf("Difference of: %g\n",x);
+      printf("Exceeded Threshold: %g\n",thresh);
+      exit(1);
+    }
+  return 0;  
+}
+
+
 
 double test_default(double x)
 {

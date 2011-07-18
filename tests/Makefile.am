@@ -44,6 +44,7 @@ check_PROGRAMS   = misc                \
 	           c_source            \
 	           c_purge             \
 	           c_array             \
+	           c_laplace           \
 	           c_heat1dsc          \
 	           c_heat2dsc          \
 	           c_heat3dsc          \
@@ -110,6 +111,7 @@ c_misc_SOURCES          = c_misc.c
 c_source_SOURCES        = c_source.c
 c_purge_SOURCES         = c_purge.c
 c_array_SOURCES         = c_array.c
+c_laplace_SOURCES       = c_laplace.c
 c_heat1dsc_SOURCES      = c_heat1dsc.c
 c_heat2dsc_SOURCES      = c_heat2dsc.c
 c_heat3dsc_SOURCES      = c_heat3dsc.c
@@ -200,6 +202,7 @@ TESTS                      = init.sh              \
 	                     c_array              \
 	                     c_source             \
 	                     c_purge              \
+	                     c_laplace            \
 	                     c_heat1dsc           \
 	                     c_heat2dsc           \
 	                     c_heat3dsc           \
