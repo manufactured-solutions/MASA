@@ -90,10 +90,34 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
   anim.push_back(new masa_test_function<Scalar>());   // test function
   anim.push_back(new masa_uninit<Scalar>()); // another test function
   
-  // register solutions here
+  //  ** register solutions here - lets keep this alphabetical ** 
+
+  // axisymmetric solutions
+  anim.push_back(new axi_cns<Scalar>());
+  anim.push_back(new axi_euler<Scalar>());
+
+  // SMASA::
+  anim.push_back(new cp_normal<Scalar>());
+
+  // euler 
+  anim.push_back(new euler_1d<Scalar>());
+  anim.push_back(new euler_2d<Scalar>());
+  anim.push_back(new euler_3d<Scalar>());
+  anim.push_back(new euler_transient_1d<Scalar>());
+  anim.push_back(new euler_chem_1d<Scalar>());
+
+  // favre averaged navier stokes
+  anim.push_back(new fans_sa_steady_wall_bounded<Scalar>());
+  anim.push_back(new fans_sa_transient_free_shear<Scalar>());
+
+  // heat equation
   anim.push_back(new heateq_1d_steady_const<Scalar>());
   anim.push_back(new heateq_2d_steady_const<Scalar>());
   anim.push_back(new heateq_3d_steady_const<Scalar>());
+
+  anim.push_back(new heateq_1d_steady_var<Scalar>());
+  anim.push_back(new heateq_2d_steady_var<Scalar>());
+  anim.push_back(new heateq_3d_steady_var<Scalar>());
 
   anim.push_back(new heateq_1d_unsteady_const<Scalar>());
   anim.push_back(new heateq_2d_unsteady_const<Scalar>());
@@ -103,34 +127,23 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
   anim.push_back(new heateq_2d_unsteady_var<Scalar>());
   anim.push_back(new heateq_3d_unsteady_var<Scalar>());
 
-  anim.push_back(new heateq_1d_steady_var<Scalar>());
-  anim.push_back(new heateq_2d_steady_var<Scalar>());
-  anim.push_back(new heateq_3d_steady_var<Scalar>());
+  // laplacian
+  anim.push_back(new laplace_2d<Scalar>());
 
-  anim.push_back(new euler_1d<Scalar>());
-  anim.push_back(new euler_2d<Scalar>());
-  anim.push_back(new euler_3d<Scalar>());
-  anim.push_back(new euler_transient_1d<Scalar>());
-  anim.push_back(new axi_euler<Scalar>());
-  anim.push_back(new euler_chem_1d<Scalar>());
-
-  anim.push_back(new sod_1d<Scalar>());
-
+  // navier stokes
   anim.push_back(new navierstokes_2d_compressible<Scalar>());
   anim.push_back(new navierstokes_3d_compressible<Scalar>());
   anim.push_back(new navierstokes_4d_compressible_powerlaw<Scalar>());
   anim.push_back(new navierstokes_ablation_1d_steady<Scalar>());
-  anim.push_back(new axi_cns<Scalar>());
 
-  anim.push_back(new rans_sa<Scalar>());
-  anim.push_back(new fans_sa_steady_wall_bounded<Scalar>());
-  anim.push_back(new fans_sa_transient_free_shear<Scalar>());
-
+  // radiation
   anim.push_back(new radiation_integrated_intensity<Scalar>());
-  anim.push_back(new laplace_2d<Scalar>());
 
-  // SMASA::
-  anim.push_back(new cp_normal<Scalar>());
+  // reynolds averaged navier stokes
+  anim.push_back(new rans_sa<Scalar>());
+
+  // sod shock tube
+  anim.push_back(new sod_1d<Scalar>());
 
   return 0;
 }
