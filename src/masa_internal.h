@@ -140,6 +140,8 @@ namespace MASA
     virtual Scalar eval_exact_p(Scalar,Scalar,Scalar)         {std::cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
     virtual Scalar eval_exact_p(Scalar,Scalar,Scalar,Scalar)  {std::cout << "MASA ERROR:: Analytical Solution (e) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 4d problems
 
+    virtual Scalar eval_exact_phi(Scalar,Scalar)              {std::cout << "MASA ERROR:: Analytical Solution (phi) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
+
     virtual Scalar eval_exact_rho(Scalar)                      {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // returns value of analytical solution
     virtual Scalar eval_exact_rho(Scalar,Scalar)               {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 2d problems
     virtual Scalar eval_exact_rho(Scalar,Scalar,Scalar)        {std::cout << "MASA ERROR:: Analytical Solution (rho) is unavailable or not properly loaded.\n"; return -1.33;}; // overloaded for 3d problems
@@ -166,6 +168,8 @@ namespace MASA
    *
    * -------------------------------------------------------------------------------------------
    */
+
+    virtual Scalar eval_q_f(Scalar, Scalar)               {std::cout << "MASA ERROR:: Solution (f) has not been properly loaded.\n"; return -1.33;};  // returns value of source term (f)
 
     virtual Scalar eval_q_t(Scalar)                       {std::cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};  // returns value of source term (temp)
     virtual Scalar eval_q_t(Scalar, Scalar)               {std::cout << "MASA ERROR:: Solution has not been properly loaded.\n"; return -1.33;};  // returns value of source term (temp)
@@ -1269,7 +1273,8 @@ namespace MASA
     laplace_2d(); // constructor
     int init_var();
 
-    Scalar eval_q_t (Scalar,Scalar);
+    Scalar eval_q_f(Scalar,Scalar);
+    Scalar eval_exact_phi(Scalar,Scalar);
 
   };
 

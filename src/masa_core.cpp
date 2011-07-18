@@ -660,6 +660,12 @@ Scalar MASA::masa_eval_source_t(Scalar x,Scalar y,Scalar t)
 }
 
 template <typename Scalar>
+Scalar MASA::masa_eval_source_f(Scalar x,Scalar y)
+{
+  return masa_master<Scalar>().get_ms().eval_q_f(x,y);
+}
+
+template <typename Scalar>
 Scalar MASA::masa_eval_source_u(Scalar x,Scalar y)
 {
   return masa_master<Scalar>().get_ms().eval_q_u(x,y);
@@ -734,6 +740,12 @@ template <typename Scalar>
 Scalar MASA::masa_eval_exact_u(Scalar x,Scalar y)
 {
   return masa_master<Scalar>().get_ms().eval_exact_u(x,y);
+}
+
+template <typename Scalar>
+Scalar MASA::masa_eval_exact_phi(Scalar x,Scalar y)
+{
+  return masa_master<Scalar>().get_ms().eval_exact_phi(x,y);
 }
 
 template <typename Scalar>
@@ -1215,6 +1227,7 @@ int MASA::masa_get_numeric_version()
   template int masa_get_vec<Scalar>(std::string,std::vector<Scalar>&); \
   template Scalar masa_eval_source_t  <Scalar>(Scalar);         \
   template Scalar masa_eval_source_t  <Scalar>(Scalar,Scalar);  \
+  template Scalar masa_eval_source_f  <Scalar>(Scalar,Scalar);  \
   template Scalar masa_eval_source_u  <Scalar>(Scalar); \
   template Scalar masa_eval_source_v  <Scalar>(Scalar);         \
   template Scalar masa_eval_source_w  <Scalar>(Scalar); \
@@ -1271,6 +1284,7 @@ int MASA::masa_get_numeric_version()
   template Scalar masa_eval_exact_w      <Scalar>(Scalar,Scalar);  \
   template Scalar masa_eval_exact_p      <Scalar>(Scalar,Scalar); \
   template Scalar masa_eval_exact_rho    <Scalar>(Scalar,Scalar); \
+  template Scalar masa_eval_exact_phi    <Scalar>(Scalar,Scalar); \
   template Scalar masa_eval_exact_nu     <Scalar>(Scalar,Scalar); \
   template Scalar masa_eval_source_t  <Scalar>(Scalar,Scalar,Scalar,Scalar);  \
   template Scalar masa_eval_source_u  <Scalar>(Scalar,Scalar,Scalar); \

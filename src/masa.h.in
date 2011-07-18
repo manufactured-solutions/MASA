@@ -271,6 +271,9 @@ namespace MASA
   Scalar masa_eval_source_t  (Scalar,Scalar,Scalar); //x,y,t
 
   template <typename Scalar>
+  Scalar masa_eval_source_f  (Scalar,Scalar);
+
+  template <typename Scalar>
   Scalar masa_eval_source_u  (Scalar,Scalar);
 
   template <typename Scalar>
@@ -309,6 +312,9 @@ namespace MASA
 
   template <typename Scalar>
   Scalar masa_eval_exact_u      (Scalar,Scalar);
+
+  template <typename Scalar>
+  Scalar masa_eval_exact_phi    (Scalar,Scalar);
 
   template <typename Scalar>
   Scalar masa_eval_exact_v      (Scalar,Scalar);
