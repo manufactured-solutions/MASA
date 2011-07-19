@@ -58,6 +58,7 @@ check_PROGRAMS   = misc                \
                    f_misc              \
                    f_array             \
                    f_purge             \
+                   f_laplace           \
                    f_heat              \
                    f_euler1d           \
                    f_euler2d           \
@@ -130,11 +131,14 @@ c_radiation_SOURCES     = c_radiation.c
 f_misc_SOURCES              = f_misc.F90
 f_misc_LDADD                = -lfmasa
 
-f_array_SOURCES              = f_array.F90
-f_array_LDADD                = -lfmasa
+f_array_SOURCES             = f_array.F90
+f_array_LDADD               = -lfmasa
 
-f_purge_SOURCES              = f_purge.F90
-f_purge_LDADD                = -lfmasa
+f_purge_SOURCES             = f_purge.F90
+f_purge_LDADD               = -lfmasa
+
+f_laplace_SOURCES           = f_laplace.F90
+f_laplace_LDADD             = -lfmasa
 
 f_heat_SOURCES              = f_heat.F90 heat_source.c 
 f_heat_LDADD                = -lfmasa
@@ -217,6 +221,7 @@ TESTS                      = init.sh              \
 		             f_misc               \
 	                     f_array              \
 		             f_purge              \
+		             f_laplace            \
 		             f_heat               \
 		             f_euler1d            \
 		             f_euler2d            \
