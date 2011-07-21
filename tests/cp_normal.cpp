@@ -23,9 +23,8 @@
 //
 //-----------------------------------------------------------------------el-
 // $Author: nick $
-// $Id: euler2d.cpp 19332 2011-03-31 20:05:16Z nick $
+// $Id: 
 //
-// euler2d.cpp :program that tests euler2d from masa against known source term
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
@@ -54,13 +53,13 @@ int run_regression()
 
   // call the sanity check routine 
   // (tests that all variables have been initialized)
-  err += masa_sanity_check<Scalar>();
+  //err += masa_sanity_check<Scalar>();
 
   // grab the default data vector:
-  masa_get_vec<Scalar>("vec_data",data);
+  //masa_get_vec<Scalar>("vec_data",data);
 
   // change the data vector to new values:
-  masa_set_vec<Scalar>("vec_data",data);
+  //masa_set_vec<Scalar>("vec_data",data);
 
   // evaluate likelyhood, prior, posterior
     for(int i=0;i<nx;i++)
