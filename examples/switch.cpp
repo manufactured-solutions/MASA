@@ -33,8 +33,7 @@
 //
 
 // header contains all subroutine information
-#include <masa.h>
-#include <iostream>
+#include <examples.h>
 
 // MASA was designed with a custom namespace
 using namespace MASA;
@@ -45,6 +44,9 @@ typedef double Scalar;
 int main()
 {
   Scalar solution;
+
+  // reroute stdout: comment to display to screen
+  freopen("/dev/null","w",stdout);
 
   // print all solutions
   masa_printid<Scalar>();

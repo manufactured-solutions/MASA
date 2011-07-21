@@ -47,15 +47,18 @@ int main()
   // init
   masa_init("nick","heateq_1d_steady_const");
   masa_init("bob","heateq_1d_steady_const");
+
+  // reroute stdout: comment to display to screen
+  freopen("/dev/null","w",stdout);
   
-  // we can list these mms with 
-  // masa_list_mms();
+  // we can list initialized mms with 
+   masa_list_mms();
 
   // switch
   masa_select_mms("nick");
   
   // we can display the parameter list with
-  // masa_display_param();
+  masa_display_param();
 
   // lets examine a particular parameter 
   q=masa_get_param(a);

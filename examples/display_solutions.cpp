@@ -35,12 +35,16 @@
 #include <iostream>
 #include <math.h>
 #include <masa.h>
+#include <stdio.h>
 
 using namespace MASA;
 using namespace std;
 
 int main()
 {
+  // reroute stdout: comment to display to screen
+  freopen("/dev/null","w",stdout);
+
   // show available solutions
   return masa_printid<double>();
 
