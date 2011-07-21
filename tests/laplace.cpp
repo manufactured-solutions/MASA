@@ -91,10 +91,10 @@ int run_regression()
 	exact_phi = masa_eval_exact_phi <Scalar>(x,y);
 
 	// get 'exact' solution
-	field2  = 2*pow(Lx-x,2) - 8*(Lx-x)*(Lx+x) + 2*pow(Lx+x,2);
-	field2 += 2*pow(Ly-y,2) - 8*(Ly-y)*(Ly+y) + 2*pow(Ly+y,2);
+	field2  = 2*std::pow(Lx-x,2) - 8*(Lx-x)*(Lx+x) + 2*std::pow(Lx+x,2);
+	field2 += 2*std::pow(Ly-y,2) - 8*(Ly-y)*(Ly+y) + 2*std::pow(Ly+y,2);
 	
-	exact_phi2 = pow(Ly-y,2)*pow(Ly+y,2) + pow(Lx-x,2)*pow(Lx+x,2);
+	exact_phi2 = std::pow(Ly-y,2)*std::pow(Ly+y,2) + std::pow(Lx-x,2)*std::pow(Lx+x,2);
 	
 	// test the result is roughly zero
 	// choose between abs and rel error
