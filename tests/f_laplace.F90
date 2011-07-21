@@ -33,7 +33,7 @@ program main
   implicit none
 
   ! threshold calculation
-  real(8) :: thresh = 2d-15
+  real(8) :: thresh = 1d-14
 
   ! solutions
   real(8) :: field,field2,field3
