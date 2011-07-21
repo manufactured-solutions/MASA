@@ -1,0 +1,68 @@
+/*! \page laplace Laplace's Equation
+
+\latexonly
+
+\subsection{Mathematical Model}
+Laplace's Equation is an elliptic second-order partial differential equation: 
+\begin{equation}
+  \nabla^2 \phi = 0
+\end{equation}
+Where $\phi$ is a scalar. 
+\newline
+\newline
+We will be generating a solution for the two dimensional form of this equation, 
+\begin{equation}
+\phi = \phi(x,y)
+\end{equation}
+Thus, our model equation becomes,
+\begin{equation}
+  \frac{\partial^2 \phi}{\partial x^2} + \frac{\partial^2 \phi}{\partial y^2} = 0
+\end{equation}
+Let's manufacture a solution, with two constants:
+\begin{equation}
+    \phi(x,y) = (Ly-y)^2 (Ly+y)^2 + (Lx-x)^2 (Lx+x)^2
+\end{equation}  
+And insert this back into the governing equation:
+\begin{equation}
+  \frac{\partial^2 ((Lx-x)^2 (Lx+x)^2)}{\partial x^2} + \frac{\partial^2 ((Ly-y)^2 (Ly+y)^2)}{\partial y^2} = 0
+\end{equation}
+Thus, our source term is:
+\begin{equation}
+    \begin{split}
+      f(x,y) &= 2(Lx-x)^2 - 8(Lx-x)(Lx+x)+2(Lx+x)^2 \\
+             &+ 2(Ly-y)^2 - 8(Ly-y)(Ly+y)+2(Ly+y)^2
+    \end{split}
+\end{equation}
+
+
+
+\subsection{MASA API}
+\endlatexonly
+
+Initialization:
+laplace_2d
+
+\latexonly
+\begin{table} 
+\begin{center} 
+\begin{tabular}{|rr|}
+\hline
+%parameters: & & \\
+%\hline 
+ Lx & Ly \\
+\hline
+\end{tabular} 
+\end{center}  
+\caption{Parameters used by Laplace's Equation in the solution}
+\label{tab:L_values}
+\end{table}
+\endlatexonly
+
+Functions:
+
+\li masa_init()
+\li masa_eval_2d_source_f()
+\li masa_eval_2d_exact_phi()
+\li masa_display_param()
+
+*/

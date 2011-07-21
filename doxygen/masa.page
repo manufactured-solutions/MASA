@@ -129,11 +129,12 @@ Please check back for details on how to cite MASA.
 The following sections detail all available manufactured solutions in MASA.
 
 <ul>
-<li> \subpage heat  </li>
-<li> \subpage euler </li>
-<li> \subpage cns   </li>
-<li> \subpage sod   </li>
-<li> \subpage rans  </li>
+<li> \subpage heat    </li>
+<li> \subpage laplace </li>
+<li> \subpage euler   </li>
+<li> \subpage cns     </li>
+<li> \subpage sod     </li>
+<li> \subpage rans    </li>
 </ul>
 
 */
