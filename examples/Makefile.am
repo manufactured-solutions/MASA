@@ -20,6 +20,7 @@ noinst_PROGRAMS += c_heat_example c_euler_example c_laplace_example
 noinst_PROGRAMS += f_cns f_euler f_laplace
 noinst_PROGRAMS += cp_gaussian
 noinst_PROGRAMS += laplace_example
+noinst_PROGRAMS += laplacian
 
 # ----------------- 
 #    CPP
@@ -55,6 +56,7 @@ cp_gaussian_SOURCES       = cp_gaussian.cpp
 
 c_heat_example_SOURCES    = c_heat_example.c
 c_euler_example_SOURCES   = c_euler_example.c
+laplacian                 = laplacian.c
 
 example_DATA             += c_heat_example.c c_euler_example.c
 
