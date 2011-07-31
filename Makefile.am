@@ -2,7 +2,7 @@ include $(top_srcdir)/doxygen/aminclude.am
 
 # Build in these directories:
 AUTOMAKE_OPTIONS = foreign
-SUBDIRS          = src examples tests doxygen
+SUBDIRS          = src examples tests doxygen tutorial
 
 # Distribute these directories:
 DISTDIRS = src examples
