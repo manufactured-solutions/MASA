@@ -40,8 +40,6 @@ int  converged          (double *a, double *b, double eps, int n, double *diff);
 void apply_dirichlet_bc (const int col_id, const int row_id, const double value, pstruct *model);
 void solve_gauss        (pstruct *model);
 double compute_l2_error (pstruct *model);
-// int    cg               (int n,double **A,double* b,double* x);
-void cg (double **a, double *b, double *x, int n );
 
 int main(int argc, char *argv[])
 {
@@ -71,22 +69,11 @@ int main(int argc, char *argv[])
   init_masa          (&model);
   apply_bcs          (&model);
 
-  //  print_matrix(&model);
-
   /* Solve */
 
-#if 1
   solve_gauss       (&model);
-#else
-  //cg(model.n,model.A,model.rhs,model.phi);
-  cg(model.A,model.rhs,model.phi,model.n);
-#endif
-
-  //  print_matrix(&model);
 
   /* Compute Error */
-
-  //compute_error(&model);
 
   printf("\n** Error Analysis\n");
   printf("   --> npts     = %i\n",model.npts);
@@ -155,14 +142,14 @@ void print_matrix(pstruct *model)
 {
   int i,j;
 
-  printf("    ");
+  printf("     j =");
   for(j=0;j<model->n;j++)
     printf("%6i ",j);
-  printf("\n");
+  printf("\n\n");
   
   for(i=0;i<model->n;i++)
     {
-      printf("%3i: ",j);
+      printf("i = %2i: ",i);
       for(j=0;j<model->n;j++)
 	printf("%6.2f ",model->A[i][j]);
       printf("\n");
@@ -315,11 +302,11 @@ void problem_initialize(const int npts, const double length, pstruct *model)
 
   /* Perform memory allocation */
 
-  model->rhs = calloc(sizeof(double  ),model->n);
-  model->phi = calloc(sizeof(double  ),model->n);
-  model->A   = calloc(sizeof(double *),model->n);
+  model->rhs = (double *) calloc(sizeof(double  ),     model->n);
+  model->phi = (double *) calloc(sizeof(double  ),     model->n);
+  model->A   = (double **)calloc(sizeof(double *),     model->n);
 
-  if(model->rhs == NULL || model->phi == NULL)
+  if(model->rhs == NULL || model->phi == NULL || model->A  == NULL )
     {
       printf("ERROR: Unable to allocate memory\n");
       exit(0);
@@ -343,21 +330,55 @@ void problem_initialize(const int npts, const double length, pstruct *model)
 void solve_gauss(pstruct *model)
 {
   int it=0;
-  int i,j;
-  double diff=0.;
-  const TOL=1.0e-9;
-
-  const int n=model->n;
-
+  int i,j, itmp;
   double *phi_old;
-
-  phi_old = calloc(sizeof(double),model->n);
+  int   **sparse_index;
+  int    *sparse_count;
+  int col_index;
+  double diff            = 0.0;
+			
+  const double  ZERO_TOL = 1.0e-20;
+  const double CONVG_TOL = 1.0e-9;
+  const int    ITER_MAX  = 30000;
+  const int           n  = model->n;
 
   printf("\n** Solving system using Gauss-Seidel\n");
 
+  phi_old      =        calloc(sizeof(double),model->n);
+  sparse_index = (int **)calloc(sizeof(int *),model->n);
+  sparse_count = ( int *)calloc(sizeof(int)  ,model->n);
+
+  assert(phi_old != NULL && sparse_index != NULL && sparse_count != NULL);
+
+  printf("   --> Building sparse matrix map\n");
+
+  /* Build sparse-matrix mapping */
+
+  for(i=0;i<n;i++)
+    {
+
+      /* Count number of non-zero entries on this row */
+
+      sparse_count[i] = 0;
+      for(j=0;j<n;j++)
+	if(fabs(model->A[i][j]) > ZERO_TOL)
+	  sparse_count[i]++;
+
+      /* Allocate space and store non-zero entries for this row */
+
+      sparse_index[i] = (int *)calloc(sizeof(int), sparse_count[i]);
+
+      sparse_count[i] = 0;
+      for(j=0;j<n;j++)
+	if(fabs(model->A[i][j]) > ZERO_TOL)
+	  sparse_index[i][sparse_count[i]++] = j;
+    }
+
   /* iterate until convergencd */
 
-  while(it < 10000)
+  printf("   --> Solving linear system\n");
+
+  while(it < ITER_MAX)
     {
       /* Save last iterate */
 
@@ -368,25 +389,28 @@ void solve_gauss(pstruct *model)
 	{
 	  model->phi[i] = model->rhs[i];
 	  
-	  /* FD stencil, skip BC rows which have unity diagonal values */
-
-	  if(model->A[i][i] < 0)
-	    for(j=0;j<n;j++)	/* loop-over columns */
-	      {	    
-		/* skip over multiply by zero (or small number) */
-		if(i != j && fabs(model->A[i][j] > 1.e-25) )
-		  model->phi[i] -= model->A[i][j]*model->phi[j];
-	      }
+	  for(j=0;j<sparse_count[i];j++)
+	    {
+	      col_index      = sparse_index[i][j];
+	      if(col_index != i)
+		model->phi[i] -= model->A[i][col_index]*model->phi[col_index];
+	    }
 	  
 	  model->phi[i] =  model->phi[i] / model->A[i][i];
 	}
 
       it++;
 
-      if(converged(model->phi,phi_old,TOL,model->n,&diff)) break;
-    }
+      if(converged(model->phi,phi_old,CONVG_TOL,model->n,&diff)) break;
+
+    } /* end main iterative loop */
 
   free(phi_old);
+  for(i=0;i<model->n;i++)
+    free(sparse_index[i]);
+  free(sparse_index);
+  
+  free(sparse_count);
 
   printf("   --> Converged in %i iters: diff: %15.7g\n", it, diff);
 }
@@ -404,10 +428,9 @@ int converged(double *a, double *b, double eps, int n, double *diff)
 
   if(*diff < eps)
     return(1);
-
-  return(0);
+  else
+    return(0);
 }
-
 
 double compute_l2_error(pstruct *model)
 {
@@ -419,7 +442,6 @@ double compute_l2_error(pstruct *model)
   for(i=0;i<model->npts;i++)
     for(j=0;j<model->npts;j++)
       {
-	//index = i+(j*model->npts);
 	index = j+(i*model->npts);
 	
 	xval = (i)*model->h;

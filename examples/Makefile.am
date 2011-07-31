@@ -56,7 +56,7 @@ cp_gaussian_SOURCES       = cp_gaussian.cpp
 
 c_heat_example_SOURCES    = c_heat_example.c
 c_euler_example_SOURCES   = c_euler_example.c
-laplacian                 = laplacian.c
+laplacian_SOURCES         = laplacian.c
 
 example_DATA             += c_heat_example.c c_euler_example.c
 
