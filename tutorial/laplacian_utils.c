@@ -66,6 +66,21 @@ void init_masa(pstruct *model)
   return;
 }
 
+/*!
+ * \fn enforce_dirichlet_bc(const int row_id, const int col_id, const double value, pstruct *model)
+ *
+ * \brief Enforces a Dirichlet BC in the model system by nullifying
+ * all but the diagonal entry for the row corresponding to a given
+ * solution value. The model RHS forcing function is set to the
+ * desired Dirchlet value and the diagonal is set to unity to enforce
+ * the desired constraint.
+ *
+ * \param row_id Row index to enforce the constraint
+ * \param col_id Column index to enforce the constraint
+ * \param value  Desired solution value
+ * \param model  Pointer to the primary model data-structure
+ */
+
 void enforce_dirichlet_bc(const int row_id, const int col_id, const double value, pstruct *model)
 {
   int i,j;
@@ -81,6 +96,14 @@ void enforce_dirichlet_bc(const int row_id, const int col_id, const double value
 
   return;
 }
+
+/*!
+ * \fn print_matrix(pstruct *model)
+ *
+ * \brief Prints model system matrix and right-hand side vector to stdout.
+ *
+ * \param model  Pointer to the primary model data-structure
+ */
 
 void print_matrix(pstruct *model)
 {
@@ -104,8 +127,6 @@ void print_matrix(pstruct *model)
     printf("%6.2f\n",model->rhs[j]);
 
 }
-
-
 
 void assemble_matrix(int fd_method, pstruct *model)
 {
