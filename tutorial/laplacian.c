@@ -62,8 +62,8 @@ int main(int argc, char *argv[])
   /* Problem Initialization */
 
   problem_initialize (n,length,&model);  
-  //assemble_matrix    (central_2nd_order,&model);		
-  assemble_matrix    (central_4th_order,&model);		
+  assemble_matrix    (central_2nd_order,&model);		
+  //assemble_matrix    (central_4th_order,&model);		
   init_masa          (&model);
   apply_bcs          (&model);
 
