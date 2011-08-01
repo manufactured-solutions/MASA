@@ -32,7 +32,7 @@
 //--------------------------------------------------------------------------
 //
 
-#include <examples.h>
+#include <masa.h>
 
 using namespace MASA;
 using namespace std;

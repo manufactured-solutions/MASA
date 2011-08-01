@@ -222,6 +222,29 @@ void MasterMS<Scalar>::select_mms(const std::string& my_name)
 }
 
 
+//
+//  this function tests if a value is set to default
+//
+template <typename Scalar>
+int MASA::masa_test_default(Scalar input)
+{
+  Scalar MASA_VAR_DEFAULT = -12345.67;
+  Scalar uninit = -1.33;
+  Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
+
+  if( fabs((input - MASA_VAR_DEFAULT)/MASA_VAR_DEFAULT) < thresh)
+    {
+      exit(1);
+    }
+
+  if(fabs((input - uninit)/uninit) < thresh)
+    {
+      exit(1);
+    }
+  
+  exit(0);
+}
+
 template <typename Scalar>
 int MASA::masa_select_mms(std::string name)
 {
@@ -1229,6 +1252,7 @@ int MASA::masa_get_numeric_version()
 
 #define INSTANTIATE_ALL_FUNCTIONS(Scalar) \
   template int masa_init      <Scalar>(std::string, std::string); \
+  template int masa_test_default <Scalar>(Scalar);		  \
   template int masa_select_mms<Scalar>(std::string); \
   template int masa_list_mms  <Scalar>(); \
   template int masa_purge_default_param <Scalar>(); \

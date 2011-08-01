@@ -30,7 +30,7 @@
 //--------------------------------------------------------------------------
 //
 
-#include <examples.h>
+#include <masa.h>
 
 typedef double Scalar;
 

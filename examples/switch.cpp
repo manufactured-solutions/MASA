@@ -33,7 +33,7 @@
 //
 
 // header contains all subroutine information
-#include <examples.h>
+#include <masa.h>
 
 // MASA was designed with a custom namespace
 using namespace MASA;

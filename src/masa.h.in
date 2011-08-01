@@ -80,10 +80,16 @@
  *
  */
 
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 #ifdef __cplusplus
 
 #include <string>
 #include <vector>
+#include <limits>
+#include <iostream>
 
 namespace MASA
 {
@@ -92,6 +98,8 @@ namespace MASA
   /// \name Problem Definition Routines
   // -------------------------------------
 
+  template <typename Scalar> 
+  int masa_test_default(Scalar input);
 
   /**
    * masa_init:
@@ -612,6 +620,11 @@ namespace MASA
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+  /**
+   * This function tests if a value is set to default
+   */
+  extern int masa_test_default(double input);
 
   // --------------------------------
   /// \name Problem Definition Routines

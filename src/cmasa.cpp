@@ -53,6 +53,25 @@ Functions which have an integer return value return "0" upon success.
 
 */
 
+extern "C" int masa_test_default(double input)
+{
+  double MASA_VAR_DEFAULT = -12345.67;
+  double uninit = -1.33;
+  double thresh = 5 * 1e-15;
+
+  if( fabs((input - MASA_VAR_DEFAULT)/MASA_VAR_DEFAULT) < thresh)
+    {
+      exit(1);
+    }
+
+  if(fabs((input - uninit)/uninit) < thresh)
+    {
+      exit(1);
+    }
+  
+  exit(0);
+}
+
 extern "C" int masa_init(const char* specificname,const char* functionname)
 {
   

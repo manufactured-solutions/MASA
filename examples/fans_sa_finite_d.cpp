@@ -33,7 +33,7 @@
 //--------------------------------------------------------------------------
 //
 
-#include <examples.h>
+#include <masa.h>
 
 using namespace MASA;
 typedef double Scalar;

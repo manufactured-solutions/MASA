@@ -41,24 +41,6 @@
 #include <limits>
 #include <iostream>
 
-template <typename Scalar>
-void test(Scalar input)
-{
-  Scalar MASA_VAR_DEFAULT = -12345.67;
-  Scalar uninit = -1.33;
-  Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
-
-  if( fabs((input - MASA_VAR_DEFAULT)/MASA_VAR_DEFAULT) < thresh)
-    {
-      exit(1);
-    }
-
-  if(fabs((input - uninit)/uninit) < thresh)
-    {
-      exit(1);
-    }
-  
-}
 
 template <typename Scalar>
 Scalar temp_function(Scalar T);
