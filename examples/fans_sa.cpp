@@ -113,17 +113,17 @@ int main()
 	      exact_rho = masa_eval_exact_rho<Scalar>   (tempx,tempy);
 	      exact_nu  = masa_eval_exact_nu <Scalar>   (tempx,tempy,tempt);
 
-	      test(ufield);
-	      test(vfield);
-	      test(efield);
-	      test(rho);
-	      test(nu);
+	      masa_test_default(ufield);
+	      masa_test_default(vfield);
+	      masa_test_default(efield);
+	      masa_test_default(rho);
+	      masa_test_default(nu);
 
-	      test(exact_u);
-	      test(exact_v);
-	      test(exact_p);
-	      test(exact_rho);
-	      test(exact_nu);
+	      masa_test_default(exact_u);
+	      masa_test_default(exact_v);
+	      masa_test_default(exact_p);
+	      masa_test_default(exact_rho);
+	      masa_test_default(exact_nu);
 
 	      // use the steady forms also
 
@@ -141,17 +141,17 @@ int main()
 	      exact_rho = masa_eval_exact_rho<Scalar>   (tempx,tempy);
 	      exact_nu  = masa_eval_exact_nu <Scalar>   (tempx,tempy);
 
-	      test(ufield);
-	      test(vfield);
-	      test(efield);
-	      test(rho);
-	      test(nu);
+	      masa_test_default(ufield);
+	      masa_test_default(vfield);
+	      masa_test_default(efield);
+	      masa_test_default(rho);
+	      masa_test_default(nu);
 
-	      test(exact_u);
-	      test(exact_v);
-	      test(exact_p);
-	      test(exact_rho);
-	      test(exact_nu);
+	      masa_test_default(exact_u);
+	      masa_test_default(exact_v);
+	      masa_test_default(exact_p);
+	      masa_test_default(exact_rho);
+	      masa_test_default(exact_nu);
 	    }
 	} // done with spatial loop
     } // done with temporal loop

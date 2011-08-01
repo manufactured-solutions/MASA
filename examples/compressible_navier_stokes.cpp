@@ -96,15 +96,15 @@ int main()
 	exact_p   = masa_eval_exact_p  <Scalar>  (tempx,tempy);
 	exact_rho = masa_eval_exact_rho<Scalar>  (tempx,tempy);
 
-	test(ufield);
-	test(vfield);
-	test(efield);
-	test(rho);
+	masa_test_default(ufield);
+	masa_test_default(vfield);
+	masa_test_default(efield);
+	masa_test_default(rho);
 
-	test(exact_u);
-	test(exact_v);
-	test(exact_p);
-	test(exact_rho);
+	masa_test_default(exact_u);
+	masa_test_default(exact_v);
+	masa_test_default(exact_p);
+	masa_test_default(exact_rho);
 
       }
   

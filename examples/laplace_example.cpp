@@ -71,8 +71,8 @@ int main()
 	ffield    = masa_eval_source_f <Scalar>  (tempx,tempy);
 	phi_field = masa_eval_exact_phi<Scalar>  (tempx,tempy);
 
-	test(ffield);
-	test(phi_field);
+	masa_test_default(ffield);
+	masa_test_default(phi_field);
 	
       }
 

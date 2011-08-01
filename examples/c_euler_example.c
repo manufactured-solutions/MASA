@@ -78,13 +78,13 @@ int main()
       exact_p   = masa_eval_1d_exact_p      (tempx);
       exact_rho = masa_eval_1d_exact_rho    (tempx);
 
-      test(ufield);
-      test(efield);
-      test(rhofield);
+      masa_test_default(ufield);
+      masa_test_default(efield);
+      masa_test_default(rhofield);
 
-      test(exact_u);
-      test(exact_p);
-      test(exact_rho);
+      masa_test_default(exact_u);
+      masa_test_default(exact_p);
+      masa_test_default(exact_rho);
 
     }
 

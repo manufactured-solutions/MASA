@@ -84,11 +84,11 @@ int main()
 	exact_u = masa_eval_exact_u  <Scalar>  (tempx);
 	exact_v = masa_eval_exact_v  <Scalar>  (tempx);
 
-	test(ufield);
-	test(vfield);
+	masa_test_default(ufield);
+	masa_test_default(vfield);
 
-	test(exact_u);
-	test(exact_v);
+	masa_test_default(exact_u);
+	masa_test_default(exact_v);
 
       }
 

@@ -164,21 +164,21 @@ int main()
       exact_c   = masa_eval_exact_rho_C<Scalar> (tempx);
       exact_c3  = masa_eval_exact_rho_C3<Scalar>(tempx);
     
-      test(ufield);
-      test(efield);
-      test(cfield);
-      test(c3field);
-      test(rho_c3field);
-      test(rho_cfield);
-      test(rho_c3field);
-      test(boundary);
-      test(e_rho_field);
+      masa_test_default(ufield);
+      masa_test_default(efield);
+      masa_test_default(cfield);
+      masa_test_default(c3field);
+      masa_test_default(rho_c3field);
+      masa_test_default(rho_cfield);
+      masa_test_default(rho_c3field);
+      masa_test_default(boundary);
+      masa_test_default(e_rho_field);
 
-      test(exact_u);
-      test(exact_t);
-      test(exact_rho);
-      test(exact_c);
-      test(exact_c3);
+      masa_test_default(exact_u);
+      masa_test_default(exact_t);
+      masa_test_default(exact_rho);
+      masa_test_default(exact_c);
+      masa_test_default(exact_c3);
 
     }
 

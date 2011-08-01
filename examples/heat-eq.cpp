@@ -73,7 +73,7 @@ int main()
 
 	tfield = masa_eval_source_t<Scalar>  (tempx,tempy);
 
-	test(tfield);
+	masa_test_default(tfield);
 	
       }
 

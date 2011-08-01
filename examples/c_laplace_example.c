@@ -70,8 +70,8 @@ int main()
 	ffield    = masa_eval_2d_source_f (tempx,tempy);
 	phi_field = masa_eval_2d_exact_phi(tempx,tempy);
 
-	test(ffield);
-	test(phi_field);
+	masa_test_default(ffield);
+	masa_test_default(phi_field);
 	
       }
 

@@ -97,16 +97,16 @@ int main()
       exact_N    = masa_eval_exact_rho_N <Scalar>(x);
       exact_Ntwo = masa_eval_exact_rho_N2<Scalar>(x);
 
-      test(ufield);
-      test(efield);
-      test(N);
-      test(Ntwo);
+      masa_test_default(ufield);
+      masa_test_default(efield);
+      masa_test_default(N);
+      masa_test_default(Ntwo);
 
-      test(exact_t);
-      test(exact_u);
-      test(exact_rho);
-      test(exact_N);
-      test(exact_Ntwo);
+      masa_test_default(exact_t);
+      masa_test_default(exact_u);
+      masa_test_default(exact_rho);
+      masa_test_default(exact_N);
+      masa_test_default(exact_Ntwo);
       
     } // done with loop
 

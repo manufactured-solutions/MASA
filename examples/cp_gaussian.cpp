@@ -62,13 +62,13 @@ int main()
 
   // evaluate likelyhood, prior, posterior
   source = masa_eval_likelyhood(x);
-  test(source);
+  masa_test_default(source);
 
   source = masa_eval_prior(x);
-  test(source);
+  masa_test_default(source);
 
   source = masa_eval_posterior(x);
-  test(source);
+  masa_test_default(source);
 
   // all odd moments must be 0 
   double first_moment  = masa_eval_central_moment<Scalar>(1);
@@ -82,9 +82,9 @@ int main()
 
   // calculate mean and variance:
   mean = masa_eval_posterior_mean<Scalar>();
-  test(mean);
+  masa_test_default(mean);
   variance = masa_eval_posterior_variance<Scalar>();
-  test(variance);
+  masa_test_default(variance);
 
   return err;
 }

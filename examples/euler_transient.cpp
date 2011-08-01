@@ -80,9 +80,9 @@ int main()
 	efield = masa_eval_source_rho_e  <Scalar>(x,t);
 	rhofield = masa_eval_source_rho  <Scalar>(x,t);
 
-	test(ufield);
-	test(efield);
-	test(rhofield);
+	masa_test_default(ufield);
+	masa_test_default(efield);
+	masa_test_default(rhofield);
 	
       }
   
