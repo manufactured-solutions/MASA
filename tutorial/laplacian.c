@@ -29,9 +29,9 @@
  * \brief A simple standalone tutorial program which solves a
  * Laplacian using finite-differening and uses the MASA library to aid
  * in verification.  For clarity, this program is self contained with
- * all required routines present in two source files (and one header
- * file). Note that for convenience, we use naive data structures and
- * form a full dense matrix. In addition, no particular performance
+ * all required source files present in this directory (laplacian.h, laplacian.c, and laplacian_utils.c)
+ * Note that for clarity, we use simple matrix data structures and
+ * form a full dense system. In addition, no particular performance
  * considerations are applied.
  *
  */
