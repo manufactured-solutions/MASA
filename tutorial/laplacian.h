@@ -41,10 +41,18 @@ typedef struct pstruct {
      int   pad;			/*!< pad dimension for ghost points       */
 } pstruct;
 
+/* Supported finite-difference stencils */
+
+enum fd_types
+  {
+    central_2nd_order,
+    central_4th_order
+  };
+
 /* Function prototypes */
 
   void apply_bcs            (pstruct *model);
-  void assemble_matrix      (int fd_method, pstruct *model);
+  void assemble_matrix      (const int fd_method, pstruct *model);
   void compute_error        (pstruct *model);
 double compute_l2_error     (pstruct *model);
    int converged            (double *a, double *b, double eps, const int n, double *diff);

@@ -128,41 +128,115 @@ void print_matrix(pstruct *model)
 
 }
 
-void assemble_matrix(int fd_method, pstruct *model)
-{
-  int i,j;
-  int index,index2;
-  const double h_squared = model->h*model->h;
+/*!
+ * \fn assemble_matrix(const int fd_method, pstruct *model)
+ *
+ * \brief Assembles system matrix entries using a finite-difference approximation. 
+ * The fd_method parameter controls the choice of underlying FD stencil.
+ *
+ * \param fd_method Desired finite-difference stencil
+ * \param model     Pointer to the primary model data-structure
+ */
 
-  const int n = model->n;
+void assemble_matrix(const int fd_method, pstruct *model)
+{
+  int i,j,index,index2;
+  const double h_squared = model->h*model->h;
 
   printf("\n** Assembling linear system\n");
 
-  for(i=0;i<model->npts;i++)
-    for(j=0;j<model->npts;j++)
+  switch(fd_method)
+    {
+    case(central_2nd_order):
       {
-	index = j+(i*model->npts);
+	model->pad = 1;
+	printf("   --> using 2nd-order central difference approximation (stencil width = %i)\n",model->pad);
+	
+	for(i=0;i<model->npts;i++)
+	  for(j=0;j<model->npts;j++)
+	    {
+	      index = j+(i*model->npts);
+	      
+	      model->A[index][index] = -4.0/h_squared;
+	      
+	      if(j > 0)		    /* (i,j-1) */
+		model->A[index][index-1] = 1.0/h_squared;
+	      
+	      if(j < model->n-1 )   /* (i,j+1) */
+		model->A[index][index+1] = 1.0/h_squared;
+	      
+	      if(i > 0)		    /* (i-1,j) */
+		{
+		  index2 = j+(i-1)*model->npts;
+		  model->A[index][index2] = 1.0/h_squared;
+		}
+	      
+	      if(i < model->npts-1) /* (i+1,j) */
+		{
+		  index2 = j+(i+1)*model->npts;
+		  model->A[index][index2] = 1.0/h_squared;
+		}
+	    }
+	break;
+      }	/* end central_2nd_order */
 
-	model->A[index][index] = -4.0/h_squared;
+    case(central_4th_order):
+      {
+	model->pad = 2;
+	printf("   --> using 4th-order central difference approximation (stencil width = %i)\n",model->pad);
+	
+	for(i=0;i<model->npts;i++)
+	  for(j=0;j<model->npts;j++)
+	    {
+	      index  = j+(i*model->npts);
+	      
+	      model->A[index][index] = -60.0/(12.0*h_squared);
+	      
+	      if(j > 0)	             /* (i,j-1) */
+		model->A[index][index-1] = 16.0/(12.0*h_squared);
+	      
+	      if(j > 1)	             /* (i,j-2) */
+		model->A[index][index-2] = -1.0/(12.0*h_squared);
+	      
+	      if(j < model->n-1)     /* (i,j+1) */
+		model->A[index][index+1] = 16.0/(12.0*h_squared);
+	      
+	      if(j < model->n-2)     /* (i,j+2) */
+		model->A[index][index+2] = -1.0/(12.0*h_squared);
+	      
+	      if(i > 0)		     /* (i-1,j) */
+		{
+		  index2 = j+(i-1)*model->npts;
+		  model->A[index][index2] = 16.0/(12.0*h_squared);
+		}
+	      
+	      if(i > 1)		     /* (i-2,j) */
+		{
+		  index2 = j+(i-2)*model->npts;
+		  model->A[index][index2] = -1.0/(12.0*h_squared);
+		}
+	      
+	      if(i < model->n-1 )    /* (i+1,j) */
+		{
+		  index2 = j+(i+1)*model->npts;
+		  model->A[index][index2] = 16.0/(12.0*h_squared);
+		}
+	      
+	      if(i < model->n-2 )    /* (i+2,j) */
+		{
+		  index2 = j+(i+2)*model->npts;
+		  model->A[index][index2] = -1.0/(12.0*h_squared);
+		}
+	    }
+	break;
+      }	/* end central_4th_order */
+      
 
-	if(index > 0)
-	  model->A[index-1][index] = 1.0/h_squared;
-
-	if(index < model->n-1 )
-	  model->A[index+1][index] = 1.0/h_squared;
-
-	if(i > 0)
-	  {
-	    index2 = j+(i-1)*model->npts;
-	    model->A[index2][index] = 1.0/h_squared;
-	  }
-
-	if(i < model->npts-1)
-	  {
-	    index2 = j+(i+1)*model->npts;
-	    model->A[index2][index] = 1.0/h_squared;
-	  }
-      }
+    default:
+      printf("\n** Error: unknown finite-difference method requested\n\n");
+      exit(1);
+	    
+    }  /* end switch statement over FD methods */
 
   printf("   --> assembly complete\n");
   return;
@@ -178,49 +252,56 @@ void apply_bcs(pstruct *model)
 
   double xval,yval;
 
-  assert(model->pad == 1);
+  assert(model->pad >= 1);
 
-  if(model->pad >= 1)
     {
-      i=0;                              /* BCs for north boundary */
-      for(j=0;j<model->npts;j++)      
-	{
-	  xval = (i)*model->h;
-	  yval = (j)*model->h;
-	  soln = masa_eval_2d_exact_phi(xval,yval);
-	  
-	  enforce_dirichlet_bc(i,j,soln,model);
-	}
+      /* BCs for north boundaries */
 
-      i=model->npts-1;                 /* BCs for south boundary */
-      for(j=0;j<model->npts;j++)      
-	{
-	  xval = (i)*model->h;
-	  yval = (j)*model->h;
-	  soln = masa_eval_2d_exact_phi(xval,yval);
+      for(i=0;i<model->pad;i++)
+	for(j=0;j<model->npts;j++)      
+	  {
+	    xval = (i)*model->h;
+	    yval = (j)*model->h;
+	    soln = masa_eval_2d_exact_phi(xval,yval);
 
-	  enforce_dirichlet_bc(i,j,soln,model);
-	}
+	    enforce_dirichlet_bc(i,j,soln,model);
+	  }
 
-      j=0;                            /* BCs for west boundary */
+      /* BCs for south boundaries */
+
+      for(i=model->npts-model->pad;i<=model->npts-1;i++)
+	for(j=0;j<model->npts;j++)      
+	  {
+	    xval = (i)*model->h;
+	    yval = (j)*model->h;
+	    soln = masa_eval_2d_exact_phi(xval,yval);
+	    
+	    enforce_dirichlet_bc(i,j,soln,model);
+	  }
+
+      /* BCs for west boundaries */
+
       for(i=0;i<model->npts;i++)      
-	{
-	  xval = (i)*model->h;
-	  yval = (j)*model->h;
-	  soln = masa_eval_2d_exact_phi(xval,yval);
+	for(j=0;j<model->pad;j++)
+	  {
+	    xval = (i)*model->h;
+	    yval = (j)*model->h;
+	    soln = masa_eval_2d_exact_phi(xval,yval);
+	    
+	    enforce_dirichlet_bc(i,j,soln,model);
+	  }
 
-	  enforce_dirichlet_bc(i,j,soln,model);
-	}
+      /* BCs for east boundaries */
 
-      j=model->npts-1;                /* BCs for east boundary */
       for(i=0;i<model->npts;i++)      
-	{
-	  xval = (i)*model->h;
-	  yval = (j)*model->h;
-	  soln = masa_eval_2d_exact_phi(xval,yval);
-
-	  enforce_dirichlet_bc(i,j,soln,model);
-	}
+	for(j=model->npts-model->pad;j<=model->npts-1;j++)
+	  {
+	    xval = (i)*model->h;
+	    yval = (j)*model->h;
+	    soln = masa_eval_2d_exact_phi(xval,yval);
+	    
+	    enforce_dirichlet_bc(i,j,soln,model);
+	  }
     }
 
   return;
@@ -246,10 +327,8 @@ void problem_initialize(const int npts, const double length, pstruct *model)
   model->npts   = npts;
   model->h      = length/(npts-1.0);
   model->n      = npts*npts;
-  model->pad    = 1;
 
   printf("   --> mesh size           = %-12.3f\n",model->h);
-  printf("   --> ghost node pad size = %i\n",model->pad);
 
   /* Perform memory allocation */
 
@@ -363,7 +442,7 @@ void solve_gauss(pstruct *model)
   
   free(sparse_count);
 
-  printf("   --> Converged in %i iters: diff: %15.7g\n", it, diff);
+  printf("   --> Converged in %i iters: tolerance =  %15.7g\n", it, diff);
 }
 
 int converged(double *a, double *b, double eps, int n, double *diff)
@@ -406,4 +485,29 @@ double compute_l2_error(pstruct *model)
   l2_error = sqrt(l2_error / model->n );
 
   return(l2_error);
+}
+
+void compute_error(pstruct *model)
+{
+  double error = 0.0;
+  double xval, yval;
+  int i,j;
+  int index;
+
+  for(i=0;i<model->npts;i++)
+    {
+      for(j=0;j<model->npts;j++)
+	{
+	  index = j+(i*model->npts);
+	  
+	  xval = (i)*model->h;
+	  yval = (j)*model->h;
+	  
+	  printf("%3i: Num solution = %12.5e, Analytic solution = %12.5e (diff = %f)\n",index,
+		 model->phi[index], masa_eval_2d_exact_phi(xval,yval),
+		 fabs(model->phi[index]-masa_eval_2d_exact_phi(xval,yval)));
+	}
+      printf("\n");
+    }
+  return;
 }
