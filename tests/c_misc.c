@@ -36,9 +36,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 int main()
 {
+  int err = 0 ;
 
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa; these tests currently just verify functions
@@ -58,7 +58,11 @@ int main()
   masa_list_mms();
 
   // display parameters @ default values
-  masa_display_param();
+  err = masa_display_param();
+  if(err != 0)
+    {
+      return 1;
+    }
   
   //change parameter
   masa_set_param("u_0",2.3);

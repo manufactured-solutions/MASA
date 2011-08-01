@@ -78,4 +78,8 @@ program main
      call exit(1)
   endif 
 
+  ! really need log here
+  call masa_display_param()
+
+  call exit(0)
 end program

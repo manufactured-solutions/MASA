@@ -101,6 +101,14 @@ int main()
   masa_version_stdout();
   masa_get_numeric_version();
 
+  err = masa_display_param<Real>();
+
+  if(err != 0)
+    {
+      cout << "MASA_DISPLAY_PARAM FAILED\n";
+      return 1;
+    }
+
   return 0; // steady as she goes
 
 }
