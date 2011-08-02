@@ -65,4 +65,4 @@ double compute_l2_error     (pstruct *model);
 
 /* conjugate gradient */
 
-int conjugate_gradient(int n,double* A,double* b,double* x,double* residual,int* iterations);
+int cg(int n,double* A,double* b,double* x,double* residual,int* iterations);

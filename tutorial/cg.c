@@ -23,9 +23,9 @@
 //
 //-----------------------------------------------------------------------el-
 // $Author: nick $
-// $Id: cg.cpp 12695 2010-08-26 03:47:26Z nick $
+// $Id: 
 //
-// cg.cpp: conjugate gradient solver
+// cg.c: conjugate gradient solver
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ double l2(double *x1,int n)
 // i is row
 // arr[i][j] = arr[i*ncolumn + j]
 //  x[i]     = x  [i]
-int conjugate_gradient(int n,double* A,double* b,double* x,double* res,int* iter)
+int cg(int n,double* A,double* b,double* x,double* res,int* iter)
 {
   int i,ii,jj;
 

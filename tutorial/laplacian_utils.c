@@ -469,7 +469,7 @@ void solve_cg(pstruct *model)
 
   printf("\n** Solving system using Conjugate Gradient\n");
   printf("   --> Solving linear system\n");
-  conjugate_gradient(model->n,*model->A,model->rhs,model->phi,&res,&iter);
+  cg(model->n,*model->A,model->rhs,model->phi,&res,&iter);
   printf("   --> Converged in %i iters: tolerance =  %15.7g\n", iter, res);
 
 }
