@@ -464,13 +464,21 @@ int converged(double *a, double *b, double eps, int n, double *diff)
 
 void solve_cg(pstruct *model)
 {
+  int i,j;
   double res  = 0;
   int    iter = 0;
+  int n = model->n;
+  double mat[n][n];
 
+  for(i=0;i<n;i++)
+      for(j=0;j<n;j++)
+	mat[i][j]=model->A[i][j];
+  
   printf("\n** Solving system using Conjugate Gradient\n");
   printf("   --> Solving linear system\n");
-  cg(model->n,*model->A,model->rhs,model->phi,&res,&iter);
-  printf("   --> Converged in %i iters: tolerance =  %15.7g\n", iter, res);
+  //cg(n,*model->A,model->rhs,model->phi,&res,&iter);
+  cg(n,*mat,model->rhs,model->phi,&res,&iter);
+  printf("   --> Converged in %i iterations. Residual =  %15.7g\n", iter, res);
 
 }
 

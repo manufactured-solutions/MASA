@@ -80,7 +80,7 @@ double l2(double *x1,int n)
 //  x[i]     = x  [i]
 int cg(int n,double* A,double* b,double* x,double* res,int* iter)
 {
-  int i,ii,jj;
+  int i,ii,j,jj;
 
   double r [n]; // residual
   double ro[n]; // old residual
@@ -88,9 +88,35 @@ int cg(int n,double* A,double* b,double* x,double* res,int* iter)
   double alpha; // step length
   double beta;  // improvement
   
-  double thresh = 1e-12;
+  double thresh = 1e-10;
   int it = 0;
   double temp[n];  // temp vector
+
+  // print solution
+  printf("\nA:\n");
+  printf("     j =");
+  for(j=0;j<n;j++)
+    {
+      printf("%6i ",j);
+    }
+  printf("\n\n");
+
+  for(i=0;i<n;i++)
+    {
+      printf("i = %2i: ",i);
+
+      for(j=0;j<n;j++)
+	{      
+	  printf("%6.2f ",A[i*n+j]);
+	}
+      printf("\n");
+    }
+
+  printf("\nb:\n");
+  for(i=0;i<n;i++)
+    {
+      printf("%g\n",b[i]);
+    }
   
   for(i=0;i<n;i++)
     {
@@ -121,7 +147,6 @@ int cg(int n,double* A,double* b,double* x,double* res,int* iter)
       
       // update step length
       alpha = scalar(&ro[0],&ro[0],n)/scalar(&p[0],&temp[0],n);
-      //cout << "alpha is: " << alpha << endl;
 
       // update approx solution & residual 
       for(ii=0;ii<n;ii++)
@@ -146,5 +171,15 @@ int cg(int n,double* A,double* b,double* x,double* res,int* iter)
 
   *res  = linf(&r[0],n);
   *iter = it;
+
+
+  // display solution(s)
+  printf("\nx:\n");
+  for(i=0;i<n;i++)
+    {
+      printf("%g\n",x[i]);
+    }
+
+    
   return 0;
 }

@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
   init_masa          (&model);
   apply_bcs          (&model);
 
-  //print_matrix(&model);
+  print_matrix(&model);
 
   /* Solve */
 
