@@ -31,16 +31,14 @@
 //--------------------------------------------------------------------------
 //
 
-#include <iostream>
 #include <math.h>
-
-using namespace std;
 
 // takes two vectors, returns scalar product
 double scalar(double *x1,double *x2, int n)
 {
+  int i;
   double scal=0;
-  for(int i=0;i<n;i++)
+  for(i=0;i<n;i++)
     scal += x1[i]*x2[i];
   
   return scal;
@@ -49,8 +47,9 @@ double scalar(double *x1,double *x2, int n)
 // return L infinity norm
 double linf(double *x1,int n)
 {
+  int i;
   double scal=0;
-  for(int i=0;i<n;i++)
+  for(i=0;i<n;i++)
     {    
       //cout << "hit " << x1[i] << endl;
 	  
@@ -65,8 +64,9 @@ double linf(double *x1,int n)
 // return L2 norm
 double l2(double *x1,int n)
 {
+  int i;
   double scal=0;
-  for(int i=0;i<n;i++)
+  for(i=0;i<n;i++)
     {    
       scal += x1[i]*x1[i];
     }
@@ -80,6 +80,8 @@ double l2(double *x1,int n)
 //  x[i]     = x  [i]
 int conjugate_gradient(int n,double* A,double* b,double* x,double* res,int* iter)
 {
+  int i,ii,jj;
+
   double r [n]; // residual
   double ro[n]; // old residual
   double p[n];  // search vector
@@ -90,7 +92,7 @@ int conjugate_gradient(int n,double* A,double* b,double* x,double* res,int* iter
   int it = 0;
   double temp[n];  // temp vector
   
-  for(int i=0;i<n;i++)
+  for(i=0;i<n;i++)
     {
       // initialize residual to RHS
       r [i] = b[i];
@@ -108,10 +110,10 @@ int conjugate_gradient(int n,double* A,double* b,double* x,double* res,int* iter
   while(linf(&r[0],n)>thresh)
     {
       // calc A p_{n-1}
-      for(int ii=0;ii<n;ii++)
+      for(ii=0;ii<n;ii++)
 	{
 	  temp[ii]=0;
-	  for(int jj=0;jj<n;jj++)
+	  for(jj=0;jj<n;jj++)
 	    {
 	      temp[ii] += A[ii*n+jj]*p[jj];
 	    }
@@ -122,7 +124,7 @@ int conjugate_gradient(int n,double* A,double* b,double* x,double* res,int* iter
       //cout << "alpha is: " << alpha << endl;
 
       // update approx solution & residual 
-      for(int ii=0;ii<n;ii++)
+      for(ii=0;ii<n;ii++)
 	{
 	  x[ii] +=  alpha*p[ii];	  
 	  r[ii] = ro[ii]-alpha*temp[ii];
@@ -132,7 +134,7 @@ int conjugate_gradient(int n,double* A,double* b,double* x,double* res,int* iter
       beta = scalar(&r[0],&r[0],n)/scalar(&ro[0],&ro[0],n);
 
       // update search direction
-      for(int ii=0;ii<n;ii++)
+      for(ii=0;ii<n;ii++)
 	{
 	  p[ii]  = r[ii] + beta * p[ii];
 	  ro[ii] = r[ii]; // also update old residual
