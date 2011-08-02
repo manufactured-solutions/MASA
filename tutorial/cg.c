@@ -92,31 +92,31 @@ int cg(int n,double* A,double* b,double* x,double* res,int* iter)
   int it = 0;
   double temp[n];  // temp vector
 
-  // print solution
-  printf("\nA:\n");
-  printf("     j =");
-  for(j=0;j<n;j++)
-    {
-      printf("%6i ",j);
-    }
-  printf("\n\n");
+  // // print solution
+  // printf("\nA:\n");
+  // printf("     j =");
+  // for(j=0;j<n;j++)
+  //   {
+  //     printf("%6i ",j);
+  //   }
+  // printf("\n\n");
 
-  for(i=0;i<n;i++)
-    {
-      printf("i = %2i: ",i);
+  // for(i=0;i<n;i++)
+  //   {
+  //     printf("i = %2i: ",i);
 
-      for(j=0;j<n;j++)
-	{      
-	  printf("%6.2f ",A[i*n+j]);
-	}
-      printf("\n");
-    }
+  //     for(j=0;j<n;j++)
+  // 	{      
+  // 	  printf("%6.2f ",A[i*n+j]);
+  // 	}
+  //     printf("\n");
+  //   }
 
-  printf("\nb:\n");
-  for(i=0;i<n;i++)
-    {
-      printf("%g\n",b[i]);
-    }
+  // printf("\nb:\n");
+  // for(i=0;i<n;i++)
+  //   {
+  //     printf("%g\n",b[i]);
+  //   }
   
   for(i=0;i<n;i++)
     {
