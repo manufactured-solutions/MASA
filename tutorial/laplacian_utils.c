@@ -462,6 +462,18 @@ int converged(double *a, double *b, double eps, int n, double *diff)
     return(0);
 }
 
+void solve_cg(pstruct *model)
+{
+  double res  = 0;
+  int    iter = 0;
+
+  printf("\n** Solving system using Conjugate Gradient\n");
+  printf("   --> Solving linear system\n");
+  conjugate_gradient(model->n,*model->A,model->rhs,model->phi,&res,&iter);
+  printf("   --> Converged in %i iters: tolerance =  %15.7g\n", iter, res);
+
+}
+
 double compute_l2_error(pstruct *model)
 {
   double l2_error = 0.0;

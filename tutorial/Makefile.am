@@ -17,7 +17,7 @@ noinst_PROGRAMS = laplacian
 #    C
 # ----------------- 
 
-laplacian_SOURCES         = laplacian.c laplacian_utils.c laplacian.h
+laplacian_SOURCES         = laplacian.c laplacian_utils.c cg.c laplacian.h
 
 # ----------------- 
 #    Pf'ortran

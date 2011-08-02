@@ -61,4 +61,8 @@ double compute_l2_error     (pstruct *model);
   void print_matrix         (pstruct *model);
   void problem_initialize   (const int, const double length, pstruct *model);
   void solve_gauss          (pstruct *model);
+  void solve_cg             (pstruct *model);
 
+/* conjugate gradient */
+
+int conjugate_gradient(int n,double* A,double* b,double* x,double* residual,int* iterations);

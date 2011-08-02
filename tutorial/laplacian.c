@@ -43,22 +43,39 @@ int main(int argc, char *argv[])
   int n;
   double length;
   pstruct model;		/* primary model data structure */
+  int solver;
 
   /* Parse command-line */
 
-  if(argc < 2)
+  if(argc < 3)
     {
-      printf("\nUsage: laplacian [num_pts] [length]\n\n");
-      printf("where \"num_pts\" is the desired number of mesh points and \n");
-      printf("\"length\" is the physical length-scale dimension in one direction\n\n");
+      printf("\nUsage: laplacian [num_pts] [length] [gauss/cg]\n\n");
+      printf("\"num_pts\" is the desired number of mesh points \n");
+      printf("\"length\" is the physical length-scale dimension in one direction\n");
+      printf("\"gauss/cg\" is which method is used: \n");
+      printf("                                    0 --> Gauss-Seidel \n"); 
+      printf("                                    1 --> Conjugate Gradient. \n\n");
       exit(1);
     }
-  else
+  else if(argc == 3)    
     {
       n      = atoi(argv[1]);
       length = (double) atof(argv[2]);
+      solver = 0; // default to gauss
     }
-  
+  else 
+    {
+      n      = atoi(argv[1]);
+      length = (double) atof(argv[2]);
+      solver = atoi(argv[3]);
+      
+      if(solver > 1 || solver < 0)
+	{
+	  printf("solver only accepts 0,1 for input");
+	  exit(1);
+	}      
+    }
+
   /* Problem Initialization */
 
   problem_initialize (n,length,&model);  
@@ -71,11 +88,16 @@ int main(int argc, char *argv[])
 
   /* Solve */
 
-  solve_gauss       (&model);
+  if(solver == 1)
+    {
+      solve_cg   (&model);  
+    }
+  else
+    {
+      solve_gauss(&model);
+    }
 
   /* Compute Error */
-
-  //compute_error     (&model);
 
   printf("\n** Error Analysis\n");
   printf("   --> npts     = %i\n",model.npts);
