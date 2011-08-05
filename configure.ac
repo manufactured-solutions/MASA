@@ -51,6 +51,12 @@ AX_FC_MINOPT	# request minimum optimization level for FC
 
 AX_MASA_WARN_ALL
 
+#---------------------------------------------
+# enable python interfaces
+#---------------------------------------------
+
+AX_SWIG
+
 # ------------------------------
 # Checks for required programs
 # ------------------------------

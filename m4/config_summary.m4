@@ -53,6 +53,12 @@ echo Optional Features:
      echo '   'Enable all warnings.......... : no
    fi
 
+   if test "$MASA_SWIG" = "1"; then
+     echo '   'Enable python interfaces..... : yes
+   else
+     echo '   'Enable python interfaces..... : no
+   fi
+
 echo
 echo '-------------------------------------------------------------------------------'
 
