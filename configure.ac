@@ -55,7 +55,7 @@ AX_MASA_WARN_ALL
 # enable python interfaces
 #---------------------------------------------
 
-AX_SWIG
+#AX_SWIG
 
 # ------------------------------
 # Checks for required programs

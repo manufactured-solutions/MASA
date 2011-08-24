@@ -38,9 +38,6 @@ program main
   ! initialize the problem
   call masa_init('mytest','navierstokes_2d_compressible')
 
-  ! test that all variables have been initialized
-  call masa_sanity_check()
-
   ! evaluate masa functions (2D)
   do i=0, nx
      do j=0, ny

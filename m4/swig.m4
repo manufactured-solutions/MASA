@@ -28,7 +28,9 @@ AC_ARG_ENABLE([swig], AC_HELP_STRING([--enable-swig],[enable SWIG python interfa
 	       AC_DEFINE(MASA_SWIG,1,[Define if SWIG python inteface generation enabled]),[])
 
 if test "$MASA_SWIG" = "1"; then
-   echo '----------------------------------- SWIG -----------------------------------'   
+
+   ax_pkg_swig(1,[echo 'found it'],[echo 'didnt find it'])
+
 fi
 
 
