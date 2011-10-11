@@ -3,7 +3,7 @@
 use warnings;
 
 $soln     = 'blargles_friend';
-$new_masa = "  anim.push_back(new $soln<Scalar>());\n";
+$new_masa = "  anim.push_back(new $soln<Scalar>());\n\n";
 
 # open file
 $old = "../masa_core.cpp";
