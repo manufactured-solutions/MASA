@@ -145,8 +145,8 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
   // sod shock tube
   anim.push_back(new sod_1d<Scalar>());
 
-  // DO NOT EDIT THIS LINE OR ANY BELOW IT
-  // --l33t--
+  // --l33t-- DO NOT EDIT THIS LINE OR ANY BELOW IT
+
 
   return 0;
 }
