@@ -69,7 +69,34 @@ while($line = <INFILE>)
 	open SRCFILE , "<", $srcf or die $!;
 	while($sf = <SRCFILE>)
 	{	    
-	    chomp($sf);
+	    if($sf =~ /double/)
+	    {
+
+		if($sf =~ /eval_q_/)
+		{
+		    if($sf =~ /int/)
+		    {
+			print "Warning: MASA importer only accepts source terms with float double arguments!\n";
+		    }
+		    
+		    if($sf =~ /void/)
+		    {
+			print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
+		    }
+
+		    $sf=~ s/double/Scalar/g;
+		    $sf=~ s/float/Scalar/g;
+		    @values = split('\(', $sf);
+		    print $values[0];
+		    # this is indexed at -1 because 
+		    # we assume that the function starts with scalar
+		    # we are counting the number of arguments in the function call
+		    my $size = -1; $size++ while $sf =~ /Scalar/g;
+
+		    # now write the number of 
+		}   
+	    }
+
 	}
 	close  SRCFILE or die $!;
 
