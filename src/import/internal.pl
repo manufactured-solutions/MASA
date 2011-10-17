@@ -87,16 +87,28 @@ while($line = <INFILE>)
 		    $sf=~ s/double/Scalar/g;
 		    $sf=~ s/float/Scalar/g;
 		    @values = split('\(', $sf);
-		    print $values[0];
+		    print OUTFILE $values[0];
+
 		    # this is indexed at -1 because 
 		    # we assume that the function starts with scalar
 		    # we are counting the number of arguments in the function call
 		    my $size = -1; $size++ while $sf =~ /Scalar/g;
 
-		    # now write the number of 
+		    # now write the number of Scalars in the source term
+		    print OUTFILE "\(";
+		    for ($count = 1; $count <= $size; $count++) 
+		    {
+			if($count eq $size)
+			{
+			    print OUTFILE "Scalar\);\n";
+			}
+			else
+			{
+			    print OUTFILE "Scalar\);\n";
+			}
+		    }		    
 		}   
 	    }
-
 	}
 	close  SRCFILE or die $!;
 
@@ -105,7 +117,46 @@ while($line = <INFILE>)
 	open ANAFILE , "<", $anaf or die $!;
 	while($af = <ANAFILE>)
 	{	    
-	    chomp($af);
+	    if($af =~ /double/)
+	    {
+
+		if($af =~ /eval_exact_/)
+		{
+		    if($af =~ /int/)
+		    {
+			print "Warning: MASA importer only accepts source terms with float double arguments!\n";
+		    }
+		    
+		    if($af =~ /void/)
+		    {
+			print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
+		    }
+
+		    $af=~ s/double/Scalar/g;
+		    $af=~ s/float/Scalar/g;
+		    @values = split('\(', $af);
+		    print OUTFILE $values[0];
+
+		    # this is indexed at -1 because 
+		    # we assume that the function starts with scalar
+		    # we are counting the number of arguments in the function call
+		    my $size = -1; $size++ while $af =~ /Scalar/g;
+
+		    # now write the number of Scalars in the source term
+		    print OUTFILE "\(";
+		    for ($count = 1; $count <= $size; $count++) 
+		    {
+			if($count eq $size)
+			{
+			    print OUTFILE "Scalar\);\n";
+			}
+			else
+			{
+			    print OUTFILE "Scalar\);\n";
+			}
+		    }		    
+		}   
+	    }
 	}
 	close  ANAFILE or die $!;
 	

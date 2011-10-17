@@ -285,7 +285,7 @@ int MASA::manufactured_solution<Scalar>::sanity_check()
     }
 
   
-  // check all vector values
+  // check all vector values -- this has a subtle bug
   for(std::map<std::string,int>::const_iterator it = vecmap.begin(); it != vecmap.end(); ++it)
     {    
       std::vector<Scalar>* vec;

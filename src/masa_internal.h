@@ -93,8 +93,8 @@ namespace MASA
     std::map<std::string,int> varmap;    // map to each variable
     std::vector<Scalar*>  vararr;        // arr of pointers to each variable
 
-    std::map<std::string,int> vecmap;     // map to each vector
-    std::vector<std::vector<Scalar>* >  vecarr;// vector of pointers to each vector
+    std::map<std::string,int> vecmap;           // map to each vector
+    std::vector<std::vector<Scalar>* >  vecarr; // vector of pointers to each vector
 
     std::string mmsname;                 // the name of the manufactured solution
     int dimension;                       // dimension of the solution
