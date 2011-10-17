@@ -8,8 +8,8 @@ print "Do not use any special characters or spaces. (underscores are acceptable)
 
 $name= "nicks_solution_class";
 $varf = "variables.var";
-$srcf = "srcterms.c";
-$anaf = "anaterms.c";
+$srcf = "source_terms.cpp";
+$anaf = "analytical_solution.cpp";
 
 # open file(s)
 $old   = "../masa_internal.h";
