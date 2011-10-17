@@ -1567,3 +1567,9 @@ namespace MASA
 
 
 } // end MASA namespace
+
+
+// DO NOT EDIT THIS LINE OR ANY BELOW IT
+// automatically generated MMS classes:
+  
+// --l33t--
