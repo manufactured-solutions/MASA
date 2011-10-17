@@ -8,7 +8,7 @@ $new_masa = "  anim.push_back(new $soln<Scalar>());\n\n";
 # open file
 $old = "../masa_core.cpp";
 $new = "tmp";
-$bak = "text.bak";
+$bak = "masa_core.bak";
 
 open INFILE , "<", $old or die $!;
 open OUTFILE, ">", $new  or die $!;
