@@ -3,14 +3,13 @@
 use warnings;
 
 print "Creating class in masa_internal.h...\n";
-
-# no spaces
-# or special characters
-# would recommend avoiding capital letters as well
-# can use underscore
+print "Please input the new MMS class name.\n";
+print "Do not use any special characters or spaces. (underscores are acceptable)\n";
 
 $name= "nicks_solution_class";
 $varf = "variables.var";
+$srcf = "srcterms.c";
+$anaf = "anaterms.c";
 
 # open file(s)
 $old   = "../masa_internal.h";
@@ -44,7 +43,7 @@ while($line = <INFILE>)
 
 	# print template and class
 	print OUTFILE "template <typename Scalar>\n";
-	print OUTFILE "class $name : public manufactured_solution<Scalar>\n{\n";
+	print OUTFILE "class MASA::$name : public manufactured_solution<Scalar>\n{\n";
 
 	# print pi
 	print OUTFILE "  using manufactured_solution<Scalar>::pi;\n";
@@ -54,6 +53,7 @@ while($line = <INFILE>)
 	print OUTFILE "private:\n";
 
 	# open file, get list of variables, populate list here:
+	print "Opening $varf...\n";
 	open VARFILE , "<", $varf or die $!;
 	while($vf = <VARFILE>)
 	{	    
@@ -64,11 +64,26 @@ while($line = <INFILE>)
 	close  VARFILE or die $!;
 	print OUTFILE "\npublic:\n  $name();\n  int init_var();\n";
 
-	# print list of source terms and analytical functions
-	# (error check here to ensure it fits a source term we support)
+	# print list of source terms 
+	print "Opening $srcf...\n";
+	open SRCFILE , "<", $srcf or die $!;
+	while($sf = <SRCFILE>)
+	{	    
+	    chomp($sf);
+	}
+	close  SRCFILE or die $!;
 
+	# print list of analytical functions
+	print "Opening $anaf...\n";
+	open ANAFILE , "<", $anaf or die $!;
+	while($af = <ANAFILE>)
+	{	    
+	    chomp($af);
+	}
+	close  ANAFILE or die $!;
+	
 	# leave moniker in and trip counter
-	print OUTFILE "\n";
+	print OUTFILE "};\n\n\n";
 	print OUTFILE $line;
 	$count=1;
     }
