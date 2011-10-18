@@ -6,7 +6,7 @@ print "Editing Makefile.am...\n";
 
 # open file(s)
 $old = "../Makefile.am";
-$new = "tmp";
+$new = "tmp.mak";
 $bak = "Makefile.bak";
 
 $name= "nicks_solution_class";

@@ -13,7 +13,7 @@ $anaf = "analytical_solution.cpp";
 
 # open file(s)
 $old   = "../masa_internal.h";
-$new   = "tmp";
+$new   = "tmp.internal";
 $bak   = "masa_internal.bak";
 $count = 0;
 
@@ -189,7 +189,7 @@ if($count =~ 0)
     exit 1;
 }
 
-wclose  INFILE or die $!;
+close  INFILE or die $!;
 close OUTFILE or die $!;
 
 #rename($old, $bak);
