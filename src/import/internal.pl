@@ -3,8 +3,6 @@
 use warnings;
 
 print "Creating class in masa_internal.h...\n";
-print "Please input the new MMS class name.\n";
-print "Do not use any special characters or spaces. (underscores are acceptable)\n";
 
 $name= "nicks_solution_class";
 $varf = "variables.var";
