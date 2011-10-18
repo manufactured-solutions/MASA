@@ -1,7 +1,7 @@
-# -------------------------------------------------------------
-# Follow these instructions to import a new solution in MASA. 
-# This will require a perl interpreter.
-# -------------------------------------------------------------
+# -------------------------------------------------------------#
+# Follow these instructions to import a new solution in MASA.  #
+# This will require a perl interpreter.                        #
+# -------------------------------------------------------------#
 
 1) You will need a file with your source terms. 
    Each source term function should start with, "eval_q_"
@@ -14,9 +14,9 @@
    and the default value should be on the same row, separated 
    by a space. 
 
-Finally, run from a command line: 'perl sar.pl'
+Finally, run from a command line: 'perl masa_import.pl'
 
 Check the subdirectory: "examples" for examples of each file.
-# -------------------------------------------------------------
-# Report any problems to: nick@ices.utexas.edu 
-# -------------------------------------------------------------
+# -------------------------------------------------------------#
+# Report any problems to: nick@ices.utexas.edu                 #
+# -------------------------------------------------------------#
