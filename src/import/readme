@@ -11,6 +11,14 @@
 
    For both the source and analytical terms:
    The functions should only take doubles or floats as arguments.
+   Please ensure that the function arguments are on the same line
+   as the function name, e.g. double eval_exact_t(double x, double y)
+
+   Instead of:
+
+   double eval_exact_t(double x, 
+                       double y)	
+
 
 3) Create a file that contains all the variables required 
    by your solutions. Each variable should be on a newline
