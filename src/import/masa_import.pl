@@ -243,7 +243,15 @@ while($line = <INFILE>)
 
 			if($bsize > 1)
 			{
-			    print OUTFILE "Scalar\) const;\n";
+			    if($bracket[1] =~ /const/)
+			    {
+				print OUTFILE "Scalar\) const;\n";
+			    }
+			    else
+			    {
+				print OUTFILE "Scalar\);\n";
+			    }
+
 			}
 			else
 			{
@@ -265,7 +273,15 @@ while($line = <INFILE>)
 
 		    if($bsize > 1)
 		    {
-			print OUTFILE "\) const;\n";
+			if($bracket[1] =~ /const/)
+			{
+			    print OUTFILE "\) const;\n";
+			}
+			else
+			{
+			    print OUTFILE "\);\n";
+			}
+
 		    }
 		    else
 		    {
@@ -313,31 +329,43 @@ while($line = <INFILE>)
 		# we are counting the number of arguments in the function call
 		my $size = -1; $size++ while $af =~ /Scalar/g;
 
-		# now write the number of Scalars in the source term
+		# now write the number of Scalars in the analytical solution
 		print OUTFILE "\(";
 		for ($count = 1; $count <= $size; $count++) 
 		{
+		    # this is the last argument to the function
 		    if($count eq $size)
 		    {
 			# see if the function is const
 			@bracket = split('\)', $af);
 			$bsize = scalar (@bracket);
 
+			# something is passed after the function ends:
+			# check if it is const
 			if($bsize > 1)
 			{
-			    print OUTFILE "Scalar\) const;\n";
+			    # it is a const!
+			    if($bracket[1] =~ /const/)
+			    {
+				print OUTFILE "Scalar\) const;\n";
+			    }
+			    else # it isnt, ignore it
+			    {
+				print OUTFILE "Scalar\);\n";
+			    }
 			}
-			else
+			else # it isnt, ignore it
 			{
 			    print OUTFILE "Scalar\);\n";
 			}
 		    }
-		    else
+		    else # print scalar and loop
 		    {
 			print OUTFILE "Scalar,";
 		    }
 		}		
-		
+
+		# this is when the user has no Scalars passed as an argument
 		if($size eq 0 )
 		{
 		    # see if the function is const
@@ -346,13 +374,22 @@ while($line = <INFILE>)
 
 		    if($bsize > 1)
 		    {
-			print OUTFILE "\) const;\n";
+
+			if($bracket[1] =~ /const/)
+			{
+			    print OUTFILE "Scalar\) const;\n";
+			}
+			else
+			{
+			    print OUTFILE "Scalar\);\n";
+			}
+			
 		    }
 		    else
 		    {
 			print OUTFILE "\);\n";
 		    }
-
+		    
 		}
 	    }   
 	}
