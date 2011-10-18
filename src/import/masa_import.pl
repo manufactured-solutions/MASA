@@ -473,6 +473,7 @@ print OUTFILE "// Analytical Terms\n";
 print OUTFILE "// ----------------------------------------\n";
 
 # build analytical terms
+print "Opening $anaf...\n";
 open ANAFILE , "<", $anaf or die $!;
 while($af = <ANAFILE>)
 {	    
