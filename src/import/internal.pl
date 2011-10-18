@@ -107,6 +107,11 @@ while($line = <INFILE>)
 			    print OUTFILE "Scalar,";
 			}
 		    }		    
+
+		    if($size eq 0 )
+		    {
+			print OUTFILE "\);\n";
+		    }
 		}   
 	    }
 	}
@@ -154,7 +159,12 @@ while($line = <INFILE>)
 			{
 			    print OUTFILE "Scalar,";
 			}
-		    }		    
+		    }		
+		    
+		    if($size eq 0 )
+		    {
+			print OUTFILE "\);\n";
+		    }
 		}   
 	    }
 	}
