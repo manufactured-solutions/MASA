@@ -1,6 +1,7 @@
 #!/bin/perl -w
 # open file, find line, replace with special text
 use warnings;
+use File::Copy;
 
 $count = 0;
 
@@ -370,7 +371,7 @@ close  INFILE or die $!;
 close OUTFILE or die $!;
 
 rename($old, $bak);
-rename($new, $old);
+copy  ($new, $old);
 
 # ----------------------------------------------------------------------------------
 #
