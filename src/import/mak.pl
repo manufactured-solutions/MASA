@@ -20,7 +20,7 @@ open OUTFILE, ">", $new  or die $!;
 while($line = <INFILE>)
 {
     # error check
-    if($line =~ /class $name/)
+    if($line =~ /$name/)
     {
 	print "MASA IMPORT CRITICAL ERROR: Solution of that name already exists!\n";
 	print "$name has already been registered!\n";
@@ -30,7 +30,11 @@ while($line = <INFILE>)
     # looking for our special moniker
     if($line =~ /-l33t-/)
     {
-	print OUTFILE "cc_source += $name.cpp\n";
+	print OUTFILE "cc_sources += $name.cpp\n";
+	print OUTFILE $line;
+    }
+    else 
+    {
 	print OUTFILE $line;
     }
 
