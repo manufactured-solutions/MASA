@@ -98,7 +98,7 @@ print $new_masa;
 # open file(s)
 $old = "../masa_core.cpp";
 $new = "tmp";
-$bak = "masa_core.bak";
+$bak = "masa_core.cpp";
 
 open INFILE , "<", $old or die $!;
 open OUTFILE, ">", $new  or die $!;
@@ -132,7 +132,7 @@ print "Cleaning up...\n\n";
 close  INFILE or die $!;
 close OUTFILE or die $!;
 
-rename($old, $bak);
+rename($old, backup/$bak);
 rename($new, $old);
 
 # ----------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ print "Creating class in masa_internal.h...\n";
 # open file(s)
 $old   = "../masa_internal.h";
 $new   = "tmp.internal";
-$bak   = "masa_internal.bak";
+$bak   = "masa_internal.h";
 $count = 0;
 
 open INFILE , "<", $old or die $!;
@@ -323,7 +323,7 @@ if($count =~ 0)
 close  INFILE or die $!;
 close OUTFILE or die $!;
 
-rename($old, $bak);
+rename($old, examples/$bak);
 rename($new, $old);
 
 # closing and cleaning up
@@ -340,7 +340,7 @@ print "Editing Makefile.am...\n";
 # open file(s)
 $old = "../Makefile.am";
 $new = "tmp.mak";
-$bak = "Makefile.bak";
+$bak = "Makefile.am";
 
 open INFILE , "<", $old or die $!;
 open OUTFILE, ">", $new  or die $!;
@@ -378,7 +378,7 @@ print "Cleaning up...\n\n";
 close  INFILE or die $!;
 close OUTFILE or die $!;
 
-copy($old, $bak);
+copy($old, backups/$bak);
 copy($new, $old);
 
 # ----------------------------------------------------------------------------------
@@ -542,7 +542,6 @@ close OUTFILE or die $!;
 
 print "Exiting: Have a Well Verified Day.\n\n";
 exit 0;
-
 
 # nick
 # 10/11/11
