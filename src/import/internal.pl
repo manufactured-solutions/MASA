@@ -104,7 +104,7 @@ while($line = <INFILE>)
 			}
 			else
 			{
-			    print OUTFILE "Scalar\);\n";
+			    print OUTFILE "Scalar,";
 			}
 		    }		    
 		}   
@@ -152,7 +152,7 @@ while($line = <INFILE>)
 			}
 			else
 			{
-			    print OUTFILE "Scalar\);\n";
+			    print OUTFILE "Scalar,";
 			}
 		    }		    
 		}   
