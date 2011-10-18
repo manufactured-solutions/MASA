@@ -414,6 +414,7 @@ while($vf = <VARFILE>)
     chomp($vf);
     @values = split(' ', $vf);
     print OUTFILE "  this->register_var(\"$values[0]\",&$values[0]);\n";
+
 }
 close  VARFILE or die $!;
 
@@ -430,7 +431,18 @@ while($vf = <VARFILE>)
 {	    
     chomp($vf);
     @values = split(' ', $vf);
-    print OUTFILE "  err += this->set_var(\"$values[0]\",$values[1]);\n";
+    $arraySize = scalar (@values);
+
+    # no default given -- assume 12
+    if($arraySize < 2)
+    {
+	print OUTFILE "  err += this->set_var(\"$values[0]\",12);\n";
+    }
+    else # use the value we were given
+    {
+	print OUTFILE "  err += this->set_var(\"$values[0]\",$values[1]);\n";
+    }
+
 }
 close  VARFILE or die $!;
 
