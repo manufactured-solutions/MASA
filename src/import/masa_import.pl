@@ -26,31 +26,59 @@ else
     exit 0;
 }
 # get solution class name
-print " Please input the name of your new MMS class:\n";
+print " Please input the name of your new MMS class (default: mms_example):\n";
 $line = <STDIN>;
-chomp($line);
-print "\n";
-$soln     = $line;
+if ($line)
+{
+    chomp($line);
+    print "\n";
+    $soln     = $line;
+}
+else
+{
+    $soln = "mms_example";
+}
 $name     = $soln;
 $new_masa = "  anim.push_back(new $soln<Scalar>());\n\n";
 
-print " Please input the source term file:\n";
+print " Please input the source term file (examples/source_terms.cpp):\n";
 $line = <STDIN>;
-chomp($line);
-#$srcf = "source_terms.cpp";
-$srcf = $line;
+if ($line)
+{
+    chomp($line);
+    print "\n";
+    $srcf     = $line;
+}
+else
+{
+    $srcf = "examples/source_terms.cpp";
+}
 
-print " Please input the analytical solution file:\n";
+print " Please input the analytical solution file (default: examples/analytical_solution.cpp):\n";
 $line = <STDIN>;
-chomp($line);
-#$anaf = "analytical_solution.cpp";
-$anaf = $line;
+if ($line)
+{
+    chomp($line);
+    print "\n";
+    $anaf     = $line;
+}
+else
+{
+    $anaf = "examples/analytical_solution.cpp";
+}
 
 print " Please input the variable file:\n";
 $line = <STDIN>;
-chomp($line);
-#$varf = "variables.var";
-$varf = $line;
+if ($line)
+{
+    chomp($line);
+    print "\n";
+    $varf     = $line;
+}
+else
+{
+    $varf = "examples/variables.var";
+}
 
 print "\n\nInstantiating $soln in masa_core.cpp...\n";
 print $new_masa;
@@ -92,8 +120,8 @@ print "Cleaning up...\n\n";
 close  INFILE or die $!;
 close OUTFILE or die $!;
 
-#rename($old, $bak);
-#rename($new, $old);
+rename($old, $bak);
+rename($new, $old);
 
 # ----------------------------------------------------------------------------------
 #
@@ -283,8 +311,8 @@ if($count =~ 0)
 close  INFILE or die $!;
 close OUTFILE or die $!;
 
-#rename($old, $bak);
-#rename($new, $old);
+rename($old, $bak);
+rename($new, $old);
 
 # closing and cleaning up
 print "Done with masa_core.cpp...\n";
@@ -296,6 +324,7 @@ print "Cleaning up...\n\n";
 #
 # ----------------------------------------------------------------------------------
 print "Editing Makefile.am...\n";
+
 # open file(s)
 $old = "../Makefile.am";
 $new = "tmp.mak";
@@ -337,8 +366,8 @@ print "Cleaning up...\n\n";
 close  INFILE or die $!;
 close OUTFILE or die $!;
 
-#rename($old, $bak);
-#rename($new, $old);
+rename($old, $bak);
+rename($new, $old);
 
 # ----------------------------------------------------------------------------------
 #
@@ -349,8 +378,8 @@ close OUTFILE or die $!;
 print "Generating MMS file...\n";
 
 # open file(s)
-$new = "$name.cpp";
-$bak = "Makefile.bak";
+$new = "../$name.cpp";
+$bak = "$name.bak";
 
 open OUTFILE, ">", $new  or die $!;
 
@@ -484,9 +513,6 @@ print OUTFILE "//---------------------------------------------------------\n";
 # clean up 
 print "Done with $name.cpp...\n";
 print "Cleaning up...\n\n";
-# #rename($old, $bak);
-# #rename($new, $old);
-
 close OUTFILE or die $!;
 
 print "Exiting: Have a Well Verified Day.\n\n";
