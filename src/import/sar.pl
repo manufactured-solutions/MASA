@@ -9,7 +9,7 @@ print " * Welcome to the MASA solution import system.                  *\n";
 print " * This will import a manufactured solution you have generated. *\n";
 print " * ------------------------------------------------------------ *\n\n";
 print " Warning!! This functionality is experimental.\n"; 
-print " It is recommended you create a backup of your MASA local library before proceeding.\n";
+print " It is recommended you create a backup of your local MASA library before proceeding.\n";
 print " Continue? (y/n)\n";
 $line = <STDIN>;
 

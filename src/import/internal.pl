@@ -1,5 +1,5 @@
 #!/bin/perl -w
-# open file, find line, replace with special text
+# edit masa_internal.h
 use warnings;
 
 print "Creating class in masa_internal.h...\n";
@@ -189,6 +189,11 @@ if($count =~ 0)
     exit 1;
 }
 
+wclose  INFILE or die $!;
+close OUTFILE or die $!;
+
+#rename($old, $bak);
+#rename($new, $old);
 
 # closing and cleaning up
 print "Done with masa_core.cpp...\n";
