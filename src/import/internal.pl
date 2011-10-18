@@ -87,7 +87,7 @@ while($line = <INFILE>)
 		    $sf=~ s/double/Scalar/g;
 		    $sf=~ s/float/Scalar/g;
 		    @values = split('\(', $sf);
-		    print OUTFILE $values[0];
+		    print OUTFILE "  $values[0]";
 
 		    # this is indexed at -1 because 
 		    # we assume that the function starts with scalar
@@ -135,7 +135,7 @@ while($line = <INFILE>)
 		    $af=~ s/double/Scalar/g;
 		    $af=~ s/float/Scalar/g;
 		    @values = split('\(', $af);
-		    print OUTFILE $values[0];
+		    print OUTFILE "  $values[0]";
 
 		    # this is indexed at -1 because 
 		    # we assume that the function starts with scalar
