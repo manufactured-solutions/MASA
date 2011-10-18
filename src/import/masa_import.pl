@@ -15,17 +15,25 @@ print " Warning!! This functionality is experimental.\n";
 print " It is recommended you create a backup of your local MASA library before proceeding.\n";
 print " Continue? (y/n)\n";
 $line = <STDIN>;
-
-# error handling
-if($line =~ "y")
+chomp($line);
+if ($line)
 {
-    print "Continuing...\n\n"
+    # error handling
+    if($line =~ "y")
+    {
+	print "Continuing...\n\n";
+    }
+    else
+    {
+	print "Ending\n";
+	exit 0;
+    }
 }
 else
 {
-    print "Ending\n";
-    exit 0;
+    print "Continuing...\n\n";
 }
+
 # get solution class name
 print " Please input the name of your new MMS class (default: mms_import_example):\n";
 $line = <STDIN>;
