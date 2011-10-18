@@ -171,12 +171,12 @@ while($line = <INFILE>)
 	print OUTFILE "// ------------------------------------------------------\n";
 
 	# print template and class
-	print OUTFILE "template <typename Scalar>\n";
-	print OUTFILE "class MASA::$name : public manufactured_solution<Scalar>\n{\n";
+	print OUTFILE "namespace MASA{template <typename Scalar>\n";
+	print OUTFILE "class MASA::$name : public MASA::manufactured_solution<Scalar>\n{\n";
 
 	# print pi
-	print OUTFILE "  using manufactured_solution<Scalar>::pi;\n";
-	print OUTFILE "  using manufactured_solution<Scalar>::PI;\n\n";
+	print OUTFILE "  using MASA::manufactured_solution<Scalar>::pi;\n";
+	print OUTFILE "  using MASA::manufactured_solution<Scalar>::PI;\n\n";
 	
 	# print list of variables
 	print OUTFILE "private:\n";
@@ -302,7 +302,7 @@ while($line = <INFILE>)
 	close  ANAFILE or die $!;
 	
 	# leave moniker in and trip counter
-	print OUTFILE "};\n\n\n";
+	print OUTFILE "};}\n\n\n";
 	print OUTFILE $line;
 	$count=1;
     }
@@ -422,7 +422,7 @@ print OUTFILE "\} // done with constructor\n\n";
 
 # build init_var
 print OUTFILE "template <typename Scalar>\n";
-print OUTFILE "MASA::$name<Scalar>::init_var()\n\{\n";
+print OUTFILE "int MASA::$name<Scalar>::init_var()\n\{\n";
 print OUTFILE "  int err = 0;\n\n";
 
 open VARFILE , "<", $varf or die $!;
