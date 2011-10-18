@@ -171,12 +171,12 @@ while($line = <INFILE>)
 	print OUTFILE "// ------------------------------------------------------\n";
 
 	# print template and class
-	print OUTFILE "namespace MASA{template <typename Scalar>\n";
-	print OUTFILE "class MASA::$name : public MASA::manufactured_solution<Scalar>\n{\n";
+	print OUTFILE "namespace MASA{\ntemplate <typename Scalar>\n";
+	print OUTFILE "class $name : public manufactured_solution<Scalar>\n{\n";
 
 	# print pi
-	print OUTFILE "  using MASA::manufactured_solution<Scalar>::pi;\n";
-	print OUTFILE "  using MASA::manufactured_solution<Scalar>::PI;\n\n";
+	print OUTFILE "  using manufactured_solution<Scalar>::pi;\n";
+	print OUTFILE "  using manufactured_solution<Scalar>::PI;\n\n";
 	
 	# print list of variables
 	print OUTFILE "private:\n";
