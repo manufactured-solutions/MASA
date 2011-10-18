@@ -132,7 +132,7 @@ print "Cleaning up...\n\n";
 close  INFILE or die $!;
 close OUTFILE or die $!;
 
-rename($old, backup/$bak);
+rename($old, "backup/$bak");
 rename($new, $old);
 
 # ----------------------------------------------------------------------------------
@@ -198,53 +198,82 @@ while($line = <INFILE>)
 	open SRCFILE , "<", $srcf or die $!;
 	while($sf = <SRCFILE>)
 	{	    
-	    if($sf =~ /double/)
+	    if($sf =~ /eval_q_/)
 	    {
-
-		if($sf =~ /eval_q_/)
+		if($sf =~ /int/)
 		{
-		    if($sf =~ /int/)
-		    {
-			print "Warning: MASA importer only accepts source terms with float double arguments!\n";
-			exit 1;
-		    }
-		    
-		    if($sf =~ /void/)
-		    {
-			print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
-			exit 1;
-		    }
+		    print "Warning: MASA importer only accepts source terms with float double arguments!\n";
+		    exit 1;
+		}
+		
+		if($sf =~ /void/)
+		{
+		    print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
+		    exit 1;
+		}
 
-		    $sf=~ s/double/Scalar/g;
-		    $sf=~ s/float/Scalar/g;
-		    @values = split('\(', $sf);
+		$sf=~ s/double/Scalar/g;
+		$sf=~ s/float/Scalar/g;
+		@values = split('\(', $sf);
+
+		# CHECK if values[0] has a scalar in it:
+		if($values[0] =~ /Scalar/)
+		{
 		    print OUTFILE "  $values[0]";
+		}
+		else
+		{
+		    print OUTFILE "  Scalar $values[0]";
+		}
 
-		    # this is indexed at -1 because 
-		    # we assume that the function starts with scalar
-		    # we are counting the number of arguments in the function call
-		    my $size = -1; $size++ while $sf =~ /Scalar/g;
+		# this is indexed at -1 because 
+		# we assume that the function starts with scalar
+		# we are counting the number of arguments in the function call
+		my $size = -1; $size++ while $sf =~ /Scalar/g;
 
-		    # now write the number of Scalars in the source term
-		    print OUTFILE "\(";
-		    for ($count = 1; $count <= $size; $count++) 
+		# now write the number of Scalars in the source term
+		print OUTFILE "\(";
+		for ($count = 1; $count <= $size; $count++) 
+		{
+		    if($count eq $size)
 		    {
-			if($count eq $size)
+			# see if the function is const
+			@bracket = split('\)', $sf);
+			$bsize = scalar (@bracket);
+
+			if($bsize > 1)
 			{
-			    print OUTFILE "Scalar\);\n";
+			    print OUTFILE "Scalar\) const;\n";
 			}
 			else
 			{
-			    print OUTFILE "Scalar,";
+			    print OUTFILE "Scalar\);\n";
 			}
-		    }		    
 
-		    if($size eq 0 )
+		    }
+		    else
+		    {
+			print OUTFILE "Scalar,";
+		    }
+		}		    
+
+		if($size eq 0 )
+		{
+		    # see if the function is const
+		    @bracket = split('\)', $sf);
+		    $bsize = scalar (@bracket);
+
+		    if($bsize > 1)
+		    {
+			print OUTFILE "\) const;\n";
+		    }
+		    else
 		    {
 			print OUTFILE "\);\n";
 		    }
-		}   
-	    }
+		}
+
+	    }   
 	}
 	close  SRCFILE or die $!;
 
@@ -253,51 +282,79 @@ while($line = <INFILE>)
 	open ANAFILE , "<", $anaf or die $!;
 	while($af = <ANAFILE>)
 	{	    
-	    if($af =~ /double/)
+	    if($af =~ /eval_exact_/)
 	    {
-
-		if($af =~ /eval_exact_/)
+		if($af =~ /int/)
 		{
-		    if($af =~ /int/)
-		    {
-			print "Warning: MASA importer only accepts source terms with float double arguments!\n";
-		    }
-		    
-		    if($af =~ /void/)
-		    {
-			print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
-		    }
+		    print "Warning: MASA importer only accepts source terms with float double arguments!\n";
+		}
+		
+		if($af =~ /void/)
+		{
+		    print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
+		}
 
-		    $af=~ s/double/Scalar/g;
-		    $af=~ s/float/Scalar/g;
-		    @values = split('\(', $af);
+		$af=~ s/double/Scalar/g;
+		$af=~ s/float/Scalar/g;
+		@values = split('\(', $af);
+
+		# CHECK if values[0] has a scalar in it:
+		if($values[0] =~ /Scalar/)
+		{
 		    print OUTFILE "  $values[0]";
+		}
+		else
+		{
+		    print OUTFILE "  Scalar $values[0]";
+		}
 
-		    # this is indexed at -1 because 
-		    # we assume that the function starts with scalar
-		    # we are counting the number of arguments in the function call
-		    my $size = -1; $size++ while $af =~ /Scalar/g;
+		# this is indexed at -1 because 
+		# we assume that the function starts with scalar
+		# we are counting the number of arguments in the function call
+		my $size = -1; $size++ while $af =~ /Scalar/g;
 
-		    # now write the number of Scalars in the source term
-		    print OUTFILE "\(";
-		    for ($count = 1; $count <= $size; $count++) 
+		# now write the number of Scalars in the source term
+		print OUTFILE "\(";
+		for ($count = 1; $count <= $size; $count++) 
+		{
+		    if($count eq $size)
 		    {
-			if($count eq $size)
+			# see if the function is const
+			@bracket = split('\)', $af);
+			$bsize = scalar (@bracket);
+
+			if($bsize > 1)
 			{
-			    print OUTFILE "Scalar\);\n";
+			    print OUTFILE "Scalar\) const;\n";
 			}
 			else
 			{
-			    print OUTFILE "Scalar,";
+			    print OUTFILE "Scalar\);\n";
 			}
-		    }		
-		    
-		    if($size eq 0 )
+		    }
+		    else
+		    {
+			print OUTFILE "Scalar,";
+		    }
+		}		
+		
+		if($size eq 0 )
+		{
+		    # see if the function is const
+		    @bracket = split('\)', $af);
+		    $bsize = scalar (@bracket);
+
+		    if($bsize > 1)
+		    {
+			print OUTFILE "\) const;\n";
+		    }
+		    else
 		    {
 			print OUTFILE "\);\n";
 		    }
-		}   
-	    }
+
+		}
+	    }   
 	}
 	close  ANAFILE or die $!;
 	
@@ -323,7 +380,7 @@ if($count =~ 0)
 close  INFILE or die $!;
 close OUTFILE or die $!;
 
-rename($old, examples/$bak);
+rename($old, "backup/$bak");
 rename($new, $old);
 
 # closing and cleaning up
@@ -378,8 +435,8 @@ print "Cleaning up...\n\n";
 close  INFILE or die $!;
 close OUTFILE or die $!;
 
-copy($old, backups/$bak);
-copy($new, $old);
+copy($old, "backup/$bak");
+rename($new, $old);
 
 # ----------------------------------------------------------------------------------
 #
