@@ -5,6 +5,8 @@ cc_sources = masa_core.cpp masa_class.cpp masa_map.cpp heat.cpp euler.cpp    \
              euler_chem.cpp euler_transient.cpp radiation.cpp fans_sa.cpp    \
              ablation.cpp cp_normal.cpp nsctpl.cpp laplace.cpp
 
+# do not edit this line! --l33t--
+
 # License Information
 
 BUILT_SOURCES = .license.stamp
