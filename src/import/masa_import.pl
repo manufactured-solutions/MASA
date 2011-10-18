@@ -26,23 +26,24 @@ else
     exit 0;
 }
 # get solution class name
-print " Please input the name of your new MMS class (default: mms_example):\n";
+print " Please input the name of your new MMS class (default: mms_import_example):\n";
 $line = <STDIN>;
+chomp($line);
 if ($line)
 {
-    chomp($line);
     print "\n";
     $soln     = $line;
 }
 else
 {
-    $soln = "mms_example";
+    $soln = "mms_import_example";
 }
 $name     = $soln;
 $new_masa = "  anim.push_back(new $soln<Scalar>());\n\n";
 
 print " Please input the source term file (examples/source_terms.cpp):\n";
 $line = <STDIN>;
+chomp($line);
 if ($line)
 {
     chomp($line);
@@ -56,6 +57,7 @@ else
 
 print " Please input the analytical solution file (default: examples/analytical_solution.cpp):\n";
 $line = <STDIN>;
+chomp($line);
 if ($line)
 {
     chomp($line);
@@ -69,6 +71,7 @@ else
 
 print " Please input the variable file:\n";
 $line = <STDIN>;
+chomp($line);
 if ($line)
 {
     chomp($line);
