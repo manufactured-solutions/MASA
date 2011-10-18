@@ -626,7 +626,8 @@ print OUTFILE "\nMASA_INSTANTIATE_ALL(MASA::$name);\n\n";
 
 print OUTFILE "\n\n";
 print OUTFILE "//---------------------------------------------------------\n";
-print OUTFILE "// generated using AUTOMASA\n"; 
+print OUTFILE "// AUTOMASA\n"; 
+use Time::Local; $time = timelocal(50, 45, 3, 18, 0, 73); print "// Generated: ", scalar(localtime($time)), "\n";
 print OUTFILE "//---------------------------------------------------------\n";
 
 # clean up 
