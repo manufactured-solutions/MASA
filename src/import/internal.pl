@@ -77,11 +77,13 @@ while($line = <INFILE>)
 		    if($sf =~ /int/)
 		    {
 			print "Warning: MASA importer only accepts source terms with float double arguments!\n";
+			exit 1;
 		    }
 		    
 		    if($sf =~ /void/)
 		    {
 			print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
+			exit 1;
 		    }
 
 		    $sf=~ s/double/Scalar/g;

@@ -10,6 +10,8 @@ $name= "nicks_solution_class";
 $new = "$name.cpp";
 $bak = "Makefile.bak";
 $varf = "variables.var";
+$srcf = "source_terms.cpp";
+$anaf = "analytical_solution.cpp";
 
 open OUTFILE, ">", $new  or die $!;
 
@@ -59,76 +61,96 @@ print OUTFILE "// ----------------------------------------\n";
 print OUTFILE "// Source Terms\n";
 print OUTFILE "// ----------------------------------------\n";
 
-# print "Opening $srcf...\n";
-# open SRCFILE , "<", $srcf or die $!;
-# while($sf = <SRCFILE>)
-# {	    
-#     if($sf =~ /double/)
-#     {
+# open file and find source terms
+print "Opening $srcf...\n";
+open SRCFILE , "<", $srcf or die $!;
+while($sf = <SRCFILE>)
+{	    
 
-# 	if($sf =~ /eval_q_/)
-# 	{
-# 	    if($sf =~ /int/)
-# 	    {
-# 		print "Warning: MASA importer only accepts source terms with float double arguments!\n";
-# 	    }
-	    
-# 	    if($sf =~ /void/)
-# 	    {
-# 		print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
-# 	    }
+    # find location of each source term start
+    if($sf =~ /eval_q_/)
+    {
+	if($sf =~ /int/)
+	{
+	    print "Warning: MASA importer only accepts source terms with float double arguments!\n";
+	}
+	
+	if($sf =~ /void/)
+	{
+	    print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
+	}
 
-# 	    $sf=~ s/double/Scalar/g;
-# 	    $sf=~ s/float/Scalar/g;
-# 	    @values = split('\(', $sf);
-# 	    print OUTFILE "  $values[0]";
-
-# 	    # this is indexed at -1 because 
-# 	    # we assume that the function starts with scalar
-# 	    # we are counting the number of arguments in the function call
-# 	    my $size = -1; $size++ while $sf =~ /Scalar/g;
-
-# 	    # now write the number of Scalars in the source term
-# 	    print OUTFILE "\(";
-# 	    for ($count = 1; $count <= $size; $count++) 
-# 	    {
-# 		if($count eq $size)
-# 		{
-# 		    print OUTFILE "Scalar\);\n";
-# 		}
-# 		else
-# 		{
-# 		    print OUTFILE "Scalar,";
-# 		}
-# 	    }		    
-
-# 	    if($size eq 0 )
-# 	    {
-# 		print OUTFILE "\);\n";
-# 	    }
-# 	}   
-#     }
-# }
-# close  SRCFILE or die $!;
-
-# # build analytical terms
+	# print template information
+	print OUTFILE "template <typename Scalar>\n";
+	$sf=~ s/eval_q_/MASA::$name<Scalar>::eval_q_/;
+	
+    }
+    
+    $sf=~ s/double/Scalar/g;
+    $sf=~ s/float/Scalar/g;
+    
+    # print line after replacements
+    print OUTFILE $sf;
+    
+}
+close  SRCFILE or die $!;
 
 
+# dump list of analytical terms 
+print OUTFILE "\n\n// ----------------------------------------\n";
+print OUTFILE "// Analytical Terms\n";
+print OUTFILE "// ----------------------------------------\n";
 
+# build analytical terms
+open ANAFILE , "<", $anaf or die $!;
+while($af = <ANAFILE>)
+{	    
 
+    if($af =~ /eval_exact_/)
+    {
+	if($af =~ /int/)
+	{
+	    print "Warning: MASA importer only accepts source terms with float double arguments!\n";
+	}
+	
+	if($af =~ /void/)
+	{
+	    print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
+	}
+	
+	# print template information
+	print OUTFILE "template <typename Scalar>\n";
+	$af=~ s/eval_exact_/MASA::$name<Scalar>::eval_exact_/;	
+	
+    }   
 
-# # clean up 
-# print "Done with $name.cpp...\n";
-# print "Cleaning up...\n\n";
-# #rename($old, $bak);
-# #rename($new, $old);
+    $af=~ s/double/Scalar/g;
+    $af=~ s/float/Scalar/g;
+    
+    # print line after replacements
+    print OUTFILE $af;
 
-# close OUTFILE or die $!;
+}
+
+# dump list of analytical terms 
+print OUTFILE "\n\n// ----------------------------------------\n";
+print OUTFILE "// Template Instantiation(s)\n";
+print OUTFILE "// ----------------------------------------\n";
+print OUTFILE "\nMASA_INSTANTIATE_ALL(MASA::$name);\n\n";
 
 print OUTFILE "\n\n";
 print OUTFILE "//---------------------------------------------------------\n";
 print OUTFILE "// generated using AUTOMASA\n"; 
 print OUTFILE "//---------------------------------------------------------\n";
+
+# clean up 
+print "Done with $name.cpp...\n";
+print "Cleaning up...\n\n";
+# #rename($old, $bak);
+# #rename($new, $old);
+
+close OUTFILE or die $!;
+
 
 # nick
 # 10/17/11
