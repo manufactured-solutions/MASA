@@ -370,8 +370,8 @@ print "Cleaning up...\n\n";
 close  INFILE or die $!;
 close OUTFILE or die $!;
 
-rename($old, $bak);
-copy  ($new, $old);
+copy($old, $bak);
+copy($new, $old);
 
 # ----------------------------------------------------------------------------------
 #
