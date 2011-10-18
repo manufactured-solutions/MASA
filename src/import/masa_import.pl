@@ -50,6 +50,20 @@ else
 $name     = $soln;
 $new_masa = "  anim.push_back(new $soln<Scalar>());\n\n";
 
+# get dimension
+print " Please input the MMS dimension (spatial + temporal) (default: 1):\n";
+$line = <STDIN>;
+chomp($line);
+if ($line)
+{
+    print "\n";
+    $dimension  = $line;
+}
+else
+{
+    $dimension = 1;
+}
+
 print " Please input the source term file (examples/source_terms.cpp):\n";
 $line = <STDIN>;
 chomp($line);
@@ -500,7 +514,7 @@ print OUTFILE "using namespace MASA;\n\n";
 print OUTFILE "template <typename Scalar>\n";
 print OUTFILE "MASA::$name<Scalar>::$name()\n\{\n";
 print OUTFILE "  this->mmsname = \"$name\";\n";
-print OUTFILE "  this->dimension = 1;\n\n";
+print OUTFILE "  this->dimension = $dimension;\n\n";
 
 open VARFILE , "<", $varf or die $!;
 while($vf = <VARFILE>)
@@ -627,7 +641,12 @@ print OUTFILE "\nMASA_INSTANTIATE_ALL(MASA::$name);\n\n";
 print OUTFILE "\n\n";
 print OUTFILE "//---------------------------------------------------------\n";
 print OUTFILE "// AUTOMASA\n"; 
-use Time::Local; $time = timelocal(50, 45, 3, 18, 0, 73); print "// Generated: ", scalar(localtime($time)), "\n";
+
+# print date
+($sec,$min,$hour,$mday,$mon,$year,$wday,
+ $yday,$isdst)=localtime(time);
+printf OUTFILE "// Generated on: %4d-%02d-%02d %02d:%02d:%02d\n",
+    $year+1900,$mon+1,$mday,$hour,$min,$sec;
 print OUTFILE "//---------------------------------------------------------\n";
 
 # clean up 
