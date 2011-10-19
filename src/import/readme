@@ -3,10 +3,10 @@
 # This will require a perl interpreter.                         #
 # ------------------------------------------------------------- #
 
-1) You will need a file with your source terms. 
+1) You will need a C/C++ file with your source terms. 
    Each source term function should start with, "eval_q_"
 
-2) Create a file that contains your analytical terms.
+2) Create a C/C++ file that contains your analytical terms.
    Each analytical function should start with, "eval_exact_"
 
    For both the source and analytical terms:
