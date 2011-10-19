@@ -469,7 +469,7 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho_u(Scalar x,Scalar y
   Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
   Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*pow(M_inf,2))  ;
   Scalar rho_w = p_0/(R*T_aw);
-  Scalar A     = (mu/rho_w)/sqrt(1-(T_inf/T_aw));
+  Scalar A     = sqrt(1.0-(T_inf/T_aw));
   Scalar nu_w  = mu/rho_w;
   Scalar F_c     = (T_aw/(T_inf-1))/pow(asin(A),2);
   Scalar rho_inf = p_0/(R*T_inf);
@@ -524,7 +524,7 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho_v(Scalar x,Scalar y
   Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
   Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*pow(M_inf,2))  ;
   Scalar rho_w = p_0/(R*T_aw);
-  Scalar A     = (mu/rho_w)/sqrt(1-(T_inf/T_aw));
+  Scalar A     = sqrt(1.0-(T_inf/T_aw));
   Scalar nu_w  = mu/rho_w;
   Scalar F_c     = (T_aw/(T_inf-1))/pow(asin(A),2);
   Scalar rho_inf = p_0/(R*T_inf);
@@ -565,7 +565,7 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho(Scalar x,Scalar y)
   Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
   Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*pow(M_inf,2))  ;
   Scalar rho_w = p_0/(R*T_aw);
-  Scalar A     = (mu/rho_w)/sqrt(1-(T_inf/T_aw));
+  Scalar A     = sqrt(1.0-(T_inf/T_aw));
   Scalar nu_w  = mu/rho_w;
   Scalar F_c     = (T_aw/(T_inf-1))/pow(asin(A),2);
   Scalar rho_inf = p_0/(R*T_inf);
@@ -613,7 +613,7 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_nu(Scalar x,Scalar y)
   Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
   Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*pow(M_inf,2))  ;
   Scalar rho_w = p_0/(R*T_aw);
-  Scalar A     = (mu/rho_w)/sqrt(1-(T_inf/T_aw));
+  Scalar A     = sqrt(1.0-(T_inf/T_aw));
   Scalar nu_w  = mu/rho_w;
   Scalar F_c     = (T_aw/(T_inf-1))/pow(asin(A),2);
   Scalar rho_inf = p_0/(R*T_inf);
@@ -687,9 +687,9 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho_e(Scalar x,Scalar y
   Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
   Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*std::pow(M_inf,2))  ;
   Scalar rho_w = p_0/(R*T_aw);
-  Scalar A     = (mu/rho_w)/sqrt(1-(T_inf/T_aw));
+  Scalar A     = sqrt(1.0-(T_inf/T_aw));
   Scalar nu_w  = mu/rho_w;
-  Scalar F_c     = (T_aw/(T_inf-1))/std::pow(asin(A),2);
+  Scalar F_c     = ((T_aw/T_inf)-1.0)/std::pow(asin(A),2);
   Scalar rho_inf = p_0/(R*T_inf);
 
   Re_x = rho_inf * u_inf * x / mu;
@@ -738,9 +738,9 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_u(Scalar x,Scalar y
   Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
   Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*std::pow(M_inf,2))  ;
   Scalar rho_w = p_0/(R*T_aw);
-  Scalar A     = (mu/rho_w)/sqrt(1-(T_inf/T_aw));
+  Scalar A     = sqrt(1.0-(T_inf/T_aw));
   Scalar nu_w  = mu/rho_w;
-  Scalar F_c     = (T_aw/(T_inf-1))/std::pow(asin(A),2);
+  Scalar F_c     = ((T_aw/T_inf)-1.0)/std::pow(asin(A),2);
   Scalar rho_inf = p_0/(R*T_inf);
   Scalar Re_x    = rho_inf * u_inf * x / mu;
   Scalar c_f     = C_cf / F_c * std::pow(0.1e1 / F_c * Re_x, Scalar(-0.1e1 / 0.7e1));
@@ -762,9 +762,9 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_v(Scalar x,Scalar y
   Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
   Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*std::pow(M_inf,2))  ;
   Scalar rho_w = p_0/(R*T_aw);
-  Scalar A     = (mu/rho_w)/sqrt(1-(T_inf/T_aw));
+  Scalar A     = sqrt(1.0-(T_inf/T_aw));
   Scalar nu_w  = mu/rho_w;
-  Scalar F_c     = (T_aw/(T_inf-1))/std::pow(asin(A),2);
+  Scalar F_c     = ((T_aw/T_inf)-1.0)/std::pow(asin(A),2);
   Scalar rho_inf = p_0/(R*T_inf);
   Scalar Re_x    = rho_inf * u_inf * x / mu;
   Scalar c_f     = C_cf / F_c * std::pow(0.1e1 / F_c * Re_x, Scalar(-0.1e1 / 0.7e1));
@@ -793,9 +793,9 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_rho(Scalar x,Scalar
   Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
   Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*std::pow(M_inf,2))  ;
   Scalar rho_w = p_0/(R*T_aw);
-  Scalar A     = (mu/rho_w)/sqrt(1-(T_inf/T_aw));
+  Scalar A     = sqrt(1.0-(T_inf/T_aw));
   Scalar nu_w  = mu/rho_w;
-  Scalar F_c     = (T_aw/(T_inf-1))/std::pow(asin(A),2);
+  Scalar F_c     = ((T_aw/T_inf)-1.0)/std::pow(asin(A),2);
   Scalar rho_inf = p_0/(R*T_inf);
   Scalar Re_x    = rho_inf * u_inf * x / mu;
   Scalar c_f     = C_cf / F_c * std::pow(0.1e1 / F_c * Re_x, Scalar(-0.1e1 / 0.7e1));
@@ -814,10 +814,10 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_nu(Scalar x,Scalar 
 {
   Scalar nu_sa_an;
   Scalar u_inf   = M_inf * sqrt(Gamma*R*T_inf);
-  Scalar T_aw  = T_inf*(1+r_T * (Gamma-1)/2*std::pow(M_inf,2))  ;
-  Scalar rho_w = p_0/(R*T_aw);
-  Scalar A     = (mu/rho_w)/sqrt(1-(T_inf/T_aw));
-  Scalar F_c     = (T_aw/(T_inf-1))/std::pow(asin(A),2);
+  Scalar T_aw    = T_inf*(1+r_T * (Gamma-1)/2*std::pow(M_inf,2))  ;
+  Scalar rho_w   = p_0/(R*T_aw);
+  Scalar A       = sqrt(1.0-(T_inf/T_aw));
+  Scalar F_c     = ((T_aw/T_inf)-1.0)/std::pow(asin(A),2);
   Scalar rho_inf = p_0/(R*T_inf);
   Scalar Re_x    = rho_inf * u_inf * x / mu;
   Scalar c_f     = C_cf / F_c * std::pow(Scalar(0.1e1 / F_c * Re_x), Scalar(-0.1e1 / 0.7e1));
