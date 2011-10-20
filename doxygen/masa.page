@@ -24,7 +24,7 @@ further divided into the following subsections:
   <li> \link tut "Tutorial" </li>
   <li> \subpage mms_avail "Available Manufactured Solutions"</li>
   <li> \subpage add_sol "Adding Additional Manufactured Solutions to MASA" </li>
-  <li> <a href="http://buildbot.ices.utexas.edu/docs/buildbot/masa/build/docs/html/lcov/build/src/index.html">Buildbot Coverage</a> </li>
+  <li> <a href="http://buildbot.ices.utexas.edu/docs/buildbot/masa/docs/html/lcov/build/src/index.html">Buildbot Coverage</a> </li>
 </ul>
 
 <!-- \subpage apiF Fortran API -->
