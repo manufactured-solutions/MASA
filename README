@@ -11,7 +11,7 @@ MASA currently supports gcc and intel compilers.
 
 TO BUILD:
 
-1) ./bootstrap
+1) ./bootstrap (from source, ignore if this is a release tarball)
 2) ./configure --prefix= top-level dir
 3) make
 4) make install
