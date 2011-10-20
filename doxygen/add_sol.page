@@ -1,14 +1,44 @@
 /*! \page add_sol Adding Additional Manufactured Solutions to MASA
 
-TO ADD A NEW SOLUTION:
+MASA permits users to import additional solutions directly into the codebase. 
+It is the hope of the developers that this import mechanism will streamline the process of 
+adding and testing manufactured solutions, which in turn will encourage users to 
+contribute patch files with additional MMS to MASA, expanding the scope of the available
+solutions and broadening its appeal as a community tool. 
 
-1) Add a new file, for your manufactued solution (e.g. new_mms.cpp)
-   * In this file, include a constructor which sets all variable names
-   * Add the file to cc_sources in Makefile.am (in src)
-   * Add the source term evaluation functions to
+To import a solution into MASA, the user is required to have:
 
-2) Add the new class in masa_internal.h (example: euler_1d)
+\li C/C++ file with your source terms.
+   Each source term function should start with, "eval_q_"
 
-3) Add the new solution in masa_core.cpp, method: get_list_mms
+\li C/C++ file that contains your analytical terms.
+   Each analytical function should start with, "eval_exact_"
+
+   For both the source and analytical terms:
+   The functions should only take doubles or floats as arguments.
+   Please ensure that the function arguments are on the same line
+   as the function name, e.g. \n
+   \t double eval_exact_t(double x, double y)
+
+   Instead of: \n
+   \t double eval_exact_t(double x,\n
+   \t\t                    double y)
+
+
+\li A file that contains all the variables required
+   by your solutions. Each variable should be on a newline
+   and the default value should be on the same row, separated
+   by a space.
+
+Finally, run from a command line: "perl masa_import.pl".
+This will complete the process of integrating the
+solution into the MASA codebase. Future work will expand this functionality to 
+permit the user to include analytically calculated gradient functions, as well as 
+directly importing LaTeX documents into the MASA documentation. 
+
+For more information, check "readme" in src/import.
+Check the subdirectory: "src/import/examples" for examples of each file.
+Finally, to revert your local version, simply copy the contents of the folder backup 
+into src to revert back.
 
 */
