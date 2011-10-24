@@ -15,7 +15,7 @@ double eval_exact_u(double x)
 {
   double exact_u;
   exact_u = x*x;
-  return exact_t;
+  return exact_u;
 }
 
 double eval_exact_t(double x)
