@@ -215,7 +215,7 @@ while($line = <INFILE>)
 	    if($sf =~ /eval_q_/)
 	    {
 
-		# ignore if they are being called
+		# ignore if they are being called as functions
 		if($sf =~ /=/)
 		{
 		    
@@ -326,7 +326,7 @@ while($line = <INFILE>)
 	    if($af =~ /eval_exact_/)
 	    {
 
-		# ignore if they are being called
+		# ignore if they are being called as functions
 		if($af =~ /=/)
 		{
 		    
@@ -592,7 +592,7 @@ while($sf = <SRCFILE>)
     if($sf =~ /eval_q_/)
     {
 
-	# ignore if they are being called
+	# ignore if they are being called as functions
 	if($sf =~ /=/)
 	{
 	    
@@ -640,7 +640,7 @@ while($af = <ANAFILE>)
     if($af =~ /eval_exact_/)
     {
 
-	# ignore if they are being called
+	# ignore if they are being called as functions
 	if($af =~ /=/)
 	{
 	    
