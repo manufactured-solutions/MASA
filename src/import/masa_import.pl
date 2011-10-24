@@ -212,7 +212,9 @@ while($line = <INFILE>)
 	open SRCFILE , "<", $srcf or die $!;
 	while($sf = <SRCFILE>)
 	{	    
-	    if($sf =~ /eval_q_/)
+
+	    # look for source terms or helper functions
+	    if($sf =~ /eval_q_/ || $sf =~ /helper_/)
 	    {
 
 		# ignore if they are being called as functions
@@ -323,7 +325,7 @@ while($line = <INFILE>)
 	open ANAFILE , "<", $anaf or die $!;
 	while($af = <ANAFILE>)
 	{	    
-	    if($af =~ /eval_exact_/)
+	    if($af =~ /eval_exact_/ || $af =~ /helper_/)
 	    {
 
 		# ignore if they are being called as functions
@@ -589,7 +591,7 @@ while($sf = <SRCFILE>)
 {	    
 
     # find location of each source term start
-    if($sf =~ /eval_q_/)
+    if($sf =~ /eval_q_/ || $sf =~ /helper_/)
     {
 
 	# ignore if they are being called as functions
@@ -613,6 +615,7 @@ while($sf = <SRCFILE>)
 	    # print template information
 	    print OUTFILE "template <typename Scalar>\n";
 	    $sf=~ s/eval_q_/MASA::$name<Scalar>::eval_q_/;
+	    $sf=~ s/helper_/MASA::$name<Scalar>::helper_/;
 	    
 	} # done with else...
     } # done with source term
@@ -637,7 +640,7 @@ while($af = <ANAFILE>)
 {	    
 
     # find all analytical terms
-    if($af =~ /eval_exact_/)
+    if($af =~ /eval_exact_/ || $af =~ /helper_/)
     {
 
 	# ignore if they are being called as functions
@@ -660,6 +663,8 @@ while($af = <ANAFILE>)
 	    # print template information
 	    print OUTFILE "template <typename Scalar>\n";
 	    $af=~ s/eval_exact_/MASA::$name<Scalar>::eval_exact_/;	
+	    $af=~ s/helper_/MASA::$name<Scalar>::helper_/;	
+	    
 	} # done with else
     }   
     
