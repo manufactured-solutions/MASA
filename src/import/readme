@@ -26,6 +26,9 @@
    function you can successfully import these into the masa 
    namespace by prepending, "helper_" before the function
 
+   Please note that functions can be helper or source/analytical terms
+   But *not* both, e.g. "helper_eval_exact_" is illegal.
+
 3) Create a file that contains all the variables required 
    by your solutions. Each variable should be on a newline
    and the default value should be on the same row, separated 
