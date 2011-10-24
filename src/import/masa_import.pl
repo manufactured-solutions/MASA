@@ -216,7 +216,7 @@ while($line = <INFILE>)
 	    {
 
 		# ignore if they are being called
-		if($af =~ /=/)
+		if($sf =~ /=/)
 		{
 		    
 		}
