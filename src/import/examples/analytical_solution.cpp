@@ -1,16 +1,15 @@
 
-/*
 // private, called from exact_t
-helper_func(double x)
+helper_func_an(double x)
 {
 
-
+  double helper_func;
+  helper_func = x+12.4;
+  return helper_func;
 
 }
-*/
 
-
-// public, but will be called from exact_t
+// public, but will be called from eval_exact_t
 double eval_exact_u(double x)
 {
   double exact_u;
@@ -21,8 +20,7 @@ double eval_exact_u(double x)
 double eval_exact_t(double x)
 {
   double exact_t;
-  exact_t = std::cos(A_x * x)*eval_exact_u(x);
-  //exact_t = helper_func(x)*std::cos(A_x * x);
+  exact_t = helper_func_an(x)*std::cos(A_x * x)*eval_exact_u(x);
   return exact_t;
 }
 
