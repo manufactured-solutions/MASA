@@ -214,6 +214,15 @@ while($line = <INFILE>)
 	{	    
 	    if($sf =~ /eval_q_/)
 	    {
+
+		# ignore if they are being called
+		if($af =~ /=/)
+		{
+		    
+		}
+		else
+		{
+
 		if($sf =~ /int/)
 		{
 		    print "Warning: MASA importer only accepts source terms with float double arguments!\n";
@@ -302,9 +311,11 @@ while($line = <INFILE>)
 			print OUTFILE "\);\n";
 		    }
 		}
-
-	    }   
-	}
+		
+		
+		} # done with else{
+	    } # done with line matching source term
+	} # done with file
 	close  SRCFILE or die $!;
 
 	# print list of analytical functions
@@ -314,99 +325,109 @@ while($line = <INFILE>)
 	{	    
 	    if($af =~ /eval_exact_/)
 	    {
-		if($af =~ /int/)
-		{
-		    print "Warning: MASA importer only accepts source terms with float double arguments!\n";
-		}
-		
-		if($af =~ /void/)
-		{
-		    print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
-		}
 
-		$af=~ s/double/Scalar/g;
-		$af=~ s/float/Scalar/g;
-		@values = split('\(', $af);
-
-		# CHECK if values[0] has a scalar in it:
-		if($values[0] =~ /Scalar/)
+		# ignore if they are being called
+		if($af =~ /=/)
 		{
-		    print OUTFILE "  $values[0]";
+		    
 		}
 		else
 		{
-		    print OUTFILE "  Scalar $values[0]";
-		}
 
-		# this is indexed at -1 because 
-		# we assume that the function starts with scalar
-		# we are counting the number of arguments in the function call
-		my $size = -1; $size++ while $af =~ /Scalar/g;
-
-		# now write the number of Scalars in the analytical solution
-		print OUTFILE "\(";
-		for ($count = 1; $count <= $size; $count++) 
-		{
-		    # this is the last argument to the function
-		    if($count eq $size)
+		    if($af =~ /int/)
 		    {
-			# see if the function is const
-			@bracket = split('\)', $af);
-			$bsize = scalar (@bracket);
+			print "Warning: MASA importer only accepts source terms with float double arguments!\n";
+		    }
+		    
+		    if($af =~ /void/)
+		    {
+			print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
+		    }
+		    
+		    $af=~ s/double/Scalar/g;
+		    $af=~ s/float/Scalar/g;
+		    @values = split('\(', $af);
+		    
+		    # CHECK if values[0] has a scalar in it:
+		    if($values[0] =~ /Scalar/)
+		    {
+			print OUTFILE "  $values[0]";
+		    }
+		    else
+		    {
+			print OUTFILE "  Scalar $values[0]";
+		    }
+		    
+		    # this is indexed at -1 because 
+		    # we assume that the function starts with scalar
+		    # we are counting the number of arguments in the function call
+		    my $size = -1; $size++ while $af =~ /Scalar/g;
 
-			# something is passed after the function ends:
-			# check if it is const
-			if($bsize > 1)
+		    # now write the number of Scalars in the analytical solution
+		    print OUTFILE "\(";
+		    for ($count = 1; $count <= $size; $count++) 
+		    {
+			# this is the last argument to the function
+			if($count eq $size)
 			{
-			    # it is a const!
-			    if($bracket[1] =~ /const/)
+			    # see if the function is const
+			    @bracket = split('\)', $af);
+			    $bsize = scalar (@bracket);
+
+			    # something is passed after the function ends:
+			    # check if it is const
+			    if($bsize > 1)
 			    {
-				print OUTFILE "Scalar\) const;\n";
+				# it is a const!
+				if($bracket[1] =~ /const/)
+				{
+				    print OUTFILE "Scalar\) const;\n";
+				}
+				else # it isnt, ignore it
+				{
+				    print OUTFILE "Scalar\);\n";
+				}
 			    }
 			    else # it isnt, ignore it
 			    {
 				print OUTFILE "Scalar\);\n";
 			    }
 			}
-			else # it isnt, ignore it
+			else # print scalar and loop
 			{
-			    print OUTFILE "Scalar\);\n";
+			    print OUTFILE "Scalar,";
 			}
-		    }
-		    else # print scalar and loop
+		    }	
+
+		    # this is when the user has no Scalars passed as an argument
+		    if($size eq 0 )
 		    {
-			print OUTFILE "Scalar,";
-		    }
-		}		
+			# see if the function is const
+			@bracket = split('\)', $af);
+			$bsize = scalar (@bracket);
 
-		# this is when the user has no Scalars passed as an argument
-		if($size eq 0 )
-		{
-		    # see if the function is const
-		    @bracket = split('\)', $af);
-		    $bsize = scalar (@bracket);
-
-		    if($bsize > 1)
-		    {
-
-			if($bracket[1] =~ /const/)
+			if($bsize > 1)
 			{
-			    print OUTFILE "Scalar\) const;\n";
+
+			    if($bracket[1] =~ /const/)
+			    {
+				print OUTFILE "Scalar\) const;\n";
+			    }
+			    else
+			    {
+				print OUTFILE "Scalar\);\n";
+			    }
+			    
 			}
 			else
 			{
-			    print OUTFILE "Scalar\);\n";
+			    print OUTFILE "\);\n";
 			}
 			
 		    }
-		    else
-		    {
-			print OUTFILE "\);\n";
-		    }
-		    
-		}
-	    }   
-	}
+		} # done with else {
+	    } # done with analytical term
+	} # done with file
 	close  ANAFILE or die $!;
 	
 	# leave moniker in and trip counter
@@ -570,22 +591,31 @@ while($sf = <SRCFILE>)
     # find location of each source term start
     if($sf =~ /eval_q_/)
     {
-	if($sf =~ /int/)
-	{
-	    print "Warning: MASA importer only accepts source terms with float double arguments!\n";
-	}
-	
-	if($sf =~ /void/)
-	{
-	    print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
-	}
 
-	# print template information
-	print OUTFILE "template <typename Scalar>\n";
-	$sf=~ s/eval_q_/MASA::$name<Scalar>::eval_q_/;
-	
-    }
-    
+	# ignore if they are being called
+	if($af =~ /=/)
+	{
+	    
+	}
+	else
+	{
+	    
+	    if($sf =~ /int/)
+	    {
+		print "Warning: MASA importer only accepts source terms with float double arguments!\n";
+	    }
+	    
+	    if($sf =~ /void/)
+	    {
+		print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
+	    }
+	    
+	    # print template information
+	    print OUTFILE "template <typename Scalar>\n";
+	    $sf=~ s/eval_q_/MASA::$name<Scalar>::eval_q_/;
+	    
+	} # done with else...
+    } # done with source term
     $sf=~ s/double/Scalar/g;
     $sf=~ s/float/Scalar/g;
     
@@ -606,24 +636,33 @@ open ANAFILE , "<", $anaf or die $!;
 while($af = <ANAFILE>)
 {	    
 
+    # find all analytical terms
     if($af =~ /eval_exact_/)
     {
-	if($af =~ /int/)
-	{
-	    print "Warning: MASA importer only accepts source terms with float double arguments!\n";
-	}
-	
-	if($af =~ /void/)
-	{
-	    print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
-	}
-	
-	# print template information
-	print OUTFILE "template <typename Scalar>\n";
-	$af=~ s/eval_exact_/MASA::$name<Scalar>::eval_exact_/;	
-	
-    }   
 
+	# ignore if they are being called
+	if($af =~ /=/)
+	{
+	    
+	}
+	else
+	{
+	    if($af =~ /int/)
+	    {
+		print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
+	    }
+	    
+	    if($af =~ /void/)
+	    {
+		print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
+	    }
+	    
+	    # print template information
+	    print OUTFILE "template <typename Scalar>\n";
+	    $af=~ s/eval_exact_/MASA::$name<Scalar>::eval_exact_/;	
+	} # done with else
+    }   
+    
     $af=~ s/double/Scalar/g;
     $af=~ s/float/Scalar/g;
     
