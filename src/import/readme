@@ -34,7 +34,7 @@
 Finally, run from a command line: 'perl masa_import.pl'
 
 Check the subdirectory: "examples" for examples of each file.
-Copy the contents of the folder backup into src to revert back.
+Run "revert.sh" to revert back.
 # ------------------------------------------------------------- #
 # Report any problems to: nick@ices.utexas.edu                  #
 # ------------------------------------------------------------- #
