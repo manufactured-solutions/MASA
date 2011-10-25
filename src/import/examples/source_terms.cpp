@@ -1,6 +1,6 @@
 
 // private, called from exact_t
-double helper_func_src(double x)
+double helper_func_src(double x) const
 {
 
   double func;
@@ -10,7 +10,7 @@ double helper_func_src(double x)
 }
 
 // public, but will be called from eval_q_t
-double eval_q_u(double x)
+double eval_q_u(double x) const
 {
   double q_u;
   q_u = x*x;
@@ -20,6 +20,6 @@ double eval_q_u(double x)
 double eval_q_t(double x) const
 {
   double Q_T;
-  Q_T = helper_func_an(x)* A_x * A_x * k_0 * std::cos(A_x * x)*eval_q_u(x);
+  Q_T = helper_func_src(x)* A_x * A_x * k_0 * std::cos(A_x * x)*eval_q_u(x);
   return Q_T;
 }
