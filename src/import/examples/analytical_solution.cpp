@@ -3,9 +3,9 @@
 double helper_func_an(double x)
 {
 
-  double helper_func;
-  helper_func = x+12.4;
-  return helper_func;
+  double func;
+  func = x+12.4;
+  return func;
 
 }
 

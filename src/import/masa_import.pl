@@ -218,7 +218,7 @@ while($line = <INFILE>)
 	    {
 
 		# ignore if they are being called as functions
-		if($sf =~ /=/ || $sf =~ / \/\/ /)
+		if($sf =~ /=/ || $sf =~ /\/\//)
 		{
 		    
 		}
@@ -330,7 +330,7 @@ while($line = <INFILE>)
 
 		# ignore if they are being called as functions
 		# or if they are mentioned in a comment
-		if($af =~ /=/ || $af =~ / \/\/ / )
+		if($af =~ /=/ || $af =~ /\/\//)
 		{
 		    
 		}
@@ -597,7 +597,7 @@ while($sf = <SRCFILE>)
 
 	# ignore if they are being called as functions
 	# or as comment
-	if($sf =~ /=/ || $sf =~ / \/\/ /)
+	if($sf =~ /=/ || $sf =~ /\/\//)
 	{
 	    
 	}
@@ -646,7 +646,7 @@ while($af = <ANAFILE>)
     {
 
 	# ignore if they are being called as functions
-	if($af =~ /=/ || $af =~ / \/\/ /)
+	if($af =~ /=/ || $af =~ /\/\//)
 	{
 	    
 	}
