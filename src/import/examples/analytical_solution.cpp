@@ -1,6 +1,6 @@
 
 // private, called from exact_t
-helper_func_an(double x)
+double helper_func_an(double x)
 {
 
   double helper_func;

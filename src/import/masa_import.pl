@@ -149,11 +149,11 @@ close OUTFILE or die $!;
 rename($old, "backup/$bak");
 rename($new, $old);
 
-# ----------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 #
 #                 MASA INTERNAL GENERATOR
 #
-# ----------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 print "Creating class in masa_internal.h...\n";
 # open file(s)
 $old   = "../masa_internal.h";
@@ -218,59 +218,65 @@ while($line = <INFILE>)
 	    {
 
 		# ignore if they are being called as functions
-		if($sf =~ /=/)
+		if($sf =~ /=/ || $sf =~ / \/\/ /)
 		{
 		    
 		}
 		else
 		{
 
-		if($sf =~ /int/)
-		{
-		    print "Warning: MASA importer only accepts source terms with float double arguments!\n";
-		    exit 1;
-		}
-		
-		if($sf =~ /void/)
-		{
-		    print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
-		    exit 1;
-		}
-
-		$sf=~ s/double/Scalar/g;
-		$sf=~ s/float/Scalar/g;
-		@values = split('\(', $sf);
-
-		# CHECK if values[0] has a scalar in it:
-		if($values[0] =~ /Scalar/)
-		{
-		    print OUTFILE "  $values[0]";
-		}
-		else
-		{
-		    print OUTFILE "  Scalar $values[0]";
-		}
-
-		# this is indexed at -1 because 
-		# we assume that the function starts with scalar
-		# we are counting the number of arguments in the function call
-		my $size = -1; $size++ while $sf =~ /Scalar/g;
-
-		# now write the number of Scalars in the source term
-		print OUTFILE "\(";
-		for ($count = 1; $count <= $size; $count++) 
-		{
-		    if($count eq $size)
+		    if($sf =~ /int/)
 		    {
-			# see if the function is const
-			@bracket = split('\)', $sf);
-			$bsize = scalar (@bracket);
+			print "Warning: MASA importer only accepts source terms with float double arguments!\n";
+			exit 1;
+		    }
+		    
+		    if($sf =~ /void/)
+		    {
+			print "Warning: MASA importer only accepts source terms with float or double arguments!\n";
+			exit 1;
+		    }
 
-			if($bsize > 1)
+		    $sf=~ s/double/Scalar/g;
+		    $sf=~ s/float/Scalar/g;
+		    @values = split('\(', $sf);
+
+		    # CHECK if values[0] has a scalar in it:
+		    if($values[0] =~ /Scalar/)
+		    {
+			print OUTFILE "  $values[0]";
+		    }
+		    else
+		    {
+			print OUTFILE "  Scalar $values[0]";
+		    }
+
+		    # this is indexed at -1 because 
+		    # we assume that the function starts with scalar
+		    # counting the number of arguments in the function call
+		    my $size = -1; $size++ while $sf =~ /Scalar/g;
+
+		    # now write the number of Scalars in the source term
+		    print OUTFILE "\(";
+		    for ($count = 1; $count <= $size; $count++) 
+		    {
+			if($count eq $size)
 			{
-			    if($bracket[1] =~ /const/)
+			    # see if the function is const
+			    @bracket = split('\)', $sf);
+			    $bsize = scalar (@bracket);
+
+			    if($bsize > 1)
 			    {
-				print OUTFILE "Scalar\) const;\n";
+				if($bracket[1] =~ /const/)
+				{
+				    print OUTFILE "Scalar\) const;\n";
+				}
+				else
+				{
+				    print OUTFILE "Scalar\);\n";
+				}
+
 			    }
 			    else
 			    {
@@ -280,41 +286,35 @@ while($line = <INFILE>)
 			}
 			else
 			{
-			    print OUTFILE "Scalar\);\n";
+			    print OUTFILE "Scalar,";
 			}
+		    }		    
 
-		    }
-		    else
+		    if($size eq 0 )
 		    {
-			print OUTFILE "Scalar,";
-		    }
-		}		    
+			# see if the function is const
+			@bracket = split('\)', $sf);
+			$bsize = scalar (@bracket);
 
-		if($size eq 0 )
-		{
-		    # see if the function is const
-		    @bracket = split('\)', $sf);
-		    $bsize = scalar (@bracket);
-
-		    if($bsize > 1)
-		    {
-			if($bracket[1] =~ /const/)
+			if($bsize > 1)
 			{
-			    print OUTFILE "\) const;\n";
+			    if($bracket[1] =~ /const/)
+			    {
+				print OUTFILE "\) const;\n";
+			    }
+			    else
+			    {
+				print OUTFILE "\);\n";
+			    }
+
 			}
 			else
 			{
 			    print OUTFILE "\);\n";
 			}
-
 		    }
-		    else
-		    {
-			print OUTFILE "\);\n";
-		    }
-		}
-		
-		
+		    
+		    
 		} # done with else{
 	    } # done with line matching source term
 	} # done with file
@@ -329,7 +329,8 @@ while($line = <INFILE>)
 	    {
 
 		# ignore if they are being called as functions
-		if($af =~ /=/)
+		# or if they are mentioned in a comment
+		if($af =~ /=/ || $af =~ / \/\/ / )
 		{
 		    
 		}
@@ -461,11 +462,11 @@ rename($new, $old);
 print "Done with masa_core.cpp...\n";
 print "Cleaning up...\n\n";
 
-# ----------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 #
 #         MAKEFILE.AM EDITOR
 #
-# ----------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 print "Editing Makefile.am...\n";
 
 # open file(s)
@@ -512,11 +513,11 @@ close OUTFILE or die $!;
 copy($old, "backup/$bak");
 rename($new, $old);
 
-# ----------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 #
 #         $name.cpp GENERATOR
 #
-# ----------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 print "Generating MMS file...\n";
 
@@ -595,7 +596,8 @@ while($sf = <SRCFILE>)
     {
 
 	# ignore if they are being called as functions
-	if($sf =~ /=/)
+	# or as comment
+	if($sf =~ /=/ || $sf =~ / \/\/ /)
 	{
 	    
 	}
@@ -644,7 +646,7 @@ while($af = <ANAFILE>)
     {
 
 	# ignore if they are being called as functions
-	if($af =~ /=/)
+	if($af =~ /=/ || $af =~ / \/\/ /)
 	{
 	    
 	}
