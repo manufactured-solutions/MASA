@@ -10,11 +10,11 @@ double helper_func_src(double x)
 }
 
 // public, but will be called from eval_q_t
-double eval_exact_u(double x)
+double eval_q_u(double x)
 {
-  double exact_u;
-  exact_u = x*x;
-  return exact_u;
+  double q_u;
+  q_u = x*x;
+  return q_u;
 }
 
 double eval_q_t(double x) const
