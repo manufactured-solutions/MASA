@@ -1572,4 +1572,50 @@ namespace MASA
 // DO NOT EDIT THIS LINE OR ANY BELOW IT
 // automatically generated MMS classes:
   
+// ------------------------------------------------------
+// --------------- burgers_equation 
+// ------------------------------------------------------
+namespace MASA{
+template <typename Scalar>
+class burgers_equation : public manufactured_solution<Scalar>
+{
+  using manufactured_solution<Scalar>::pi;
+  using manufactured_solution<Scalar>::PI;
+
+private:
+  Scalar nu;
+  Scalar u_0;
+  Scalar u_x;
+  Scalar u_y;
+  Scalar u_t;
+  Scalar v_0;
+  Scalar v_x;
+  Scalar v_y;
+  Scalar v_t;
+  Scalar a_ux;
+  Scalar a_uy;
+  Scalar a_ut;
+  Scalar a_vx;
+  Scalar a_vy;
+  Scalar a_vt;
+  Scalar L;
+
+public:
+  burgers_equation();
+  int init_var();
+  Scalar eval_q_v_transient_viscous (Scalar,Scalar,Scalar);
+  Scalar eval_q_v_steady_viscous (Scalar,Scalar);
+  Scalar eval_q_v_transient_inviscid (Scalar,Scalar,Scalar);
+  Scalar eval_q_v_steady_inviscid (Scalar,Scalar);
+  Scalar eval_q_u_transient_viscous (Scalar,Scalar,Scalar);
+  Scalar eval_q_u_steady_viscous (Scalar,Scalar);
+  Scalar eval_q_u_transient_inviscid (Scalar,Scalar,Scalar);
+  Scalar eval_q_u_steady_inviscid (Scalar,Scalar);
+  Scalar eval_exact_u(Scalar,Scalar);
+  Scalar eval_exact_v(Scalar,Scalar);
+  Scalar eval_exact_u_t(Scalar,Scalar,Scalar);
+  Scalar eval_exact_v_t(Scalar,Scalar,Scalar);
+};}
+
+
 // --l33t--

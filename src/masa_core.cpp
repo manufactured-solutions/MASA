@@ -147,6 +147,8 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
 
   // automatically generated MMS:
 
+  anim.push_back(new burgers_equation<Scalar>());
+
   // --l33t-- DO NOT EDIT THIS LINE OR ANY BELOW IT
 
 
