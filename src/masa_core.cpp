@@ -105,6 +105,7 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
   anim.push_back(new euler_3d<Scalar>());
   anim.push_back(new euler_transient_1d<Scalar>());
   anim.push_back(new euler_transient_2d<Scalar>());
+  anim.push_back(new euler_transient_3d<Scalar>());
 
   anim.push_back(new euler_chem_1d<Scalar>());
 
@@ -150,8 +151,6 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
   // automatically generated MMS:
 
   anim.push_back(new burgers_equation<Scalar>());
-
-  anim.push_back(new euler_transient_3d<Scalar>());
 
   // --l33t-- DO NOT EDIT THIS LINE OR ANY BELOW IT
 
