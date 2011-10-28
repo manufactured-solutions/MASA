@@ -7,6 +7,7 @@ cc_sources = masa_core.cpp masa_class.cpp masa_map.cpp heat.cpp euler.cpp    \
 
 cc_sources += burgers_equation.cpp
 cc_sources += euler_transient_2d.cpp
+cc_sources += euler_transient_3d.cpp
 # do not edit this line! --l33t--
 
 # License Information

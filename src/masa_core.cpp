@@ -151,6 +151,8 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
 
   anim.push_back(new burgers_equation<Scalar>());
 
+  anim.push_back(new euler_transient_3d<Scalar>());
+
   // --l33t-- DO NOT EDIT THIS LINE OR ANY BELOW IT
 
 
