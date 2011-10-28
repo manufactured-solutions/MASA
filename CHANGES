@@ -1,6 +1,8 @@
 Version 0.40 (In Progress)
 
   * users can now import MMS solutions directly into masa
+       * added burgers equation   (automasa)
+       * added euler_transient_2d (automasa)
   * added a tutorial/ sub-directory 
   * added regression tests for masa_display_param
   * fixed bug in which examples could not compile after install 
