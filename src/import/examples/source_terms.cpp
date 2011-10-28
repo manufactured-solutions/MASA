@@ -1,5 +1,5 @@
 
-// private, called from exact_t
+// example of a private static method: called from exact_t
 double helper_func_src(double x) const
 {
 
@@ -9,7 +9,7 @@ double helper_func_src(double x) const
 
 }
 
-// public, but will be called from eval_q_t
+// public static method, that can be called from eval_q_t
 double eval_q_u(double x) const
 {
   double q_u;
@@ -17,6 +17,7 @@ double eval_q_u(double x) const
   return q_u;
 }
 
+// public, static method
 double eval_q_t(double x) const
 {
   double Q_T;

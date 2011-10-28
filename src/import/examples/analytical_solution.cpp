@@ -1,5 +1,5 @@
 
-// private, called from exact_t
+// example of a private method, called from exact_t
 double helper_func_an(double x)
 {
 
@@ -9,7 +9,7 @@ double helper_func_an(double x)
 
 }
 
-// public, but will be called from eval_exact_t
+// example of a public method called from eval_exact_t
 double eval_exact_u(double x)
 {
   double exact_u;
@@ -17,6 +17,7 @@ double eval_exact_u(double x)
   return exact_u;
 }
 
+// public method
 double eval_exact_t(double x)
 {
   double exact_t;
