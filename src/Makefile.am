@@ -10,6 +10,7 @@ cc_sources += euler_transient_2d.cpp
 cc_sources += euler_transient_3d.cpp
 cc_sources += axi_euler_transient.cpp
 cc_sources += axi_cns_transient.cpp
+cc_sources += navierstokes_3d_transient_sutherland.cpp
 # do not edit this line! --l33t--
 
 # License Information
