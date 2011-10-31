@@ -541,7 +541,13 @@ print OUTFILE "// -*-c++-*-\n";
 print OUTFILE "//-----------------------------------------------------------------------bl-\n";
 print OUTFILE "//-----------------------------------------------------------------------el-\n";
 print OUTFILE "\n#include <masa_internal.h>\n";
+print OUTFILE "using std::cos;\n";
+print OUTFILE "using std::sin;\n";
+print OUTFILE "using std::pow;\n";
 print OUTFILE "using namespace MASA;\n\n";
+
+# adding pow(long double, double) overload line
+print OUTFILE "long double pow(long double a, double b){return pow(a,(long double)(b));}\n\n"; 
 
 # build constructor
 print OUTFILE "template <typename Scalar>\n";
