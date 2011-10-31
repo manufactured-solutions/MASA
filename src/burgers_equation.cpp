@@ -23,7 +23,14 @@
 //-----------------------------------------------------------------------el-
 
 #include <masa_internal.h>
+
+using std::cos;
+using std::sin;
+using std::pow;
 using namespace MASA;
+
+// overload for pgi compilers
+long double pow(long double a, double b){return pow(a,(long double)(b));}
 
 template <typename Scalar>
 MASA::burgers_equation<Scalar>::burgers_equation()
