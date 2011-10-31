@@ -1809,4 +1809,63 @@ public:
 };}
 
 
+// ------------------------------------------------------
+// --------------- axi_cns_transient 
+// ------------------------------------------------------
+namespace MASA{
+template <typename Scalar>
+class axi_cns_transient : public manufactured_solution<Scalar>
+{
+  using manufactured_solution<Scalar>::pi;
+  using manufactured_solution<Scalar>::PI;
+
+private:
+  Scalar rho_0;
+  Scalar rho_r;
+  Scalar rho_z;
+  Scalar rho_t;
+  Scalar a_rhoz;
+  Scalar a_rhor;
+  Scalar a_rhot;
+  Scalar u_0;
+  Scalar u_r;
+  Scalar u_z;
+  Scalar u_t;
+  Scalar a_uz;
+  Scalar a_ur;
+  Scalar a_ut;
+  Scalar w_0;
+  Scalar w_r;
+  Scalar w_z;
+  Scalar w_t;
+  Scalar a_wz;
+  Scalar a_wr;
+  Scalar a_wt;
+  Scalar p_0;
+  Scalar p_r;
+  Scalar p_z;
+  Scalar p_t;
+  Scalar a_pz;
+  Scalar a_pr;
+  Scalar a_pt;
+  Scalar L;
+  Scalar Gamma;
+  Scalar mu;
+  Scalar k;
+  Scalar R;
+
+public:
+  axi_cns_transient();
+  int init_var();
+  Scalar eval_q_e (Scalar,Scalar,Scalar);
+  Scalar eval_q_u (Scalar,Scalar,Scalar);
+  Scalar eval_q_w (Scalar,Scalar,Scalar);
+  Scalar eval_q_rho (Scalar,Scalar,Scalar);
+  Scalar eval_exact_rho(Scalar,Scalar,Scalar);
+  Scalar eval_exact_p(Scalar,Scalar,Scalar);
+  Scalar eval_exact_u(Scalar,Scalar,Scalar);
+  Scalar eval_exact_w(Scalar,Scalar,Scalar);
+};}
+
+
 // --l33t--
