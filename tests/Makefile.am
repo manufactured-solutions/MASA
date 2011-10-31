@@ -194,8 +194,6 @@ TESTS                      = init.sh              \
                              cns3d_phys           \
 	       	             cn2d3d               \
 	       	             ablation             \
-                             axi_euler            \
-                             axi_cns              \
                              rans_sa              \
                              fans_sa_wall         \
                              radiation            \
