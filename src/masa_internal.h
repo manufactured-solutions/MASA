@@ -42,6 +42,10 @@
 #include <vector>
 #include <stdlib.h>
 
+using std::cos;
+using std::sin;
+using std::pow;
+
 // Macro for declaring MASA classes with all supported Scalar types
 #define MASA_INSTANTIATE_ALL(my_class) template class my_class<double>; \
                                        template class my_class<long double>
@@ -50,6 +54,7 @@ namespace MASA
 {
   // masa map functions here
   // probably want to hide this from the user eventually
+  long double pow(long double, double);
 
   int masa_map_solution  (std::string, std::string);
   int masa_map_temporal  (std::string, std::string);
