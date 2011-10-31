@@ -52,10 +52,15 @@ using std::pow;
 
 namespace MASA
 {
+
+
+// overload for pgi compilers
+#ifdef portland_compiler
+  long double pow(long double, double);
+#endif
+
   // masa map functions here
   // probably want to hide this from the user eventually
-  long double pow(long double, double);
-
   int masa_map_solution  (std::string, std::string);
   int masa_map_temporal  (std::string, std::string);
   int masa_map_coeff     (std::string, std::string);
