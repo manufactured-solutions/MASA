@@ -918,12 +918,16 @@ namespace MASA
     Scalar R;                             // (or is this the ideal gas constant?) ratio of specific heat capacities, defined in constructor
 
     Scalar p_0;
-    Scalar p_1;
+    Scalar p_r;
+    Scalar p_z;
     Scalar rho_0;
-    Scalar rho_1;
-    Scalar u_1;
+    Scalar rho_r;
+    Scalar rho_z;
+    Scalar u_r;
+    Scalar u_z;
     Scalar w_0;
-    Scalar w_1;
+    Scalar w_r;
+    Scalar w_z;
     Scalar a_pr;
     Scalar a_pz;
     Scalar a_rhor;

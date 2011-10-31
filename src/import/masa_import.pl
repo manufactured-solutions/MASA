@@ -547,7 +547,7 @@ print OUTFILE "using std::pow;\n";
 print OUTFILE "using namespace MASA;\n\n";
 
 # adding pow(long double, double) overload line
-print OUTFILE "long double pow(long double a, double b){return pow(a,(long double)(b));}\n\n"; 
+print OUTFILE "#ifdef portland_compiler\nlong double pow(long double a, double b){return pow(a,(long double)(b));}\n#endif\n\n"; 
 
 # build constructor
 print OUTFILE "template <typename Scalar>\n";
