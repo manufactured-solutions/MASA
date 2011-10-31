@@ -4,6 +4,7 @@ Version 0.40 (In Progress)
        * added burgers equation             (automasa)
        * added euler_transient_2d           (automasa)
        * added transient axisymmetric euler (automasa)
+       * added transient axisymmetric CNS   (automasa)
   * added a tutorial/ sub-directory 
   * added regression tests for masa_display_param
   * fixed bug in which examples could not compile after install 
