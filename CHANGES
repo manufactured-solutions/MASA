@@ -1,8 +1,9 @@
 Version 0.40 (In Progress)
 
   * users can now import MMS solutions directly into masa
-       * added burgers equation   (automasa)
-       * added euler_transient_2d (automasa)
+       * added burgers equation             (automasa)
+       * added euler_transient_2d           (automasa)
+       * added transient axisymmetric euler (automasa)
   * added a tutorial/ sub-directory 
   * added regression tests for masa_display_param
   * fixed bug in which examples could not compile after install 
@@ -28,7 +29,7 @@ Version 0.31 (20 April 2011)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.31.0
   
   * enable STL debug mode with --enable-warn-all option when using GNU compiler family
-  * fixed incompatibilities with PGI compilers: euler+chemistry mms currently unavailable with PGI
+  * fixed incompatibilities with PGI compilers: euler+chemistry ms unavailable with PGI
   * ported codebase to Portland group compilers
   * bug fix associated with radiation_integrated_intensity constructor
   * added new smasa mms: conjugate prior for standard deviation
@@ -49,7 +50,7 @@ https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.30.0
   * API changes-- flipped terms, e.g. masa_eval_rho_u_source -> masa_eval_source_rho_u
   * improved parallel build support
   * regressions expanded to achieve 90%+ line coverage	
-  * c++ bindings now support arbitrary precision (double, long double, etc.) w/ regression testing
+  * c++ bindings now support arbitrary precision (long double, etc.)
   * gradient of source terms available for c++
   * adding new conditional (--masa-exceptions) that adds exception handling
   * modifications to Fortran interface
