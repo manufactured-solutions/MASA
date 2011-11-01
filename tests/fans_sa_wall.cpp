@@ -36,6 +36,7 @@
 #include <tests.h>
 
 using namespace MASA;
+using namespace std;
 typedef double Scalar;
 
 int main()
