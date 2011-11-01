@@ -16,11 +16,10 @@ bin_PROGRAMS  = MASAshell
 noinst_PROGRAMS  = MASAshell display_solutions euler_example navierstokes 
 noinst_PROGRAMS += rans_sa fans_sa fans_sa_finite_d radiation euler_chem 
 noinst_PROGRAMS += euler_transient heat_example switch ablation_example
-noinst_PROGRAMS += c_heat_example c_euler_example c_laplace_example
+noinst_PROGRAMS += c_heat_example c_euler_example c_laplace_example sod
 noinst_PROGRAMS += f_cns f_euler f_laplace
 noinst_PROGRAMS += cp_gaussian
 noinst_PROGRAMS += laplace_example
-#noinst_PROGRAMS += laplacian
 
 # ----------------- 
 #    CPP
@@ -40,6 +39,7 @@ fans_sa_finite_d_SOURCES  = fans_sa_finite_d.cpp
 radiation_SOURCES         = radiation.cpp
 euler_chem_SOURCES        = euler_chem.cpp
 switch_SOURCES            = switch.cpp
+sod_SOURCES               = sod.cpp
 example_DATA              = euler_example.cpp heat-eq.cpp compressible_navier_stokes.cpp
 
 
@@ -88,6 +88,7 @@ TESTS                      = init.sh              \
 			     display_solutions    \
                              switch               \
 	                     euler_example        \
+	                     sod                  \
 	                     laplace_example      \
 	                     euler_transient      \
                              heat_example         \

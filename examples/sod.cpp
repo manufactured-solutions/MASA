@@ -22,11 +22,11 @@
 // Boston, MA  02110-1301  USA
 //
 //-----------------------------------------------------------------------el-
-// $Author$
-// $Id$
+// $Author: nick $
+// $Id: rans_sa.cpp 22699 2011-08-01 03:22:24Z nick $
 //
-// rans_sa.cpp: this is an example of the API used for 
-//              calling the spelart alamaras (RANS) model
+// sod.cpp: this is an example of the API used for 
+//          calling the sod shock tube solution
 //
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
@@ -35,61 +35,41 @@
 #include <masa.h>
 
 using namespace MASA;
+using namespace std;
 
 typedef double Scalar;
 
 int main()
 {
 
-  Scalar ufield;
-  Scalar vfield;
-
-  // declarations
-  Scalar tempx;
-
-  Scalar exact_u;
-  Scalar exact_v;
-
-  //error handing
+  int i,j;
   int err = 0;
+  Scalar x;
+  Scalar t;
+  Scalar out;
 
-  //problem size
-  Scalar lx;
-  Scalar dx;
-  int nx;
+  int nx = 200;  // number of points
+  int lx=10;     // length
+  int nt = 22;
+  int lt=4;   
+  Scalar dx=Scalar(lx)/Scalar(nx);
+  Scalar dt=Scalar(lt)/Scalar(nt);
 
-  // initialize
-  nx = 10;  // number of points
-  lx=1;     // length
-  dx=lx/nx;
-
-  // initialize the problem 
-  err = masa_init<Scalar>("spelart-alamaras example","rans_sa");
-
-  // call the sanity check routine 
-  // (tests that all variables have been initialized)
+  err  = masa_init<Scalar>("sod-test","sod_1d");
   err += masa_sanity_check<Scalar>();
-
-  // evaluate source terms over the domain (0<x<1)
-  for(int i=0;i<nx;i++)
-      {  
-	tempx=i*dx;
-
-	// evaluate source terms
-	ufield = masa_eval_source_u  <Scalar> (tempx);
-	vfield = masa_eval_source_v  <Scalar> (tempx);
-	
-	//evaluate analytical solution
-	exact_u = masa_eval_exact_u  <Scalar>  (tempx);
-	exact_v = masa_eval_exact_v  <Scalar>  (tempx);
-
-	masa_test_default(ufield);
-	masa_test_default(vfield);
-
-	masa_test_default(exact_u);
-	masa_test_default(exact_v);
-
-      }
+  
+  for(i=0;i<nx;i++)
+    {
+      for(j=0;j<nt;j++)
+	{
+	  x=i*dx;
+	  t=j*dt;
+	  
+	  out = masa_eval_source_rho  <Scalar>(x,t);
+	  out = masa_eval_source_rho_u<Scalar>(x,t);	
+	  
+	}
+    } //done iterating
 
   return err;
 
