@@ -1,14 +1,34 @@
 // -*-c++-*-
 //-----------------------------------------------------------------------bl-
+//--------------------------------------------------------------------------
+//
+// MASA - Manufactured Analytical Solutions Abstraction Library
+//
+// Copyright (C) 2010,2011 The PECOS Development Team
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the Version 2.1 GNU Lesser General
+// Public License as published by the Free Software Foundation.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc. 51 Franklin Street, Fifth Floor,
+// Boston, MA  02110-1301  USA
+//
 //-----------------------------------------------------------------------el-
 
 #include <masa_internal.h>
 using namespace MASA;
 
 template <typename Scalar>
-MASA::navier_stokes_3d_transient_sutherland<Scalar>::navier_stokes_3d_transient_sutherland()
+MASA::navierstokes_3d_transient_sutherland<Scalar>::navierstokes_3d_transient_sutherland()
 {
-  this->mmsname = "navier_stokes_3d_transient_sutherland";
+  this->mmsname = "navierstokes_3d_transient_sutherland";
   this->dimension = 3;
 
   this->register_var("rho_0",&rho_0);
@@ -66,7 +86,7 @@ MASA::navier_stokes_3d_transient_sutherland<Scalar>::navier_stokes_3d_transient_
 } // done with constructor
 
 template <typename Scalar>
-int MASA::navier_stokes_3d_transient_sutherland<Scalar>::init_var()
+int MASA::navierstokes_3d_transient_sutherland<Scalar>::init_var()
 {
   int err = 0;
 
@@ -128,7 +148,7 @@ int MASA::navier_stokes_3d_transient_sutherland<Scalar>::init_var()
 // Source Terms
 // ----------------------------------------
 template <typename Scalar>
-Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_q_u (
+Scalar MASA::navierstokes_3d_transient_sutherland<Scalar>::eval_q_u (
   Scalar x,
   Scalar y,
   Scalar z,
@@ -157,7 +177,7 @@ Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_q_u (
 
 
 template <typename Scalar>
-Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_q_v (
+Scalar MASA::navierstokes_3d_transient_sutherland<Scalar>::eval_q_v (
   Scalar x,
   Scalar y,
   Scalar z,
@@ -185,7 +205,7 @@ Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_q_v (
 }
 
 template <typename Scalar>
-Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_q_w (
+Scalar MASA::navierstokes_3d_transient_sutherland<Scalar>::eval_q_w (
   Scalar x,
   Scalar y,
   Scalar z,
@@ -213,7 +233,7 @@ Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_q_w (
 }
 
 template <typename Scalar>
-Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_q_e (
+Scalar MASA::navierstokes_3d_transient_sutherland<Scalar>::eval_q_e (
   Scalar x,
   Scalar y,
   Scalar z,
@@ -241,7 +261,7 @@ Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_q_e (
 }
 
 template <typename Scalar>
-Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_q_rho (
+Scalar MASA::navierstokes_3d_transient_sutherland<Scalar>::eval_q_rho (
   Scalar x,
   Scalar y,
   Scalar z,
@@ -265,42 +285,42 @@ Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_q_rho (
 // Analytical Terms
 // ----------------------------------------
 template <typename Scalar>
-Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_exact_rho(Scalar x, Scalar y, Scalar z, Scalar t)
+Scalar MASA::navierstokes_3d_transient_sutherland<Scalar>::eval_exact_rho(Scalar x, Scalar y, Scalar z, Scalar t)
 {
   Scalar exact_rho;
-  rho_an = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_z * sin(a_rhoz * pi * z / L) + rho_t * sin(a_rhot * pi * t / L);
+  exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_z * sin(a_rhoz * pi * z / L) + rho_t * sin(a_rhot * pi * t / L);
   return exact_rho;
 }
 
 template <typename Scalar>
-Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_exact_p(Scalar x, Scalar y, Scalar z, Scalar t)
+Scalar MASA::navierstokes_3d_transient_sutherland<Scalar>::eval_exact_p(Scalar x, Scalar y, Scalar z, Scalar t)
 {
   Scalar exact_p;
-  p_an = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_z * cos(a_pz * pi * z / L) + p_t * cos(a_pt * pi * t / L);
+  exact_p = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_z * cos(a_pz * pi * z / L) + p_t * cos(a_pt * pi * t / L);
   return exact_p;
 }
 
 template <typename Scalar>
-Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_exact_u(Scalar x, Scalar y, Scalar z, Scalar t)
+Scalar MASA::navierstokes_3d_transient_sutherland<Scalar>::eval_exact_u(Scalar x, Scalar y, Scalar z, Scalar t)
 {
   Scalar exact_u;
-  u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_z * cos(a_uz * pi * z / L) + u_t * cos(a_ut * pi * t / L);
+  exact_u = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_z * cos(a_uz * pi * z / L) + u_t * cos(a_ut * pi * t / L);
   return exact_u;
 }
 
 template <typename Scalar>
-Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_exact_v(Scalar x, Scalar y, Scalar z, Scalar t)
+Scalar MASA::navierstokes_3d_transient_sutherland<Scalar>::eval_exact_v(Scalar x, Scalar y, Scalar z, Scalar t)
 {
   Scalar exact_v;
-  v_an = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_z * sin(a_vz * pi * z / L) + v_t * sin(a_vt * pi * t / L);
+  exact_v = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_z * sin(a_vz * pi * z / L) + v_t * sin(a_vt * pi * t / L);
   return exact_v;
 }
 
 template <typename Scalar>
-Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_exact_w(Scalar x, Scalar y, Scalar z, Scalar t)
+Scalar MASA::navierstokes_3d_transient_sutherland<Scalar>::eval_exact_w(Scalar x, Scalar y, Scalar z, Scalar t)
 {
   Scalar exact_w;
-  w_an = w_0 + w_x * sin(a_wx * pi * x / L) + w_y * sin(a_wy * pi * y / L) + w_z * cos(a_wz * pi * z / L) + w_t * cos(a_wt * pi * t / L);
+  exact_w = w_0 + w_x * sin(a_wx * pi * x / L) + w_y * sin(a_wy * pi * y / L) + w_z * cos(a_wz * pi * z / L) + w_t * cos(a_wt * pi * t / L);
   return exact_w;
 }
 
@@ -314,7 +334,7 @@ Scalar MASA::navier_stokes_3d_transient_sutherland<Scalar>::eval_exact_w(Scalar 
 // Template Instantiation(s)
 // ----------------------------------------
 
-MASA_INSTANTIATE_ALL(MASA::navier_stokes_3d_transient_sutherland);
+MASA_INSTANTIATE_ALL(MASA::navierstokes_3d_transient_sutherland);
 
 
 
