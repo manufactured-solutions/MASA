@@ -53,20 +53,23 @@ int run_regression()
   masa_init<Scalar>("sod-test","sod_1d");
   masa_init_param<Scalar>();
   masa_sanity_check<Scalar>();
-  
+
   for(i=0;i<nx;i++)
-    for(j=0;j<nt;j++)
-      {
-	x=i*dx;
-	t=j*dt;
-	
-	out = masa_eval_source_rho  <Scalar>(x,t);
-	nancheck(out);
-	out = masa_eval_source_rho_u<Scalar>(x,t);	
-	nancheck(out);
+    {
+      for(j=0;j<nt;j++)
+	{
+	  x=i*dx;
+	  t=j*dt;
+	  
+	  out = masa_eval_source_rho  <Scalar>(x,t);
+	  nancheck(out);
+	  out = masa_eval_source_rho_u<Scalar>(x,t);	
+	  nancheck(out);
+	  
+	}
+    } //done iterating
 
-      } //done iterating
-
+  
   // below are barely a regression test: 
   // mostly 'touching' code for coverage
   
@@ -93,7 +96,7 @@ int run_regression()
   // reroute stdout for regressions: TODO remove when logger mechanism
   // is used inside masa; these tests currently just verify functions
   // run successfully.
-  freopen("/dev/null","w",stdout);
+  //freopen("/dev/null","w",stdout);
 
   try
     {
@@ -122,7 +125,6 @@ int run_regression()
     }
 
 #endif 
-  
   return 0;
 
 }// end program

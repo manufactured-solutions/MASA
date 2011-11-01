@@ -61,11 +61,15 @@
 
 
 #include <config.h>
-#include <math.h>
+#include <cmath>
 #include <masa_internal.h> 
 #include <iostream>
 #include <limits>
 #include <stdlib.h>
+
+using std::cos;
+using std::sin;
+using std::pow;
 
 using namespace MASA;
 using namespace std;
@@ -170,11 +174,11 @@ Scalar MASA::sod_1d<Scalar>::eval_q_rho(Scalar x,Scalar t)
 
   // Define the density to the left of the contact discontinuity rhoml.
  
-  rhoml = pow(rhol * (pm / pl),(1.e0 / Gamma));
+  rhoml = std::pow(rhol * (pm / pl),(1.e0 / Gamma));
 
   // Define the postshock fluid velocity vm.
 
-  vm = 2.e0 * cl / (Gamma - 1.e0) * (1.e0 - pow((pm / pl),( (Gamma - 1.e0) / (2.e0 * Gamma) )));
+  vm = 2.e0 * cl / (Gamma - 1.e0) * (1.e0 - std::pow((pm / pl),( (Gamma - 1.e0) / (2.e0 * Gamma) )));
 
   // Define the postshock density rhomr.
 
@@ -197,7 +201,7 @@ Scalar MASA::sod_1d<Scalar>::eval_q_rho(Scalar x,Scalar t)
       if (x <= (-cl*t) )
 	  density = rhol;
       else if (x <= (-vt*t) )
-	  density = pow(rhol * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 / (Gamma - 1.e0)));
+	density = std::pow(rhol * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 / (Gamma - 1.e0)));
       else if (x <= (vm*t) )
 	  density = rhoml;
       else if (x <= (vs*t) )
@@ -241,11 +245,11 @@ Scalar MASA::sod_1d<Scalar>::eval_q_rho_u(Scalar x,Scalar t)
 
   // Define the density to the left of the contact discontinuity rhoml.
  
-  rhoml = pow(rhol * (pm / pl),(1.e0 / Gamma));
+  rhoml = std::pow(rhol * (pm / pl),(1.e0 / Gamma));
 
   // Define the postshock fluid velocity vm.
 
-  vm = 2.e0 * cl / (Gamma - 1.e0) * (1.e0 - pow((pm / pl),( (Gamma - 1.e0) / (2.e0 * Gamma) )));
+  vm = 2.e0 * cl / (Gamma - 1.e0) * (1.e0 - std::pow((pm / pl),( (Gamma - 1.e0) / (2.e0 * Gamma) )));
 
   // Define the postshock density rhomr.
 
@@ -268,7 +272,7 @@ Scalar MASA::sod_1d<Scalar>::eval_q_rho_u(Scalar x,Scalar t)
       if (x <= (-cl*t) )
 	  density = rhol;
       else if (x <= (-vt*t) )
-	  density = pow(rhol * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 / (Gamma - 1.e0))) ;
+	  density = std::pow(rhol * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 / (Gamma - 1.e0))) ;
       else if (x <= (vm*t) )
 	  density = rhoml;
       else if (x <= (vs*t) )
@@ -367,7 +371,7 @@ Scalar MASA::sod_1d<Scalar>::func(Scalar pm)
  
   Scalar myval;
  
-  myval = -2*cl*(1 - pow((pm/pl),((-1 + Gamma)/(2*Gamma))))/
+  myval = -2*cl*(1 - std::pow((pm/pl),((-1 + Gamma)/(2*Gamma))))/
     (cr*(-1 + Gamma)) +
     (-1 + pm/pr)*sqrt((1 - mu)/(Gamma*(mu + pm/pr)));
   
