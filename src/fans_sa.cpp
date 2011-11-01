@@ -473,7 +473,7 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho_u(Scalar x,Scalar y
   Scalar rho_w = p_0/(R*T_aw);
   Scalar A     = sqrt(1.0-(T_inf/T_aw));
   Scalar nu_w  = mu/rho_w;
-  Scalar F_c     = (T_aw/(T_inf-1))/pow(asin(A),2);
+  Scalar F_c     = (T_aw/(T_inf-1))/std::pow(asin(A),2);
   Scalar rho_inf = p_0/(R*T_inf);
 
   Re_x = rho_inf * u_inf * x / mu;
@@ -528,7 +528,7 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho_v(Scalar x,Scalar y
   Scalar rho_w = p_0/(R*T_aw);
   Scalar A     = sqrt(1.0-(T_inf/T_aw));
   Scalar nu_w  = mu/rho_w;
-  Scalar F_c     = (T_aw/(T_inf-1))/pow(asin(A),2);
+  Scalar F_c     = (T_aw/(T_inf-1))/std::pow(asin(A),2);
   Scalar rho_inf = p_0/(R*T_inf);
 
   Re_x = rho_inf * u_inf * x / mu;
