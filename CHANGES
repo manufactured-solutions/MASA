@@ -1,6 +1,7 @@
 Version 0.40 (In Progress)
 
   * corrected a bug in the sod shock tube
+  * adjusted velocity field in cns3d so velocity >= 0
   * users can now import MMS solutions directly into masa
        * added burgers equation             (automasa)
        * added euler_transient_2d           (automasa)
