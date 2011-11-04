@@ -91,16 +91,16 @@ int MASA::navierstokes_2d_compressible<Scalar>::init_var()
   err += this->set_var("R",1.01);
   err += this->set_var("k",1.38);
 
-  err += this->set_var("u_0",1.23);
+  err += this->set_var("u_0",10.23);
   err += this->set_var("u_x",1.1);
   err += this->set_var("u_y",.08);
   err += this->set_var("v_0",12);
   err += this->set_var("v_x",1.6);
   err += this->set_var("v_y",.67);
-  err += this->set_var("rho_0",1.02);
+  err += this->set_var("rho_0",10.02);
   err += this->set_var("rho_x",7.2);
   err += this->set_var("rho_y",9.8);
-  err += this->set_var("p_0",1.2);
+  err += this->set_var("p_0",10.2);
   err += this->set_var("p_x",.91);
   err += this->set_var("p_y",.623);
   err += this->set_var("a_px",.165);
