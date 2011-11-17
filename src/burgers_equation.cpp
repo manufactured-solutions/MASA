@@ -81,108 +81,185 @@ int MASA::burgers_equation<Scalar>::init_var()
 // ----------------------------------------
 // Source Terms
 // ----------------------------------------
-#include <math.h>
 
 template <typename Scalar>
 Scalar MASA::burgers_equation<Scalar>::eval_q_v_transient_viscous (Scalar x, Scalar y, Scalar t)
 {
-  Scalar Qv_tv;
-  Scalar U;
-  Scalar V;
-  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
-  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
-  Qv_tv = a_vt * PI * v_t * cos(a_vt * PI * t / L) / L - a_vx * PI * v_x * U * sin(a_vx * PI * x / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * V / L + a_vx * a_vx * PI * PI * v_x * nu * cos(a_vx * PI * x / L) * pow(L, -0.2e1) + a_vy * a_vy * PI * PI * v_y * nu * sin(a_vy * PI * y / L) * pow(L, -0.2e1);
+  double Qv_tv;
+  double U;
+  double V;
+  double Q_v_time;
+  double Q_v_convection;
+  double Q_v_dissipation;
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / Lt);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / Lt);
+
+  // "Contribution from the time derivative  to the total source term "
+  Q_v_time = a_vt * PI * v_t * cos(a_vt * PI * t / Lt) / Lt;
+
+  // "Contribution from the convective terms to the total source term "
+  Q_v_convection = -a_vx * PI * v_x * U * sin(a_vx * PI * x / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * V / L;
+
+  // "Contribution from the viscous/dissipation terms to the total source term "
+  Q_v_dissipation = a_vx * a_vx * PI * PI * v_x * nu * cos(a_vx * PI * x / L) * pow(L, -0.2e1) + a_vy * a_vy * PI * PI * v_y * nu * sin(a_vy * PI * y / L) * pow(L, -0.2e1);
+
+  // "Total source term "
+  Qv_tv = Q_v_dissipation + Q_v_convection + Q_v_time;
   return(Qv_tv);
 }
-#include <math.h>
 
 template <typename Scalar>
 Scalar MASA::burgers_equation<Scalar>::eval_q_v_steady_viscous (Scalar x, Scalar y)
 {
-  Scalar Qv_sv;
-  Scalar U;
-  Scalar V;
-  U = u_0; //+ u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
-  V = v_0; //+ v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
-  Qv_sv = -a_vx * PI * v_x * U * sin(a_vx * PI * x / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * V / L + a_vx * a_vx * PI * PI * v_x * nu * cos(a_vx * PI * x / L) * pow(L, -0.2e1) + a_vy * a_vy * PI * PI * v_y * nu * sin(a_vy * PI * y / L) * pow(L, -0.2e1);
+  double Qv_sv;
+  double U;
+  double V;
+  double Q_v_convection;
+  double Q_v_dissipation;
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
+
+  // "Contribution from the convective terms to the total source term "
+  Q_v_convection = -a_vx * PI * v_x * U * sin(a_vx * PI * x / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * V / L;
+
+  // "Contribution from the viscous/dissipation terms to the total source term"
+  Q_v_dissipation = a_vx * a_vx * PI * PI * v_x * nu * cos(a_vx * PI * x / L) * pow(L, -0.2e1) + a_vy * a_vy * PI * PI * v_y * nu * sin(a_vy * PI * y / L) * pow(L, -0.2e1);
+
+  // "Total source term "
+  Qv_sv = Q_v_dissipation + Q_v_convection;
   return(Qv_sv);
+  
 }
-#include <math.h>
 
 template <typename Scalar>
 Scalar MASA::burgers_equation<Scalar>::eval_q_v_transient_inviscid (Scalar x, Scalar y, Scalar t)
 {
-  Scalar Qv_t;
-  Scalar U;
-  Scalar V;
-  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
-  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
-  Qv_t = a_vt * PI * v_t * cos(a_vt * PI * t / L) / L - a_vx * PI * v_x * U * sin(a_vx * PI * x / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * V / L;
-  return(Qv_t);
+  double Qv_tinv;
+  double U;
+  double V;
+  double Q_v_time;
+  double Q_v_convection;
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / Lt);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / Lt);
+
+  // "Contribution from the time derivative  to the total source term "  
+  Q_v_time = a_vt * PI * v_t * cos(a_vt * PI * t / Lt) / Lt;
+
+  // "Contribution from the convective terms to the total source term "
+  Q_v_convection = -a_vx * PI * v_x * U * sin(a_vx * PI * x / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * V / L;
+
+  // "Total source term "
+  Qv_tinv = Q_v_convection + Q_v_time;
+  return(Qv_tinv);
+
 }
-#include <math.h>
 
 template <typename Scalar>
 Scalar MASA::burgers_equation<Scalar>::eval_q_v_steady_inviscid (Scalar x, Scalar y)
 {
-  Scalar Qv_s;
-  Scalar U;
-  Scalar V;
-  U = u_0;// + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
-  V = v_0;// + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
-  Qv_s = -a_vx * PI * v_x * U * sin(a_vx * PI * x / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * V / L;
-  return(Qv_s);
+  double Qv_sinv;
+  double U;
+  double V;
+  double Q_v_convection;
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
+
+  // "Contribution from the convective terms to the total source term "
+  Q_v_convection = -a_vx * PI * v_x * U * sin(a_vx * PI * x / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * V / L;
+  
+  // "Total source term "
+  Qv_sinv = Q_v_convection;
+  return(Qv_sinv);
+
 }
 
 template <typename Scalar>
 Scalar MASA::burgers_equation<Scalar>::eval_q_u_transient_viscous (Scalar x,Scalar y,Scalar t)
 {
-  Scalar Qu_tv;
-  Scalar U;
-  Scalar V;
-  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
-  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
-  Qu_tv = -a_ut * PI * u_t * sin(a_ut * PI * t / L) / L - a_uy * PI * u_y * V * sin(a_uy * PI * y / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * U / L + a_ux * a_ux * PI * PI * u_x * nu * sin(a_ux * PI * x / L) * pow(L, -0.2e1) + a_uy * a_uy * PI * PI * u_y * nu * cos(a_uy * PI * y / L) * pow(L, -0.2e1);
+  double Qu_tv;
+  double U;
+  double V;
+  double Q_u_time;
+  double Q_u_convection;
+  double Q_u_dissipation;
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / Lt);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / Lt);
+
+  // "Contribution from the time derivative  to the total source term"
+  Q_u_time = -a_ut * PI * u_t * sin(a_ut * PI * t / Lt) / Lt;
+
+  // "Contribution from the convective terms to the total source term "
+  Q_u_convection = -a_uy * PI * u_y * V * sin(a_uy * PI * y / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * U / L;
+
+  // "Contribution from the viscous/dissipation terms to the total source term "
+  Q_u_dissipation = a_ux * a_ux * PI * PI * u_x * nu * sin(a_ux * PI * x / L) * pow(L, -0.2e1) + a_uy * a_uy * PI * PI * u_y * nu * cos(a_uy * PI * y / L) * pow(L, -0.2e1);
+
+  // "Total source term"
+  Qu_tv = Q_u_dissipation + Q_u_convection + Q_u_time;
   return(Qu_tv);
 }
-#include <math.h>
 
 template <typename Scalar>
 Scalar MASA::burgers_equation<Scalar>::eval_q_u_steady_viscous (Scalar x, Scalar y)
 {
-  Scalar Qu_sv;
-  Scalar U;
-  Scalar V;
-  U = u_0;// + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
-  V = v_0;// + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
-  Qu_sv = -a_uy * PI * u_y * V * sin(a_uy * PI * y / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * U / L + a_ux * a_ux * PI * PI * u_x * nu * sin(a_ux * PI * x / L) * pow(L, -0.2e1) + a_uy * a_uy * PI * PI * u_y * nu * cos(a_uy * PI * y / L) * pow(L, -0.2e1);
+  double Qu_sv;
+  double U;
+  double V;
+  double Q_u_convection;
+  double Q_u_dissipation;
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
+
+  // "Contribution from the convective terms to the total source term"
+  Q_u_convection = -a_uy * PI * u_y * V * sin(a_uy * PI * y / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * U / L;
+
+  // "Contribution from the viscous/dissipation terms to the total source term"
+  Q_u_dissipation = a_ux * a_ux * PI * PI * u_x * nu * sin(a_ux * PI * x / L) * pow(L, -0.2e1) + a_uy * a_uy * PI * PI * u_y * nu * cos(a_uy * PI * y / L) * pow(L, -0.2e1);
+
+  // "Total source term"
+  Qu_sv = Q_u_dissipation + Q_u_convection;
   return(Qu_sv);
 }
-#include <math.h>
 
 template <typename Scalar>
 Scalar MASA::burgers_equation<Scalar>::eval_q_u_transient_inviscid (Scalar x, Scalar y, Scalar t)
-{
-  Scalar Qu_t;
-  Scalar U;
-  Scalar V;
-  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
-  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
-  Qu_t = -a_ut * PI * u_t * sin(a_ut * PI * t / L) / L - a_uy * PI * u_y * V * sin(a_uy * PI * y / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * U / L;
-  return(Qu_t);
+{ 
+  double Qu_tinv;
+  double U;
+  double V;
+  double Q_u_time;
+  double Q_u_convection;
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / Lt);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / Lt);
+
+  // "Contribution from the time derivative  to the total source term "
+  Q_u_time = -a_ut * PI * u_t * sin(a_ut * PI * t / Lt) / Lt;
+
+  // "Contribution from the convective terms to the total source term "
+  Q_u_convection = -a_uy * PI * u_y * V * sin(a_uy * PI * y / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * U / L;
+
+  // "Total source term "
+  Qu_tinv = Q_u_convection + Q_u_time;
+  return(Qu_tinv);
+  
 }
-#include <math.h>
 
 template <typename Scalar>
 Scalar MASA::burgers_equation<Scalar>::eval_q_u_steady_inviscid (Scalar x, Scalar y)
 {
-  Scalar Qu_s;
-  Scalar U;
-  Scalar V;
-  U = u_0;// + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
-  V = v_0;// + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
-  Qu_s = -a_uy * PI * u_y * V * sin(a_uy * PI * y / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * U / L;
-  return(Qu_s);
+  double Qu_sinv;
+  double U;
+  double V;
+  double Q_u_convection;
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
+
+  // "Contribution from the convective terms to the total source term "
+  Q_u_convection = -a_uy * PI * u_y * V * sin(a_uy * PI * y / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * U / L;
+  
+  // "Total source term "
+  Qu_sinv = Q_u_convection;
+  return(Qu_sinv);
 }
 
 
@@ -193,33 +270,33 @@ Scalar MASA::burgers_equation<Scalar>::eval_q_u_steady_inviscid (Scalar x, Scala
 template <typename Scalar>
 Scalar MASA::burgers_equation<Scalar>::eval_exact_u(Scalar x,Scalar y)
 {
-  Scalar exact_u;
-  exact_u = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
-  return exact_u;
+  Scalar u_an;
+  u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L);
+  return u_an;
 }
 
 template <typename Scalar>
 Scalar MASA::burgers_equation<Scalar>::eval_exact_v(Scalar x,Scalar y)
 {
-  Scalar exact_v;
-  exact_v = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L);
-  return exact_v;
+  Scalar v_an;
+  v_an = v_0 + v_x * sin(a_vx * pi * x / L) + v_y * cos(a_vy * pi * y / L);
+  return v_an;
 }
 
 template <typename Scalar>
 Scalar MASA::burgers_equation<Scalar>::eval_exact_u_t(Scalar x,Scalar y, Scalar t)
 {
-  Scalar exact_u_t;
-  exact_u_t = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_t * cos(a_ut * pi * t / L);
-  return exact_u_t;
+  Scalar u_an;
+  u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_t * cos(a_ut * pi * t / L);
+  return u_an;
 }
 
 template <typename Scalar>
 Scalar MASA::burgers_equation<Scalar>::eval_exact_v_t(Scalar x,Scalar y, Scalar t)
 {
-  Scalar exact_v_t;
-  exact_v_t = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_t * sin(a_vt * pi * t / L);
-  return exact_v_t;
+  Scalar v_an;
+  v_an = v_0 + v_x * sin(a_vx * pi * x / L) + v_y * cos(a_vy * pi * y / L) + v_t * cos(a_vt * pi * t / L);
+  return v_an;
 }
 
 
@@ -234,4 +311,5 @@ MASA_INSTANTIATE_ALL(MASA::burgers_equation);
 //---------------------------------------------------------
 // AUTOMASA
 // Generated on: 2011-10-26 17:35:23
+// updated     : 2011-11-17
 //---------------------------------------------------------

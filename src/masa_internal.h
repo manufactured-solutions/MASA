@@ -1613,6 +1613,7 @@ private:
   Scalar a_vy;
   Scalar a_vt;
   Scalar L;
+  Scalar Lt;
 
 public:
   burgers_equation();
