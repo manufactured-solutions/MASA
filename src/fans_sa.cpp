@@ -519,7 +519,7 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_v(Scalar x,Scalar y
 }
 
 template <typename Scalar>
-Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_T(Scalar x,Scalar y)
+Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_t(Scalar x,Scalar y)
 {
   // this resets all constants set from parameters
   update(x,y);

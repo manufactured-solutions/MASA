@@ -1119,7 +1119,7 @@ namespace MASA
 
     Scalar eval_exact_u  (Scalar,Scalar);
     Scalar eval_exact_v  (Scalar,Scalar);
-    Scalar eval_exact_T  (Scalar,Scalar);
+    Scalar eval_exact_t  (Scalar,Scalar);
     Scalar eval_exact_rho(Scalar,Scalar);
     Scalar eval_exact_nu (Scalar,Scalar);
   };
