@@ -1073,12 +1073,43 @@ namespace MASA
     Scalar Gamma;
     Scalar alpha;
     Scalar C_cf;
-    Scalar C1;
+    Scalar C;
     Scalar b;
+
+    // constants that are computed from parameters
+    Scalar C1;
+    Scalar u_inf;
+    Scalar rho_inf;
+    Scalar T_aw;
+    Scalar rho_w;
+    Scalar A;
+    Scalar F_c;
+    Scalar nu_w;
+    Scalar Re_x;
+    Scalar c_f;
+    Scalar u_tau;
+    Scalar u_eq_plus;
+    Scalar y_plus;
+    Scalar u_eq;
+    Scalar U;
+    Scalar V;
+    Scalar T;
+    Scalar RHO;
+    Scalar NU_SA;
+    Scalar chi;
+    Scalar f_v1;
+    Scalar mu_t;
+    Scalar d_ueqplus_yplus;
+    Scalar D2ueqDx2;
+    Scalar D2ueqDy2;
+    Scalar D2uDx2;
+    Scalar D2uDy2;
+    Scalar D2vDxy;
 
   public:
     fans_sa_steady_wall_bounded(); // constructor
     int init_var();
+    Scalar update(Scalar,Scalar);
 
     Scalar eval_q_rho_u (Scalar,Scalar);
     Scalar eval_q_rho_v (Scalar,Scalar);
@@ -1088,7 +1119,7 @@ namespace MASA
 
     Scalar eval_exact_u  (Scalar,Scalar);
     Scalar eval_exact_v  (Scalar,Scalar);
-    Scalar eval_exact_p  (Scalar,Scalar);
+    Scalar eval_exact_T  (Scalar,Scalar);
     Scalar eval_exact_rho(Scalar,Scalar);
     Scalar eval_exact_nu (Scalar,Scalar);
   };

@@ -107,7 +107,7 @@ int main()
 	  //evaluate analytical solution
 	  exact_u   = masa_eval_exact_u  <Scalar>   (tempx,tempy);
 	  exact_v   = masa_eval_exact_v  <Scalar>   (tempx,tempy);
-	  exact_p   = masa_eval_exact_p  <Scalar>   (tempx,tempy);
+	  exact_p   = masa_eval_exact_T  <Scalar>   (tempx,tempy);
 	  exact_rho = masa_eval_exact_rho<Scalar>   (tempx,tempy);
 	  exact_nu  = masa_eval_exact_nu <Scalar>   (tempx,tempy);
 
