@@ -452,7 +452,18 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho_u(Scalar x,Scalar y
   // this resets all constants set from parameters
   update(x,y);
 
-  return 0;
+  // "Contribution from the convective terms to the total source term ---------------------------------------"
+  Scalar Q_u_convection = r_T * (Gamma - 0.1e1) * M_inf * M_inf * T_inf * y_plus * u_tau * d_ueqplus_yplus * RHO * U * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / y / T - r_T * (Gamma - 0.1e1) * (u_eq_plus + y_plus * d_ueqplus_yplus) * M_inf * M_inf * T_inf * u_tau * RHO * pow(U, 0.3e1) * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / T / 0.14e2 + y_plus * u_tau * d_ueqplus_yplus * RHO * V * cos(A / u_inf * u_eq) / y - (u_eq_plus + y_plus * d_ueqplus_yplus) * u_tau * RHO * U * cos(A / u_inf * u_eq) / x / 0.7e1 + RHO * U * V / y;
+
+  // "Contribution from the gradient of pressure (body forces) to the total source term -----------------"
+  Scalar Q_u_gradp = 0.0e0;
+  
+  // "Contribution  from the viscous terms to the total source term -----------------------------------"
+  Scalar Q_u_viscous = -(Gamma - 0.1e1) * (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * r_T * mu_t * M_inf * M_inf * T_inf * y_plus * y_plus * u_tau * u_tau * d_ueqplus_yplus * d_ueqplus_yplus * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.2e1) * pow(y, -0.2e1) / NU_SA / RHO / T - pow(u_eq_plus + y_plus * d_ueqplus_yplus, 0.2e1) * (Gamma - 0.1e1) * (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * r_T * mu_t * M_inf * M_inf * T_inf * u_tau * u_tau * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(x, -0.2e1) * pow(u_inf, -0.2e1) / NU_SA / RHO / T / 0.147e3 + (Gamma - 0.1e1) * (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * (0.43e2 * y_plus * d_ueqplus_yplus - 0.2e1 * u_eq_plus) * r_T * mu_t * M_inf * M_inf * T_inf * u_tau * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / y / NU_SA / RHO / T / 0.42e2 + (-0.2e1 * mu_t - 0.2e1 * mu) * (0.2e1 / 0.3e1 * D2uDx2 + D2vDxy / 0.6e1 + D2uDy2 / 0.2e1);
+
+    // "Total source term --------------------------------------------------------------------------------"
+  Scalar Q_u = Q_u_convection + Q_u_gradp + Q_u_viscous;
+  return(Q_u);
 }
 
 template <typename Scalar>
@@ -461,7 +472,18 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho_v(Scalar x,Scalar y
   // this resets all constants set from parameters
   update(x,y);
 
-  return 0;
+  // "Contribution from the convective terms to the total source term -------------------------------------------"
+  Scalar Q_v_convection = r_T * (Gamma - 0.1e1) * M_inf * M_inf * T_inf * y_plus * u_tau * d_ueqplus_yplus * RHO * U * V * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / y / T - r_T * (Gamma - 0.1e1) * (y_plus * d_ueqplus_yplus + u_eq_plus) * M_inf * M_inf * T_inf * u_tau * RHO * U * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / T / 0.14e2 - (y_plus * d_ueqplus_yplus + u_eq_plus) * u_tau * RHO * V * cos(A / u_inf * u_eq) / x / 0.14e2 - 0.15e2 / 0.14e2 * RHO * U * V / x + 0.2e1 * RHO * V * V / y;
+
+  // "Contribution from the gradient of pressure (body forces) to the total source term ------------------------"
+  Scalar Q_v_gradp = 0.0e0;
+
+  // "Contribution  from the viscous terms to the total source term ----------------------------------------------"
+  Scalar Q_v_viscous = (-0.2e1 * mu - 0.2e1 * mu_t) * (D2uDxy / 0.6e1 + D2vDx2 / 0.2e1 + 0.2e1 / 0.3e1 * D2vDy2) + r_T * (Gamma - 0.1e1) * (y_plus * d_ueqplus_yplus + u_eq_plus) * (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * mu_t * M_inf * M_inf * T_inf * y_plus * u_tau * u_tau * d_ueqplus_yplus * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.2e1) / x / y / NU_SA / RHO / T / 0.42e2 - 0.15e2 / 0.196e3 * r_T * (Gamma - 0.1e1) * (y_plus * d_ueqplus_yplus + u_eq_plus) * (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * mu_t * M_inf * M_inf * T_inf * u_tau * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) * pow(x, -0.2e1) / NU_SA / RHO / T - 0.4e1 / 0.3e1 * r_T * (Gamma - 0.1e1) * (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * mu_t * M_inf * M_inf * T_inf * y_plus * u_tau * d_ueqplus_yplus * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) * pow(y, -0.2e1) / NU_SA / RHO / T;
+
+    // "Total source term ----------------------------------------------------------------------------------"
+  Scalar Q_v = Q_v_convection + Q_v_gradp + Q_v_viscous;
+  return(Q_v);
 }
 
 template <typename Scalar>
@@ -469,8 +491,13 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho(Scalar x,Scalar y)
 {
   // this resets all constants set from parameters
   update(x,y);
+  
+  // "Contribution from the convective terms to the total source term ---------------------------"
+  Scalar Q_rho_convection = r_T * (Gamma - 0.1e1) * d_ueqplus_yplus * M_inf * M_inf * T_inf * y_plus * u_tau * RHO * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / y / T - r_T * (Gamma - 0.1e1) * (d_ueqplus_yplus * y_plus + u_eq_plus) * M_inf * M_inf * T_inf * u_tau * RHO * U * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / T / 0.14e2 - (d_ueqplus_yplus * y_plus + u_eq_plus) * u_tau * RHO * cos(A / u_inf * u_eq) / x / 0.14e2 + RHO * V / y;
 
-  return 0;
+  // "Total source term -------------------------------------------------------------------------"
+  Scalar Q_rho = Q_rho_convection;
+  return(Q_rho);
 }
 
 template <typename Scalar>
@@ -479,7 +506,25 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_nu(Scalar x,Scalar y)
   // this resets all constants set from parameters
   update(x,y);
 
-  return 0;
+  // "Contribution from the convective terms to the total source term --------------------------------------"
+  Scalar Q_nusa_convection = r_T * (Gamma - 0.1e1) * d_ueqplus_yplus * M_inf * M_inf * T_inf * y_plus * u_tau * NU_SA * RHO * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / y / T - r_T * (Gamma - 0.1e1) * (d_ueqplus_yplus * y_plus + u_eq_plus) * M_inf * M_inf * T_inf * u_tau * NU_SA * RHO * U * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / T / 0.14e2 - kappa * u_tau * y * RHO * U / x / 0.14e2 - (d_ueqplus_yplus * y_plus + u_eq_plus) * u_tau * NU_SA * RHO * cos(A / u_inf * u_eq) / x / 0.14e2 + RHO * NU_SA * V / y + (-0.2e1 * alpha * y + kappa * u_tau) * RHO * V;
+  
+  // "Contribution from theproduction  to the total source term ------------------------------------------------"
+  Scalar Q_nusa_production = -c_b1 * (Sm + Omega) * RHO * NU_SA;
+
+  // "Contribution  from the diffusion to the total source term ----------------------------------------------"
+  Scalar Q_nusa_diffusion = (0.2e1 * alpha * y - kappa * u_tau) * r_T * (Gamma - 0.1e1) * M_inf * M_inf * T_inf * y_plus * u_tau * d_ueqplus_yplus * NU_SA * RHO * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / sigma / y / T - r_T * (Gamma - 0.1e1) * (d_ueqplus_yplus * y_plus + u_eq_plus) * kappa * y * M_inf * M_inf * T_inf * u_tau * u_tau * NU_SA * RHO * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / sigma * pow(x, -0.2e1) / T / 0.196e3 - kappa * kappa * y * y * u_tau * u_tau * RHO / sigma * pow(x, -0.2e1) / 0.196e3 - pow(0.2e1 * alpha * y - kappa * u_tau, 0.2e1) * RHO / sigma - 0.15e2 / 0.196e3 * kappa * (RHO * NU_SA + mu) * y * u_tau / sigma * pow(x, -0.2e1) + 0.2e1 * alpha * (RHO * NU_SA + mu) / sigma;
+
+  // "Contribution  from the grad squared  to the total source term ----------------------------------------"
+  Scalar Q_nusa_gradsquare = -c_b2 * kappa * kappa * y * y * u_tau * u_tau * RHO / sigma * pow(x, -0.2e1) / 0.196e3 - c_b2 * pow(0.2e1 * alpha * y - kappa * u_tau, 0.2e1) * RHO / sigma;
+
+  // "Contribution  from the dissipation to the total source term ----------------------------------------------"
+  Scalar Q_nusa_dissipation = c_w1 * f_w * RHO * NU_SA * NU_SA * pow(d, -0.2e1);
+
+    // "Total source term ----------------------------------------------------------------------------------"
+  Scalar Q_nu_sa = Q_nusa_convection + Q_nusa_production + Q_nusa_diffusion + Q_nusa_gradsquare + Q_nusa_dissipation;
+  return(Q_nu_sa);
+
 }
 
 template <typename Scalar>
@@ -488,7 +533,18 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_q_rho_e(Scalar x,Scalar y
   // this resets all constants set from parameters
   update(x,y);
   
-  return 0;
+  // "Contribution from the convective terms to the total source term ---------------------------------------------"
+  Scalar Q_E_convection = T_inf * r_T * (Gamma - 0.1e1) * M_inf * M_inf * y_plus * u_tau * d_ueqplus_yplus * RHO * pow(U, 0.3e1) * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / y / T / 0.2e1 - r_T * (Gamma - 0.1e1) * (u_eq_plus + y_plus * d_ueqplus_yplus) * (U * U + V * V) * M_inf * M_inf * T_inf * u_tau * RHO * U * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / T / 0.28e2 + (r_T * Gamma * M_inf * M_inf * T_inf * V * V - r_T * M_inf * M_inf * T_inf * V * V + 0.2e1 * u_inf * u_inf * T) * y_plus * u_tau * d_ueqplus_yplus * RHO * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / y / T / 0.2e1 - 0.15e2 / 0.14e2 * RHO * U * V * V / x - (u_eq_plus + y_plus * d_ueqplus_yplus) * (0.3e1 * U * U + V * V + 0.2e1 * cp * T) * u_tau * RHO * cos(A / u_inf * u_eq) / x / 0.28e2 + (U * U + 0.3e1 * V * V + 0.2e1 * cp * T) * RHO * V / y / 0.2e1;
+
+  // "Contribution from the heat flux to the total source term --------------------------------------------------"
+  Scalar Q_E_heat_flux = (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * pow(Gamma - 0.1e1, 0.2e1) * cp * r_T * r_T * mu_t * pow(M_inf, 0.4e1) * T_inf * T_inf * y_plus * y_plus * u_tau * u_tau * d_ueqplus_yplus * d_ueqplus_yplus * U * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.4e1) / Pr_t * pow(y, -0.2e1) / NU_SA / RHO / T + (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * pow(Gamma - 0.1e1, 0.2e1) * pow(u_eq_plus + y_plus * d_ueqplus_yplus, 0.2e1) * cp * r_T * r_T * mu_t * pow(M_inf, 0.4e1) * T_inf * T_inf * u_tau * u_tau * U * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.4e1) / Pr_t * pow(x, -0.2e1) / NU_SA / RHO / T / 0.196e3 + (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * (Gamma - 0.1e1) * (u_eq_plus + y_plus * d_ueqplus_yplus) * cp * r_T * mu_t * kappa * M_inf * M_inf * T_inf * u_tau * u_tau * y * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / Pr_t * pow(x, -0.2e1) * pow(NU_SA, -0.2e1) / RHO / 0.196e3 - (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * (-kappa * u_tau + 0.2e1 * alpha * y) * (Gamma - 0.1e1) * cp * r_T * mu_t * M_inf * M_inf * T_inf * y_plus * u_tau * d_ueqplus_yplus * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / Pr_t / y * pow(NU_SA, -0.2e1) / RHO + (-mu_t / Pr_t - mu / Pr) * (D2TDx2 + D2TDy2) * cp;
+
+  // "Contribution  from the viscous/turbulence work to the total source term -----------------------------------"
+  Scalar Q_E_work = (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * (Gamma - 0.1e1) * r_T * mu_t * M_inf * M_inf * T_inf * y_plus * y_plus * u_tau * u_tau * d_ueqplus_yplus * d_ueqplus_yplus * U * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.2e1) * pow(y, -0.2e1) / NU_SA / RHO / T - (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * (Gamma - 0.1e1) * (u_eq_plus + y_plus * d_ueqplus_yplus) * r_T * mu_t * M_inf * M_inf * T_inf * y_plus * u_tau * u_tau * d_ueqplus_yplus * U * V * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(u_inf, -0.2e1) / x / y / NU_SA / RHO / T / 0.42e2 + 0.4e1 / 0.3e1 * (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * (Gamma - 0.1e1) * r_T * mu_t * M_inf * M_inf * T_inf * y_plus * u_tau * d_ueqplus_yplus * U * V * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) * pow(y, -0.2e1) / NU_SA / RHO / T + (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * (Gamma - 0.1e1) * pow(u_eq_plus + y_plus * d_ueqplus_yplus, 0.2e1) * r_T * mu_t * M_inf * M_inf * T_inf * u_tau * u_tau * U * U * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(x, -0.2e1) * pow(u_inf, -0.2e1) / NU_SA / RHO / T / 0.147e3 - (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * (Gamma - 0.1e1) * (0.43e2 * y_plus * d_ueqplus_yplus - 0.2e1 * u_eq_plus) * r_T * mu_t * M_inf * M_inf * T_inf * u_tau * U * U * V * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1) / x / y / NU_SA / RHO / T / 0.42e2 + 0.15e2 / 0.196e3 * (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * (Gamma - 0.1e1) * (u_eq_plus + y_plus * d_ueqplus_yplus) * r_T * mu_t * M_inf * M_inf * T_inf * u_tau * U * V * V * cos(A / u_inf * u_eq) * pow(x, -0.2e1) * pow(u_inf, -0.2e1) / NU_SA / RHO / T + (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * mu_t * kappa * y_plus * u_tau * u_tau * d_ueqplus_yplus * U * cos(A / u_inf * u_eq) / y * pow(NU_SA, -0.2e1) / RHO - (0.8e1 * RHO * NU_SA - 0.6e1 * mu_t) * alpha * mu_t * y_plus * u_tau * d_ueqplus_yplus * U * cos(A / u_inf * u_eq) * pow(NU_SA, -0.2e1) / RHO - (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * (y_plus * d_ueqplus_yplus - 0.2e1 * u_eq_plus) * mu_t * kappa * u_tau * u_tau * V * cos(A / u_inf * u_eq) / x * pow(NU_SA, -0.2e1) / RHO / 0.42e2 + (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * (u_eq_plus + y_plus * d_ueqplus_yplus) * mu_t * kappa * u_tau * u_tau * y * U * cos(A / u_inf * u_eq) * pow(x, -0.2e1) * pow(NU_SA, -0.2e1) / RHO / 0.147e3 - 0.2e1 / 0.21e2 * (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * alpha * (u_eq_plus + y_plus * d_ueqplus_yplus) * mu_t * u_tau * y * V * cos(A / u_inf * u_eq) / x * pow(NU_SA, -0.2e1) / RHO - 0.8e1 / 0.3e1 * (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * alpha * mu_t * V * V * pow(NU_SA, -0.2e1) / RHO + (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * (0.784e3 * x * x + 0.45e2 * y * y) * mu_t * kappa * u_tau * V * V * pow(x, -0.2e1) / y * pow(NU_SA, -0.2e1) / RHO / 0.588e3 + (0.4e1 * RHO * NU_SA - 0.3e1 * mu_t) * (-0.43e2 * kappa * u_tau + 0.90e2 * alpha * y) * mu_t * U * V / x * pow(NU_SA, -0.2e1) / RHO / 0.42e2 + (-0.2e1 * mu_t - 0.2e1 * mu) * (y_plus * y_plus * u_tau * u_tau * d_ueqplus_yplus * d_ueqplus_yplus * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(y, -0.2e1) / 0.2e1 + pow(u_eq_plus + y_plus * d_ueqplus_yplus, 0.2e1) * u_tau * u_tau * pow(cos(A / u_inf * u_eq), 0.2e1) * pow(x, -0.2e1) / 0.294e3 - (0.43e2 * y_plus * d_ueqplus_yplus - 0.2e1 * u_eq_plus) * u_tau * V * cos(A / u_inf * u_eq) / x / y / 0.42e2 + (0.2e1 / 0.3e1 * D2uDx2 + D2vDxy / 0.6e1 + D2uDy2 / 0.2e1) * U + (D2uDxy / 0.6e1 + D2vDx2 / 0.2e1 + 0.2e1 / 0.3e1 * D2vDy2) * V + 0.225e3 / 0.392e3 * V * V * pow(x, -0.2e1) + 0.2e1 / 0.3e1 * V * V * pow(y, -0.2e1));
+
+  // "Total source term ----------------------------------------------------------------------------------"
+  Scalar Q_E = Q_E_work + Q_E_heat_flux + Q_E_convection;
+  return(Q_E);
 
 }
 
@@ -587,7 +643,9 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::update(Scalar x, Scalar y)
   NU_SA = kappa * u_tau * y - alpha * y * y;
   chi = RHO * NU_SA / mu;
   f_v1 = pow(chi, 0.3e1) / (pow(chi, 0.3e1) + pow(c_v1, 0.3e1));
+  f_v2 = 0.1e1 - chi / (0.1e1 + chi * f_v1);
   mu_t = RHO * NU_SA * f_v1;
+  f_w = g * pow((0.1e1 + pow(c_w3, 0.6e1)) / (pow(g, 0.6e1) + pow(c_w3, 0.6e1)), 0.1e1 / 0.6e1);
 
   // "---------------------------------------------"
   d_ueqplus_yplus = 0.1e1 / (0.1e1 + kappa * y_plus) + C1 * (exp(-y_plus / eta1) / eta1 - exp(-y_plus * b) / eta1 + y_plus * b * exp(-y_plus * b) / eta1);
@@ -596,6 +654,32 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::update(Scalar x, Scalar y)
   D2uDx2 = -u_tau * u_tau * A * A * pow(u_eq_plus + y_plus * d_ueqplus_yplus, 0.2e1) * U * pow(x, -0.2e1) * pow(u_inf, -0.2e1) / 0.196e3 + D2ueqDx2 * cos(A / u_inf * u_eq);
   D2uDy2 = -U * A * A * y_plus * y_plus * d_ueqplus_yplus * d_ueqplus_yplus * u_tau * u_tau * pow(u_inf, -0.2e1) * pow(y, -0.2e1) + cos(A / u_inf * u_eq) * D2ueqDy2;
   D2vDxy = -0.15e2 / 0.14e2 * V / x / y;
+  D2TDx2 = -T_inf * r_T * (Gamma - 0.1e1) * M_inf * M_inf * pow(u_eq_plus + y_plus * d_ueqplus_yplus, 0.2e1) * u_tau * u_tau * (pow(cos(A / u_inf * u_eq), 0.2e1) - pow(sin(A / u_inf * u_eq), 0.2e1)) * pow(x, -0.2e1) * pow(u_inf, -0.2e1) / 0.196e3 - T_inf * r_T * (Gamma - 0.1e1) * M_inf * M_inf * D2ueqDx2 * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1);
+  D2vDx2 = 0.435e3 / 0.196e3 * V * pow(x, -0.2e1);
+  D2vDy2 = 0.0e0;
+  D2TDy2 = -T_inf * r_T * (Gamma - 0.1e1) * M_inf * M_inf * y_plus * y_plus * d_ueqplus_yplus * d_ueqplus_yplus * u_tau * u_tau * (pow(cos(A / u_inf * u_eq), 0.2e1) - pow(sin(A / u_inf * u_eq), 0.2e1)) * pow(u_inf, -0.2e1) * pow(y, -0.2e1) - T_inf * r_T * (Gamma - 0.1e1) * M_inf * M_inf * D2ueqDy2 * U * cos(A / u_inf * u_eq) * pow(u_inf, -0.2e1);
+  D2uDxy = A * A * (u_eq_plus + y_plus * d_ueqplus_yplus) * u_tau * u_tau * y_plus * d_ueqplus_yplus * U * pow(u_inf, -0.2e1) / x / y / 0.14e2 - u_tau * y_plus * d_ueqplus_yplus * cos(A / u_inf * u_eq) / x / y / 0.7e1 - y * cos(A / u_inf * u_eq) * D2ueqDy2 / x / 0.14e2;
+
+
+  // "distance from wall"
+  d = y;
+
+  r = NU_SA / S_sa * pow(kappa, -0.2e1) * pow(d, -0.2e1);
+  g = r + c_w2 * (pow(r, 0.6e1) - r);
+  Omega = sqrt(pow(0.196e3 * x * x * y_plus * d_ueqplus_yplus * cos(A / u_inf * u_eq) + 0.15e2 * eta_v * y * y, 0.2e1) * u_tau * u_tau * pow(x, -0.4e1) * pow(y, -0.2e1)) / 0.196e3;
+
+
+  // hacking in a few more constants
+  c_w1 = c_b1 * pow(kappa, -0.2e1) + (0.1e1 + c_b2) / sigma;
+  Sm_orig = NU_SA * pow(kappa, -0.2e1) * pow(d, -0.2e1) * f_v2;
+  Sm1 = Sm_orig;
+  Sm2 = Omega * (c_v2 * c_v2 * Omega + c_v3 * Sm_orig) / ((c_v3 + (-0.1e1) * 0.20e1 * c_v2) * Omega - Sm_orig);
+  if (-c_v2 * Omega <= Sm_orig)
+    Sm = Sm1;
+  else
+    Sm = Sm2;
+  S_sa = Sm + Omega;
+  cp = Gamma * R / (Gamma - 0.1e1);
 
   return 0;
 

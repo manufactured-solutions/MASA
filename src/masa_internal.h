@@ -1100,11 +1100,34 @@ namespace MASA
     Scalar f_v1;
     Scalar mu_t;
     Scalar d_ueqplus_yplus;
+
+    Scalar c_w1;
+    Scalar d;
+    Scalar Omega;
+    Scalar Sm1;
+    Scalar Sm;
+    Scalar Sm2;
+    Scalar Sm_orig;
+    Scalar g;
+    Scalar r;
+    Scalar S_sa;
+    Scalar cp;
+
+    Scalar sigma_sa;
+    Scalar f_w;
+    Scalar f_v2;
+
     Scalar D2ueqDx2;
     Scalar D2ueqDy2;
     Scalar D2uDx2;
     Scalar D2uDy2;
     Scalar D2vDxy;
+    
+    Scalar D2vDx2;
+    Scalar D2vDy2;
+    Scalar D2TDx2;
+    Scalar D2TDy2;
+    Scalar D2uDxy;
 
   public:
     fans_sa_steady_wall_bounded(); // constructor
