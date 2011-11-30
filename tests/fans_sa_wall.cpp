@@ -112,6 +112,8 @@ int main()
 	  exact_rho = masa_eval_exact_rho<Scalar>   (tempx,tempy);
 	  exact_nu  = masa_eval_exact_nu <Scalar>   (tempx,tempy);
 	  exact_p   = masa_eval_exact_p  <Scalar>   (tempx,tempy);
+
+	  //cout << exact_p << endl;
 	  /* achtung: add regression tests here!
 	  nancheck(ufield);
 	  nancheck(vfield);
