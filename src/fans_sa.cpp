@@ -550,6 +550,14 @@ Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_nu(Scalar x,Scalar 
   return nu_an;
 }
 
+template <typename Scalar>
+Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::eval_exact_p(Scalar x,Scalar y)
+{
+  // this resets all constants set from parameters
+  update(x,y);
+  return p_0;
+}
+
 // update function -- set all constants that are computed from parameters
 template <typename Scalar>
 Scalar MASA::fans_sa_steady_wall_bounded<Scalar>::update(Scalar x, Scalar y)
