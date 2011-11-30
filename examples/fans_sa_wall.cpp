@@ -57,6 +57,7 @@ int main()
   Scalar exact_t;
   Scalar exact_rho;
   Scalar exact_nu;
+  Scalar exact_p;
 
   //error handing
   int err = 0;
@@ -110,6 +111,7 @@ int main()
 	  exact_t   = masa_eval_exact_t  <Scalar>   (tempx,tempy);
 	  exact_rho = masa_eval_exact_rho<Scalar>   (tempx,tempy);
 	  exact_nu  = masa_eval_exact_nu <Scalar>   (tempx,tempy);
+	  exact_p   = masa_eval_exact_p  <Scalar>   (tempx,tempy);
 
 	}
     } // done with spatial loop
