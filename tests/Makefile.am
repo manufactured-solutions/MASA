@@ -66,8 +66,8 @@ check_PROGRAMS   = misc                \
                    f_euler_chem_1d     \
                    f_cns2d             \
                    f_cns3d             \
-                   f_radiation         
-#		   ad_euler
+                   f_radiation         \
+		   ad_euler
 
 #----------------------
 # C++ Test Sources
@@ -108,7 +108,7 @@ cp_normal_SOURCES           = cp_normal.cpp
 #----------------------
 # C++ AD Test Sources
 #----------------------
-# ad_euler_SOURCES            = ad_euler.cpp
+ad_euler_SOURCES            = ad_euler.cpp
 
 #----------------------
 # C Test Sources
@@ -235,9 +235,9 @@ TESTS                      = init.sh              \
 		             f_cns3d              \
 		             f_radiation          \
 			     ad_init.sh           \
+			     ad_euler             \
                              finalize.sh
 
-#			     ad_euler            
 
 
 EXTRA_DIST                 = init.sh     \
