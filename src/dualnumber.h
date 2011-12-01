@@ -1,33 +1,3 @@
-// -*-c++-*-
-//
-//-----------------------------------------------------------------------bl-
-//--------------------------------------------------------------------------
-//
-// MASA - Manufactured Analytical Solutions Abstraction Library
-//
-// Copyright (C) 2010,2011 The PECOS Development Team
-//
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the Version 2.1 GNU Lesser General
-// Public License as published by the Free Software Foundation.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc. 51 Franklin Street, Fifth Floor,
-// Boston, MA  02110-1301  USA
-//
-//-----------------------------------------------------------------------el-
-//
-// dualnumber.h: 
-//
-// $Id$
-//--------------------------------------------------------------------------
-//--------------------------------------------------------------------------
 
 #ifndef __dualnumber_h__
 #define __dualnumber_h__
@@ -35,6 +5,7 @@
 #include <ostream>
 
 #include "compare_types.h"
+#include "raw_type.h"
 
 template <typename T, typename D=T>
 class DualNumber
@@ -330,12 +301,12 @@ DualNumber_std_binary(pow,
   funcval * (b.value() * a.derivatives() / a.value() + b.derivatives() * std::log(a.value())))
 DualNumber_std_binary(atan2,
   (b.value() * a.derivatives() - a.value() * b.derivatives()) /
-  (b.value() * b.value() + a.value() * a.value()));
+  (b.value() * b.value() + a.value() * a.value()))
 DualNumber_std_binary(max,
-  (a.value() > b.value()) ?  a : b);
+  (a.value() > b.value()) ?  a : b)
 DualNumber_std_binary(min,
-  (a.value() > b.value()) ?  b : a);
-DualNumber_std_binary(fmod, a.derivatives());
+  (a.value() > b.value()) ?  b : a)
+DualNumber_std_binary(fmod, a.derivatives())
 
 template <typename T, typename D>
 class numeric_limits<DualNumber<T, D> > : 
