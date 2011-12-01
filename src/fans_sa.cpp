@@ -355,6 +355,7 @@ Scalar MASA::fans_sa_transient_free_shear<Scalar>::eval_exact_rho(Scalar x,Scala
   return rho_an;
 }
 
+
 /* ------------------------------------------------
  *
  *   favre averaged navier stokes transient
