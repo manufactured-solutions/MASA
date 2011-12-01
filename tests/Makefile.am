@@ -67,7 +67,8 @@ check_PROGRAMS   = misc                \
                    f_cns2d             \
                    f_cns3d             \
                    f_radiation         \
-		   ad_euler
+		   ad_euler            \
+		   ad_cns
 
 #----------------------
 # C++ Test Sources
@@ -109,6 +110,7 @@ cp_normal_SOURCES           = cp_normal.cpp
 # C++ AD Test Sources
 #----------------------
 ad_euler_SOURCES            = ad_euler.cpp
+ad_cns_SOURCES              = ad_cns.cpp
 
 #----------------------
 # C Test Sources
@@ -236,6 +238,7 @@ TESTS                      = init.sh              \
 		             f_radiation          \
 			     ad_init.sh           \
 			     ad_euler             \
+			     ad_cns               \
                              finalize.sh
 
 
@@ -249,7 +252,6 @@ EXTRA_DIST                 = init.sh     \
 
 
 # License Information
-
 .license.stamp: $(top_srcdir)/LICENSE
 	for file in $(srcdir)/*.h $(srcdir)/*.c $(srcdir)/*.cpp ; do \
 		$(top_srcdir)/src/lic_utils/update_license.pl \

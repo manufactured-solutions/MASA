@@ -23,7 +23,7 @@
 //
 //-----------------------------------------------------------------------el-
 //
-// ad_euler.h: test the euler equation is roughly identical to 
+// ad_cns.h: test the compressible navier stokes equations are roughly identical to 
 //             the source terms generated from maple
 //
 // $Id: $
@@ -33,9 +33,17 @@
 #include "ad_masa.h"
 #include <iostream>
 #include <masa.h>
-#include <tests.h>
 
-typedef double RawScalar;
+// typedef double RawScalar;
+typedef ShadowNumber<double, long double> RawScalar;
+
+const unsigned int NDIM = 2;
+
+typedef DualNumber<RawScalar, NumberArray<NDIM, RawScalar> > FirstDerivType;
+typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+
+typedef SecondDerivType ADType;
+// typedef FirstDerivType ADType;
 
 template <std::size_t NDIM, typename Scalar>
 double evaluate_q (const NumberArray<NDIM, Scalar>& xyz, const int);
@@ -56,36 +64,55 @@ int main(void)
   pnorm_max = 0;
   enorm_max = 0;
 
-  const unsigned int NDIM = 2;
-
   const RawScalar xvecinit[] = {1., 0.};
   const RawScalar yvecinit[] = {0., 1.};
 
   const NumberArray<NDIM, RawScalar> xvec(xvecinit);
   const NumberArray<NDIM, RawScalar> yvec(yvecinit);
 
-  typedef DualNumber<RawScalar, NumberArray<NDIM, RawScalar> > FirstDerivType;
-  typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
-
-  typedef SecondDerivType ADType;
-  // typedef FirstDerivType ADType;
-
   // initialize the problem in MASA
-  err += masa_init("euler-maple","euler_2d");
+  err += masa_init("ns-maple","navierstokes_2d_compressible");
   
+  masa_set_param("u_0", 200.23);
+  masa_set_param("u_y", 1.08);
+  masa_set_param("v_0", 1.2);
+  masa_set_param("v_y", .67);
+  masa_set_param("rho_0", 100.02);
+  masa_set_param("rho_x", 2.22);
+  masa_set_param("rho_y", 0.8);
+  masa_set_param("p_0", 150.2);
+  masa_set_param("a_rhox", 1.0);
+  masa_set_param("a_rhoy", 1.0);
+  masa_set_param("a_vy", 1.0);
+  masa_set_param("mu", 10.0);
+  masa_set_param("k", 100.0);
+
   // call the sanity check routine
   // (tests that all variables have been initialized)
   err += masa_sanity_check();
   //err += masa_printid<double>();
 
-  // we first set up the DualNumber::derivatives() terms.  
+  // we first set up the DualNumbers that correspond to independent
+  // variables, spatial coordinates x and y.
+
+  NumberArray<NDIM, ADType> xy;
+
   // When main() says "xy[0] = ADType(1., xvec);", that's saying "x = 1, and 
   // the gradient of f(x,y)=x is the constant vector xvec={1,0}"  
   // Likewise "xy[1] = ADType(1., yvec);" means "y = 1, and the gradient of f(x,y)=y 
-  // is the constant vector yvec={0,1}" 
-  NumberArray<NDIM, ADType> xy;
   xy[0] = ADType(1., xvec);
   xy[1] = ADType(1., yvec);
+
+  // For getting second derivatives, the way to set up a
+  // twice-differentiable independent variable used to be more
+  // complicated: first set up a once-differentiable variable, then
+  // make sure *its* derivatives are also properly set.
+
+  // However, if the new DualNumber constructors are working properly
+  // then this is unnecessary.
+
+  // xy[0] = ADType(FirstDerivType(1., xvec), xvec);
+  // xy[1] = ADType(FirstDerivType(1., yvec), yvec);
 
   // the input argument xyz is another NumberArray 
   // a vector just like Q_rho_u, a spatial location rather 
@@ -93,10 +120,19 @@ int main(void)
   double h = 1.0/N;
   for (int i=0; i != N+1; ++i)
     {
-      xy[0] = ADType(i*h,xvec);
+      //
+      xy[0] = ADType(i*h, xvec);
+
+      // Under the hood:
+      // xy[0] = ADType(FirstDerivType(i*h, xvec), xvec);
+
       for (int j=0; j != N+1; ++j)
 	{
-	  xy[1] = ADType(j*h,yvec);
+          xy[1] = ADType(j*h, yvec);
+
+          // Under the hood:
+          // xy[1] = ADType(FirstDerivType(j*h, yvec), yvec);
+
 	  // evaluate masa source terms
 	  su  = masa_eval_source_rho_u<double>(i*h,j*h);
 	  sv  = masa_eval_source_rho_v<double>(i*h,j*h);
@@ -132,12 +168,15 @@ int main(void)
 	}
     }
  
+  std::cout << "max error in u      : " << unorm_max << std::endl;
+  std::cout << "max error in v      : " << vnorm_max << std::endl;
+  std::cout << "max error in density: " << pnorm_max << std::endl;
+  std::cout << "max error in energy : " << enorm_max << std::endl;
 
-  // need to convert this into a real test
-  threshcheck(urnorm_max);
-  threshcheck(vrnorm_max);
-  threshcheck(prnorm_max);
-  threshcheck(ernorm_max);
+  std::cout << "max relative error in u      : " << urnorm_max << std::endl;
+  std::cout << "max relative error in v      : " << vrnorm_max << std::endl;
+  std::cout << "max relative error in density: " << prnorm_max << std::endl;
+  std::cout << "max relative error in energy : " << ernorm_max << std::endl;
 
   // steady as she goes...
   return 0;
@@ -155,30 +194,31 @@ double evaluate_q (const NumberArray<NDIM, ADScalar>& xyz, const int ret)
 
   const Scalar PI = std::acos(Scalar(-1));
 
-  const Scalar k = 1.38;
-  const Scalar u_0 = 200.23;
-  const Scalar u_x = 1.1;
-  const Scalar u_y = 1.08;
-  const Scalar v_0 = 1.2;
-  const Scalar v_x = 1.6;
-  const Scalar v_y = .47;
-  const Scalar rho_0 = 100.02;
-  const Scalar rho_x = 2.22;
-  const Scalar rho_y = 0.8;
-  const Scalar p_0 = 150.2;
-  const Scalar p_x = .91;
-  const Scalar p_y = .623;
-  const Scalar a_px = .165;
-  const Scalar a_py = .612;
-  const Scalar a_rhox = 1.0;
-  const Scalar a_rhoy = 1.0;
-  const Scalar a_ux = .1987;
-  const Scalar a_uy = 1.189;
-  const Scalar a_vx = 1.91;
-  const Scalar a_vy = 1.0;
-  const Scalar Gamma = 1.01;
-  const Scalar mu = .918;
-  const Scalar L = 3.02;
+  const Scalar R = masa_get_param("R");
+  const Scalar u_0 = masa_get_param("u_0");
+  const Scalar u_x = masa_get_param("u_x");
+  const Scalar u_y = masa_get_param("u_y");
+  const Scalar v_0 = masa_get_param("v_0");
+  const Scalar v_x = masa_get_param("v_x");
+  const Scalar v_y = masa_get_param("v_y");
+  const Scalar rho_0 = masa_get_param("rho_0");
+  const Scalar rho_x = masa_get_param("rho_x");
+  const Scalar rho_y = masa_get_param("rho_y");
+  const Scalar p_0 = masa_get_param("p_0");
+  const Scalar p_x = masa_get_param("p_x");
+  const Scalar p_y = masa_get_param("p_y");
+  const Scalar a_px = masa_get_param("a_px");
+  const Scalar a_py = masa_get_param("a_py");
+  const Scalar a_rhox = masa_get_param("a_rhox");
+  const Scalar a_rhoy = masa_get_param("a_rhoy");
+  const Scalar a_ux = masa_get_param("a_ux");
+  const Scalar a_uy = masa_get_param("a_uy");
+  const Scalar a_vx = masa_get_param("a_vx");
+  const Scalar a_vy = masa_get_param("a_vy");
+  const Scalar Gamma = masa_get_param("Gamma");
+  const Scalar L = masa_get_param("L");
+  const Scalar mu = masa_get_param("mu");
+  const Scalar k = masa_get_param("k");
 
   const ADScalar& x = xyz[0];
   const ADScalar& y = xyz[1];
@@ -192,17 +232,33 @@ double evaluate_q (const NumberArray<NDIM, ADScalar>& xyz, const int ret)
   ADScalar RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L);
   ADScalar P = p_0 + p_x * std::cos(a_px * PI * x / L) + p_y * std::sin(a_py * PI * y / L);
 
+  // Temperature
+  ADScalar T = P / RHO / R;
+
   // Perfect gas energies
   ADScalar E = 1./(Gamma-1.)*P/RHO;
   ADScalar ET = E + .5 * U.dot(U);
 
+  // The shear strain tensor
+  NumberArray<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
+
+  // The identity tensor I
+  NumberArray<NDIM, NumberArray<NDIM, Scalar> > Identity = 
+    NumberArrayIdentity<NDIM, Scalar>::identity();
+
+  // The shear stress tensor
+  NumberArray<NDIM, NumberArray<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
+
+  // Temperature flux
+  NumberArray<NDIM, ADScalar> q = -k * T.derivatives();
+
   // Euler equation residuals
   Scalar Q_rho = raw_value(divergence(RHO*U));
-  NumberArray<NDIM, Scalar> Q_rho_u = raw_value(divergence(RHO*U.outerproduct(U)) + P.derivatives());
+  NumberArray<NDIM, Scalar> Q_rho_u = 
+    raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
 
   // energy equation
-  Scalar Q_rho_e = raw_value(divergence((RHO*ET+P)*U));
-  // Scalar Q_rho_e = raw_value(divergence((RHO*U*ET)+(P*U)));
+  Scalar Q_rho_e = raw_value(divergence((RHO*ET+P)*U + q - Tau.dot(U)));
 
   switch(ret)
     {
@@ -229,6 +285,6 @@ double evaluate_q (const NumberArray<NDIM, ADScalar>& xyz, const int ret)
 
     default:
       std::cout << "something is wrong!\n";
-      exit;
+      exit(1);
     }
 }
