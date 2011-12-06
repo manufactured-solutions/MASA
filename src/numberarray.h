@@ -111,7 +111,8 @@ struct NumberArrayIdentity
     NumberArray<size, NumberArray<size, T> > returnval;
   
     for (unsigned int i=0; i != size; ++i)
-      returnval[i][i] = 1;
+      for (unsigned int j=0; j != size; ++j)
+        returnval[i][j] = (i == j);
 
     return returnval;
   }
