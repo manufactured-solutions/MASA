@@ -12,6 +12,9 @@ Version 0.40 (In Progress)
   * added a tutorial/ sub-directory 
   * added regression tests for masa_display_param
   * fixed bug in which examples could not compile after install 
+  * masa now supports automatic differentiation (AD_MASA):
+       * added an AD euler equation regression test and example
+       * added an AD N-S   equation regression test and example
 
 Version 0.33 (26 July 2011)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.33.0
