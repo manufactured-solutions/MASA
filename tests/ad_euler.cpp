@@ -133,7 +133,6 @@ int main(void)
     }
  
 
-  // need to convert this into a real test
   threshcheck(urnorm_max);
   threshcheck(vrnorm_max);
   threshcheck(prnorm_max);
@@ -231,4 +230,5 @@ double evaluate_q (const NumberArray<NDIM, ADScalar>& xyz, const int ret)
       std::cout << "something is wrong!\n";
       exit;
     }
+  return 0;
 }

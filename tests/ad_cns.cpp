@@ -33,6 +33,7 @@
 #include "ad_masa.h"
 #include <iostream>
 #include <masa.h>
+#include <tests.h>
 
 // typedef double RawScalar;
 typedef ShadowNumber<double, long double> RawScalar;
@@ -168,15 +169,21 @@ int main(void)
 	}
     }
  
-  std::cout << "max error in u      : " << unorm_max << std::endl;
-  std::cout << "max error in v      : " << vnorm_max << std::endl;
-  std::cout << "max error in density: " << pnorm_max << std::endl;
-  std::cout << "max error in energy : " << enorm_max << std::endl;
+  
+  // std::cout << "max error in u      : " << unorm_max << std::endl;
+  // std::cout << "max error in v      : " << vnorm_max << std::endl;
+  // std::cout << "max error in density: " << pnorm_max << std::endl;
+  // std::cout << "max error in energy : " << enorm_max << std::endl;
 
-  std::cout << "max relative error in u      : " << urnorm_max << std::endl;
-  std::cout << "max relative error in v      : " << vrnorm_max << std::endl;
-  std::cout << "max relative error in density: " << prnorm_max << std::endl;
-  std::cout << "max relative error in energy : " << ernorm_max << std::endl;
+  // std::cout << "max relative error in u      : " << urnorm_max << std::endl;
+  // std::cout << "max relative error in v      : " << vrnorm_max << std::endl;
+  // std::cout << "max relative error in density: " << prnorm_max << std::endl;
+  // std::cout << "max relative error in energy : " << ernorm_max << std::endl;
+
+  threshcheck(urnorm_max);
+  threshcheck(vrnorm_max);
+  threshcheck(prnorm_max);
+  threshcheck(ernorm_max);
 
   // steady as she goes...
   return 0;
