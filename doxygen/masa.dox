@@ -580,6 +580,7 @@ INPUT                  = src/masa.h src/masa.f90 examples/pecos-input.txt \
 		         $(SRCDIR)/doxygen/tutorial.page \
 		         $(SRCDIR)/doxygen/install.page \			 
 		         $(SRCDIR)/doxygen/add_sol.page \			 
+		         $(SRCDIR)/doxygen/auto_diff.page \			 
 			 $(SRCDIR)/doxygen/solutions    \
 
 # This tag can be used to specify the character encoding of the source files 

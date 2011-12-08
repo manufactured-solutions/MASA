@@ -1,0 +1,179 @@
+/*! \page auto_diff Creating Manufactured Solutions with Automatic Differentiation
+
+Although most of the manufactured solutions currently in MASA were
+created via symbolic manipulation using computational algebra systems,
+the difficulty in constructing such solutions may be prohibitive for
+some users with particularly complicated PDEs.
+
+To enable easier development of code for evaluating forcing terms,
+MASA provides a simple set of classes for automatic differentiation of
+manufactured solutions.
+
+The primary class required to perform automatic differentiation with
+MASA is:
+
+\code
+ DualNumber<ValueType, DerivativeType>
+\endcode
+
+Each object of this class stores one conceptually-scalar value of type
+\c ValueType accessible with the member function \c value(), as well
+as the first derivative(s) of that value of type \c DerivativeType
+accessible with the member function \c derivatives().  Arithmetic
+operators for the class are overloaded, and the std:: operators from
+<cmath> are defined, in order to enable these objects to be used in
+any type-independent code which expects ordinary mathematical scalars.
+When these objects are transformed by mathematical operations and
+functions, the functions are applied directly to the \c value() and the
+corresponding differentiation rules are applied to the \c
+derivatives().
+
+For operations on collections of numbers, as occur in multidimensional
+problems, the corresponding MASA data type is:
+
+\code
+ NumberArray<Dimension, ValueType>
+\endcode
+
+For example, with Dimension=2 and ValueType=double, the type
+\c NumberArray<2,double> represents a 2-D algebraic vector.
+
+To make these classes useful for more than simple problems, they must
+be composed into more elaborate types; they are designed to enable
+this composition both with each other and recursively with themselves.
+For example, a double-precision scalar which is twice-differentiable
+with respect to one variable can be created by using the recursive type
+
+\code
+ DualNumber<DualNumber<double,double>, DualNumber<double,double> >
+\endcode
+
+or a 3-D algebraic double-precision matrix can be constructed with the
+recursive type
+
+\code
+ NumberArray<3, NumberArray<3, double> >
+\endcode
+
+For differentiable functions of multiple variables, combinations of \c
+DualNumber and \c NumberArray are required, wherein the NumberArray
+based types are needed to represent gradient vectors and Hessian
+matrices given by derivatives of the scalar-valued DualNumber.  For
+instance, a double-precision scalar-valued function of two
+coordinates which is once-differentiable can be defined with the type
+
+\code
+ typedef DualNumber<double, NumberArray<2, double> > ADOne;
+\endcode
+
+This sort of operation can be performed recursively to give a twice
+differentiable function:
+
+\code
+ typedef DualNumber<ADOne, NumberArray<2, ADOne> > ADTwo;
+\endcode
+
+And any differentiable scalar-valued function can be extended to a
+vector-valued function by being placed in a \c NumberArray:
+
+\code
+ NumberArray<2, ADTwo> U;
+\endcode
+
+To initialize an automatically differentiable function variable
+properly, one must first initialize the independent variables with
+respect to which later differentiation will occur.  Each independent
+variable should have a derivative which is a unit vector in the
+direction corresponding to that variable.  In the above examples,
+evaluation at a point (x,y) = (0.3,0.4) can begin with
+
+\code
+ const double unitvec1[] = {1, 0};
+ const double unitvec2[] = {0, 1};
+ ADTwo x(0.3, unitvec1);
+ ADTwo y(0.4, unitvec2);
+\endcode
+
+Later reassignment of independent variables also requires manual
+instantiation of derivatives.  In the following code,
+
+\code
+x = ADTwo(0.4, unitvec1);
+x = 0.5;
+\endcode
+
+the first statement properly reassigns the value of \c x to 0.4 while
+leaving its status as an independent variable unchanged.  The second
+statement makes \c x a constant with value 0.5, and if this \c x is
+used in further calculations, differentiation with respect to x will
+silently give incorrect results!
+
+Presuming that independent variables have been set correctly,
+calculations of dependent variables are straightforward, e.g.:
+
+\code
+ADTwo f = std::pow(1.1, x);
+U[0] = 3 * f * std::sin(x) + std::cos(f);
+\endcode
+
+Intermediate variables of the appropriate types can be created,
+and upconversion of non-AD constants is automatic.  Inadvertent
+downconversions such as:
+
+\code
+double f = std::pow(1.1, x);
+\endcode
+
+are flagged as errors at compile-time, to prevent users from
+accidentally making type errors in intermediate calculations.
+Intentional downconversions can be obtained with the \p raw_value()
+function,
+
+\code
+double f = raw_value(std::pow(1.1, x));
+\endcode
+
+which is useful when differentiable calculations are finished and
+output values must be provided to other C++ functions which expect raw
+scalars.
+
+Once differentiable manufacutured solution variables have been
+calculated, the evaluation of a manufactured forcing function simply
+requires the differential equation itself to be expressed in C++.
+Some differential operators are naturally expressed in the designs
+described above; e.g.  a gradient of any \c DualNumber may be taken
+with the \c derivatives() method.  Other common mathematical terms are
+enabled via separate functions applying to class compositions; e.g. a
+divergence of a vector or tensor expressed as a \c NumberArray with
+underlying \c DualNumber contents can be taken with the \c
+divergence() function, or an identity tensor can be obtained with the
+\c identity() function.
+
+As an example of a manufactured forcing function calculation with
+these tools, consider the Navier-Stokes momentum equation:
+
+\code
+  NumberArray<NDIM, double> Q_rho_u =
+    raw_value(divergence(RHO*U.outerproduct(U) - Tau) +
+    P.derivatives());
+\endcode
+
+Here we require a vector output, but the output will not have further
+derivatives taken, so a plain double is used within a \c NumberArray,
+and raw_value() is used to initialize that away from an automatically
+differentiated calculation.  An integer compile-time constant or
+template argument \c NDIM is used here to write dimension-independent
+code.  The \c outerproduct() method takes its vector object \c U and
+constructs a tensor product with its argument (also \c U here).  The
+\c operator* then automatically performs scalar-times-tensor
+multiplication.  The \c Tau variable here was declared to be a tensor
+type in an intermediate calculation.
+
+Some aspects of these classes may still be under development.  In
+particular, the identification of the \p derivatives() method with a
+spatial gradient presumes a steady-state PDE with no non-spatial
+independent variables; other methods may be introduced in the future
+to provide more natural syntax for transient and more complicated
+PDEs.
+
+*/
