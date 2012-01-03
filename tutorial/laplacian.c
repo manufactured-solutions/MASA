@@ -27,7 +27,7 @@
  * \file laplacian.c
  *
  * \brief A simple standalone tutorial program which solves a
- * Laplacian using finite-differening and uses the MASA library to aid
+ * Laplacian using finite-differencing and uses the MASA library to aid
  * in verification.  For clarity, this program is self contained with
  * all required source files present in this directory (laplacian.h,
  * laplacian.c, and laplacian_utils.c) Note that for clarity, we use
