@@ -115,8 +115,7 @@ TESTS                      = init.sh              \
 EXTRA_DIST                 = init.sh \
 			     c_init.sh \
 	                     f_init.sh \
-                             finalize.sh \
-			     examples.h
+                             finalize.sh
 
 #---------------------------------
 # Embedded license header support
