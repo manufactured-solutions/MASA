@@ -1,4 +1,5 @@
-Version 0.40 (In Progress)
+Version 0.40 (Jan 3rd, 2012)
+https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.40.0
 
   * corrected a bug in the sod shock tube
   * added new FANS_SA_steady_wall_bounded_hierarchic formulation
