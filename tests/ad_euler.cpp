@@ -30,10 +30,10 @@
 //--------------------------------------------------------------------------
 //--------------------------------------------------------------------------
 
-#include "ad_masa.h"
-#include <iostream>
-#include <masa.h>
+
 #include <tests.h>
+#include <iostream>
+#include "ad_masa.h"
 
 typedef double RawScalar;
 
