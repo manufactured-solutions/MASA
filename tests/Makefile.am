@@ -116,21 +116,21 @@ ad_cns_SOURCES              = ad_cns.cpp
 # C Test Sources
 #----------------------
 
-c_misc_SOURCES          = c_misc.c
-c_source_SOURCES        = c_source.c
-c_purge_SOURCES         = c_purge.c
-c_array_SOURCES         = c_array.c
-c_laplace_SOURCES       = c_laplace.c
-c_heat1dsc_SOURCES      = c_heat1dsc.c
-c_heat2dsc_SOURCES      = c_heat2dsc.c
-c_heat3dsc_SOURCES      = c_heat3dsc.c
-c_euler1d_SOURCES       = c_euler1d.c
-c_euler2d_SOURCES       = c_euler2d.c
-c_euler3d_SOURCES       = c_euler3d.c
-c_euler_chem_1d_SOURCES = c_euler_chem_1d.c
-c_cns2d_SOURCES         = c_cns2d.c
-c_cns3d_SOURCES         = c_cns3d.c
-c_radiation_SOURCES     = c_radiation.c
+c_misc_SOURCES              = c_misc.c
+c_source_SOURCES            = c_source.c
+c_purge_SOURCES             = c_purge.c
+c_array_SOURCES             = c_array.c
+c_laplace_SOURCES           = c_laplace.c
+c_heat1dsc_SOURCES          = c_heat1dsc.c
+c_heat2dsc_SOURCES          = c_heat2dsc.c
+c_heat3dsc_SOURCES          = c_heat3dsc.c
+c_euler1d_SOURCES           = c_euler1d.c
+c_euler2d_SOURCES           = c_euler2d.c
+c_euler3d_SOURCES           = c_euler3d.c
+c_euler_chem_1d_SOURCES     = c_euler_chem_1d.c
+c_cns2d_SOURCES             = c_cns2d.c
+c_cns3d_SOURCES             = c_cns3d.c
+c_radiation_SOURCES         = c_radiation.c
 
 #----------------------
 # Fortran Test Sources
