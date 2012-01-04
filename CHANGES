@@ -7,18 +7,18 @@ https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.40.0
   * corrected a bug in the sod shock tube
   * added new FANS_SA_steady_wall_bounded_hierarchic formulation
   * adjusted velocity field in cns3d so velocity >= 0
-  * users can now import MMS solutions directly into masa
-       * added burgers equation             (automasa)
-       * added euler_transient_2d           (automasa)
-       * added transient axisymmetric euler (automasa)
-       * added transient axisymmetric CNS   (automasa)
-       * added transient CNS w/ sutherland  (automasa)
+  * users can now import MMS solutions directly into masa:
+    --> added burgers equation             (automasa)
+    --> added euler_transient_2d           (automasa)
+    --> added transient axisymmetric euler (automasa)
+    --> added transient axisymmetric CNS   (automasa)
+    --> added transient CNS w/ sutherland  (automasa)
   * added a tutorial/ sub-directory 
   * added regression tests for masa_display_param
   * fixed bug in which examples could not compile after install 
   * masa now supports automatic differentiation (AD_MASA):
-       * added an AD euler equation regression test and example
-       * added an AD N-S   equation regression test and example
+    --> added an AD Euler equation regression test and example
+    --> added an AD Navier-Stokes equation regression test and example
 
 Version 0.33 (26 July 2011)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.33.0
