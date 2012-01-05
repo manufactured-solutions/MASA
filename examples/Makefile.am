@@ -112,10 +112,11 @@ TESTS                      = init.sh              \
                              f_cns                \
                              finalize.sh
 
-EXTRA_DIST                 = init.sh \
-			     c_init.sh \
-	                     f_init.sh \
-                             finalize.sh
+EXTRA_DIST                 = init.sh              \
+			     c_init.sh            \
+	                     f_init.sh            \
+                             finalize.sh          \
+                             .license.stamp
 
 #---------------------------------
 # Embedded license header support
