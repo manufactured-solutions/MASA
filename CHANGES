@@ -4,7 +4,7 @@ Version 0.41 (In progress)
 Version 0.40 (Jan 3rd, 2012)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.40.0
 
-  * corrected a bug in the sod shock tube
+  * corrected a bug in the Sod shock tube
   * added new FANS_SA_steady_wall_bounded_hierarchic formulation
   * adjusted velocity field in cns3d so velocity >= 0
   * users can now import MMS solutions directly into masa:
