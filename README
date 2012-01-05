@@ -1,15 +1,29 @@
+------------------
 BASIC INFORMATION:
+------------------
 
 Welcome to MASA, the Manufactured Analytical Solutions Abstraction Library.
 
 Check the EXAMPLES directory for examples of the MASA C++, C and Fortran API.
 The source code is contained in src, and the regression tests are in tests.
 
+------------------
 BUILD INFORMATION:
+------------------
 
-MASA currently supports gcc and intel compilers.
+MASA currently supports later versions of the GNU, Intel, and PGI
+family of compilers.
 
+Regression tests are routinely performed against the following
+compiler versions:
+
+PGI 11.5
+GNU 4.5
+Intel 11.1
+
+------------------
 TO BUILD:
+------------------
 
 1) ./bootstrap (from source, ignore if this is a release tarball)
 2) ./configure --prefix= top-level dir
@@ -21,7 +35,3 @@ tests, which ensure the precision of all associated solutions are at minimum,
 10e-15.
 
 
-Tested on:
-pgi 11.5
-gcc 4.5
-intel 11.1
