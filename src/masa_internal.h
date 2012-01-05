@@ -53,7 +53,6 @@ using std::pow;
 namespace MASA
 {
 
-
 // overload for pgi compilers
 #ifdef portland_compiler
   long double pow(long double, double);

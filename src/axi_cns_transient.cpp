@@ -23,14 +23,9 @@
 //-----------------------------------------------------------------------el-
 
 #include <masa_internal.h>
-using std::cos;
-using std::sin;
-using std::pow;
-using namespace MASA;
 
-#ifdef portland_compiler
-long double pow(long double a, double b){return pow(a,(long double)(b));}
-#endif
+using namespace MASA;
+using namespace std;
 
 template <typename Scalar>
 MASA::axi_cns_transient<Scalar>::axi_cns_transient()
