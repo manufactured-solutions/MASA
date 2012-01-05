@@ -70,7 +70,7 @@ install-data-local: libfmasa.la
 	$(INSTALL_DATA) $(top_builddir)/src/masa.mod $(DESTDIR)$(libdir)/masa.mod
 
 uninstall-local: libfmasa.la
-	rm -rf $(INSTALL_DATA) $(top_builddir)/src/masa.mod $(DESTDIR)$(libdir)/masa.mod
+	rm -rf $(DESTDIR)$(libdir)/masa.mod
 
 EXTRA_DIST  = lic_utils/update_license.pl .license.stamp
 CLEANFILES  = .license.stamp masa.mod *.gcda *.gcno
