@@ -54,9 +54,9 @@ namespace MASA
 {
 
 // overload for pgi compilers
-//#ifdef portland_compiler
+#ifdef portland_compiler
   long double pow(long double, double);
-  //#endif
+#endif
 
   // masa map functions here
   // probably want to hide this from the user eventually

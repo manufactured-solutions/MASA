@@ -49,9 +49,9 @@ using namespace MASA;
 
 
 // overload for pgi compilers
-//#ifdef portland_compiler
+#ifdef portland_compiler
 long double MASA::pow(long double a, double b){return pow(a,(long double)(b));};
-//#endif          
+#endif          
 
 
 template <typename Scalar>
