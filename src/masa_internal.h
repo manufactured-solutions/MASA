@@ -56,6 +56,11 @@ using std::pow;
   long double pow(long double, double);
 #endif
 
+// overload for intel compilers
+#ifdef intel_compiler
+  long double pow(long double, double);
+#endif
+
 namespace MASA
 {
 

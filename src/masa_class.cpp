@@ -53,6 +53,11 @@ using namespace MASA;
 long double pow(long double a, double b){return pow(a,(long double)(b));};
 #endif          
 
+// overload for pgi compilers
+#ifdef intel_compiler
+long double pow(long double a, double b){return pow(a,(long double)(b));};
+#endif          
+
 
 template <typename Scalar>
 MASA::manufactured_solution<Scalar>::manufactured_solution()
