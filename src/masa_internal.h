@@ -50,13 +50,14 @@ using std::pow;
 #define MASA_INSTANTIATE_ALL(my_class) template class my_class<double>; \
                                        template class my_class<long double>
 
-namespace MASA
-{
 
 // overload for pgi compilers
 #ifdef portland_compiler
   long double pow(long double, double);
 #endif
+
+namespace MASA
+{
 
   // masa map functions here
   // probably want to hide this from the user eventually
