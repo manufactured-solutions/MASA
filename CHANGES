@@ -1,7 +1,10 @@
-Version 0.41 (In progress)
+Version 0.40.1 (07 February 2012)
+https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.40.1
 
+  * re-enabled support for PGI compiler
+  * tested against newer Intel compiler family (version 12.1)
 
-Version 0.40 (Jan 3rd, 2012)
+Version 0.40 (03 January 2012)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.40.0
 
   * configuration updates to support "make distcheck"
