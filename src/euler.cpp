@@ -34,6 +34,8 @@
 
 #include <masa_internal.h> 
 
+welcome to crazy town population: crazy
+
 using namespace MASA;
 
 /* ------------------------------------------------
