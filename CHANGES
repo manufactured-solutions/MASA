@@ -1,5 +1,5 @@
-Version 0.41.0 (In progress)
-  * added c++ interface
+Version 0.40.2 (02 March 2012)
+  * fixed a bug in FANS with SA model
 
 Version 0.40.1 (07 February 2012)
 https://svn.ices.utexas.edu/repos/pecos/mms/MASA/releases/0.40.1
