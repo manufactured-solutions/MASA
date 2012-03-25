@@ -108,7 +108,7 @@ int MASA::manufactured_solution<Scalar>::register_vec(std::string in,std::vector
 
   return 0; // smooth sailing
   
-}// done with register_var function
+}// done with register_vec function
 
 template <typename Scalar>
 int MASA::manufactured_solution<Scalar>::get_vec(std::string name,std::vector<Scalar>& vec)
