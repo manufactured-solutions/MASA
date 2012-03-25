@@ -449,8 +449,8 @@ MASA::masa_test_function<Scalar>::masa_test_function()
   // WARNING: this is designed to fail! 
   // This function tests the MASA error handling for: 
   // registering two variables of the same name
-  register_var("demo_var_2",&demo_var_2);
-  register_var("demo_var_3",&demo_var_3);
+  this->register_var("demo_var_2",&demo_var_2);
+  this->register_var("demo_var_3",&demo_var_3);
  
 }//done with constructor
 
