@@ -32,6 +32,7 @@
 //
 
 #include <math.h>
+#include <stdio.h>
 
 // takes two vectors, returns scalar product
 double scalar(double *x1,double *x2, int n)
