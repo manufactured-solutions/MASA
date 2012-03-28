@@ -1,25 +1,26 @@
-//-----------------------------------------------------------------------bl-
 //--------------------------------------------------------------------------
 //
-// MASA - Manufactured Analytical Solutions Abstraction Library
+// Copyright (C) 2011,2012 Rhys Ulerich
 //
-// Copyright (C) 2010,2011,2012 The PECOS Development Team
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this file,
+// You can obtain one at http://mozilla.org/MPL/2.0/.
 //
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the Version 2.1 GNU Lesser General
-// Public License as published by the Free Software Foundation.
+// This is one of two files implementing the manufactured solution from
+// @inproceedings{Ulerich2012,
+//   title={A transient manufactured solution for the compressible
+//          {N}avier–-{S}tokes equations with a power law viscosity},
+//   author={Rhys Ulerich and Kemelli C. Estacio-Hiroms
+//           and Nicholas Malaya and Robert D. Moser},
+//   booktitle={{10th World Congress on Computational Mechanics}},
+//   address={{S}\~{a}o {P}aulo, {B}razil},
+//   month={{J}uly},
+//   year={2012}
+// }
+// Please refer to the paper for more details on the manufactured solution.
+// Please consider citing the paper if you find the solution useful.
 //
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc. 51 Franklin Street, Fifth Floor,
-// Boston, MA  02110-1301  USA
-//
-//-----------------------------------------------------------------------el-
+//--------------------------------------------------------------------------
 
 #include "nsctpl_fwd.hpp"
 
@@ -949,7 +950,6 @@ template <class T> void isothermal_flat_plate(T& t)
     t.w.b_y   = scalar(1) / scalar(4);
     t.T.b_y   = scalar(1) / scalar(4);
 }
-
 
 } // end namespace nsctpl
 
