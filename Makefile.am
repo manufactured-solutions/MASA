@@ -50,3 +50,24 @@ dist_version: FORCE
 
 FORCE:
 endif
+
+#
+# If the primary buffer panel is going to fall off the ship the user needs to know...
+#
+install-data-hook:
+	@echo ''
+	@echo '+--------------------------------------------------------------+'
+	@echo '| ACHTUNG:                                                     |'
+	@echo '|                                                              |'
+	@echo '| If you have not already run "make check", then we strongly   |'
+	@echo '| recommend you do so.                                         |'
+	@echo '|                                                              |'
+	@echo '| MASA has been carefully tested by its authors, but compilers |'
+	@echo '| are all too often prepared to trade performance for          |'
+	@echo '| precision. Verification necessitates extreme precision       |' 
+	@echo '| requirements from compilers and MASA has encountered         |'
+	@echo '| significant precision loss with various vendors on more than |'
+	@echo '| a few occasions.                                             |'
+	@echo '|                                                              |'
+	@echo '+--------------------------------------------------------------+'
+	@echo ''

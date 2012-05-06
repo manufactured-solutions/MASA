@@ -237,7 +237,7 @@ int MASA::manufactured_solution<Scalar>::set_var(std::string var, Scalar val)
   selector = varmap.find(var);
   
   // error handling
-  if(selector == varmap.end())
+  if( selector == varmap.end() )
     {
       std::cout << "\nMASA ERROR!!!:: No such variable  (" << var << ") exists to be set\n";
       return 1;
