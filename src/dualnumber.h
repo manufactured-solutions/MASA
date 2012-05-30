@@ -6,9 +6,10 @@
 
 #include "compare_types.h"
 #include "raw_type.h"
+#include "testable.h"
 
 template <typename T, typename D=T>
-class DualNumber
+class DualNumber : public safe_bool<DualNumber<T,D> >
 {
 public:
   typedef T value_type;
@@ -31,7 +32,9 @@ public:
 
   const D& derivatives() const { return _deriv; }
 
-  DualNumber<T,D> operator- () { return DualNumber<T,D>(-_val, -_deriv); }
+  bool boolean_test() const { return _val; }
+
+  DualNumber<T,D> operator- () const { return DualNumber<T,D>(-_val, -_deriv); }
 
   template <typename T2, typename D2>
   DualNumber<T,D>& operator+= (const DualNumber<T2,D2>& a);
@@ -57,7 +60,6 @@ public:
   template <typename T2>
   DualNumber<T,D>& operator/= (const T2& a);
 
-
 private:
   T _val;
   D _deriv;
@@ -80,7 +82,9 @@ struct DualNumberConstructor
   static T value(const T2& v, const D2&) { return v; }
 
   template <typename T2, typename D2>
-  static T value(const DualNumber<T2,D2>& v) { return v.value(); }
+  static T value(const DualNumber<T2,D2>& v) {
+    return DualNumberConstructor<T,D>::value(v.value());
+  }
 
   template <typename T2>
   static D deriv(const T2&) { return 0.; }
@@ -95,7 +99,8 @@ struct DualNumberConstructor
 template <typename T, typename D, typename DD>
 struct DualNumberConstructor<DualNumber<T,D>, DD>
 {
-  static T value(const DualNumber<DualNumber<T,D>, DD>& v) { return v.value(); }
+  template <typename T2, typename D2, typename D3>
+  static DualNumber<T,D> value(const DualNumber<DualNumber<T2,D2>, D3>& v) { return v.value(); }
 
   template <typename T2>
   static DualNumber<T,D> value(const T2& v) { return v; }
@@ -107,7 +112,7 @@ struct DualNumberConstructor<DualNumber<T,D>, DD>
   static DualNumber<T,D> value(const DualNumber<T,D>& v, const D2&) { return v; }
 
   template <typename T2>
-  static DD deriv(const T2&) { return 0.; }
+  static DD deriv(const T2&) { return 0; }
 
   template <typename T2, typename D2>
   static DD deriv(const DualNumber<T2,D2>& v) { return v.derivatives(); }
@@ -124,7 +129,7 @@ struct DualNumberConstructor<DualNumber<T,D>, DD>
 template <typename T, typename D>
 inline
 DualNumber<T,D>::DualNumber() :
-  _val(0.), _deriv(0.) {}
+  _val(), _deriv() {}
 
 template <typename T, typename D>
 template <typename T2>
@@ -141,7 +146,16 @@ DualNumber<T,D>::DualNumber(const T2& val,
   _val  (DualNumberConstructor<T,D>::value(val,deriv)),
   _deriv(DualNumberConstructor<T,D>::deriv(val,deriv)) {}
 
-#define DualNumber_op(opname, simplecalc, dualcalc) \
+
+// FIXME: these operators currently do automatic type promotion when
+// encountering DualNumbers of differing levels of recursion and
+// differentiability.  But what we really want is automatic type
+// *demotion*, to avoid pretending we have accurate derivatives which
+// we don't have.  If we could do that right then some potential
+// subtle run-time user errors would turn into compile-time user
+// errors.
+
+#define DualNumber_op(opname, functorname, simplecalc, dualcalc) \
 template <typename T, typename D> \
 template <typename T2> \
 inline \
@@ -166,54 +180,52 @@ DualNumber<T,D>::operator opname##= (const DualNumber<T2,D2>& in) \
  \
 template <typename T, typename D, typename T2, typename D2> \
 inline \
-DualNumber<typename CompareTypes<T,T2>::supertype,  \
-           typename CompareTypes<D,D2>::supertype>  \
+typename functorname##Type<DualNumber<T,D>,DualNumber<T2,D2> >::supertype \
 operator opname (const DualNumber<T,D>& a, const DualNumber<T2,D2>& b) \
 { \
-  typedef typename CompareTypes<T,T2>::supertype TS; \
-  typedef typename CompareTypes<D,D2>::supertype DS; \
-  DualNumber<TS,DS> returnval = a; \
+  typedef typename \
+    functorname##Type<DualNumber<T,D>,DualNumber<T2,D2> >::supertype \
+    DS; \
+  DS returnval = a; \
   returnval opname##= b; \
   return returnval; \
 } \
  \
 template <typename T, typename T2, typename D> \
 inline \
-typename boostcopy::enable_if_c<ScalarTraits<T>::value, \
-DualNumber<typename CompareTypes<T,T2>::supertype, D> \
->::type \
+typename functorname##Type<DualNumber<T2,D>,T,true>::supertype \
 operator opname (const T& a, const DualNumber<T2,D>& b) \
 { \
-  typedef typename CompareTypes<T,T2>::supertype TS; \
-  DualNumber<TS,D> returnval = a; \
+  typedef typename \
+    functorname##Type<DualNumber<T2,D>,T,true>::supertype DS; \
+  DS returnval = a; \
   returnval opname##= b; \
   return returnval; \
 } \
  \
 template <typename T, typename D, typename T2> \
 inline \
-typename boostcopy::enable_if_c<ScalarTraits<T2>::value, \
-DualNumber<typename CompareTypes<T,T2>::supertype, D> \
->::type \
+typename functorname##Type<DualNumber<T,D>,T2,false>::supertype \
 operator opname (const DualNumber<T,D>& a, const T2& b) \
 { \
-  typedef typename CompareTypes<T,T2>::supertype TS; \
-  DualNumber<TS,D> returnval = a; \
+  typedef typename \
+    functorname##Type<DualNumber<T,D>,T2,false>::supertype DS; \
+  DS returnval = a; \
   returnval opname##= b; \
   return returnval; \
 }
 
 
 
-DualNumber_op(+, , this->derivatives() += in.derivatives())
+DualNumber_op(+, Plus, , this->derivatives() += in.derivatives())
 
-DualNumber_op(-, , this->derivatives() -= in.derivatives())
+DualNumber_op(-, Minus, , this->derivatives() -= in.derivatives())
 
-DualNumber_op(*, this->derivatives() *= in,
+DualNumber_op(*, Multiplies, this->derivatives() *= in,
   this->derivatives() *= in.value();
   this->derivatives() += this->value() * in.derivatives();)
 
-DualNumber_op(/, this->derivatives() /= in,
+DualNumber_op(/, Divides, this->derivatives() /= in,
   this->derivatives() /= in.value();
   this->derivatives() -= this->value()/(in.value()*in.value()) * in.derivatives();
 )
@@ -262,38 +274,33 @@ DualNumber_std_unary(floor, 0,)
 #define DualNumber_std_binary(funcname, derivative) \
 template <typename T, typename D, typename T2, typename D2> \
 inline \
-DualNumber<typename CompareTypes<T,T2>::supertype, \
-           typename CompareTypes<D,D2>::supertype> \
+typename CompareTypes<DualNumber<T,D>,DualNumber<T2,D2> >::supertype \
 funcname (const DualNumber<T,D>& a, const DualNumber<T2,D2>& b) \
 { \
   typedef typename CompareTypes<T,T2>::supertype TS; \
-  typedef typename CompareTypes<D,D2>::supertype DS; \
+  typedef typename CompareTypes<DualNumber<T,D>,DualNumber<T2,D2> >::supertype type; \
  \
   TS funcval = std::funcname(a.value(), b.value()); \
-  return DualNumber<TS,DS>(funcval, derivative); \
+  return type(funcval, derivative); \
 } \
  \
 template <typename T, typename T2, typename D> \
 inline \
-typename boostcopy::enable_if_c<ScalarTraits<T>::value, \
-DualNumber<typename CompareTypes<T,T2>::supertype, D> \
->::type \
+typename CompareTypes<DualNumber<T2,D>,T,true>::supertype \
 funcname (const T& a, const DualNumber<T2,D>& b) \
 { \
-  typedef typename CompareTypes<T,T2>::supertype TS; \
-  DualNumber<TS, D> newa(a); \
+  typedef typename CompareTypes<DualNumber<T2,D>,T,true>::supertype type; \
+  type newa(a); \
   return std::funcname(newa, b); \
 } \
  \
 template <typename T, typename T2, typename D> \
 inline \
-typename boostcopy::enable_if_c<ScalarTraits<T2>::value, \
-DualNumber<typename CompareTypes<T,T2>::supertype, D> \
->::type \
+typename CompareTypes<DualNumber<T,D>,T2>::supertype \
 funcname (const DualNumber<T,D>& a, const T2& b) \
 { \
-  typedef typename CompareTypes<T,T2>::supertype TS; \
-  DualNumber<TS, D> newb(b); \
+  typedef typename CompareTypes<DualNumber<T,D>,T2>::supertype type; \
+  type newb(b); \
   return std::funcname(a, newb); \
 }
 
@@ -325,8 +332,9 @@ operator opname  (const DualNumber<T,D>& a, const DualNumber<T2,D2>& b) \
  \
 template <typename T, typename T2, typename D2> \
 inline \
-typename boostcopy::enable_if_c<ScalarTraits<T>::value, \
-bool \
+typename boostcopy::enable_if_class< \
+  typename CompareTypes<DualNumber<T2,D2>,T>::supertype, \
+  bool \
 >::type \
 operator opname  (const T& a, const DualNumber<T2,D2>& b) \
 { \
@@ -335,12 +343,13 @@ operator opname  (const T& a, const DualNumber<T2,D2>& b) \
  \
 template <typename T, typename T2, typename D> \
 inline \
-typename boostcopy::enable_if_c<ScalarTraits<T2>::value, \
-bool \
+typename boostcopy::enable_if_class< \
+  typename CompareTypes<DualNumber<T,D>,T2>::supertype, \
+  bool \
 >::type \
 operator opname  (const DualNumber<T,D>& a, const T2& b) \
 { \
-  return (a.value() opname b.value()); \
+  return (a.value() opname b); \
 }
 
 DualNumber_compare(>)
@@ -375,27 +384,187 @@ struct RawType<DualNumber<T, D> >
   static value_type value(const DualNumber<T, D>& a) { return raw_value(a.value()); }
 };
 
-template<typename T, typename T2, typename D>
-struct CompareTypes<T, DualNumber<T2, D> > {
-  typedef DualNumber<typename CompareTypes<T, T2>::supertype,
-                     typename CompareTypes<D, T2>::supertype> supertype;
+template<typename T, typename T2, typename D, bool reverseorder>
+struct PlusType<DualNumber<T, D>, T2, reverseorder,
+                    typename boostcopy::enable_if<BuiltinTraits<T2> >::type> {
+  typedef DualNumber<typename SymmetricPlusType<T, T2, reverseorder>::supertype, D> supertype;
 };
 
+template<typename T, typename D, typename T2, typename D2, bool reverseorder>
+struct PlusType<DualNumber<T, D>, DualNumber<T2, D2>, reverseorder> {
+  typedef DualNumber<typename SymmetricPlusType<T, T2, reverseorder>::supertype,
+                     typename SymmetricPlusType<D, D2, reverseorder>::supertype> supertype;
+};
+
+template<typename T, typename D>
+struct PlusType<DualNumber<T, D>, DualNumber<T, D> > {
+  typedef DualNumber<typename SymmetricPlusType<T,T>::supertype,
+                     typename SymmetricPlusType<D,D>::supertype> supertype;
+};
+
+
+template<typename T, typename T2, typename D, bool reverseorder>
+struct MinusType<DualNumber<T, D>, T2, reverseorder,
+                    typename boostcopy::enable_if<BuiltinTraits<T2> >::type> {
+  typedef DualNumber<typename SymmetricMinusType<T, T2, reverseorder>::supertype, D> supertype;
+};
+
+template<typename T, typename D, typename T2, typename D2, bool reverseorder>
+struct MinusType<DualNumber<T, D>, DualNumber<T2, D2>, reverseorder> {
+  typedef DualNumber<typename SymmetricMinusType<T, T2, reverseorder>::supertype,
+                     typename SymmetricMinusType<D, D2, reverseorder>::supertype> supertype;
+};
+
+template<typename T, typename D, bool reverseorder>
+struct MinusType<DualNumber<T, D>, DualNumber<T, D>, reverseorder> {
+  typedef DualNumber<typename SymmetricMinusType<T,T>::supertype,
+                     typename SymmetricMinusType<D,D>::supertype> supertype;
+};
+
+
+template<typename T, typename T2, typename D, bool reverseorder>
+struct MultipliesType<DualNumber<T, D>, T2, reverseorder,
+                      typename boostcopy::enable_if<BuiltinTraits<T2> >::type> {
+  typedef DualNumber<typename SymmetricMultipliesType<T, T2, reverseorder>::supertype,
+                     typename SymmetricMultipliesType<D, T2, reverseorder>::supertype> supertype;
+};
+
+template<typename T, typename D, typename T2, typename D2, bool reverseorder>
+struct MultipliesType<DualNumber<T, D>, DualNumber<T2, D2>, reverseorder> {
+  typedef DualNumber<typename SymmetricMultipliesType<T, T2, reverseorder>::supertype,
+                     typename SymmetricPlusType<
+                       typename SymmetricMultipliesType<T, D2, reverseorder>::supertype,
+                       typename SymmetricMultipliesType<D, T2, reverseorder>::supertype>::supertype
+                     > supertype;
+};
+
+template<typename T, typename D, bool reverseorder>
+struct MultipliesType<DualNumber<T, D>, DualNumber<T, D>, reverseorder> {
+  typedef DualNumber<typename SymmetricMultipliesType<T, T, reverseorder>::supertype,
+                     typename SymmetricMultipliesType<T, D, reverseorder>::supertype
+                     > supertype;
+};
+
+
 template<typename T, typename T2, typename D>
-struct CompareTypes<DualNumber<T, D>, T2> {
-  typedef DualNumber<typename CompareTypes<T, T2>::supertype,
-                     typename CompareTypes<D, T2>::supertype> supertype;
+struct DividesType<DualNumber<T, D>, T2, false,
+                      typename boostcopy::enable_if<BuiltinTraits<T2> >::type> {
+  typedef DualNumber<typename SymmetricDividesType<T, T2>::supertype,
+                     typename SymmetricDividesType<D, T2>::supertype> supertype;
+};
+
+template<typename T, typename D, typename T2>
+struct DividesType<DualNumber<T, D>, T2, true,
+                   typename boostcopy::enable_if<BuiltinTraits<T2> >::type> {
+  typedef DualNumber<typename SymmetricDividesType<T2, T>::supertype,
+                     typename SymmetricDividesType<
+                       typename SymmetricMultipliesType<T2, D>::supertype,
+                       T
+                     >::supertype
+                    > supertype;
+};
+
+
+template<typename T, typename D, typename T2, typename D2>
+struct DividesType<DualNumber<T, D>, DualNumber<T2, D2>, false> {
+  typedef DualNumber<typename SymmetricDividesType<T, T2>::supertype,
+                     typename SymmetricMinusType<
+                       typename SymmetricDividesType<T2, D>::supertype,
+                       typename SymmetricDividesType<
+                         typename SymmetricMultipliesType<T, D2>::supertype,
+                         T2
+                       >::supertype
+                     >::supertype
+                    > supertype;
+};
+
+template<typename T, typename D, typename T2, typename D2>
+struct DividesType<DualNumber<T, D>, DualNumber<T2, D2>, true> {
+  typedef typename DividesType<DualNumber<T2, D2>, DualNumber<T, D>, false>::supertype supertype;
+};
+
+template<typename T, typename D>
+struct DividesType<DualNumber<T, D>, DualNumber<T, D>, false> {
+  typedef DualNumber<T,
+                     typename SymmetricMinusType<
+                       typename SymmetricDividesType<T, D>::supertype,
+                       typename SymmetricDividesType<
+                         typename SymmetricMultipliesType<T, D>::supertype,
+                         T
+                       >::supertype
+                     >::supertype
+                    > supertype;
+};
+
+template<typename T, typename D>
+struct DividesType<DualNumber<T, D>, DualNumber<T, D>, true> {
+  typedef typename DividesType<DualNumber<T, D>, DualNumber<T, D>, false>::supertype supertype;
+};
+
+
+
+template<typename T, typename T2, typename D, bool reverseorder>
+struct CompareTypes<DualNumber<T, D>, T2, reverseorder,
+                    typename boostcopy::enable_if<BuiltinTraits<T2> >::type> {
+  typedef DualNumber<typename SymmetricCompareTypes<T, T2>::supertype,
+                     typename SymmetricCompareTypes<
+                       typename SymmetricCompareTypes<D, T2>::supertype,
+                       T
+                     >::supertype> supertype;
 };
 
 template<typename T, typename D, typename T2, typename D2>
 struct CompareTypes<DualNumber<T, D>, DualNumber<T2, D2> > {
-  typedef DualNumber<typename CompareTypes<T, T2>::supertype,
-                     typename CompareTypes<D, D2>::supertype> supertype;
+  typedef DualNumber<typename SymmetricCompareTypes<T, T2>::supertype,
+                     typename SymmetricCompareTypes<
+                       typename SymmetricCompareTypes<T, T2>::supertype,
+                       typename SymmetricCompareTypes<D, D2>::supertype
+                     >::supertype
+                    > supertype;
 };
 
 template<typename T, typename D>
 struct CompareTypes<DualNumber<T, D>, DualNumber<T, D> > {
-  typedef DualNumber<T, D> supertype;
+  typedef DualNumber<T, typename SymmetricCompareTypes<T, D>::supertype> supertype;
 };
+
+
+template <typename T>
+struct DerivativeType
+{
+  typedef typename T::derivatives_type::value_type type;
+};
+
+
+template <typename T>
+struct DerivativesOf {
+  static
+  typename DerivativeType<T>::type
+  derivative(const T& a, unsigned int derivativeindex)
+  {
+    return a.derivatives()[derivativeindex];
+  }
+};
+
+
+template <typename T, unsigned int derivativeindex>
+struct DerivativeOf {
+  static
+  typename DerivativeType<T>::type
+  derivative(const T& a)
+  {
+    return a.derivatives().template get<derivativeindex>();
+  }
+};
+
+
+template <typename T, typename D>
+inline
+D gradient(const DualNumber<T, D>& a)
+{
+  return a.derivatives();
+}
+
+
 
 #endif // __dualnumber_h__

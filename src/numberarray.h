@@ -14,6 +14,16 @@ class NumberArray
 public:
   typedef T value_type;
 
+  template <unsigned int i>
+  struct entry_type {
+    typedef value_type type;
+  };
+
+  template <typename T2>
+  struct rebind {
+    typedef NumberArray<size, T2> other;
+  };
+
   NumberArray() {}
 
   NumberArray(const T& val)
@@ -36,7 +46,15 @@ public:
   const T& operator[](unsigned int i) const
     { return _data[i]; }
 
-  NumberArray<size,T> operator- () {
+  template <unsigned int i>
+  typename entry_type<i>::type& get()
+    { return _data[i]; }
+
+  template <unsigned int i>
+  const typename entry_type<i>::type& get() const
+    { return _data[i]; }
+
+  NumberArray<size,T> operator- () const {
     NumberArray<size,T> returnval;
     for (unsigned int i=0; i != size; ++i) returnval[i] = -_data[i];
     return returnval;
@@ -75,20 +93,20 @@ public:
     { for (unsigned int i=0; i != size; ++i) _data[i] /= a; return *this; }
 
   template <typename T2>
-  typename CompareTypes<T,T2>::supertype
+  typename SymmetricMultipliesType<T,T2>::supertype
   dot (const NumberArray<size,T2>& a)
   {
-    typename CompareTypes<T,T2>::supertype returnval;
+    typename SymmetricMultipliesType<T,T2>::supertype returnval = 0;
     for (unsigned int i=0; i != size; ++i)
       returnval += _data[i] * a[i];
     return returnval;
   }
 
   template <typename T2>
-  NumberArray<size, NumberArray<size, typename CompareTypes<T,T2>::supertype> >
+  NumberArray<size, NumberArray<size, typename SymmetricMultipliesType<T,T2>::supertype> >
   outerproduct (const NumberArray<size,T2>& a)
   {
-    NumberArray<size, NumberArray<size, typename CompareTypes<T,T2>::supertype> > returnval;
+    NumberArray<size, NumberArray<size, typename SymmetricMultipliesType<T,T2>::supertype> > returnval;
 
     for (unsigned int i=0; i != size; ++i)
       for (unsigned int j=0; j != size; ++j)
@@ -97,25 +115,18 @@ public:
     return returnval;
   }
 
-private:
-  T _data[size];
-};
-
-// A helper class for producing identity matrices
-
-template <std::size_t size, typename T>
-struct NumberArrayIdentity
-{
   static NumberArray<size, NumberArray<size, T> > identity()
   {
-    NumberArray<size, NumberArray<size, T> > returnval;
+    NumberArray<size, NumberArray<size, T> > returnval(0);
   
     for (unsigned int i=0; i != size; ++i)
-      for (unsigned int j=0; j != size; ++j)
-        returnval[i][j] = (i == j);
+      returnval[i][i] = 1;
 
     return returnval;
   }
+
+private:
+  T _data[size];
 };
 
 
@@ -123,6 +134,65 @@ struct NumberArrayIdentity
 //
 // Non-member functions
 //
+
+template <unsigned int size,
+          unsigned int index1=0, typename Data1=void,
+          unsigned int index2=0, typename Data2=void,
+          unsigned int index3=0, typename Data3=void,
+          unsigned int index4=0, typename Data4=void,
+          unsigned int index5=0, typename Data5=void,
+          unsigned int index6=0, typename Data6=void,
+          unsigned int index7=0, typename Data7=void,
+          unsigned int index8=0, typename Data8=void>
+struct NumberArrayOf
+{
+  typedef
+  typename CompareTypes<Data1,
+    typename CompareTypes<Data2,
+      typename CompareTypes<Data3,
+        typename CompareTypes<Data4,
+          typename CompareTypes<Data5,
+            typename CompareTypes<Data6,
+              typename CompareTypes<Data7,Data8>::supertype
+            >::supertype
+          >::supertype
+        >::supertype
+      >::supertype
+    >::supertype
+  >::supertype supertype;
+
+  typedef NumberArray<size, supertype> type;
+};
+
+
+
+template <std::size_t size, unsigned int index, typename T>
+struct NumberArrayUnitVector
+{
+  typedef NumberArray<size, T> type;
+
+  static const type value() {
+    type returnval = 0;
+    returnval[index] = 1;
+    return returnval;
+  }
+};
+
+
+template <std::size_t size, typename T>
+struct NumberArrayFullVector
+{
+  typedef NumberArray<size,T> type;
+
+  static const type value() {
+    type returnval;
+    for (unsigned int i=0; i != size; ++i)
+      returnval[i] = 1;
+    return returnval;
+  }
+};
+
+
 
 template <std::size_t size, typename T>
 inline
@@ -140,29 +210,30 @@ transpose(const NumberArray<size, NumberArray<size, T> >& a)
 
 
 
-#define NumberArray_op_ab(opname, atype, btype) \
+#define NumberArray_op_ab(opname, atype, btype, newtype) \
 template <std::size_t size, typename T, typename T2> \
 inline \
-NumberArray<size, typename CompareTypes<T,T2>::supertype> \
+typename newtype::supertype \
 operator opname (const atype& a, const btype& b) \
 { \
-  typedef typename CompareTypes<T,T2>::supertype TS; \
-  NumberArray<size, TS> returnval(a); \
+  typedef typename newtype::supertype TS; \
+  TS returnval(a); \
   returnval opname##= b; \
   return returnval; \
 }
 
-#define MacroComma ,
+#define NumberArray_op(opname, typecomparison) \
+NumberArray_op_ab(opname, NumberArray<size MacroComma T>, NumberArray<size MacroComma T2>, \
+                  typecomparison##Type<NumberArray<size MacroComma T> MacroComma NumberArray<size MacroComma T2> >) \
+NumberArray_op_ab(opname,                             T , NumberArray<size MacroComma T2>, \
+                  typecomparison##Type<NumberArray<size MacroComma T2> MacroComma T MacroComma true>) \
+NumberArray_op_ab(opname, NumberArray<size MacroComma T>,                             T2 , \
+                  typecomparison##Type<NumberArray<size MacroComma T> MacroComma T2>)
 
-#define NumberArray_op(opname) \
-NumberArray_op_ab(opname, NumberArray<size MacroComma T>, NumberArray<size MacroComma T2>) \
-NumberArray_op_ab(opname,                             T , NumberArray<size MacroComma T2>) \
-NumberArray_op_ab(opname, NumberArray<size MacroComma T>,                             T2 )
-
-NumberArray_op(+)
-NumberArray_op(-)
-NumberArray_op(*)
-NumberArray_op(/)
+NumberArray_op(+,Plus)
+NumberArray_op(-,Minus)
+NumberArray_op(*,Multiplies)
+NumberArray_op(/,Divides)
 
 namespace std {
 
@@ -181,14 +252,14 @@ funcname (const NumberArray<size, T>& a) \
 }
 
 
-#define NumberArray_std_binary_abab(funcname, atype, btype, aarg, barg) \
+#define NumberArray_std_binary_abab(funcname, atype, btype, abtypes, aarg, barg) \
 template <std::size_t size, typename T, typename T2> \
 inline \
-NumberArray<size, typename CompareTypes<T,T2>::supertype> \
+typename CompareTypes<abtypes>::supertype \
 funcname (const atype& a, const btype& b) \
 { \
-  typedef typename CompareTypes<T,T2>::supertype TS; \
-  NumberArray<size, TS> returnval; \
+  typedef typename CompareTypes<abtypes>::supertype TS; \
+  TS returnval; \
  \
   for (unsigned int i=0; i != size; ++i) \
     returnval[i] = std::funcname(aarg, barg); \
@@ -197,9 +268,12 @@ funcname (const atype& a, const btype& b) \
 }
 
 #define NumberArray_std_binary(funcname) \
-NumberArray_std_binary_abab(funcname, NumberArray<size MacroComma T>, NumberArray<size MacroComma T2>, a[i], b[i]) \
-NumberArray_std_binary_abab(funcname,                             T , NumberArray<size MacroComma T2>, a,    b[i]) \
-NumberArray_std_binary_abab(funcname, NumberArray<size MacroComma T>,                             T2 , a[i], b)
+NumberArray_std_binary_abab(funcname, NumberArray<size MacroComma T>, NumberArray<size MacroComma T2>, \
+                            NumberArray<size MacroComma T> MacroComma NumberArray<size MacroComma T2>, a[i], b[i]) \
+NumberArray_std_binary_abab(funcname,                             T , NumberArray<size MacroComma T2>, \
+                            NumberArray<size MacroComma T2> MacroComma T,                              a,    b[i]) \
+NumberArray_std_binary_abab(funcname, NumberArray<size MacroComma T>,                             T2 , \
+                            NumberArray<size MacroComma T> MacroComma T2,                              a[i],    b)
 
 NumberArray_std_binary(pow)
 NumberArray_std_unary(exp)
@@ -273,27 +347,28 @@ operator<< (std::ostream& output, const NumberArray<size,T>& a)
 
 // CompareTypes, RawType specializations
 
-template<std::size_t size, typename T>
-struct CompareTypes<NumberArray<size,T>, NumberArray<size,T> > {
-  typedef NumberArray<size, T> supertype;
-};
+#define NumberArray_comparisons(templatename) \
+template<std::size_t size, typename T, bool reverseorder> \
+struct templatename<NumberArray<size,T>, NumberArray<size,T>, reverseorder> { \
+  typedef NumberArray<size, T> supertype; \
+}; \
+ \
+template<std::size_t size, typename T, typename T2, bool reverseorder> \
+struct templatename<NumberArray<size,T>, NumberArray<size,T2>, reverseorder> { \
+  typedef NumberArray<size, typename Symmetric##templatename<T, T2, reverseorder>::supertype> supertype; \
+}; \
+ \
+template<std::size_t size, typename T, typename T2, bool reverseorder> \
+struct templatename<NumberArray<size, T>, T2, reverseorder, \
+                    typename boostcopy::enable_if<BuiltinTraits<T2> >::type> { \
+  typedef NumberArray<size, typename Symmetric##templatename<T, T2, reverseorder>::supertype> supertype; \
+}
 
-template<std::size_t size, typename T, typename T2>
-struct CompareTypes<NumberArray<size,T>, NumberArray<size,T2> > {
-  typedef NumberArray<size, typename CompareTypes<T, T2>::supertype> supertype;
-};
-
-template<std::size_t size, typename T, typename T2>
-struct CompareTypes<NumberArray<size, T>, T2> {
-  typedef NumberArray<size, typename CompareTypes<T, T2>::supertype> supertype;
-};
-
-template<std::size_t size, typename T, typename T2>
-struct CompareTypes<T, NumberArray<size, T2> > {
-  typedef NumberArray<size, typename CompareTypes<T, T2>::supertype> supertype;
-};
-
-
+NumberArray_comparisons(CompareTypes);
+NumberArray_comparisons(PlusType);
+NumberArray_comparisons(MinusType);
+NumberArray_comparisons(MultipliesType);
+NumberArray_comparisons(DividesType);
 
 template <std::size_t size, typename T>
 struct RawType<NumberArray<size, T> >

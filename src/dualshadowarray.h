@@ -2,34 +2,22 @@
 #define __dualshadowarray_h__
 
 
-#include "shadownumber.h"
+// Order of declarations is important here?
+#include "dualshadow.h"
 #include "dualnumberarray.h"
 
-// The compiler can't choose between NumberArray-vs-T and
-// T-vs-ShadowNumber CompareTypes specializations...
+// ShadowNumber is subordinate to NumberArray:
 
-template<std::size_t size, typename T, typename T2, typename S>
-struct CompareTypes<NumberArray<size, T2>, ShadowNumber<T, S> > {
-  typedef NumberArray<size, typename CompareTypes<T2, ShadowNumber<T, S> >::supertype> supertype;
-};
+#define DualShadowArray_comparisons(templatename) \
+template<std::size_t size, typename T, typename T2, typename S, bool reverseorder> \
+struct templatename<NumberArray<size, T2>, ShadowNumber<T, S>, reverseorder> { \
+  typedef NumberArray<size, typename Symmetric##templatename<T2, ShadowNumber<T, S>, reverseorder>::supertype> supertype; \
+}
 
-template<std::size_t size, typename T, typename T2, typename S>
-struct CompareTypes<ShadowNumber<T, S>, NumberArray<size, T2> > {
-  typedef NumberArray<size, typename CompareTypes<T2, ShadowNumber<T, S> >::supertype> supertype;
-};
-
-template<typename T, typename D, typename T2, typename S>
-struct CompareTypes<DualNumber<T, D>, ShadowNumber<T2, S> > {
-  typedef DualNumber<typename CompareTypes<T, ShadowNumber<T2, S> >::supertype,
-                     typename CompareTypes<D, ShadowNumber<T2, S> >::supertype> supertype;
-};
-
-template<typename T, typename D, typename T2, typename S>
-struct CompareTypes<ShadowNumber<T2, S>, DualNumber<T, D> > {
-  typedef DualNumber<typename CompareTypes<T, ShadowNumber<T2, S> >::supertype,
-                     typename CompareTypes<D, ShadowNumber<T2, S> >::supertype> supertype;
-};
-
-
+DualShadowArray_comparisons(CompareTypes);
+DualShadowArray_comparisons(PlusType);
+DualShadowArray_comparisons(MinusType);
+DualShadowArray_comparisons(MultipliesType);
+DualShadowArray_comparisons(DividesType);
 
 #endif // __dualshadowarray_h__

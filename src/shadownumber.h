@@ -7,9 +7,10 @@
 
 #include "compare_types.h"
 #include "raw_type.h"
+#include "testable.h"
 
 template <typename T, typename S>
-class ShadowNumber
+class ShadowNumber : public safe_bool<ShadowNumber<T,S> >
 {
 public:
   typedef T value_type;
@@ -35,7 +36,9 @@ public:
 
   const S& shadow() const { return _shadow; }
 
-  ShadowNumber<T,S> operator- () { return ShadowNumber<T,S> (-_val, -_shadow); }
+  bool boolean_test() const { return _val; }
+
+  ShadowNumber<T,S> operator- () const { return ShadowNumber<T,S> (-_val, -_shadow); }
 
   template <typename T2, typename S2>
   ShadowNumber<T,S>& operator+= (const ShadowNumber<T2,S2>& a)
@@ -81,39 +84,33 @@ private:
 #define ShadowNumber_op(opname) \
 template <typename T, typename S, typename T2, typename S2> \
 inline \
-ShadowNumber<typename CompareTypes<T,T2>::supertype, \
-             typename CompareTypes<S,S2>::supertype> \
+typename CompareTypes<ShadowNumber<T,S>,ShadowNumber<T2,S2> >::supertype \
 operator opname (const ShadowNumber<T,S>& a, const ShadowNumber<T2,S2>& b) \
 { \
-  typedef typename CompareTypes<T,T2>::supertype TS; \
-  typedef typename CompareTypes<S,S2>::supertype SS; \
-  ShadowNumber<TS, SS> returnval(a); \
+  typedef typename CompareTypes<ShadowNumber<T,S>,ShadowNumber<T2,S2> >::supertype TS; \
+  TS returnval(a); \
   returnval opname##= b; \
   return returnval; \
 } \
  \
 template <typename T, typename S, typename T2> \
 inline \
-typename boostcopy::enable_if_c<ScalarTraits<T2>::value, \
-ShadowNumber<typename CompareTypes<T,T2>::supertype, S> \
->::type \
+typename CompareTypes<ShadowNumber<T,S>,T2>::supertype \
 operator opname (const ShadowNumber<T,S>& a, const T2& b) \
 { \
-  typedef typename CompareTypes<T,T2>::supertype TS; \
-  ShadowNumber<TS, S> returnval(a); \
+  typedef typename CompareTypes<ShadowNumber<T,S>,T2>::supertype TS; \
+  TS returnval(a); \
   returnval opname##= b; \
   return returnval; \
  \
 } \
 template <typename T, typename T2, typename S> \
 inline \
-typename boostcopy::enable_if_c<ScalarTraits<T>::value, \
-ShadowNumber<typename CompareTypes<T,T2>::supertype, S> \
->::type \
+typename CompareTypes<ShadowNumber<T2,S>,T>::supertype \
 operator opname (const T& a, const ShadowNumber<T2,S>& b) \
 { \
-  typedef typename CompareTypes<T,T2>::supertype TS; \
-  ShadowNumber<TS, S> returnval(a); \
+  typedef typename CompareTypes<ShadowNumber<T2,S>,T>::supertype TS; \
+  TS returnval(a); \
   returnval opname##= b; \
   return returnval; \
 }
@@ -124,14 +121,6 @@ ShadowNumber_op(*)
 ShadowNumber_op(/)
 
 namespace std {
-
-// Some forward declarations necessary for recursive DualNumbers
-
-template <typename T, typename S>
-inline ShadowNumber<T,S> cos   (const ShadowNumber<T,S>& a);
-
-template <typename T, typename S>
-inline ShadowNumber<T,S> cosh  (const ShadowNumber<T,S>& a);
 
 // Now just combined declaration/definitions
 
@@ -148,34 +137,32 @@ funcname (const ShadowNumber<T, S>& a) \
 #define ShadowNumber_std_binary(funcname) \
 template <typename T, typename S, typename T2, typename S2> \
 inline \
-ShadowNumber<typename CompareTypes<T,T2>::supertype, \
-             typename CompareTypes<S,S2>::supertype> \
+typename CompareTypes<ShadowNumber<T,S>,ShadowNumber<T2,S2> >::supertype \
 funcname (const ShadowNumber<T,S>& a, const ShadowNumber<T2,S2>& b) \
 { \
-  typedef typename CompareTypes<T,T2>::supertype TS; \
-  typedef typename CompareTypes<S,S2>::supertype SS; \
-  return ShadowNumber<TS, SS> (std::funcname(a.value(), b.value()), \
-                               std::funcname(a.shadow(), b.shadow())); \
+  typedef typename CompareTypes<ShadowNumber<T,S>,ShadowNumber<T2,S2> >::supertype TS; \
+  return TS (std::funcname(a.value(), b.value()), \
+             std::funcname(a.shadow(), b.shadow())); \
 } \
  \
 template <typename T, typename S, typename T2> \
 inline \
-ShadowNumber<typename CompareTypes<T,T2>::supertype, S> \
+typename CompareTypes<ShadowNumber<T,S>,T2>::supertype \
 funcname (const ShadowNumber<T,S>& a, const T2& b) \
 { \
-  typedef typename CompareTypes<T,T2>::supertype TS; \
-  return ShadowNumber<TS, S> (std::funcname(a.value(), b), \
-                              std::funcname(a.shadow(), b)); \
+  typedef typename CompareTypes<ShadowNumber<T,S>,T2>::supertype TS; \
+  return TS (std::funcname(a.value(), b), \
+             std::funcname(a.shadow(), b)); \
 } \
  \
 template <typename T, typename T2, typename S> \
 inline \
-ShadowNumber<typename CompareTypes<T,T2>::supertype, S> \
+typename CompareTypes<ShadowNumber<T2,S>,T>::supertype \
 funcname (const T& a, const ShadowNumber<T2,S>& b) \
 { \
-  typedef typename CompareTypes<T,T2>::supertype TS; \
-  return ShadowNumber<TS, S> (std::funcname(a, b.value()), \
-                              std::funcname(a, b.shadow())); \
+  typedef typename CompareTypes<ShadowNumber<T2,S>,T>::supertype TS; \
+  return TS (std::funcname(a, b.value()), \
+             std::funcname(a, b.shadow())); \
 }
 
 
@@ -218,7 +205,10 @@ operator opname (const ShadowNumber<T,S>& a, const ShadowNumber<T2,S2>& b) \
  \
 template <typename T, typename S, typename T2> \
 inline \
-ShadowNumber<bool, bool> \
+typename boostcopy::enable_if_class< \
+  typename CompareTypes<ShadowNumber<T,S>,T2>::supertype, \
+  ShadowNumber<bool,bool> \
+>::type \
 operator opname (const ShadowNumber<T,S>& a, const T2& b) \
 { \
   return ShadowNumber<bool, bool> (a.value() opname b, a.shadow() opname b); \
@@ -226,7 +216,10 @@ operator opname (const ShadowNumber<T,S>& a, const T2& b) \
  \
 template <typename T, typename T2, typename S> \
 inline \
-ShadowNumber<bool, bool> \
+typename boostcopy::enable_if_class< \
+  typename CompareTypes<ShadowNumber<T2,S>,T>::supertype, \
+  ShadowNumber<bool,bool> \
+>::type \
 operator opname (const T& a, const ShadowNumber<T2,S>& b) \
 { \
   return ShadowNumber<bool, bool> (a opname b.value(), a opname b.shadow()); \
@@ -257,26 +250,30 @@ struct ScalarTraits<ShadowNumber<T, S> >
   static const bool value = ScalarTraits<T>::value;
 };
 
-template<typename T, typename S>
-struct CompareTypes<ShadowNumber<T,S>, ShadowNumber<T,S> > {
-  typedef ShadowNumber<T, S> supertype;
-};
+#define ShadowNumber_comparisons(templatename) \
+template<typename T, typename S, bool reverseorder> \
+struct templatename<ShadowNumber<T,S>, ShadowNumber<T,S>, reverseorder> { \
+  typedef ShadowNumber<T, S> supertype; \
+}; \
+ \
+template<typename T, typename S, typename T2, typename S2, bool reverseorder> \
+struct templatename<ShadowNumber<T,S>, ShadowNumber<T2,S2>, reverseorder> { \
+  typedef ShadowNumber<typename Symmetric##templatename<T, T2, reverseorder>::supertype, \
+                       typename Symmetric##templatename<S, S2, reverseorder>::supertype> supertype; \
+}; \
+ \
+template<typename T, typename S, typename T2, bool reverseorder> \
+struct templatename<ShadowNumber<T, S>, T2, reverseorder, \
+                    typename boostcopy::enable_if<BuiltinTraits<T2> >::type> { \
+  typedef ShadowNumber<typename Symmetric##templatename<T, T2, reverseorder>::supertype, \
+                       typename Symmetric##templatename<S, T2, reverseorder>::supertype> supertype; \
+}
 
-template<typename T, typename S, typename T2, typename S2>
-struct CompareTypes<ShadowNumber<T,S>, ShadowNumber<T2,S2> > {
-  typedef ShadowNumber<typename CompareTypes<T, T2>::supertype,
-                       typename CompareTypes<S, S2>::supertype> supertype;
-};
-
-template<typename T, typename S, typename T2>
-struct CompareTypes<ShadowNumber<T, S>, T2> {
-  typedef ShadowNumber<typename CompareTypes<T, T2>::supertype, S> supertype;
-};
-
-template<typename T, typename T2, typename S>
-struct CompareTypes<T, ShadowNumber<T2, S> > {
-  typedef ShadowNumber<typename CompareTypes<T, T2>::supertype, S> supertype;
-};
+ShadowNumber_comparisons(CompareTypes);
+ShadowNumber_comparisons(PlusType);
+ShadowNumber_comparisons(MinusType);
+ShadowNumber_comparisons(MultipliesType);
+ShadowNumber_comparisons(DividesType);
 
 
 
