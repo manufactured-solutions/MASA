@@ -249,7 +249,7 @@ double evaluate_q (const NumberArray<NDIM, ADScalar>& xyz, const int ret)
 
   // The identity tensor I
   NumberArray<NDIM, NumberArray<NDIM, Scalar> > Identity = 
-    NumberArrayIdentity<NDIM, Scalar>::identity();
+    NumberArray<NDIM, Scalar>::identity();
 
   // The shear stress tensor
   NumberArray<NDIM, NumberArray<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
