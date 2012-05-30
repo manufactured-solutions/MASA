@@ -1,6 +1,8 @@
 Version 0.41.0 (In Progress)
+
   * Added C++ interfaces
   * Added hook to strongly suggest user utilize "make check"
+  * added an AD Navier-Stokes solution with non-trivial cross terms
 
 Version 0.40.2 (02 March 2012)
   * fixed a bug in FANS with SA model

@@ -23,8 +23,7 @@
 //
 //-----------------------------------------------------------------------el-
 //
-// ad_cns.h: test the compressible navier stokes equations are roughly identical to 
-//             the source terms generated from maple
+// ad_cns.h: test a solution with non-trivial cross terms in masa AD
 //
 // $Id: $
 //--------------------------------------------------------------------------
