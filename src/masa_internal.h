@@ -2019,4 +2019,55 @@ public:
 };}
 
 
+// ------------------------------------------------------
+// --------------- ad_cns_2d_crossterms 
+// ------------------------------------------------------
+namespace MASA{
+template <typename Scalar>
+class ad_cns_2d_crossterms : public manufactured_solution<Scalar>
+{
+  using manufactured_solution<Scalar>::pi;
+  using manufactured_solution<Scalar>::PI;
+
+private:
+  Scalar R;
+  Scalar k;
+  Scalar u_0;
+  Scalar u_x;
+  Scalar u_y;
+  Scalar v_0;
+  Scalar v_x;
+  Scalar v_y;
+  Scalar rho_0;
+  Scalar rho_x;
+  Scalar rho_y;
+  Scalar p_0;
+  Scalar p_x;
+  Scalar p_y;
+  Scalar a_px;
+  Scalar a_py;
+  Scalar a_rhox;
+  Scalar a_rhoy;
+  Scalar a_ux;
+  Scalar a_uy;
+  Scalar a_vx;
+  Scalar a_vy;
+  Scalar Gamma;
+  Scalar mu;
+  Scalar L;
+
+public:
+  ad_cns_2d_crossterms();
+  int init_var();
+  Scalar eval_q_u(Scalar,Scalar) const;
+  Scalar eval_q_v(Scalar,Scalar) const;
+  Scalar eval_q_e(Scalar,Scalar) const;
+  Scalar eval_q_rho(Scalar,Scalar) const;
+  Scalar eval_exact_u(Scalar,Scalar);
+  Scalar eval_exact_v(Scalar,Scalar);
+  Scalar eval_exact_p(Scalar,Scalar);
+  Scalar eval_exact_rho(Scalar,Scalar);
+};}
+
+
 // --l33t--

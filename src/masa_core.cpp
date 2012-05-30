@@ -158,6 +158,8 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
 
   anim.push_back(new navierstokes_3d_transient_sutherland<Scalar>());
 
+  anim.push_back(new ad_cns_2d_crossterms<Scalar>());
+
   // --l33t-- DO NOT EDIT THIS LINE OR ANY BELOW IT
 
 
