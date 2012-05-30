@@ -68,7 +68,8 @@ check_PROGRAMS   = misc                \
                    f_cns3d             \
                    f_radiation         \
 		   ad_euler            \
-		   ad_cns
+		   ad_cns              \
+		   ad_cns_crossterm
 
 #----------------------
 # C++ Test Sources
@@ -111,6 +112,7 @@ cp_normal_SOURCES           = cp_normal.cpp
 #----------------------
 ad_euler_SOURCES            = ad_euler.cpp
 ad_cns_SOURCES              = ad_cns.cpp
+ad_cns_crossterm_SOURCES    = ad_cns_crossterm.cpp
 
 #----------------------
 # C Test Sources
@@ -239,6 +241,7 @@ TESTS                      = init.sh              \
 			     ad_init.sh           \
 			     ad_euler             \
 			     ad_cns               \
+			     ad_cns_crossterm     \
                              finalize.sh
 
 
