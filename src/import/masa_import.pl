@@ -541,6 +541,15 @@ print OUTFILE "// -*-c++-*-\n";
 print OUTFILE "//-----------------------------------------------------------------------bl-\n";
 print OUTFILE "//-----------------------------------------------------------------------el-\n";
 print OUTFILE "\n#include <masa_internal.h>\n";
+print OUTFILE "\n#include <ad_masa.h>\n";
+
+# typedefs
+print OUTFILE "\ntypedef ShadowNumber<double, long double> RawScalar;\n";
+print OUTFILE "\nconst unsigned int NDIM = $dimension;\n";
+print OUTFILE "\ntypedef DualNumber<RawScalar, NumberArray<NDIM, RawScalar> > FirstDerivType;\n";
+print OUTFILE "\ntypedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;\n";
+print OUTFILE "\ntypedef SecondDerivType ADType;\n";
+
 #print OUTFILE "using std::cos;\n";
 #print OUTFILE "using std::sin;\n";
 #print OUTFILE "using std::pow;\n";
