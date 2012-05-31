@@ -18,14 +18,14 @@ double eval_exact_v(double x, double y)
 // public method
 double eval_exact_p(double x, double y)
 {
-  ADScalar P = p_0 + p_x * std::cos(a_px * PI * x / L) * p_y * std::cos(a_py * PI * y / L);
+  double P = p_0 + p_x * std::cos(a_px * PI * x / L) * p_y * std::cos(a_py * PI * y / L);
   return P;
 }
 
 // public method
 double eval_exact_rho(double x, double y)
 {
-  ADScalar RHO = rho_0 + rho_x * std::cos(a_rhox * PI * x / L) * rho_y * std::cos(a_rhoy * PI * y / L);
+  double RHO = rho_0 + rho_x * std::cos(a_rhox * PI * x / L) * rho_y * std::cos(a_rhoy * PI * y / L);
   return RHO;
 }
 

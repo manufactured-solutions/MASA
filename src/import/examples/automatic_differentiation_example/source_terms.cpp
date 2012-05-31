@@ -62,7 +62,7 @@ double eval_q_v(double x, double y) const
   // Temperature
   ADScalar T = P / RHO / R;
 
-  // Perfect gas energies
+ // Perfect gas energies
   ADScalar E = 1./(Gamma-1.)*P/RHO;
   ADScalar ET = E + .5 * U.dot(U);
 
@@ -136,8 +136,7 @@ double eval_q_e(double x, double y) const
 }
 
 // public, static method
-template <typename Scalar>
-Scalar MASA::ad_cns_2d_crossterms<Scalar>::eval_q_rho(Scalar x1, Scalar y1) const
+double eval_q_rho(Scalar x1, Scalar y1) const
 {
   typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
