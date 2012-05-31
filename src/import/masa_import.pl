@@ -737,9 +737,9 @@ print "Done with $name.cpp...\n";
 print "Cleaning up...\n\n";
 close OUTFILE or die $!;
 
-print "Finished with no errors.\n\n";
+print "Finished with no errors.\n";
 print "Exiting: Have a Well Verified Day.\n\n";
 exit 0;
 
 # nick
-# 10/11/11
+# created: 10/11/11
