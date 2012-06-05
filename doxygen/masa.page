@@ -117,10 +117,13 @@ Roy Stogner
 
 <h2> Citing MASA </h2>
 
-A paper detailing the MASA library has been submitted for publication. 
-Upon acceptance, this section will be updated. 
-Please check back for details on how to cite MASA.
+Please add the following citation to any paper, technical report 
+or article describing the use of the MASA library:
 
+Nicholas Malaya, Kemelli C. Estacio-Hiroms, Roy H. Stogner, Karl
+ W. Schulz, Paul T. Bauman, and Graham F. Carey. ``MASA: A Library for
+ Verification Using Manufactured and Analytical
+ Solutions''. Engineering with Computers, June 2012.
 */
 
 
