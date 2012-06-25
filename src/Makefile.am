@@ -1,7 +1,7 @@
 h_sources  = masa.h masa_internal.h smasa.h ad_masa.h                        \
              nsctpl_fwd.hpp nsctpl.hpp                                       \
 	     dualnumber.h numberarray.h dualnumberarray.h compare_types.h    \
-	     raw_type.h shadownumber.h dualshadowarray.h
+	     raw_type.h shadownumber.h dualshadowarray.h dualshadow.h
 
 cc_sources = masa_core.cpp masa_class.cpp masa_map.cpp heat.cpp euler.cpp    \
              cns.cpp sod.cpp cmasa.cpp axi_euler.cpp axi_cns.cpp rans_sa.cpp \
