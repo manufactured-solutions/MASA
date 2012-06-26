@@ -530,7 +530,7 @@ module masa
      !! @param[in] x Real(8) value of the x-coordinate.
      !! @param[in] y Real(8) value of the y-coordinate.
      !! @return Real(8) value for the source term.
-     !!
+
      real (c_double) function masa_eval_2d_source_rho_e(x,y) bind (C,name='masa_eval_2d_source_rho_e')
        use iso_c_binding
        implicit none
