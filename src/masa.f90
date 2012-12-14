@@ -334,8 +334,14 @@ module masa
        use iso_c_binding
        implicit none
        
-       real (c_double), value    :: x
-       real (c_double), external :: funct
+       real (c_double), value :: x
+       abstract interface
+         function funct(x) bind(C)
+         import
+	 real(c_double), intent(in) :: x
+	 real(c_double) :: funct
+         end function
+       end interface
        
      end function masa_eval_1d_source_rho_N
   end interface  
@@ -354,8 +360,14 @@ module masa
        use iso_c_binding
        implicit none
        
-       real (c_double), value    :: x
-       real (c_double), external :: funct
+       real (c_double), value :: x
+       abstract interface
+         function funct(x) bind(C)
+         import
+	 real(c_double), intent(in) :: x
+	 real(c_double) :: funct
+         end function
+       end interface
        
      end function masa_eval_1d_source_rho_N2
   end interface  
