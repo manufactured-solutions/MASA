@@ -1,9 +1,6 @@
-INCLUDES         = -I$(top_srcdir)/src -I$(top_builddir)/src
 LIBS             = -L$(top_builddir)/src -lmasa
-AM_CFLAGS        = $(INCLUDES)
-AM_CXXFLAGS      = $(INCLUDES)
-AM_F77FLAGS      = $(INCLUDES)
-AM_FCFLAGS       = $(INCLUDES) $(FC_STRICT_TOL_CPP)
+AM_CPPFLAGS      = -I$(top_srcdir)/src -I$(top_builddir)/src
+AM_FCFLAGS       = $(FC_STRICT_TOL_CPP)
 AM_LDFLAGS       = $(LIBS)
 
 # License Information

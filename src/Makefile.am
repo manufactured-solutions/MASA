@@ -23,11 +23,6 @@ cc_sources += ad_cns_3d_crossterms.cpp
 
 BUILT_SOURCES = .license.stamp
 
-INCLUDES                =
-AM_FCFLAGS              = $(INCLUDES)
-AM_CFLAGS               = $(INCLUDES)
-AM_CXXFLAGS             = $(INCLUDES)
-
 lib_LTLIBRARIES         = libmasa.la libfmasa.la
 library_includedir      = $(includedir)
 library_include_HEADERS = masa.h

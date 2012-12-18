@@ -1,7 +1,4 @@
-INCLUDES      = -I$(top_srcdir)/src -I$(top_builddir)/src
-AM_FCFLAGS    = $(INCLUDES)
-AM_CFLAGS     = $(INCLUDES)
-AM_CPPFLAGS   = $(INCLUDES)
+AM_CPPFLAGS   = -I$(top_srcdir)/src -I$(top_builddir)/src
 LIBS          = -L$(top_builddir)/src -lmasa
 
 exampledir    = @prefix@/examples
