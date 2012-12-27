@@ -1,4 +1,5 @@
 AM_CPPFLAGS   = -I$(top_srcdir)/src -I$(top_builddir)/src
+AM_FCFLAGS    = -I$(top_srcdir)/src -I$(top_builddir)/src
 LIBS          = -L$(top_builddir)/src -lmasa
 
 exampledir    = @prefix@/examples
