@@ -83,8 +83,8 @@ int MASA::burgers_equation<Scalar>::init_var()
 // ----------------------------------------
 
 template <typename Scalar>
-//Scalar MASA::burgers_equation<Scalar>::eval_q_v_transient_viscous (Scalar x, Scalar y, Scalar t)
-Scalar MASA::burgers_equation<Scalar>::eval_q_v (Scalar x, Scalar y, Scalar t)
+Scalar MASA::burgers_equation<Scalar>::eval_q_v_transient_viscous (Scalar x, Scalar y, Scalar t)
+//Scalar MASA::burgers_equation<Scalar>::eval_q_v (Scalar x, Scalar y, Scalar t)
 {
   double Qv_tv;
   double U;
@@ -133,7 +133,8 @@ Scalar MASA::burgers_equation<Scalar>::eval_q_v_steady_viscous (Scalar x, Scalar
 }
 
 template <typename Scalar>
-Scalar MASA::burgers_equation<Scalar>::eval_q_v_transient_inviscid (Scalar x, Scalar y, Scalar t)
+//Scalar MASA::burgers_equation<Scalar>::eval_q_v_transient_inviscid (Scalar x, Scalar y, Scalar t)
+Scalar MASA::burgers_equation<Scalar>::eval_q_v (Scalar x,Scalar y,Scalar t)
 {
   double Qv_tinv;
   double U;
@@ -175,8 +176,7 @@ Scalar MASA::burgers_equation<Scalar>::eval_q_v_steady_inviscid (Scalar x, Scala
 }
 
 template <typename Scalar>
-//Scalar MASA::burgers_equation<Scalar>::eval_q_u_transient_viscous (Scalar x,Scalar y,Scalar t)
-Scalar MASA::burgers_equation<Scalar>::eval_q_u (Scalar x,Scalar y,Scalar t)
+Scalar MASA::burgers_equation<Scalar>::eval_q_u_transient_viscous (Scalar x,Scalar y,Scalar t)
 {
   double Qu_tv;
   double U;
@@ -224,7 +224,8 @@ Scalar MASA::burgers_equation<Scalar>::eval_q_u_steady_viscous (Scalar x, Scalar
 }
 
 template <typename Scalar>
-Scalar MASA::burgers_equation<Scalar>::eval_q_u_transient_inviscid (Scalar x, Scalar y, Scalar t)
+//Scalar MASA::burgers_equation<Scalar>::eval_q_u_transient_inviscid (Scalar x, Scalar y, Scalar t)
+Scalar MASA::burgers_equation<Scalar>::eval_q_u (Scalar x,Scalar y,Scalar t)
 { 
   double Qu_tinv;
   double U;
@@ -286,7 +287,7 @@ Scalar MASA::burgers_equation<Scalar>::eval_exact_v(Scalar x,Scalar y)
 }
 
 template <typename Scalar>
-Scalar MASA::burgers_equation<Scalar>::eval_exact_u_t(Scalar x,Scalar y, Scalar t)
+Scalar MASA::burgers_equation<Scalar>::eval_exact_u(Scalar x,Scalar y, Scalar t)
 {
   Scalar u_an;
   u_an = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_t * cos(a_ut * pi * t / L);
@@ -294,7 +295,7 @@ Scalar MASA::burgers_equation<Scalar>::eval_exact_u_t(Scalar x,Scalar y, Scalar 
 }
 
 template <typename Scalar>
-Scalar MASA::burgers_equation<Scalar>::eval_exact_v_t(Scalar x,Scalar y, Scalar t)
+Scalar MASA::burgers_equation<Scalar>::eval_exact_v(Scalar x,Scalar y, Scalar t)
 {
   Scalar v_an;
   v_an = v_0 + v_x * sin(a_vx * pi * x / L) + v_y * cos(a_vy * pi * y / L) + v_t * cos(a_vt * pi * t / L);

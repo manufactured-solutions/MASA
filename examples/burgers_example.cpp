@@ -91,8 +91,8 @@ int main()
 	vfield = masa_eval_source_v<Scalar>  (tempx,tempy,tempt);
 	
 	//evaluate analytical solution
-	exact_u   = masa_eval_exact_u_t <Scalar>   (tempx,tempy,tempt);
-	exact_v   = masa_eval_exact_v_t <Scalar>   (tempx,tempy,tempt);
+	exact_u   = masa_eval_exact_u <Scalar>   (tempx,tempy,tempt);
+	exact_v   = masa_eval_exact_v <Scalar>   (tempx,tempy,tempt);
 
 	masa_test_default(ufield);
 	masa_test_default(vfield);

@@ -164,13 +164,16 @@ parameter has been set to \em something.
 
 <h2> Accessing the Source Terms </h2>
 
+Now, we need to access the correct source and manufactured solution terms. Let us again use
+our euler_1d solution. 
      
 \code
  > ls $HOME/bin/masa/
  examples/  include/  lib/
 \endcode
 
-    
+
+   
 For further examples (including c-code and fortran), the user is directed 
 to the examples directory included in the MASA distribution.
 
