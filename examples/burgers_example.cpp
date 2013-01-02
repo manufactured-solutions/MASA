@@ -41,7 +41,7 @@ typedef double Scalar;
 int main()
 {
   // declarations
-  Scalar tempx,tempy;
+  Scalar tempx,tempy, tempt;
 
   Scalar ufield;
   Scalar vfield;
@@ -77,6 +77,8 @@ int main()
   // (tests that all variables have been initialized)
   err += masa_sanity_check<Scalar>();
 
+  tempt = 0.0;
+
   // evaluate source terms over the domain (0<x<1, 0<y<1) 
   for(int i=0;i<nx;i++)
     for(int j=0;j<nx;j++)
@@ -85,8 +87,8 @@ int main()
 	tempy=j*dy;
 
 	// evaluate source terms
-	ufield = masa_eval_source_u<Scalar>  (tempx,tempy);
-	vfield = masa_eval_source_v<Scalar>  (tempx,tempy);
+	ufield = masa_eval_source_u<Scalar>  (tempx,tempy,tempt);
+	vfield = masa_eval_source_v<Scalar>  (tempx,tempy,tempt);
 	
 	//evaluate analytical solution
 	exact_u   = masa_eval_exact_u  <Scalar>   (tempx,tempy);
