@@ -165,15 +165,30 @@ parameter has been set to \em something.
 <h2> Accessing the Source Terms </h2>
 
 Now, we need to access the correct source and manufactured solution terms. Let us again use
-our euler_1d solution. 
-     
-\code
- > ls $HOME/bin/masa/
- examples/  include/  lib/
-\endcode
+our euler1d solution example. Consulting our MASA documentation, we can see that the available 
+source terms are:
 
+<ul>
+  <li> masa_eval_1d_source_rho_u()
+  <li> masa_eval_1d_source_rho_e()
+  <li> masa_eval_1d_source_rho()
+  <li> masa_eval_1d_exact_u()
+  <li> masa_eval_1d_exact_p()
+  <li> masa_eval_1d_exact_rho()
+  <li> masa_eval_1d_exact_grad_u()
+  <li> masa_eval_1d_exact_grad_p()
+  <li> masa_eval_1d_exact_grad_rho()
+</ul>
 
-   
+The first three functions (containing "source") are the source terms for the momentum, the energy and the density.  
+The functions containing "_exact_" are the manufactured solutions. Finally, the "_grad_" are the 
+gradients of the manufactured solutions, useful for setting boundary conditions.
+
+In this case, the call pattern is simply: (x), e.g. masa_eval_1d_source_rho_u(x), where x is a Scalar value for the 
+location on the mesh you are evaluating at. In general, the rule for MASA is that the spatial components go first,
+followed by the temporal component (if applicable). Thus, a 2d unsteady solution would take the form: "foo(x,y,t)". 
+The spatial indicies are always in the order: x,y,z.
+
 For further examples (including c-code and fortran), the user is directed 
 to the examples directory included in the MASA distribution.
 
