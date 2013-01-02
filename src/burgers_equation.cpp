@@ -83,7 +83,8 @@ int MASA::burgers_equation<Scalar>::init_var()
 // ----------------------------------------
 
 template <typename Scalar>
-Scalar MASA::burgers_equation<Scalar>::eval_q_v_transient_viscous (Scalar x, Scalar y, Scalar t)
+//Scalar MASA::burgers_equation<Scalar>::eval_q_v_transient_viscous (Scalar x, Scalar y, Scalar t)
+Scalar MASA::burgers_equation<Scalar>::eval_q_v (Scalar x, Scalar y, Scalar t)
 {
   double Qv_tv;
   double U;
@@ -174,7 +175,8 @@ Scalar MASA::burgers_equation<Scalar>::eval_q_v_steady_inviscid (Scalar x, Scala
 }
 
 template <typename Scalar>
-Scalar MASA::burgers_equation<Scalar>::eval_q_u_transient_viscous (Scalar x,Scalar y,Scalar t)
+//Scalar MASA::burgers_equation<Scalar>::eval_q_u_transient_viscous (Scalar x,Scalar y,Scalar t)
+Scalar MASA::burgers_equation<Scalar>::eval_q_u (Scalar x,Scalar y,Scalar t)
 {
   double Qu_tv;
   double U;

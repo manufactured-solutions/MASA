@@ -1678,11 +1678,15 @@ private:
 public:
   burgers_equation();
   int init_var();
-  Scalar eval_q_v_transient_viscous (Scalar,Scalar,Scalar);
+
+  //Scalar eval_q_v_transient_viscous (Scalar,Scalar,Scalar);
+  //Scalar eval_q_u_transient_viscous (Scalar,Scalar,Scalar);
+  Scalar eval_q_v (Scalar,Scalar,Scalar);
+  Scalar eval_q_u (Scalar,Scalar,Scalar);
+
   Scalar eval_q_v_steady_viscous (Scalar,Scalar);
   Scalar eval_q_v_transient_inviscid (Scalar,Scalar,Scalar);
   Scalar eval_q_v_steady_inviscid (Scalar,Scalar);
-  Scalar eval_q_u_transient_viscous (Scalar,Scalar,Scalar);
   Scalar eval_q_u_steady_viscous (Scalar,Scalar);
   Scalar eval_q_u_transient_inviscid (Scalar,Scalar,Scalar);
   Scalar eval_q_u_steady_inviscid (Scalar,Scalar);
