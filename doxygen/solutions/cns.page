@@ -61,7 +61,7 @@ $$k= \dfrac{\gamma R \mu}{ (\gamma-1) \text{Pr}}.$$
 
 The Method of Manufactured Solutions (MMS) applied to Navier--Stokes equations consists in modifying Equations~(\ref{eq:ns_01})~--~(\ref{eq:ns_03}) by adding a source term to the right-hand side of each equation, so the modified set of equations conveniently has the analytical solution chosen \textit{a priori}.
 
-\citet{Roy2002} propose the general form of the primitive manufactured solution variables to be  a function of sines and cosines:
+\cite{Roy2002} propose the general form of the primitive manufactured solution variables to be  a function of sines and cosines:
 \begin{equation}
  \label{eq:manufactured01}
   \phi (x,y,z) = \phi_0+ \phi_x\, f_s \left(\frac{a_{\phi x} \pi x}{L} \right) +  \phi_y \,f_s\left(\frac{a_{\phi y} \pi y}{L}\right) + \phi_z \,f_s\left(\frac{a_{\phi z} \pi z}{L}\right),
@@ -70,10 +70,10 @@ where $\phi=\rho,u,v,w$ or $p$, and $f_s(\cdot)$ functions denote either sine or
 
 
 
-Although \citet{Roy2002} provide the constants used in the manufactured solutions for the 2D supersonic and subsonic cases for Euler and Navier-Stokes equations, only the source term for the 2D mass conservation equation~(\ref{eq:ns_01}) is presented.
+Although \cite{Roy2002} provide the constants used in the manufactured solutions for the 2D supersonic and subsonic cases for Euler and Navier-Stokes equations, only the source term for the 2D mass conservation equation~(\ref{eq:ns_01}) is presented.
 
 
-Source terms  for mass conservation ($Q_\rho$), momentum ($Q_u$, $Q_v$ and $Q_w$)  and total energy ($Q_{e_t}$) equations are obtained by symbolic manipulations of compressible steady Navier--Stokes equations above using Maple~13~\citep{Maple} and are presented in the following sections for the one, two and three-dimensional cases.
+Source terms  for mass conservation ($Q_\rho$), momentum ($Q_u$, $Q_v$ and $Q_w$)  and total energy ($Q_{e_t}$) equations are obtained by symbolic manipulations of compressible steady Navier--Stokes equations above using Maple~13~\cite{Maple} and are presented in the following sections for the one, two and three-dimensional cases.
 
 
 \subsubsection{1D Steady Navier--Stokes}
