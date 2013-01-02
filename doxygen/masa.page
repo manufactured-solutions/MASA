@@ -138,6 +138,7 @@ The following sections detail all available manufactured solutions in MASA.
 <li> \subpage cns     </li>
 <li> \subpage sod     </li>
 <li> \subpage rans    </li>
+<li> \subpage burgers </li>
 </ul>
 
 */

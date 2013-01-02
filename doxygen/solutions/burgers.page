@@ -1,0 +1,35 @@
+/*! \page burgers Burgers Equation
+
+\latexonly
+\subsection{MASA API}
+\endlatexonly
+
+Initialization:
+\li burgers_equation
+
+\latexonly
+% parameter list
+\begin{table} 
+\begin{center} 
+\begin{tabular}{|rrrrrrr|}
+\hline
+L     & k      & u\_0    & u\_x    & u\_y  & v\_0 & v\_x  \\
+v\_y  & rho\_0 & rho\_x  & rho\_y  & p\_0  & p\_x & p\_y  \\
+a\_px & a\_py  & a\_rhox & a\_rhoy & a\_ux & a\_uy& a\_vx \\
+a\_vy & Gamma  & mu      &         &       &      &      \\
+\hline
+\end{tabular} 
+\end{center}  
+\caption{Parameters used by the 2D Burgers Equation}
+\label{tab:L_values}
+\end{table}
+\endlatexonly
+
+Functions:
+\li masa_init()
+\li masa_eval_2d_source_rho_u()
+\li masa_eval_2d_source_rho_v()
+\li masa_eval_2d_exact_u()
+\li masa_eval_2d_exact_v()
+
+*/ 
