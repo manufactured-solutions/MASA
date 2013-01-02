@@ -11,7 +11,7 @@ BUILT_SOURCES = .license.stamp
 
 bin_PROGRAMS  = MASAshell
 
-noinst_PROGRAMS  = MASAshell display_solutions euler_example navierstokes 
+noinst_PROGRAMS  = MASAshell display_solutions euler_example navierstokes burgers_example
 noinst_PROGRAMS += rans_sa fans_sa fans_sa_finite_d fans_sa_wall radiation euler_chem 
 noinst_PROGRAMS += euler_transient heat_example switch ablation_example
 noinst_PROGRAMS += c_heat_example c_euler_example c_laplace_example sod
@@ -27,6 +27,7 @@ MASAshell_SOURCES         = masa_shell.cpp
 display_solutions_SOURCES = display_solutions.cpp
 heat_example_SOURCES      = heat-eq.cpp
 euler_example_SOURCES     = euler_example.cpp
+burgers_example_SOURCES   = burgers_example.cpp
 laplace_example_SOURCES   = laplace_example.cpp
 ablation_example_SOURCES  = ablation_example.cpp
 euler_transient_SOURCES   = euler_transient.cpp
@@ -87,6 +88,7 @@ TESTS                      = init.sh              \
 			     display_solutions    \
                              switch               \
 	                     euler_example        \
+	                     burgers_example      \
 	                     sod                  \
 	                     laplace_example      \
 	                     euler_transient      \
