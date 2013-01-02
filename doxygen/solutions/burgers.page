@@ -13,10 +13,9 @@ Initialization:
 \begin{center} 
 \begin{tabular}{|rrrrrrr|}
 \hline
-L     & k      & u\_0    & u\_x    & u\_y  & v\_0 & v\_x  \\
-v\_y  & rho\_0 & rho\_x  & rho\_y  & p\_0  & p\_x & p\_y  \\
-a\_px & a\_py  & a\_rhox & a\_rhoy & a\_ux & a\_uy& a\_vx \\
-a\_vy & Gamma  & mu      &         &       &      &      \\
+L     & nu      & u\_0    & u\_x    & u\_y  & v\_0  & v\_x  \\
+v\_y  & a\_ut   & a\_ux   & a\_uy   & a\_vt & a\_vx & a\_vy \\
+u\_t  & v\_t    & Gamma   &         &       &       &       \\
 \hline
 \end{tabular} 
 \end{center}  
