@@ -1,5 +1,6 @@
 Version 0.41.0 (In Progress)
 
+  * Removed natbib style references from MASA
   * adding AM_FCFLAGS to build fmasa properly
   * added C++ interfaces
   * added hook to strongly suggest user utilize "make check"
