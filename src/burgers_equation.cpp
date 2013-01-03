@@ -92,11 +92,11 @@ Scalar MASA::burgers_equation<Scalar>::eval_q_v_transient_viscous (Scalar x, Sca
   double Q_v_time;
   double Q_v_convection;
   double Q_v_dissipation;
-  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / Lt);
-  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / Lt);
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
 
   // "Contribution from the time derivative  to the total source term "
-  Q_v_time = a_vt * PI * v_t * cos(a_vt * PI * t / Lt) / Lt;
+  Q_v_time = a_vt * PI * v_t * cos(a_vt * PI * t / L) / L;
 
   // "Contribution from the convective terms to the total source term "
   Q_v_convection = -a_vx * PI * v_x * U * sin(a_vx * PI * x / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * V / L;
@@ -141,11 +141,11 @@ Scalar MASA::burgers_equation<Scalar>::eval_q_v (Scalar x,Scalar y,Scalar t)
   double V;
   double Q_v_time;
   double Q_v_convection;
-  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / Lt);
-  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / Lt);
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
 
   // "Contribution from the time derivative  to the total source term "  
-  Q_v_time = a_vt * PI * v_t * cos(a_vt * PI * t / Lt) / Lt;
+  Q_v_time = a_vt * PI * v_t * cos(a_vt * PI * t / L) / L;
 
   // "Contribution from the convective terms to the total source term "
   Q_v_convection = -a_vx * PI * v_x * U * sin(a_vx * PI * x / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * V / L;
@@ -184,11 +184,11 @@ Scalar MASA::burgers_equation<Scalar>::eval_q_u_transient_viscous (Scalar x,Scal
   double Q_u_time;
   double Q_u_convection;
   double Q_u_dissipation;
-  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / Lt);
-  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / Lt);
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
 
   // "Contribution from the time derivative  to the total source term"
-  Q_u_time = -a_ut * PI * u_t * sin(a_ut * PI * t / Lt) / Lt;
+  Q_u_time = -a_ut * PI * u_t * sin(a_ut * PI * t / L) / L;
 
   // "Contribution from the convective terms to the total source term "
   Q_u_convection = -a_uy * PI * u_y * V * sin(a_uy * PI * y / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * U / L;
@@ -232,11 +232,11 @@ Scalar MASA::burgers_equation<Scalar>::eval_q_u (Scalar x,Scalar y,Scalar t)
   double V;
   double Q_u_time;
   double Q_u_convection;
-  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / Lt);
-  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / Lt);
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / L);
 
   // "Contribution from the time derivative  to the total source term "
-  Q_u_time = -a_ut * PI * u_t * sin(a_ut * PI * t / Lt) / Lt;
+  Q_u_time = -a_ut * PI * u_t * sin(a_ut * PI * t / L) / L;
 
   // "Contribution from the convective terms to the total source term "
   Q_u_convection = -a_uy * PI * u_y * V * sin(a_uy * PI * y / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * U / L;
