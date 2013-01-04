@@ -5,6 +5,8 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{geometry}
+%\usepackage[authoryear]{natbib}
+\renewcommand{\bibname}{References}
 
 \newcommand{\D}{\partial}
 \newcommand{\Diff}[2] {\dfrac{\partial( #1)}{\partial #2}}
@@ -15,6 +17,24 @@
 \newcommand{\Rho}{\,\mathtt{Rho}}
 \newcommand{\PP}{\,\mathtt{P}}
 %\newcommand{\U}{\,\mathtt{U}}
+\newcommand{\UU}{\,\mathtt{U}}
 \newcommand{\V}{\,\mathtt{V}}
 \newcommand{\W}{\,\mathtt{W}}
 \newcommand{\Lo}{\,\mathcal{L}}
+
+
+\def\thebibliography#1{\vspace{24pt plus 4pt minus 2pt}
+%\noindent{\normalsize\centerline{REFERENCES}}
+\vspace{12pt plus 3pt minus 1pt}%
+\list{{\arabic{enumi}}}{\def\makelabel##1{\hss{##1.}}\topsep=0\p@\parsep=0\p@
+\partopsep=0\p@\itemsep=0\p@
+\labelsep=1ex\itemindent=0\p@
+\settowidth\labelwidth{\normalsize[#1]}%
+\leftmargin\labelwidth
+\advance\leftmargin\labelsep
+\advance\leftmargin -\itemindent
+\usecounter{enumi}}\normalsize
+\def\newblock{\ }
+\sloppy\clubpenalty4000\widowpenalty4000
+\sfcode`\.=1000\relax}
+\let\endthebibliography=\endlist

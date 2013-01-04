@@ -1,7 +1,503 @@
 /*! \page burgers Burgers Equation
 
 \latexonly
-\subsection{MASA API}
+
+%%%%%%%%% Added by Kemelli on 1/5/2013
+
+
+Burgers' equation is a useful test case for numerical methods due to its simplicity and predictable dynamics, together with its non-linearity and multidimensionality. The various kinds of Burgers equation constitute a good benchmark to modeling traffic flows, shock waves and acoustic transmission, and they are also considered a basic model of nonlinear convective-diffusive phenomena such as those that arise
+in Navier--Stokes equations.
+
+
+
+The 2D Burgers  equations are:
+\begin{equation}
+ \label{eq:burgers2d_01}
+\begin{split}
+&\diff{ u}{t} + \diff{ u^2 }{x}+\diff{uv}{y}=\nu \left( \diff{^2u}{ x^2}+ \diff{^2u }{y^2}\right),\\
+& \diff{ v}{t}+ \diff{ u v}{x} + \diff{  v^2 }{y}=\nu \left( \diff{^2v}{ x^2}+ \diff{^2v }{y^2}\right),\\
+%&\diff{\bv{u} }{t} + \nabla\cdot(\bv{uu}) = \nu \nabla^2 \bv{u},\\
+\end{split}
+\end{equation}
+%
+where $\bv{u}=(u,v)$,  $u$ and $v$ are the velocity in the  $x$ and $y$  directions, respectively, and $\nu$ is the viscosity. This is the complete version of Burgers equations and can be modified to address a combination of steady/transient state and viscid/inviscid case.
+
+\subsection{Manufactured Solution}
+The Method of Manufactured Solutions (MMS) provides a general procedure for  code accuracy verification \cite{Roache2002,Bond2007}.
+The MMS constructs a non-trivial but analytical solution for the flow variables; this manufactured
+solution usually does not  satisfy the governing equations, since the choice is somewhat arbitrary. However, by passing the solution through the governing equations gives the production terms $Q$. A modified set of equations formed by adding these source terms to the right-hand-side of the original governing equations is forced to become a model for the constructed solution, i.e., the manufactured solutions chosen \textit{a priori} are the analytical solutions of the MMS-modified governing equations.
+
+
+Although the form of the manufactured solution is slightly arbitrary, it should be chosen to be smooth, infinitely differentiable and realizable. Solutions should be avoided which have negative densities, pressures, temperatures, etc. \cite{KnuppSalari2003,Roy2004}. Solutions should also be chosen that are sufficiently general so as to exercise all terms in the governing equations. Examples of manufactured solutions and convergence studies for Burgers, Euler and/or Navier--Stokes equations may be found in \cite{Roy2002,KnuppSalari2003,Roy2004,Bond2007,Orozco2010}.
+
+\cite{Roy2002} introduce the general form of the primitive manufactured solution variables to be  a function of sines and cosines for the spatial variables only. In this work, \cite{Roy2002}'s manufactured solutions are modified in order to address temporal accuracy as well:
+\begin{equation*}
+ \label{eq:manufactured01}
+  \phi (x,y,t) = \phi_0+ \phi_x\, f_s \left(\frac{a_{\phi x} \pi x}{L} \right) +  \phi_y \,f_s\left(\frac{a_{\phi y} \pi y}{L}\right) +  \phi_t \,f_s\left(\frac{a_{\phi t} \pi t}{Lt}\right),
+\end{equation*}
+where $\phi=u$ or $v$, and $f_s(\cdot)$ functions denote either sine or cosine function. Note that in this case, $\phi_x$, $\phi_y$,  and $\phi_t$ are constants  and the subscripts do not denote differentiation.
+
+The source terms for the transient/steady and viscous/inviscid variations of the 2D Burger equations~(\ref{eq:burgers2d_01}) using appropriate manufactured solutions  for $u$ and $v$, %described either in Equations (\ref{eq:manufactured02}) or  Equations (\ref{eq:manufactured03})  
+derived from Equations (\ref{eq:manufactured01})  
+are presented in the following sections. 
+
+
+\subsection{Transient Viscous Burgers Equation}
+
+
+The transient, viscous version of Burgers equations is:
+\begin{equation}
+ \label{eq:burgers2d_tv}
+\begin{split}
+ &\diff{ u}{t} + \diff{ u^2 }{x}+\diff{uv}{y}=\nu \left( \diff{^2u}{ x^2}+ \diff{^2u }{y^2}\right),\\
+&\diff{ v}{t}+ \diff{ u v}{x} + \diff{  v^2 }{y}=\nu \left( \diff{^2v}{ x^2}+ \diff{^2v }{y^2}\right),
+\end{split}
+\end{equation}
+%
+where $u$ and $v$ are the velocity in the  $x$ and $y$  directions, respectively, $t$ is the time, and $\nu$ is the viscosity.
+
+
+The manufactured analytical solutions (\ref{eq:manufactured01}) for each one of the variables in 2D transient viscous case of Burgers equations~are:
+\begin{equation}
+\begin{split}
+\label{eq:manufactured_2d_trans}
+u\left(x,y,t\right) &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u y} \pi y}{L}\right) + u_t \cos\left(\dfrac{a_{u t} \pi t}{Lt}\right),\\
+v\left(x,y,t\right) &= v_{0}+v_{x} \cos\left(\frac{a_{v x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v y} \pi y}{L}\right)+ v_t \sin\left(\dfrac{a_{v t} \pi t}{Lt}\right).
+\end{split}
+\end{equation}
+
+
+MMS applied to the 2D transient viscous Burgers equations consists in modifying Equations~(\ref{eq:burgers2d_tv}) by adding a source term to the right-hand side of each equation:
+\begin{equation}
+ \label{eq:burgers2d_tv_mod}
+\begin{split}
+ &\diff{ u}{t} + \diff{ u^2 }{x}+\diff{uv}{y}-\nu \left( \diff{^2u}{ x^2}+ \diff{^2u }{y^2}\right)= Q_{u_\text{t,v}},\\
+&\diff{ v}{t}+ \diff{ u v}{x} + \diff{  v^2 }{y}-\nu \left( \diff{^2v}{ x^2}+ \diff{^2v }{y^2}\right)=Q_{v_\text{t,v}},
+\end{split}
+\end{equation}
+so the modified set of Equations (\ref{eq:burgers2d_tv_mod}) has Equation (\ref{eq:manufactured_2d_trans}) as analytical solution. Note that the subscripts ``$\text{t,v}$'' in $Q_{u_\text{t,v}}$ and $Q_{v_\text{t,v}}$  refer to \underline{t}ransient \underline{v}iscous flow.
+
+
+Source terms $Q_{u_\text{t,v}}$ and $Q_{v_\text{t,v}}$ are presented in the subsequent sessions with the use of the auxiliary variables:
+\begin{equation}
+ \begin{split}
+\label{eq:aux_2d_transient}
+\UU &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u y} \pi y}{L}\right) + u_t \cos\left(\dfrac{a_{u t} \pi t}{Lt}\right),\\
+\V &= v_{0}+v_{x} \cos\left(\frac{a_{v x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v y} \pi y}{L}\right)+ v_t \sin\left(\dfrac{a_{v t} \pi t}{Lt}\right),\\
+\end{split}
+\end{equation}
+%
+which simply are the manufactured solutions.
+
+\subsubsection{Velocity $u$}
+
+For the generation of the analytical source term $Q_{u_\text{t,v}}$ for the velocity in the $x$-direction, the first component of Equation  (\ref{eq:burgers2d_tv}) is written as an  operator $\Lo_{u_\text{t,v}}$:
+\begin{equation*}
+\begin{split}
+\Lo_{u_\text{t,v}}&= \Lo_{u_\text{time}}+\Lo_{u_\text{convection}}+\Lo_{u_\text{dissipation}}\\
+\Lo_{u_\text{time}}&=\diff{ u}{t},\\
+\Lo_{u_\text{convection}}&= \diff{ u^2 }{x}+\diff{uv}{y},\\
+\Lo_{u_\text{dissipation}}&=-\nu \left( \diff{^2u}{ x^2}+ \diff{^2u }{y^2}\right),
+\end{split}
+%\Lo=\diff{ u}{t} + \diff{ u^2 }{x}+\diff{uv}{y}-\nu \left( \diff{^2u}{ x^2}+ \diff{^2u }{y^2}\right),
+\end{equation*}
+which, when operated in Equation (\ref{eq:manufactured_2d_trans}), provides source term $Q_{u_\text{t,v}}$:
+$$Q_{u_\text{t,v}}= Q_{u_\text{time}}+Q_{u_\text{convection}}+Q_{u_\text{dissipation}}$$
+where:
+\begin{equation}
+\begin{split}\label{sourceQu_tv_complete}
+Q_{u_\text{time}} &= - \dfrac{a_{ut} \pi u_t }{Lt}\sin\left(\dfrac{a_{ut} \pi t}{Lt}\right), \\  
+%
+&\\
+%
+Q_{u_\text{convection}} &= -\dfrac{a_{uy} \pi u_y \V}{L} \sin\left(\dfrac{a_{uy} \pi y}{L}\right)+\dfrac{\pi \UU}{L}\left[2 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right] , \\  
+%
+&\\
+%
+Q_{u_\text{dissipation}} &= \dfrac{a_{ux}^2 \pi^2 u_x \nu}{L^2} \sin\left(\dfrac{a_{ux} \pi x}{L}\right)+\dfrac{a_{uy}^2 \pi^2 u_y \nu}{L^2} \cos\left(\dfrac{a_{uy} \pi y}{L}\right)\\  
+\end{split}
+\end{equation}
+where $\UU$ and $\V$ are defined in Equation (\ref{eq:aux_2d_transient}).
+
+
+\subsubsection{Velocity $v$}
+Analogously, for the generation of the analytical source term $Q_{v_\text{t,v}}$ for the $y$-velocity, the second component of  Equation~(\ref{eq:burgers2d_tv}) is written as an  operator $\Lo_{v_\text{t,v}}$:
+\begin{equation*}
+\begin{split}
+\Lo_{v_\text{t,v}}&= \Lo_{v_\text{time}}+\Lo_{v_\text{convection}}+\Lo_{v_\text{dissipation}}\\
+\Lo_{v_\text{time}}&=\diff{ v}{t},\\
+\Lo_{v_\text{convection}}&=\diff{ u v}{x} + \diff{  v^2 }{y},\\
+\Lo_{v_\text{dissipation}}&=-\nu \left( \diff{^2v}{ x^2}+ \diff{^2v }{y^2}\right),
+\end{split}
+%\Lo=\diff{ u}{t} + \diff{ u^2 }{x}+\diff{uv}{y}-\nu \left( \diff{^2u}{ x^2}+ \diff{^2u }{y^2}\right),
+\end{equation*}
+
+
+and then applied to Equation  (\ref{eq:manufactured_2d_trans}).  The resulting source term $Q_{v_\text{t,v}}$ is:
+$$Q_{v_\text{t,v}}= Q_{v_\text{time}}+Q_{v_\text{convection}}+Q_{v_\text{dissipation}}$$
+where:
+\begin{equation}
+\begin{split}
+Q_{v_\text{time}} &=\dfrac{ a_{vt} \pi v_t }{Lt}\cos\left(\dfrac{a_{vt} \pi t}{Lt}\right), \\  
+%
+&\\
+%
+ Q_{v_\text{convection}} &= -\dfrac{a_{vx} \pi v_x \UU}{L} \sin\left(\dfrac{a_{vx} \pi x}{L}\right)+\dfrac{ \pi \V}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+2 a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right] , \\  
+%
+&\\
+%
+ Q_{v_\text{dissipation}} &= \dfrac{a_{vx}^2 \pi^2 v_x \nu }{L^2}\cos\left(\dfrac{a_{vx} \pi x}{L}\right)+\dfrac{a_{vy}^2 \pi^2 v_y \nu }{L^2}\sin\left(\dfrac{a_{vy} \pi y}{L}\right), \\  
+\end{split}
+\end{equation}
+with $\UU$ and $\V$ defined in Equation (\ref{eq:aux_2d_transient}).
+
+\subsection{Transient Inviscid Burgers Equation}
+
+
+The transient, inviscid ($\nu\equiv 0$) version of Burgers equations is:
+\begin{equation}
+ \label{eq:burgers2d_tinv}
+\begin{split}
+ &\diff{ u}{t} + \diff{ u^2 }{x}+\diff{uv}{y}=0,\\
+&\diff{ v}{t}+ \diff{ u v}{x} + \diff{  v^2 }{y}=0,
+\end{split}
+\end{equation}
+%
+where $u$ and $v$ are the velocity in the  $x$ and $y$  directions, respectively, and $t$ is the time,.
+
+
+The manufactured analytical solutions for each one of the variables in 2D transient inviscid case of Burgers equations~are also given by Equations (\ref{eq:manufactured_2d_trans}). 
+
+MMS applied to the 2D transient inviscid Burgers equations consists in modifying Equations~(\ref{eq:burgers2d_tinv}) by adding a source term to the right-hand side of each equation:
+\begin{equation}
+ \label{eq:burgers2d_tinv_mod}
+\begin{split}
+ &\diff{ u}{t} + \diff{ u^2 }{x}+\diff{uv}{y}= Q_{u_\text{t,inv}},\\
+&\diff{ v}{t}+ \diff{ u v}{x} + \diff{  v^2 }{y}=Q_{v_\text{t,inv}},
+\end{split}
+\end{equation}
+so the modified set of Equations (\ref{eq:burgers2d_tinv_mod}) has Equation (\ref{eq:manufactured_2d_trans}) as analytical solution. Note that the subscripts ``$\text{t,inv}$'' in $Q_{u_\text{t,inv}}$ and $Q_{v_\text{t,inv}}$  refer to \underline{t}ransient \underline{inv}iscid flow.
+
+
+Source terms $Q_{u_\text{t,inv}}$ and $Q_{v_\text{t,inv}}$ are presented in the subsequent sessions with the use of the auxiliary variables given in Equation (\ref{eq:aux_2d_transient}), simply are the manufactured solutions and have been used in the viscous case. Recalling:
+\begin{equation*}
+ \begin{split}
+\label{eq:aux_2d_transient_recall}
+\UU &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u y} \pi y}{L}\right) + u_t \cos\left(\dfrac{a_{u t} \pi t}{Lt}\right),\\
+\V &= v_{0}+v_{x} \cos\left(\frac{a_{v x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v y} \pi y}{L}\right)+ v_t \sin\left(\dfrac{a_{v t} \pi t}{Lt}\right).
+\end{split}
+\end{equation*}
+%
+
+\subsubsection{Velocity $u$}
+
+For the generation of the analytical source term $Q_{u_\text{t,inv}}$ for the velocity in the $x$-direction, the first component of Equation  (\ref{eq:burgers2d_tinv}) is written as an  operator $\Lo_{u_\text{t,inv}}$:
+\begin{equation*}
+ \label{eq:burgers2d_14}
+\begin{split}
+\Lo_{u_\text{t,inv}}&= \Lo_{u_\text{time}}+\Lo_{u_\text{convection}}\\
+\Lo_{u_\text{time}}&=\diff{ u}{t},\\
+\Lo_{u_\text{convection}}&= \diff{ u^2 }{x}+\diff{uv}{y},\\
+\end{split}
+%\Lo=\diff{ u}{t} + \diff{ u^2 }{x}+\diff{uv}{y}-\nu \left( \diff{^2u}{ x^2}+ \diff{^2u }{y^2}\right),
+\end{equation*}
+which, when operated in Equation (\ref{eq:manufactured_2d_trans}), provides source term $Q_{u_\text{t,inv}}$:
+$$Q_{u_\text{t,inv}}= Q_{u_\text{time}}+Q_{u_\text{convection}}$$
+where:
+\begin{equation}
+\begin{split}
+Q_{u_\text{time}} &= - \dfrac{a_{ut} \pi u_t }{Lt}\sin\left(\dfrac{a_{ut} \pi t}{Lt}\right), \\  
+%
+&\\
+%
+Q_{u_\text{convection}} &= -\dfrac{a_{uy} \pi u_y \V}{L} \sin\left(\dfrac{a_{uy} \pi y}{L}\right)+\dfrac{\pi \UU}{L}\left[2 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right] , \\  
+\end{split}
+\end{equation}
+where $\UU$ and $\V$ are defined in Equation (\ref{eq:aux_2d_transient}).
+
+
+\subsubsection{Velocity $v$}
+Analogously, for the generation of the analytical source term $Q_{v_\text{t,inv}}$ for the $y$-velocity, the second component of  Equation~(\ref{eq:burgers2d_tinv}) is written as an  operator $\Lo_{v_\text{t,inv}}$:
+\begin{equation*}
+\begin{split}
+\Lo_{v_\text{t,inv}}&= \Lo_{v_\text{time}}+\Lo_{v_\text{convection}}\\
+\Lo_{v_\text{time}}&=\diff{ v}{t},\\
+\Lo_{v_\text{convection}}&=\diff{ u v}{x} + \diff{  v^2 }{y},
+\end{split}
+\end{equation*}
+and then applied to Equation  (\ref{eq:manufactured_2d_trans}).  The resulting source term $Q_{v_\text{t,inv}}$ is:
+$$Q_{v_\text{t,inv}}= Q_{v_\text{time}}+Q_{v_\text{convection}}$$
+where:
+\begin{equation}
+\begin{split}
+Q_{v_\text{time}} &=\dfrac{ a_{vt} \pi v_t }{Lt}\cos\left(\dfrac{a_{vt} \pi t}{Lt}\right), \\  
+%
+&\\
+%
+ Q_{v_\text{convection}} &= -\dfrac{a_{vx} \pi v_x \UU}{L} \sin\left(\dfrac{a_{vx} \pi x}{L}\right)+\dfrac{ \pi \V}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+2 a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right] , 
+%
+\end{split}
+\end{equation}
+with $\UU$ and $\V$ defined in Equation (\ref{eq:aux_2d_transient}).
+
+
+
+\subsection{Steady Viscous Burgers Equation}
+
+
+The steady, viscous version of Burgers equations is:
+\begin{equation}
+ \label{eq:burgers2d_sv}
+\begin{split}
+& \diff{ u^2 }{x}+\diff{uv}{y}=\nu \left( \diff{^2u}{ x^2}+ \diff{^2u }{y^2}\right),\\
+& \diff{ u v}{x} + \diff{  v^2 }{y}=\nu \left( \diff{^2v}{ x^2}+ \diff{^2v }{y^2}\right),
+\end{split}
+\end{equation}
+%
+where $u$ and $v$ are the velocity in the  $x$ and $y$  directions, respectively, and $\nu$ is the viscosity.
+
+
+The manufactured analytical solutions (\ref{eq:manufactured01}) for each one of the variables in 2D steady viscous case of Burgers equations~are\footnote{Note that Equations (\ref{eq:manufactured_2d_steady}) is a special case of Equations (\ref{eq:aux_2d_transient}) by setting $u_t=v_t=0$.}:
+\begin{equation}
+\begin{split}
+\label{eq:manufactured_2d_steady}
+u\left(x,y\right) &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u y} \pi y}{L}\right) ,\\
+v\left(x,y\right) &= v_{0}+v_{x} \cos\left(\frac{a_{v x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v y} \pi y}{L}\right).
+\end{split}
+\end{equation}
+
+
+MMS applied to the 2D steady viscous Burgers equations consists in modifying Equations~(\ref{eq:burgers2d_sv}) by adding a source term to the right-hand side of each equation:
+\begin{equation}
+ \label{eq:burgers2d_sv_mod}
+\begin{split}
+ & \diff{ u^2 }{x}+\diff{uv}{y}-\nu \left( \diff{^2u}{ x^2}+ \diff{^2u }{y^2}\right)= Q_{u_\text{s,v}},\\
+& \diff{ u v}{x} + \diff{  v^2 }{y}-\nu \left( \diff{^2v}{ x^2}+ \diff{^2v }{y^2}\right)=Q_{v_\text{s,v}},
+\end{split}
+\end{equation}
+so the modified set of Equations (\ref{eq:burgers2d_sv_mod}) has Equation (\ref{eq:manufactured_2d_steady}) as analytical solution. Note that the subscripts ``$\text{s,v}$'' in $Q_{u_\text{s,v}}$ and $Q_{v_\text{s,v}}$  refer to \underline{s}teady \underline{v}iscous flow.
+
+
+Source terms $Q_{u_\text{s,v}}$ and $Q_{v_\text{s,v}}$ are presented in the subsequent sessions with the use of the auxiliary variables:
+\begin{equation}
+ \begin{split}
+\label{eq:aux_2d_steady}
+\UU &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u y} \pi y}{L}\right) ,\\
+\V &= v_{0}+v_{x} \cos\left(\frac{a_{v x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v y} \pi y}{L}\right),\\
+\end{split}
+\end{equation}
+%
+which simply are the manufactured solutions.
+
+\subsubsection{Velocity $u$}
+
+For the generation of the analytical source term $Q_{u_\text{s,v}}$ for the velocity in the $x$-direction, the first component of Equation  (\ref{eq:burgers2d_sv}) is written as an  operator $\Lo_{u_\text{s,v}}$:
+\begin{equation*}
+\begin{split}
+\Lo_{u_\text{s,v}}&= \Lo_{u_\text{convection}}+\Lo_{u_\text{dissipation}}\\
+\Lo_{u_\text{convection}}&= \diff{ u^2 }{x}+\diff{uv}{y},\\
+\Lo_{u_\text{dissipation}}&=-\nu \left( \diff{^2u}{ x^2}+ \diff{^2u }{y^2}\right),
+\end{split}
+%\Lo=\diff{ u}{t} + \diff{ u^2 }{x}+\diff{uv}{y}-\nu \left( \diff{^2u}{ x^2}+ \diff{^2u }{y^2}\right),
+\end{equation*}
+which, when operated in Equation (\ref{eq:manufactured_2d_steady}), provides source term $Q_{u_\text{s,v}}$:
+$$Q_{u_\text{s,v}}= Q_{u_\text{convection}}+Q_{u_\text{dissipation}}$$
+where:
+\begin{equation}
+\begin{split}
+Q_{u_\text{convection}} &= -\dfrac{a_{uy} \pi u_y \V}{L} \sin\left(\dfrac{a_{uy} \pi y}{L}\right)+\dfrac{\pi \UU}{L}\left[2 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right] , \\  
+%
+&\\
+%
+Q_{u_\text{dissipation}} &= \dfrac{a_{ux}^2 \pi^2 u_x \nu}{L^2} \sin\left(\dfrac{a_{ux} \pi x}{L}\right)+\dfrac{a_{uy}^2 \pi^2 u_y \nu}{L^2} \cos\left(\dfrac{a_{uy} \pi y}{L}\right)\\  
+\end{split}
+\end{equation}
+where $\UU$ and $\V$ are defined in Equation (\ref{eq:aux_2d_steady}).
+
+
+\subsubsection{Velocity $v$}
+Analogously, for the generation of the analytical source term $Q_{v_\text{s,v}}$ for the $y$-velocity, the second component of  Equation~(\ref{eq:burgers2d_sv}) is written as an  operator $\Lo_{v_\text{s,v}}$:
+\begin{equation*}
+\begin{split}
+\Lo_{v_\text{s,v}}&= \Lo_{v_\text{convection}}+\Lo_{v_\text{dissipation}}\\
+\Lo_{v_\text{convection}}&=\diff{ u v}{x} + \diff{  v^2 }{y},\\
+\Lo_{v_\text{dissipation}}&=-\nu \left( \diff{^2v}{ x^2}+ \diff{^2v }{y^2}\right),
+\end{split}
+%\Lo=\diff{ u}{t} + \diff{ u^2 }{x}+\diff{uv}{y}-\nu \left( \diff{^2u}{ x^2}+ \diff{^2u }{y^2}\right),
+\end{equation*}
+
+
+and then applied to Equation  (\ref{eq:manufactured_2d_steady}).  The resulting source term $Q_{v_\text{s,v}}$ is:
+$$Q_{v_\text{s,v}}= Q_{v_\text{convection}}+Q_{v_\text{dissipation}}$$
+where:
+\begin{equation}
+\begin{split}
+%
+ Q_{v_\text{convection}} &= -\dfrac{a_{vx} \pi v_x \UU}{L} \sin\left(\dfrac{a_{vx} \pi x}{L}\right)+\dfrac{ \pi \V}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+2 a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right] , \\  
+%
+&\\
+%
+ Q_{v_\text{dissipation}} &= \dfrac{a_{vx}^2 \pi^2 v_x \nu }{L^2}\cos\left(\dfrac{a_{vx} \pi x}{L}\right)+\dfrac{a_{vy}^2 \pi^2 v_y \nu }{L^2}\sin\left(\dfrac{a_{vy} \pi y}{L}\right), \\  
+\end{split}
+\end{equation}
+with $\UU$ and $\V$ defined in Equation (\ref{eq:aux_2d_steady}).
+
+
+
+
+\subsection{Steady Inviscid Burgers Equation}
+
+
+The steady, inviscid version of Burgers equations is:
+\begin{equation}
+ \label{eq:burgers2d_sinv}
+\begin{split}
+& \diff{ u^2 }{x}+\diff{uv}{y}=0,\\
+& \diff{ u v}{x} + \diff{  v^2 }{y}=0,
+\end{split}
+\end{equation}
+%
+where $u$ and $v$ are the velocity in the  $x$ and $y$  directions, respectively.
+
+
+The manufactured analytical solutions (\ref{eq:manufactured01}) for each one of the variables in 2D steady inviscid case of Burgers equations~are also given in Equation (\ref{eq:manufactured_2d_steady}).
+% \begin{equation}
+% \begin{split}
+% \label{eq:manufactured_2d_steady}
+% u\left(x,y\right) &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u y} \pi y}{L}\right) ,\\
+% v\left(x,y\right) &= v_{0}+v_{x} \cos\left(\frac{a_{v x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v y} \pi y}{L}\right).
+% \end{split}
+% \end{equation}
+%
+Therefore, MMS applied to the 2D steady inviscid Burgers equations consists in modifying Equations~(\ref{eq:burgers2d_sinv}) by adding a source term to the right-hand side of each equation:
+\begin{equation}
+ \label{eq:burgers2d_sinv_mod}
+\begin{split}
+ & \diff{ u^2 }{x}+\diff{uv}{y}= Q_{u_\text{s,inv}},\\
+& \diff{ u v}{x} + \diff{  v^2 }{y}=Q_{v_\text{s,inv}},
+\end{split}
+\end{equation}
+so the modified set of Equations (\ref{eq:burgers2d_sinv_mod}) has Equation (\ref{eq:manufactured_2d_steady}) as analytical solution. Note that the subscripts ``$\text{s,inv}$'' in $Q_{u_\text{s,inv}}$ and $Q_{v_\text{s,inv}}$  refer to \underline{s}teady \underline{inv}iscid flow.
+
+
+Source terms $Q_{u_\text{s,inv}}$ and $Q_{v_\text{s,inv}}$ are presented in the subsequent sessions with the use of the auxiliary variables given in Equation (\ref{eq:aux_2d_steady}), simply are the manufactured solutions and have been used in the viscous case. Recalling:
+\begin{equation*}
+ \begin{split}
+\label{eq:aux_2d_steady_recall}
+\UU &= u_{0}+u_{x} \sin\left(\frac{a_{u x} \pi x}{L}\right)+u_{y} \cos\left(\frac{a_{u y} \pi y}{L}\right) ,\\
+\V &= v_{0}+v_{x} \cos\left(\frac{a_{v x} \pi x}{L}\right)+v_{y} \sin\left(\frac{a_{v y} \pi y}{L}\right).
+\end{split}
+\end{equation*}
+%
+
+
+\subsubsection{Velocity $u$}
+
+For the generation of the analytical source term $Q_{u_\text{s,inv}}$ for the velocity in the $x$-direction, the first component of Equation  (\ref{eq:burgers2d_sinv}) is written as an  operator $\Lo_{u_\text{s,inv}}$:
+\begin{equation*}
+ \begin{split}
+\Lo_{u_\text{s,inv}}&= \Lo_{u_\text{convection}}\\
+\Lo_{u_\text{convection}}&= \diff{ u^2 }{x}+\diff{uv}{y},\\
+\end{split}
+%\Lo=\diff{ u}{t} + \diff{ u^2 }{x}+\diff{uv}{y}-\nu \left( \diff{^2u}{ x^2}+ \diff{^2u }{y^2}\right),
+\end{equation*}
+which, when operated in Equation (\ref{eq:manufactured_2d_steady}), provides source term $Q_{u_\text{s,inv}}$:
+$$Q_{u_\text{s,inv}}= Q_{u_\text{convection}}$$
+where:
+\begin{equation}
+\begin{split}
+Q_{u_\text{convection}} &= -\dfrac{a_{uy} \pi u_y \V}{L} \sin\left(\dfrac{a_{uy} \pi y}{L}\right)+\dfrac{\pi \UU}{L}\left[2 a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right] , 
+\end{split}
+\end{equation}
+where $\UU$ and $\V$ are defined in Equation (\ref{eq:aux_2d_steady}).
+
+
+\subsubsection{Velocity $v$}
+Analogously, for the generation of the analytical source term $Q_{v_\text{s,inv}}$ for the $y$-velocity, the second component of  Equation~(\ref{eq:burgers2d_sinv}) is written as an  operator $\Lo_{v_\text{s,inv}}$:
+\begin{equation*}
+\begin{split}
+\Lo_{v_\text{s,inv}}&= \Lo_{v_\text{convection}}\\
+\Lo_{v_\text{convection}}&=\diff{ u v}{x} + \diff{  v^2 }{y},
+\end{split}
+\end{equation*}
+%
+and then applied to Equation  (\ref{eq:manufactured_2d_steady}).  The resulting source term $Q_{v_\text{s,inv}}$ is:
+$$Q_{v_\text{s,inv}}= Q_{v_\text{convection}}$$
+where:
+\begin{equation}
+\begin{split}
+%
+ Q_{v_\text{convection}} &= -\dfrac{a_{vx} \pi v_x \UU}{L} \sin\left(\dfrac{a_{vx} \pi x}{L}\right)+\dfrac{ \pi \V}{L}\left[a_{ux} u_x \cos\left(\dfrac{a_{ux} \pi x}{L}\right)+2 a_{vy} v_y \cos\left(\dfrac{a_{vy} \pi y}{L}\right)\right] , 
+%
+\end{split}
+\end{equation}
+with $\UU$ and $\V$ defined in Equation (\ref{eq:aux_2d_steady}).
+
+
+
+% 
+% 
+% \subsection{Comments}
+% 
+% Source terms $Q_u$ and $Q_v$ for the distinct regimen of Burgers equations have been generated by replacing the either the transient or the steady version of the analytical  manufactured solutions into the corresponding set of Equations (\ref{eq:burgers2d_tv}), (\ref{eq:burgers2d_tinv}), (\ref{eq:burgers2d_sv}),and/or (\ref{eq:burgers2d_sinv}), followed by the usage of Maple \cite{Maple15} commands for collecting, sorting and factorizing the terms. Files containing $C$ codes for the source terms have also been generated:  \texttt{Burgers\_2d\_u\_code\_all\_cases.C} and \texttt{Burgers\_2d\_v\_code\_all\_cases.C,}
+% 
+% Additionally to verifying code capability of solving the governing equations accurately in the interior of the domain of interest, one may also verify the software's capability of correctly imposing boundary conditions. The gradients of both steady and transient versions of the manufactured analytical solutions given in Equations (\ref{eq:manufactured_2d_trans}) and (\ref{eq:manufactured_2d_steady}) are identical:
+% \begin{equation*}
+% \nabla u = \left[ \begin{array}{c}
+%   \dfrac{  a_{ux}  \pi u_x}{L} \cos\left( \dfrac{ a_{ux}  \pi  x}{L}\right)\vspace{5pt}\\
+%  -   \dfrac{  a_{uy}  \pi u_y}{L} \sin\left( \dfrac{ a_{uy}  \pi  y}{L}\right)
+% \end{array} \right],
+% \quad\mbox{and}\quad
+% \nabla  v= \left[ \begin{array}{c}
+% -  \dfrac{  a_{vx}  \pi v_x}{L}  \sin\left( \dfrac{ a_{vx}  \pi  x}{L}\right)\vspace{5pt}\\
+%     \dfrac{  a_{vy}  \pi v_y}{L} \cos\left( \dfrac{ a_{vy}  \pi  y}{L}\right)
+% \end{array} \right],
+% \end{equation*}
+% and have been translated into  $C$ code  and stored in the file \texttt{Burgers\_2d\_manuf\_solutions\_grad\_code.C}.
+% 
+% An example of the automatically generated C file from the source term $Q_{u_\text{t,v}}$ for velocity $u$ for the transient viscous flow, given in Equation (\ref{sourceQu_tv_complete}), is:
+% \begin{small}
+% \begin{verbatim}
+% // Source term for the x-momentum equation (u), 2D transient, viscous Burgers equations
+% 
+% double SourceQ_u_transient_viscous ( double x, double y, double t, double nu)
+% {
+%   double Qu_tv;
+%   double U;
+%   double V;
+%   double Q_u_time;
+%   double Q_u_convection;
+%   double Q_u_dissipation;
+% 
+%   U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_t * cos(a_ut * PI * t / Lt);
+%   V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_t * sin(a_vt * PI * t / Lt);
+% 
+%     // "Contribution from the time derivative  to the total source term -------------------------------"
+%   Q_u_time = -a_ut * PI * u_t * sin(a_ut * PI * t / Lt) / Lt;
+% 
+%     // "Contribution from the convective terms to the total source term -------------------------------"
+%   Q_u_convection = -a_uy * PI * u_y * V * sin(a_uy * PI * y / L) / L 
+%     + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * U / L;
+% 
+%     // "Contribution from the viscous/dissipation terms to the total source term ----------------------"
+%   Q_u_dissipation = a_ux * a_ux * PI * PI * u_x * nu * sin(a_ux * PI * x / L) * pow(L, -0.2e1) 
+%     + a_uy * a_uy * PI * PI * u_y * nu * cos(a_uy * PI * y / L) * pow(L, -0.2e1);
+% 
+%     // "Total source term -----------------------------------------------------------------------------"
+%   Qu_tv = Q_u_dissipation + Q_u_convection + Q_u_time;
+%   return(Qu_tv);
+% }
+% \end{verbatim}
+% \end{small}
+
+
+
+
+%%%%%%%%%%%%%%%%% end - added by Kemelli
+
+
+
+\subsubsection{MASA API}
 \endlatexonly
 
 Initialization:
@@ -9,13 +505,13 @@ Initialization:
 
 \latexonly
 % parameter list
-\begin{table} 
+\begin{table}[htpb] 
 \begin{center} 
 \begin{tabular}{|rrrrrrr|}
 \hline
-L     & nu      & u\_0    & u\_x    & u\_y  & v\_0  & v\_x  \\
-v\_y  & a\_ut   & a\_ux   & a\_uy   & a\_vt & a\_vx & a\_vy \\
-u\_t  & v\_t    & Gamma   &         &       &       &       \\
+L     & nu     & u\_0    & u\_x    & u\_y   & u\_t  & v\_0  \\
+v\_x  & v\_y   & v\_t    & a\_ux  & a\_uy   & a\_ut & a\_vx \\
+a\_vy & a\_vt  &         &         &       &       &       \\
 \hline
 \end{tabular} 
 \end{center}  
@@ -30,5 +526,8 @@ Functions:
 \li masa_eval_2d_source_rho_v()
 \li masa_eval_2d_exact_u()
 \li masa_eval_2d_exact_v()
+
+
+
 
 */ 
