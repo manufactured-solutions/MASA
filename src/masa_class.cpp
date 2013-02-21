@@ -72,11 +72,15 @@ MASA::manufactured_solution<Scalar>::manufactured_solution()
   }
 
 // define PI and other constants
-template <typename Scalar>
-const Scalar MASA::manufactured_solution<Scalar>::PI = std::acos(Scalar(-1));
+namespace {
+  using std::acos;
+}
 
 template <typename Scalar>
-const Scalar MASA::manufactured_solution<Scalar>::pi = std::acos(Scalar(-1));
+const Scalar MASA::manufactured_solution<Scalar>::PI = acos(Scalar(-1));
+
+template <typename Scalar>
+const Scalar MASA::manufactured_solution<Scalar>::pi = acos(Scalar(-1));
 
 template <typename Scalar>
 const Scalar MASA::manufactured_solution<Scalar>::MASA_VAR_DEFAULT = -12345.67; // default init each var to 'crazy' val
@@ -458,6 +462,8 @@ MASA::masa_test_function<Scalar>::masa_test_function()
 template <typename Scalar>
 int MASA::manufactured_solution<Scalar>::poly_test()
 {
+  using std::abs;
+
   Scalar thresh = 5 * std::numeric_limits<Scalar>::epsilon();
   
   int return_flag = 0;
@@ -484,10 +490,10 @@ int MASA::manufactured_solution<Scalar>::poly_test()
   poly.set_coeffs( a );
 
   // Check to make sure we get back what we set
-  if( std::abs( a0 - poly.get_coeffs( 0 ) ) > thresh ) return_flag = 1;
-  if( std::abs( a1 - poly.get_coeffs( 1 ) ) > thresh ) return_flag = 1;
-  if( std::abs( a2 - poly.get_coeffs( 2 ) ) > thresh ) return_flag = 1;
-  if( std::abs( a3 - poly.get_coeffs( 3 ) ) > thresh ) return_flag = 1;
+  if( abs( a0 - poly.get_coeffs( 0 ) ) > thresh ) return_flag = 1;
+  if( abs( a1 - poly.get_coeffs( 1 ) ) > thresh ) return_flag = 1;
+  if( abs( a2 - poly.get_coeffs( 2 ) ) > thresh ) return_flag = 1;
+  if( abs( a3 - poly.get_coeffs( 3 ) ) > thresh ) return_flag = 1;
 
   // Check polynomial evaluation
   const Scalar x = 2.0;
@@ -497,7 +503,7 @@ int MASA::manufactured_solution<Scalar>::poly_test()
   computed_value = poly( x , &ierr);
   if(ierr != 0) return_flag=1;
 
-  if( std::abs( exact_value - computed_value ) > thresh ) return_flag = 1;
+  if( abs( exact_value - computed_value ) > thresh ) return_flag = 1;
 
   // Check derivatives
   const Scalar dx = 62;
@@ -508,10 +514,10 @@ int MASA::manufactured_solution<Scalar>::poly_test()
 
   poly.eval_derivs( x, 4, derivs );
   
-  if( std::abs( exact_value - derivs[0] ) > thresh ) return_flag = 1;
-  if( std::abs( dx  - derivs[1] ) > thresh ) return_flag = 1;
-  if( std::abs( d2x - derivs[2] ) > thresh ) return_flag = 1;
-  if( std::abs( d3x - derivs[3] ) > thresh ) return_flag = 1;
+  if( abs( exact_value - derivs[0] ) > thresh ) return_flag = 1;
+  if( abs( dx  - derivs[1] ) > thresh ) return_flag = 1;
+  if( abs( d2x - derivs[2] ) > thresh ) return_flag = 1;
+  if( abs( d3x - derivs[3] ) > thresh ) return_flag = 1;
 
   return return_flag;
 }

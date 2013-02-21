@@ -92,6 +92,9 @@ int MASA::cp_normal<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::cp_normal<Scalar>::eval_likelyhood(Scalar x)
 {
+  using std::exp;
+  using std::pow;
+
   Scalar likelyhood;
   Scalar av = 0;
 
@@ -104,7 +107,7 @@ Scalar MASA::cp_normal<Scalar>::eval_likelyhood(Scalar x)
   //set x_bar to average of data vector
   this->set_var("x_bar",av);
   
-  likelyhood = std::exp(-(vec_data.size()/(2*std::pow(Scalar(sigma_d),2)))*std::pow((x-x_bar),2));
+  likelyhood = exp(-(vec_data.size()/(2*pow(Scalar(sigma_d),2)))*pow((x-x_bar),2));
   return likelyhood;
 }
 
@@ -112,6 +115,8 @@ Scalar MASA::cp_normal<Scalar>::eval_likelyhood(Scalar x)
 template <typename Scalar>
 Scalar MASA::cp_normal<Scalar>::eval_loglikelyhood(Scalar x)
 {
+  using std::pow;
+
   Scalar loglikelyhood;
   Scalar av = 0;
 
@@ -124,21 +129,29 @@ Scalar MASA::cp_normal<Scalar>::eval_loglikelyhood(Scalar x)
   //set x_bar to average of data vector
   this->set_var("x_bar",av);
   
-  loglikelyhood = -(vec_data.size()/(2*std::pow(sigma_d,2)))*std::pow((x-x_bar),2);
+  loglikelyhood = -(vec_data.size()/(2*pow(sigma_d,2)))*pow((x-x_bar),2);
   return loglikelyhood;
 }
 
 template <typename Scalar>
 Scalar MASA::cp_normal<Scalar>::eval_prior(Scalar x)
 {
+  using std::sqrt;
+  using std::exp;
+  using std::pow;
+
   Scalar prior;
-  prior = std::sqrt(2*pi*std::pow(sigma,2)) * std::exp(-(1/(2*std::pow(sigma,2)))*std::pow((x-m),2));
+  prior = sqrt(2*pi*pow(sigma,2)) * exp(-(1/(2*pow(sigma,2)))*pow((x-m),2));
   return prior;
 }
 
 template <typename Scalar>
 Scalar MASA::cp_normal<Scalar>::eval_posterior(Scalar x)
 {
+  using std::sqrt;
+  using std::exp;
+  using std::pow;
+
   Scalar av = 0;
   Scalar post;
   Scalar sigmap;
@@ -153,9 +166,9 @@ Scalar MASA::cp_normal<Scalar>::eval_posterior(Scalar x)
   //set x_bar to average of data vector
   this->set_var("x_bar",av);
   
-  sigmap = std::sqrt(1/((1/std::pow(sigma,2)) + (Scalar(vec_data.size())/std::pow(sigma_d,2))));
-  mp     = std::pow(sigmap,2) * (m/std::pow(sigma,2) + (Scalar(vec_data.size())*x_bar/std::pow(sigma_d,2)));
-  post   = std::sqrt(2*pi*std::pow(sigmap,2)) * std::exp(-(1/(2*std::pow(sigmap,2)))*std::pow((x-mp),2));
+  sigmap = sqrt(1/((1/pow(sigma,2)) + (Scalar(vec_data.size())/pow(sigma_d,2))));
+  mp     = pow(sigmap,2) * (m/pow(sigma,2) + (Scalar(vec_data.size())*x_bar/pow(sigma_d,2)));
+  post   = sqrt(2*pi*pow(sigmap,2)) * exp(-(1/(2*pow(sigmap,2)))*pow((x-mp),2));
 
   return post;
 }
@@ -169,12 +182,13 @@ Scalar MASA::cp_normal<Scalar>::factorial(int n)
 template <typename Scalar>
 Scalar MASA::cp_normal<Scalar>::eval_cen_mom(int k)
 {
+  using std::pow;
 
   Scalar moment;
 
   if(k%2 == 0 ) // k is even!
     {
-      moment = std::pow(sigma,k) * (factorial(k) / std::pow(Scalar(2),k/2) * factorial(k/2));
+      moment = pow(sigma,k) * (factorial(k) / pow(Scalar(2),k/2) * factorial(k/2));
     }
   else // k is odd
     {
@@ -188,17 +202,22 @@ Scalar MASA::cp_normal<Scalar>::eval_cen_mom(int k)
 template <typename Scalar>
 Scalar MASA::cp_normal<Scalar>::eval_post_mean()
 {
+  using std::sqrt;
+  using std::pow;
+
   Scalar mean;
-  Scalar sigmap = std::sqrt(1/((1/std::pow(sigma,2)) + (Scalar(vec_data.size())/std::pow(sigma_d,2))));
-  mean     = std::pow(sigmap,2) * (m/std::pow(sigma,2) + (Scalar(vec_data.size())*x_bar/std::pow(sigma_d,2)));  
+  Scalar sigmap = sqrt(1/((1/pow(sigma,2)) + (Scalar(vec_data.size())/pow(sigma_d,2))));
+  mean     = pow(sigmap,2) * (m/pow(sigma,2) + (Scalar(vec_data.size())*x_bar/pow(sigma_d,2)));  
   return mean;
 }
 
 template <typename Scalar>
 Scalar MASA::cp_normal<Scalar>::eval_post_var()
 {
+  using std::pow;
+
   Scalar var;
-  var =1/((1/std::pow(sigma,2)) + (Scalar(vec_data.size())/std::pow(sigma_d,2)));
+  var =1/((1/pow(sigma,2)) + (Scalar(vec_data.size())/pow(sigma_d,2)));
   return var;
 }
 

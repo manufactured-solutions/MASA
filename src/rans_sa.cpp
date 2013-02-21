@@ -182,7 +182,9 @@ Scalar MASA::rans_sa<Scalar>::d2u()
 template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::nu(Scalar eta)
 {
-  return b1*eta - .5*(etam+1)*b1*eta*eta/etam + b1*std::pow(eta,3)/(3*etam);
+  using std::pow;
+
+  return b1*eta - .5*(etam+1)*b1*eta*eta/etam + b1*pow(eta,3)/(3*etam);
 }
 
 template <typename Scalar>
@@ -211,26 +213,24 @@ Scalar MASA::rans_sa<Scalar>::d2nu(Scalar eta)
 template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::production(Scalar eta)
 {
-
   return cb1*s(eta)*nu(eta);
-  
 }
 
 template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::destruction(Scalar eta)
 {
+  using std::pow;
 
-  return cw1()*fw(eta)*std::pow((nu(eta)/eta),2);
-
+  return cw1()*fw(eta)*pow((nu(eta)/eta),2);
 }
 
 // some rearranging here, for transport. might look funky to SA specialists.
 template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::transport(Scalar eta)
 {
+  using std::pow;
 
-  return (1/sigma)* ((1/re_tau + nu(eta)) * d2nu(eta) + (1+cb2)*std::pow(dnu(eta),2));
-
+  return (1/sigma)* ((1/re_tau + nu(eta)) * d2nu(eta) + (1+cb2)*pow(dnu(eta),2));
 }
 
 
@@ -261,9 +261,9 @@ Scalar MASA::rans_sa<Scalar>::chi(Scalar eta)
 template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::fv1(Scalar eta)
 {
+  using std::pow;
 
-  return std::pow(chi(eta),3)/(std::pow(chi(eta),3) + std::pow(cv1,3));
-
+  return pow(chi(eta),3)/(pow(chi(eta),3) + pow(cv1,3));
 }
 
 template <typename Scalar>
@@ -312,18 +312,18 @@ Scalar MASA::rans_sa<Scalar>::r(Scalar eta)
 template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::g(Scalar eta)
 {
+  using std::pow;
 
-  return r(eta) + cw2*(std::pow(r(eta),6) - r(eta));
-
+  return r(eta) + cw2*(pow(r(eta),6) - r(eta));
 }
 
 // wall function
 template <typename Scalar>
 Scalar MASA::rans_sa<Scalar>::fw(Scalar eta)
 {
+  using std::pow;
 
-  return g(eta)*std::pow((1.+std::pow(cw3,6))/(std::pow(g(eta),6)+std::pow(cw3,6)),1/Scalar(6));
-
+  return g(eta)*pow((1.+pow(cw3,6))/(pow(g(eta),6)+pow(cw3,6)),1/Scalar(6));
 }
 
 // first derivative of vt

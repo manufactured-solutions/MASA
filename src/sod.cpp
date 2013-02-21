@@ -67,10 +67,6 @@
 #include <limits>
 #include <stdlib.h>
 
-using std::cos;
-using std::sin;
-using std::pow;
-
 using namespace MASA;
 using namespace std;
 
@@ -103,6 +99,8 @@ int MASA::sod_1d<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::sod_1d<Scalar>::eval_q_t()
 {
+  using std::sqrt;
+
   // Define the Sod problem initial conditions for the left and right states.
 
   pl = 1.e0;
@@ -118,12 +116,13 @@ Scalar MASA::sod_1d<Scalar>::eval_q_t()
 
   // will hit masa_exit --root not bracketed!
   return rtbis(1.,20.,1.,100);
-
 }
 
 template <typename Scalar>
 Scalar MASA::sod_1d<Scalar>::eval_q_t(Scalar x)
 {
+  using std::sqrt;
+
   // Define the Sod problem initial conditions for the left and right states.
   Scalar test = x;
 
@@ -142,12 +141,14 @@ Scalar MASA::sod_1d<Scalar>::eval_q_t(Scalar x)
 
   // will hit 'too many bisections' 
   return rtbis(-1,2,test,1);
-
 }
 
 template <typename Scalar>
 Scalar MASA::sod_1d<Scalar>::eval_q_rho(Scalar x,Scalar t)
 {
+  using std::pow;
+  using std::sqrt;
+
   // xmax determines the size of the computational domain (-xmax, +xmax).
   // numcells determines the number of cells in the output table.          
   // Scalar xmax 	= 5.e0;
@@ -174,11 +175,11 @@ Scalar MASA::sod_1d<Scalar>::eval_q_rho(Scalar x,Scalar t)
 
   // Define the density to the left of the contact discontinuity rhoml.
  
-  rhoml = std::pow(rhol * (pm / pl),(1.e0 / Gamma));
+  rhoml = pow(rhol * (pm / pl),(1.e0 / Gamma));
 
   // Define the postshock fluid velocity vm.
 
-  vm = 2.e0 * cl / (Gamma - 1.e0) * (1.e0 - std::pow((pm / pl),( (Gamma - 1.e0) / (2.e0 * Gamma) )));
+  vm = 2.e0 * cl / (Gamma - 1.e0) * (1.e0 - pow((pm / pl),( (Gamma - 1.e0) / (2.e0 * Gamma) )));
 
   // Define the postshock density rhomr.
 
@@ -201,7 +202,7 @@ Scalar MASA::sod_1d<Scalar>::eval_q_rho(Scalar x,Scalar t)
       if (x <= (-cl*t) )
 	  density = rhol;
       else if (x <= (-vt*t) )
-	density = std::pow(rhol * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 / (Gamma - 1.e0)));
+	density = pow(rhol * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 / (Gamma - 1.e0)));
       else if (x <= (vm*t) )
 	  density = rhoml;
       else if (x <= (vs*t) )
@@ -211,7 +212,6 @@ Scalar MASA::sod_1d<Scalar>::eval_q_rho(Scalar x,Scalar t)
       
       Scalar out_soln = density;
       return out_soln;
-
 }
 
 // return product of rho and u
@@ -219,6 +219,8 @@ Scalar MASA::sod_1d<Scalar>::eval_q_rho(Scalar x,Scalar t)
 template <typename Scalar>
 Scalar MASA::sod_1d<Scalar>::eval_q_rho_u(Scalar x,Scalar t)
 {
+  using std::pow;
+
   // xmax determines the size of the computational domain (-xmax, +xmax).
   // numcells determines the number of cells in the output table.          
   // Scalar xmax 	= 5.e0;
@@ -245,11 +247,11 @@ Scalar MASA::sod_1d<Scalar>::eval_q_rho_u(Scalar x,Scalar t)
 
   // Define the density to the left of the contact discontinuity rhoml.
  
-  rhoml = std::pow(rhol * (pm / pl),(1.e0 / Gamma));
+  rhoml = pow(rhol * (pm / pl),(1.e0 / Gamma));
 
   // Define the postshock fluid velocity vm.
 
-  vm = 2.e0 * cl / (Gamma - 1.e0) * (1.e0 - std::pow((pm / pl),( (Gamma - 1.e0) / (2.e0 * Gamma) )));
+  vm = 2.e0 * cl / (Gamma - 1.e0) * (1.e0 - pow((pm / pl),( (Gamma - 1.e0) / (2.e0 * Gamma) )));
 
   // Define the postshock density rhomr.
 
@@ -272,7 +274,7 @@ Scalar MASA::sod_1d<Scalar>::eval_q_rho_u(Scalar x,Scalar t)
       if (x <= (-cl*t) )
 	  density = rhol;
       else if (x <= (-vt*t) )
-	  density = std::pow(rhol * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 / (Gamma - 1.e0))) ;
+	  density = pow(rhol * (-mu * (x / (cl * t) ) + (1 - mu) ),(2.e0 / (Gamma - 1.e0))) ;
       else if (x <= (vm*t) )
 	  density = rhoml;
       else if (x <= (vs*t) )
@@ -300,6 +302,7 @@ Scalar MASA::sod_1d<Scalar>::eval_q_rho_u(Scalar x,Scalar t)
 template <typename Scalar>
 Scalar MASA::sod_1d<Scalar>::eval_q_p(Scalar x,Scalar t)
 {
+  using std::pow;
 
   Scalar pm, pressure;
   Scalar vs, vt, rhomr, vm;
@@ -359,6 +362,8 @@ Scalar MASA::sod_1d<Scalar>::eval_q_p(Scalar x,Scalar t)
 template <typename Scalar>
 Scalar MASA::sod_1d<Scalar>::func(Scalar pm)
 {
+  using std::pow;
+  using std::sqrt;
 
 ///////////////////////////////////////////////////////////////////////
 //
@@ -371,7 +376,7 @@ Scalar MASA::sod_1d<Scalar>::func(Scalar pm)
  
   Scalar myval;
  
-  myval = -2*cl*(1 - std::pow((pm/pl),((-1 + Gamma)/(2*Gamma))))/
+  myval = -2*cl*(1 - pow((pm/pl),((-1 + Gamma)/(2*Gamma))))/
     (cr*(-1 + Gamma)) +
     (-1 + pm/pr)*sqrt((1 - mu)/(Gamma*(mu + pm/pr)));
   
@@ -395,6 +400,8 @@ Scalar MASA::sod_1d<Scalar>::func(Scalar pm)
 template <typename Scalar>
 Scalar MASA::sod_1d<Scalar>::rtbis(Scalar x1,Scalar x2,Scalar xacc,int JMAX)
 {
+  using std::abs;
+
   int j;
   Scalar dx,f,fmid,xmid;
   Scalar myval;
@@ -426,7 +433,7 @@ Scalar MASA::sod_1d<Scalar>::rtbis(Scalar x1,Scalar x2,Scalar xacc,int JMAX)
       xmid=myval+dx;
       fmid=func(xmid);
       if(fmid <= 0.) myval=xmid;
-      if(std::abs(dx) < xacc || fmid < thresh) 
+      if(abs(dx) < xacc || fmid < thresh) 
 	return(myval);
     }
   

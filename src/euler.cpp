@@ -103,14 +103,17 @@ int MASA::euler_1d<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::euler_1d<Scalar>::eval_q_rho_u(Scalar x)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_u;
   Scalar RHO;
   Scalar U;
 
-  RHO = rho_0 + rho_x * std::sin(a_rhox * pi * x / L);
-  U = u_0 + u_x * std::sin(a_ux * pi * x / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L);
 
-  Q_u = Scalar(0.2e1) * std::cos(a_ux * PI * x / L) * RHO * U * a_ux * PI * u_x / L + std::cos(a_rhox * PI * x / L) * U * U * a_rhox * PI * rho_x / L - std::sin(a_px * PI * x / L) * a_px * PI * p_x / L;
+  Q_u = Scalar(0.2e1) * cos(a_ux * PI * x / L) * RHO * U * a_ux * PI * u_x / L + cos(a_rhox * PI * x / L) * U * U * a_rhox * PI * rho_x / L - sin(a_px * PI * x / L) * a_px * PI * p_x / L;
   
   return(Q_u);
 }
@@ -118,16 +121,20 @@ Scalar MASA::euler_1d<Scalar>::eval_q_rho_u(Scalar x)
 template <typename Scalar>
 Scalar MASA::euler_1d<Scalar>::eval_q_rho_e(Scalar x)
 {
+  using std::cos;
+  using std::pow;
+  using std::sin;
+
   Scalar Q_e;
   Scalar RHO;
   Scalar U;
   Scalar P;
 
-  RHO = rho_0 + rho_x * std::sin(a_rhox * pi * x / L);
-  P = p_0 + p_x * std::cos(a_px * pi * x / L);
-  U = u_0 + u_x * std::sin(a_ux * pi * x / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L);
+  P = p_0 + p_x * cos(a_px * pi * x / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L);
 
-  Q_e = std::cos(a_rhox * PI * x / L) * std::pow(Scalar(U), Scalar(Scalar(0.3e1))) * a_rhox * PI * rho_x / L / Scalar(0.2e1) + std::cos(a_ux * PI * x / L) * P * a_ux * PI * u_x * Gamma / L / (Gamma - Scalar(0.1e1)) + Scalar(0.3e1) / Scalar(0.2e1) * std::cos(a_ux * PI * x / L) * RHO * U * U * a_ux * PI * u_x / L - std::sin(a_px * PI * x / L) * U * a_px * PI * p_x * Gamma / L / (Gamma - Scalar(0.1e1));
+  Q_e = cos(a_rhox * PI * x / L) * pow(Scalar(U), Scalar(Scalar(0.3e1))) * a_rhox * PI * rho_x / L / Scalar(0.2e1) + cos(a_ux * PI * x / L) * P * a_ux * PI * u_x * Gamma / L / (Gamma - Scalar(0.1e1)) + Scalar(0.3e1) / Scalar(0.2e1) * cos(a_ux * PI * x / L) * RHO * U * U * a_ux * PI * u_x / L - sin(a_px * PI * x / L) * U * a_px * PI * p_x * Gamma / L / (Gamma - Scalar(0.1e1));
 
   return(Q_e);
 }
@@ -135,14 +142,17 @@ Scalar MASA::euler_1d<Scalar>::eval_q_rho_e(Scalar x)
 template <typename Scalar>
 Scalar MASA::euler_1d<Scalar>::eval_q_rho(Scalar x)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_rho;
   Scalar RHO;
   Scalar U;
 
-  RHO = rho_0 + rho_x * std::sin(a_rhox * pi * x / L);
-  U = u_0 + u_x * std::sin(a_ux * pi * x / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * pi * x / L);
+  U = u_0 + u_x * sin(a_ux * pi * x / L);
 
-  Q_rho = std::cos(a_ux * PI * x / L) * RHO * a_ux * PI * u_x / L + std::cos(a_rhox * PI * x / L) * U * a_rhox * PI * rho_x / L;
+  Q_rho = cos(a_ux * PI * x / L) * RHO * a_ux * PI * u_x / L + cos(a_rhox * PI * x / L) * U * a_rhox * PI * rho_x / L;
   return(Q_rho);
 }
 
@@ -153,25 +163,27 @@ Scalar MASA::euler_1d<Scalar>::eval_q_rho(Scalar x)
 template <typename Scalar>
 Scalar MASA::euler_1d<Scalar>::eval_g_u(Scalar x)
 {
+  using std::cos;
 
-  Scalar grad_u = u_x * std::cos(a_ux * pi * x / L) * a_ux * pi / L;
+  Scalar grad_u = u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
   return grad_u;
-
-
 }
 
 template <typename Scalar>
 Scalar MASA::euler_1d<Scalar>::eval_g_p(Scalar x)
 {
-  Scalar grad_p = -p_x * std::sin(a_px * pi * x / L) * a_px * pi / L;
-  return grad_p;
+  using std::sin;
 
+  Scalar grad_p = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
+  return grad_p;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_1d<Scalar>::eval_g_rho(Scalar x)
 {
-  Scalar grad_rho = rho_x * std::cos(a_rhox * pi * x / L) * a_rhox * pi / L;
+  using std::cos;
+
+  Scalar grad_rho = rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
   return grad_rho;
 
 }
@@ -184,24 +196,30 @@ Scalar MASA::euler_1d<Scalar>::eval_g_rho(Scalar x)
 template <typename Scalar>
 Scalar MASA::euler_1d<Scalar>::eval_exact_u(Scalar x)
 {
+  using std::sin;
+
   Scalar exact_u;
-  exact_u = u_0 + u_x * std::sin(a_ux * pi * x / L);
+  exact_u = u_0 + u_x * sin(a_ux * pi * x / L);
   return exact_u;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_1d<Scalar>::eval_exact_p(Scalar x)
 {
+  using std::cos;
+
   Scalar exact_p;
-  exact_p = p_0 + p_x * std::cos(a_px * pi * x / L);
+  exact_p = p_0 + p_x * cos(a_px * pi * x / L);
   return exact_p;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_1d<Scalar>::eval_exact_rho(Scalar x)
 {
+  using std::sin;
+
   Scalar exact_rho;
-  exact_rho = rho_0 + rho_x * std::sin(a_rhox * pi * x / L);
+  exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L);
   return exact_rho;
 }
 
@@ -294,16 +312,19 @@ int MASA::euler_2d<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_q_rho_u(Scalar x,Scalar y)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_u;
   Scalar RHO;
   Scalar U;
   Scalar V;
 
-  RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L);
-  U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L);
-  V = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L);
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
 
-  Q_u = a_rhox * PI * rho_x * U * U * std::cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * U * V * std::sin(a_rhoy * PI * y / L) / L - a_uy * PI * u_y * RHO * V * std::sin(a_uy * PI * y / L) / L - a_px * PI * p_x * std::sin(a_px * PI * x / L) / L + (0.2e1 * a_ux * u_x * std::cos(a_ux * PI * x / L) + a_vy * v_y * std::cos(a_vy * PI * y / L)) * PI * RHO * U / L;
+  Q_u = a_rhox * PI * rho_x * U * U * cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * U * V * sin(a_rhoy * PI * y / L) / L - a_uy * PI * u_y * RHO * V * sin(a_uy * PI * y / L) / L - a_px * PI * p_x * sin(a_px * PI * x / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * RHO * U / L;
 
   return Q_u;
 }
@@ -311,15 +332,18 @@ Scalar MASA::euler_2d<Scalar>::eval_q_rho_u(Scalar x,Scalar y)
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_q_rho_v(Scalar x,Scalar y)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_v;
   Scalar RHO;
   Scalar U;
   Scalar V;
-  RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L);
-  U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L);
-  V = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L);
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
 
-  Q_v = a_rhox * PI * rho_x * U * V * std::cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * V * std::sin(a_rhoy * PI * y / L) / L - a_vx * PI * v_x * RHO * U * std::sin(a_vx * PI * x / L) / L + a_py * PI * p_y * std::cos(a_py * PI * y / L) / L + (a_ux * u_x * std::cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * std::cos(a_vy * PI * y / L)) * PI * RHO * V / L;
+  Q_v = a_rhox * PI * rho_x * U * V * cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * V * sin(a_rhoy * PI * y / L) / L - a_vx * PI * v_x * RHO * U * sin(a_vx * PI * x / L) / L + a_py * PI * p_y * cos(a_py * PI * y / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * RHO * V / L;
 
   return Q_v;
 }
@@ -327,18 +351,21 @@ Scalar MASA::euler_2d<Scalar>::eval_q_rho_v(Scalar x,Scalar y)
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_q_rho_e(Scalar x,Scalar y)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_e;
   Scalar RHO;
   Scalar U;
   Scalar V;
   Scalar P;
 
-  RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L);
-  U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L);
-  V = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L);
-  P = p_0 + p_x * std::cos(a_px * PI * x / L) + p_y * std::sin(a_py * PI * y / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L);
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
+  P = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L);
 
-  Q_e = -a_px * PI * p_x * Gamma * U * std::sin(a_px * PI * x / L) / (Gamma - 0.1e1) / L + a_py * PI * p_y * Gamma * V * std::cos(a_py * PI * y / L) / (Gamma - 0.1e1) / L + (U * U + V * V) * a_rhox * PI * rho_x * U * std::cos(a_rhox * PI * x / L) / L / 0.2e1 - (U * U + V * V) * a_rhoy * PI * rho_y * V * std::sin(a_rhoy * PI * y / L) / L / 0.2e1 + (0.3e1 * a_ux * u_x * std::cos(a_ux * PI * x / L) + a_vy * v_y * std::cos(a_vy * PI * y / L)) * PI * RHO * U * U / L / 0.2e1 - (a_uy * u_y * std::sin(a_uy * PI * y / L) + a_vx * v_x * std::sin(a_vx * PI * x / L)) * PI * RHO * U * V / L + (a_ux * u_x * std::cos(a_ux * PI * x / L) + 0.3e1 * a_vy * v_y * std::cos(a_vy * PI * y / L)) * PI * RHO * V * V / L / 0.2e1 + (a_ux * u_x * std::cos(a_ux * PI * x / L) + a_vy * v_y * std::cos(a_vy * PI * y / L)) * PI * Gamma * P / (Gamma - 0.1e1) / L;
+  Q_e = -a_px * PI * p_x * Gamma * U * sin(a_px * PI * x / L) / (Gamma - 0.1e1) / L + a_py * PI * p_y * Gamma * V * cos(a_py * PI * y / L) / (Gamma - 0.1e1) / L + (U * U + V * V) * a_rhox * PI * rho_x * U * cos(a_rhox * PI * x / L) / L / 0.2e1 - (U * U + V * V) * a_rhoy * PI * rho_y * V * sin(a_rhoy * PI * y / L) / L / 0.2e1 + (0.3e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * RHO * U * U / L / 0.2e1 - (a_uy * u_y * sin(a_uy * PI * y / L) + a_vx * v_x * sin(a_vx * PI * x / L)) * PI * RHO * U * V / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.3e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * RHO * V * V / L / 0.2e1 + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * Gamma * P / (Gamma - 0.1e1) / L;
 
   return(Q_e);
 }
@@ -346,16 +373,19 @@ Scalar MASA::euler_2d<Scalar>::eval_q_rho_e(Scalar x,Scalar y)
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_q_rho(Scalar x,Scalar y)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_rho;
   Scalar RHO;
   Scalar U;
   Scalar V;
 
-  RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L);
-  U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L);
-  V = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L);
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
 
-  Q_rho = a_rhox * PI * rho_x * U * std::cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * std::sin(a_rhoy * PI * y / L) / L + (a_ux * u_x * std::cos(a_ux * PI * x / L) + a_vy * v_y * std::cos(a_vy * PI * y / L)) * PI * RHO / L;
+  Q_rho = a_rhox * PI * rho_x * U * cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * sin(a_rhoy * PI * y / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * RHO / L;
 
   return(Q_rho);
 }
@@ -378,11 +408,11 @@ Scalar MASA::euler_2d<Scalar>::eval_g_u(Scalar x,Scalar y, int i)
       break;
       
     case 1:
-      grad = u_x * std::cos(a_ux * pi * x / L) * a_ux * pi / L;      
+      grad = u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;      
       break;
 
     case 2:
-      grad = -u_y * std::sin(a_uy * pi * y / L) * a_uy * pi / L;
+      grad = -u_y * sin(a_uy * pi * y / L) * a_uy * pi / L;
       break;
 
     default:
@@ -400,6 +430,8 @@ Scalar MASA::euler_2d<Scalar>::eval_g_u(Scalar x,Scalar y, int i)
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_g_v(Scalar x,Scalar y, int i)
 {
+  using std::cos;
+  using std::sin;
 
   Scalar grad = -1;
 
@@ -411,11 +443,11 @@ Scalar MASA::euler_2d<Scalar>::eval_g_v(Scalar x,Scalar y, int i)
       break;
       
     case 1:
-      grad = -v_x * std::sin(a_vx * pi * x / L) * a_vx * pi / L;
+      grad = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
       break;
 
     case 2:
-      grad =  v_y * std::cos(a_vy * pi * y / L) * a_vy * pi / L;
+      grad =  v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
       break;
 
     default:
@@ -432,6 +464,8 @@ Scalar MASA::euler_2d<Scalar>::eval_g_v(Scalar x,Scalar y, int i)
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_g_p(Scalar x,Scalar y, int i)
 {
+  using std::cos;
+  using std::sin;
 
   Scalar grad = -1;
 
@@ -443,11 +477,11 @@ Scalar MASA::euler_2d<Scalar>::eval_g_p(Scalar x,Scalar y, int i)
       break;
       
     case 1:
-      grad = -p_x * std::sin(a_px * pi * x / L) * a_px * pi / L;
+      grad = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
       break;
 
     case 2:
-      grad =  p_y * std::cos(a_py * pi * y / L) * a_py * pi / L;
+      grad =  p_y * cos(a_py * pi * y / L) * a_py * pi / L;
       break;
 
     default:
@@ -464,6 +498,8 @@ Scalar MASA::euler_2d<Scalar>::eval_g_p(Scalar x,Scalar y, int i)
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_g_rho(Scalar x,Scalar y, int i)
 {
+  using std::cos;
+  using std::sin;
 
   Scalar grad = -1;
 
@@ -475,11 +511,11 @@ Scalar MASA::euler_2d<Scalar>::eval_g_rho(Scalar x,Scalar y, int i)
       break;
       
     case 1:
-      grad =  rho_x * std::cos(a_rhox * pi * x / L) * a_rhox * pi / L;
+      grad =  rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
       break;
 
     case 2:
-      grad = -rho_y * std::sin(a_rhoy * pi * y / L) * a_rhoy * pi / L;
+      grad = -rho_y * sin(a_rhoy * pi * y / L) * a_rhoy * pi / L;
       break;
 
     default:
@@ -500,32 +536,44 @@ Scalar MASA::euler_2d<Scalar>::eval_g_rho(Scalar x,Scalar y, int i)
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_exact_u(Scalar x,Scalar y)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar exact_u;
-  exact_u = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L); 
+  exact_u = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L); 
   return exact_u;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_exact_v(Scalar x,Scalar y)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar exact_v;
-  exact_v = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L);
+  exact_v = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L);
   return exact_v;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_exact_p(Scalar x,Scalar y)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar exact_p;
-  exact_p = p_0 + p_x * std::cos(a_px * PI * x / L) + p_y * std::sin(a_py * PI * y / L);
+  exact_p = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L);
   return exact_p;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_2d<Scalar>::eval_exact_rho(Scalar x,Scalar y)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar exact_rho;
-  exact_rho = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L); 
+  exact_rho = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L); 
   return exact_rho;
 }
 
@@ -648,6 +696,8 @@ int MASA::euler_3d<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_g_u(Scalar x,Scalar y,Scalar z,int i)
 {
+  using std::cos;
+  using std::sin;
 
   Scalar grad = -1;
 
@@ -659,15 +709,15 @@ Scalar MASA::euler_3d<Scalar>::eval_g_u(Scalar x,Scalar y,Scalar z,int i)
       break;
       
     case 1:
-      grad =  u_x * std::cos(a_ux * pi * x / L) * a_ux * pi / L;
+      grad =  u_x * cos(a_ux * pi * x / L) * a_ux * pi / L;
       break;
 
     case 2:
-      grad = -u_y * std::sin(a_uy * pi * y / L) * a_uy * pi / L;
+      grad = -u_y * sin(a_uy * pi * y / L) * a_uy * pi / L;
       break;
 
     case 3:
-      grad = -u_z * std::sin(a_uz * pi * z / L) * a_uz * pi / L;
+      grad = -u_z * sin(a_uz * pi * z / L) * a_uz * pi / L;
       break;
 
     default:
@@ -685,6 +735,8 @@ Scalar MASA::euler_3d<Scalar>::eval_g_u(Scalar x,Scalar y,Scalar z,int i)
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_g_v(Scalar x,Scalar y,Scalar z,int i)
 {
+  using std::cos;
+  using std::sin;
 
   Scalar grad = -1;
 
@@ -696,15 +748,15 @@ Scalar MASA::euler_3d<Scalar>::eval_g_v(Scalar x,Scalar y,Scalar z,int i)
       break;
       
     case 1:
-      grad = -v_x * std::sin(a_vx * pi * x / L) * a_vx * pi / L;
+      grad = -v_x * sin(a_vx * pi * x / L) * a_vx * pi / L;
       break;
 
     case 2:
-      grad =  v_y * std::cos(a_vy * pi * y / L) * a_vy * pi / L;
+      grad =  v_y * cos(a_vy * pi * y / L) * a_vy * pi / L;
       break;
 
     case 3:
-      grad =  v_z * std::cos(a_vz * pi * z / L) * a_vz * pi / L;
+      grad =  v_z * cos(a_vz * pi * z / L) * a_vz * pi / L;
       break;
 
     default:
@@ -721,6 +773,8 @@ Scalar MASA::euler_3d<Scalar>::eval_g_v(Scalar x,Scalar y,Scalar z,int i)
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_g_w(Scalar x,Scalar y,Scalar z,int i)
 {
+  using std::cos;
+  using std::sin;
 
   Scalar grad = -1;
 
@@ -732,15 +786,15 @@ Scalar MASA::euler_3d<Scalar>::eval_g_w(Scalar x,Scalar y,Scalar z,int i)
       break;
       
     case 1:
-      grad =  w_x * std::cos(a_wx * pi * x / L) * a_wx * pi / L;
+      grad =  w_x * cos(a_wx * pi * x / L) * a_wx * pi / L;
       break;
 
     case 2:
-      grad =  w_y * std::cos(a_wy * pi * y / L) * a_wy * pi / L;
+      grad =  w_y * cos(a_wy * pi * y / L) * a_wy * pi / L;
       break;
 
     case 3:
-      grad = -w_z * std::sin(a_wz * pi * z / L) * a_wz * pi / L;
+      grad = -w_z * sin(a_wz * pi * z / L) * a_wz * pi / L;
       break;
 
     default:
@@ -757,6 +811,8 @@ Scalar MASA::euler_3d<Scalar>::eval_g_w(Scalar x,Scalar y,Scalar z,int i)
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_g_p(Scalar x,Scalar y,Scalar z,int i)
 {
+  using std::cos;
+  using std::sin;
 
   Scalar grad = -1;
 
@@ -768,15 +824,15 @@ Scalar MASA::euler_3d<Scalar>::eval_g_p(Scalar x,Scalar y,Scalar z,int i)
       break;
       
     case 1:
-      grad = -p_x * std::sin(a_px * pi * x / L) * a_px * pi / L;
+      grad = -p_x * sin(a_px * pi * x / L) * a_px * pi / L;
       break;
 
     case 2:
-      grad =  p_y * std::cos(a_py * pi * y / L) * a_py * pi / L;
+      grad =  p_y * cos(a_py * pi * y / L) * a_py * pi / L;
       break;
 
     case 3:
-      grad = -p_z * std::sin(a_pz * pi * z / L) * a_pz * pi / L;
+      grad = -p_z * sin(a_pz * pi * z / L) * a_pz * pi / L;
       break;
 
     default:
@@ -793,6 +849,8 @@ Scalar MASA::euler_3d<Scalar>::eval_g_p(Scalar x,Scalar y,Scalar z,int i)
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_g_rho(Scalar x,Scalar y,Scalar z,int i)
 {
+  using std::cos;
+  using std::sin;
 
   Scalar grad = -1;
 
@@ -804,15 +862,15 @@ Scalar MASA::euler_3d<Scalar>::eval_g_rho(Scalar x,Scalar y,Scalar z,int i)
       break;
       
     case 1:
-      grad = rho_x * std::cos(a_rhox * pi * x / L) * a_rhox * pi / L;
+      grad = rho_x * cos(a_rhox * pi * x / L) * a_rhox * pi / L;
       break;
       
     case 2:
-      grad = -rho_y * std::sin(a_rhoy * pi * y / L) * a_rhoy * pi / L;
+      grad = -rho_y * sin(a_rhoy * pi * y / L) * a_rhoy * pi / L;
       break;
       
     case 3:
-      grad = rho_z * std::cos(a_rhoz * pi * z / L) * a_rhoz * pi / L;
+      grad = rho_z * cos(a_rhoz * pi * z / L) * a_rhoz * pi / L;
       break;
 
     default:
@@ -833,18 +891,21 @@ Scalar MASA::euler_3d<Scalar>::eval_g_rho(Scalar x,Scalar y,Scalar z,int i)
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_q_rho_u(Scalar x,Scalar y,Scalar z)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_u;
   Scalar RHO;
   Scalar U;
   Scalar V;
   Scalar W;
 
-  RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L) + rho_z * std::sin(a_rhoz * PI * z / L);
-  U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L) + u_z * std::cos(a_uz * PI * z / L);
-  V = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L) + v_z * std::sin(a_vz * PI * z / L);
-  W = w_0 + w_x * std::sin(a_wx * PI * x / L) + w_y * std::sin(a_wy * PI * y / L) + w_z * std::cos(a_wz * PI * z / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L);
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
+  W = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);
 
-  Q_u = a_rhox * PI * rho_x * U * U * std::cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * U * V * std::sin(a_rhoy * PI * y / L) / L + a_rhoz * PI * rho_z * U * W * std::cos(a_rhoz * PI * z / L) / L - a_uy * PI * u_y * RHO * V * std::sin(a_uy * PI * y / L) / L - a_uz * PI * u_z * RHO * W * std::sin(a_uz * PI * z / L) / L - a_px * PI * p_x * std::sin(a_px * PI * x / L) / L + (0.2e1 * a_ux * u_x * std::cos(a_ux * PI * x / L) + a_vy * v_y * std::cos(a_vy * PI * y / L) - a_wz * w_z * std::sin(a_wz * PI * z / L)) * PI * RHO * U / L;
+  Q_u = a_rhox * PI * rho_x * U * U * cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * U * V * sin(a_rhoy * PI * y / L) / L + a_rhoz * PI * rho_z * U * W * cos(a_rhoz * PI * z / L) / L - a_uy * PI * u_y * RHO * V * sin(a_uy * PI * y / L) / L - a_uz * PI * u_z * RHO * W * sin(a_uz * PI * z / L) / L - a_px * PI * p_x * sin(a_px * PI * x / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L) - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * U / L;
 
   return(Q_u);
 }
@@ -852,18 +913,21 @@ Scalar MASA::euler_3d<Scalar>::eval_q_rho_u(Scalar x,Scalar y,Scalar z)
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_q_rho_v(Scalar x,Scalar y,Scalar z)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_v;
   Scalar RHO;
   Scalar U;
   Scalar V;
   Scalar W;
 
-  RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L) + rho_z * std::sin(a_rhoz * PI * z / L);
-  U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L) + u_z * std::cos(a_uz * PI * z / L);
-  V = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L) + v_z * std::sin(a_vz * PI * z / L);
-  W = w_0 + w_x * std::sin(a_wx * PI * x / L) + w_y * std::sin(a_wy * PI * y / L) + w_z * std::cos(a_wz * PI * z / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L);
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
+  W = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);
 
-  Q_v = a_rhox * PI * rho_x * U * V * std::cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * V * std::sin(a_rhoy * PI * y / L) / L + a_rhoz * PI * rho_z * V * W * std::cos(a_rhoz * PI * z / L) / L - a_vx * PI * v_x * RHO * U * std::sin(a_vx * PI * x / L) / L + a_vz * PI * v_z * RHO * W * std::cos(a_vz * PI * z / L) / L + a_py * PI * p_y * std::cos(a_py * PI * y / L) / L + (a_ux * u_x * std::cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * std::cos(a_vy * PI * y / L) - a_wz * w_z * std::sin(a_wz * PI * z / L)) * PI * RHO * V / L;
+  Q_v = a_rhox * PI * rho_x * U * V * cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * V * sin(a_rhoy * PI * y / L) / L + a_rhoz * PI * rho_z * V * W * cos(a_rhoz * PI * z / L) / L - a_vx * PI * v_x * RHO * U * sin(a_vx * PI * x / L) / L + a_vz * PI * v_z * RHO * W * cos(a_vz * PI * z / L) / L + a_py * PI * p_y * cos(a_py * PI * y / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L) - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * V / L;
 
   return(Q_v);
 }
@@ -871,18 +935,21 @@ Scalar MASA::euler_3d<Scalar>::eval_q_rho_v(Scalar x,Scalar y,Scalar z)
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_q_rho_w(Scalar x,Scalar y,Scalar z)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_w;
   Scalar RHO;
   Scalar U;
   Scalar V;
   Scalar W;
 
-  RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L) + rho_z * std::sin(a_rhoz * PI * z / L);
-  U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L) + u_z * std::cos(a_uz * PI * z / L);
-  V = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L) + v_z * std::sin(a_vz * PI * z / L);
-  W = w_0 + w_x * std::sin(a_wx * PI * x / L) + w_y * std::sin(a_wy * PI * y / L) + w_z * std::cos(a_wz * PI * z / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L);
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
+  W = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);
 
-  Q_w = a_rhox * PI * rho_x * U * W * std::cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * W * std::sin(a_rhoy * PI * y / L) / L + a_rhoz * PI * rho_z * W * W * std::cos(a_rhoz * PI * z / L) / L + a_wx * PI * w_x * RHO * U * std::cos(a_wx * PI * x / L) / L + a_wy * PI * w_y * RHO * V * std::cos(a_wy * PI * y / L) / L - a_pz * PI * p_z * std::sin(a_pz * PI * z / L) / L + (a_ux * u_x * std::cos(a_ux * PI * x / L) + a_vy * v_y * std::cos(a_vy * PI * y / L) - 0.2e1 * a_wz * w_z * std::sin(a_wz * PI * z / L)) * PI * RHO * W / L;
+  Q_w = a_rhox * PI * rho_x * U * W * cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * W * sin(a_rhoy * PI * y / L) / L + a_rhoz * PI * rho_z * W * W * cos(a_rhoz * PI * z / L) / L + a_wx * PI * w_x * RHO * U * cos(a_wx * PI * x / L) / L + a_wy * PI * w_y * RHO * V * cos(a_wy * PI * y / L) / L - a_pz * PI * p_z * sin(a_pz * PI * z / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L) - 0.2e1 * a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * W / L;
 
   return(Q_w);
 }
@@ -890,6 +957,9 @@ Scalar MASA::euler_3d<Scalar>::eval_q_rho_w(Scalar x,Scalar y,Scalar z)
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_q_rho_e(Scalar x,Scalar y,Scalar z)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_e;
   Scalar RHO;
   Scalar P;
@@ -897,13 +967,13 @@ Scalar MASA::euler_3d<Scalar>::eval_q_rho_e(Scalar x,Scalar y,Scalar z)
   Scalar V;
   Scalar W;
 
-  RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L) + rho_z * std::sin(a_rhoz * PI * z / L);
-  U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L) + u_z * std::cos(a_uz * PI * z / L);
-  V = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L) + v_z * std::sin(a_vz * PI * z / L);
-  W = w_0 + w_x * std::sin(a_wx * PI * x / L) + w_y * std::sin(a_wy * PI * y / L) + w_z * std::cos(a_wz * PI * z / L);
-  P = p_0 + p_x * std::cos(a_px * PI * x / L) + p_y * std::sin(a_py * PI * y / L) + p_z * std::cos(a_pz * PI * z / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L);
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
+  W = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);
+  P = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_z * cos(a_pz * PI * z / L);
 
-  Q_e = -a_px * PI * p_x * Gamma * U * std::sin(a_px * PI * x / L) / (Gamma - 0.1e1) / L + a_py * PI * p_y * Gamma * V * std::cos(a_py * PI * y / L) / (Gamma - 0.1e1) / L - a_pz * PI * p_z * Gamma * W * std::sin(a_pz * PI * z / L) / (Gamma - 0.1e1) / L + (U * U + V * V + W * W) * a_rhox * PI * rho_x * U * std::cos(a_rhox * PI * x / L) / L / 0.2e1 - (U * U + V * V + W * W) * a_rhoy * PI * rho_y * V * std::sin(a_rhoy * PI * y / L) / L / 0.2e1 + (U * U + V * V + W * W) * a_rhoz * PI * rho_z * W * std::cos(a_rhoz * PI * z / L) / L / 0.2e1 - (-0.3e1 * a_ux * u_x * std::cos(a_ux * PI * x / L) - a_vy * v_y * std::cos(a_vy * PI * y / L) + a_wz * w_z * std::sin(a_wz * PI * z / L)) * PI * RHO * U * U / L / 0.2e1 - (a_uy * u_y * std::sin(a_uy * PI * y / L) + a_vx * v_x * std::sin(a_vx * PI * x / L)) * PI * RHO * U * V / L - (a_uz * u_z * std::sin(a_uz * PI * z / L) - a_wx * w_x * std::cos(a_wx * PI * x / L)) * PI * RHO * U * W / L - (-a_ux * u_x * std::cos(a_ux * PI * x / L) - 0.3e1 * a_vy * v_y * std::cos(a_vy * PI * y / L) + a_wz * w_z * std::sin(a_wz * PI * z / L)) * PI * RHO * V * V / L / 0.2e1 + (a_vz * v_z * std::cos(a_vz * PI * z / L) + a_wy * w_y * std::cos(a_wy * PI * y / L)) * PI * RHO * V * W / L - (-a_ux * u_x * std::cos(a_ux * PI * x / L) - a_vy * v_y * std::cos(a_vy * PI * y / L) + 0.3e1 * a_wz * w_z * std::sin(a_wz * PI * z / L)) * PI * RHO * W * W / L / 0.2e1 - (-a_ux * u_x * std::cos(a_ux * PI * x / L) - a_vy * v_y * std::cos(a_vy * PI * y / L) + a_wz * w_z * std::sin(a_wz * PI * z / L)) * PI * Gamma * P / (Gamma - 0.1e1) / L;
+  Q_e = -a_px * PI * p_x * Gamma * U * sin(a_px * PI * x / L) / (Gamma - 0.1e1) / L + a_py * PI * p_y * Gamma * V * cos(a_py * PI * y / L) / (Gamma - 0.1e1) / L - a_pz * PI * p_z * Gamma * W * sin(a_pz * PI * z / L) / (Gamma - 0.1e1) / L + (U * U + V * V + W * W) * a_rhox * PI * rho_x * U * cos(a_rhox * PI * x / L) / L / 0.2e1 - (U * U + V * V + W * W) * a_rhoy * PI * rho_y * V * sin(a_rhoy * PI * y / L) / L / 0.2e1 + (U * U + V * V + W * W) * a_rhoz * PI * rho_z * W * cos(a_rhoz * PI * z / L) / L / 0.2e1 - (-0.3e1 * a_ux * u_x * cos(a_ux * PI * x / L) - a_vy * v_y * cos(a_vy * PI * y / L) + a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * U * U / L / 0.2e1 - (a_uy * u_y * sin(a_uy * PI * y / L) + a_vx * v_x * sin(a_vx * PI * x / L)) * PI * RHO * U * V / L - (a_uz * u_z * sin(a_uz * PI * z / L) - a_wx * w_x * cos(a_wx * PI * x / L)) * PI * RHO * U * W / L - (-a_ux * u_x * cos(a_ux * PI * x / L) - 0.3e1 * a_vy * v_y * cos(a_vy * PI * y / L) + a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * V * V / L / 0.2e1 + (a_vz * v_z * cos(a_vz * PI * z / L) + a_wy * w_y * cos(a_wy * PI * y / L)) * PI * RHO * V * W / L - (-a_ux * u_x * cos(a_ux * PI * x / L) - a_vy * v_y * cos(a_vy * PI * y / L) + 0.3e1 * a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO * W * W / L / 0.2e1 - (-a_ux * u_x * cos(a_ux * PI * x / L) - a_vy * v_y * cos(a_vy * PI * y / L) + a_wz * w_z * sin(a_wz * PI * z / L)) * PI * Gamma * P / (Gamma - 0.1e1) / L;
 
   return(Q_e);
 }
@@ -911,18 +981,21 @@ Scalar MASA::euler_3d<Scalar>::eval_q_rho_e(Scalar x,Scalar y,Scalar z)
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_q_rho(Scalar x,Scalar y,Scalar z)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_rho;
   Scalar RHO;
   Scalar U;
   Scalar V;
   Scalar W;
 
-  RHO = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L) + rho_z * std::sin(a_rhoz * PI * z / L);
-  U = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L) + u_z * std::cos(a_uz * PI * z / L);
-  V = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L) + v_z * std::sin(a_vz * PI * z / L);
-  W = w_0 + w_x * std::sin(a_wx * PI * x / L) + w_y * std::sin(a_wy * PI * y / L) + w_z * std::cos(a_wz * PI * z / L);
+  RHO = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L);
+  U = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);
+  V = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
+  W = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);
 
-  Q_rho = a_rhox * PI * rho_x * U * std::cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * std::sin(a_rhoy * PI * y / L) / L + a_rhoz * PI * rho_z * W * std::cos(a_rhoz * PI * z / L) / L + (a_ux * u_x * std::cos(a_ux * PI * x / L) + a_vy * v_y * std::cos(a_vy * PI * y / L) - a_wz * w_z * std::sin(a_wz * PI * z / L)) * PI * RHO / L;
+  Q_rho = a_rhox * PI * rho_x * U * cos(a_rhox * PI * x / L) / L - a_rhoy * PI * rho_y * V * sin(a_rhoy * PI * y / L) / L + a_rhoz * PI * rho_z * W * cos(a_rhoz * PI * z / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L) - a_wz * w_z * sin(a_wz * PI * z / L)) * PI * RHO / L;
 
   return(Q_rho);
 }
@@ -934,40 +1007,55 @@ Scalar MASA::euler_3d<Scalar>::eval_q_rho(Scalar x,Scalar y,Scalar z)
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_exact_u(Scalar x,Scalar y,Scalar z)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar exact_u;
-  exact_u = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L) + u_z * std::cos(a_uz * PI * z / L);
+  exact_u = u_0 + u_x * sin(a_ux * PI * x / L) + u_y * cos(a_uy * PI * y / L) + u_z * cos(a_uz * PI * z / L);
   return exact_u;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_exact_v(Scalar x,Scalar y,Scalar z)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar exact_v;
-  exact_v = v_0 + v_x * std::cos(a_vx * PI * x / L) + v_y * std::sin(a_vy * PI * y / L) + v_z * std::sin(a_vz * PI * z / L);
+  exact_v = v_0 + v_x * cos(a_vx * PI * x / L) + v_y * sin(a_vy * PI * y / L) + v_z * sin(a_vz * PI * z / L);
   return exact_v;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_exact_w(Scalar x,Scalar y,Scalar z)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar exact_w;
-  exact_w = w_0 + w_x * std::sin(a_wx * PI * x / L) + w_y * std::sin(a_wy * PI * y / L) + w_z * std::cos(a_wz * PI * z / L);  
+  exact_w = w_0 + w_x * sin(a_wx * PI * x / L) + w_y * sin(a_wy * PI * y / L) + w_z * cos(a_wz * PI * z / L);  
   return exact_w;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_exact_p(Scalar x,Scalar y,Scalar z)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar exact_p;
-  exact_p = p_0 + p_x * std::cos(a_px * PI * x / L) + p_y * std::sin(a_py * PI * y / L) + p_z * std::cos(a_pz * PI * z / L);
+  exact_p = p_0 + p_x * cos(a_px * PI * x / L) + p_y * sin(a_py * PI * y / L) + p_z * cos(a_pz * PI * z / L);
   return exact_p;
 }
 
 template <typename Scalar>
 Scalar MASA::euler_3d<Scalar>::eval_exact_rho(Scalar x,Scalar y,Scalar z)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar exact_rho;
-  exact_rho = rho_0 + rho_x * std::sin(a_rhox * PI * x / L) + rho_y * std::cos(a_rhoy * PI * y / L) + rho_z * std::sin(a_rhoz * PI * z / L);
+  exact_rho = rho_0 + rho_x * sin(a_rhox * PI * x / L) + rho_y * cos(a_rhoy * PI * y / L) + rho_z * sin(a_rhoz * PI * z / L);
   return exact_rho;
 }
 

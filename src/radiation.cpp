@@ -164,6 +164,9 @@ int MASA::radiation_integrated_intensity<Scalar>::check_vec()
 template <typename Scalar>
 Scalar MASA::radiation_integrated_intensity<Scalar>::eval_q_u(Scalar x)
 {
+  using std::exp;
+  using std::pow;
+
   // this is the manufactured solution: i.e. the gaussians contributions
   Scalar Q_I = 0;
 
@@ -179,7 +182,7 @@ Scalar MASA::radiation_integrated_intensity<Scalar>::eval_q_u(Scalar x)
     {
       // this is evaluating the gaussians contributions at 
       // a particular spatial location
-      Q_I += vec_amp[it]*std::exp( -std::pow(x-vec_mean[it],2)/(2*std::pow(vec_stdev[it],2)));
+      Q_I += vec_amp[it]*exp( -pow(x-vec_mean[it],2)/(2*pow(vec_stdev[it],2)));
     }
 
   return Q_I;  

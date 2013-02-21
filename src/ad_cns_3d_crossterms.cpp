@@ -143,6 +143,8 @@ int MASA::ad_cns_3d_crossterms<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_u(Scalar x, Scalar y, Scalar z) const
 {
+  using std::cos;
+
   typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
@@ -151,11 +153,11 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_u(Scalar x, Scalar y, Scalar z
   NumberArray<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * std::cos(a_ux * PI * x / L) * u_y * std::cos(a_uy * PI * y / L) * std::cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * std::cos(a_vx * PI * x / L) * v_y * std::cos(a_vy * PI * y / L) * std::cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * std::cos(a_wx * PI * x / L) * w_y * std::cos(a_wy * PI * y / L) * std::cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * std::cos(a_rhox * PI * x / L) * rho_y * std::cos(a_rhoy * PI * y / L) * std::cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * std::cos(a_px * PI * x / L) * p_y * std::cos(a_py * PI * y / L) * std::cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
@@ -189,6 +191,8 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_u(Scalar x, Scalar y, Scalar z
 template <typename Scalar>
 Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_v(Scalar x, Scalar y, Scalar z) const
 {
+  using std::cos;
+
   typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
@@ -197,11 +201,11 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_v(Scalar x, Scalar y, Scalar z
   NumberArray<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * std::cos(a_ux * PI * x / L) * u_y * std::cos(a_uy * PI * y / L) * std::cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * std::cos(a_vx * PI * x / L) * v_y * std::cos(a_vy * PI * y / L) * std::cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * std::cos(a_wx * PI * x / L) * w_y * std::cos(a_wy * PI * y / L) * std::cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * std::cos(a_rhox * PI * x / L) * rho_y * std::cos(a_rhoy * PI * y / L) * std::cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * std::cos(a_px * PI * x / L) * p_y * std::cos(a_py * PI * y / L) * std::cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
@@ -236,6 +240,8 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_v(Scalar x, Scalar y, Scalar z
 template <typename Scalar>
 Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_w(Scalar x, Scalar y, Scalar z) const
 {
+  using std::cos;
+
   typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
@@ -244,11 +250,11 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_w(Scalar x, Scalar y, Scalar z
   NumberArray<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * std::cos(a_ux * PI * x / L) * u_y * std::cos(a_uy * PI * y / L) * std::cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * std::cos(a_vx * PI * x / L) * v_y * std::cos(a_vy * PI * y / L) * std::cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * std::cos(a_wx * PI * x / L) * w_y * std::cos(a_wy * PI * y / L) * std::cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * std::cos(a_rhox * PI * x / L) * rho_y * std::cos(a_rhoy * PI * y / L) * std::cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * std::cos(a_px * PI * x / L) * p_y * std::cos(a_py * PI * y / L) * std::cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
@@ -283,6 +289,8 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_w(Scalar x, Scalar y, Scalar z
 template <typename Scalar>
 Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_e(Scalar x, Scalar y, Scalar z) const
 {
+  using std::cos;
+
   typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
@@ -291,11 +299,11 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_e(Scalar x, Scalar y, Scalar z
   NumberArray<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * std::cos(a_ux * PI * x / L) * u_y * std::cos(a_uy * PI * y / L) * std::cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * std::cos(a_vx * PI * x / L) * v_y * std::cos(a_vy * PI * y / L) * std::cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * std::cos(a_wx * PI * x / L) * w_y * std::cos(a_wy * PI * y / L) * std::cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * std::cos(a_rhox * PI * x / L) * rho_y * std::cos(a_rhoy * PI * y / L) * std::cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * std::cos(a_px * PI * x / L) * p_y * std::cos(a_py * PI * y / L) * std::cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
@@ -333,6 +341,8 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_e(Scalar x, Scalar y, Scalar z
 template <typename Scalar>
 Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scalar z1) const
 {
+  using std::cos;
+
   typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
@@ -345,11 +355,11 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scal
   NumberArray<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * std::cos(a_ux * PI * x / L) * u_y * std::cos(a_uy * PI * y / L) * std::cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * std::cos(a_vx * PI * x / L) * v_y * std::cos(a_vy * PI * y / L) * std::cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * std::cos(a_wx * PI * x / L) * w_y * std::cos(a_wy * PI * y / L) * std::cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * std::cos(a_rhox * PI * x / L) * rho_y * std::cos(a_rhoy * PI * y / L) * std::cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * std::cos(a_px * PI * x / L) * p_y * std::cos(a_py * PI * y / L) * std::cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
 
   Scalar Q_rho = raw_value(divergence(RHO*U));
 
@@ -365,8 +375,10 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scal
 template <typename Scalar>
 Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_u(Scalar x, Scalar y, Scalar z)
 {
+  using std::cos;
+
   Scalar exact_u;
-  exact_u = u_0 + u_x * std::cos(a_ux * PI * x / L) * u_y * std::cos(a_uy * PI * y / L) * std::cos(a_uz * PI * z / L);
+  exact_u = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uz * PI * z / L);
   return exact_u;
 }
 
@@ -374,8 +386,10 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_u(Scalar x, Scalar y, Scal
 template <typename Scalar>
 Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_v(Scalar x, Scalar y, Scalar z)
 {
+  using std::cos;
+
   Scalar exact_v;
-  exact_v = v_0 + v_x * std::cos(a_vx * PI * x / L) * v_y * std::cos(a_vy * PI * y / L) * std::cos(a_vz * PI * z / L);
+  exact_v = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vz * PI * z / L);
   return exact_v;
 }
 
@@ -383,8 +397,10 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_v(Scalar x, Scalar y, Scal
 template <typename Scalar>
 Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_w(Scalar x, Scalar y, Scalar z)
 {
+  using std::cos;
+
   Scalar exact_v;
-  exact_v = v_0 + v_x * std::cos(a_vx * PI * x / L) * v_y * std::cos(a_vy * PI * y / L) * std::cos(a_wz * PI * z / L);
+  exact_v = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_wz * PI * z / L);
   return exact_v;
 }
 
@@ -392,7 +408,9 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_w(Scalar x, Scalar y, Scal
 template <typename Scalar>
 Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_p(Scalar x, Scalar y, Scalar z)
 {
-  Scalar P = p_0 + p_x * std::cos(a_px * PI * x / L) * p_y * std::cos(a_py * PI * y / L) * std::cos(a_pz * PI * z / L);
+  using std::cos;
+
+  Scalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
   return P;
 }
 
@@ -400,7 +418,9 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_p(Scalar x, Scalar y, Scal
 template <typename Scalar>
 Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_rho(Scalar x, Scalar y, Scalar z)
 {
-  Scalar RHO = rho_0 + rho_x * std::cos(a_rhox * PI * x / L) * rho_y * std::cos(a_rhoy * PI * y / L) * std::cos(a_rhoz * PI * z / L);
+  using std::cos;
+
+  Scalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
   return RHO;
 }
 
