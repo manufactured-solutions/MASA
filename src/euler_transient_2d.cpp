@@ -23,6 +23,7 @@
 //-----------------------------------------------------------------------el-
 
 #include <masa_internal.h>
+#include <cmath>
 using namespace MASA;
 
 template <typename Scalar>
@@ -109,11 +110,13 @@ int MASA::euler_transient_2d<Scalar>::init_var()
 // ----------------------------------------
 // Source Terms
 // ----------------------------------------
-#include <math.h>
 
 template <typename Scalar>
 Scalar MASA::euler_transient_2d<Scalar>::eval_q_e (Scalar x, Scalar y, Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_e_t;
   Scalar RHO;
   Scalar U;
@@ -130,6 +133,9 @@ Scalar MASA::euler_transient_2d<Scalar>::eval_q_e (Scalar x, Scalar y, Scalar t)
 template <typename Scalar>
 Scalar MASA::euler_transient_2d<Scalar>::eval_q_u (Scalar x, Scalar y, Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_u_t;
   Scalar RHO;
   Scalar U;
@@ -144,6 +150,9 @@ Scalar MASA::euler_transient_2d<Scalar>::eval_q_u (Scalar x, Scalar y, Scalar t)
 template <typename Scalar>
 Scalar MASA::euler_transient_2d<Scalar>::eval_q_v (Scalar x, Scalar y, Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_v_t;
   Scalar RHO;
   Scalar U;
@@ -158,6 +167,9 @@ Scalar MASA::euler_transient_2d<Scalar>::eval_q_v (Scalar x, Scalar y, Scalar t)
 template <typename Scalar>
 Scalar MASA::euler_transient_2d<Scalar>::eval_q_rho (Scalar x, Scalar y, Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_rho_t;
   Scalar RHO;
   Scalar U;
@@ -176,6 +188,9 @@ Scalar MASA::euler_transient_2d<Scalar>::eval_q_rho (Scalar x, Scalar y, Scalar 
 template <typename Scalar>
 Scalar MASA::euler_transient_2d<Scalar>::eval_exact_rho(Scalar x,Scalar y,Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar exact_rho;
   exact_rho = rho_0 + rho_x * sin(a_rhox * pi * x / L) + rho_y * cos(a_rhoy * pi * y / L) + rho_t * sin(a_rhot * pi * t / L);
   return exact_rho;
@@ -184,6 +199,9 @@ Scalar MASA::euler_transient_2d<Scalar>::eval_exact_rho(Scalar x,Scalar y,Scalar
 template <typename Scalar>
 Scalar MASA::euler_transient_2d<Scalar>::eval_exact_p(Scalar x,Scalar y,Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar exact_p;
   exact_p = p_0 + p_x * cos(a_px * pi * x / L) + p_y * sin(a_py * pi * y / L) + p_t * cos(a_pt * pi * t / L);
   return exact_p;
@@ -192,6 +210,9 @@ Scalar MASA::euler_transient_2d<Scalar>::eval_exact_p(Scalar x,Scalar y,Scalar t
 template <typename Scalar>
 Scalar MASA::euler_transient_2d<Scalar>::eval_exact_u(Scalar x,Scalar y,Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar exact_u;
   exact_u = u_0 + u_x * sin(a_ux * pi * x / L) + u_y * cos(a_uy * pi * y / L) + u_t * cos(a_ut * pi * t / L);
   return exact_u;
@@ -200,6 +221,9 @@ Scalar MASA::euler_transient_2d<Scalar>::eval_exact_u(Scalar x,Scalar y,Scalar t
 template <typename Scalar>
 Scalar MASA::euler_transient_2d<Scalar>::eval_exact_v(Scalar x,Scalar y,Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar exact_v;
   exact_v = v_0 + v_x * cos(a_vx * pi * x / L) + v_y * sin(a_vy * pi * y / L) + v_t * sin(a_vt * pi * t / L);
   return exact_v;

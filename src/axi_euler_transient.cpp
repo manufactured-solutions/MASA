@@ -23,6 +23,9 @@
 //-----------------------------------------------------------------------el-
 
 #include <masa_internal.h>
+
+#include <cmath>
+
 using namespace MASA;
 
 template <typename Scalar>
@@ -109,11 +112,13 @@ int MASA::axi_euler_transient<Scalar>::init_var()
 // ----------------------------------------
 // Source Terms
 // ----------------------------------------
-#include <math.h>
 
 template <typename Scalar>
 Scalar MASA::axi_euler_transient<Scalar>::eval_q_e (Scalar r, Scalar z, Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_e;
   Scalar RHO;
   Scalar P;
@@ -130,6 +135,9 @@ Scalar MASA::axi_euler_transient<Scalar>::eval_q_e (Scalar r, Scalar z, Scalar t
 template <typename Scalar>
 Scalar MASA::axi_euler_transient<Scalar>::eval_q_u (Scalar r, Scalar z, Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_u;
   Scalar RHO;
   Scalar U;
@@ -144,6 +152,9 @@ Scalar MASA::axi_euler_transient<Scalar>::eval_q_u (Scalar r, Scalar z, Scalar t
 template <typename Scalar>
 Scalar MASA::axi_euler_transient<Scalar>::eval_q_w (Scalar r, Scalar z, Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_w;
   Scalar RHO;
   Scalar U;
@@ -158,6 +169,9 @@ Scalar MASA::axi_euler_transient<Scalar>::eval_q_w (Scalar r, Scalar z, Scalar t
 template <typename Scalar>
 Scalar MASA::axi_euler_transient<Scalar>::eval_q_rho (Scalar r, Scalar z, Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar Q_rho;
   Scalar RHO;
   Scalar U;
@@ -178,6 +192,9 @@ Scalar MASA::axi_euler_transient<Scalar>::eval_q_rho (Scalar r, Scalar z, Scalar
 template <typename Scalar>
 Scalar MASA::axi_euler_transient<Scalar>::eval_exact_rho(Scalar r, Scalar z, Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar rho_an;
   rho_an = rho_0 + rho_r * cos(a_rhor * PI * r / L) + rho_z * sin(a_rhoz * PI * z / L) + rho_t * sin(a_rhot * PI * t / L);
   return rho_an;
@@ -186,6 +203,9 @@ Scalar MASA::axi_euler_transient<Scalar>::eval_exact_rho(Scalar r, Scalar z, Sca
 template <typename Scalar>
 Scalar MASA::axi_euler_transient<Scalar>::eval_exact_p(Scalar r, Scalar z, Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar p_an;
   p_an = p_0 + p_r * sin(a_pr * PI * r / L) + p_z * cos(a_pz * PI * z / L) + p_t * cos(a_pt * PI * t / L);
   return p_an;
@@ -194,6 +214,9 @@ Scalar MASA::axi_euler_transient<Scalar>::eval_exact_p(Scalar r, Scalar z, Scala
 template <typename Scalar>
 Scalar MASA::axi_euler_transient<Scalar>::eval_exact_u(Scalar r, Scalar z, Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar u_an;
   u_an = u_r * (cos(a_ur * PI * r / L) - 0.1e1) * (u_z * sin(a_uz * PI * z / L) + u_t * cos(a_ut * PI * t / L));
   return u_an;
@@ -202,6 +225,9 @@ Scalar MASA::axi_euler_transient<Scalar>::eval_exact_u(Scalar r, Scalar z, Scala
 template <typename Scalar>
 Scalar MASA::axi_euler_transient<Scalar>::eval_exact_w(Scalar r, Scalar z, Scalar t)
 {
+  using std::cos;
+  using std::sin;
+
   Scalar w_an;
   w_an = w_0 + w_r * cos(a_wr * PI * r / L) + w_z * sin(a_wz * PI * z / L) + w_t * cos(a_wt * PI * t / L);
   return w_an;

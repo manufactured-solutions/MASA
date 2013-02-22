@@ -24,6 +24,8 @@
 
 #include <masa_internal.h>
 
+#include <cmath>
+
 using namespace MASA;
 
 template <typename Scalar>
@@ -116,7 +118,6 @@ int MASA::axi_cns_transient<Scalar>::init_var()
 // ----------------------------------------
 // Source Terms
 // ----------------------------------------
-#include <math.h>
 
 template <typename Scalar>
 Scalar MASA::axi_cns_transient<Scalar>::eval_q_e (Scalar r, Scalar z, Scalar t)
