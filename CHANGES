@@ -1,5 +1,6 @@
 Version 0.41.0 (In Progress)
 
+  * Added convection diffusion manufactured solution
   * Added burgers_example.cpp, an example of the burgers API
   * Added model documentation for Burgers' Equation
   * Removed natbib style references from MASA
