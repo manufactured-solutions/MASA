@@ -2143,4 +2143,29 @@ public:
 };}
 
 
+// ------------------------------------------------------
+// --------------- convdiff_steady_nosource_1d 
+// ------------------------------------------------------
+namespace MASA{
+template <typename Scalar>
+class convdiff_steady_nosource_1d : public manufactured_solution<Scalar>
+{
+  using manufactured_solution<Scalar>::pi;
+  using manufactured_solution<Scalar>::PI;
+
+private:
+  Scalar a_ux;
+  Scalar a_cx;
+  Scalar nu;
+  Scalar L;
+
+public:
+  convdiff_steady_nosource_1d();
+  int init_var();
+  Scalar eval_q_c(Scalar,Scalar) const;
+  Scalar eval_exact_c(Scalar);
+  Scalar eval_exact_u(Scalar);
+};}
+
+
 // --l33t--
