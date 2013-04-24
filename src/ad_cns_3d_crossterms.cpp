@@ -141,13 +141,17 @@ int MASA::ad_cns_3d_crossterms<Scalar>::init_var()
 
 // public static method, that can be called from eval_q_t
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_u(Scalar x, Scalar y, Scalar z) const
+Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar z1) const
 {
   using std::cos;
 
   typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
+
+  const ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
+  const ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
+  const ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
 
   // Treat velocity as a vector
   NumberArray<NDIM, ADScalar> U;
@@ -189,13 +193,17 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_u(Scalar x, Scalar y, Scalar z
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_v(Scalar x, Scalar y, Scalar z) const
+Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar z1) const
 {
   using std::cos;
 
   typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
+
+  const ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
+  const ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
+  const ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
 
   // Treat velocity as a vector
   NumberArray<NDIM, ADScalar> U;
@@ -238,13 +246,17 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_v(Scalar x, Scalar y, Scalar z
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_w(Scalar x, Scalar y, Scalar z) const
+Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar z1) const
 {
   using std::cos;
 
   typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
+
+  const ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
+  const ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
+  const ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
 
   // Treat velocity as a vector
   NumberArray<NDIM, ADScalar> U;
@@ -287,7 +299,7 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_w(Scalar x, Scalar y, Scalar z
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_e(Scalar x, Scalar y, Scalar z) const
+Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_e(Scalar x1, Scalar y1, Scalar z1) const
 {
   using std::cos;
 
@@ -297,6 +309,10 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_e(Scalar x, Scalar y, Scalar z
 
   // Treat velocity as a vector
   NumberArray<NDIM, ADScalar> U;
+
+  const ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
+  const ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
+  const ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
 
   // Arbitrary manufactured solution
   U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
@@ -347,9 +363,9 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scal
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
 
-  const Scalar& x = x1;
-  const Scalar& y = y1;
-  const Scalar& z = z1;
+  const ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
+  const ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
+  const ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
 
   // Treat velocity as a vector
   NumberArray<NDIM, ADScalar> U;
