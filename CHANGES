@@ -1,4 +1,8 @@
-Version 0.41.0 (In Progress)
+Version 0.41.1 (IN PROGRESS)
+
+  * To be added.
+
+Version 0.41.0 (28 April 2013)
 
   * Added convection diffusion manufactured solution
   * Added burgers_example.cpp, an example of the burgers API
@@ -9,7 +13,7 @@ Version 0.41.0 (In Progress)
   * added hook to strongly suggest user utilize "make check"
   * added an AD Navier-Stokes solution with non-trivial cross terms
   * added an example of AD to masa autoimport
-  * included MASA citation 
+  * included MASA paper citation 
 
 Version 0.40.2 (02 March 2012)
   * fixed a bug in FANS with SA model
