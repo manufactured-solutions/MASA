@@ -1,6 +1,6 @@
 Version 0.41.1 (IN PROGRESS)
 
-  * To be added.
+  * Fixed a bug related to intel 11.1 not passing make-check on lonestar
 
 Version 0.41.0 (28 April 2013)
 
