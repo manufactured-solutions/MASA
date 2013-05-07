@@ -106,6 +106,96 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_u(Scalar x1, Scalar 
   return Q_rho_u[0];
 }
 
+
+// public static method, that can be called from eval_q_t
+template <typename Scalar>
+Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar z1)
+{
+  typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
+  typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+  typedef DualNumber<SecondDerivType, NumberArray<NDIM, SecondDerivType> > ThirdDerivType;
+  typedef ThirdDerivType ADScalar;
+
+  // Treat velocity as a vector
+  NumberArray<NDIM, ADScalar> U;
+
+  ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
+  ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
+  ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
+
+  // this is a hack, but now casting necessary variables as ADScalars
+  // ADScalar ad_beta  = ADScalar(beta,NumberArrayUnitVector <NDIM, 0, Scalar>::value());
+  // ADScalar ad_kx    = ADScalar(kx,NumberArrayUnitVector   <NDIM, 0, Scalar>::value());
+  // ADScalar ad_gamma = ADScalar(gamma,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
+  // ADScalar ad_kz    = ADScalar(kz,NumberArrayUnitVector   <NDIM, 0, Scalar>::value());
+
+  // Arbitrary manufactured solutions
+  U[0]       = a * helper_f(x)                  + helper_g(y).derivatives()[1] + helper_h(z).derivatives()[2];
+  U[1]       = b * helper_f(x).derivatives()[0] + helper_g(y)                  + helper_h(z).derivatives()[2];
+  U[2]       = c * helper_f(x).derivatives()[0] + helper_g(y).derivatives()[1] + helper_h(z);
+  ADScalar P = d * helper_f(x)                  + helper_gt(y)                 + helper_h(z);
+
+  // NS equation residuals
+  NumberArray<NDIM, Scalar> Q_rho_u = 
+    raw_value(
+
+	      // convective term
+	      divergence(U.outerproduct(U))
+
+	      // pressure
+	      + P.derivatives()
+
+	      // dissipation
+	      + nu * divergence(gradient(U)));
+
+  return Q_rho_u[1];
+}
+
+
+// public static method, that can be called from eval_q_t
+template <typename Scalar>
+Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar z1)
+{
+  typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
+  typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+  typedef DualNumber<SecondDerivType, NumberArray<NDIM, SecondDerivType> > ThirdDerivType;
+  typedef ThirdDerivType ADScalar;
+
+  // Treat velocity as a vector
+  NumberArray<NDIM, ADScalar> U;
+
+  ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
+  ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
+  ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
+
+  // this is a hack, but now casting necessary variables as ADScalars
+  // ADScalar ad_beta  = ADScalar(beta,NumberArrayUnitVector <NDIM, 0, Scalar>::value());
+  // ADScalar ad_kx    = ADScalar(kx,NumberArrayUnitVector   <NDIM, 0, Scalar>::value());
+  // ADScalar ad_gamma = ADScalar(gamma,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
+  // ADScalar ad_kz    = ADScalar(kz,NumberArrayUnitVector   <NDIM, 0, Scalar>::value());
+
+  // Arbitrary manufactured solutions
+  U[0]       = a * helper_f(x)                  + helper_g(y).derivatives()[1] + helper_h(z).derivatives()[2];
+  U[1]       = b * helper_f(x).derivatives()[0] + helper_g(y)                  + helper_h(z).derivatives()[2];
+  U[2]       = c * helper_f(x).derivatives()[0] + helper_g(y).derivatives()[1] + helper_h(z);
+  ADScalar P = d * helper_f(x)                  + helper_gt(y)                 + helper_h(z);
+
+  // NS equation residuals
+  NumberArray<NDIM, Scalar> Q_rho_u = 
+    raw_value(
+
+	      // convective term
+	      divergence(U.outerproduct(U))
+
+	      // pressure
+	      + P.derivatives()
+
+	      // dissipation
+	      + nu * divergence(gradient(U)));
+
+  return Q_rho_u[2];
+}
+
 // ----------------------------------------
 // Analytical Terms
 // ----------------------------------------
