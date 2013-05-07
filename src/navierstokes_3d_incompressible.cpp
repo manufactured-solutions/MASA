@@ -153,8 +153,11 @@ Scalar helper_h(Scalar z)
 
 // example of a public method called from eval_exact_t
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_u(Scalar x, Scalar y, Scalar z)
+Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_u(Scalar x, Scalar y1, Scalar z)
 {
+  typedef DualNumber<Scalar, Scalar> OneDDerivType;
+  OneDDerivType y = OneDDerivType(y1,1);
+
   Scalar exact_u;
   exact_u =   a *  helper_f(x) + helper_g(y).derivatives() +  helper_h(z);
   return exact_u;
@@ -162,8 +165,12 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_u(Scalar x, Scal
 
 // public method
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_v(Scalar x, Scalar y, Scalar z)
+Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_v(Scalar x1, Scalar y, Scalar z1)
 {
+  typedef DualNumber<Scalar, Scalar> OneDDerivType;
+  OneDDerivType x = OneDDerivType(x1,1);
+  OneDDerivType z = OneDDerivType(z1,1);
+
   Scalar exact_v;
   exact_v = b * helper_f(x).derivatives() +  helper_g(y) + helper_h(z).derivatives();
   return exact_v;
@@ -171,8 +178,12 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_v(Scalar x, Scal
 
 // public method
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_w(Scalar x, Scalar y, Scalar z)
+Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_w(Scalar x1, Scalar y1, Scalar z)
 {
+  typedef DualNumber<Scalar, Scalar> OneDDerivType;
+  OneDDerivType x = OneDDerivType(x1,1);
+  OneDDerivType y = OneDDerivType(y1,1);
+
   Scalar exact_w;
   exact_w = c * helper_f(x).derivatives() + helper_g(y).derivatives() +  helper_h(z);
   return exact_w;
