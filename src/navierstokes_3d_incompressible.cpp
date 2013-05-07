@@ -85,10 +85,10 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_u(Scalar x1, Scalar 
   // ADScalar ad_kz    = ADScalar(kz,NumberArrayUnitVector   <NDIM, 0, Scalar>::value());
 
   // Arbitrary manufactured solutions
-  U[0]       = a * helper_f(x)               + helper_g(y).derivatives() + helper_h(z).derivatives();
-  U[1]       = b * helper_f(x).derivatives() + helper_g(y)               + helper_h(z).derivatives();
-  U[2]       = c * helper_f(x).derivatives() + helper_g(y).derivatives() + helper_h(z);
-  ADScalar P = d * helper_f(x)               + helper_gt(y)              + helper_h(z);
+  U[0]       = a * helper_f(x)                  + helper_g(y).derivatives()[1] + helper_h(z).derivatives()[2];
+  U[1]       = b * helper_f(x).derivatives()[0] + helper_g(y)                  + helper_h(z).derivatives()[2];
+  U[2]       = c * helper_f(x).derivatives()[0] + helper_g(y).derivatives()[1] + helper_h(z);
+  ADScalar P = d * helper_f(x)                  + helper_gt(y)                 + helper_h(z);
 
   // NS equation residuals
   NumberArray<NDIM, Scalar> Q_rho_u = 
