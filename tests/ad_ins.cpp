@@ -72,8 +72,6 @@ int main(void)
 
   unorm_max = 0;
   vnorm_max = 0;
-  pnorm_max = 0;
-  enorm_max = 0;
 
   const RawScalar xvecinit[] = {1., 0., 0.};
   const RawScalar yvecinit[] = {0., 1., 0.};
@@ -129,10 +127,6 @@ int main(void)
 	      xyz[1] = ADType(j*h, yvec);
 
 	      // evaluate masa source terms
-	      // su  = masa_eval_source_rho_u<double>(k*h,i*h,j*h);
-	      // sv  = masa_eval_source_rho_v<double>(k*h,i*h,j*h);
-	      // sw  = masa_eval_source_rho_w<double>(k*h,i*h,j*h);
-	      // sp  = masa_eval_source_rho  <double>(k*h,i*h,j*h);
 	      su  = masa_eval_source_u<double>(k*h,i*h,j*h);
 	      sv  = masa_eval_source_v<double>(k*h,i*h,j*h);
 	      sw  = masa_eval_source_w<double>(k*h,i*h,j*h);
@@ -140,31 +134,26 @@ int main(void)
 	      // AD source terms
 	      s2u = evaluate_q(xyz);
 	      s2v = evaluate_q(xyz);
-	      s2p = evaluate_q(xyz);
 
 	      unorm = fabs(su-s2u);	  
 	      vnorm = fabs(sv-s2v);
-	      pnorm = fabs(sp-s2p);	  
 
 	      double urnorm = fabs(su-s2u)/std::max(su,s2u);	  
 	      double vrnorm = fabs(sv-s2v)/std::max(sv,s2v);
-	      double prnorm = fabs(sp-s2p)/std::max(sp,s2p);	  
 
 	      unorm_max = std::max(unorm, unorm_max);
 	      vnorm_max = std::max(vnorm, vnorm_max);
-	      pnorm_max = std::max(pnorm, pnorm_max);
 
 	      urnorm_max = std::max(urnorm, urnorm_max);
 	      vrnorm_max = std::max(vrnorm, vrnorm_max);
-	      prnorm_max = std::max(prnorm, prnorm_max);
 
 	    }
 	}
     }//done with 'k' index
 
-  threshcheck(urnorm_max);
-  threshcheck(vrnorm_max);
-  threshcheck(prnorm_max);
+  //threshcheck(urnorm_max);
+  //threshcheck(vrnorm_max);
+  //threshcheck(prnorm_max);
 
   // steady as she goes...
   return 0;
