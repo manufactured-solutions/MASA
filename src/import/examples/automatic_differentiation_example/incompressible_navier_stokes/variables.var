@@ -4,3 +4,6 @@ c -3.2
 d 10.1
 beta 2.2
 gamma 2.4
+nu .02
+kx 1
+kz 1
