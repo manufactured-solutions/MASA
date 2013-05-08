@@ -64,7 +64,7 @@ using namespace MASA;
 int main(void)
 {
   int err = 0;
-  int N   = 10; // mesh pts. in x and y
+  int N   = 4; // mesh pts. in x and y and z
   double su,sv,sw,s2u,s2v,sp,se,s2e,s2p;
   double pnorm, unorm, vnorm, enorm;
   double pnorm_max, unorm_max, vnorm_max, enorm_max;
@@ -129,10 +129,13 @@ int main(void)
 	      xyz[1] = ADType(j*h, yvec);
 
 	      // evaluate masa source terms
-	      su  = masa_eval_source_rho_u<double>(k*h,i*h,j*h);
-	      sv  = masa_eval_source_rho_v<double>(k*h,i*h,j*h);
-	      sw  = masa_eval_source_rho_w<double>(k*h,i*h,j*h);
-	      sp  = masa_eval_source_rho  <double>(k*h,i*h,j*h);
+	      // su  = masa_eval_source_rho_u<double>(k*h,i*h,j*h);
+	      // sv  = masa_eval_source_rho_v<double>(k*h,i*h,j*h);
+	      // sw  = masa_eval_source_rho_w<double>(k*h,i*h,j*h);
+	      // sp  = masa_eval_source_rho  <double>(k*h,i*h,j*h);
+	      su  = masa_eval_source_u<double>(k*h,i*h,j*h);
+	      sv  = masa_eval_source_v<double>(k*h,i*h,j*h);
+	      sw  = masa_eval_source_w<double>(k*h,i*h,j*h);
 
 	      // AD source terms
 	      s2u = evaluate_q(xyz);
