@@ -226,7 +226,7 @@ double evaluate_q (const NumberArray<NDIM, ADScalar>& xyz)
 	      divergence(U.outerproduct(U))
 
 	      // pressure
-	      + P.derivatives()
+	      - P.derivatives()
 
 	      // dissipation
 	      + nu * divergence(gradient(U)));
