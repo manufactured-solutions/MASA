@@ -56,8 +56,8 @@ typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDer
 typedef SecondDerivType ADType;
 // typedef FirstDerivType ADType;
 
-template <std::size_t NDIM, typename Scalar>
-double evaluate_q (const NumberArray<NDIM, Scalar>& xyz);
+template <std::size_t NDIM, typename RawScalar>
+double evaluate_q (const NumberArray<NDIM, RawScalar>& xyz);
 
 using namespace MASA;
 
@@ -73,14 +73,6 @@ int main(void)
   unorm_max = 0;
   vnorm_max = 0;
 
-  const RawScalar xvecinit[] = {1., 0., 0.};
-  const RawScalar yvecinit[] = {0., 1., 0.};
-  const RawScalar zvecinit[] = {0., 0., 1.};
-
-  const NumberArray<NDIM, RawScalar> xvec(xvecinit);
-  const NumberArray<NDIM, RawScalar> yvec(yvecinit);
-  const NumberArray<NDIM, RawScalar> zvec(zvecinit);
-
   // initialize the problem in MASA
   err += masa_init("ad_incom","navierstokes_3d_incompressible");
   err += masa_sanity_check();
@@ -88,25 +80,7 @@ int main(void)
   // we first set up the DualNumbers that correspond to independent
   // variables, spatial coordinates x and y and z
 
-  NumberArray<NDIM, ADType> xyz;
-
-  // When main() says "xy[0] = ADType(1., xvec);", that's saying "x = 1, and 
-  // the gradient of f(x,y)=x is the constant vector xvec={1,0}"  
-  // Likewise "xy[1] = ADType(1., yvec);" means "y = 1, and the gradient of f(x,y)=y 
-  xyz[0] = ADType(1., xvec);
-  xyz[1] = ADType(1., yvec);
-  xyz[2] = ADType(1., zvec);
-
-  // For getting second derivatives, the way to set up a
-  // twice-differentiable independent variable used to be more
-  // complicated: first set up a once-differentiable variable, then
-  // make sure *its* derivatives are also properly set.
-
-  // However, if the new DualNumber constructors are working properly
-  // then this is unnecessary.
-
-  // xy[0] = ADType(FirstDerivType(1., xvec), xvec);
-  // xy[1] = ADType(FirstDerivType(1., yvec), yvec);
+  NumberArray<NDIM, RawScalar> xyz;
 
   // the input argument xyz is another NumberArray 
   // a vector just like Q_rho_u, a spatial location rather 
@@ -114,22 +88,24 @@ int main(void)
   double h = 1.0/N;
   for (int k=0; k != N+1; ++k)
     {
+      xyz[2] = k*h;
+
       for (int i=0; i != N+1; ++i)
 	{
 	  //
-	  xyz[0] = ADType(i*h, xvec);
+	  xyz[0] = i*h;
 	  
 	  // Under the hood:
 	  // xy[0] = ADType(FirstDerivType(i*h, xvec), xvec);
 
 	  for (int j=0; j != N+1; ++j)
 	    {
-	      xyz[1] = ADType(j*h, yvec);
+	      xyz[1] = j*h;
 
 	      // evaluate masa source terms
-	      su  = masa_eval_source_u<double>(k*h,i*h,j*h);
-	      sv  = masa_eval_source_v<double>(k*h,i*h,j*h);
-	      sw  = masa_eval_source_w<double>(k*h,i*h,j*h);
+	      su  = masa_eval_source_u<double>(i*h,j*h,k*h);
+	      sv  = masa_eval_source_v<double>(i*h,j*h,k*h);
+	      sw  = masa_eval_source_w<double>(i*h,j*h,k*h);
 
 	      // AD source terms
 	      s2u = evaluate_q(xyz);
@@ -197,8 +173,8 @@ Scalar helper_h(Scalar z)
 // first derivatives here.  Adding diffusion will require a
 // SecondDerivType or better
 
-template <std::size_t NDIM, typename ADScalar>
-double evaluate_q (const NumberArray<NDIM, ADScalar>& xyz)
+template <std::size_t NDIM, typename RawScalar>
+double evaluate_q (const NumberArray<NDIM, RawScalar>& xyz)
 {
   typedef DualNumber<RawScalar, NumberArray<NDIM, RawScalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
