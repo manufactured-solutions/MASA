@@ -65,7 +65,7 @@ int main(void)
 {
   int err = 0;
   int N   = 10; // mesh pts. in x and y
-  double su,sv,s2u,s2v,sp,se,s2e,s2p;
+  double su,sv,sw,s2u,s2v,sp,se,s2e,s2p;
   double pnorm, unorm, vnorm, enorm;
   double pnorm_max, unorm_max, vnorm_max, enorm_max;
   double prnorm_max = 0., urnorm_max = 0., vrnorm_max = 0., ernorm_max = 0.;
@@ -114,47 +114,51 @@ int main(void)
   // a vector just like Q_rho_u, a spatial location rather 
   // than a vector-valued forcing function.
   double h = 1.0/N;
-  for (int i=0; i != N+1; ++i)
+  for (int k=0; k != N+1; ++k)
     {
-      //
-      xyz[0] = ADType(i*h, xvec);
-
-      // Under the hood:
-      // xy[0] = ADType(FirstDerivType(i*h, xvec), xvec);
-
-      for (int j=0; j != N+1; ++j)
+      for (int i=0; i != N+1; ++i)
 	{
-          xyz[1] = ADType(j*h, yvec);
+	  //
+	  xyz[0] = ADType(i*h, xvec);
+	  
+	  // Under the hood:
+	  // xy[0] = ADType(FirstDerivType(i*h, xvec), xvec);
 
-	  // evaluate masa source terms
-	  su  = masa_eval_source_rho_u<double>(i*h,j*h);
-	  sv  = masa_eval_source_rho_v<double>(i*h,j*h);
-	  sp  = masa_eval_source_rho  <double>(i*h,j*h);
+	  for (int j=0; j != N+1; ++j)
+	    {
+	      xyz[1] = ADType(j*h, yvec);
 
-	  // AD source terms
-	  s2u = evaluate_q(xyz);
-	  s2v = evaluate_q(xyz);
-	  s2p = evaluate_q(xyz);
+	      // evaluate masa source terms
+	      su  = masa_eval_source_rho_u<double>(k*h,i*h,j*h);
+	      sv  = masa_eval_source_rho_v<double>(k*h,i*h,j*h);
+	      sw  = masa_eval_source_rho_w<double>(k*h,i*h,j*h);
+	      sp  = masa_eval_source_rho  <double>(k*h,i*h,j*h);
 
-	  unorm = fabs(su-s2u);	  
-	  vnorm = fabs(sv-s2v);
-	  pnorm = fabs(sp-s2p);	  
+	      // AD source terms
+	      s2u = evaluate_q(xyz);
+	      s2v = evaluate_q(xyz);
+	      s2p = evaluate_q(xyz);
 
-	  double urnorm = fabs(su-s2u)/std::max(su,s2u);	  
-	  double vrnorm = fabs(sv-s2v)/std::max(sv,s2v);
-	  double prnorm = fabs(sp-s2p)/std::max(sp,s2p);	  
+	      unorm = fabs(su-s2u);	  
+	      vnorm = fabs(sv-s2v);
+	      pnorm = fabs(sp-s2p);	  
 
-          unorm_max = std::max(unorm, unorm_max);
-          vnorm_max = std::max(vnorm, vnorm_max);
-          pnorm_max = std::max(pnorm, pnorm_max);
+	      double urnorm = fabs(su-s2u)/std::max(su,s2u);	  
+	      double vrnorm = fabs(sv-s2v)/std::max(sv,s2v);
+	      double prnorm = fabs(sp-s2p)/std::max(sp,s2p);	  
 
-          urnorm_max = std::max(urnorm, urnorm_max);
-          vrnorm_max = std::max(vrnorm, vrnorm_max);
-          prnorm_max = std::max(prnorm, prnorm_max);
+	      unorm_max = std::max(unorm, unorm_max);
+	      vnorm_max = std::max(vnorm, vnorm_max);
+	      pnorm_max = std::max(pnorm, pnorm_max);
 
+	      urnorm_max = std::max(urnorm, urnorm_max);
+	      vrnorm_max = std::max(vrnorm, vrnorm_max);
+	      prnorm_max = std::max(prnorm, prnorm_max);
+
+	    }
 	}
-    }
-   
+    }//done with 'k' index
+
   threshcheck(urnorm_max);
   threshcheck(vrnorm_max);
   threshcheck(prnorm_max);
