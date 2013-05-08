@@ -118,7 +118,7 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_u(Scalar x1, Scalar 
 	      divergence(U.outerproduct(U))
 
 	      // pressure
-	      + P.derivatives()
+	      - P.derivatives()
 
 	      // dissipation
 	      + nu * divergence(gradient(U)));
@@ -163,7 +163,7 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_v(Scalar x1, Scalar 
 	      divergence(U.outerproduct(U))
 
 	      // pressure
-	      + P.derivatives()
+	      - P.derivatives()
 
 	      // dissipation
 	      + nu * divergence(gradient(U)));
@@ -208,7 +208,7 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_w(Scalar x1, Scalar 
 	      divergence(U.outerproduct(U))
 
 	      // pressure
-	      + P.derivatives()
+	      - P.derivatives()
 
 	      // dissipation
 	      + nu * divergence(gradient(U)));
