@@ -160,6 +160,8 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
 
   anim.push_back(new navierstokes_3d_incompressible<Scalar>());
 
+  anim.push_back(new navierstokes_3d_incompressible_homogeneous<Scalar>());
+
   // --l33t-- DO NOT EDIT THIS LINE OR ANY BELOW IT
 
 

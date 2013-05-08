@@ -72,7 +72,7 @@ int MASA::navierstokes_3d_incompressible<Scalar>::init_var()
   err += this->set_var("gamma",2.4);
   err += this->set_var("nu",.02);
   err += this->set_var("kx",1);
-  err += this->set_var("kz",1);
+  err += this->set_var("kz",1);  
 
   return err;
 

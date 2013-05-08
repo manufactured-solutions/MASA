@@ -2206,4 +2206,40 @@ public:
 };}
 
 
+// ------------------------------------------------------
+// --------------- navierstokes_3d_incompressible_homogeneous 
+// ------------------------------------------------------
+namespace MASA{
+template <typename Scalar>
+class navierstokes_3d_incompressible_homogeneous : public manufactured_solution<Scalar>
+{
+  using manufactured_solution<Scalar>::pi;
+  using manufactured_solution<Scalar>::PI;
+
+private:
+  Scalar a;
+  Scalar b;
+  Scalar c;
+  Scalar d;
+  Scalar beta;
+  Scalar gamma;
+  Scalar delta;
+  Scalar nu;
+  Scalar kx;
+  Scalar kz;
+  Scalar ky;
+
+public:
+  navierstokes_3d_incompressible_homogeneous();
+  int init_var();
+  Scalar eval_q_u(Scalar,Scalar,Scalar);
+  Scalar eval_q_v(Scalar,Scalar,Scalar);
+  Scalar eval_q_w(Scalar,Scalar,Scalar);
+  Scalar eval_exact_u(Scalar,Scalar,Scalar);
+  Scalar eval_exact_v(Scalar,Scalar,Scalar);
+  Scalar eval_exact_w(Scalar,Scalar,Scalar);
+  Scalar eval_exact_p(Scalar,Scalar,Scalar);
+};}
+
+
 // --l33t--
