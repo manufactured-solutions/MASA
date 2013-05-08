@@ -151,10 +151,6 @@ int main(void)
 	}
     }//done with 'k' index
 
-  //threshcheck(urnorm_max);
-  //threshcheck(vrnorm_max);
-  //threshcheck(prnorm_max);
-
   // steady as she goes...
   return 0;
 
