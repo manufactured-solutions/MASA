@@ -2226,8 +2226,8 @@ private:
   Scalar delta;
   Scalar nu;
   Scalar kx;
-  Scalar kz;
   Scalar ky;
+  Scalar kz;
 
 public:
   navierstokes_3d_incompressible_homogeneous();
