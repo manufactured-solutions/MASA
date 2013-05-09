@@ -568,7 +568,7 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = src/masa.h src/masa.f90 examples/pecos-input.txt \
+INPUT                  = src/masa.h src/masa.f90 \
 		         tutorial/laplacian.c tutorial/laplacian_utils.c tutorial/laplacian.h \
 		         $(SRCDIR)/doxygen/masa.page \
 			 $(SRCDIR)/doxygen/fortran_interface.page \
@@ -658,7 +658,7 @@ EXAMPLE_RECURSIVE      = NO
 # directories that contain image that are included in the documentation (see 
 # the \image command).
 
-IMAGE_PATH             = $(SRCDIR)/doxygen/images/ $(SRCDIR)/doxygen/fig_common
+IMAGE_PATH             = $(SRCDIR)/doxygen/fig_common
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should 
 # invoke to filter for each input file. Doxygen will invoke the filter program 
