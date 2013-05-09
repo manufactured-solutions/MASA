@@ -34,16 +34,16 @@
 #include <tests.h>
 #include "ad_masa.h"
 
-double ad_beta;
-double ad_gamma;
-double ad_kx;
-double ad_kz;
+double my_beta;
+double my_gamma;
+double kx;
+double kz;
 
-double a = 1.05;
-double b = 2.15;
-double c = -3.2;
-double d = 10.1;
-double nu = .02;
+double a;
+double b;
+double c;
+double d;
+double nu;
 
 // typedef double RawScalar;
 typedef ShadowNumber<double, long double> RawScalar;
@@ -76,6 +76,16 @@ int main(void)
   // initialize the problem in MASA
   err += masa_init("ad_incom","navierstokes_3d_incompressible");
   err += masa_sanity_check();
+
+  my_beta = masa_get_param("beta");
+  my_gamma = masa_get_param("gamma");
+  kx = masa_get_param("kx");
+  kz = masa_get_param("kz");
+  a = masa_get_param("a");
+  b = masa_get_param("b");
+  c = masa_get_param("c");
+  d = masa_get_param("d");
+  nu = masa_get_param("nu");
 
   // we first set up the DualNumbers that correspond to independent
   // variables, spatial coordinates x and y and z
@@ -138,7 +148,7 @@ Scalar helper_f(Scalar x)
 //Scalar MASA::navierstokes_3d_incompressible<Scalar>::helper_f(Scalar x)
 {
   Scalar func;
-  func = 1/(ad_beta+std::sin(ad_kx*x));
+  func = 1/(my_beta+std::sin(kx*x));
   return func;
 }
 
@@ -165,7 +175,7 @@ template <typename Scalar>
 Scalar helper_h(Scalar z)
 {
   Scalar func;
-  func = 1/(ad_gamma+std::sin(ad_kz*z));
+  func = 1/(my_gamma+std::sin(kz*z));
   return func;
 }
 
