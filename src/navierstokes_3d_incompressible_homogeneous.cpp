@@ -221,7 +221,7 @@ Scalar MASA::navierstokes_3d_incompressible_homogeneous<Scalar>::eval_exact_u(Sc
   OneDDerivType y = OneDDerivType(y1,1);
  
   Scalar exact_u;
-  exact_u =   a *  helper_f(beta,kx,x) + helper_g(delta,ky,y).derivatives() +  helper_h(gamma,kz,z);
+  exact_u =   a *  helper_f(beta,kx,x) * helper_g(delta,ky,y).derivatives() *  helper_h(gamma,kz,z);
   return exact_u;
 }
 
@@ -234,7 +234,7 @@ Scalar MASA::navierstokes_3d_incompressible_homogeneous<Scalar>::eval_exact_v(Sc
   OneDDerivType z = OneDDerivType(z1,1);
 
   Scalar exact_v;
-  exact_v = b * helper_f(beta,kx,x).derivatives() +  helper_g(delta,ky,y) + helper_h(gamma,kz,z).derivatives();
+  exact_v = b * helper_f(beta,kx,x).derivatives() *  helper_g(delta,ky,y) * helper_h(gamma,kz,z).derivatives();
   return exact_v;
 }
 
@@ -247,7 +247,7 @@ Scalar MASA::navierstokes_3d_incompressible_homogeneous<Scalar>::eval_exact_w(Sc
   OneDDerivType y = OneDDerivType(y1,1);
 
   Scalar exact_w;
-  exact_w = c * helper_f(beta,kx,x).derivatives() + helper_g(delta,ky,y).derivatives() +  helper_h(gamma,kz,z);
+  exact_w = c * helper_f(beta,kx,x).derivatives() * helper_g(delta,ky,y).derivatives() *  helper_h(gamma,kz,z);
   return exact_w;
 }
 
@@ -256,7 +256,7 @@ template <typename Scalar>
 Scalar MASA::navierstokes_3d_incompressible_homogeneous<Scalar>::eval_exact_p(Scalar x, Scalar y, Scalar z)
 {
 
-  Scalar P = d *  helper_f(beta,kx,x) + helper_g(delta,ky,y) +  helper_h(gamma,kz,z);
+  Scalar P = d *  helper_f(beta,kx,x) * helper_g(delta,ky,y) *  helper_h(gamma,kz,z);
   return P;
 }
 
