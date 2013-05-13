@@ -88,7 +88,7 @@ Scalar MASA::navierstokes_3d_incompressible_homogeneous<Scalar>::eval_q_u(Scalar
     raw_value(
 
 	      // convective term
-	      divergence(U.outerproduct(U))
+	      -divergence(U.outerproduct(U))
 
 	      // pressure
 	      - P.derivatives()
@@ -127,7 +127,7 @@ Scalar MASA::navierstokes_3d_incompressible_homogeneous<Scalar>::eval_q_v(Scalar
     raw_value(
 
 	      // convective term
-	      divergence(U.outerproduct(U))
+	      -divergence(U.outerproduct(U))
 
 	      // pressure
 	      - P.derivatives()
@@ -166,7 +166,7 @@ Scalar MASA::navierstokes_3d_incompressible_homogeneous<Scalar>::eval_q_w(Scalar
     raw_value(
 
 	      // convective term
-	      divergence(U.outerproduct(U))
+	      -divergence(U.outerproduct(U))
 
 	      // pressure
 	      - P.derivatives()
