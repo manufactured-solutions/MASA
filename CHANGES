@@ -1,4 +1,4 @@
-Version 0.41.1 (IN PROGRESS)
+Version 0.41.1 (22 May, 2013)
 
   * Added incompressible Channel flow Navier Stokes Automatic Differentiation MS
   * Added incompressible isotropic, homogeneous Navier Stokes Automatic Differentiation MS
