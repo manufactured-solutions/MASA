@@ -35,8 +35,8 @@ program main
   implicit none
 
   ! solutions
-  real(8) :: field
-  real(8) :: exact_phi
+  real(8) :: u,v,w
+  real(8) :: exact_u,exact_v,exact_w
 
   ! error handling
   integer ::  err=0 
@@ -77,13 +77,22 @@ program main
            z = k*dz
         
            ! evalulate source term
-           field = masa_eval_3d_source_u   (x,y,z)
+           u = masa_eval_3d_source_u   (x,y,z)
+           v = masa_eval_3d_source_v   (x,y,z)
+           w = masa_eval_3d_source_w   (x,y,z)
            
            !evaluate analytical term
-           exact_phi = masa_eval_3d_exact_u (x,y,z)
+           exact_u = masa_eval_3d_exact_u (x,y,z)
+           exact_v = masa_eval_3d_exact_v (x,y,z)
+           exact_w = masa_eval_3d_exact_w (x,y,z)
            
-           call test(field)
-           call test(exact_phi)
+           call test(u)
+           call test(v)
+           call test(w)
+
+           call test(exact_u)
+           call test(exact_v)
+           call test(exact_w)
            
         enddo
      enddo
