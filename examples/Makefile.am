@@ -15,7 +15,7 @@ noinst_PROGRAMS  = MASAshell display_solutions euler_example navierstokes burger
 noinst_PROGRAMS += rans_sa fans_sa fans_sa_finite_d fans_sa_wall radiation euler_chem 
 noinst_PROGRAMS += euler_transient heat_example switch ablation_example
 noinst_PROGRAMS += c_heat_example c_euler_example c_laplace_example sod
-noinst_PROGRAMS += f_cns f_euler f_laplace
+noinst_PROGRAMS += f_cns f_euler f_laplace f_insh
 noinst_PROGRAMS += cp_gaussian
 noinst_PROGRAMS += laplace_example
 
@@ -76,6 +76,10 @@ f_cns_SOURCES             = f_cns.f90
 f_cns_LDADD               = -lfmasa
 f_cns_LIBTOOLFLAGS        = --tag=FC
 
+f_insh_SOURCES             = f_insh.f90
+f_insh_LDADD               = -lfmasa
+f_insh_LIBTOOLFLAGS        = --tag=FC
+
 example_DATA             += f_euler.f90
 
 
@@ -110,6 +114,7 @@ TESTS                      = init.sh              \
                              f_laplace            \
                              f_euler              \
                              f_cns                \
+                             f_insh               \
                              finalize.sh
 
 EXTRA_DIST                 = init.sh              \
