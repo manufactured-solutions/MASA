@@ -22,7 +22,7 @@
 !!
 !!-----------------------------------------------------------------------el-
 !!
-!! f_laplace.f90: Fortran Laplace 2D Example
+!! f_laplace.f90: Fortran Incompressible Navierstokes 3D Example
 !!
 !! $Id: 
 !! -------------------------------------------------------------------------
@@ -44,40 +44,48 @@ program main
   ! declarations
   real(8) :: x
   real(8) :: y
+  real(8) :: z
   real(8) :: fsol
 
   ! problem size
-  integer i,j
-  integer ::  nx = 71
-  integer ::  ny = 93  
+  integer i,j,k
+  integer ::  nx = 8
+  integer ::  ny = 9
+  integer ::  nz = 12  
   integer ::  lx=3
   integer ::  ly=1 
+  integer ::  lz=2 
   real(8) ::  dx 
   real(8) ::  dy
+  real(8) ::  dz
 
   ! initialize the problem
   dx = real(lx)/real(nx)
   dy = real(ly)/real(ny);
+  dz = real(lz)/real(nz);
 
   ! initialize the problem
-  call masa_init("laplace example","laplace_2d")
+  call masa_init("incompressible homogeneous isotropic NS example","navierstokes_3d_incompressible")
 
-  ! evaluate source terms (2D)
+  ! evaluate source terms (3D)
   do i=0, nx
      do j=0, ny
+        do k=0, nz
          
-        y = j*dy        
-        x = i*dx
+           x = i*dx
+           y = j*dy        
+           z = k*dz
         
-        ! evalulate source term
-        field = masa_eval_2d_source_f   (x,y)
-
-	!evaluate analytical term
-        exact_phi = masa_eval_2d_exact_phi (x,y)
-
-        call test(field)
-        call test(exact_phi)
-
+           ! evalulate source term
+           field = masa_eval_3d_source_u   (x,y,z)
+           
+           !evaluate analytical term
+           exact_phi = masa_eval_3d_exact_u (x,y,z)
+           
+           call test(field)
+           call test(exact_phi)
+           
+        enddo
      enddo
   enddo
 
