@@ -221,7 +221,7 @@ Scalar MASA::navierstokes_3d_incompressible_homogeneous<Scalar>::eval_exact_u(Sc
   OneDDerivType y = OneDDerivType(y1,1);
  
   Scalar exact_u;
-  exact_u =   a *  helper_f(beta,kx,x) * helper_g(delta,ky,y).derivatives() *  helper_h(gamma,kz,z);
+  exact_u =   a *  helper_f(beta,kx,x) * helper_g(delta,ky,y).derivatives() *  helper_h(gamma,kz,z).derivatives();
   return exact_u;
 }
 
