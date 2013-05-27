@@ -96,7 +96,7 @@ Scalar MASA::navierstokes_3d_incompressible_homogeneous<Scalar>::eval_q_u(Scalar
 	      // dissipation
 	      + nu * divergence(gradient(U)));
 
-  return Q_u[1];
+  return Q_u[0];
 
 }
 
