@@ -26,6 +26,23 @@
 
 #include <ad_masa.h>
 
+
+
+// Private methods declarations
+template <typename Scalar, typename Scalar2>
+Scalar helper_f(Scalar2 beta, Scalar2 kx, Scalar x);
+
+template <typename Scalar>
+Scalar helper_g(Scalar y);
+  
+template <typename Scalar>
+Scalar helper_gt(Scalar y);
+
+template <typename Scalar, typename Scalar2>
+Scalar helper_h(Scalar2 gamma, Scalar2 kz, Scalar z);
+
+
+
 typedef ShadowNumber<double, long double> RawScalar;
 const unsigned int NDIM = 3;
 typedef DualNumber<RawScalar, NumberArray<NDIM, RawScalar> > FirstDerivType;
@@ -240,10 +257,11 @@ Scalar helper_h(Scalar2 gamma, Scalar2 kz, Scalar z)
 
 // example of a public method called from eval_exact_t
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_u(Scalar x, Scalar y1, Scalar z)
+Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_u(Scalar x, Scalar y1, Scalar z1)
 {
   typedef DualNumber<Scalar, Scalar> OneDDerivType;
   OneDDerivType y = OneDDerivType(y1,1);
+  OneDDerivType z = OneDDerivType(z1,1);
 
   Scalar exact_u;
   exact_u =   a *  helper_f(beta,kx,x) + helper_g(y).derivatives() +  helper_h(gamma,kz,z).derivatives();

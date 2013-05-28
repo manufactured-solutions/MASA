@@ -1,10 +1,44 @@
 // -*-c++-*-
 //-----------------------------------------------------------------------bl-
+//--------------------------------------------------------------------------
+//
+// MASA - Manufactured Analytical Solutions Abstraction Library
+//
+// Copyright (C) 2010,2011,2012 The PECOS Development Team
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the Version 2.1 GNU Lesser General
+// Public License as published by the Free Software Foundation.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc. 51 Franklin Street, Fifth Floor,
+// Boston, MA  02110-1301  USA
+//
 //-----------------------------------------------------------------------el-
 
 #include <masa_internal.h>
 
 #include <ad_masa.h>
+
+
+
+// Private methods declarations
+template <typename Scalar, typename Scalar2>
+Scalar helper_f(Scalar2 beta, Scalar2 kx, Scalar x);
+
+template <typename Scalar, typename Scalar2>
+Scalar helper_g(Scalar2 delta, Scalar2 ky, Scalar y);
+  
+template <typename Scalar, typename Scalar2>
+Scalar helper_h(Scalar2 gamma, Scalar2 kz, Scalar z);
+
+
 
 typedef ShadowNumber<double, long double> RawScalar;
 const unsigned int NDIM = 3;
@@ -215,10 +249,11 @@ Scalar helper_h(Scalar2 gamma, Scalar2 kz, Scalar z)
 
 // example of a public method called from eval_exact_t
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_incompressible_homogeneous<Scalar>::eval_exact_u(Scalar x, Scalar y1, Scalar z)
+Scalar MASA::navierstokes_3d_incompressible_homogeneous<Scalar>::eval_exact_u(Scalar x, Scalar y1, Scalar z1)
 {
   typedef DualNumber<Scalar, Scalar> OneDDerivType;
   OneDDerivType y = OneDDerivType(y1,1);
+  OneDDerivType z = OneDDerivType(z1,1);
  
   Scalar exact_u;
   exact_u =   a *  helper_f(beta,kx,x) * helper_g(delta,ky,y).derivatives() *  helper_h(gamma,kz,z).derivatives();
