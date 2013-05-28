@@ -1,6 +1,8 @@
 Version 0.41.2 (IN PROGRESS)
 
   * Added example for isotropic, homogeneous Navier Stokes AD MS
+  * Bug fix in isotropic, homogeneous Navier Stokes AD MS
+  * Bug fix in channel Navier Stokes AD MS
 
 Version 0.41.1 (22 May, 2013)
 
