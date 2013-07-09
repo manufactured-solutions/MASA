@@ -111,10 +111,10 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_u(Scalar x1, Scalar 
   ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
 
   // Arbitrary manufactured solutions
-  U[0]       = a * helper_f(beta,kx,x)                  + helper_g(y).derivatives()[1] + helper_h(gamma,kz,z).derivatives()[2];
-  U[1]       = b * helper_f(beta,kx,x).derivatives()[0] + helper_g(y)                  + helper_h(gamma,kz,z).derivatives()[2];
-  U[2]       = c * helper_f(beta,kx,x).derivatives()[0] + helper_g(y).derivatives()[1] + helper_h(gamma,kz,z);
-  ADScalar P = d * helper_f(beta,kx,x)                  + helper_gt(y)                 + helper_h(gamma,kz,z);
+  U[0]       = a * helper_f(beta,kx,x)                  * helper_g(y).derivatives()[1] * helper_h(gamma,kz,z).derivatives()[2];
+  U[1]       = b * helper_f(beta,kx,x).derivatives()[0] * helper_g(y)                  * helper_h(gamma,kz,z).derivatives()[2];
+  U[2]       = c * helper_f(beta,kx,x).derivatives()[0] * helper_g(y).derivatives()[1] * helper_h(gamma,kz,z);
+  ADScalar P = d * helper_f(beta,kx,x)                  * helper_gt(y)                 * helper_h(gamma,kz,z);
 
   // NS equation residuals
   NumberArray<NDIM, Scalar> Q_rho_u = 
@@ -150,10 +150,10 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_v(Scalar x1, Scalar 
   ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
 
   // Arbitrary manufactured solutions
-  U[0]       = a * helper_f(beta,kx,x)                  + helper_g(y).derivatives()[1] + helper_h(gamma,kz,z).derivatives()[2];
-  U[1]       = b * helper_f(beta,kx,x).derivatives()[0] + helper_g(y)                  + helper_h(gamma,kz,z).derivatives()[2];
-  U[2]       = c * helper_f(beta,kx,x).derivatives()[0] + helper_g(y).derivatives()[1] + helper_h(gamma,kz,z);
-  ADScalar P = d * helper_f(beta,kx,x)                  + helper_gt(y)                 + helper_h(gamma,kz,z);
+  U[0]       = a * helper_f(beta,kx,x)                  * helper_g(y).derivatives()[1] * helper_h(gamma,kz,z).derivatives()[2];
+  U[1]       = b * helper_f(beta,kx,x).derivatives()[0] * helper_g(y)                  * helper_h(gamma,kz,z).derivatives()[2];
+  U[2]       = c * helper_f(beta,kx,x).derivatives()[0] * helper_g(y).derivatives()[1] * helper_h(gamma,kz,z);
+  ADScalar P = d * helper_f(beta,kx,x)                  * helper_gt(y)                 * helper_h(gamma,kz,z);
 
   // NS equation residuals
   NumberArray<NDIM, Scalar> Q_rho_u = 
@@ -189,10 +189,10 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_w(Scalar x1, Scalar 
   ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
 
   // Arbitrary manufactured solutions
-  U[0]       = a * helper_f(beta,kx,x)                  + helper_g(y).derivatives()[1] + helper_h(gamma,kz,z).derivatives()[2];
-  U[1]       = b * helper_f(beta,kx,x).derivatives()[0] + helper_g(y)                  + helper_h(gamma,kz,z).derivatives()[2];
-  U[2]       = c * helper_f(beta,kx,x).derivatives()[0] + helper_g(y).derivatives()[1] + helper_h(gamma,kz,z);
-  ADScalar P = d * helper_f(beta,kx,x)                  + helper_gt(y)                 + helper_h(gamma,kz,z);
+  U[0]       = a * helper_f(beta,kx,x)                  * helper_g(y).derivatives()[1] * helper_h(gamma,kz,z).derivatives()[2];
+  U[1]       = b * helper_f(beta,kx,x).derivatives()[0] * helper_g(y)                  * helper_h(gamma,kz,z).derivatives()[2];
+  U[2]       = c * helper_f(beta,kx,x).derivatives()[0] * helper_g(y).derivatives()[1] * helper_h(gamma,kz,z);
+  ADScalar P = d * helper_f(beta,kx,x)                  * helper_gt(y)                 * helper_h(gamma,kz,z);
 
   // NS equation residuals
   NumberArray<NDIM, Scalar> Q_rho_u = 
@@ -264,7 +264,7 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_u(Scalar x, Scal
   OneDDerivType z = OneDDerivType(z1,1);
 
   Scalar exact_u;
-  exact_u =   a *  helper_f(beta,kx,x) + helper_g(y).derivatives() +  helper_h(gamma,kz,z).derivatives();
+  exact_u =   a *  helper_f(beta,kx,x) * helper_g(y).derivatives() *  helper_h(gamma,kz,z).derivatives();
   return exact_u;
 }
 
@@ -277,7 +277,7 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_v(Scalar x1, Sca
   OneDDerivType z = OneDDerivType(z1,1);
 
   Scalar exact_v;
-  exact_v = b * helper_f(beta,kx,x).derivatives() +  helper_g(y) + helper_h(gamma,kz,z).derivatives();
+  exact_v = b * helper_f(beta,kx,x).derivatives() *  helper_g(y) * helper_h(gamma,kz,z).derivatives();
   return exact_v;
 }
 
@@ -290,7 +290,7 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_w(Scalar x1, Sca
   OneDDerivType y = OneDDerivType(y1,1);
 
   Scalar exact_w;
-  exact_w = c * helper_f(beta,kx,x).derivatives() + helper_g(y).derivatives() +  helper_h(gamma,kz,z);
+  exact_w = c * helper_f(beta,kx,x).derivatives() * helper_g(y).derivatives() *  helper_h(gamma,kz,z);
   return exact_w;
 }
 
@@ -298,7 +298,7 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_w(Scalar x1, Sca
 template <typename Scalar>
 Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_p(Scalar x, Scalar y, Scalar z)
 {
-  Scalar P = d *  helper_f(beta,kx,x) + helper_gt(y) +  helper_h(gamma,kz,z);
+  Scalar P = d *  helper_f(beta,kx,x) * helper_gt(y) *  helper_h(gamma,kz,z);
   return P;
 }
 
