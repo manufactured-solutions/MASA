@@ -52,11 +52,11 @@ BUILT_SOURCES += $(srcdir)/masa_wrap.c
 SWIG_SOURCES=masa.i
 
 pkgpython_PYTHON = masa.py
-pkgpyexec_LTLIBRARIES = _pmasa.la
-_pmasa_la_SOURCES = $(srcdir)/masa_wrap.c $(SWIG_SOURCES)
-_pmasa_la_CFLAGS = $(SWIG_PYTHON_CFLAGS) -I$(top_srcdir)/src
-_pmasa_la_LDFLAGS = -module
-_pmasa_la_LIBADD = ../src/libmasa.la
+pkgpyexec_LTLIBRARIES = _masa.la
+_masa_la_SOURCES = $(srcdir)/masa_wrap.c $(SWIG_SOURCES)
+_masa_la_CFLAGS = $(SWIG_PYTHON_CFLAGS) -I$(top_srcdir)/src
+_masa_la_LDFLAGS = -module
+_masa_la_LIBADD = ../src/libmasa.la
 
 $(srcdir)/masa_wrap.c : $(SWIG_SOURCES)
 	$(SWIG) $(SWIG_PYTHON_OPT) -I$(top_srcdir)/src -o $@ $<
