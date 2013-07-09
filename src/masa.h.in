@@ -1170,13 +1170,6 @@ extern "C" {
   /**
    * This subroutine returns the gradient of the analytical solution
    * for the v-component of velocity.
-   * It should be called for solutions with a single dimension.
-   */
-  extern double masa_eval_1d_grad_v(double x);
-
-  /**
-   * This subroutine returns the gradient of the analytical solution
-   * for the v-component of velocity.
    * It should be called for solutions with two dimensions.
    */
   extern double masa_eval_2d_grad_v(double x,double y,int direction);
@@ -1191,20 +1184,6 @@ extern "C" {
   //
   // w-component
   //
-
-  /**
-   * This subroutine returns the gradient of the analytical solution
-   * for the w-component of velocity.
-   * It should be called for solutions with a single dimension.
-   */
-  extern double masa_eval_1d_grad_w(double x);
-
-  /**
-   * This subroutine returns the gradient of the analytical solution
-   * for the w-component of velocity.
-   * It should be called for solutions with two dimensions.
-   */
-  extern double masa_eval_2d_grad_w(double x,double y,int direction);
 
   /**
    * This subroutine returns the gradient of the analytical solution

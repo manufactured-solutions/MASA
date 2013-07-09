@@ -59,7 +59,11 @@ _masa_la_LDFLAGS = -module
 _masa_la_LIBADD = ../src/libmasa.la
 
 $(srcdir)/masa_wrap.c : $(SWIG_SOURCES)
-	$(SWIG) $(SWIG_PYTHON_OPT) -I$(top_srcdir)/src -o $@ $<
+	$(SWIG) $(SWIG_PYTHON_OPT) -o $@ $<
+	$(SWIG) -c++ -python $(SWIG_PYTHON_OPT) masa.i
+
+#masa.py: masa.i
+#	$(MAKE) masa_wrap.c
 
 #-----------------------
 # Standalone binaries
@@ -91,4 +95,4 @@ uninstall-local: libfmasa.la
 	rm -rf $(DESTDIR)$(libdir)/masa.mod
 
 EXTRA_DIST  = lic_utils/update_license.pl .license.stamp
-CLEANFILES  = .license.stamp masa.mod *.gcda *.gcno
+CLEANFILES  = .license.stamp masa.mod *.gcda *.gcno masa_wrap.c masa.py
