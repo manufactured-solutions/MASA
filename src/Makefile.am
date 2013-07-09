@@ -51,7 +51,7 @@ libfmasa_la_SOURCES     = masa.f90
 BUILT_SOURCES += $(srcdir)/masa_wrap.c
 SWIG_SOURCES=masa.i
 
-pkgpython_PYTHON = masa.py
+pkgpython_PYTHON = masa.py __init__.py
 pkgpyexec_LTLIBRARIES = _masa.la
 _masa_la_SOURCES = $(srcdir)/masa_wrap.c $(SWIG_SOURCES)
 _masa_la_CFLAGS = $(SWIG_PYTHON_CFLAGS) -I$(top_srcdir)/src
