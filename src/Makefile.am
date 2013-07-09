@@ -45,6 +45,23 @@ libfmasa_la_LDFLAGS     = $(all_libraries) -release $(GENERIC_RELEASE)
 libfmasa_la_SOURCES     = masa.f90
 
 #-----------------------
+# MASA (SWIG) Python interface -- optional!
+#-----------------------
+
+BUILT_SOURCES += $(srcdir)/masa_wrap.c
+SWIG_SOURCES=masa.i
+
+pkgpython_PYTHON = masa.py
+pkgpyexec_LTLIBRARIES = _your_extension.la
+_your_extension_la_SOURCES = $(srcdir)/masa_wrap.c $(SWIG_SOURCES)
+_your_extension_la_CFLAGS = $(SWIG_PYTHON_CFLAGS) -I$(top_srcdir)/src
+_your_extension_la_LDFLAGS = -module
+_your_extension_la_LIBADD = ../src/libmasa.la
+
+$(srcdir)/masa_wrap.c : $(SWIG_SOURCES)
+	$(SWIG) $(SWIG_PYTHON_OPT) -I$(top_srcdir)/src -o $@ $<
+
+#-----------------------
 # Standalone binaries
 #-----------------------
 
