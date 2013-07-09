@@ -52,14 +52,20 @@ AX_FC_MINOPT	# request minimum optimization level for FC
 AX_MASA_WARN_ALL
 
 #---------------------------------------------
-# enable python interfaces
+# enable python interfaces with SWIG
 #---------------------------------------------
 
-#AX_SWIG
+
+dnl AX_PKG_SWIG(1.3.17, [], [ AC_MSG_WARN([SWIG not detected: python interfaces not built!]) ])
+dnl AX_SWIG_ENABLE_CXX
+dnl AX_SWIG_MULTI_MODULE_SUPPORT
+dnl AX_SWIG_PYTHON
 
 # ------------------------------
 # Checks for required programs
 # ------------------------------
+
+AC_DISABLE_STATIC
 
 AC_PROG_CC
 AC_PROG_CXX
@@ -67,6 +73,13 @@ AC_PROG_FC
 AC_PROG_F77
 AC_PROG_LIBTOOL
 AM_SANITY_CHECK
+
+
+# swig
+AM_PATH_PYTHON(2.3)
+AC_PROG_SWIG(1.3.21)
+SWIG_ENABLE_CXX
+SWIG_PYTHON
 
  #---------------------------------------------
 # Check for extra-strict regression tolerance
