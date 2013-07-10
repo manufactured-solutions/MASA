@@ -78,6 +78,7 @@ AC_ARG_ENABLE([python-interfaces], AC_HELP_STRING([--enable-python-interfaces],[
 	       AC_DEFINE(SWIG_INTERFACES,1,[Define if python interfaces enabled]),[])
 AC_SUBST(SWIG_INTERFACES)
 AM_CONDITIONAL(SWIG_ENABLED,test x$SWIG_INTERFACES = x1) 
+
 # ---------------------------------------------
 # Check for extra-strict regression tolerance
 # ---------------------------------------------
