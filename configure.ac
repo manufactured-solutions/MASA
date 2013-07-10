@@ -45,21 +45,11 @@ AX_CXX_MINOPT	# request minimum optimization level for CXX
 AC_FC_SRCEXT([F90]) 
 AX_FC_MINOPT	# request minimum optimization level for FC
 
-#---------------------------------------------
+# ---------------------------------------------
 # Enable/Disable -Wall (Warn all)
-#---------------------------------------------
+# ---------------------------------------------
 
 AX_MASA_WARN_ALL
-
-#---------------------------------------------
-# enable python interfaces with SWIG
-#---------------------------------------------
-
-
-dnl AX_PKG_SWIG(1.3.17, [], [ AC_MSG_WARN([SWIG not detected: python interfaces not built!]) ])
-dnl AX_SWIG_ENABLE_CXX
-dnl AX_SWIG_MULTI_MODULE_SUPPORT
-dnl AX_SWIG_PYTHON
 
 # ------------------------------
 # Checks for required programs
@@ -75,15 +65,20 @@ AC_PROG_LIBTOOL
 AM_SANITY_CHECK
 
 
-# swig
-AM_PATH_PYTHON(2.3)
-AC_PROG_SWIG(1.3.21)
-SWIG_ENABLE_C
-SWIG_PYTHON
+# ---------------------------------------------
+# enable python interfaces with SWIG
+# ---------------------------------------------
+AC_ARG_ENABLE([python-interfaces], AC_HELP_STRING([--enable-python-interfaces],[enable python support]),
+	       SWIG_INTERFACES=1
+	       AM_PATH_PYTHON(2.3)
+	       AC_PROG_SWIG(1.3.21)
+	       SWIG_ENABLE_C
+	       SWIG_PYTHON
+	       AC_DEFINE(SWIG_INTERFACES,1,[Define if python interfaces enabled]),[])
 
- #---------------------------------------------
+# ---------------------------------------------
 # Check for extra-strict regression tolerance
-#---------------------------------------------
+# ---------------------------------------------
 
 FC_STRICT_TOL_CPP=""
 
@@ -102,9 +97,9 @@ AC_ARG_ENABLE([masa-exceptions], AC_HELP_STRING([--enable-masa-exceptions],[enab
  	       MASA_EXCEPTIONS=1 
 	       AC_DEFINE(MASA_EXCEPTIONS,1,[Define if exception handling enabled]),[])
 
-#--------------------------
+# --------------------------
 # Checks for code coverage
-#-------------------------
+# -------------------------
 
 AX_CODE_COVERAGE
 
