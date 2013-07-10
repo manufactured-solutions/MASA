@@ -49,9 +49,9 @@ libfmasa_la_SOURCES     = masa.f90
 #-----------------------
 # MASA (SWIG) Python interface (optional)
 #-----------------------
-if PYTHON_INTERFACES
+if SWIG_ENABLED
   BUILT_SOURCES += masa_wrap.c masa.py
-  SWIG_SOURCES   = $(srcdir)/masa.i
+  SWIG_SRC   = $(srcdir)/masa.i
 
   pkgpython_PYTHON      = masa.py __init__.py
   pkgpyexec_LTLIBRARIES = _masa.la
@@ -61,7 +61,7 @@ if PYTHON_INTERFACES
   _masa_la_LIBADD = ../src/libmasa.la
 
   # Produce two built sources from a single masa.i source
-  masa_wrap.c : $(SWIG_SOURCES)
+  masa_wrap.c : $(SWIG_SRC)
 	$(SWIG) $(AX_SWIG_PYTHON_OPT) masa.i
   masa.py     : masa_wrap.c
 	@if test ! -f $@; then rm -f $+; $(MAKE) $(AM_MAKEFLAGS) $+; fi
