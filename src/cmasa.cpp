@@ -89,6 +89,19 @@ extern "C" int masa_select_mms(const char* function_user_wants)
   return 0;
 }
 
+extern "C" int masa_get_name(char* name)
+{
+  std::string fuw(name);
+  masa_get_name<double>(&fuw);
+  return 0;
+}
+
+extern "C" int masa_get_dimension(int* dim)
+{
+  masa_get_dimension<double>(dim);
+  return 0;
+}
+
 extern "C" int masa_list_mms()
 {
   masa_list_mms<double>();

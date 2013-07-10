@@ -1254,7 +1254,7 @@ extern "C" {
    * Subroutine will return a string with the current manufactured solution
    * name.
    */
-  extern int masa_get_name(const char* name);
+  extern int masa_get_name(char* name);
 
   /**
    * Subroutine takes an integer pointer, which is returned as the dimension
