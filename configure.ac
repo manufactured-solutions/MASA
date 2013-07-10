@@ -76,7 +76,7 @@ AC_ARG_ENABLE([python-interfaces], AC_HELP_STRING([--enable-python-interfaces],[
 	       SWIG_ENABLE_C
 	       SWIG_PYTHON
 	       AC_DEFINE(SWIG_INTERFACES,1,[Define if python interfaces enabled]),[])
-AC_SUBST(SWIG_INTERFACES)
+# AC_SUBST(SWIG_INTERFACES)
 AM_CONDITIONAL(SWIG_ENABLED,test x$SWIG_INTERFACES = x1) 
 
 # ---------------------------------------------
