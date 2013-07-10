@@ -1,3 +1,5 @@
+CLEANFILES  = .license.stamp masa.mod *.gcda *.gcno
+
 h_sources  = masa.h masa_internal.h smasa.h ad_masa.h                        \
              nsctpl_fwd.hpp nsctpl.hpp                                       \
 	     dualnumber.h numberarray.h dualnumberarray.h compare_types.h    \
@@ -48,22 +50,37 @@ libfmasa_la_SOURCES     = masa.f90
 # MASA (SWIG) Python interface -- optional!
 #-----------------------
 
-BUILT_SOURCES += $(srcdir)/masa_wrap.c
-SWIG_SOURCES=masa.i
+###BUILT_SOURCES += $(srcdir)/masa_wrap.c
+###SWIG_SOURCES=masa.i
+###
+###pkgpython_PYTHON = masa.py __init__.py
+###pkgpyexec_LTLIBRARIES = _masa.la
+###_masa_la_SOURCES = $(srcdir)/masa_wrap.c $(SWIG_SOURCES)
+###_masa_la_CFLAGS = $(AX_SWIG_PYTHON_CFLAGS) -I$(top_srcdir)/src
+###_masa_la_LDFLAGS = -module
+###_masa_la_LIBADD = ../src/libmasa.la
+###
+###$(srcdir)/masa_wrap.c : $(SWIG_SOURCES)
+###	$(SWIG) $(AX_SWIG_PYTHON_OPT) -o $@ $<
+###	$(SWIG) $(AX_SWIG_PYTHON_OPT) masa.i
 
-pkgpython_PYTHON = masa.py __init__.py
+BUILT_SOURCES += masa_wrap.c masa.py
+SWIG_SOURCES   = $(srcdir)/masa.i
+
+pkgpython_PYTHON      = masa.py __init__.py
 pkgpyexec_LTLIBRARIES = _masa.la
-_masa_la_SOURCES = $(srcdir)/masa_wrap.c $(SWIG_SOURCES)
-_masa_la_CFLAGS = $(SWIG_PYTHON_CFLAGS) -I$(top_srcdir)/src
+_masa_la_SOURCES = masa_wrap.c
+_masa_la_CFLAGS = $(AX_SWIG_PYTHON_CPPFLAGS) -I$(top_srcdir)/src
 _masa_la_LDFLAGS = -module
 _masa_la_LIBADD = ../src/libmasa.la
 
-$(srcdir)/masa_wrap.c : $(SWIG_SOURCES)
-	$(SWIG) $(SWIG_PYTHON_OPT) -o $@ $<
-	$(SWIG) -c++ -python $(SWIG_PYTHON_OPT) masa.i
+# Produce two built sources from a single masa.i source
+masa_wrap.c : $(SWIG_SOURCES)
+	$(SWIG) $(AX_SWIG_PYTHON_OPT) masa.i
+masa.py     : masa_wrap.c
+	@if test ! -f $@; then rm -f $+; $(MAKE) $(AM_MAKEFLAGS) $+; fi
 
-#masa.py: masa.i
-#	$(MAKE) masa_wrap.c
+CLEANFILES  += masa_wrap.c masa.py masa.pyc
 
 #-----------------------
 # Standalone binaries
@@ -94,5 +111,4 @@ install-data-local: libfmasa.la
 uninstall-local: libfmasa.la
 	rm -rf $(DESTDIR)$(libdir)/masa.mod
 
-EXTRA_DIST  = lic_utils/update_license.pl .license.stamp
-CLEANFILES  = .license.stamp masa.mod *.gcda *.gcno masa_wrap.c masa.py
+EXTRA_DIST   = lic_utils/update_license.pl .license.stamp
