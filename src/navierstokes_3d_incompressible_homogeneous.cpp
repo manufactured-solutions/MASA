@@ -130,7 +130,7 @@ Scalar MASA::navierstokes_3d_incompressible_homogeneous<Scalar>::eval_q_u(Scalar
 	      // dissipation
 	      + nu * divergence(gradient(U)));
 
-  return Q_u[0];
+  return -Q_u[0];
 
 }
 
@@ -169,7 +169,7 @@ Scalar MASA::navierstokes_3d_incompressible_homogeneous<Scalar>::eval_q_v(Scalar
 	      // dissipation
 	      + nu * divergence(gradient(U)));
 
-  return Q_u[1];
+  return -Q_u[1];
 
 }
 
@@ -208,7 +208,7 @@ Scalar MASA::navierstokes_3d_incompressible_homogeneous<Scalar>::eval_q_w(Scalar
 	      // dissipation
 	      + nu * divergence(gradient(U)));
 
-  return Q_u[2];
+  return -Q_u[2];
 
 }
 
