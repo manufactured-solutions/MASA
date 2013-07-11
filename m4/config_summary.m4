@@ -53,7 +53,7 @@ echo Optional Features:
      echo '   'Enable all warnings.......... : no
    fi
 
-   if test "$SWIG_ENABLED" = ""; then
+   if test "$SWIG_INTERFACES" = ""; then
      echo '   'Enable python interfaces..... : no
    else
      echo '   'Enable python interfaces..... : yes
