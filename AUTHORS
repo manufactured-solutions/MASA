@@ -14,9 +14,10 @@ Rhys Ulerich
 Manufactured Solution Generation:
 
 Kemelli Estacio-Hiroms
-Todd Oliver      (FANS/RANS)
-Marco Panesi     (Radiation)
-Gabriel Terejanu (SMASA)
+Nicholas Fitzsimmons (Incompressible Navier Stokes
+Todd Oliver          (FANS/RANS)
+Marco Panesi         (Radiation)
+Gabriel Terejanu     (SMASA)
 Rhys Ulerich
 
 ------------------------------------------------------------
@@ -33,6 +34,9 @@ Primary maintainer(s):
 
 Nicholas Malaya 
 {nick}@ices.utexas.edu
+
+Karl Schulz
+{karl}@ices.utexas.edu
 
 Predictive Engineering and Computational Sciences    (PECOS)
 Institute for Computational Engineering and Sciences (ICES)
