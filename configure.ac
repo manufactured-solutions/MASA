@@ -73,13 +73,15 @@ SWIG_INTERFACES=0
 AC_ARG_ENABLE([python-interfaces], AC_HELP_STRING([--enable-python-interfaces],[enable python support]),
 [
 AM_PATH_PYTHON(2.3)
-AC_PROG_SWIG(1.3.21)
-SWIG_ENABLE_C
+dnl AC_PROG_SWIG(1.3.21)
+AC_PROG_SWIG()
+dnl SWIG_ENABLE_C
 SWIG_PYTHON
+SWIG_INTERFACES=1
 AC_DEFINE(SWIG_INTERFACES,1,[Define if python interfaces enabled])
 ],[])
 
-AM_CONDITIONAL(SWIG_ENABLED,test x$SWIG_INTERFACES = x1) 
+AM_CONDITIONAL(SWIG_ENABLED,[test "x$SWIG_INTERFACES" = xtrue]) 
 
 # ---------------------------------------------
 # Check for extra-strict regression tolerance

@@ -53,10 +53,10 @@ echo Optional Features:
      echo '   'Enable all warnings.......... : no
    fi
 
-   if test "$SWIG_INTERFACES" = ""; then
-     echo '   'Enable python interfaces..... : no
-   else
+   if test "$SWIG_INTERFACES" = "1"; then
      echo '   'Enable python interfaces..... : yes
+   else
+     echo '   'Enable python interfaces..... : no
    fi
 
 echo
