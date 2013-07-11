@@ -1,6 +1,6 @@
 Version 0.42.0 (IN PROGRESS)
 
-  * Added python interface support with SWIG
+  * Added optional python interface support with SWIG
   * Added example for isotropic, homogeneous Navier Stokes AD MS
   * Bug fix in isotropic, homogeneous Navier Stokes AD MS
   * Bug fix in channel Navier Stokes AD MS
