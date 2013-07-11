@@ -7,6 +7,7 @@ AC_PREREQ(2.61)
 AC_INIT([masa],[0.41.2], [masa-dev@ices.utexas.edu])
 AC_CONFIG_HEADER(config.h)
 AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE
 
 # snarf and provide versioning numbers
@@ -70,13 +71,14 @@ AM_SANITY_CHECK
 # ---------------------------------------------
 SWIG_INTERFACES=0
 AC_ARG_ENABLE([python-interfaces], AC_HELP_STRING([--enable-python-interfaces],[enable python support]),
-	       SWIG_INTERFACES=1
-	       AM_PATH_PYTHON(2.3)
-	       AC_PROG_SWIG(1.3.21)
-	       SWIG_ENABLE_C
-	       SWIG_PYTHON
-	       AC_DEFINE(SWIG_INTERFACES,1,[Define if python interfaces enabled]),[])
-# AC_SUBST(SWIG_INTERFACES)
+[
+AM_PATH_PYTHON(2.3)
+AC_PROG_SWIG(1.3.21)
+SWIG_ENABLE_C
+SWIG_PYTHON
+AC_DEFINE(SWIG_INTERFACES,1,[Define if python interfaces enabled])
+],[])
+
 AM_CONDITIONAL(SWIG_ENABLED,test x$SWIG_INTERFACES = x1) 
 
 # ---------------------------------------------
