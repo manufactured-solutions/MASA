@@ -81,7 +81,7 @@ SWIG_INTERFACES=1
 AC_DEFINE(SWIG_INTERFACES,1,[Define if python interfaces enabled])
 ],[])
 
-AM_CONDITIONAL(SWIG_ENABLED,[test "x$SWIG_INTERFACES" = xtrue]) 
+AM_CONDITIONAL(SWIG_ENABLED,[test "x$SWIG_INTERFACES" = x1]) 
 
 # ---------------------------------------------
 # Check for extra-strict regression tolerance
