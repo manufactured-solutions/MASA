@@ -254,10 +254,9 @@ EXTRA_DIST                 = init.sh              \
 
 # IF optional SWIG python interfaces are enabled:
 if SWIG_ENABLED
-	TESTS      += py_init.sh
-	TESTS      += test_swig.py
+TESTS      += py_init.sh touch_swig_interface.sh
 
-	EXTRA_DIST += py_init.sh test_swig.py
+EXTRA_DIST += py_init.sh test_swig.py
 endif
 
 # Finalize tests
