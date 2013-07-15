@@ -241,9 +241,7 @@ TESTS                      = init.sh              \
 			     ad_euler             \
 			     ad_cns               \
 			     ad_cns_crossterm     \
-			     ad_ins               \
-                             finalize.sh
-
+			     ad_ins               
 
 
 EXTRA_DIST                 = init.sh              \
@@ -253,6 +251,18 @@ EXTRA_DIST                 = init.sh              \
                              finalize.sh          \
 			     tests.h              \
 			     .license.stamp       
+
+# IF optional SWIG python interfaces are enabled:
+if SWIG_ENABLED
+	TESTS      += py_init.sh
+	TESTS      += test_swig.py
+
+	EXTRA_DIST += py_init.sh test_swig.py
+endif
+
+# Finalize tests
+TESTS +=  finalize.sh
+
 
 # License Information
 .license.stamp: $(top_srcdir)/LICENSE
