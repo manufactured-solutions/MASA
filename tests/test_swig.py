@@ -3,6 +3,7 @@
 # touch swig interfaces, ensure they function
 #
 import sys
+#import masa
 
 
 # Has the whole world gone crazy? 

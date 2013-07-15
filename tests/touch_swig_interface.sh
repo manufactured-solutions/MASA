@@ -4,11 +4,12 @@
 #
 
 python test_swig.py
-if($? != 0)
+if [ $? != 0 ] 
+then
     echo 'SWIG interfaces:: FAILED'
-    return 1
+    exit 1
 else
-    return 0 
+    exit 0
 fi
 
 #
