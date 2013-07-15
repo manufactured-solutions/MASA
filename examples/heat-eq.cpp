@@ -71,6 +71,7 @@ int main()
 	tempx=i*dx;
 	tempy=j*dy;
 
+
 	tfield = masa_eval_source_t<Scalar>  (tempx,tempy);
 
 	masa_test_default(tfield);
