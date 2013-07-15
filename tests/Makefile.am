@@ -1,4 +1,4 @@
-LIBS             = -L$(top_builddir)/src -lmasa
+LIBS             = -L$(top_builddir)/src -lmasa -lm
 AM_CPPFLAGS      = -I$(top_srcdir)/src -I$(top_builddir)/src
 AM_FCFLAGS       = $(FC_STRICT_TOL_CPP)
 AM_LDFLAGS       = $(LIBS)

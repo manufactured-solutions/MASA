@@ -1,5 +1,5 @@
 AM_CPPFLAGS   = -I$(top_srcdir)/src -I$(top_builddir)/src
-LIBS          = -L$(top_builddir)/src -lmasa
+LIBS          = -L$(top_builddir)/src -lmasa -lm
 
 # License Information
 BUILT_SOURCES = .license.stamp
