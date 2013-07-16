@@ -6,7 +6,7 @@
 python test_swig.py
 if [ $? != 0 ] 
 then
-    echo 'SWIG interfaces:: FAILED'
+    echo 'Test SWIG interfaces:: FAILED'
     exit 1
 else
     exit 0
