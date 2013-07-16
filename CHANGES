@@ -1,3 +1,7 @@
+Version 0.43.0 (In Progress)
+
+  * Moved MASA from PECOS Private SVN to Github
+
 Version 0.42.0 (16 July, 2013)
 
   * Added optional python interface support with SWIG
