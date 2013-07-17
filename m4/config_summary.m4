@@ -10,7 +10,7 @@
 #
 # LAST MODIFICATION
 #
-#   $Id$
+#   $Id: config_summary.m4 40370 2013-07-11 13:16:42Z nick $
 #
 
 AC_DEFUN([AX_SUMMARIZE_CONFIG],
