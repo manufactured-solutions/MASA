@@ -22,7 +22,7 @@
 
 \latexonly
 \begin{tabular}{m{2.2cm} m{0.80\textwidth} }
-\includegraphics[width=2cm]{/workspace/src/pecos/mms/MASA/trunk/doxygen/fig_common/circle-logo.pdf} &
+\includegraphics[width=2cm]{/workspace/src/MASA/doxygen/fig_common/circle-logo.pdf} &
 The \href{http://pecos.ices.utexas.edu}{Center for Predictive
 Engineering and Computational Sciences} (PECOS) is one of five US
 centers sponsored under the Predictive Science Academic Alliance
