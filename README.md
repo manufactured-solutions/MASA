@@ -23,19 +23,20 @@ MASA: a library for verification using manufactured and analytical solutions pub
 doi:10.1007/s00366-012-0267-9
 
 Bibtex:
-@article{
-year={2012},
-issn={0177-0667},
-journal={Engineering with Computers},
-doi={10.1007/s00366-012-0267-9},
-title={MASA: a library for verification using manufactured and analytical solutions},
-url={http://dx.doi.org/10.1007/s00366-012-0267-9},
-publisher={Springer-Verlag},
-keywords={Verification; Manufactured solutions; Partial differential equations; Finite elements},
-author={Malaya, Nicholas and Estacio-Hiroms, Kemelli C. and Stogner, Roy H. and Schulz, Karl W. and Bauman, Paul T. and Carey, Graham F.},
-pages={1-10},
-language={English}
-}
+
+    @article{
+    year={2012},
+    issn={0177-0667},
+    journal={Engineering with Computers},
+    doi={10.1007/s00366-012-0267-9},
+    title={MASA: a library for verification using manufactured and analytical solutions},
+    url={http://dx.doi.org/10.1007/s00366-012-0267-9},
+    publisher={Springer-Verlag},
+    keywords={Verification; Manufactured solutions; Partial differential equations; Finite elements},
+    author={Malaya, Nicholas and Estacio-Hiroms, Kemelli C. and Stogner, Roy H. and Schulz, Karl W. and Bauman, Paul T. and Carey, Graham F.},
+    pages={1-10},
+    language={English}
+    }
 
 For more information on the use of MASA and a brief introduction to verification, consult the following presentation:
 
