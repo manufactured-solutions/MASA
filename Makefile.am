@@ -7,7 +7,8 @@ SUBDIRS          = src examples tests doxygen tutorial
 
 # Distribute these directories:
 DISTDIRS = src examples
-EXTRA_DIST= AUTHORS README LICENSE COPYING CHANGES dist_version
+EXTRA_DIST= AUTHORS README LICENSE COPYING CHANGES
+#EXTRA_DIST= AUTHORS README LICENSE COPYING CHANGES dist_version
 
 # Support for pkgconfig
 pkgconfigdir   = $(libdir)/pkgconfig

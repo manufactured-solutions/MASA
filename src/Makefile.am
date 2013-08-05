@@ -49,8 +49,10 @@ libfmasa_la_SOURCES     = masa.f90
 #-----------------------
 # MASA (SWIG) Python interface (optional)
 #-----------------------
+
 if SWIG_ENABLED
   BUILT_SOURCES += masa_wrap.c masa.py
+
   SWIG_SRC   = $(srcdir)/masa.i
 
   pkgpython_PYTHON      = masa.py __init__.py
@@ -67,6 +69,13 @@ if SWIG_ENABLED
 	@if test ! -f $@; then rm -f $+; $(MAKE) $(AM_MAKEFLAGS) $+; fi
 
   CLEANFILES  += masa_wrap.c masa.py masa.pyc
+else
+  # Stubs for "make distcheck" to be happy
+  masa_wrap.c :
+	@touch $@
+  masa.py     :
+	@touch $@
+
 endif
 
 #-----------------------
