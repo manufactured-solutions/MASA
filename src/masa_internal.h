@@ -1945,86 +1945,6 @@ public:
 
 
 // ------------------------------------------------------
-// --------------- navierstokes_3d_transient_sutherland 
-// ------------------------------------------------------
-namespace MASA{
-template <typename Scalar>
-class navierstokes_3d_transient_sutherland : public manufactured_solution<Scalar>
-{
-  using manufactured_solution<Scalar>::pi;
-  using manufactured_solution<Scalar>::PI;
-
-private:
-  Scalar rho_0;
-  Scalar rho_x;
-  Scalar rho_y;
-  Scalar rho_z;
-  Scalar rho_t;
-  Scalar a_rhox;
-  Scalar a_rhoy;
-  Scalar a_rhoz;
-  Scalar a_rhot;
-  Scalar p_0;
-  Scalar p_x;
-  Scalar p_y;
-  Scalar p_z;
-  Scalar p_t;
-  Scalar a_px;
-  Scalar a_py;
-  Scalar a_pz;
-  Scalar a_pt;
-  Scalar w_0;
-  Scalar w_x;
-  Scalar w_y;
-  Scalar w_z;
-  Scalar w_t;
-  Scalar a_wx;
-  Scalar a_wy;
-  Scalar a_wz;
-  Scalar a_wt;
-  Scalar v_0;
-  Scalar v_x;
-  Scalar v_y;
-  Scalar v_z;
-  Scalar v_t;
-  Scalar a_vx;
-  Scalar a_vy;
-  Scalar a_vz;
-  Scalar a_vt;
-  Scalar u_0;
-  Scalar u_x;
-  Scalar u_y;
-  Scalar u_z;
-  Scalar u_t;
-  Scalar a_ux;
-  Scalar a_uy;
-  Scalar a_uz;
-  Scalar a_ut;
-  Scalar L;
-  Scalar Gamma;
-  Scalar k;
-  Scalar mu;
-  Scalar R;
-  Scalar A_mu;
-  Scalar B_mu;
-
-public:
-  navierstokes_3d_transient_sutherland();
-  int init_var();
-  Scalar eval_q_u (Scalar,Scalar,Scalar,Scalar);
-  Scalar eval_q_v (Scalar,Scalar,Scalar,Scalar);
-  Scalar eval_q_w (Scalar,Scalar,Scalar,Scalar);
-  Scalar eval_q_e (Scalar,Scalar,Scalar,Scalar);
-  Scalar eval_q_rho (Scalar,Scalar,Scalar,Scalar);
-  Scalar eval_exact_rho(Scalar,Scalar,Scalar,Scalar);
-  Scalar eval_exact_p(Scalar,Scalar,Scalar,Scalar);
-  Scalar eval_exact_u(Scalar,Scalar,Scalar,Scalar);
-  Scalar eval_exact_v(Scalar,Scalar,Scalar,Scalar);
-  Scalar eval_exact_w(Scalar,Scalar,Scalar,Scalar);
-};}
-
-
-// ------------------------------------------------------
 // --------------- ad_cns_2d_crossterms 
 // ------------------------------------------------------
 namespace MASA{
@@ -2239,6 +2159,86 @@ public:
   Scalar eval_exact_v(Scalar,Scalar,Scalar);
   Scalar eval_exact_w(Scalar,Scalar,Scalar);
   Scalar eval_exact_p(Scalar,Scalar,Scalar);
+};}
+
+
+// ------------------------------------------------------
+// --------------- navierstokes_3d_transient_sutherland 
+// ------------------------------------------------------
+namespace MASA{
+template <typename Scalar>
+class navierstokes_3d_transient_sutherland : public manufactured_solution<Scalar>
+{
+  using manufactured_solution<Scalar>::pi;
+  using manufactured_solution<Scalar>::PI;
+
+private:
+  Scalar L;
+  Scalar Lt;
+  Scalar rho_0;
+  Scalar rho_x;
+  Scalar a_rhox;
+  Scalar rho_y;
+  Scalar a_rhoy;
+  Scalar rho_z;
+  Scalar a_rhoz;
+  Scalar rho_t;
+  Scalar a_rhot;
+  Scalar p_0;
+  Scalar p_x;
+  Scalar a_px;
+  Scalar p_y;
+  Scalar a_py;
+  Scalar p_z;
+  Scalar a_pz;
+  Scalar p_t;
+  Scalar a_pt;
+  Scalar u_0;
+  Scalar u_x;
+  Scalar a_ux;
+  Scalar u_y;
+  Scalar a_uy;
+  Scalar u_z;
+  Scalar a_uz;
+  Scalar u_t;
+  Scalar a_ut;
+  Scalar v_0;
+  Scalar v_x;
+  Scalar a_vx;
+  Scalar v_y;
+  Scalar a_vy;
+  Scalar v_z;
+  Scalar a_vz;
+  Scalar v_t;
+  Scalar a_vt;
+  Scalar w_0;
+  Scalar w_x;
+  Scalar a_wx;
+  Scalar w_y;
+  Scalar a_wy;
+  Scalar w_z;
+  Scalar a_wz;
+  Scalar w_t;
+  Scalar a_wt;
+  Scalar B_mu;
+  Scalar A_mu;
+  Scalar Gamma;
+  Scalar R;
+  Scalar Pr;
+
+public:
+  navierstokes_3d_transient_sutherland();
+  int init_var();
+  Scalar eval_q_e(Scalar,Scalar,Scalar,Scalar);
+  Scalar eval_q_rho(Scalar,Scalar,Scalar,Scalar);
+  Scalar eval_q_u(Scalar,Scalar,Scalar,Scalar);
+  Scalar eval_q_v(Scalar,Scalar,Scalar,Scalar);
+  Scalar eval_q_w(Scalar,Scalar,Scalar,Scalar);
+  Scalar eval_exact_rho(Scalar,Scalar,Scalar,Scalar);
+  Scalar eval_exact_p(Scalar,Scalar,Scalar,Scalar);
+  Scalar eval_exact_u(Scalar,Scalar,Scalar,Scalar);
+  Scalar eval_exact_v(Scalar,Scalar,Scalar,Scalar);
+  Scalar eval_exact_w(Scalar,Scalar,Scalar,Scalar);
 };}
 
 
