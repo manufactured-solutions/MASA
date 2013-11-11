@@ -1,7 +1,11 @@
+Version 0.43.1 (In progress)
+  * ...	
+
 Version 0.43.0 (November 10th, 2013)
 
   * Moved MASA from PECOS Private SVN to Github
   * Replacing MMS for 3D Navier-Stokes with Sutherland viscosity
+  * Fixing Make-dist
 
 Version 0.42.0 (16 July, 2013)
 
