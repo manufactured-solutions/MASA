@@ -45,13 +45,6 @@ coverage: docs lcov-reset check lcov-report
 endif
 
 # Revision control support for external distribution
-if SVN_CHECKOUT
-dist_version: FORCE
-	@SVN_REVISION@ > $(top_srcdir)/dist_version
-
-FORCE:
-endif
-
 if GIT_CLONE
 dist_version: FORCE
 	@GIT_REVISION@ > $(top_srcdir)/dist_version
