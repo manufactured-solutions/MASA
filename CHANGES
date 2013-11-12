@@ -1,5 +1,6 @@
-Version 0.43.1 (In progress)
+Version 0.43.1 (ovember 12th, 2013)
   * Transitioned to git source control checks
+  * Fixed bug in python interfaces from release tarball
 
 Version 0.43.0 (November 10th, 2013)
 
