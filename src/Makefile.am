@@ -107,4 +107,4 @@ install-data-local: libfmasa.la
 uninstall-local: libfmasa.la
 	rm -rf $(DESTDIR)$(libdir)/masa.mod
 
-EXTRA_DIST   = lic_utils/update_license.pl .license.stamp
+EXTRA_DIST   = lic_utils/update_license.pl .license.stamp masa.i
