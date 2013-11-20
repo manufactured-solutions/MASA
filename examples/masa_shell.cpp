@@ -55,7 +55,7 @@ void MASA::masa_shell_choose_solution()
   string str1;
   
   printf("\n\n Now type solution to initialize.");
-  printf("\n Remember to place underscores between parameters (e.g. steady_heatequation)");
+  printf("\n Remember to place underscores between parameters (e.g. heateq_1d_steady_const)");
   printf("\n\n");
   cin >> userstring;
 
