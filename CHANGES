@@ -1,14 +1,18 @@
-Version 0.43.1 (November 12th, 2013)
+Version 0.43.1 (In progress, 2013)
+
+  * python configuration included in masa_version binary
+
+Version 0.43.1 (12 November 2013)
   * Transitioned to git source control checks
   * Fixed bug in python interfaces from release tarball
 
-Version 0.43.0 (November 10th, 2013)
+Version 0.43.0 (10 November 2013)
 
   * Moved MASA from PECOS Private SVN to Github
   * Replacing MMS for 3D Navier-Stokes with Sutherland viscosity
   * Fixing Make-dist
 
-Version 0.42.0 (16 July, 2013)
+Version 0.42.0 (16 July 2013)
 
   * Added optional python interface support with SWIG
   * Added example for isotropic, homogeneous Navier Stokes AD MS
@@ -16,7 +20,7 @@ Version 0.42.0 (16 July, 2013)
   * Bug fix in channel Navier Stokes AD MS
   * Included two missing cmasa interfaces: masa_get_name and masa_get_dimension
 
-Version 0.41.1 (22 May, 2013)
+Version 0.41.1 (22 May 2013)
 
   * Added incompressible Channel flow Navier Stokes Automatic Differentiation MS
   * Added incompressible isotropic, homogeneous Navier Stokes Automatic Differentiation MS

@@ -1217,7 +1217,7 @@ int MASA::masa_sanity_check()
 
 int MASA::masa_version_stdout()
 {
-  std::cout << "--------------------------------------------------------" << std::endl;
+  std::cout << "-------------------------------------------------------------------------------" << std::endl;
   std::cout << "MASA Library: Version = " << MASA_LIB_VERSION;
   std::cout << " (" << MASA::masa_get_numeric_version() << ")" << std::endl << std::endl;
 
@@ -1230,8 +1230,15 @@ int MASA::masa_version_stdout()
   std::cout << "Build Rev    = " << MASA_BUILD_VERSION  << std::endl << std::endl;
 
   std::cout << "C++ Config   = " << MASA_CXX << " "     << MASA_CXXFLAGS << std::endl;
-  std::cout << "F90 Config   = " << MASA_FC MASA_FCFLAGS << std::endl;
-  std::cout << "--------------------------------------------------------" << std::endl;
+  std::cout << "F90 Config   = " << MASA_FC MASA_FCFLAGS << std::endl << std::endl;
+  std::cout << "Optional Features:" << std::endl;
+  std::cout << "   Python support enabled = ";
+#ifdef SWIG_INTERFACES
+  std::cout << "yes" << std::endl;
+#else
+  std::cout << "no" << std::endl;
+#endif
+  std::cout << "-------------------------------------------------------------------------------" << std::endl;
   return 0;
 }
 
