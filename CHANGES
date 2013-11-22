@@ -1,6 +1,7 @@
-Version 0.43.1 (In progress, 2013)
+Version 0.43.2 (In progress, 2013)
 
-  * python configuration included in masa_version binary
+  * fix for parallel builds when python is enabled (Issue #11)
+  * python configuration included in masa_version binary (Issue #12)
 
 Version 0.43.1 (12 November 2013)
   * Transitioned to git source control checks
