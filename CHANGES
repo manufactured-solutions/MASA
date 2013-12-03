@@ -1,5 +1,6 @@
 Version 0.43.2 (In progress, 2013)
 
+  * added an example for calling the python interfaces
   * added 4d interfaces for cmasa and pymasa 
   * fix for parallel builds when python is enabled (Issue #11)
   * python configuration included in masa_version binary (Issue #12)
