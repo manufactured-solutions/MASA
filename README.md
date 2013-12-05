@@ -4,9 +4,7 @@ MASA
 Method of Manufactured Solutions Repository
 
 
-MASA (Manufactured Analytical Solution Abstraction) is a library written in C++ (with C and Fortran90 interfaces) 
-which provides a suite of manufactured solutions for the software verification of partial differential equation 
-solvers in multiple dimensions. Example formulations include:
+MASA (Manufactured Analytical Solution Abstraction) is a library written in C++ (with C, python and Fortran90 interfaces) which provides a suite of manufactured solutions for the software verification of partial differential equation solvers in multiple dimensions. Example formulations include:
 
     Heat Equation
     Laplace's Equation
