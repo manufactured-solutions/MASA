@@ -65,6 +65,14 @@ AC_PROG_F77
 AC_PROG_LIBTOOL
 AM_SANITY_CHECK
 
+# ----------------------------
+# We may need the math library
+# ----------------------------
+AC_LANG_PUSH([C])
+AC_SEARCH_LIBS([cos], [m], [], [
+    AC_MSG_ERROR([unable to find the cos() function])
+])
+AC_LANG_POP([C])
 
 # ---------------------------------------------
 # enable python interfaces with SWIG
