@@ -39,12 +39,13 @@ library_include_HEADERS = masa.h
 libmasa_la_LDFLAGS      = $(all_libraries) -release $(GENERIC_RELEASE)
 libmasa_la_SOURCES      = $(cc_sources) $(h_sources)
 
-#-----------------------
-# MASA Fortran interface
-#-----------------------
+#----------------------
+# MASA Fortran library
+# (Installs standalone)
+#----------------------
 
 libfmasa_la_LDFLAGS     = $(all_libraries) -release $(GENERIC_RELEASE)
-libfmasa_la_SOURCES     = masa.f90
+libfmasa_la_SOURCES     = masa.f90 $(libmasa_la_SOURCES)
 
 #-----------------------
 # MASA (SWIG) Python interface (optional)
