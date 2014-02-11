@@ -138,9 +138,16 @@ DX_PS_FEATURE(OFF)
 
 DX_INIT_DOXYGEN(MASA, doxygen/masa.dox, docs) 
 
+# Run scripts for regression tests
+AC_CONFIG_FILES(tests/py_init.sh, [chmod +x tests/py_init.sh])
+AC_CONFIG_FILES(tests/touch_swig_interface.sh, [chmod +x tests/touch_swig_interface.sh])
+
 # Generate Output Files
-AC_OUTPUT( Makefile src/Makefile examples/Makefile tests/Makefile tutorial/Makefile \
-	   doxygen/Makefile doxygen/txt_common/about_vpath.page src/masa.h masa.spec masa.pc )
+AC_CONFIG_FILES([Makefile src/Makefile examples/Makefile
+                 tests/Makefile tutorial/Makefile
+                 doxygen/Makefile doxygen/txt_common/about_vpath.page
+                 src/masa.h masa.spec masa.pc])
+AC_OUTPUT()
 
 # FINAL SUMMARY
 

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo " "
+echo "-------------------------------------------------------"
+echo "Initializing pythonMASA Tests"
+echo "-------------------------------------------------------"
+
+python "@srcdir@/test_swig.py"

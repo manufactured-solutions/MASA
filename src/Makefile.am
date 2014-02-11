@@ -64,7 +64,7 @@ if SWIG_ENABLED
 
   # Produce two built sources from a single masa.i source
   masa_wrap.c : $(SWIG_SRC)
-	$(SWIG) $(AX_SWIG_PYTHON_OPT) masa.i
+	$(SWIG) $(AX_SWIG_PYTHON_OPT) $(srcdir)/masa.i
   masa.py     : masa_wrap.c
 	@if test ! -f $@; then rm -f $+; $(MAKE) $(AM_MAKEFLAGS) $+; fi
 
