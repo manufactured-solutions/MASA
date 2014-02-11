@@ -2,7 +2,9 @@ AM_CPPFLAGS        = -I$(top_srcdir)/src -I$(top_builddir)/src
 AM_FCFLAGS         = $(FC_STRICT_TOL_CPP)
 check_PROGRAMS     =
 dist_check_SCRIPTS =
-EXTRA_DIST         = tests.h
+EXTRA_DIST         = tests.h init.sh ad_init.sh c_init.sh \
+                     f_init.sh finalize.sh py_init.sh \
+                     touch_swig_interface.sh test_swig.py
 
 #--------------
 # C++ Binaries
