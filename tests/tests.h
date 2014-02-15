@@ -39,7 +39,7 @@
 extern "C" {
 #endif
 
-double nancheck(double x)
+void nancheck(double x)
 {
 
   if(isnan(x))
@@ -47,12 +47,9 @@ double nancheck(double x)
       printf("MASA REGRESSION FAILURE:: nan found!\n");
       exit(1);
     }
-  
-  return 0;
-
 }
 
-double threshcheck(double x, double thresh)
+void threshcheck(double x, double thresh)
 {
   if(isnan(x))
     {
@@ -67,12 +64,11 @@ double threshcheck(double x, double thresh)
       printf("Exceeded Threshold: %g\n",thresh);
       exit(1);
     }
-  return 0;  
 }
 
 
 
-double test_default(double x)
+void test_default(double x)
 {
   double MASA_VAR_DEFAULT = -12345.67;
   //double uninit = -1.33;
@@ -90,7 +86,6 @@ double test_default(double x)
       printf("Not set to default! %g",x);
       exit(1);
     }
-  return 0;  
 }
 
 
@@ -105,7 +100,7 @@ double test_default(double x)
 #include <iostream>
 
 template<typename Scalar>
-Scalar nancheck(Scalar x)
+void nancheck(Scalar x)
 {
 
   if(isnan(x))
@@ -116,7 +111,7 @@ Scalar nancheck(Scalar x)
 }
 
 template<typename Scalar>
-Scalar threshcheck(Scalar x, Scalar thresh)
+void threshcheck(Scalar x, Scalar thresh)
 {
   //Scalar MASA_VAR_DEFAULT = -12345.67;
   //Scalar uninit = -1.33;
@@ -135,11 +130,10 @@ Scalar threshcheck(Scalar x, Scalar thresh)
       std::cout << "Exceeded Threshold: " << thresh << std::endl;
       exit(1);
     }
-  return 0;  
 }
 
 template<typename Scalar>
-Scalar test_default(Scalar x)
+void test_default(Scalar x)
 {
   Scalar MASA_VAR_DEFAULT = -12345.67;
   //Scalar uninit = -1.33;
@@ -157,11 +151,10 @@ Scalar test_default(Scalar x)
       std::cout << "Exceeded Threshold by: " << x << std::endl;
       exit(1);
     }
-  return 0;  
 }
 
 template<typename Scalar>
-Scalar threshcheck(Scalar x)
+void threshcheck(Scalar x)
 {
   //Scalar MASA_VAR_DEFAULT = -12345.67;
   //Scalar uninit = -1.33;
@@ -179,7 +172,6 @@ Scalar threshcheck(Scalar x)
       std::cout << "Exceeded Threshold by: " << x << std::endl;
       exit(1);
     }
-  return 0;  
 }
 
 template<typename Scalar>
@@ -188,11 +180,10 @@ Scalar tester(Scalar a)
   
   a = 4.4;
   return a;
-
 }
 
 template<typename Scalar>
-Scalar test_grad(Scalar derr)
+void test_grad(Scalar derr)
 {
   //Scalar MASA_VAR_DEFAULT = -12345.67;
   //Scalar uninit = -1.33;
@@ -203,7 +194,6 @@ Scalar test_grad(Scalar derr)
       std::cout << "MASA :: gradient error condition failed!\n";
       exit(1);
     }
-  
 }
 
 template<typename Scalar>
