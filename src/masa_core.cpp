@@ -50,8 +50,12 @@ public:
   MasterMS () : _master_pointer(NULL), _master_map() {}
 
   ~MasterMS () {
-    for(typename map<std::string,manufactured_solution<Scalar>*>::iterator iter = this->_master_map.begin(); iter != this->_master_map.end(); iter++)
-      delete iter->second;
+    if (!_master_map.empty()) // workaround for icpc 12.1.6 map bug
+      for(typename map<std::string,manufactured_solution<Scalar>*>::iterator iter = this->_master_map.begin(); iter != this->_master_map.end(); iter++)
+        delete iter->second;
+
+    // workaround for icpc 12.1.6 "double destruct globals" bug
+    _master_map.clear();
   }
 
   const manufactured_solution<Scalar>& get_ms() const {
