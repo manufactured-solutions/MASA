@@ -30,8 +30,7 @@ Citing MASA
 ====
 
 Should you use MASA in your research, please provide a citation of the library through the MASA paper, 
-MASA: a library for verification using manufactured and analytical solutions published in Engineering with Computers, 
-doi:10.1007/s00366-012-0267-9
+[MASA: a library for verification using manufactured and analytical solutions published in Engineering with Computers](http://link.springer.com/article/10.1007%2Fs00366-012-0267-9#page-1)
 
 Bibtex:
 
@@ -49,7 +48,7 @@ Bibtex:
     language={English}
     }
 
-For more information on the use of MASA and a brief introduction to verification, consult the following [presentation](https://red.ices.utexas.edu/attachments/download/1687/masa_intro.pdf) 
+For more information on the use of MASA and a brief introduction to verification, consult the following [repository of recent MASA presentations](https://github.com/manufactured-solutions/presentations) 
 
 ====
 Adding Manufactured Solutions to MASA
