@@ -49,9 +49,7 @@ Bibtex:
     language={English}
     }
 
-For more information on the use of MASA and a brief introduction to verification, consult the following presentation:
-
-https://red.ices.utexas.edu/attachments/download/1687/masa_intro.pdf
+For more information on the use of MASA and a brief introduction to verification, consult the following [presentation](https://red.ices.utexas.edu/attachments/download/1687/masa_intro.pdf) 
 
 ====
 Adding Manufactured Solutions to MASA
