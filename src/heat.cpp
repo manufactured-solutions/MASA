@@ -284,6 +284,16 @@ int MASA::heateq_2d_unsteady_const<Scalar>::init_var()
 } // done with variable initializer
 
 template <typename Scalar>
+Scalar MASA::heateq_2d_unsteady_const<Scalar>::eval_exact_t(Scalar x,Scalar y, Scalar t)
+{
+  using std::cos;
+
+  Scalar exact_t;
+  exact_t = cos(A_x * x + A_t * t) * cos(B_y * y + B_t * t) * cos(D_t * t);
+  return exact_t;
+}
+
+template <typename Scalar>
 Scalar MASA::heateq_2d_unsteady_const<Scalar>::eval_q_t(Scalar x,Scalar y, Scalar t)
 {
   using std::cos;
@@ -335,7 +345,7 @@ int MASA::heateq_3d_unsteady_const<Scalar>::init_var()
 } // done with variable initializer
 
 template <typename Scalar>
-Scalar MASA::heateq_3d_unsteady_const<Scalar>::eval_q_t(Scalar x,Scalar y, Scalar z,Scalar t)
+Scalar MASA::heateq_3d_unsteady_const<Scalar>::eval_q_t(Scalar x, Scalar y, Scalar z, Scalar t)
 {
   using std::cos;
   using std::sin;

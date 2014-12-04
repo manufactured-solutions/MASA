@@ -492,9 +492,10 @@ namespace MASA
     Scalar cp_0;
 
   public:
-    heateq_2d_unsteady_const(); // constructor
-    int init_var();        // default problem values
-    Scalar eval_q_t(Scalar,Scalar,Scalar); // needs x,y,t
+    heateq_2d_unsteady_const();                // constructor
+    int init_var();                            // default problem values
+    Scalar eval_q_t(Scalar,Scalar,Scalar);     // needs x,y,t
+    Scalar eval_exact_t(Scalar,Scalar,Scalar); // analytical term evaluator
   };
 
   template <typename Scalar>
