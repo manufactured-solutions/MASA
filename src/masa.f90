@@ -758,6 +758,231 @@ module masa
   end interface  
 
   ! ---------------------------------
+  ! MMS source term interfaces -- 4d
+  ! ---------------------------------
+
+  interface
+     !> Evaluates the 'four' dimensional source term of the
+     !! temperature.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_4d_source_t(x,y,z,t) bind (C,name='masa_eval_4d_source_t')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_source_t
+  end interface
+
+  interface
+     !> Evaluates the 'four' dimensional source term of the
+     !! u-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_4d_source_u(x,y,z,t) bind (C,name='masa_eval_4d_source_u')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_source_u
+  end interface
+
+  interface
+     !> Evaluates the 'four' dimensional source term of the
+     !! v-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_4d_source_v(x,y,z,t) bind (C,name='masa_eval_4d_source_v')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_source_v
+  end interface
+
+  interface
+     !> Evaluates the 'four' dimensional source term of the
+     !! w-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_4d_source_w(x,y,z,t) bind (C,name='masa_eval_4d_source_w')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_source_w
+  end interface
+
+  interface
+     !> Evaluates the 'four' dimensional source term of the
+     !! energy.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_4d_source_e(x,y,z,t) bind (C,name='masa_eval_4d_source_e')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_source_e
+  end interface
+
+  interface
+     !> Evaluates the 'four' dimensional source term of the
+     !! density.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_4d_source_rho(x,y,z,t) bind (C,name='masa_eval_4d_source_rho')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_source_rho
+  end interface
+
+  interface
+     !> Evaluates the 'four' dimensional source term of the
+     !! density*u-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_4d_source_rho_u(x,y,z,t) bind (C,name='masa_eval_4d_source_rho_u')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_source_rho_u
+  end interface
+
+  interface
+     !> Evaluates the 'four' dimensional source term of the
+     !! density*v-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_4d_source_rho_v(x,y,z,t) bind (C,name='masa_eval_4d_source_rho_v')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_source_rho_v
+  end interface
+
+  interface
+     !> Evaluates the 'four' dimensional source term of the
+     !! density*w-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_4d_source_rho_w(x,y,z,t) bind (C,name='masa_eval_4d_source_rho_w')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_source_rho_w
+  end interface
+
+  interface
+     !> Evaluates the 'four' dimensional source term of the
+     !! density*energy.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the source term.
+     !!
+     real (c_double) function masa_eval_4d_source_rho_e(x,y,z,t) bind (C,name='masa_eval_4d_source_rho_e')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_source_rho_e
+  end interface
+
+
+  ! ---------------------------------
   ! MMS analytical term interfaces -- 1d
   ! ---------------------------------
 
@@ -1092,6 +1317,144 @@ module masa
      end function masa_eval_3d_exact_rho
   end interface
 
+
+  ! ---------------------------------
+  ! MMS analytical term interfaces -- 4d
+  ! ---------------------------------
+
+  interface
+     !> Evaluates the 'four' dimensional exact solution of the
+     !! temperature.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the exact solution.
+     !!
+     real (c_double) function masa_eval_4d_exact_t(x,y,z,t) bind (C,name='masa_eval_4d_exact_t')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_exact_t
+  end interface
+
+  interface
+     !> Evaluates the 'four' dimensional exact solution of the
+     !! u-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the exact solution.
+     !!
+     real (c_double) function masa_eval_4d_exact_u(x,y,z,t) bind (C,name='masa_eval_4d_exact_u')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_exact_u
+  end interface
+
+  interface
+     !> Evaluates the 'four' dimensional exact solution of the
+     !! v-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the exact solution.
+     !!
+     real (c_double) function masa_eval_4d_exact_v(x,y,z,t) bind (C,name='masa_eval_4d_exact_v')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_exact_v
+  end interface
+
+  interface
+     !> Evaluates the 'four' dimensional exact solution of the
+     !! w-component of velocity.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the exact solution.
+     !!
+     real (c_double) function masa_eval_4d_exact_w(x,y,z,t) bind (C,name='masa_eval_4d_exact_w')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_exact_w
+  end interface
+
+  interface
+     !> Evaluates the 'four' dimensional exact solution of the
+     !! pressure.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the exact solution.
+     !!
+     real (c_double) function masa_eval_4d_exact_p(x,y,z,t) bind (C,name='masa_eval_4d_exact_p')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_exact_p
+  end interface
+
+  interface
+     !> Evaluates the 'four' dimensional exact solution of the
+     !! density.
+     !!
+     !! @param[in] x Real(8) value of the x-coordinate.
+     !! @param[in] y Real(8) value of the y-coordinate.
+     !! @param[in] z Real(8) value of the z-coordinate.
+     !! @param[in] t Real(8) value of the time.
+     !! @return Real(8) value for the exact solution.
+     !!
+     real (c_double) function masa_eval_4d_exact_rho(x,y,z,t) bind (C,name='masa_eval_4d_exact_rho')
+       use iso_c_binding
+       implicit none
+
+       real (c_double), value :: x
+       real (c_double), value :: y
+       real (c_double), value :: z
+       real (c_double), value :: t
+
+     end function masa_eval_4d_exact_rho
+  end interface
+
+
   ! ---------------------------------
   ! MMS gradient term interfaces -- 1d
   ! ---------------------------------
@@ -1258,8 +1621,82 @@ module masa
        
      end function masa_eval_3d_grad_rho
   end interface
-  
-contains 
+
+  ! ---------------------------------
+  ! MMS gradient term interfaces -- 4d
+  ! ---------------------------------
+
+  interface
+     real (c_double) function masa_eval_4d_grad_u(x,y,z,t,it) bind (C,name='masa_eval_4d_grad_u')
+       use iso_c_binding
+       implicit none
+
+       real    (c_double), value :: x
+       real    (c_double), value :: y
+       real    (c_double), value :: z
+       real    (c_double), value :: t
+       integer (c_int),    value :: it
+
+     end function masa_eval_4d_grad_u
+  end interface
+
+  interface
+     real (c_double) function masa_eval_4d_grad_v(x,y,z,t,it) bind (C,name='masa_eval_4d_grad_v')
+       use iso_c_binding
+       implicit none
+
+       real    (c_double), value :: x
+       real    (c_double), value :: y
+       real    (c_double), value :: z
+       real    (c_double), value :: t
+       integer (c_int),    value :: it
+
+     end function masa_eval_4d_grad_v
+  end interface
+
+  interface
+     real (c_double) function masa_eval_4d_grad_w(x,y,z,t,it) bind (C,name='masa_eval_4d_grad_w')
+       use iso_c_binding
+       implicit none
+
+       real    (c_double), value :: x
+       real    (c_double), value :: y
+       real    (c_double), value :: z
+       real    (c_double), value :: t
+       integer (c_int),    value :: it
+
+     end function masa_eval_4d_grad_w
+  end interface
+
+  interface
+     real (c_double) function masa_eval_4d_grad_p(x,y,z,t,it) bind (C,name='masa_eval_4d_grad_p')
+       use iso_c_binding
+       implicit none
+
+       real    (c_double), value :: x
+       real    (c_double), value :: y
+       real    (c_double), value :: z
+       real    (c_double), value :: t
+       integer (c_int),    value :: it
+
+     end function masa_eval_4d_grad_p
+  end interface
+
+  interface
+     real (c_double) function masa_eval_4d_grad_rho(x,y,z,t,it) bind (C,name='masa_eval_4d_grad_rho')
+       use iso_c_binding
+       implicit none
+
+       real    (c_double), value :: x
+       real    (c_double), value :: y
+       real    (c_double), value :: z
+       real    (c_double), value :: t
+       integer (c_int),    value :: it
+
+     end function masa_eval_4d_grad_rho
+  end interface
+
+contains
   
   ! ----------------------------------------------------------------
   ! Wrapper routines for functions which include character
