@@ -226,9 +226,11 @@ c_radiation_SOURCES      =  c_radiation.c
 c_radiation_LDADD        =  ../src/libmasa.la
 
 
+
 #------------------
 # Fortran Binaries
 #------------------
+if FORT_ENABLED
 TESTS_F         =
 check_PROGRAMS += $(TESTS_F)
 
@@ -280,6 +282,7 @@ TESTS_F                 +=  f_radiation
 f_radiation_SOURCES      =  f_radiation.F90
 f_radiation_LDADD        =  ../src/libfmasa.la
 
+endif
 
 #------------------
 # Regression suite
