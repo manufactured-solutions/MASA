@@ -60,8 +60,6 @@ AC_DISABLE_STATIC
 
 AC_PROG_CC
 AC_PROG_CXX
-AC_PROG_FC
-AC_PROG_F77
 AC_PROG_LIBTOOL
 AM_SANITY_CHECK
 
@@ -73,6 +71,21 @@ AC_SEARCH_LIBS([cos], [m], [], [
     AC_MSG_ERROR([unable to find the cos() function])
 ])
 AC_LANG_POP([C])
+
+# ---------------------------------------------
+# enable fortran interfaces
+# ---------------------------------------------
+FORTRAN_INTERFACES=0
+AC_ARG_ENABLE([fortran-interfaces], AC_HELP_STRING([--enable-fortran-interfaces],[enable fortran support]),
+[
+#AC_PROG_FC
+#AC_PROG_F77
+
+FORTRAN_INTERFACES=1
+AC_DEFINE(FORTRAN_INTERFACES,1,[Define if python interfaces enabled])
+],[])
+AM_CONDITIONAL(FORT_ENABLED,[test "x$FORTRAN_INTERFACES" = x1]) 
+
 
 # ---------------------------------------------
 # enable python interfaces with SWIG
