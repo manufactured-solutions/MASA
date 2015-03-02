@@ -300,9 +300,12 @@ dist_check_SCRIPTS += c_init.sh
 TESTS              += c_init.sh
 TESTS              += $(TESTS_C)
 
+# If optional fortran interfaces are enabled:
+if FORT_ENABLED
 dist_check_SCRIPTS += f_init.sh
 TESTS              += f_init.sh
 TESTS              += $(TESTS_F)
+endif
 
 dist_check_SCRIPTS += finalize.sh
 TESTS              += finalize.sh
