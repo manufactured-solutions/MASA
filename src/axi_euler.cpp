@@ -31,7 +31,7 @@
 //--------------------------------------------------------------------------
 //
 
-#include <masa_internal.h> 
+#include <masa_internal.h>
 using namespace MASA;
 
 /* ------------------------------------------------
@@ -41,7 +41,7 @@ using namespace MASA;
  *
  *
  * -----------------------------------------------
- */ 
+ */
 
 template <typename Scalar>
 MASA::axi_euler<Scalar>::axi_euler()
