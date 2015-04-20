@@ -37,30 +37,30 @@ using namespace MASA;
 using namespace std;
 
 template<typename Scalar>
-Scalar anQ_p(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
+Scalar anQ_p(Scalar r,Scalar z,Scalar p_0,Scalar p_r,Scalar p_z,Scalar rho_0,Scalar rho_r,Scalar u_r,Scalar w_0,Scalar w_r,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
-  Scalar exact_p = p_0 + p_1 * std::sin(a_pr * pi * r / L) * std::cos(a_pz * pi * z / L);
+  Scalar exact_p = p_0 + p_r * std::sin(a_pr * pi * r / L) + p_z * std::cos(a_pz * pi * z / L);
   return exact_p;
 }
-  
+
 template<typename Scalar>
-Scalar anQ_u (Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
+Scalar anQ_u (Scalar r,Scalar z,Scalar p_0,Scalar p_r,Scalar rho_0,Scalar rho_r,Scalar u_r,Scalar u_z,Scalar w_0,Scalar w_r,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
-  Scalar exact_u = u_1 * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * std::sin(a_uz * pi * z / L);
+  Scalar exact_u = u_r * u_z * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * std::sin(a_uz * pi * z / L);
   return exact_u;
-} 
- 
+}
+
 template<typename Scalar>
-Scalar anQ_w (Scalar r,Scalar z,Scalar w_0,Scalar w_1,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L)
+Scalar anQ_w (Scalar r,Scalar z,Scalar w_0,Scalar w_r,Scalar w_z,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L)
 {
-  Scalar exact_w = w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L);
+  Scalar exact_w = w_0 + w_r * std::cos(a_wr * pi * r / L) + w_z * std::sin(a_wz * pi * z / L);
   return exact_w;
 }
 
 template<typename Scalar>
-Scalar anQ_rho (Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
-{ 
-  Scalar exact_rho = rho_0 + rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L);
+Scalar anQ_rho (Scalar r,Scalar z,Scalar p_0,Scalar p_r,Scalar rho_0,Scalar rho_r,Scalar rho_z,Scalar u_r,Scalar w_0,Scalar w_r,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
+{
+  Scalar exact_rho = rho_0 + rho_r * std::cos(a_rhor * pi * r / L) + rho_z * std::sin(a_rhoz * pi * z / L);
   return exact_rho;
 }
 
@@ -69,44 +69,78 @@ Scalar anQ_rho (Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_
 // ----------------------------------------
 
 template<typename Scalar>
-Scalar SourceQ_e(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
+Scalar SourceQ_e(Scalar r,Scalar z,Scalar p_0,Scalar p_r,Scalar p_z,Scalar rho_0,Scalar rho_r,Scalar rho_z,Scalar u_r,Scalar u_z,Scalar w_0,Scalar w_r,Scalar w_z,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
-  Scalar Q_e = Gamma * std::cos(a_pz * pi * z / L) * std::cos(a_pr * pi * r / L) * p_1 * u_1 * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * std::sin(a_uz * pi * z / L) * a_pr * pi / L / (Gamma - Scalar(0.1e1)) - Gamma * std::sin(a_pz * pi * z / L) * std::sin(a_pr * pi * r / L) * p_1 * (w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L)) * a_pz * pi / L / (Gamma - Scalar(0.1e1)) - std::sin(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L) * std::sin(a_uz * pi * z / L) * u_1 * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * (std::pow(w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L), Scalar(0.2e1)) + std::pow(sin(a_uz * pi * z / L), Scalar(0.2e1)) * std::pow(cos(a_ur * pi * r / L) - 0.1e1, Scalar(0.2e1)) * u_1 * u_1) * a_rhor * pi * rho_1 / L / Scalar(0.2e1) + std::cos(a_rhor * pi * r / L) * std::cos(a_rhoz * pi * z / L) * (w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L)) * (std::pow(w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L), Scalar(0.2e1)) + std::pow(sin(a_uz * pi * z / L), Scalar(0.2e1)) * std::pow(cos(a_ur * pi * r / L) - 0.1e1, Scalar(0.2e1)) * u_1 * u_1) * a_rhoz * pi * rho_1 / L / Scalar(0.2e1) - std::sin(a_uz * pi * z / L) * std::sin(a_ur * pi * r / L) * (p_0 + p_1 * std::sin(a_pr * pi * r / L) * std::cos(a_pz * pi * z / L)) * a_ur * pi * u_1 * Gamma / L / (Gamma - Scalar(0.1e1)) - std::sin(a_uz * pi * z / L) * std::sin(a_ur * pi * r / L) * (rho_0 + rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L)) * (std::pow(w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L), Scalar(0.2e1)) + Scalar(0.3e1) * std::pow(sin(a_uz * pi * z / L), Scalar(0.2e1)) * std::pow(cos(a_ur * pi * r / L) - 0.1e1, Scalar(0.2e1)) * u_1 * u_1) * a_ur * pi * u_1 / L / Scalar(0.2e1) + (w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L)) * u_1 * u_1 * std::cos(a_uz * pi * z / L) * std::sin(a_uz * pi * z / L) * std::pow(cos(a_ur * pi * r / L) - 0.1e1, Scalar(0.2e1)) * (rho_0 + rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L)) * a_uz * pi / L - std::sin(a_uz * pi * z / L) * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * u_1 * w_1 * std::sin(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L) * (rho_0 + rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L)) * a_wr * pi / L + std::cos(a_wr * pi * r / L) * std::cos(a_wz * pi * z / L) * (p_0 + p_1 * std::sin(a_pr * pi * r / L) * std::cos(a_pz * pi * z / L)) * a_wz * pi * w_1 * Gamma / L / (Gamma - Scalar(0.1e1)) + std::cos(a_wr * pi * r / L) * std::cos(a_wz * pi * z / L) * (rho_0 + rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L)) * (Scalar(0.3e1) * std::pow(w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L), Scalar(0.2e1)) + std::pow(sin(a_uz * pi * z / L), Scalar(0.2e1)) * std::pow(cos(a_ur * pi * r / L) - 0.1e1, Scalar(0.2e1)) * u_1 * u_1) * a_wz * pi * w_1 / L / Scalar(0.2e1) + std::sin(a_uz * pi * z / L) * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * u_1 * (p_0 + p_1 * std::sin(a_pr * pi * r / L) * std::cos(a_pz * pi * z / L)) * Gamma / (Gamma - Scalar(0.1e1)) / r + std::sin(a_uz * pi * z / L) * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * u_1 * (rho_0 + rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L)) * (std::pow(w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L), Scalar(0.2e1)) + std::pow(sin(a_uz * pi * z / L), Scalar(0.2e1)) * std::pow(cos(a_ur * pi * r / L) - 0.1e1, Scalar(0.2e1)) * u_1 * u_1) / r / Scalar(0.2e1);
+  Scalar Q_e;
+  Scalar RHO;
+  Scalar P;
+  Scalar U;
+  Scalar W;
+  RHO = rho_0 + rho_r * std::cos(a_rhor * pi * r / L) + rho_z * std::sin(a_rhoz * pi * z / L);
+  P = p_0 + p_r * std::sin(a_pr * pi * r / L) + p_z * std::cos(a_pz * pi * z / L);
+  U = u_r * u_z * (std::cos(a_ur * pi * r / L) - 0.1e1) * std::sin(a_uz * pi * z / L);
+  W = w_0 + w_r * std::cos(a_wr * pi * r / L) + w_z * std::sin(a_wz * pi * z / L);
+  Q_e = -Gamma * a_ur * pi * u_r * u_z * P * std::sin(a_ur * pi * r / L) * std::sin(a_uz * pi * z / L) / (Gamma - 0.1e1) / L + (std::cos(a_ur * pi * r / L) - 0.1e1) * a_uz * pi * u_r * u_z * RHO * U * W * std::cos(a_uz * pi * z / L) / L - (0.3e1 * U * U + W * W) * a_ur * pi * u_r * u_z * RHO * std::sin(a_ur * pi * r / L) * std::sin(a_uz * pi * z / L) / L / 0.2e1 - a_wr * pi * w_r * RHO * U * W * std::sin(a_wr * pi * r / L) / L + Gamma * a_pr * pi * p_r * U * std::cos(a_pr * pi * r / L) / (Gamma - 0.1e1) / L - Gamma * a_pz * pi * p_z * W * std::sin(a_pz * pi * z / L) / (Gamma - 0.1e1) / L + Gamma * a_wz * pi * w_z * P * std::cos(a_wz * pi * z / L) / (Gamma - 0.1e1) / L - (U * U + W * W) * a_rhor * pi * rho_r * U * std::sin(a_rhor * pi * r / L) / L / 0.2e1 + (U * U + W * W) * a_rhoz * pi * rho_z * W * std::cos(a_rhoz * pi * z / L) / L / 0.2e1 + (U * U + 0.3e1 * W * W) * a_wz * pi * w_z * RHO * std::cos(a_wz * pi * z / L) / L / 0.2e1 + Gamma * P * U / (Gamma - 0.1e1) / r + (U * U + W * W) * RHO * U / r / 0.2e1;
   return(Q_e);
 }
 
 template<typename Scalar>
-Scalar SourceQ_u(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
+Scalar SourceQ_u(Scalar r,Scalar z,Scalar p_0,Scalar p_r,Scalar rho_0,Scalar rho_r,Scalar rho_z,Scalar u_r,Scalar u_z,Scalar w_0,Scalar w_r,Scalar w_z,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
-  Scalar Q_u = p_1 * std::cos(a_pr * pi * r / L) * std::cos(a_pz * pi * z / L) * a_pr * pi / L - u_1 * u_1 * std::pow(sin(a_uz * pi * z / L), Scalar(0.2e1)) * std::pow(cos(a_ur * pi * r / L) - 0.1e1, Scalar(0.2e1)) * rho_1 * std::sin(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L) * a_rhor * pi / L + u_1 * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * rho_1 * std::cos(a_rhor * pi * r / L) * std::cos(a_rhoz * pi * z / L) * std::sin(a_uz * pi * z / L) * (w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L)) * a_rhoz * pi / L - Scalar(0.2e1) * u_1 * u_1 * std::pow(sin(a_uz * pi * z / L), Scalar(0.2e1)) * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * std::sin(a_ur * pi * r / L) * (rho_0 + rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L)) * a_ur * pi / L + u_1 * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * std::cos(a_uz * pi * z / L) * (rho_0 + rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L)) * a_uz * pi / L + u_1 * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * w_1 * std::cos(a_wr * pi * r / L) * std::cos(a_wz * pi * z / L) * std::sin(a_uz * pi * z / L) * (rho_0 + rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L)) * a_wz * pi / L + u_1 * u_1 * std::pow(sin(a_uz * pi * z / L), Scalar(0.2e1)) * std::pow(cos(a_ur * pi * r / L) - 0.1e1, Scalar(0.2e1)) * (rho_0 + rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L)) / r;
-  return(Q_u);  
+  Scalar Q_u;
+  Scalar RHO;
+  Scalar U;
+  Scalar W;
+  RHO = rho_0 + rho_r * std::cos(a_rhor * pi * r / L) + rho_z * std::sin(a_rhoz * pi * z / L);
+  U = u_r * u_z * (std::cos(a_ur * pi * r / L) - 0.1e1) * std::sin(a_uz * pi * z / L);
+  W = w_0 + w_r * std::cos(a_wr * pi * r / L) + w_z * std::sin(a_wz * pi * z / L);
+  Q_u = (std::cos(a_ur * pi * r / L) - 0.1e1) * a_uz * pi * u_r * u_z * RHO * W * std::cos(a_uz * pi * z / L) / L - a_rhor * pi * rho_r * U * U * std::sin(a_rhor * pi * r / L) / L + a_rhoz * pi * rho_z * U * W * std::cos(a_rhoz * pi * z / L) / L + a_pr * pi * p_r * std::cos(a_pr * pi * r / L) / L - (0.2e1 * a_ur * u_r * u_z * std::sin(a_ur * pi * r / L) * std::sin(a_uz * pi * z / L) - a_wz * w_z * std::cos(a_wz * pi * z / L)) * pi * RHO * U / L + RHO * U * U / r;
+  return(Q_u);
 }
 
 template<typename Scalar>
-Scalar SourceQ_w(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
+Scalar SourceQ_w(Scalar r,Scalar z,Scalar p_0,Scalar p_r,Scalar p_z,Scalar rho_0,Scalar rho_r,Scalar rho_z,Scalar u_r,Scalar u_z,Scalar w_0,Scalar w_r,Scalar w_z,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
-  Scalar Q_w = -p_1 * std::sin(a_pr * pi * r / L) * std::sin(a_pz * pi * z / L) * a_pz * pi / L - u_1 * std::sin(a_uz * pi * z / L) * rho_1 * std::sin(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L) * (w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L)) * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * a_rhor * pi / L + std::pow(w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L), Scalar(0.2e1)) * rho_1 * std::cos(a_rhor * pi * r / L) * std::cos(a_rhoz * pi * z / L) * a_rhoz * pi / L - u_1 * std::sin(a_uz * pi * z / L) * std::sin(a_ur * pi * r / L) * (rho_0 + rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L)) * a_ur * pi / L - u_1 * std::sin(a_uz * pi * z / L) * w_1 * std::sin(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L) * (rho_0 + rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L)) * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * a_wr * pi / L + (Scalar(0.2e1) * w_0 + Scalar(0.2e1) * w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L)) * w_1 * std::cos(a_wr * pi * r / L) * std::cos(a_wz * pi * z / L) * (rho_0 + rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L)) * a_wz * pi / L + u_1 * std::sin(a_uz * pi * z / L) * (rho_0 + rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L)) * (w_0 + w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L)) * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) / r;
+  Scalar Q_w;
+  Scalar RHO;
+  Scalar U;
+  Scalar W;
+  RHO = rho_0 + rho_r * std::cos(a_rhor * pi * r / L) + rho_z * std::sin(a_rhoz * pi * z / L);
+  U = u_r * u_z * (std::cos(a_ur * pi * r / L) - 0.1e1) * std::sin(a_uz * pi * z / L);
+  W = w_0 + w_r * std::cos(a_wr * pi * r / L) + w_z * std::sin(a_wz * pi * z / L);
+  Q_w = -a_rhor * pi * rho_r * U * W * std::sin(a_rhor * pi * r / L) / L + a_rhoz * pi * rho_z * W * W * std::cos(a_rhoz * pi * z / L) / L - a_wr * pi * w_r * RHO * U * std::sin(a_wr * pi * r / L) / L - a_pz * pi * p_z * std::sin(a_pz * pi * z / L) / L - (a_ur * u_r * u_z * std::sin(a_ur * pi * r / L) * std::sin(a_uz * pi * z / L) - 0.2e1 * a_wz * w_z * std::cos(a_wz * pi * z / L)) * pi * RHO * W / L + RHO * U * W / r;
   return(Q_w);
 }
 
 template<typename Scalar>
-Scalar SourceQ_rho(Scalar r,Scalar z,Scalar p_0,Scalar p_1,Scalar rho_0,Scalar rho_1,Scalar u_1,Scalar w_0,Scalar w_1,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
+Scalar SourceQ_rho(Scalar r,Scalar z,Scalar p_0,Scalar p_r,Scalar rho_0,Scalar rho_r,Scalar rho_z,Scalar u_r,Scalar u_z,Scalar w_0,Scalar w_r,Scalar w_z,Scalar a_pr,Scalar a_pz,Scalar a_rhor,Scalar a_rhoz,Scalar a_ur,Scalar a_uz,Scalar a_wr,Scalar a_wz,Scalar pi,Scalar L,Scalar Gamma)
 {
-  Scalar Q_rho = -(std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * a_rhor * pi * rho_1 * u_1 * std::sin(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L) * std::sin(a_uz * pi * z / L) / L + (w_1 * std::cos(a_wr * pi * r / L) * std::sin(a_wz * pi * z / L) + w_0) * a_rhoz * pi * rho_1 * std::cos(a_rhor * pi * r / L) * std::cos(a_rhoz * pi * z / L) / L - (rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L) + rho_0) * a_ur * pi * u_1 * std::sin(a_ur * pi * r / L) * std::sin(a_uz * pi * z / L) / L + (rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L) + rho_0) * a_wz * pi * w_1 * std::cos(a_wr * pi * r / L) * std::cos(a_wz * pi * z / L) / L + (rho_1 * std::cos(a_rhor * pi * r / L) * std::sin(a_rhoz * pi * z / L) + rho_0) * (std::cos(a_ur * pi * r / L) - Scalar(0.1e1)) * u_1 * std::sin(a_uz * pi * z / L) / r;
+  Scalar Q_rho;
+  Scalar RHO;
+  Scalar U;
+  Scalar W;
+  RHO = rho_0 + rho_r * std::cos(a_rhor * pi * r / L) + rho_z * std::sin(a_rhoz * pi * z / L);
+  U = u_r * u_z * (std::cos(a_ur * pi * r / L) - 0.1e1) * std::sin(a_uz * pi * z / L);
+  W = w_0 + w_r * std::cos(a_wr * pi * r / L) + w_z * std::sin(a_wz * pi * z / L);
+  Q_rho = -a_rhor * pi * rho_r * U * std::sin(a_rhor * pi * r / L) / L + a_rhoz * pi * rho_z * W * std::cos(a_rhoz * pi * z / L) / L - (a_ur * u_r * u_z * std::sin(a_ur * pi * r / L) * std::sin(a_uz * pi * z / L) - a_wz * w_z * std::cos(a_wz * pi * z / L)) * pi * RHO / L + RHO * U / r;
   return(Q_rho);
 }
 
 template<typename Scalar>
 int run_regression()
-{  
+{
   //variables
   Scalar p_0;
-  Scalar p_1;
+  Scalar p_r;
+  Scalar p_z;
   Scalar rho_0;
-  Scalar rho_1;
-  Scalar u_1;
+  Scalar rho_r;
+  Scalar rho_z;
+  Scalar u_r;
+  Scalar u_z;
   Scalar w_0;
-  Scalar w_1;
+  Scalar w_r;
+  Scalar w_z;
   Scalar a_pr;
   Scalar a_pz;
   Scalar a_rhor;
@@ -116,8 +150,8 @@ int run_regression()
   Scalar a_wr;
   Scalar a_wz;
   Scalar L;
-  Scalar Gamma;    
-  
+  Scalar Gamma;
+
   // parameters
   Scalar r;
   Scalar z;
@@ -137,10 +171,10 @@ int run_regression()
 
   // initalize
   int nx = 115;  // number of points
-  int ny = 68;  
+  int ny = 68;
   int lx=3;     // length
-  int ly=1; 
-  
+  int ly=1;
+
   Scalar dx=Scalar(lx)/Scalar(nx);
   Scalar dy=Scalar(ly)/Scalar(ny);
 
@@ -148,15 +182,19 @@ int run_regression()
 
   // set params
   masa_init_param<Scalar>();
-  
+
   // get vars
   p_0    = masa_get_param<Scalar>("p_0");
-  p_1    = masa_get_param<Scalar>("p_1");
+  p_r    = masa_get_param<Scalar>("p_r");
+  p_z    = masa_get_param<Scalar>("p_z");
   rho_0  = masa_get_param<Scalar>("rho_0");
-  rho_1  = masa_get_param<Scalar>("rho_1");
-  u_1    = masa_get_param<Scalar>("u_1");
+  rho_r  = masa_get_param<Scalar>("rho_r");
+  rho_z  = masa_get_param<Scalar>("rho_z");
+  u_r    = masa_get_param<Scalar>("u_r");
+  u_z    = masa_get_param<Scalar>("u_z");
   w_0    = masa_get_param<Scalar>("w_0");
-  w_1    = masa_get_param<Scalar>("w_1");
+  w_r    = masa_get_param<Scalar>("w_r");
+  w_z    = masa_get_param<Scalar>("w_z");
   a_pr   = masa_get_param<Scalar>("a_pr");
   a_pz   = masa_get_param<Scalar>("a_pz");
   a_rhor = masa_get_param<Scalar>("a_rhor");
@@ -174,11 +212,11 @@ int run_regression()
     {
       cout << "MASA :: Sanity Check Failed!\n";
       exit(1);
-    }  
+    }
 
   // evaluate source terms (2D)
   for(int i=1;i<nx;i++)    // this is the radial term -- thus, do not start at 0!
-    for(int j=1;j<ny;j++)  // z component  
+    for(int j=1;j<ny;j++)  // z component
       {
 	r=i*dx;
 	z=j*dy;
@@ -194,17 +232,17 @@ int run_regression()
 	exact_w = masa_eval_exact_w<Scalar>        (r,z);
 	exact_p = masa_eval_exact_p<Scalar>        (r,z);
 	exact_rho = masa_eval_exact_rho<Scalar>    (r,z);
-	  	  
+
 	// check against maple
-	ufield2 = SourceQ_u   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
-	wfield2 = SourceQ_w   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
-	rho2    = SourceQ_rho (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
-	efield2 = SourceQ_e   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
-	
-	exact_u2   = anQ_u   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
-	exact_rho2 = anQ_rho (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
-	exact_p2   = anQ_p   (r, z, p_0, p_1, rho_0, rho_1, u_1, w_0, w_1, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
-	exact_w2   = anQ_w   (r, z, w_0, w_1, a_wr, a_wz, pi, L);
+	ufield2 = SourceQ_u   (r, z, p_0, p_r, rho_0, rho_r, rho_z, u_r, u_z, w_0, w_r, w_z, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
+	wfield2 = SourceQ_w   (r, z, p_0, p_r, p_z, rho_0, rho_r, rho_z, u_r, u_z, w_0, w_r, w_z, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
+	rho2    = SourceQ_rho (r, z, p_0, p_r, rho_0, rho_r, rho_z, u_r, u_z, w_0, w_r, w_z, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
+	efield2 = SourceQ_e   (r, z, p_0, p_r, p_z, rho_0, rho_r, rho_z, u_r, u_z, w_0, w_r, w_z, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
+
+	exact_u2   = anQ_u   (r, z, p_0, p_r, rho_0, rho_r, u_r, u_z, w_0, w_r, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
+	exact_rho2 = anQ_rho (r, z, p_0, p_r, rho_0, rho_r, rho_z, u_r, w_0, w_r, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
+	exact_p2   = anQ_p   (r, z, p_0, p_r, p_z, rho_0, rho_r, u_r, w_0, w_r, a_pr, a_pz, a_rhor, a_rhoz, a_ur, a_uz, a_wr, a_wz, pi, L, Gamma);
+	exact_w2   = anQ_w   (r, z, w_0, w_r, w_z, a_wr, a_wz, pi, L);
 
 	// test the result is roughly zero
 	// choose between abs and rel error
@@ -214,7 +252,7 @@ int run_regression()
 	wfield3 = std::abs(wfield-wfield2);
 	efield3 = std::abs(efield-efield2);
 	rho3    = std::abs(rho-rho2);
-	
+
 	exact_u3   = std::abs(exact_u-exact_u2);
 	exact_w3   = std::abs(exact_w-exact_w2);
 	exact_rho3 = std::abs(exact_rho-exact_rho2);
@@ -226,7 +264,7 @@ int run_regression()
 	wfield3 = std::abs(wfield-wfield2)/std::abs(wfield2);
 	efield3 = std::abs(efield-efield2)/std::abs(efield2);
 	rho3    = std::abs(rho-rho2)/std::abs(rho2);
-	
+
 	exact_u3   = std::abs(exact_u-exact_u2)/std::abs(exact_u2);
 	exact_w3   = std::abs(exact_w-exact_w2)/std::abs(exact_w2);
 	exact_rho3 = std::abs(exact_rho-exact_rho2)/std::abs(exact_rho2);
@@ -252,10 +290,6 @@ int run_regression()
 
 int main()
 {
-  // This test needs to be updated for the new axi_euler model
-  // Return XFAIL for now.
-  return 77;
-
   int err=0;
 
   err += run_regression<double>();
