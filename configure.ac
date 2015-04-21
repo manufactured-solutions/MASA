@@ -42,10 +42,6 @@ AC_SUBST([PACKAGE_URL])
 AX_CC_MINOPT	# request minimum optimization level for C	
 AX_CXX_MINOPT	# request minimum optimization level for CXX
 
-# set suffix to .F90 to get CPP support for testing vendor Fortran compiler
-AC_FC_SRCEXT([F90]) 
-AX_FC_MINOPT	# request minimum optimization level for FC
-
 # ---------------------------------------------
 # Enable/Disable -Wall (Warn all)
 # ---------------------------------------------
@@ -60,8 +56,6 @@ AC_DISABLE_STATIC
 
 AC_PROG_CC
 AC_PROG_CXX
-AC_PROG_LIBTOOL
-AM_SANITY_CHECK
 
 # ----------------------------
 # We may need the math library
@@ -78,13 +72,22 @@ AC_LANG_POP([C])
 FORTRAN_INTERFACES=0
 AC_ARG_ENABLE([fortran-interfaces], AC_HELP_STRING([--enable-fortran-interfaces],[enable fortran support]),
 [
-#AC_PROG_FC
-#AC_PROG_F77
-
+dnl set suffix to .F90 to get CPP support for testing vendor Fortran compiler
+AC_FC_SRCEXT([F90]) 
+dnl request minimum optimization level for FC
+AX_FC_MINOPT
+AC_PROG_F77()
+AC_PROG_FC()
 FORTRAN_INTERFACES=1
-AC_DEFINE(FORTRAN_INTERFACES,1,[Define if python interfaces enabled])
+AC_DEFINE(FORTRAN_INTERFACES,1,[Define if Fortran interfaces enabled])
 ],[])
 AM_CONDITIONAL(FORT_ENABLED,[test "x$FORTRAN_INTERFACES" = x1]) 
+
+#
+# now call libtool
+#
+AC_PROG_LIBTOOL
+AM_SANITY_CHECK
 
 
 # ---------------------------------------------
