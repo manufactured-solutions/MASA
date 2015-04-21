@@ -25,8 +25,6 @@ echo C++ compiler....................   : $CXX
 echo C++ compiler flags..............   : $CXXFLAGS
 echo C compiler......................   : $CC
 echo C compiler flags................   : $CFLAGS
-echo Fortran compiler................   : $FC
-echo Fortran compiler flags..........   : $FCFLAGS
 echo Install dir.....................   : $prefix 
 echo Build user......................   : $USER
 echo Build host......................   : $BUILD_HOST
@@ -57,6 +55,14 @@ echo Optional Features:
      echo '   'Enable python interfaces..... : yes
    else
      echo '   'Enable python interfaces..... : no
+   fi
+
+   if test "$FORT_INTERFACES" = "1"; then
+     echo '   'Enable fortran interfaces.... : yes
+     echo Fortran compiler................   : $FC
+     echo Fortran compiler flags..........   : $FCFLAGS
+   else
+     echo '   'Enable fortran interfaces.... : no
    fi
 
 echo

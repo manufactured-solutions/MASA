@@ -28,7 +28,7 @@ cc_sources += navierstokes_3d_transient_sutherland.cpp
 
 BUILT_SOURCES = .license.stamp
 
-lib_LTLIBRARIES         = libmasa.la libfmasa.la
+lib_LTLIBRARIES         = libmasa.la
 library_includedir      = $(includedir)
 library_include_HEADERS = masa.h
 
@@ -43,9 +43,11 @@ libmasa_la_SOURCES      = $(cc_sources) $(h_sources)
 # MASA Fortran library
 # (Installs standalone)
 #----------------------
-
-libfmasa_la_LDFLAGS     = $(all_libraries) -release $(GENERIC_RELEASE)
-libfmasa_la_SOURCES     = masa.f90 $(libmasa_la_SOURCES)
+if FORT_ENABLED
+  lib_LTLIBRARIES        += libfmasa.la
+  libfmasa_la_LDFLAGS     = $(all_libraries) -release $(GENERIC_RELEASE)
+  libfmasa_la_SOURCES     = masa.f90 $(libmasa_la_SOURCES)
+endif
 
 #-----------------------
 # MASA (SWIG) Python interface (optional)
@@ -104,7 +106,9 @@ install-data-local: libfmasa.la
 	mkdir -p $(DESTDIR)$(libdir)
 	$(INSTALL_DATA) $(top_builddir)/src/masa.mod $(DESTDIR)$(libdir)/masa.mod
 
+if FORT_ENABLED
 uninstall-local: libfmasa.la
 	rm -rf $(DESTDIR)$(libdir)/masa.mod
+endif
 
 EXTRA_DIST   = lic_utils/update_license.pl .license.stamp masa.i

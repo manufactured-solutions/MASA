@@ -15,11 +15,11 @@ MASA currently supports later versions of the GNU, Intel, and PGI
 family of compilers.
 
 Regression tests are routinely performed against the following
-compiler versions:
+compilers:
 
-PGI 11.5
-GNU 4.5
-Intel 11.1
+PGI
+GNU
+Intel
 
 ------------------
 TO BUILD:
