@@ -34,4 +34,8 @@ It is recommended that new users run 'make check' This runs numerous diagnostic
 tests, which ensure the precision of all associated solutions are at minimum,
 1e-15.
 
+------------------
+More information:
+------------------
 
+Please consult the online documentation at http://manufactured-solutions.github.io/MASA/ or the README.md
