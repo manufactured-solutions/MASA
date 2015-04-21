@@ -1,6 +1,6 @@
 Version 0.44.0 (In progress, 2015)
 
-  * Added '--enable-fortran-interfaces' configuration option
+  * Added '--enable-fortran-interfaces' configuration option (Issue #24)
   * Adding fortran interface for 4d cns
   * fixed a bug in the 2d temporal interfaces (Issue #20)
   * two workarounds prevent segfaults at program exit (fixes Intel 12.1)
