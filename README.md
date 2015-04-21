@@ -50,6 +50,14 @@ Bibtex:
 
 For more information on the use of MASA and a brief introduction to verification, consult the following [repository of recent MASA presentations](https://github.com/manufactured-solutions/presentations) 
 
+
+====
+Online Documentation
+====
+
+Please check out github.io pages at: http://manufactured-solutions.github.io/MASA/
+
+
 ====
 Adding Manufactured Solutions to MASA
 ====
