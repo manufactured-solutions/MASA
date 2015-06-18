@@ -1,4 +1,4 @@
-Version 0.44.0 (In progress, 2015)
+Version 0.44.0 (19 June, 2015)
 
   * Added '--enable-fortran-interfaces' configuration option (Issue #24)
   * Adding fortran interface for 4d cns
