@@ -20,17 +20,22 @@ doxygen/txt_common/about_vpath.page
 libtool
 masa.pc
 masa.spec
-src/libfmasa.la
-src/libmasa.la
-src/masa.h
-src/masa.mod
-src/masa_version
 stamp-h1
+
 m4/libtool.m4
 m4/ltoptions.m4
 m4/ltsugar.m4
 m4/ltversion.m4
 m4/lt~obsolete.m4
+
+src/libfmasa.la
+src/libmasa.la
+src/masa.h
+src/masa.mod
+src/masa_version
+src/masa.py
+src/masa_wrap.c
+src/_masa.la
 
 examples/MASAshell
 examples/ablation_example
@@ -86,6 +91,7 @@ tests/cns-2d-3d
 tests/cns2d
 tests/cns3d
 tests/cns3d_phys
+tests/cn2d3d
 tests/cns_source_interface.mod
 tests/cp_normal
 tests/euler1d
@@ -108,6 +114,10 @@ tests/f_purge
 tests/f_radiation
 tests/fail_cond
 tests/fans_sa_wall
+tests/heat_const_steady
+tests/heat_const_unsteady
+tests/heat_var_steady
+tests/heat_var_unsteady
 tests/heat_steady_const
 tests/heat_steady_var
 tests/heat_unsteady_const
