@@ -1,4 +1,4 @@
-CLEANFILES  = .license.stamp masa.mod *.gcda *.gcno
+CLEANFILES  = .license.stamp *.gcda *.gcno
 
 h_sources  = masa.h masa_internal.h smasa.h ad_masa.h                        \
              nsctpl_fwd.hpp nsctpl.hpp                                       \
@@ -44,6 +44,7 @@ libmasa_la_SOURCES      = $(cc_sources) $(h_sources)
 # (Installs standalone)
 #----------------------
 if FORT_ENABLED
+  CLEANFILES             += masa.mod 
   lib_LTLIBRARIES        += libfmasa.la
   libfmasa_la_LDFLAGS     = $(all_libraries) -release $(GENERIC_RELEASE)
   libfmasa_la_SOURCES     = masa.f90 $(libmasa_la_SOURCES)
@@ -102,11 +103,12 @@ bin_PROGRAMS                           = @PACKAGE_NAME@_version
 # install fo'tran modules
 #------------------------
 
+if FORT_ENABLED
+
 install-data-local: libfmasa.la
 	mkdir -p $(DESTDIR)$(libdir)
 	$(INSTALL_DATA) $(top_builddir)/src/masa.mod $(DESTDIR)$(libdir)/masa.mod
 
-if FORT_ENABLED
 uninstall-local: libfmasa.la
 	rm -rf $(DESTDIR)$(libdir)/masa.mod
 endif
