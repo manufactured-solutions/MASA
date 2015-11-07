@@ -57,7 +57,7 @@ echo Optional Features:
      echo '   'Enable python interfaces..... : no
    fi
 
-   if test "$FORT_INTERFACES" = "1"; then
+   if test "$FORTRAN_INTERFACES" = "1"; then
      echo '   'Enable fortran interfaces.... : yes
      echo Fortran compiler................   : $FC
      echo Fortran compiler flags..........   : $FCFLAGS
