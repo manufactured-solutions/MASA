@@ -102,7 +102,7 @@ Scalar MASA::burgers_equation<Scalar>::eval_q_v_transient_viscous (Scalar x, Sca
   Q_v_convection = -a_vx * PI * v_x * U * sin(a_vx * PI * x / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * V / L;
 
   // "Contribution from the viscous/dissipation terms to the total source term "
-  Q_v_dissipation = a_vx * a_vx * PI * PI * v_x * nu * cos(a_vx * PI * x / L) * pow(L, -0.2e1) + a_vy * a_vy * PI * PI * v_y * nu * sin(a_vy * PI * y / L) * pow(L, -0.2e1);
+  Q_v_dissipation = a_vx * a_vx * PI * PI * v_x * nu * cos(a_vx * PI * x / L) * pow(L, Scalar(-0.2e1)) + a_vy * a_vy * PI * PI * v_y * nu * sin(a_vy * PI * y / L) * pow(L, Scalar(-0.2e1));
 
   // "Total source term "
   Qv_tv = Q_v_dissipation + Q_v_convection + Q_v_time;
@@ -124,7 +124,7 @@ Scalar MASA::burgers_equation<Scalar>::eval_q_v_steady_viscous (Scalar x, Scalar
   Q_v_convection = -a_vx * PI * v_x * U * sin(a_vx * PI * x / L) / L + (a_ux * u_x * cos(a_ux * PI * x / L) + 0.2e1 * a_vy * v_y * cos(a_vy * PI * y / L)) * PI * V / L;
 
   // "Contribution from the viscous/dissipation terms to the total source term"
-  Q_v_dissipation = a_vx * a_vx * PI * PI * v_x * nu * cos(a_vx * PI * x / L) * pow(L, -0.2e1) + a_vy * a_vy * PI * PI * v_y * nu * sin(a_vy * PI * y / L) * pow(L, -0.2e1);
+  Q_v_dissipation = a_vx * a_vx * PI * PI * v_x * nu * cos(a_vx * PI * x / L) * pow(L, Scalar(-0.2e1)) + a_vy * a_vy * PI * PI * v_y * nu * sin(a_vy * PI * y / L) * pow(L, Scalar(-0.2e1));
 
   // "Total source term "
   Qv_sv = Q_v_dissipation + Q_v_convection;
@@ -194,7 +194,7 @@ Scalar MASA::burgers_equation<Scalar>::eval_q_u_transient_viscous (Scalar x,Scal
   Q_u_convection = -a_uy * PI * u_y * V * sin(a_uy * PI * y / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * U / L;
 
   // "Contribution from the viscous/dissipation terms to the total source term "
-  Q_u_dissipation = a_ux * a_ux * PI * PI * u_x * nu * sin(a_ux * PI * x / L) * pow(L, -0.2e1) + a_uy * a_uy * PI * PI * u_y * nu * cos(a_uy * PI * y / L) * pow(L, -0.2e1);
+  Q_u_dissipation = a_ux * a_ux * PI * PI * u_x * nu * sin(a_ux * PI * x / L) * pow(L, Scalar(-0.2e1)) + a_uy * a_uy * PI * PI * u_y * nu * cos(a_uy * PI * y / L) * pow(L, Scalar(-0.2e1));
 
   // "Total source term"
   Qu_tv = Q_u_dissipation + Q_u_convection + Q_u_time;
@@ -216,7 +216,7 @@ Scalar MASA::burgers_equation<Scalar>::eval_q_u_steady_viscous (Scalar x, Scalar
   Q_u_convection = -a_uy * PI * u_y * V * sin(a_uy * PI * y / L) / L + (0.2e1 * a_ux * u_x * cos(a_ux * PI * x / L) + a_vy * v_y * cos(a_vy * PI * y / L)) * PI * U / L;
 
   // "Contribution from the viscous/dissipation terms to the total source term"
-  Q_u_dissipation = a_ux * a_ux * PI * PI * u_x * nu * sin(a_ux * PI * x / L) * pow(L, -0.2e1) + a_uy * a_uy * PI * PI * u_y * nu * cos(a_uy * PI * y / L) * pow(L, -0.2e1);
+  Q_u_dissipation = a_ux * a_ux * PI * PI * u_x * nu * sin(a_ux * PI * x / L) * pow(L, Scalar(-0.2e1)) + a_uy * a_uy * PI * PI * u_y * nu * cos(a_uy * PI * y / L) * pow(L, Scalar(-0.2e1));
 
   // "Total source term"
   Qu_sv = Q_u_dissipation + Q_u_convection;
