@@ -154,46 +154,46 @@ The following sections detail all available manufactured solutions in MASA.
 
 \begin{thebibliography}{}
 
-\bibitem{Roache2002}
+\bibitem[(Roache, 2002)]{Roache2002}
 P.~Roache, ``{Code Verification by the Method of Manufactured Solutions},''
   {\em {Journal of Fluids Engineering - Transactions of the ASME}}, vol.~{124},
   pp.~{4--10}, {MAR} {2002}.
 
-\bibitem{Bond2007}
+\bibitem[(Bond et~al, 2007)]{Bond2007}
 R.~B. Bond, C.~C. Ober, P.~M. Knupp, and S.~W. Bova, ``{Manufactured Solution
   for Computational Fluid Dynamics Boundary Condition Verification},'' {\em
   {AIAA Journal}}, vol.~{45}, pp.~{2224--2236}, {SEP} {2007}.
 
-\bibitem{KnuppSalari2003}
+\bibitem[(Knupp et~al, 2003)]{KnuppSalari2003}
 P.~Knupp and K.~Salari, {\em Verification of Computer Codes in Computational
   Science and Engineering}.
 \newblock Discrete Mathematics and its Applications, Chapman \& Hall/CRC, 2003.
 
-\bibitem{Kirk2009}
+\bibitem[(Kirk et~al, 2009)]{Kirk2009}
 B.~Kirk, A.~Amar, R.~Stogner, K.~Schultz, and T.~Oliver, ``The hyflow
   hypersonic flow simulation toolkit,'' tech. rep., NASA Lyndon B. Johnson
   
-\bibitem{Maple}
+\bibitem[(Maple 2010)]{Maple2010}
 Maplesoft, ``Maple: the essential tool for mathematics and modeling.''
   http://www.maplesoft.com/Products/Maple/, October 2010.
   
-\bibitem{Roy2004}
+\bibitem[(Roy et~al, 2004)]{Roy2004}
 C.~Roy, C.~Nelson, T.~Smith, and C.~Ober, ``{Verification Of
   Euler/Navier-Stokes Codes using the Method of Manufactured Solutions},'' {\em
   International Journal for Numerical Methods in Fluids}, vol.~{44},
   pp.~{599--620}, {FEB 28} {2004}.
 
-\bibitem{Roy2002}
+\bibitem[(Roy et~al, 2002)]{Roy2002}
 C.~Roy, T.~Smith, and C.~Ober, ``{Verification of a Compressible {CFD} Code
   using the Method of Manufactured Solutions},'' in {\em 32nd AIAA Fluid
   Dynamics Conference and Exhibit}, no.~AIAA 2002-3110, 2002.
 
-\bibitem{Orozco2010}
+\bibitem[(Orozco et~al, 2010)]{Orozco2010}
 C.~Orozco, D.~Kizildag, A.~Oliva, and C.~D. P\'erez-Segarra, ``Verification of
   multidimensional and transient {CFD} solutions,'' {\em Numerical Heat
   Transfer, Part B: Fundamentals}, vol.~57, no.~1, pp.~46--73, 2010.
 
-\bibitem{Maple15}
+\bibitem[(Maple 15)]{Maple15}
 Maplesoft, ``Maple${}^\mathrm{TM} 15$: the essential tool for mathematics and
   modeling.'' http://www.maplesoft.com/Products/Maple/, November 2011.
 
