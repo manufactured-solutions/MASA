@@ -331,7 +331,7 @@ and for the $1D$ distribution,
 
 \subsubsection{Steady Conduction: Constant Thermal Conductivity}
 
-\bibliographystyle{ieeetr} 
+\bibliographystyle{chicago}
 \bibliography{MMS_bib}
 
 %
