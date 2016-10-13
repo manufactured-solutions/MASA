@@ -1,5 +1,8 @@
 CLEANFILES  = .license.stamp *.gcda *.gcno
 
+AM_CPPFLAGS  =
+AM_CPPFLAGS += $(masa_optional_INCLUDES)
+
 h_sources  = masa.h masa_internal.h smasa.h ad_masa.h                        \
              nsctpl_fwd.hpp nsctpl.hpp                                       \
 	     dualnumber.h numberarray.h dualnumberarray.h compare_types.h    \

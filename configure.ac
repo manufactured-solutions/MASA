@@ -83,6 +83,17 @@ AC_DEFINE(FORTRAN_INTERFACES,1,[Define if Fortran interfaces enabled])
 ],[])
 AM_CONDITIONAL(FORT_ENABLED,[test "x$FORTRAN_INTERFACES" = x1]) 
 
+dnl--------------------------
+dnl Checks for third-party libraries
+dnl--------------------------
+masa_optional_INCLUDES=""
+
+dnl Enable MetaPhysicL if a new enough version is found
+AX_PATH_METAPHYSICL(0.0.0, no)
+if (test x$HAVE_METAPHYSICL = x1); then
+  masa_optional_INCLUDES="$METAPHYSICL_CPPFLAGS $masa_optional_INCLUDES"
+fi
+
 #
 # now call libtool
 #
