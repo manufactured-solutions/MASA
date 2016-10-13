@@ -1,8 +1,5 @@
 CLEANFILES  = .license.stamp *.gcda *.gcno
 
-AM_CPPFLAGS  =
-AM_CPPFLAGS += $(masa_optional_INCLUDES)
-
 h_sources  = masa.h masa_internal.h smasa.h ad_masa.h                        \
              nsctpl_fwd.hpp nsctpl.hpp                                       \
 	     dualnumber.h numberarray.h dualnumberarray.h compare_types.h    \
@@ -40,6 +37,7 @@ library_include_HEADERS = masa.h
 #-----------------------
 
 libmasa_la_LDFLAGS      = $(all_libraries) -release $(GENERIC_RELEASE)
+libmasa_la_CPPFLAGS     = $(masa_optional_INCLUDES)
 libmasa_la_SOURCES      = $(cc_sources) $(h_sources)
 
 #----------------------

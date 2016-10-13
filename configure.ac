@@ -94,6 +94,10 @@ if (test x$HAVE_METAPHYSICL = x1); then
   masa_optional_INCLUDES="$METAPHYSICL_CPPFLAGS $masa_optional_INCLUDES"
 fi
 
+
+AC_SUBST(masa_optional_INCLUDES)
+
+
 #
 # now call libtool
 #
