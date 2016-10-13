@@ -38,7 +38,7 @@
 typedef double RawScalar;
 
 template <std::size_t NDIM, typename Scalar>
-double evaluate_q (const NumberArray<NDIM, Scalar>& xyz, const int);
+double evaluate_q (const NumberVector<NDIM, Scalar>& xyz, const int);
 
 using namespace MASA;
 
@@ -61,11 +61,11 @@ int main(void)
   const RawScalar xvecinit[] = {1., 0.};
   const RawScalar yvecinit[] = {0., 1.};
 
-  const NumberArray<NDIM, RawScalar> xvec(xvecinit);
-  const NumberArray<NDIM, RawScalar> yvec(yvecinit);
+  const NumberVector<NDIM, RawScalar> xvec(xvecinit);
+  const NumberVector<NDIM, RawScalar> yvec(yvecinit);
 
-  typedef DualNumber<RawScalar, NumberArray<NDIM, RawScalar> > FirstDerivType;
-  typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+  typedef DualNumber<RawScalar, NumberVector<NDIM, RawScalar> > FirstDerivType;
+  typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
 
   typedef SecondDerivType ADType;
   // typedef FirstDerivType ADType;
@@ -83,11 +83,11 @@ int main(void)
   // the gradient of f(x,y)=x is the constant vector xvec={1,0}"  
   // Likewise "xy[1] = ADType(1., yvec);" means "y = 1, and the gradient of f(x,y)=y 
   // is the constant vector yvec={0,1}" 
-  NumberArray<NDIM, ADType> xy;
+  NumberVector<NDIM, ADType> xy;
   xy[0] = ADType(1., xvec);
   xy[1] = ADType(1., yvec);
 
-  // the input argument xyz is another NumberArray 
+  // the input argument xyz is another NumberVector 
   // a vector just like Q_rho_u, a spatial location rather 
   // than a vector-valued forcing function.
   double h = 1.0/N;
@@ -148,7 +148,7 @@ int main(void)
 // SecondDerivType or better
 
 template <std::size_t NDIM, typename ADScalar>
-double evaluate_q (const NumberArray<NDIM, ADScalar>& xyz, const int ret)
+double evaluate_q (const NumberVector<NDIM, ADScalar>& xyz, const int ret)
 {
   typedef typename RawType<ADScalar>::value_type Scalar;
 
@@ -183,7 +183,7 @@ double evaluate_q (const NumberArray<NDIM, ADScalar>& xyz, const int ret)
   const ADScalar& y = xyz[1];
 
   // Treat velocity as a vector
-  NumberArray<NDIM, ADScalar> U;
+  NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
   U[0] = u_0 + u_x * std::sin(a_ux * PI * x / L) + u_y * std::cos(a_uy * PI * y / L);
@@ -197,7 +197,7 @@ double evaluate_q (const NumberArray<NDIM, ADScalar>& xyz, const int ret)
 
   // Euler equation residuals
   Scalar Q_rho = raw_value(divergence(RHO*U));
-  NumberArray<NDIM, Scalar> Q_rho_u = raw_value(divergence(RHO*U.outerproduct(U)) + P.derivatives());
+  NumberVector<NDIM, Scalar> Q_rho_u = raw_value(divergence(RHO*U.outerproduct(U)) + P.derivatives());
 
   // energy equation
   Scalar Q_rho_e = raw_value(divergence((RHO*ET+P)*U));

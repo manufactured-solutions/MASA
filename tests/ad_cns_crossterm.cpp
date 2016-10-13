@@ -38,14 +38,14 @@ typedef ShadowNumber<double, long double> RawScalar;
 
 const unsigned int NDIM = 2;
 
-typedef DualNumber<RawScalar, NumberArray<NDIM, RawScalar> > FirstDerivType;
-typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+typedef DualNumber<RawScalar, NumberVector<NDIM, RawScalar> > FirstDerivType;
+typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
 
 typedef SecondDerivType ADType;
 // typedef FirstDerivType ADType;
 
 template <std::size_t NDIM, typename Scalar>
-double evaluate_q (const NumberArray<NDIM, Scalar>& xyz, const int);
+double evaluate_q (const NumberVector<NDIM, Scalar>& xyz, const int);
 
 using namespace MASA;
 
@@ -66,8 +66,8 @@ int main(void)
   const RawScalar xvecinit[] = {1., 0.};
   const RawScalar yvecinit[] = {0., 1.};
 
-  const NumberArray<NDIM, RawScalar> xvec(xvecinit);
-  const NumberArray<NDIM, RawScalar> yvec(yvecinit);
+  const NumberVector<NDIM, RawScalar> xvec(xvecinit);
+  const NumberVector<NDIM, RawScalar> yvec(yvecinit);
 
   // initialize the problem in MASA
   err += masa_init("ns-maple","navierstokes_2d_compressible");
@@ -94,7 +94,7 @@ int main(void)
   // we first set up the DualNumbers that correspond to independent
   // variables, spatial coordinates x and y.
 
-  NumberArray<NDIM, ADType> xy;
+  NumberVector<NDIM, ADType> xy;
 
   // When main() says "xy[0] = ADType(1., xvec);", that's saying "x = 1, and 
   // the gradient of f(x,y)=x is the constant vector xvec={1,0}"  
@@ -113,7 +113,7 @@ int main(void)
   // xy[0] = ADType(FirstDerivType(1., xvec), xvec);
   // xy[1] = ADType(FirstDerivType(1., yvec), yvec);
 
-  // the input argument xyz is another NumberArray 
+  // the input argument xyz is another NumberVector 
   // a vector just like Q_rho_u, a spatial location rather 
   // than a vector-valued forcing function.
   double h = 1.0/N;
@@ -193,7 +193,7 @@ int main(void)
 // SecondDerivType or better
 
 template <std::size_t NDIM, typename ADScalar>
-double evaluate_q (const NumberArray<NDIM, ADScalar>& xyz, const int ret)
+double evaluate_q (const NumberVector<NDIM, ADScalar>& xyz, const int ret)
 {
   typedef typename RawType<ADScalar>::value_type Scalar;
 
@@ -229,7 +229,7 @@ double evaluate_q (const NumberArray<NDIM, ADScalar>& xyz, const int ret)
   const ADScalar& y = xyz[1];
 
   // Treat velocity as a vector
-  NumberArray<NDIM, ADScalar> U;
+  NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
   U[0] = u_0 + u_x * std::cos(a_ux * PI * x / L) * u_y * std::cos(a_uy * PI * y / L);
@@ -245,21 +245,21 @@ double evaluate_q (const NumberArray<NDIM, ADScalar>& xyz, const int ret)
   ADScalar ET = E + .5 * U.dot(U);
 
   // The shear strain tensor
-  NumberArray<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
+  NumberVector<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
 
   // The identity tensor I
-  NumberArray<NDIM, NumberArray<NDIM, Scalar> > Identity = 
-    NumberArray<NDIM, Scalar>::identity();
+  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity = 
+    NumberVector<NDIM, Scalar>::identity();
 
   // The shear stress tensor
-  NumberArray<NDIM, NumberArray<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
 
   // Temperature flux
-  NumberArray<NDIM, ADScalar> q = -k * T.derivatives();
+  NumberVector<NDIM, ADScalar> q = -k * T.derivatives();
 
   // Euler equation residuals
   Scalar Q_rho = raw_value(divergence(RHO*U));
-  NumberArray<NDIM, Scalar> Q_rho_u = 
+  NumberVector<NDIM, Scalar> Q_rho_u = 
     raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
 
   // energy equation

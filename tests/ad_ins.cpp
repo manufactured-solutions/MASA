@@ -50,14 +50,14 @@ typedef ShadowNumber<double, long double> RawScalar;
 
 const unsigned int NDIM = 3;
 
-typedef DualNumber<RawScalar, NumberArray<NDIM, RawScalar> > FirstDerivType;
-typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+typedef DualNumber<RawScalar, NumberVector<NDIM, RawScalar> > FirstDerivType;
+typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
 
 typedef SecondDerivType ADType;
 // typedef FirstDerivType ADType;
 
 template <std::size_t NDIM, typename RawScalar>
-double evaluate_q (const NumberArray<NDIM, RawScalar>& xyz);
+double evaluate_q (const NumberVector<NDIM, RawScalar>& xyz);
 
 using namespace MASA;
 
@@ -90,9 +90,9 @@ int main(void)
   // we first set up the DualNumbers that correspond to independent
   // variables, spatial coordinates x and y and z
 
-  NumberArray<NDIM, RawScalar> xyz;
+  NumberVector<NDIM, RawScalar> xyz;
 
-  // the input argument xyz is another NumberArray 
+  // the input argument xyz is another NumberVector 
   // a vector just like Q_rho_u, a spatial location rather 
   // than a vector-valued forcing function.
   double h = 1.0/N;
@@ -151,15 +151,6 @@ Scalar helper_f(Scalar x)
   func = 1/(my_beta+std::sin(kx*x));
   return func;
 }
-
-template <typename Scalar>
-Scalar helper_g(Scalar y)
-//Scalar MASA::navierstokes_3d_incompressible<Scalar>::helper_g(Scalar y)
-{
-  Scalar func;
-  func = (1-y*y)*(1-y*y)*helper_gt(y);
-  return func;
-}
   
 template <typename Scalar>
 Scalar helper_gt(Scalar y)
@@ -167,6 +158,15 @@ Scalar helper_gt(Scalar y)
 {
   Scalar func;
   func = std::pow(y,Scalar(5.0))+std::pow(y,Scalar(4.0))+std::pow(y,Scalar(3.0))+std::pow(y,Scalar(2.0))+y;
+  return func;
+}
+
+template <typename Scalar>
+Scalar helper_g(Scalar y)
+//Scalar MASA::navierstokes_3d_incompressible<Scalar>::helper_g(Scalar y)
+{
+  Scalar func;
+  func = (1-y*y)*(1-y*y)*helper_gt(y);
   return func;
 }
 
@@ -184,19 +184,19 @@ Scalar helper_h(Scalar z)
 // SecondDerivType or better
 
 template <std::size_t NDIM, typename RawScalar>
-double evaluate_q (const NumberArray<NDIM, RawScalar>& xyz)
+double evaluate_q (const NumberVector<NDIM, RawScalar>& xyz)
 {
-  typedef DualNumber<RawScalar, NumberArray<NDIM, RawScalar> > FirstDerivType;
-  typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
-  typedef DualNumber<SecondDerivType, NumberArray<NDIM, SecondDerivType> > ThirdDerivType;
+  typedef DualNumber<RawScalar, NumberVector<NDIM, RawScalar> > FirstDerivType;
+  typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
+  typedef DualNumber<SecondDerivType, NumberVector<NDIM, SecondDerivType> > ThirdDerivType;
   typedef ThirdDerivType ADScalar;
 
   // Treat velocity as a vector
-  NumberArray<NDIM, ADScalar> U;
+  NumberVector<NDIM, ADScalar> U;
 
-  ADScalar x = ADScalar(xyz[0],NumberArrayUnitVector<NDIM, 0, RawScalar>::value());
-  ADScalar y = ADScalar(xyz[1],NumberArrayUnitVector<NDIM, 1, RawScalar>::value());
-  ADScalar z = ADScalar(xyz[2],NumberArrayUnitVector<NDIM, 2, RawScalar>::value());
+  ADScalar x = ADScalar(xyz[0],NumberVectorUnitVector<NDIM, 0, RawScalar>::value());
+  ADScalar y = ADScalar(xyz[1],NumberVectorUnitVector<NDIM, 1, RawScalar>::value());
+  ADScalar z = ADScalar(xyz[2],NumberVectorUnitVector<NDIM, 2, RawScalar>::value());
 
   // Arbitrary manufactured solutions
   U[0]       = a * helper_f(x)                  + helper_g(y).derivatives()[1] + helper_h(z).derivatives()[2];
@@ -205,7 +205,7 @@ double evaluate_q (const NumberArray<NDIM, RawScalar>& xyz)
   ADScalar P = d * helper_f(x)                  + helper_gt(y)                 + helper_h(z);
 
   // NS equation residuals
-  NumberArray<NDIM, RawScalar> Q_rho_u = 
+  NumberVector<NDIM, RawScalar> Q_rho_u = 
     raw_value(
 
 	      // convective term

@@ -45,8 +45,8 @@ Scalar helper_h(Scalar2 gamma, Scalar2 kz, Scalar z);
 
 typedef ShadowNumber<double, long double> RawScalar;
 const unsigned int NDIM = 3;
-typedef DualNumber<RawScalar, NumberArray<NDIM, RawScalar> > FirstDerivType;
-typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+typedef DualNumber<RawScalar, NumberVector<NDIM, RawScalar> > FirstDerivType;
+typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
 typedef SecondDerivType ADType;
 
 using namespace MASA;
@@ -98,17 +98,17 @@ int MASA::navierstokes_3d_incompressible<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar z1)
 {
-  typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
-  typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
-  typedef DualNumber<SecondDerivType, NumberArray<NDIM, SecondDerivType> > ThirdDerivType;
+  typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
+  typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
+  typedef DualNumber<SecondDerivType, NumberVector<NDIM, SecondDerivType> > ThirdDerivType;
   typedef ThirdDerivType ADScalar;
 
   // Treat velocity as a vector
-  NumberArray<NDIM, ADScalar> U;
+  NumberVector<NDIM, ADScalar> U;
 
-  ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
-  ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
-  ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
+  ADScalar x = ADScalar(x1,NumberVectorUnitVector<NDIM, 0, Scalar>::value());
+  ADScalar y = ADScalar(y1,NumberVectorUnitVector<NDIM, 1, Scalar>::value());
+  ADScalar z = ADScalar(z1,NumberVectorUnitVector<NDIM, 2, Scalar>::value());
 
   // Arbitrary manufactured solutions
   U[0]       = a * helper_f(beta,kx,x)                  * helper_g(y).derivatives()[1] * helper_h(gamma,kz,z).derivatives()[2];
@@ -117,7 +117,7 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_u(Scalar x1, Scalar 
   ADScalar P = d * helper_f(beta,kx,x)                  * helper_gt(y)                 * helper_h(gamma,kz,z);
 
   // NS equation residuals
-  NumberArray<NDIM, Scalar> Q_rho_u = 
+  NumberVector<NDIM, Scalar> Q_rho_u = 
     raw_value(
 
 	      // convective term
@@ -137,17 +137,17 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_u(Scalar x1, Scalar 
 template <typename Scalar>
 Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar z1)
 {
-  typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
-  typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
-  typedef DualNumber<SecondDerivType, NumberArray<NDIM, SecondDerivType> > ThirdDerivType;
+  typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
+  typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
+  typedef DualNumber<SecondDerivType, NumberVector<NDIM, SecondDerivType> > ThirdDerivType;
   typedef ThirdDerivType ADScalar;
 
   // Treat velocity as a vector
-  NumberArray<NDIM, ADScalar> U;
+  NumberVector<NDIM, ADScalar> U;
 
-  ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
-  ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
-  ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
+  ADScalar x = ADScalar(x1,NumberVectorUnitVector<NDIM, 0, Scalar>::value());
+  ADScalar y = ADScalar(y1,NumberVectorUnitVector<NDIM, 1, Scalar>::value());
+  ADScalar z = ADScalar(z1,NumberVectorUnitVector<NDIM, 2, Scalar>::value());
 
   // Arbitrary manufactured solutions
   U[0]       = a * helper_f(beta,kx,x)                  * helper_g(y).derivatives()[1] * helper_h(gamma,kz,z).derivatives()[2];
@@ -156,7 +156,7 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_v(Scalar x1, Scalar 
   ADScalar P = d * helper_f(beta,kx,x)                  * helper_gt(y)                 * helper_h(gamma,kz,z);
 
   // NS equation residuals
-  NumberArray<NDIM, Scalar> Q_rho_u = 
+  NumberVector<NDIM, Scalar> Q_rho_u = 
     raw_value(
 
 	      // convective term
@@ -176,17 +176,17 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_v(Scalar x1, Scalar 
 template <typename Scalar>
 Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar z1)
 {
-  typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
-  typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
-  typedef DualNumber<SecondDerivType, NumberArray<NDIM, SecondDerivType> > ThirdDerivType;
+  typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
+  typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
+  typedef DualNumber<SecondDerivType, NumberVector<NDIM, SecondDerivType> > ThirdDerivType;
   typedef ThirdDerivType ADScalar;
 
   // Treat velocity as a vector
-  NumberArray<NDIM, ADScalar> U;
+  NumberVector<NDIM, ADScalar> U;
 
-  ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
-  ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
-  ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
+  ADScalar x = ADScalar(x1,NumberVectorUnitVector<NDIM, 0, Scalar>::value());
+  ADScalar y = ADScalar(y1,NumberVectorUnitVector<NDIM, 1, Scalar>::value());
+  ADScalar z = ADScalar(z1,NumberVectorUnitVector<NDIM, 2, Scalar>::value());
 
   // Arbitrary manufactured solutions
   U[0]       = a * helper_f(beta,kx,x)                  * helper_g(y).derivatives()[1] * helper_h(gamma,kz,z).derivatives()[2];
@@ -195,7 +195,7 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_q_w(Scalar x1, Scalar 
   ADScalar P = d * helper_f(beta,kx,x)                  * helper_gt(y)                 * helper_h(gamma,kz,z);
 
   // NS equation residuals
-  NumberArray<NDIM, Scalar> Q_rho_u = 
+  NumberVector<NDIM, Scalar> Q_rho_u = 
     raw_value(
 
 	      // convective term

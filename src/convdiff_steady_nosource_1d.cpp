@@ -28,8 +28,8 @@
 
 typedef ShadowNumber<double, long double> RawScalar;
 const unsigned int NDIM = 1;
-typedef DualNumber<RawScalar, NumberArray<NDIM, RawScalar> > FirstDerivType;
-typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+typedef DualNumber<RawScalar, NumberVector<NDIM, RawScalar> > FirstDerivType;
+typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
 typedef SecondDerivType ADType;
 
 using namespace MASA;

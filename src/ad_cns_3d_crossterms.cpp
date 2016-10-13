@@ -28,8 +28,8 @@
 
 typedef ShadowNumber<double, long double> RawScalar;
 const unsigned int NDIM = 3;
-typedef DualNumber<RawScalar, NumberArray<NDIM, RawScalar> > FirstDerivType;
-typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+typedef DualNumber<RawScalar, NumberVector<NDIM, RawScalar> > FirstDerivType;
+typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
 typedef SecondDerivType ADType;
 
 using namespace MASA;
@@ -145,16 +145,16 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar
 {
   using std::cos;
 
-  typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
-  typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+  typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
+  typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
 
-  const ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
-  const ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
-  const ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
+  const ADScalar x = ADScalar(x1,NumberVectorUnitVector<NDIM, 0, Scalar>::value());
+  const ADScalar y = ADScalar(y1,NumberVectorUnitVector<NDIM, 1, Scalar>::value());
+  const ADScalar z = ADScalar(z1,NumberVectorUnitVector<NDIM, 2, Scalar>::value());
 
   // Treat velocity as a vector
-  NumberArray<NDIM, ADScalar> U;
+  NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
   U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
@@ -171,21 +171,21 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar
   ADScalar ET = E + .5 * U.dot(U);
 
   // The shear strain tensor
-  NumberArray<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
+  NumberVector<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
 
   // The identity tensor I
-  NumberArray<NDIM, NumberArray<NDIM, Scalar> > Identity = 
-    NumberArray<NDIM, Scalar>::identity();
+  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity = 
+    NumberVector<NDIM, Scalar>::identity();
 
   // The shear stress tensor
-  NumberArray<NDIM, NumberArray<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
 
   // Temperature flux
-  NumberArray<NDIM, ADScalar> q = -k * T.derivatives();
+  NumberVector<NDIM, ADScalar> q = -k * T.derivatives();
 
   // Euler equation residuals
   // Scalar Q_rho = raw_value(divergence(RHO*U));
-  NumberArray<NDIM, Scalar> Q_rho_u = 
+  NumberVector<NDIM, Scalar> Q_rho_u = 
     raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
 
   return Q_rho_u[0];
@@ -197,16 +197,16 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar
 {
   using std::cos;
 
-  typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
-  typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+  typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
+  typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
 
-  const ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
-  const ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
-  const ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
+  const ADScalar x = ADScalar(x1,NumberVectorUnitVector<NDIM, 0, Scalar>::value());
+  const ADScalar y = ADScalar(y1,NumberVectorUnitVector<NDIM, 1, Scalar>::value());
+  const ADScalar z = ADScalar(z1,NumberVectorUnitVector<NDIM, 2, Scalar>::value());
 
   // Treat velocity as a vector
-  NumberArray<NDIM, ADScalar> U;
+  NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
   U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
@@ -223,21 +223,21 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar
   ADScalar ET = E + .5 * U.dot(U);
 
   // The shear strain tensor
-  NumberArray<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
+  NumberVector<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
 
   // The identity tensor I
-  NumberArray<NDIM, NumberArray<NDIM, Scalar> > Identity = 
-    NumberArray<NDIM, Scalar>::identity();
+  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity = 
+    NumberVector<NDIM, Scalar>::identity();
 
   // The shear stress tensor
-  NumberArray<NDIM, NumberArray<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
 
   // Temperature flux
-  NumberArray<NDIM, ADScalar> q = -k * T.derivatives();
+  NumberVector<NDIM, ADScalar> q = -k * T.derivatives();
 
   // Euler equation residuals
   // Scalar Q_rho = raw_value(divergence(RHO*U));
-  NumberArray<NDIM, Scalar> Q_rho_u = 
+  NumberVector<NDIM, Scalar> Q_rho_u = 
     raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
 
   return Q_rho_u[1];
@@ -250,16 +250,16 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar
 {
   using std::cos;
 
-  typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
-  typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+  typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
+  typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
 
-  const ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
-  const ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
-  const ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
+  const ADScalar x = ADScalar(x1,NumberVectorUnitVector<NDIM, 0, Scalar>::value());
+  const ADScalar y = ADScalar(y1,NumberVectorUnitVector<NDIM, 1, Scalar>::value());
+  const ADScalar z = ADScalar(z1,NumberVectorUnitVector<NDIM, 2, Scalar>::value());
 
   // Treat velocity as a vector
-  NumberArray<NDIM, ADScalar> U;
+  NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
   U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
@@ -276,21 +276,21 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar
   ADScalar ET = E + .5 * U.dot(U);
 
   // The shear strain tensor
-  NumberArray<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
+  NumberVector<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
 
   // The identity tensor I
-  NumberArray<NDIM, NumberArray<NDIM, Scalar> > Identity = 
-    NumberArray<NDIM, Scalar>::identity();
+  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity = 
+    NumberVector<NDIM, Scalar>::identity();
 
   // The shear stress tensor
-  NumberArray<NDIM, NumberArray<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
 
   // Temperature flux
-  NumberArray<NDIM, ADScalar> q = -k * T.derivatives();
+  NumberVector<NDIM, ADScalar> q = -k * T.derivatives();
 
   // Euler equation residuals
   // Scalar Q_rho = raw_value(divergence(RHO*U));
-  NumberArray<NDIM, Scalar> Q_rho_u = 
+  NumberVector<NDIM, Scalar> Q_rho_u = 
     raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
 
   return Q_rho_u[2];
@@ -303,16 +303,16 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_e(Scalar x1, Scalar y1, Scalar
 {
   using std::cos;
 
-  typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
-  typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+  typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
+  typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
 
   // Treat velocity as a vector
-  NumberArray<NDIM, ADScalar> U;
+  NumberVector<NDIM, ADScalar> U;
 
-  const ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
-  const ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
-  const ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
+  const ADScalar x = ADScalar(x1,NumberVectorUnitVector<NDIM, 0, Scalar>::value());
+  const ADScalar y = ADScalar(y1,NumberVectorUnitVector<NDIM, 1, Scalar>::value());
+  const ADScalar z = ADScalar(z1,NumberVectorUnitVector<NDIM, 2, Scalar>::value());
 
   // Arbitrary manufactured solution
   U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
@@ -329,21 +329,21 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_e(Scalar x1, Scalar y1, Scalar
   ADScalar ET = E + .5 * U.dot(U);
 
   // The shear strain tensor
-  NumberArray<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
+  NumberVector<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
 
   // The identity tensor I
-  NumberArray<NDIM, NumberArray<NDIM, Scalar> > Identity = 
-    NumberArray<NDIM, Scalar>::identity();
+  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity = 
+    NumberVector<NDIM, Scalar>::identity();
 
   // The shear stress tensor
-  NumberArray<NDIM, NumberArray<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
 
   // Temperature flux
-  NumberArray<NDIM, ADScalar> q = -k * T.derivatives();
+  NumberVector<NDIM, ADScalar> q = -k * T.derivatives();
 
   // Euler equation residuals
   // Scalar Q_rho = raw_value(divergence(RHO*U));
-  // NumberArray<NDIM, Scalar> Q_rho_u = 
+  // NumberVector<NDIM, Scalar> Q_rho_u = 
   //   raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
 
   // energy equation
@@ -359,16 +359,16 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scal
 {
   using std::cos;
 
-  typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
-  typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+  typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
+  typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
 
-  const ADScalar x = ADScalar(x1,NumberArrayUnitVector<NDIM, 0, Scalar>::value());
-  const ADScalar y = ADScalar(y1,NumberArrayUnitVector<NDIM, 1, Scalar>::value());
-  const ADScalar z = ADScalar(z1,NumberArrayUnitVector<NDIM, 2, Scalar>::value());
+  const ADScalar x = ADScalar(x1,NumberVectorUnitVector<NDIM, 0, Scalar>::value());
+  const ADScalar y = ADScalar(y1,NumberVectorUnitVector<NDIM, 1, Scalar>::value());
+  const ADScalar z = ADScalar(z1,NumberVectorUnitVector<NDIM, 2, Scalar>::value());
 
   // Treat velocity as a vector
-  NumberArray<NDIM, ADScalar> U;
+  NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
   U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
