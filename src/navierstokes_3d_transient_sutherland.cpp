@@ -24,6 +24,8 @@
 
 #include <masa_internal.h>
 
+#ifdef HAVE_METAPHYSICL
+
 #include <ad_masa.h>
 
 typedef ShadowNumber<double, long double> RawScalar;
@@ -402,8 +404,4 @@ Scalar MASA::navierstokes_3d_transient_sutherland<Scalar>::eval_exact_w(Scalar x
 MASA_INSTANTIATE_ALL(MASA::navierstokes_3d_transient_sutherland);
 
 
-
-//---------------------------------------------------------
-// AUTOMASA
-// Generated on: 2013-08-17 16:58:35
-//---------------------------------------------------------
+#endif // HAVE_METAPHYSICL

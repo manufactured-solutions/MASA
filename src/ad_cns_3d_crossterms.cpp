@@ -24,6 +24,8 @@
 
 #include <masa_internal.h>
 
+#ifdef HAVE_METAPHYSICL
+
 #include <ad_masa.h>
 
 typedef ShadowNumber<double, long double> RawScalar;
@@ -449,8 +451,4 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_rho(Scalar x, Scalar y, Sc
 MASA_INSTANTIATE_ALL(MASA::ad_cns_3d_crossterms);
 
 
-
-//---------------------------------------------------------
-// AUTOMASA
-// Generated on: 2012-05-31 13:55:08
-//---------------------------------------------------------
+#endif // HAVE_METAPHYSICL

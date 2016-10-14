@@ -24,6 +24,8 @@
 
 #include <masa_internal.h>
 
+#ifdef HAVE_METAPHYSICL
+
 #include <ad_masa.h>
 
 
@@ -310,8 +312,4 @@ Scalar MASA::navierstokes_3d_incompressible<Scalar>::eval_exact_p(Scalar x, Scal
 MASA_INSTANTIATE_ALL(MASA::navierstokes_3d_incompressible);
 
 
-
-//---------------------------------------------------------
-// AUTOMASA
-// Generated on: 2013-05-06 12:39:39
-//---------------------------------------------------------
+#endif // HAVE_METAPHYSICL

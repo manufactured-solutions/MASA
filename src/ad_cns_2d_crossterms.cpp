@@ -23,6 +23,9 @@
 //-----------------------------------------------------------------------el-
 
 #include <masa_internal.h>
+
+#ifdef HAVE_METAPHYSICL
+
 #include <ad_masa.h>
 
 // typedef double RawScalar;
@@ -348,8 +351,4 @@ Scalar MASA::ad_cns_2d_crossterms<Scalar>::eval_exact_rho(Scalar x, Scalar y)
 MASA_INSTANTIATE_ALL(MASA::ad_cns_2d_crossterms);
 
 
-
-//---------------------------------------------------------
-// AUTOMASA
-// Generated on: 2012-05-30 14:47:18
-//---------------------------------------------------------
+#endif // HAVE_METAPHYSICL
