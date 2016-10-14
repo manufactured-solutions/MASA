@@ -31,8 +31,12 @@
 //--------------------------------------------------------------------------
 
 
-#include <tests.h>
 #include <iostream>
+#include <config.h>
+
+#ifdef HAVE_METAPHYSICL
+
+#include <tests.h>
 #include "ad_masa.h"
 
 typedef double RawScalar;
@@ -232,3 +236,12 @@ double evaluate_q (const NumberVector<NDIM, ADScalar>& xyz, const int ret)
     }
   return 0;
 }
+
+#else // HAVE_METAPHYSICL
+
+int main(void)
+{
+  return 77; // Autotools code for "skip test"
+}
+
+#endif // HAVE_METAPHYSICL
