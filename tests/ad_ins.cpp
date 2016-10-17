@@ -209,7 +209,7 @@ double evaluate_q (const NumberArray<NDIM, RawScalar>& xyz)
     raw_value(
 
 	      // convective term
-	      divergence(U.outerproduct(U))
+	      - divergence(U.outerproduct(U))
 
 	      // pressure
 	      - P.derivatives()

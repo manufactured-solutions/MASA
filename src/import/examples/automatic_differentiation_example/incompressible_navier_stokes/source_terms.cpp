@@ -25,7 +25,7 @@ double eval_q_u(double x, double y, double z)
     raw_value(
 
 	      // convective term
-	      divergence(U.outerproduct(U))
+	      - divergence(U.outerproduct(U))
 
 	      // pressure
 	      - P.derivatives()
@@ -63,7 +63,7 @@ double eval_q_v(double x, double y, double z)
     raw_value(
 
 	      // convective term
-	      divergence(U.outerproduct(U))
+	      - divergence(U.outerproduct(U))
 
 	      // pressure
 	      - P.derivatives()
@@ -101,7 +101,7 @@ double eval_q_w(double x, double y, double z)
     raw_value(
 
 	      // convective term
-	      divergence(U.outerproduct(U))
+	      - divergence(U.outerproduct(U))
 
 	      // pressure
 	      - P.derivatives()
