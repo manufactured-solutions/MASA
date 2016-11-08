@@ -45,6 +45,7 @@ if FORT_ENABLED
   CLEANFILES             += masa.mod 
   lib_LTLIBRARIES        += libfmasa.la
   libfmasa_la_LDFLAGS     = $(all_libraries) -release $(GENERIC_RELEASE)
+  libfmasa_la_CPPFLAGS    = $(masa_optional_INCLUDES)
   libfmasa_la_SOURCES     = masa.f90 $(libmasa_la_SOURCES)
 endif
 
