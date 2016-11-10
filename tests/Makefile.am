@@ -159,6 +159,10 @@ TESTS_CXX_AD             +=  ad_cns_crossterm
 ad_cns_crossterm_SOURCES  =  ad_cns_crossterm.cpp
 ad_cns_crossterm_LDADD    =  ../src/libmasa.la
 
+TESTS_CXX_AD             +=  ad_divgradsimple
+ad_divgradsimple_SOURCES  =  ad_divgradsimple.cpp
+ad_divgradsimple_LDADD    =  ../src/libmasa.la
+
 #------------
 # C Binaries
 #------------
