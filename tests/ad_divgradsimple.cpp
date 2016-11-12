@@ -63,7 +63,7 @@ int run_test()
   Scalar x, y, z;
 
   //problem size
-  int nx = 200;  // number of points
+  int nx = 5;  // number of points
   int lx=10;     // length
   Scalar dx=Scalar(lx)/Scalar(nx);
   Scalar dy=Scalar(lx)/Scalar(nx);
