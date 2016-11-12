@@ -1,4 +1,4 @@
-AM_CPPFLAGS        = -I$(top_srcdir)/src -I$(top_builddir)/src
+AM_CPPFLAGS        = -I$(top_srcdir)/src -I$(top_builddir)/src $(masa_optional_INCLUDES)
 AM_FCFLAGS         = $(FC_STRICT_TOL_CPP)
 check_PROGRAMS     =
 dist_check_SCRIPTS =

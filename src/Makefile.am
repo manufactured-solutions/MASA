@@ -1,10 +1,7 @@
 CLEANFILES  = .license.stamp *.gcda *.gcno
 
 h_sources  = masa.h masa_internal.h smasa.h ad_masa.h                        \
-             nsctpl_fwd.hpp nsctpl.hpp                                       \
-	     dualnumber.h numberarray.h dualnumberarray.h compare_types.h    \
-	     raw_type.h shadownumber.h dualshadowarray.h dualshadow.h        \
-	     testable.h
+             nsctpl_fwd.hpp nsctpl.hpp
 
 cc_sources = masa_core.cpp masa_class.cpp masa_map.cpp heat.cpp euler.cpp    \
              cns.cpp sod.cpp cmasa.cpp axi_euler.cpp axi_cns.cpp rans_sa.cpp \
@@ -37,6 +34,7 @@ library_include_HEADERS = masa.h
 #-----------------------
 
 libmasa_la_LDFLAGS      = $(all_libraries) -release $(GENERIC_RELEASE)
+libmasa_la_CPPFLAGS     = $(masa_optional_INCLUDES)
 libmasa_la_SOURCES      = $(cc_sources) $(h_sources)
 
 #----------------------
@@ -47,6 +45,7 @@ if FORT_ENABLED
   CLEANFILES             += masa.mod 
   lib_LTLIBRARIES        += libfmasa.la
   libfmasa_la_LDFLAGS     = $(all_libraries) -release $(GENERIC_RELEASE)
+  libfmasa_la_CPPFLAGS    = $(masa_optional_INCLUDES)
   libfmasa_la_SOURCES     = masa.f90 $(libmasa_la_SOURCES)
 endif
 

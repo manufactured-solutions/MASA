@@ -42,6 +42,8 @@
 #include <vector>
 #include <stdlib.h>
 
+#include <config.h>
+
 using std::cos;
 using std::sin;
 using std::pow;
@@ -1945,6 +1947,9 @@ public:
 };}
 
 
+// MetaPhysicL-powered manufactured solutions:
+#ifdef HAVE_METAPHYSICL
+
 // ------------------------------------------------------
 // --------------- ad_cns_2d_crossterms 
 // ------------------------------------------------------
@@ -2242,5 +2247,7 @@ public:
   Scalar eval_exact_w(Scalar,Scalar,Scalar,Scalar);
 };}
 
+
+#endif // HAVE_METAPHYSICL
 
 // --l33t--

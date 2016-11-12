@@ -24,12 +24,14 @@
 
 #include <masa_internal.h>
 
+#ifdef HAVE_METAPHYSICL
+
 #include <ad_masa.h>
 
 typedef ShadowNumber<double, long double> RawScalar;
 const unsigned int NDIM = 4;
-typedef DualNumber<RawScalar, NumberArray<NDIM, RawScalar> > FirstDerivType;
-typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
+typedef DualNumber<RawScalar, NumberVector<NDIM, RawScalar> > FirstDerivType;
+typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
 typedef SecondDerivType ADType;
 
 using namespace MASA;
@@ -402,8 +404,4 @@ Scalar MASA::navierstokes_3d_transient_sutherland<Scalar>::eval_exact_w(Scalar x
 MASA_INSTANTIATE_ALL(MASA::navierstokes_3d_transient_sutherland);
 
 
-
-//---------------------------------------------------------
-// AUTOMASA
-// Generated on: 2013-08-17 16:58:35
-//---------------------------------------------------------
+#endif // HAVE_METAPHYSICL

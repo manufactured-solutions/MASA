@@ -3,6 +3,7 @@ Version 0.50.0 (In progress)
   * bug fix to --enable-fortran-interfaces Makefile.AM including .mod files
   * bug fix in navierstokes_3d_incompressible to fix sign error in convection
   * bug fix to import/examples/ to fix sign error in convection terms
+  * Include MetaPhysicL as a third party library, not as a forked copy
 
 Version 0.44.0 (19 June, 2015)
 
