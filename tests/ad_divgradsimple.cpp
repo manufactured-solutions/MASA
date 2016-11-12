@@ -78,10 +78,10 @@ int run_test()
     x = i*dx;
     for (int j=0;j<nx;j++)
     {
-        y = i*dy;
+        y = j*dy;
         for (int k=0;k<nx;k++)
         {
-            z = i*dz;
+            z = k*dz;
             Scalar ad_x_soln = divgradsimple_x<Scalar>(x,y,z);
             Scalar ad_y_soln = divgradsimple_y<Scalar>(x,y,z);
             Scalar ad_z_soln = divgradsimple_z<Scalar>(x,y,z);
