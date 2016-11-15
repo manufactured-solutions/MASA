@@ -57,8 +57,7 @@ typedef SecondDerivType ADType;
 template<typename Scalar>
 int run_test()
 {
-  // CCP: I hacked this threshold to be very lenient of errors
-  const Scalar thresh = 5000 * std::numeric_limits<Scalar>::epsilon();
+  const Scalar thresh = 50 * std::numeric_limits<Scalar>::epsilon();
   // parameters
   Scalar x, y, z;
 
