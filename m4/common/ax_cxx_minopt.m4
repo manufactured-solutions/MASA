@@ -52,7 +52,6 @@ AC_DEFUN([AX_CXX_MINOPT],
 
 if test "$ac_test_CXXFLAGS" != "set"; then
 
-  AC_LANG_PUSH([C++])
   AX_COMPILER_VENDOR
 
   # Baseline disable
@@ -78,7 +77,6 @@ if test "$ac_test_CXXFLAGS" != "set"; then
   esac	 
 
   AC_MSG_NOTICE([disabling C++ compiler optimizations ($CXXFLAGS)])
-  AC_LANG_POP([C++])
 
 else 
 
