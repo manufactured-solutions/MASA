@@ -57,7 +57,6 @@ AC_DEFUN([AX_FC_MINOPT],
 
 if test "$ac_test_FCFLAGS" != "set"; then
 
-  AC_LANG_PUSH([Fortran])
   AX_COMPILER_VENDOR
 
   # Baseline disable
