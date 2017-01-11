@@ -46,6 +46,9 @@ AX_CXX_MINOPT	# request minimum optimization level for CXX
 # Enable/Disable -Wall (Warn all)
 # ---------------------------------------------
 
+AC_PROG_CC
+AC_PROG_CXX
+
 AX_MASA_WARN_ALL
 
 # ------------------------------
@@ -53,9 +56,6 @@ AX_MASA_WARN_ALL
 # ------------------------------
 
 AC_DISABLE_STATIC
-
-AC_PROG_CC
-AC_PROG_CXX
 
 # ----------------------------
 # We may need the math library
@@ -72,12 +72,12 @@ AC_LANG_POP([C])
 FORTRAN_INTERFACES=0
 AC_ARG_ENABLE([fortran-interfaces], AC_HELP_STRING([--enable-fortran-interfaces],[enable fortran support]),
 [
-dnl set suffix to .F90 to get CPP support for testing vendor Fortran compiler
-AC_FC_SRCEXT([F90]) 
 dnl request minimum optimization level for FC
 AX_FC_MINOPT
-AC_PROG_F77()
-AC_PROG_FC()
+AC_REQUIRE([AC_PROG_F77])
+AC_REQUIRE([AC_PROG_FC])
+dnl set suffix to .F90 to get CPP support for testing vendor Fortran compiler
+AC_FC_SRCEXT([F90]) 
 FORTRAN_INTERFACES=1
 AC_DEFINE(FORTRAN_INTERFACES,1,[Define if Fortran interfaces enabled])
 ],[])
@@ -96,13 +96,6 @@ fi
 
 
 AC_SUBST(masa_optional_INCLUDES)
-
-
-#
-# now call libtool
-#
-AC_PROG_LIBTOOL
-AM_SANITY_CHECK
 
 
 # ---------------------------------------------
@@ -168,6 +161,15 @@ DX_PDF_FEATURE(ON)
 DX_PS_FEATURE(OFF)
 
 DX_INIT_DOXYGEN(MASA, doxygen/masa.dox, docs) 
+
+
+#
+# now call libtool
+#
+AM_SANITY_CHECK
+
+LT_INIT
+
 
 # Run scripts for regression tests
 AC_CONFIG_FILES(tests/py_init.sh, [chmod +x tests/py_init.sh])
