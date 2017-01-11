@@ -23,8 +23,6 @@ AC_SUBST(GENERIC_MINOR_VERSION)
 AC_SUBST(GENERIC_MICRO_VERSION)
 AC_SUBST(GENERIC_RELEASE)
 
-LT_INIT
-
 # define
 PACKAGE_DESCRIPTION="Manufactured Analytical Solutions Abstraction Library"
 AC_SUBST([PACKAGE_DESCRIPTION])
@@ -76,8 +74,8 @@ AC_ARG_ENABLE([fortran-interfaces], AC_HELP_STRING([--enable-fortran-interfaces]
 [
 dnl request minimum optimization level for FC
 AX_FC_MINOPT
-AC_PROG_F77()
-AC_PROG_FC()
+AC_REQUIRE([AC_PROG_F77])
+AC_REQUIRE([AC_PROG_FC])
 dnl set suffix to .F90 to get CPP support for testing vendor Fortran compiler
 AC_FC_SRCEXT([F90]) 
 FORTRAN_INTERFACES=1
@@ -98,12 +96,6 @@ fi
 
 
 AC_SUBST(masa_optional_INCLUDES)
-
-
-#
-# now call libtool
-#
-AM_SANITY_CHECK
 
 
 # ---------------------------------------------
@@ -169,6 +161,15 @@ DX_PDF_FEATURE(ON)
 DX_PS_FEATURE(OFF)
 
 DX_INIT_DOXYGEN(MASA, doxygen/masa.dox, docs) 
+
+
+#
+# now call libtool
+#
+AM_SANITY_CHECK
+
+LT_INIT
+
 
 # Run scripts for regression tests
 AC_CONFIG_FILES(tests/py_init.sh, [chmod +x tests/py_init.sh])
