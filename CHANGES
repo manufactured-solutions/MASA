@@ -5,6 +5,7 @@ Version 0.50.0 (In progress)
   * bug fix to import/examples/ to fix sign error in convection terms
   * Include MetaPhysicL as a third party library, not as a forked copy
   * Added unit test to verify divergence(gradient(U)) as a vector laplacian
+  * Fixed a configuration failure on some versions of OS X
 
 Version 0.44.0 (19 June, 2015)
 
