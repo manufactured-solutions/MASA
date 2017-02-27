@@ -1,7 +1,9 @@
 Version 0.50.1 (IN PROGRESS)
+
   * Updates and bugfixes coming!
 
 Version 0.50.0 (27 February, 2017)
+
   * updated .gitignore
   * bug fix to --enable-fortran-interfaces Makefile.AM including .mod files
   * bug fix in navierstokes_3d_incompressible to fix sign error in convection
@@ -22,6 +24,7 @@ Version 0.44.0 (19 June, 2015)
   * python configuration included in masa_version binary (Issue #12)
 
 Version 0.43.1 (12 November 2013)
+
   * Transitioned to git source control checks
   * Fixed bug in python interfaces from release tarball
 
