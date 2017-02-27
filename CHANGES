@@ -1,4 +1,4 @@
-Version 0.50.0 (In progress)
+Version 0.50.0 (27 February, 2017)
   * updated .gitignore
   * bug fix to --enable-fortran-interfaces Makefile.AM including .mod files
   * bug fix in navierstokes_3d_incompressible to fix sign error in convection
