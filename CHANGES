@@ -1,3 +1,6 @@
+Version 0.50.1 (IN PROGRESS)
+  * Updates and bugfixes coming!
+
 Version 0.50.0 (27 February, 2017)
   * updated .gitignore
   * bug fix to --enable-fortran-interfaces Makefile.AM including .mod files
