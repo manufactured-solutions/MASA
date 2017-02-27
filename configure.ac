@@ -26,7 +26,7 @@ AC_SUBST(GENERIC_RELEASE)
 # define
 PACKAGE_DESCRIPTION="Manufactured Analytical Solutions Abstraction Library"
 AC_SUBST([PACKAGE_DESCRIPTION])
-PACKAGE_URL="https://red.ices.utexas.edu/projects/software/"
+PACKAGE_URL="https://github.com/manufactured-solutions/MASA"
 AC_SUBST([PACKAGE_URL])
 
 # ------------------------------------------------------------------
