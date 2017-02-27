@@ -4,7 +4,7 @@
 AC_PREREQ(2.61)
 
 #init
-AC_INIT([masa],[0.50.0], [masa-dev@ices.utexas.edu])
+AC_INIT([masa],[0.50.1], [masa-dev@ices.utexas.edu])
 AC_CONFIG_HEADER(config.h)
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
