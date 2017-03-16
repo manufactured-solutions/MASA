@@ -2169,11 +2169,11 @@ public:
 
 
 // ------------------------------------------------------
-// --------------- navierstokes_3d_incompBouss_homogeneous 
+// --------------- navierstokes_3d_incompbouss_homogeneous 
 // ------------------------------------------------------
 namespace MASA{
 template <typename Scalar>
-class navierstokes_3d_incompBouss_homogeneous : public manufactured_solution<Scalar>
+class navierstokes_3d_incompbouss_homogeneous : public manufactured_solution<Scalar>
 {
   using manufactured_solution<Scalar>::pi;
   using manufactured_solution<Scalar>::PI;
@@ -2197,7 +2197,7 @@ private:
   Scalar kz;
 
 public:
-  navierstokes_3d_incompBouss_homogeneous();
+  navierstokes_3d_incompbouss_homogeneous();
   int init_var();
   Scalar eval_q_u(Scalar,Scalar,Scalar);
   Scalar eval_q_v(Scalar,Scalar,Scalar);

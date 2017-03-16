@@ -18,7 +18,7 @@ cc_sources += ad_cns_3d_crossterms.cpp
 cc_sources += convdiff_steady_nosource_1d.cpp
 cc_sources += navierstokes_3d_incompressible.cpp
 cc_sources += navierstokes_3d_incompressible_homogeneous.cpp
-cc_sources += navierstokes_3d_incompBouss_homogeneous.cpp
+cc_sources += navierstokes_3d_incompbouss_homogeneous.cpp
 cc_sources += navierstokes_3d_transient_sutherland.cpp
 # do not edit this line! --l33t--
 

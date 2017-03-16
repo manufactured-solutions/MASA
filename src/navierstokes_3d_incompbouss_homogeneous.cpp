@@ -50,9 +50,9 @@ typedef SecondDerivType ADType;
 using namespace MASA;
 
 template <typename Scalar>
-MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::navierstokes_3d_incompBouss_homogeneous()
+MASA::navierstokes_3d_incompbouss_homogeneous<Scalar>::navierstokes_3d_incompbouss_homogeneous()
 {
-  this->mmsname = "navierstokes_3d_incompBouss_homogeneous";
+  this->mmsname = "navierstokes_3d_incompbouss_homogeneous";
   this->dimension = 3;
 
   this->register_var("a",&a);
@@ -67,9 +67,9 @@ MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::navierstokes_3d_incompBou
   this->register_var("kz",&kz);
   this->register_var("ky",&ky);
 
-  // JAM - Added for Boussinesq
-  this->register_var("e",&d);
-  this->register_var("omega",&delta);
+  // JAM - Added for boussinesq
+  this->register_var("e",&e);
+  this->register_var("omega",&omega);
   this->register_var("grav",&grav);
   this->register_var("gradRho",&gradRho);
   this->register_var("diff",&diff);
@@ -79,7 +79,7 @@ MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::navierstokes_3d_incompBou
 } // done with constructor
 
 template <typename Scalar>
-int MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::init_var()
+int MASA::navierstokes_3d_incompbouss_homogeneous<Scalar>::init_var()
 {
   int err = 0;
 
@@ -95,7 +95,7 @@ int MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::init_var()
   err += this->set_var("kz",1);
   err += this->set_var("ky",1);
 
-  // JAM - Added for Boussinesq
+  // JAM - Added for boussinesq
   err += this->set_var("e",4.6);
   err += this->set_var("omega",1.8);
   err += this->set_var("grav",-9.8);
@@ -112,7 +112,7 @@ int MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::init_var()
 
 // u component of velocity source term
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar z1)
+Scalar MASA::navierstokes_3d_incompbouss_homogeneous<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar z1)
 {
   typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
@@ -154,7 +154,7 @@ Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_q_u(Scalar x1
 
 // v component of velocity source term
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar z1)
+Scalar MASA::navierstokes_3d_incompbouss_homogeneous<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar z1)
 {
   typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
@@ -187,7 +187,7 @@ Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_q_v(Scalar x1
 	      // pressure
 	      - P.derivatives()
     
-              // JAM : added Boussinesq term
+              // JAM : added boussinesq term
               + RHO*grav
 
 	      // dissipation
@@ -199,7 +199,7 @@ Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_q_v(Scalar x1
 
 // w component of velocity source term
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar z1)
+Scalar MASA::navierstokes_3d_incompbouss_homogeneous<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar z1)
 {
   typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
@@ -241,7 +241,7 @@ Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_q_w(Scalar x1
 
 // JAM: Added density source term
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scalar z1)
+Scalar MASA::navierstokes_3d_incompbouss_homogeneous<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scalar z1)
 {
   typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
@@ -318,7 +318,7 @@ Scalar helper_h(Scalar2 gamma, Scalar2 kz, Scalar z)
 
 // example of a public method called from eval_exact_t
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_exact_u(Scalar x, Scalar y1, Scalar z1)
+Scalar MASA::navierstokes_3d_incompbouss_homogeneous<Scalar>::eval_exact_u(Scalar x, Scalar y1, Scalar z1)
 {
   typedef DualNumber<Scalar, Scalar> OneDDerivType;
   OneDDerivType y = OneDDerivType(y1,1);
@@ -331,7 +331,7 @@ Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_exact_u(Scala
 
 // public method
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_exact_v(Scalar x1, Scalar y, Scalar z1)
+Scalar MASA::navierstokes_3d_incompbouss_homogeneous<Scalar>::eval_exact_v(Scalar x1, Scalar y, Scalar z1)
 {
   typedef DualNumber<Scalar, Scalar> OneDDerivType;
   OneDDerivType x = OneDDerivType(x1,1);
@@ -344,7 +344,7 @@ Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_exact_v(Scala
 
 // public method
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_exact_w(Scalar x1, Scalar y1, Scalar z)
+Scalar MASA::navierstokes_3d_incompbouss_homogeneous<Scalar>::eval_exact_w(Scalar x1, Scalar y1, Scalar z)
 {
   typedef DualNumber<Scalar, Scalar> OneDDerivType;
   OneDDerivType x = OneDDerivType(x1,1);
@@ -357,7 +357,7 @@ Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_exact_w(Scala
 
 // public method
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_exact_p(Scalar x, Scalar y, Scalar z)
+Scalar MASA::navierstokes_3d_incompbouss_homogeneous<Scalar>::eval_exact_p(Scalar x, Scalar y, Scalar z)
 {
 
   Scalar P = d *  helper_f(beta,kx,x) * helper_g(delta,ky,y) *  helper_h(gamma,kz,z);
@@ -366,7 +366,7 @@ Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_exact_p(Scala
 
 // public method
 template <typename Scalar>
-Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_exact_rho(Scalar x, Scalar y1, Scalar z)
+Scalar MASA::navierstokes_3d_incompbouss_homogeneous<Scalar>::eval_exact_rho(Scalar x, Scalar y1, Scalar z)
 {
   typedef DualNumber<Scalar, Scalar> OneDDerivType;
   OneDDerivType y = OneDDerivType(y1,1);
@@ -381,7 +381,7 @@ Scalar MASA::navierstokes_3d_incompBouss_homogeneous<Scalar>::eval_exact_rho(Sca
 // Template Instantiation(s)
 // ----------------------------------------
 
-MASA_INSTANTIATE_ALL(MASA::navierstokes_3d_incompBouss_homogeneous);
+MASA_INSTANTIATE_ALL(MASA::navierstokes_3d_incompbouss_homogeneous);
 
 
 #endif // HAVE_METAPHYSICL
