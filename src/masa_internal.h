@@ -2070,6 +2070,77 @@ public:
 
 
 // ------------------------------------------------------
+// --------------- ad_cns_3d_les_smag
+// ------------------------------------------------------
+namespace MASA{
+template <typename Scalar>
+class ad_cns_3d_les_smag : public manufactured_solution<Scalar>
+{
+  using manufactured_solution<Scalar>::pi;
+  using manufactured_solution<Scalar>::PI;
+
+private:
+  Scalar R;
+  Scalar k;
+  Scalar u_0;
+  Scalar u_x;
+  Scalar u_y;
+  Scalar u_z;
+  Scalar v_0;
+  Scalar v_x;
+  Scalar v_y;
+  Scalar v_z;
+  Scalar w_0;
+  Scalar w_x;
+  Scalar w_y;
+  Scalar w_z;
+  Scalar rho_0;
+  Scalar rho_x;
+  Scalar rho_y;
+  Scalar rho_z;
+  Scalar p_0;
+  Scalar p_x;
+  Scalar p_y;
+  Scalar p_z;
+  Scalar a_px;
+  Scalar a_py;
+  Scalar a_pz;
+  Scalar a_rhox;
+  Scalar a_rhoy;
+  Scalar a_rhoz;
+  Scalar a_ux;
+  Scalar a_uy;
+  Scalar a_uz;
+  Scalar a_vx;
+  Scalar a_vy;
+  Scalar a_vz;
+  Scalar a_wx;
+  Scalar a_wy;
+  Scalar a_wz;
+  Scalar Gamma;
+  Scalar mu;
+  Scalar L;
+  Scalar Cs;
+  Scalar CI;
+  Scalar PrT;
+
+public:
+  ad_cns_3d_les_smag();
+  int init_var();
+  Scalar eval_q_u(Scalar,Scalar,Scalar) const;
+  Scalar eval_q_v(Scalar,Scalar,Scalar) const;
+  Scalar eval_q_w(Scalar,Scalar,Scalar) const;
+  Scalar eval_q_e(Scalar,Scalar,Scalar) const;
+  Scalar eval_q_rho(Scalar,Scalar,Scalar) const;
+  Scalar eval_exact_u(Scalar,Scalar,Scalar);
+  Scalar eval_exact_v(Scalar,Scalar,Scalar);
+  Scalar eval_exact_w(Scalar,Scalar,Scalar);
+  Scalar eval_exact_p(Scalar,Scalar,Scalar);
+  Scalar eval_exact_rho(Scalar,Scalar,Scalar);
+};}
+
+
+// ------------------------------------------------------
 // --------------- convdiff_steady_nosource_1d 
 // ------------------------------------------------------
 namespace MASA{

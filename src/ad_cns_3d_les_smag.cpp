@@ -37,9 +37,9 @@ typedef SecondDerivType ADType;
 using namespace MASA;
 
 template <typename Scalar>
-MASA::ad_cns_3d_les<Scalar>::ad_cns_3d_les()
+MASA::ad_cns_3d_les_smag<Scalar>::ad_cns_3d_les_smag()
 {
-  this->mmsname = "ad_cns_3d_les";
+  this->mmsname = "ad_cns_3d_les_smag";
   this->dimension = 3;
 
   this->register_var("R",&R);
@@ -91,7 +91,7 @@ MASA::ad_cns_3d_les<Scalar>::ad_cns_3d_les()
 } // done with constructor
 
 template <typename Scalar>
-int MASA::ad_cns_3d_les<Scalar>::init_var()
+int MASA::ad_cns_3d_les_smag<Scalar>::init_var()
 {
   int err = 0;
 
@@ -149,7 +149,7 @@ int MASA::ad_cns_3d_les<Scalar>::init_var()
 
 // public static method, that can be called from eval_q_t
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar z1) const
 {
   using std::cos;
   using std::sqrt;
@@ -210,7 +210,7 @@ Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar z1) co
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar z1) const
 {
   using std::cos;
 
@@ -271,7 +271,7 @@ Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar z1) co
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar z1) const
 {
   using std::cos;
 
@@ -332,7 +332,7 @@ Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar z1) co
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_e(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_e(Scalar x1, Scalar y1, Scalar z1) const
 {
   using std::cos;
 
@@ -396,7 +396,7 @@ Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_e(Scalar x1, Scalar y1, Scalar z1) co
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scalar z1) const
 {
   using std::cos;
 
@@ -430,7 +430,7 @@ Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scalar z1) 
 
 // example of a public method called from eval_exact_t
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_u(Scalar x, Scalar y, Scalar z)
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_exact_u(Scalar x, Scalar y, Scalar z)
 {
   using std::cos;
 
@@ -441,7 +441,7 @@ Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_u(Scalar x, Scalar y, Scalar z)
 
 // public method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_v(Scalar x, Scalar y, Scalar z)
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_exact_v(Scalar x, Scalar y, Scalar z)
 {
   using std::cos;
 
@@ -452,7 +452,7 @@ Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_v(Scalar x, Scalar y, Scalar z)
 
 // public method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_w(Scalar x, Scalar y, Scalar z)
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_exact_w(Scalar x, Scalar y, Scalar z)
 {
   using std::cos;
 
@@ -463,7 +463,7 @@ Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_w(Scalar x, Scalar y, Scalar z)
 
 // public method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_p(Scalar x, Scalar y, Scalar z)
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_exact_p(Scalar x, Scalar y, Scalar z)
 {
   using std::cos;
 
@@ -473,7 +473,7 @@ Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_p(Scalar x, Scalar y, Scalar z)
 
 // public method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_rho(Scalar x, Scalar y, Scalar z)
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_exact_rho(Scalar x, Scalar y, Scalar z)
 {
   using std::cos;
 
@@ -487,7 +487,7 @@ Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_rho(Scalar x, Scalar y, Scalar z)
 // Template Instantiation(s)
 // ----------------------------------------
 
-MASA_INSTANTIATE_ALL(MASA::ad_cns_3d_les);
+MASA_INSTANTIATE_ALL(MASA::ad_cns_3d_les_smag);
 
 
 #endif // HAVE_METAPHYSICL
