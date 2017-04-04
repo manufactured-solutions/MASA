@@ -85,6 +85,7 @@ MASA::ad_cns_3d_les_smag<Scalar>::ad_cns_3d_les_smag()
   this->register_var("Cs",&Cs);
   this->register_var("CI",&CI);
   this->register_var("PrT",&PrT);
+  this->register_var("deltabar",&deltabar);
 
   this->init_var();
 
@@ -138,6 +139,7 @@ int MASA::ad_cns_3d_les_smag<Scalar>::init_var()
   err += this->set_var("Cs",0.16);
   err += this->set_var("CI",0.09);
   err += this->set_var("PrT",0.7);
+  err += this->set_var("deltabar",1.0);
 
   return err;
 

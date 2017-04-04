@@ -2123,6 +2123,7 @@ private:
   Scalar Cs;
   Scalar CI;
   Scalar PrT;
+  Scalar deltabar;
 
 public:
   ad_cns_3d_les_smag();
