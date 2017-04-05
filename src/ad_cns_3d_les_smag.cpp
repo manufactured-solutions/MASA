@@ -190,9 +190,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar z
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
-  ADScalar Smag = sqrt(2.0 * (S[0,0]*S[0,0] + S[0,1]*S[0,1] + S[0,2]*S[0,2] \
-			      + S[1,0]*S[1,0] + S[1,1]*S[1,1] + S[1,2]*S[1,2] \
-			      + S[2,0]*S[2,0] + S[2,1]*S[2,1] + S[2,2]*S[2,2] ));
+  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
   ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
   ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
@@ -215,6 +213,7 @@ template <typename Scalar>
 Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar z1) const
 {
   using std::cos;
+  using std::sqrt;
 
   typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
@@ -250,9 +249,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar z
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
-  ADScalar Smag = sqrt(2.0 * (S[0,0]*S[0,0] + S[0,1]*S[0,1] + S[0,2]*S[0,2] \
-			      + S[1,0]*S[1,0] + S[1,1]*S[1,1] + S[1,2]*S[1,2] \
-			      + S[2,0]*S[2,0] + S[2,1]*S[2,1] + S[2,2]*S[2,2] ));
+  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
   ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
   ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
@@ -276,6 +273,7 @@ template <typename Scalar>
 Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar z1) const
 {
   using std::cos;
+  using std::sqrt;
 
   typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
@@ -311,9 +309,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar z
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
-  ADScalar Smag = sqrt(2.0 * (S[0,0]*S[0,0] + S[0,1]*S[0,1] + S[0,2]*S[0,2] \
-			      + S[1,0]*S[1,0] + S[1,1]*S[1,1] + S[1,2]*S[1,2] \
-			      + S[2,0]*S[2,0] + S[2,1]*S[2,1] + S[2,2]*S[2,2] ));
+  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
   ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
   ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
@@ -337,6 +333,7 @@ template <typename Scalar>
 Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_e(Scalar x1, Scalar y1, Scalar z1) const
 {
   using std::cos;
+  using std::sqrt;
 
   typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
@@ -372,9 +369,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_e(Scalar x1, Scalar y1, Scalar z
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
-  ADScalar Smag = sqrt(2.0 * (S[0,0]*S[0,0] + S[0,1]*S[0,1] + S[0,2]*S[0,2] \
-			      + S[1,0]*S[1,0] + S[1,1]*S[1,1] + S[1,2]*S[1,2] \
-			      + S[2,0]*S[2,0] + S[2,1]*S[2,1] + S[2,2]*S[2,2] ));
+  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
   ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
   ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
