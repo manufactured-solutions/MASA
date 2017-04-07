@@ -417,9 +417,9 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_w(Scalar x, Scalar y, Scal
 {
   using std::cos;
 
-  Scalar exact_v;
-  exact_v = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_wz * PI * z / L);
-  return exact_v;
+  Scalar exact_w;
+  exact_w = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wz * PI * z / L);
+  return exact_w;
 }
 
 // public method
