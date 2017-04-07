@@ -2128,11 +2128,11 @@ private:
 public:
   ad_cns_3d_les_smag();
   int init_var();
-  Scalar eval_q_u(Scalar,Scalar,Scalar) const;
-  Scalar eval_q_v(Scalar,Scalar,Scalar) const;
-  Scalar eval_q_w(Scalar,Scalar,Scalar) const;
-  Scalar eval_q_e(Scalar,Scalar,Scalar) const;
-  Scalar eval_q_rho(Scalar,Scalar,Scalar) const;
+  Scalar eval_q_rho_u(Scalar,Scalar,Scalar);
+  Scalar eval_q_rho_v(Scalar,Scalar,Scalar);
+  Scalar eval_q_rho_w(Scalar,Scalar,Scalar);
+  Scalar eval_q_rho_e(Scalar,Scalar,Scalar);
+  Scalar eval_q_rho(Scalar,Scalar,Scalar);
   Scalar eval_exact_u(Scalar,Scalar,Scalar);
   Scalar eval_exact_v(Scalar,Scalar,Scalar);
   Scalar eval_exact_w(Scalar,Scalar,Scalar);

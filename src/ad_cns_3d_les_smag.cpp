@@ -151,7 +151,7 @@ int MASA::ad_cns_3d_les_smag<Scalar>::init_var()
 
 // public static method, that can be called from eval_q_t
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_u(Scalar x1, Scalar y1, Scalar z1)
 {
   using std::cos;
   using std::sqrt;
@@ -210,7 +210,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar z
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_v(Scalar x1, Scalar y1, Scalar z1)
 {
   using std::cos;
   using std::sqrt;
@@ -270,7 +270,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar z
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_w(Scalar x1, Scalar y1, Scalar z1)
 {
   using std::cos;
   using std::sqrt;
@@ -330,7 +330,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar z
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_e(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_e(Scalar x1, Scalar y1, Scalar z1)
 {
   using std::cos;
   using std::sqrt;
@@ -393,7 +393,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_e(Scalar x1, Scalar y1, Scalar z
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scalar z1)
 {
   using std::cos;
 
