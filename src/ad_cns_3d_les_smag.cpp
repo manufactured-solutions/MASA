@@ -168,18 +168,18 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_u(Scalar x1, Scalar y1, Scal
   NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * u_z * cos(a_uz * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * v_z * cos(a_vz * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * w_z * cos(a_wz * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * rho_z * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * p_z * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
 
   // Perfect gas energies
-  ADScalar E = 1./(Gamma-1.)*P/RHO;
-  ADScalar ET = E + .5 * U.dot(U);
+  ADScalar E = 1./(Gamma-1.)*P;
+  ADScalar ET = E + .5 * RHO * U.dot(U);
 
   // The shear strain tensor
   NumberVector<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
@@ -190,7 +190,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_u(Scalar x1, Scalar y1, Scal
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
-  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
+  ADScalar Smag = 0.0; // sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
   ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
   ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
@@ -227,18 +227,18 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_v(Scalar x1, Scalar y1, Scal
   NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * u_z * cos(a_uz * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * v_z * cos(a_vz * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * w_z * cos(a_wz * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * rho_z * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * p_z * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
 
- // Perfect gas energies
-  ADScalar E = 1./(Gamma-1.)*P/RHO;
-  ADScalar ET = E + .5 * U.dot(U);
+  // Perfect gas energies
+  ADScalar E = 1./(Gamma-1.)*P;
+  ADScalar ET = E + .5 * RHO * U.dot(U);
 
   // The shear strain tensor
   NumberVector<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
@@ -249,7 +249,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_v(Scalar x1, Scalar y1, Scal
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
-  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
+  ADScalar Smag = 0.0; // sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
   ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
   ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
@@ -287,18 +287,18 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_w(Scalar x1, Scalar y1, Scal
   NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * u_z * cos(a_uz * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * v_z * cos(a_vz * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * w_z * cos(a_wz * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * rho_z * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * p_z * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
 
- // Perfect gas energies
-  ADScalar E = 1./(Gamma-1.)*P/RHO;
-  ADScalar ET = E + .5 * U.dot(U);
+  // Perfect gas energies
+  ADScalar E = 1./(Gamma-1.)*P;
+  ADScalar ET = E + .5 * RHO * U.dot(U);
 
   // The shear strain tensor
   NumberVector<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
@@ -309,7 +309,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_w(Scalar x1, Scalar y1, Scal
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
-  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
+  ADScalar Smag = 0.0; // sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
   ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
   ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
@@ -347,18 +347,18 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_e(Scalar x1, Scalar y1, Scal
   const ADScalar z = ADScalar(z1,NumberVectorUnitVector<NDIM, 2, Scalar>::value());
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * u_z * cos(a_uz * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * v_z * cos(a_vz * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * w_z * cos(a_wz * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * rho_z * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * p_z * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
 
   // Perfect gas energies
-  ADScalar E = 1./(Gamma-1.)*P/RHO;
-  ADScalar ET = E + .5 * U.dot(U);
+  ADScalar E = 1./(Gamma-1.)*P;
+  ADScalar ET = E + .5 * RHO * U.dot(U);
 
   // The shear strain tensor
   NumberVector<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
@@ -369,7 +369,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_e(Scalar x1, Scalar y1, Scal
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
-  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
+  ADScalar Smag = 0.0; // sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
   ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
   ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
@@ -385,7 +385,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_e(Scalar x1, Scalar y1, Scal
   //   raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
 
   // energy equation
-  Scalar Q_rho_e = raw_value(divergence((RHO*ET+P)*U + q - Tau.dot(U)));
+  Scalar Q_rho_e = raw_value(divergence((ET+P)*U + q - Tau.dot(U)));
 
   return Q_rho_e;
 }
@@ -409,11 +409,11 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scalar
   NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * u_z * cos(a_uz * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * v_z * cos(a_vz * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * w_z * cos(a_wz * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * rho_z * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * p_z * cos(a_pz * PI * z / L);
 
   Scalar Q_rho = raw_value(divergence(RHO*U));
 
@@ -432,7 +432,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_exact_u(Scalar x, Scalar y, Scalar
   using std::cos;
 
   Scalar exact_u;
-  exact_u = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uz * PI * z / L);
+  exact_u = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * u_z * cos(a_uz * PI * z / L);
   return exact_u;
 }
 
@@ -443,7 +443,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_exact_v(Scalar x, Scalar y, Scalar
   using std::cos;
 
   Scalar exact_v;
-  exact_v = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vz * PI * z / L);
+  exact_v = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * v_z * cos(a_vz * PI * z / L);
   return exact_v;
 }
 
@@ -454,7 +454,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_exact_w(Scalar x, Scalar y, Scalar
   using std::cos;
 
   Scalar exact_w;
-  exact_w = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wz * PI * z / L);
+  exact_w = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * w_z * cos(a_wz * PI * z / L);
   return exact_w;
 }
 
@@ -464,7 +464,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_exact_p(Scalar x, Scalar y, Scalar
 {
   using std::cos;
 
-  Scalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
+  Scalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * p_z * cos(a_pz * PI * z / L);
   return P;
 }
 
@@ -474,7 +474,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_exact_rho(Scalar x, Scalar y, Scal
 {
   using std::cos;
 
-  Scalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
+  Scalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * rho_z * cos(a_rhoz * PI * z / L);
   return RHO;
 }
 
