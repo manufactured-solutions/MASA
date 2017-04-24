@@ -81,6 +81,7 @@ MASA::ad_cns_3d_les_smag<Scalar>::ad_cns_3d_les_smag()
   this->register_var("a_wz",&a_wz);
   this->register_var("Gamma",&Gamma);
   this->register_var("mu",&mu);
+  this->register_var("mu_bulk",&mu_bulk);
   this->register_var("L",&L);
   this->register_var("Cs",&Cs);
   this->register_var("CI",&CI);
@@ -135,6 +136,7 @@ int MASA::ad_cns_3d_les_smag<Scalar>::init_var()
   err += this->set_var("a_wz",2.901);
   err += this->set_var("Gamma",1.01);
   err += this->set_var("mu",.918);
+  err += this->set_var("mu_bulk",.3);
   err += this->set_var("L",3.02);
   err += this->set_var("Cs",0.16);
   err += this->set_var("CI",0.09);
@@ -195,7 +197,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_u(Scalar x1, Scalar y1, Scal
   ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
   // The shear stress tensor
-  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + 1./3. * sigmakk * Identity;
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity + 1./3. * sigmakk * Identity;
     
   // Temperature flux
   NumberVector<NDIM, ADScalar> q = -(k + mut/PrT) * T.derivatives();
@@ -254,7 +256,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_v(Scalar x1, Scalar y1, Scal
   ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
   // The shear stress tensor
-  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + 1./3. * sigmakk * Identity;
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity + 1./3. * sigmakk * Identity;
     
   // Temperature flux
   NumberVector<NDIM, ADScalar> q = -(k + mut/PrT) * T.derivatives();
@@ -314,7 +316,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_w(Scalar x1, Scalar y1, Scal
   ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
   // The shear stress tensor
-  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + 1./3. * sigmakk * Identity;
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity + 1./3. * sigmakk * Identity;
     
   // Temperature flux
   NumberVector<NDIM, ADScalar> q = -(k + mut/PrT) * T.derivatives();
@@ -374,7 +376,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_e(Scalar x1, Scalar y1, Scal
   ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
   // The shear stress tensor
-  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + 1./3. * sigmakk * Identity;
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity + 1./3. * sigmakk * Identity;
     
   // Temperature flux
   NumberVector<NDIM, ADScalar> q = -(k + mut/PrT) * T.derivatives();

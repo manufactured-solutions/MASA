@@ -2119,6 +2119,7 @@ private:
   Scalar a_wz;
   Scalar Gamma;
   Scalar mu;
+  Scalar mu_bulk;
   Scalar L;
   Scalar Cs;
   Scalar CI;
