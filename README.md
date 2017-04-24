@@ -24,7 +24,6 @@ An important tool that has emerged over the past decade to assist in the code ve
 MASA began as a centralized repository for the MMS generated across the [PECOS](http://pecos.ices.utexas.edu/) Center for use with verification. Given that there appears to be no openly available, application-independent software package that provides generated MMS source terms, solutions, etc., it was decided to centralize the Center’s MMS efforts into one library to enhance reusability and consistency across the various software packages. The library is written in C++ (with C and Fortran90 interfaces) and provides a suite of manufactured solutions for the software verification of partial differential equation solvers in multiple dimensions.
 
 
-====
 Citing MASA
 ====
 
@@ -50,14 +49,12 @@ Bibtex:
 For more information on the use of MASA and a brief introduction to verification, consult the following [repository of recent MASA presentations](https://github.com/manufactured-solutions/presentations) 
 
 
-====
 Online Documentation
 ====
 
 Please check out github.io pages at: http://manufactured-solutions.github.io/MASA/
 
 
-====
 Adding Manufactured Solutions to MASA
 ====
 MASA provides two methods to import manufactured solutions into the library. Users can either generate their own 
@@ -72,7 +69,6 @@ masa-dev \@ ices.utexas.edu with the following information:
 
 Please recall that MASA is an open-source library, and all MMS are publicly available.
 
-====
 Questions/Problems?
 ====
 
