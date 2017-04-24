@@ -13,7 +13,6 @@ MASA (Manufactured Analytical Solution Abstraction) is a library written in C++ 
     Navier-Stokes Equations
     Reynolds Averaged Navier Stokes with Various Turbulence Models
 
-====
 Summary
 ====
 Code verification focuses on identifying failures of the code to correctly implement a desired numerical algorithm. When performing code verification, analytical solutions to mathematical equations are used to calculate error in a corresponding approximate solution.
