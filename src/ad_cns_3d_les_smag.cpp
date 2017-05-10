@@ -192,9 +192,9 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_u(Scalar x1, Scalar y1, Scal
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
-  ADScalar Smag = 0.0; // sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
-  ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
-  ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
+  Scalar Smag = sqrt(2.0 * (raw_value(S[0][0])*raw_value(S[0][0])+ raw_value(S[0][1])*raw_value(S[0][1]) + raw_value(S[0][2])*raw_value(S[0][2]) + raw_value(S[1][0])*raw_value(S[1][0]) + raw_value(S[1][1])*raw_value(S[1][1]) + raw_value(S[1][2])*raw_value(S[1][2]) + raw_value(S[2][0])*raw_value(S[2][0]) + raw_value(S[2][1])*raw_value(S[2][1]) + raw_value(S[2][2])*raw_value(S[2][2])));
+  Scalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * raw_value(RHO) * Smag;
+  Scalar sigmakk = 2.0 * CI * deltabar*deltabar * raw_value(RHO) * Smag * Smag;
     
   // The shear stress tensor
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity + 1./3. * sigmakk * Identity;
@@ -251,9 +251,9 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_v(Scalar x1, Scalar y1, Scal
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
-  ADScalar Smag = 0.0; // sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
-  ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
-  ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
+  Scalar Smag = sqrt(2.0 * (raw_value(S[0][0])*raw_value(S[0][0])+ raw_value(S[0][1])*raw_value(S[0][1]) + raw_value(S[0][2])*raw_value(S[0][2]) + raw_value(S[1][0])*raw_value(S[1][0]) + raw_value(S[1][1])*raw_value(S[1][1]) + raw_value(S[1][2])*raw_value(S[1][2]) + raw_value(S[2][0])*raw_value(S[2][0]) + raw_value(S[2][1])*raw_value(S[2][1]) + raw_value(S[2][2])*raw_value(S[2][2])));
+  Scalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * raw_value(RHO) * Smag;
+  Scalar sigmakk = 2.0 * CI * deltabar*deltabar * raw_value(RHO) * Smag * Smag;
     
   // The shear stress tensor
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity + 1./3. * sigmakk * Identity;
@@ -311,9 +311,9 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_w(Scalar x1, Scalar y1, Scal
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
-  ADScalar Smag = 0.0; // sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
-  ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
-  ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
+  Scalar Smag = sqrt(2.0 * (raw_value(S[0][0])*raw_value(S[0][0])+ raw_value(S[0][1])*raw_value(S[0][1]) + raw_value(S[0][2])*raw_value(S[0][2]) + raw_value(S[1][0])*raw_value(S[1][0]) + raw_value(S[1][1])*raw_value(S[1][1]) + raw_value(S[1][2])*raw_value(S[1][2]) + raw_value(S[2][0])*raw_value(S[2][0]) + raw_value(S[2][1])*raw_value(S[2][1]) + raw_value(S[2][2])*raw_value(S[2][2])));
+  Scalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * raw_value(RHO) * Smag;
+  Scalar sigmakk = 2.0 * CI * deltabar*deltabar * raw_value(RHO) * Smag * Smag;
     
   // The shear stress tensor
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity + 1./3. * sigmakk * Identity;
@@ -371,9 +371,9 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_e(Scalar x1, Scalar y1, Scal
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
-  ADScalar Smag = 0.0; // sqrt(2.0 * (S[0][0]*S[0][0]+ S[0][1]*S[0][1] + S[0][2]*S[0][2] + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2] + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2] ));
-  ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
-  ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
+  Scalar Smag = sqrt(2.0 * (raw_value(S[0][0])*raw_value(S[0][0])+ raw_value(S[0][1])*raw_value(S[0][1]) + raw_value(S[0][2])*raw_value(S[0][2]) + raw_value(S[1][0])*raw_value(S[1][0]) + raw_value(S[1][1])*raw_value(S[1][1]) + raw_value(S[1][2])*raw_value(S[1][2]) + raw_value(S[2][0])*raw_value(S[2][0]) + raw_value(S[2][1])*raw_value(S[2][1]) + raw_value(S[2][2])*raw_value(S[2][2])));
+  Scalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * raw_value(RHO) * Smag;
+  Scalar sigmakk = 2.0 * CI * deltabar*deltabar * raw_value(RHO) * Smag * Smag;
     
   // The shear stress tensor
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity + 1./3. * sigmakk * Identity;
