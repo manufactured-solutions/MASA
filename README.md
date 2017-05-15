@@ -1,7 +1,8 @@
 MASA
 ====
 
-[![Build Status](https://travis-ci.org/manufactured-solutions/MASA.png?branch=master)](https://travis-ci.org/manufactured-solutions/MASA)
+[![Build Status](https://travis-ci.org/manufactured-solutions/MASA.png?branch=master)](https://travis-ci.org/manufactured-solutions/MASA) [![Join the chat at https://gitter.im/manufactured-solutions/](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/manufactured-solutions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 Method of Manufactured Solutions Repository
 
