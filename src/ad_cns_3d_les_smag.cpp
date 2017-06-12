@@ -191,7 +191,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_u(Scalar x1, Scalar y1, Scal
     NumberVector<NDIM, Scalar>::identity();
 
   // Constant Smagorinsky
-  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = 0.5*(GradU + transpose(GradU));
   Scalar Smag = sqrt(2.0 * (raw_value(S[0][0])*raw_value(S[0][0])+ raw_value(S[0][1])*raw_value(S[0][1]) + raw_value(S[0][2])*raw_value(S[0][2]) + raw_value(S[1][0])*raw_value(S[1][0]) + raw_value(S[1][1])*raw_value(S[1][1]) + raw_value(S[1][2])*raw_value(S[1][2]) + raw_value(S[2][0])*raw_value(S[2][0]) + raw_value(S[2][1])*raw_value(S[2][1]) + raw_value(S[2][2])*raw_value(S[2][2])));
   Scalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * raw_value(RHO) * Smag;
   Scalar sigmakk = 2.0 * CI * deltabar*deltabar * raw_value(RHO) * Smag * Smag;
@@ -250,7 +250,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_v(Scalar x1, Scalar y1, Scal
     NumberVector<NDIM, Scalar>::identity();
 
   // Constant Smagorinsky
-  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = 0.5*(GradU + transpose(GradU));
   Scalar Smag = sqrt(2.0 * (raw_value(S[0][0])*raw_value(S[0][0])+ raw_value(S[0][1])*raw_value(S[0][1]) + raw_value(S[0][2])*raw_value(S[0][2]) + raw_value(S[1][0])*raw_value(S[1][0]) + raw_value(S[1][1])*raw_value(S[1][1]) + raw_value(S[1][2])*raw_value(S[1][2]) + raw_value(S[2][0])*raw_value(S[2][0]) + raw_value(S[2][1])*raw_value(S[2][1]) + raw_value(S[2][2])*raw_value(S[2][2])));
   Scalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * raw_value(RHO) * Smag;
   Scalar sigmakk = 2.0 * CI * deltabar*deltabar * raw_value(RHO) * Smag * Smag;
@@ -310,7 +310,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_w(Scalar x1, Scalar y1, Scal
     NumberVector<NDIM, Scalar>::identity();
 
   // Constant Smagorinsky
-  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = 0.5*(GradU + transpose(GradU));
   Scalar Smag = sqrt(2.0 * (raw_value(S[0][0])*raw_value(S[0][0])+ raw_value(S[0][1])*raw_value(S[0][1]) + raw_value(S[0][2])*raw_value(S[0][2]) + raw_value(S[1][0])*raw_value(S[1][0]) + raw_value(S[1][1])*raw_value(S[1][1]) + raw_value(S[1][2])*raw_value(S[1][2]) + raw_value(S[2][0])*raw_value(S[2][0]) + raw_value(S[2][1])*raw_value(S[2][1]) + raw_value(S[2][2])*raw_value(S[2][2])));
   Scalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * raw_value(RHO) * Smag;
   Scalar sigmakk = 2.0 * CI * deltabar*deltabar * raw_value(RHO) * Smag * Smag;
@@ -370,7 +370,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_e(Scalar x1, Scalar y1, Scal
     NumberVector<NDIM, Scalar>::identity();
 
   // Constant Smagorinsky
-  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = GradU + transpose(GradU);
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = 0.5*(GradU + transpose(GradU));
   Scalar Smag = sqrt(2.0 * (raw_value(S[0][0])*raw_value(S[0][0])+ raw_value(S[0][1])*raw_value(S[0][1]) + raw_value(S[0][2])*raw_value(S[0][2]) + raw_value(S[1][0])*raw_value(S[1][0]) + raw_value(S[1][1])*raw_value(S[1][1]) + raw_value(S[1][2])*raw_value(S[1][2]) + raw_value(S[2][0])*raw_value(S[2][0]) + raw_value(S[2][1])*raw_value(S[2][1]) + raw_value(S[2][2])*raw_value(S[2][2])));
   Scalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * raw_value(RHO) * Smag;
   Scalar sigmakk = 2.0 * CI * deltabar*deltabar * raw_value(RHO) * Smag * Smag;
