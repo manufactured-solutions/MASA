@@ -28,7 +28,7 @@ MASA began as a centralized repository for the MMS generated across the [Center 
 Citing MASA
 ====
 
-Should you use MASA in your research, please provide a citation of the library through the MASA paper, 
+Should you use MASA in your research, please provide a citation of the library through the paper, 
 [MASA: a library for verification using manufactured and analytical solutions published in Engineering with Computers](http://link.springer.com/article/10.1007%2Fs00366-012-0267-9#page-1)
 
 Bibtex:
