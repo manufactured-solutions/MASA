@@ -22,7 +22,7 @@ There are many techniques common in the software engineering community that can 
 
 An important tool that has emerged over the past decade to assist in the code verification process is the Method of Manufactured Solutions (MMS). MMS, instead of relying upon the availability of an exact solution to the governing equations, specifies a solution. This artificial solution is then substituted into the equations. Naturally, there will be a residual term since the chosen function is unlikely to be an exact solution to the equations. This residual can then be added to the code as a source term; the MMS test then uses the code to solve the modified equations and checks that the chosen function is recovered. Although previous work has focused mainly on partial differential equations (PDE’s), this idea applies to a broad range of systems in mathematical physics including nonlinear equations, systems of algebraic equations, and ordinary differential equations.
 
-MASA began as a centralized repository for the MMS generated across the [PECOS](http://pecos.ices.utexas.edu/) Center for use with verification. Given that there appears to be no openly available, application-independent software package that provides generated MMS source terms, solutions, etc., it was decided to centralize the Center’s MMS efforts into one library to enhance reusability and consistency across the various software packages. The library is written in C++ (with C and Fortran90 interfaces) and provides a suite of manufactured solutions for the software verification of partial differential equation solvers in multiple dimensions.
+MASA began as a centralized repository for the MMS generated across the [PECOS](http://pecos..utexas.edu/) Center for use with verification. Given that there appears to be no openly available, application-independent software package that provides generated MMS source terms, solutions, etc., it was decided to centralize the Center’s MMS efforts into one library to enhance reusability and consistency across the various software packages. The library is written in C++ (with C and Fortran90 interfaces) and provides a suite of manufactured solutions for the software verification of partial differential equation solvers in multiple dimensions.
 
 
 Citing MASA
@@ -62,8 +62,8 @@ MASA provides two methods to import manufactured solutions into the library. Use
 source terms, or they can use the automatic differentiation capabilities provided in MASA. The method by which 
 solutions can be added to is provided by the "MASA-import" script. Please consult the MASA documentation for more 
 details. The MASA development team will gladly add manufactured solutions to the library, for use in the 
-verification community. If you would like to incorporate an MMS in the library, please contact 
-masa-dev \@ ices.utexas.edu with the following information:
+verification community. If you would like to incorporate an MMS in the library, start a github ticket with the 
+following information:
 
     Model document (written in LaTeX) detailing the equations, manufactured analytical terms
     C-code used to import the manufactured solutions into masa, using the "masa-import" feature.
@@ -74,7 +74,7 @@ Questions/Problems?
 ====
 
 We welcome any feedback regarding MASA and bugs in the code and errors or omissions in the documentation can be 
-reported to masa-dev \@ ices.utexas.edu. Requests and contributions are welcome at the same e-mail address. 
+reported as a ticket on github. Requests and contributions are welcome at the location. 
 Ideally, please include the following information:
 
     the version number of the MASA library (versioning information can be obtained by running the masa_version binary located in the bin/ directory of a local MASA installation)
