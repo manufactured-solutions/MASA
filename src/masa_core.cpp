@@ -160,6 +160,7 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
   anim.push_back(new convdiff_steady_nosource_1d<Scalar>());
   anim.push_back(new navierstokes_3d_incompressible<Scalar>());
   anim.push_back(new navierstokes_3d_incompressible_homogeneous<Scalar>());
+  anim.push_back(new navierstokes_3d_incompbouss_homogeneous<Scalar>());
   anim.push_back(new navierstokes_3d_transient_sutherland<Scalar>());
 #endif // HAVE_METAPHYSICL
 

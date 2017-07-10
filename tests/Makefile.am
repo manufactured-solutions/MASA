@@ -163,6 +163,10 @@ TESTS_CXX_AD             +=  ad_divgradsimple
 ad_divgradsimple_SOURCES  =  ad_divgradsimple.cpp
 ad_divgradsimple_LDADD    =  ../src/libmasa.la
 
+TESTS_CXX_AD             +=  ns3d_incompbouss
+ns3d_incompbouss_SOURCES  =  ns3d_incompbouss.cpp
+ns3d_incompbouss_LDADD    =  ../src/libmasa.la
+
 #------------
 # C Binaries
 #------------
