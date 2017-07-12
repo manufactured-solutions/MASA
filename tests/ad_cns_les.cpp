@@ -92,17 +92,17 @@ int main(void)
   masa_set_param("rho_y", 1.);
   masa_set_param("rho_z", 1.);
   masa_set_param("u_0", 34719.02199147968);
-  masa_set_param("u_x", 34719.02199147968);
+  masa_set_param("u_x", 3471.902199147968);
   masa_set_param("u_y", 1.);
   masa_set_param("u_z", 1.);
   masa_set_param("v_0", 34719.02199147968);
   masa_set_param("v_x", 1.);
-  masa_set_param("v_y", 34719.02199147968);
+  masa_set_param("v_y", 3471.902199147968);
   masa_set_param("v_z", 1.);
   masa_set_param("w_0", 34719.02199147968);
   masa_set_param("w_x", 1.);
   masa_set_param("w_y", 1.);
-  masa_set_param("w_z", 34719.02199147968);
+  masa_set_param("w_z", 3471.902199147968);
   masa_set_param("p_0", 1013000.);
   masa_set_param("p_x", 202600.);
   masa_set_param("p_y", 1.);
@@ -122,9 +122,9 @@ int main(void)
   masa_set_param("a_px", 6.0);
   masa_set_param("a_py", 2.0);
   masa_set_param("a_pz", 4.0);
-  masa_set_param("Cs", 0.2);
-  masa_set_param("CI", 0.5);
-  masa_set_param("PrT", 1.);
+  masa_set_param("Cs", 0.16);
+  masa_set_param("CI", 0.09);
+  masa_set_param("PrT", 0.7);
   masa_set_param("deltabar", h);
 
   // call the sanity check routine
@@ -137,21 +137,25 @@ int main(void)
   xyz[1] = ADType(1., yvec);
   xyz[2] = ADType(1., zvec);
 
+  double x = 0, y = 0, z = 0;
   for (int i=0; i != N+1; ++i){
-    xyz[0] = ADType(i*h, xvec);
+    x = i*h;
+    xyz[0] = ADType(x, xvec);
 
     for (int j=0; j != N+1; ++j){
-      xyz[1] = ADType(j*h, yvec);
+      y = j*h;
+      xyz[1] = ADType(y, yvec);
 
       for (int k=0; k != N+1; ++k){
+	z = k*h;
 	xyz[2] = ADType(k*h, zvec);
 
 	// evaluate masa source terms
-	su = masa_eval_source_rho_u<double>(i*h,j*h,k*h);
-	sv = masa_eval_source_rho_v<double>(i*h,j*h,k*h);
-	sw = masa_eval_source_rho_w<double>(i*h,j*h,k*h);
-	sp = masa_eval_source_rho  <double>(i*h,j*h,k*h);
-	se = masa_eval_source_rho_e<double>(i*h,j*h,k*h);
+	su = masa_eval_source_rho_u<double>(x,y,z);
+	sv = masa_eval_source_rho_v<double>(x,y,z);
+	sw = masa_eval_source_rho_w<double>(x,y,z);
+	sp = masa_eval_source_rho  <double>(x,y,z);
+	se = masa_eval_source_rho_e<double>(x,y,z);
 
 	// AD source terms
 	s2u = evaluate_q(xyz,1);
@@ -188,11 +192,11 @@ int main(void)
     }
   }
 
-  std::cout << "max error in u      : " << unorm_max << std::endl;
-  std::cout << "max error in v      : " << vnorm_max << std::endl;
-  std::cout << "max error in w      : " << wnorm_max << std::endl;
-  std::cout << "max error in density: " << pnorm_max << std::endl;
-  std::cout << "max error in energy : " << enorm_max << std::endl;
+  // std::cout << "max error in u      : " << unorm_max << std::endl;
+  // std::cout << "max error in v      : " << vnorm_max << std::endl;
+  // std::cout << "max error in w      : " << wnorm_max << std::endl;
+  // std::cout << "max error in density: " << pnorm_max << std::endl;
+  // std::cout << "max error in energy : " << enorm_max << std::endl;
 
   threshcheck(urnorm_max);
   threshcheck(urnorm_max);
@@ -287,56 +291,59 @@ double evaluate_q (const NumberVector<NDIM, ADScalar>& xyz, const int ret)
   NumberVector<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
 
   // The identity tensor I
-  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity = 
+  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity =
     NumberVector<NDIM, Scalar>::identity();
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = 0.5*(GradU + transpose(GradU));
-  Scalar Smag = sqrt(2.0 * (raw_value(S[0][0])*raw_value(S[0][0])+ raw_value(S[0][1])*raw_value(S[0][1]) + raw_value(S[0][2])*raw_value(S[0][2]) + raw_value(S[1][0])*raw_value(S[1][0]) + raw_value(S[1][1])*raw_value(S[1][1]) + raw_value(S[1][2])*raw_value(S[1][2]) + raw_value(S[2][0])*raw_value(S[2][0]) + raw_value(S[2][1])*raw_value(S[2][1]) + raw_value(S[2][2])*raw_value(S[2][2])));
-  Scalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * raw_value(RHO) * Smag;
-  Scalar sigmakk = 2.0 * CI * deltabar*deltabar * raw_value(RHO) * Smag * Smag;
-    
+  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0] + S[0][1]*S[0][1] + S[0][2]*S[0][2]
+			      + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2]
+			      + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2]));
+  ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
+  ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
+
   // The shear stress tensor
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity + 1./3. * sigmakk * Identity;
 
   // Temperature flux
   NumberVector<NDIM, ADScalar> q = -(k + mut/PrT) * T.derivatives();
 
-  // Euler equation residuals
-  Scalar Q_rho = raw_value(divergence(RHO*U));
-  NumberVector<NDIM, Scalar> Q_rho_u = 
-    raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
-
-  // energy equation
-  Scalar Q_rho_e = raw_value(divergence((ET+P)*U + q - Tau.dot(U)));
+  Scalar Q_rho;
+  NumberVector<NDIM, Scalar> Q_rho_u;
+  Scalar Q_rho_e;
 
   switch(ret){
 
     // u
   case 1:
+    Q_rho_u = raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
     return Q_rho_u[0];
     break;
 
     // v
   case 2:
+    Q_rho_u = raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
     return Q_rho_u[1];
     break;
-    
+
     // w
   case 3:
+    Q_rho_u = raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
     return Q_rho_u[2];
     break;
 
     // rho
   case 4:
+    Q_rho = raw_value(divergence(RHO*U));
     return Q_rho;
     break;
-    
+
     // energy
   case 5:
+    Q_rho_e = raw_value(divergence((ET+P)*U + q - Tau.dot(U)));
     return Q_rho_e;
     break;
-    
+
   default:
     std::cout << "something is wrong!\n";
     exit(1);

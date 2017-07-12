@@ -67,6 +67,8 @@ examples/switch
 tests/ablation
 tests/ad_cns
 tests/ad_cns_crossterm
+tests/ad_cns_les
+tests/ad_divgradsimple
 tests/ad_euler
 tests/ad_ins
 tests/axi_cns
@@ -124,6 +126,7 @@ tests/heat_unsteady_const
 tests/heat_unsteady_var
 tests/laplace
 tests/misc
+tests/ns3d_incompbouss
 tests/pass_func
 tests/poly
 tests/purge

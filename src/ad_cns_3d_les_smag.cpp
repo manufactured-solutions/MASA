@@ -192,9 +192,11 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_u(Scalar x1, Scalar y1, Scal
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = 0.5*(GradU + transpose(GradU));
-  Scalar Smag = sqrt(2.0 * (raw_value(S[0][0])*raw_value(S[0][0])+ raw_value(S[0][1])*raw_value(S[0][1]) + raw_value(S[0][2])*raw_value(S[0][2]) + raw_value(S[1][0])*raw_value(S[1][0]) + raw_value(S[1][1])*raw_value(S[1][1]) + raw_value(S[1][2])*raw_value(S[1][2]) + raw_value(S[2][0])*raw_value(S[2][0]) + raw_value(S[2][1])*raw_value(S[2][1]) + raw_value(S[2][2])*raw_value(S[2][2])));
-  Scalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * raw_value(RHO) * Smag;
-  Scalar sigmakk = 2.0 * CI * deltabar*deltabar * raw_value(RHO) * Smag * Smag;
+  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0] + S[0][1]*S[0][1] + S[0][2]*S[0][2]
+			      + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2]
+			      + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2]));
+  ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
+  ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
   // The shear stress tensor
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity + 1./3. * sigmakk * Identity;
@@ -202,8 +204,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_u(Scalar x1, Scalar y1, Scal
   // Temperature flux
   NumberVector<NDIM, ADScalar> q = -(k + mut/PrT) * T.derivatives();
 
-  // Euler equation residuals
-  // Scalar Q_rho = raw_value(divergence(RHO*U));
+  // Momentum equation
   NumberVector<NDIM, Scalar> Q_rho_u = 
     raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
 
@@ -251,9 +252,11 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_v(Scalar x1, Scalar y1, Scal
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = 0.5*(GradU + transpose(GradU));
-  Scalar Smag = sqrt(2.0 * (raw_value(S[0][0])*raw_value(S[0][0])+ raw_value(S[0][1])*raw_value(S[0][1]) + raw_value(S[0][2])*raw_value(S[0][2]) + raw_value(S[1][0])*raw_value(S[1][0]) + raw_value(S[1][1])*raw_value(S[1][1]) + raw_value(S[1][2])*raw_value(S[1][2]) + raw_value(S[2][0])*raw_value(S[2][0]) + raw_value(S[2][1])*raw_value(S[2][1]) + raw_value(S[2][2])*raw_value(S[2][2])));
-  Scalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * raw_value(RHO) * Smag;
-  Scalar sigmakk = 2.0 * CI * deltabar*deltabar * raw_value(RHO) * Smag * Smag;
+  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0] + S[0][1]*S[0][1] + S[0][2]*S[0][2]
+			      + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2]
+			      + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2]));
+  ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
+  ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
   // The shear stress tensor
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity + 1./3. * sigmakk * Identity;
@@ -261,8 +264,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_v(Scalar x1, Scalar y1, Scal
   // Temperature flux
   NumberVector<NDIM, ADScalar> q = -(k + mut/PrT) * T.derivatives();
 
-  // Euler equation residuals
-  // Scalar Q_rho = raw_value(divergence(RHO*U));
+  // Momentum equation
   NumberVector<NDIM, Scalar> Q_rho_u = 
     raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
 
@@ -311,18 +313,19 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_w(Scalar x1, Scalar y1, Scal
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = 0.5*(GradU + transpose(GradU));
-  Scalar Smag = sqrt(2.0 * (raw_value(S[0][0])*raw_value(S[0][0])+ raw_value(S[0][1])*raw_value(S[0][1]) + raw_value(S[0][2])*raw_value(S[0][2]) + raw_value(S[1][0])*raw_value(S[1][0]) + raw_value(S[1][1])*raw_value(S[1][1]) + raw_value(S[1][2])*raw_value(S[1][2]) + raw_value(S[2][0])*raw_value(S[2][0]) + raw_value(S[2][1])*raw_value(S[2][1]) + raw_value(S[2][2])*raw_value(S[2][2])));
-  Scalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * raw_value(RHO) * Smag;
-  Scalar sigmakk = 2.0 * CI * deltabar*deltabar * raw_value(RHO) * Smag * Smag;
-    
+  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0] + S[0][1]*S[0][1] + S[0][2]*S[0][2]
+			      + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2]
+			      + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2]));
+  ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
+  ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
+
   // The shear stress tensor
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity + 1./3. * sigmakk * Identity;
     
   // Temperature flux
   NumberVector<NDIM, ADScalar> q = -(k + mut/PrT) * T.derivatives();
 
-  // Euler equation residuals
-  // Scalar Q_rho = raw_value(divergence(RHO*U));
+  // Momentum equation
   NumberVector<NDIM, Scalar> Q_rho_u = 
     raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
 
@@ -371,9 +374,11 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_e(Scalar x1, Scalar y1, Scal
 
   // Constant Smagorinsky
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = 0.5*(GradU + transpose(GradU));
-  Scalar Smag = sqrt(2.0 * (raw_value(S[0][0])*raw_value(S[0][0])+ raw_value(S[0][1])*raw_value(S[0][1]) + raw_value(S[0][2])*raw_value(S[0][2]) + raw_value(S[1][0])*raw_value(S[1][0]) + raw_value(S[1][1])*raw_value(S[1][1]) + raw_value(S[1][2])*raw_value(S[1][2]) + raw_value(S[2][0])*raw_value(S[2][0]) + raw_value(S[2][1])*raw_value(S[2][1]) + raw_value(S[2][2])*raw_value(S[2][2])));
-  Scalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * raw_value(RHO) * Smag;
-  Scalar sigmakk = 2.0 * CI * deltabar*deltabar * raw_value(RHO) * Smag * Smag;
+  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0] + S[0][1]*S[0][1] + S[0][2]*S[0][2]
+			      + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2]
+			      + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2]));
+  ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
+  ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
     
   // The shear stress tensor
   NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity + 1./3. * sigmakk * Identity;
@@ -381,12 +386,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho_e(Scalar x1, Scalar y1, Scal
   // Temperature flux
   NumberVector<NDIM, ADScalar> q = -(k + mut/PrT) * T.derivatives();
 
-  // Euler equation residuals
-  // Scalar Q_rho = raw_value(divergence(RHO*U));
-  // NumberVector<NDIM, Scalar> Q_rho_u = 
-  //   raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
-
-  // energy equation
+  // Energy equation
   Scalar Q_rho_e = raw_value(divergence((ET+P)*U + q - Tau.dot(U)));
 
   return Q_rho_e;
@@ -417,6 +417,7 @@ Scalar MASA::ad_cns_3d_les_smag<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scalar
   ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * rho_z * cos(a_rhoz * PI * z / L);
   ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * p_z * cos(a_pz * PI * z / L);
 
+  // Continuity equation
   Scalar Q_rho = raw_value(divergence(RHO*U));
 
   return Q_rho;
