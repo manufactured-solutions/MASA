@@ -80,7 +80,8 @@ int main(void)
   // initialize the problem in MASA
   err += masa_init("cnd_les","ad_cns_3d_les_smag");
 
-  // If you are wondering... these are CGS units.
+  // If you are wondering... these are CGS units, roughly
+  // corresponding to a Re=1, Mach=1, and Prandtl=1 flow.
   masa_set_param("L", 2.);
   masa_set_param("R", 2870024.971535356);
   masa_set_param("k", 820641949.8052748);
