@@ -2070,11 +2070,11 @@ public:
 
 
 // ------------------------------------------------------
-// --------------- ad_cns_3d_les_smag
+// --------------- ad_cns_3d_les
 // ------------------------------------------------------
 namespace MASA{
 template <typename Scalar>
-class ad_cns_3d_les_smag : public manufactured_solution<Scalar>
+class ad_cns_3d_les : public manufactured_solution<Scalar>
 {
   using manufactured_solution<Scalar>::pi;
   using manufactured_solution<Scalar>::PI;
@@ -2127,7 +2127,7 @@ private:
   Scalar deltabar;
 
 public:
-  ad_cns_3d_les_smag();
+  ad_cns_3d_les();
   int init_var();
   Scalar eval_q_rho_u(Scalar,Scalar,Scalar);
   Scalar eval_q_rho_v(Scalar,Scalar,Scalar);

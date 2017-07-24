@@ -78,7 +78,7 @@ int main(void)
   const NumberVector<NDIM, RawScalar> zvec(zvecinit);
 
   // initialize the problem in MASA
-  err += masa_init("cnd_les","ad_cns_3d_les_smag");
+  err += masa_init("cnd_les","ad_cns_3d_les");
 
   // If you are wondering... these are CGS units, roughly
   // corresponding to a Re=1, Mach=1, and Prandtl=1 flow.
