@@ -300,14 +300,15 @@ double evaluate_q (const NumberVector<NDIM, ADScalar>& xyz, const int ret)
   ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0] + S[0][1]*S[0][1] + S[0][2]*S[0][2]
 			      + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2]
 			      + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2]));
-  ADScalar mut = - 2.0 * (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
-  ADScalar sigmakk = 2.0 * CI * deltabar*deltabar * RHO * Smag * Smag;
+  ADScalar mut = (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
+  ADScalar sigmakk = CI * deltabar*deltabar * RHO * Smag * Smag;
 
   // The shear stress tensor
-  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = (mu + mut) * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity + 1./3. * sigmakk * Identity;
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = 2.0 * (mu + mut) * (S - 1./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity - 2./3. * sigmakk * Identity;
 
   // Temperature flux
-  NumberVector<NDIM, ADScalar> q = -(k + mut/PrT) * T.derivatives();
+  double Cv = R / (Gamma - 1);
+  NumberVector<NDIM, ADScalar> q = -(k + Gamma * Cv * mut/PrT) * T.derivatives();
 
   Scalar Q_rho;
   NumberVector<NDIM, Scalar> Q_rho_u;
