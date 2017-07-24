@@ -37,9 +37,9 @@ typedef SecondDerivType ADType;
 using namespace MASA;
 
 template <typename Scalar>
-MASA::ad_cns_3d_crossterms<Scalar>::ad_cns_3d_crossterms()
+MASA::ad_cns_3d_les<Scalar>::ad_cns_3d_les()
 {
-  this->mmsname = "ad_cns_3d_crossterms";
+  this->mmsname = "ad_cns_3d_les";
   this->dimension = 3;
 
   this->register_var("R",&R);
@@ -81,14 +81,19 @@ MASA::ad_cns_3d_crossterms<Scalar>::ad_cns_3d_crossterms()
   this->register_var("a_wz",&a_wz);
   this->register_var("Gamma",&Gamma);
   this->register_var("mu",&mu);
+  this->register_var("mu_bulk",&mu_bulk);
   this->register_var("L",&L);
+  this->register_var("Cs",&Cs);
+  this->register_var("CI",&CI);
+  this->register_var("PrT",&PrT);
+  this->register_var("deltabar",&deltabar);
 
   this->init_var();
 
 } // done with constructor
 
 template <typename Scalar>
-int MASA::ad_cns_3d_crossterms<Scalar>::init_var()
+int MASA::ad_cns_3d_les<Scalar>::init_var()
 {
   int err = 0;
 
@@ -131,7 +136,12 @@ int MASA::ad_cns_3d_crossterms<Scalar>::init_var()
   err += this->set_var("a_wz",2.901);
   err += this->set_var("Gamma",1.01);
   err += this->set_var("mu",.918);
+  err += this->set_var("mu_bulk",.3);
   err += this->set_var("L",3.02);
+  err += this->set_var("Cs",0.16);
+  err += this->set_var("CI",0.09);
+  err += this->set_var("PrT",0.7);
+  err += this->set_var("deltabar",1.0);
 
   return err;
 
@@ -143,9 +153,10 @@ int MASA::ad_cns_3d_crossterms<Scalar>::init_var()
 
 // public static method, that can be called from eval_q_t
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_rho_u(Scalar x1, Scalar y1, Scalar z1)
 {
   using std::cos;
+  using std::sqrt;
 
   typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
@@ -159,35 +170,43 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar
   NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * u_z * cos(a_uz * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * v_z * cos(a_vz * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * w_z * cos(a_wz * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * rho_z * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * p_z * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
 
   // Perfect gas energies
-  ADScalar E = 1./(Gamma-1.)*P/RHO;
-  ADScalar ET = E + .5 * U.dot(U);
+  ADScalar E = 1./(Gamma-1.)*P;
+  ADScalar ET = E + .5 * RHO * U.dot(U);
 
   // The shear strain tensor
   NumberVector<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
 
   // The identity tensor I
-  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity = 
+  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity =
     NumberVector<NDIM, Scalar>::identity();
 
+  // Constant Smagorinsky
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = 0.5*(GradU + transpose(GradU));
+  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0] + S[0][1]*S[0][1] + S[0][2]*S[0][2]
+			      + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2]
+			      + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2]));
+  ADScalar mut = (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
+  ADScalar sigmakk = CI * deltabar*deltabar * RHO * Smag * Smag;
+
   // The shear stress tensor
-  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = 2.0 * (mu + mut) * (S - 1./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity - 2./3. * sigmakk * Identity;
 
   // Temperature flux
-  NumberVector<NDIM, ADScalar> q = -k * T.derivatives();
+  double Cv = R / (Gamma - 1);
+  NumberVector<NDIM, ADScalar> q = -(k + Gamma * Cv * mut/PrT) * T.derivatives();
 
-  // Euler equation residuals
-  // Scalar Q_rho = raw_value(divergence(RHO*U));
-  NumberVector<NDIM, Scalar> Q_rho_u = 
+  // Momentum equation
+  NumberVector<NDIM, Scalar> Q_rho_u =
     raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
 
   return Q_rho_u[0];
@@ -195,9 +214,10 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_u(Scalar x1, Scalar y1, Scalar
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_rho_v(Scalar x1, Scalar y1, Scalar z1)
 {
   using std::cos;
+  using std::sqrt;
 
   typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
@@ -211,35 +231,43 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar
   NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * u_z * cos(a_uz * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * v_z * cos(a_vz * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * w_z * cos(a_wz * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * rho_z * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * p_z * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
 
- // Perfect gas energies
-  ADScalar E = 1./(Gamma-1.)*P/RHO;
-  ADScalar ET = E + .5 * U.dot(U);
+  // Perfect gas energies
+  ADScalar E = 1./(Gamma-1.)*P;
+  ADScalar ET = E + .5 * RHO * U.dot(U);
 
   // The shear strain tensor
   NumberVector<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
 
   // The identity tensor I
-  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity = 
+  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity =
     NumberVector<NDIM, Scalar>::identity();
 
+  // Constant Smagorinsky
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = 0.5*(GradU + transpose(GradU));
+  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0] + S[0][1]*S[0][1] + S[0][2]*S[0][2]
+			      + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2]
+			      + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2]));
+  ADScalar mut = (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
+  ADScalar sigmakk = CI * deltabar*deltabar * RHO * Smag * Smag;
+
   // The shear stress tensor
-  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = 2.0 * (mu + mut) * (S - 1./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity - 2./3. * sigmakk * Identity;
 
   // Temperature flux
-  NumberVector<NDIM, ADScalar> q = -k * T.derivatives();
+  double Cv = R / (Gamma - 1);
+  NumberVector<NDIM, ADScalar> q = -(k + Gamma * Cv * mut/PrT) * T.derivatives();
 
-  // Euler equation residuals
-  // Scalar Q_rho = raw_value(divergence(RHO*U));
-  NumberVector<NDIM, Scalar> Q_rho_u = 
+  // Momentum equation
+  NumberVector<NDIM, Scalar> Q_rho_u =
     raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
 
   return Q_rho_u[1];
@@ -248,9 +276,10 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_v(Scalar x1, Scalar y1, Scalar
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_rho_w(Scalar x1, Scalar y1, Scalar z1)
 {
   using std::cos;
+  using std::sqrt;
 
   typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
@@ -264,35 +293,43 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar
   NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * u_z * cos(a_uz * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * v_z * cos(a_vz * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * w_z * cos(a_wz * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * rho_z * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * p_z * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
 
- // Perfect gas energies
-  ADScalar E = 1./(Gamma-1.)*P/RHO;
-  ADScalar ET = E + .5 * U.dot(U);
+  // Perfect gas energies
+  ADScalar E = 1./(Gamma-1.)*P;
+  ADScalar ET = E + .5 * RHO * U.dot(U);
 
   // The shear strain tensor
   NumberVector<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
 
   // The identity tensor I
-  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity = 
+  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity =
     NumberVector<NDIM, Scalar>::identity();
 
+  // Constant Smagorinsky
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = 0.5*(GradU + transpose(GradU));
+  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0] + S[0][1]*S[0][1] + S[0][2]*S[0][2]
+			      + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2]
+			      + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2]));
+  ADScalar mut = (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
+  ADScalar sigmakk = CI * deltabar*deltabar * RHO * Smag * Smag;
+
   // The shear stress tensor
-  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = 2.0 * (mu + mut) * (S - 1./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity - 2./3. * sigmakk * Identity;
 
   // Temperature flux
-  NumberVector<NDIM, ADScalar> q = -k * T.derivatives();
+  double Cv = R / (Gamma - 1);
+  NumberVector<NDIM, ADScalar> q = -(k + Gamma * Cv * mut/PrT) * T.derivatives();
 
-  // Euler equation residuals
-  // Scalar Q_rho = raw_value(divergence(RHO*U));
-  NumberVector<NDIM, Scalar> Q_rho_u = 
+  // Momentum equation
+  NumberVector<NDIM, Scalar> Q_rho_u =
     raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
 
   return Q_rho_u[2];
@@ -301,9 +338,10 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_w(Scalar x1, Scalar y1, Scalar
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_e(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_rho_e(Scalar x1, Scalar y1, Scalar z1)
 {
   using std::cos;
+  using std::sqrt;
 
   typedef DualNumber<Scalar, NumberVector<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberVector<NDIM, FirstDerivType> > SecondDerivType;
@@ -317,39 +355,43 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_e(Scalar x1, Scalar y1, Scalar
   const ADScalar z = ADScalar(z1,NumberVectorUnitVector<NDIM, 2, Scalar>::value());
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * u_z * cos(a_uz * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * v_z * cos(a_vz * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * w_z * cos(a_wz * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * rho_z * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * p_z * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
 
   // Perfect gas energies
-  ADScalar E = 1./(Gamma-1.)*P/RHO;
-  ADScalar ET = E + .5 * U.dot(U);
+  ADScalar E = 1./(Gamma-1.)*P;
+  ADScalar ET = E + .5 * RHO * U.dot(U);
 
   // The shear strain tensor
   NumberVector<NDIM, typename ADScalar::derivatives_type> GradU = gradient(U);
 
   // The identity tensor I
-  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity = 
+  NumberVector<NDIM, NumberVector<NDIM, Scalar> > Identity =
     NumberVector<NDIM, Scalar>::identity();
 
+  // Constant Smagorinsky
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > S = 0.5*(GradU + transpose(GradU));
+  ADScalar Smag = sqrt(2.0 * (S[0][0]*S[0][0] + S[0][1]*S[0][1] + S[0][2]*S[0][2]
+			      + S[1][0]*S[1][0] + S[1][1]*S[1][1] + S[1][2]*S[1][2]
+			      + S[2][0]*S[2][0] + S[2][1]*S[2][1] + S[2][2]*S[2][2]));
+  ADScalar mut = (Cs*deltabar) * (Cs*deltabar) * RHO * Smag;
+  ADScalar sigmakk = CI * deltabar*deltabar * RHO * Smag * Smag;
+
   // The shear stress tensor
-  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = mu * (GradU + transpose(GradU) - 2./3.*divergence(U)*Identity);
+  NumberVector<NDIM, NumberVector<NDIM, ADScalar> > Tau = 2.0 * (mu + mut) * (S - 1./3.*divergence(U)*Identity) + mu_bulk * divergence(U)*Identity - 2./3. * sigmakk * Identity;
 
   // Temperature flux
-  NumberVector<NDIM, ADScalar> q = -k * T.derivatives();
+  double Cv = R / (Gamma - 1);
+  NumberVector<NDIM, ADScalar> q = -(k + Gamma * Cv * mut/PrT) * T.derivatives();
 
-  // Euler equation residuals
-  // Scalar Q_rho = raw_value(divergence(RHO*U));
-  // NumberVector<NDIM, Scalar> Q_rho_u = 
-  //   raw_value(divergence(RHO*U.outerproduct(U) - Tau) + P.derivatives());
-
-  // energy equation
-  Scalar Q_rho_e = raw_value(divergence((RHO*ET+P)*U + q - Tau.dot(U)));
+  // Energy equation
+  Scalar Q_rho_e = raw_value(divergence((ET+P)*U + q - Tau.dot(U)));
 
   return Q_rho_e;
 }
@@ -357,7 +399,7 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_e(Scalar x1, Scalar y1, Scalar
 
 // public, static method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scalar z1) const
+Scalar MASA::ad_cns_3d_les<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scalar z1)
 {
   using std::cos;
 
@@ -373,12 +415,13 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scal
   NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * u_z * cos(a_uz * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * v_z * cos(a_vz * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * w_z * cos(a_wz * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * rho_z * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * p_z * cos(a_pz * PI * z / L);
 
+  // Continuity equation
   Scalar Q_rho = raw_value(divergence(RHO*U));
 
   return Q_rho;
@@ -391,54 +434,54 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_q_rho(Scalar x1, Scalar y1, Scal
 
 // example of a public method called from eval_exact_t
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_u(Scalar x, Scalar y, Scalar z)
+Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_u(Scalar x, Scalar y, Scalar z)
 {
   using std::cos;
 
   Scalar exact_u;
-  exact_u = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uz * PI * z / L);
+  exact_u = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * u_z * cos(a_uz * PI * z / L);
   return exact_u;
 }
 
 // public method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_v(Scalar x, Scalar y, Scalar z)
+Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_v(Scalar x, Scalar y, Scalar z)
 {
   using std::cos;
 
   Scalar exact_v;
-  exact_v = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vz * PI * z / L);
+  exact_v = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * v_z * cos(a_vz * PI * z / L);
   return exact_v;
 }
 
 // public method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_w(Scalar x, Scalar y, Scalar z)
+Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_w(Scalar x, Scalar y, Scalar z)
 {
   using std::cos;
 
   Scalar exact_w;
-  exact_w = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wz * PI * z / L);
+  exact_w = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * w_z * cos(a_wz * PI * z / L);
   return exact_w;
 }
 
 // public method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_p(Scalar x, Scalar y, Scalar z)
+Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_p(Scalar x, Scalar y, Scalar z)
 {
   using std::cos;
 
-  Scalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
+  Scalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * p_z * cos(a_pz * PI * z / L);
   return P;
 }
 
 // public method
 template <typename Scalar>
-Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_rho(Scalar x, Scalar y, Scalar z)
+Scalar MASA::ad_cns_3d_les<Scalar>::eval_exact_rho(Scalar x, Scalar y, Scalar z)
 {
   using std::cos;
 
-  Scalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
+  Scalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * rho_z * cos(a_rhoz * PI * z / L);
   return RHO;
 }
 
@@ -448,7 +491,7 @@ Scalar MASA::ad_cns_3d_crossterms<Scalar>::eval_exact_rho(Scalar x, Scalar y, Sc
 // Template Instantiation(s)
 // ----------------------------------------
 
-MASA_INSTANTIATE_ALL(MASA::ad_cns_3d_crossterms);
+MASA_INSTANTIATE_ALL(MASA::ad_cns_3d_les);
 
 
 #endif // HAVE_METAPHYSICL
