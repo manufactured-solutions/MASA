@@ -15,6 +15,7 @@ cc_sources += axi_euler_transient.cpp
 cc_sources += axi_cns_transient.cpp
 cc_sources += ad_cns_2d_crossterms.cpp
 cc_sources += ad_cns_3d_crossterms.cpp
+cc_sources += ad_cns_3d_les.cpp
 cc_sources += convdiff_steady_nosource_1d.cpp
 cc_sources += navierstokes_3d_incompressible.cpp
 cc_sources += navierstokes_3d_incompressible_homogeneous.cpp
