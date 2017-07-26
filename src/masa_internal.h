@@ -2069,9 +2069,11 @@ public:
 };}
 
 
-// ------------------------------------------------------
+// ------------------------------------------------------------
 // --------------- ad_cns_3d_les
-// ------------------------------------------------------
+// Source Documentation available at:
+// analytical/navier_stokes/navier_stokes_comp_steady_les/latex
+// ------------------------------------------------------------
 namespace MASA{
 template <typename Scalar>
 class ad_cns_3d_les : public manufactured_solution<Scalar>
