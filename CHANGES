@@ -1,6 +1,6 @@
 Version 0.51.0 (IN PROGRESS)
 
-  * Updates and bugfixes coming!
+  * Disables f_insh example if MetaPhysicL not present
   * Added Homogeneous Incompressible Navier Stokes with Boussinesq Buoyancy term
   * Added compressible Navier-Stokes with Smagorinsky LES model
 
