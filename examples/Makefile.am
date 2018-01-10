@@ -17,7 +17,12 @@ noinst_PROGRAMS += euler_transient heat_example switch ablation_example
 noinst_PROGRAMS += c_heat_example c_euler_example c_laplace_example sod
 
 if FORT_ENABLED
-noinst_PROGRAMS += f_cns f_cns_4d f_euler f_laplace f_insh
+noinst_PROGRAMS += f_cns f_cns_4d f_euler f_laplace
+
+if METAPHYSICL_ENABLED
+noinst_PROGRAMS += f_insh
+endif
+
 endif
 
 noinst_PROGRAMS += cp_gaussian
@@ -85,9 +90,11 @@ f_cns_4d_SOURCES          = f_cns_4d.f90
 f_cns_4d_LDADD            = -lfmasa
 f_cns_4d_LIBTOOLFLAGS     = --tag=FC
 
+if METAPHYSICL_ENABLED
 f_insh_SOURCES             = f_insh.f90
 f_insh_LDADD               = -lfmasa
 f_insh_LIBTOOLFLAGS        = --tag=FC
+endif
 
 example_DATA             += f_euler.f90
 
@@ -126,8 +133,12 @@ TESTS                     += f_init.sh            \
                              f_laplace            \
                              f_euler              \
                              f_cns                \
-                             f_cns_4d             \
-                             f_insh 
+                             f_cns_4d             
+
+if METAPHYSICL_ENABLED
+TESTS                     += f_insh 
+endif
+
 endif
 
 TESTS                     += finalize.sh
