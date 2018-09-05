@@ -157,6 +157,7 @@ int get_list_mms(std::vector<manufactured_solution<Scalar>*>& anim)
   anim.push_back(new ad_cns_2d_crossterms<Scalar>());
   anim.push_back(new ad_cns_3d_crossterms<Scalar>());
   anim.push_back(new ad_cns_3d_les<Scalar>());
+  anim.push_back(new ad_cns_3d_les_sph<Scalar>());
   anim.push_back(new convdiff_steady_nosource_1d<Scalar>());
   anim.push_back(new navierstokes_3d_incompressible<Scalar>());
   anim.push_back(new navierstokes_3d_incompressible_homogeneous<Scalar>());

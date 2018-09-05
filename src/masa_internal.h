@@ -2144,6 +2144,65 @@ public:
 };}
 
 
+// ------------------------------------------------------------
+// --------------- ad_cns_3d_les_sph
+// Source Documentation available at:
+// analytical/navier_stokes/navier_stokes_comp_steady_les_sph/latex
+// ------------------------------------------------------------
+namespace MASA{
+template <typename Scalar>
+class ad_cns_3d_les_sph : public manufactured_solution<Scalar>
+{
+  using manufactured_solution<Scalar>::pi;
+  using manufactured_solution<Scalar>::PI;
+
+private:
+  Scalar R;
+  Scalar k;
+  Scalar u_0;
+  Scalar v_0;
+  Scalar w_0;
+  Scalar u_r;
+  Scalar v_r;
+  Scalar w_r;
+  Scalar rho_0;
+  Scalar rho_x;
+  Scalar rho_y;
+  Scalar rho_z;
+  Scalar p_0;
+  Scalar p_r;
+  Scalar a_pr;
+  Scalar a_rhox;
+  Scalar a_rhoy;
+  Scalar a_rhoz;
+  Scalar a_ur;
+  Scalar a_vr;
+  Scalar a_wr;
+  Scalar Gamma;
+  Scalar mu;
+  Scalar mu_bulk;
+  Scalar L;
+  Scalar Cs;
+  Scalar CI;
+  Scalar PrT;
+  Scalar deltabar;
+
+public:
+  ad_cns_3d_les_sph();
+  int init_var();
+  Scalar eval_q_rho_u(Scalar,Scalar,Scalar);
+  Scalar eval_q_rho_v(Scalar,Scalar,Scalar);
+  Scalar eval_q_rho_w(Scalar,Scalar,Scalar);
+  Scalar eval_q_rho_e(Scalar,Scalar,Scalar);
+  Scalar eval_q_rho(Scalar,Scalar,Scalar);
+  Scalar eval_exact_u(Scalar,Scalar,Scalar);
+  Scalar eval_exact_v(Scalar,Scalar,Scalar);
+  Scalar eval_exact_w(Scalar,Scalar,Scalar);
+  Scalar eval_exact_p(Scalar,Scalar,Scalar);
+  Scalar eval_exact_rho(Scalar,Scalar,Scalar);
+};}
+
+
 // ------------------------------------------------------
 // --------------- convdiff_steady_nosource_1d 
 // ------------------------------------------------------
