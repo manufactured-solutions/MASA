@@ -474,7 +474,7 @@ int MASA::fans_sa_steady_wall_bounded<Scalar>::init_var()
   err += this->set_var("b",0.33);
 
   // this sets all constants set from parameters
-  update(0,0);
+  update(std::numeric_limits<Scalar>::epsilon(),std::numeric_limits<Scalar>::epsilon());
 
   return err;
 }
