@@ -1,8 +1,12 @@
-Version 0.51.0 (IN PROGRESS)
+Version 0.51.0 (04 November, 2024)
 
   * Disables f_insh example if MetaPhysicL not present
   * Added Homogeneous Incompressible Navier Stokes with Boussinesq Buoyancy term
   * Added compressible Navier-Stokes with Smagorinsky LES model
+  * Added a compressible Navier-Stoke case with spherical symmetry
+  * Fixed FPE at (0,0) in fans_sa_steady_wall_bounded
+  * Fixed macro for strict C++11 conformance
+  * Updated python detection
 
 Version 0.50.0 (27 February, 2017)
 
