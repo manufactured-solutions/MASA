@@ -57,7 +57,11 @@ typedef SecondDerivType ADType;
 template<typename Scalar>
 int run_test()
 {
-  const Scalar thresh = 50 * std::numeric_limits<Scalar>::epsilon();
+  // Argument-dependent lookup should work for non std:: methods
+  using std::abs;
+  using std::numeric_limits;
+
+  const Scalar thresh = 50 * numeric_limits<Scalar>::epsilon();
   // parameters
   Scalar x, y, z;
 
@@ -93,20 +97,20 @@ int run_test()
 	// choose between abs and rel error
 #ifdef MASA_STRICT_REGRESSION
 
-            uerror = std::abs(ad_x_soln - exact_x_soln);
-            verror = std::abs(ad_y_soln - exact_y_soln);
-            werror = std::abs(ad_z_soln - exact_z_soln);
+            uerror = abs(ad_x_soln - exact_x_soln);
+            verror = abs(ad_y_soln - exact_y_soln);
+            werror = abs(ad_z_soln - exact_z_soln);
 
 #else
 
-            uerror = std::abs(ad_x_soln - exact_x_soln)/std::abs(exact_x_soln);
-            verror = std::abs(ad_y_soln - exact_y_soln)/std::abs(exact_y_soln);
-            werror = std::abs(ad_z_soln - exact_z_soln)/std::abs(exact_z_soln);
+            uerror = abs(ad_x_soln - exact_x_soln)/abs(exact_x_soln);
+            verror = abs(ad_y_soln - exact_y_soln)/abs(exact_y_soln);
+            werror = abs(ad_z_soln - exact_z_soln)/abs(exact_z_soln);
 
 #endif	
-	        threshcheck(uerror,thresh);
-	        threshcheck(verror,thresh);
-	        threshcheck(werror,thresh);
+            threshcheck(uerror,thresh);
+            threshcheck(verror,thresh);
+            threshcheck(werror,thresh);
         }
     }
   }

@@ -2,6 +2,9 @@
 // public static method, that can be called from eval_q_t
 double eval_q_u(double x, double y, double z) const
 {
+  // Argument-dependent lookup should work for non std:: methods
+  using std::cos;
+
   typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
@@ -10,11 +13,11 @@ double eval_q_u(double x, double y, double z) const
   NumberArray<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * std::cos(a_ux * PI * x / L) * u_y * std::cos(a_uy * PI * y / L) * std::cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * std::cos(a_vx * PI * x / L) * v_y * std::cos(a_vy * PI * y / L) * std::cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * std::cos(a_wx * PI * x / L) * w_y * std::cos(a_wy * PI * y / L) * std::cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * std::cos(a_rhox * PI * x / L) * rho_y * std::cos(a_rhoy * PI * y / L) * std::cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * std::cos(a_px * PI * x / L) * p_y * std::cos(a_py * PI * y / L) * std::cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
@@ -47,6 +50,8 @@ double eval_q_u(double x, double y, double z) const
 // public, static method
 double eval_q_v(double x, double y, double z) const
 {
+  using std::cos;
+
   typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
@@ -55,11 +60,11 @@ double eval_q_v(double x, double y, double z) const
   NumberArray<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * std::cos(a_ux * PI * x / L) * u_y * std::cos(a_uy * PI * y / L) * std::cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * std::cos(a_vx * PI * x / L) * v_y * std::cos(a_vy * PI * y / L) * std::cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * std::cos(a_wx * PI * x / L) * w_y * std::cos(a_wy * PI * y / L) * std::cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * std::cos(a_rhox * PI * x / L) * rho_y * std::cos(a_rhoy * PI * y / L) * std::cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * std::cos(a_px * PI * x / L) * p_y * std::cos(a_py * PI * y / L) * std::cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
@@ -93,6 +98,8 @@ double eval_q_v(double x, double y, double z) const
 // public, static method
 double eval_q_w(double x, double y, double z) const
 {
+  using std::cos;
+
   typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
@@ -101,11 +108,11 @@ double eval_q_w(double x, double y, double z) const
   NumberArray<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * std::cos(a_ux * PI * x / L) * u_y * std::cos(a_uy * PI * y / L) * std::cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * std::cos(a_vx * PI * x / L) * v_y * std::cos(a_vy * PI * y / L) * std::cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * std::cos(a_wx * PI * x / L) * w_y * std::cos(a_wy * PI * y / L) * std::cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * std::cos(a_rhox * PI * x / L) * rho_y * std::cos(a_rhoy * PI * y / L) * std::cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * std::cos(a_px * PI * x / L) * p_y * std::cos(a_py * PI * y / L) * std::cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
@@ -139,6 +146,8 @@ double eval_q_w(double x, double y, double z) const
 // public, static method
 double eval_q_e(double x, double y, double z) const
 {
+  using std::cos;
+
   typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
@@ -147,11 +156,11 @@ double eval_q_e(double x, double y, double z) const
   NumberArray<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * std::cos(a_ux * PI * x / L) * u_y * std::cos(a_uy * PI * y / L) * std::cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * std::cos(a_vx * PI * x / L) * v_y * std::cos(a_vy * PI * y / L) * std::cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * std::cos(a_wx * PI * x / L) * w_y * std::cos(a_wy * PI * y / L) * std::cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * std::cos(a_rhox * PI * x / L) * rho_y * std::cos(a_rhoy * PI * y / L) * std::cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * std::cos(a_px * PI * x / L) * p_y * std::cos(a_py * PI * y / L) * std::cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
@@ -188,6 +197,8 @@ double eval_q_e(double x, double y, double z) const
 // public, static method
 double eval_q_rho(double x1, double y1, double z1) const
 {
+  using std::cos;
+
   typedef DualNumber<Scalar, NumberArray<NDIM, Scalar> > FirstDerivType;
   typedef DualNumber<FirstDerivType, NumberArray<NDIM, FirstDerivType> > SecondDerivType;
   typedef SecondDerivType ADScalar;
@@ -200,11 +211,11 @@ double eval_q_rho(double x1, double y1, double z1) const
   NumberArray<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * std::cos(a_ux * PI * x / L) * u_y * std::cos(a_uy * PI * y / L) * std::cos(a_uy * PI * z / L);
-  U[1] = v_0 + v_x * std::cos(a_vx * PI * x / L) * v_y * std::cos(a_vy * PI * y / L) * std::cos(a_vy * PI * z / L);
-  U[2] = w_0 + w_x * std::cos(a_wx * PI * x / L) * w_y * std::cos(a_wy * PI * y / L) * std::cos(a_wy * PI * z / L);
-  ADScalar RHO = rho_0 + rho_x * std::cos(a_rhox * PI * x / L) * rho_y * std::cos(a_rhoy * PI * y / L) * std::cos(a_rhoz * PI * z / L);
-  ADScalar P = p_0 + p_x * std::cos(a_px * PI * x / L) * p_y * std::cos(a_py * PI * y / L) * std::cos(a_pz * PI * z / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L) * cos(a_uy * PI * z / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L) * cos(a_vy * PI * z / L);
+  U[2] = w_0 + w_x * cos(a_wx * PI * x / L) * w_y * cos(a_wy * PI * y / L) * cos(a_wy * PI * z / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L) * cos(a_rhoz * PI * z / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L) * cos(a_pz * PI * z / L);
 
   Scalar Q_rho = raw_value(divergence(RHO*U));
 

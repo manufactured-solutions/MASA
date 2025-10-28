@@ -73,8 +73,13 @@ int MASA::convdiff_steady_nosource_1d<Scalar>::init_var()
 template <typename Scalar>
 Scalar MASA::convdiff_steady_nosource_1d<Scalar>::eval_q_c(Scalar x, Scalar y) const
 {
+  // Argument-dependent lookup should work for non std:: methods
+  using std::cos;
+  using std::pow;
+  using std::sin;
+
   Scalar q_c;
-  q_c = PI * a_cx * std::cos(PI * a_cx * x / L) * std::cos(PI * a_ux * x / L) / L - PI * a_ux * std::sin(PI * a_cx * x / L) * std::sin(PI * a_ux * x / L) / L + std::pow(PI, 2) * std::pow(a_cx, 2) * nu * std::sin(PI * a_cx * x / L) / std::pow(L, 2);
+  q_c = PI * a_cx * cos(PI * a_cx * x / L) * cos(PI * a_ux * x / L) / L - PI * a_ux * sin(PI * a_cx * x / L) * sin(PI * a_ux * x / L) / L + pow(PI, 2) * pow(a_cx, 2) * nu * sin(PI * a_cx * x / L) / pow(L, 2);
   return q_c;
 }
 
@@ -88,8 +93,10 @@ Scalar MASA::convdiff_steady_nosource_1d<Scalar>::eval_q_c(Scalar x, Scalar y) c
 template <typename Scalar>
 Scalar MASA::convdiff_steady_nosource_1d<Scalar>::eval_exact_c(Scalar x)
 {
+  using std::sin;
+
   Scalar exact_c;
-  exact_c = std::sin(a_cx * PI * x / L);
+  exact_c = sin(a_cx * PI * x / L);
   return exact_c;
 }
 
@@ -97,8 +104,10 @@ Scalar MASA::convdiff_steady_nosource_1d<Scalar>::eval_exact_c(Scalar x)
 template <typename Scalar>
 Scalar MASA::convdiff_steady_nosource_1d<Scalar>::eval_exact_u(Scalar x)
 {
+  using std::cos;
+
   Scalar exact_u;
-  exact_u = std::cos(a_ux * PI * x / L);
+  exact_u = cos(a_ux * PI * x / L);
   return exact_u;
 }
 

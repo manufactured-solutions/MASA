@@ -185,48 +185,61 @@ int main(void)
 template <typename Scalar>
 Scalar helper_f(Scalar x)
 {
+  // Argument-dependent lookup should work for non std:: methods
+  using std::sin;
+
   Scalar func;
-  func = 1/(my_beta+std::sin(kx*x));
+  func = 1/(my_beta+sin(kx*x));
   return func;
 }
 
 template <typename Scalar>
 Scalar helper_frho(Scalar x)
 {
+  using std::sin;
+
   Scalar func;
-  func = 1/(my_gamma+std::sin(kx*x));
+  func = 1/(my_gamma+sin(kx*x));
   return func;
 }
 
 template <typename Scalar>
 Scalar helper_g(Scalar y)
 {
+  using std::sin;
+
   Scalar func;
-  func = 1/(my_delta+std::sin(ky*y));
+  func = 1/(my_delta+sin(ky*y));
   return func;
 }
 
 template <typename Scalar>
 Scalar helper_grho(Scalar y)
 {
+  using std::sin;
+
   Scalar func;
-  func = 1/(my_omega+std::sin(ky*y));
+  func = 1/(my_omega+sin(ky*y));
   return func;
 }
 
 template <typename Scalar>
 Scalar helper_h(Scalar z)
 {
+  using std::sin;
+
   Scalar func;
-  func = 1/(my_gamma+std::sin(kz*z));
+  func = 1/(my_gamma+sin(kz*z));
   return func;
 }
 
 template <typename Scalar>
 Scalar helper_hrho(Scalar z)
 {
+  using std::sin;
+
   Scalar func;
-  func = 1/(my_delta+std::sin(kz*z));
+  func = 1/(my_delta+sin(kz*z));
   return func;
 }
 

@@ -221,8 +221,11 @@ template <typename Scalar, typename Scalar2>
 Scalar helper_f(Scalar2 beta, Scalar2 kx, Scalar x)
 //Scalar MASA::navierstokes_3d_incompressible<Scalar>::helper_f(Scalar x)
 {
+  // Argument-dependent lookup should work for non std:: methods
+  using std::sin;
+
   Scalar func;
-  func = 1/(beta+std::sin(kx*x));
+  func = 1/(beta+sin(kx*x));
   return func;
 }
 
@@ -239,8 +242,10 @@ template <typename Scalar>
 Scalar helper_gt(Scalar y)
 //Scalar MASA::navierstokes_3d_incompressible<Scalar>::helper_gt(Scalar y)
 {
+  using std::pow;
+
   Scalar func;
-  func = std::pow(y,Scalar(5.0))+std::pow(y,Scalar(4.0))+std::pow(y,Scalar(3.0))+std::pow(y,Scalar(2.0))+y;
+  func = pow(y,Scalar(5.0))+pow(y,Scalar(4.0))+pow(y,Scalar(3.0))+pow(y,Scalar(2.0))+y;
   return func;
 }
 
@@ -248,8 +253,10 @@ template <typename Scalar, typename Scalar2>
 //Scalar MASA::navierstokes_3d_incompressible<Scalar>::helper_h(Scalar z)
 Scalar helper_h(Scalar2 gamma, Scalar2 kz, Scalar z)
 {
+  using std::sin;
+
   Scalar func;
-  func = 1/(gamma+std::sin(kz*z));
+  func = 1/(gamma+sin(kz*z));
   return func;
 }
 
