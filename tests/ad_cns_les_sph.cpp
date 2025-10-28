@@ -214,12 +214,14 @@ int main(void)
 template <std::size_t NDIM, typename ADScalar>
 double evaluate_q (const NumberVector<NDIM, ADScalar>& xyz, const int ret)
 {
+  // Argument-dependent lookup should work for non std:: methods
+  using std::acos;
   using std::cos;
   using std::sqrt;
 
   typedef typename RawType<ADScalar>::value_type Scalar;
 
-  const Scalar PI = std::acos(Scalar(-1));
+  const Scalar PI = acos(Scalar(-1));
 
   const Scalar L = masa_get_param("L");
   const Scalar R = masa_get_param("R");

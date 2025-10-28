@@ -199,9 +199,14 @@ int main(void)
 template <std::size_t NDIM, typename ADScalar>
 double evaluate_q (const NumberVector<NDIM, ADScalar>& xyz, const int ret)
 {
+  // Argument-dependent lookup should work for non std:: methods
+  using std::acos;
+  using std::cos;
+  using std::sin;
+
   typedef typename RawType<ADScalar>::value_type Scalar;
 
-  const Scalar PI = std::acos(Scalar(-1));
+  const Scalar PI = acos(Scalar(-1));
 
   const Scalar R = masa_get_param("R");
   const Scalar u_0 = masa_get_param("u_0");
@@ -236,10 +241,10 @@ double evaluate_q (const NumberVector<NDIM, ADScalar>& xyz, const int ret)
   NumberVector<NDIM, ADScalar> U;
 
   // Arbitrary manufactured solution
-  U[0] = u_0 + u_x * std::cos(a_ux * PI * x / L) * u_y * std::cos(a_uy * PI * y / L);
-  U[1] = v_0 + v_x * std::cos(a_vx * PI * x / L) * v_y * std::cos(a_vy * PI * y / L);
-  ADScalar RHO = rho_0 + rho_x * std::cos(a_rhox * PI * x / L) * rho_y * std::cos(a_rhoy * PI * y / L);
-  ADScalar P = p_0 + p_x * std::cos(a_px * PI * x / L) * p_y * std::cos(a_py * PI * y / L);
+  U[0] = u_0 + u_x * cos(a_ux * PI * x / L) * u_y * cos(a_uy * PI * y / L);
+  U[1] = v_0 + v_x * cos(a_vx * PI * x / L) * v_y * cos(a_vy * PI * y / L);
+  ADScalar RHO = rho_0 + rho_x * cos(a_rhox * PI * x / L) * rho_y * cos(a_rhoy * PI * y / L);
+  ADScalar P = p_0 + p_x * cos(a_px * PI * x / L) * p_y * cos(a_py * PI * y / L);
 
   // Temperature
   ADScalar T = P / RHO / R;
